@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
+import { DataService } from '../data.service';
+
 
 @Component({
   selector: 'app-categorylisting',
@@ -8,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./categorylisting.component.scss']
 })
 export class CategorylistingComponent implements OnInit {
+  token: any;
 
   dummyText: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   price: string = "00.00";
@@ -82,7 +85,7 @@ export class CategorylistingComponent implements OnInit {
   deleteCookie(cname) {
     this.cookieService.delete(cname);
   }
-
+  
   // Sticky Filter Set
   // @HostListener('document:scroll', ['$event']) // for window scroll events
   // onWindowScroll(event) {
@@ -99,3 +102,4 @@ export class CategorylistingComponent implements OnInit {
   //   }
   // }
 }
+

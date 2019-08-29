@@ -9,7 +9,11 @@ import { ListingComponent } from './listing/listing.component';
 import { CategorylistingComponent } from './categorylisting/categorylisting.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home.component';
+import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 
+
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +22,14 @@ import { HomeComponent } from './home/home.component';
     ListingComponent,
     CategorylistingComponent,
     HomeComponent,
+    ShopProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
