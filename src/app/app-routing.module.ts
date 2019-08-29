@@ -3,15 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListingComponent } from './listing/listing.component';
 import { CategorylistingComponent } from './categorylisting/categorylisting.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component'
+import { HomeComponent } from './home/home.component';
+
 const routes: Routes = [
-  {path: '',component:ShopProfileComponent},
-  {path: 'listing',component:ListingComponent},
-  {path: 'categorylisting',component:CategorylistingComponent}
+  { path: '', component: HomeComponent},
+  { path: 'listing', component: ListingComponent},
+  { path: 'category', component: CategorylistingComponent},
+  { path: 'categorylisting', component : CategorylistingComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),
-            RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes),RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'enabled' 
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

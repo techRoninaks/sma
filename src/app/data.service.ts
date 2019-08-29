@@ -51,4 +51,10 @@ export class DataService {
     .append("userId",data['user_id'])
     return this.http.post('http://localhost:81/sma/src/assets/api/follow.php',httpParams);
   }
+
+  getPageData(page: string){
+    let httpParams = new HttpParams()
+    .append("pageName", page);
+    return this.http.post('http://localhost/SMA/src/assets/api/getPage.php', httpParams);
+  }
 }
