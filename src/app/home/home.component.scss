@@ -1,0 +1,879 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+/* ----------------- Home slider ends here ----------------------- */
+
+.mySlides {
+  display: none;
+  height: 500px;
+}
+.slideImg {
+  vertical-align: middle;
+  width: 100%;
+  height: -webkit-fill-available;
+  object-fit: cover;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.dvPrev {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: fit-content;
+  border-radius: 50%;
+  &:hover {
+    border: 2px solid white;
+  }
+}
+.dvNext {
+  position: absolute;
+  bottom: 10%;
+  right: 7%;
+  width: fit-content;
+  border-radius: 50%;
+  &:hover {
+    border: 2px solid white;
+  }
+}
+.prev,
+.next {
+  cursor: pointer;
+  padding: 10px;
+  color: white !important;
+  opacity: 0.5;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  opacity: 1;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.slideDots {
+  position: absolute;
+  margin: 5%;
+  top: 30%;
+  width: fit-content;
+}
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+  margin: 0 2px;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: white;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+  opacity: 1 !important;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev,
+  .next,
+  .text {
+    font-size: 11px;
+  }
+}
+
+/* ----------------- Home slider ends here ----------------------- */
+.dvFeature {
+  grid-template-columns: auto;
+  grid-template-areas:
+    "feature-img"
+    "feature-set";
+  display: grid;
+  background: $smaLightGray;
+
+  .dvFeatureImg {
+    grid-area: feature-img;
+
+    .dvFeatureHead {
+      width: fit-content;
+      margin: auto;
+
+      img {
+        position: relative;
+        top: 48px;
+      }
+
+      .head {
+        font-size: $SubHeader;
+        font-family: BitterBold;
+        text-align: center;
+      }
+    }
+  }
+  .dvFeatureSet {
+    grid-area: feature-set;
+    grid-template-columns: repeat(3, auto);
+    grid-template-areas: "dv-left dv-mid dv-right";
+    display: grid;
+    padding: 5%;
+
+    .dvLeft {
+      grid-area: dv-left;
+      grid-template-columns: auto;
+      grid-template-areas: "dv-icon" "dv-text" "dv-btn";
+      display: grid;
+
+      .dvIcon {
+        grid-area: dv-icon;
+        text-align: center;
+      }
+      .dvText {
+        grid-area: dv-text;
+        .head {
+          font-size: $SubHeader;
+          font-family: BitterBold;
+          text-align: center;
+        }
+        .subText {
+          font-size: $SubText;
+          font-family: Bitter;
+          text-align: center;
+        }
+      }
+      .dvBtn {
+        grid-area: dv-btn;
+        text-align: center;
+
+        .btnRead {
+          cursor: pointer;
+          font-family: BitterBold;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          background: #efbe24;
+          box-shadow: 2px 2px 10px -5px black;
+          padding: 5px;
+        }
+      }
+    }
+    .dvMid {
+      grid-area: dv-mid;
+      grid-template-columns: auto;
+      grid-template-areas: "dv-icon" "dv-text" "dv-btn";
+      display: grid;
+
+      .dvIcon {
+        grid-area: dv-icon;
+        text-align: center;
+      }
+      .dvText {
+        grid-area: dv-text;
+        .head {
+          font-size: $SubHeader;
+          font-family: BitterBold;
+          text-align: center;
+        }
+        .subText {
+          font-size: $SubText;
+          font-family: Bitter;
+          text-align: center;
+        }
+      }
+      .dvBtn {
+        grid-area: dv-btn;
+        text-align: center;
+
+        .btnRead {
+          cursor: pointer;
+          font-family: BitterBold;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          background: #efbe24;
+          box-shadow: 2px 2px 10px -5px black;
+          padding: 5px;
+        }
+      }
+    }
+    .dvRight {
+      grid-area: dv-right;
+
+      grid-template-columns: auto;
+      grid-template-areas: "dv-icon" "dv-text" "dv-btn";
+      display: grid;
+
+      .dvIcon {
+        grid-area: dv-icon;
+        text-align: center;
+      }
+      .dvText {
+        grid-area: dv-text;
+        .head {
+          font-size: $SubHeader;
+          font-family: BitterBold;
+          text-align: center;
+        }
+        .subText {
+          font-size: $SubText;
+          font-family: Bitter;
+          text-align: center;
+        }
+      }
+      .dvBtn {
+        grid-area: dv-btn;
+        text-align: center;
+
+        .btnRead {
+          cursor: pointer;
+          font-family: BitterBold;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          background: #efbe24;
+          box-shadow: 2px 2px 10px -5px black;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+
+.dvProduct {
+  margin: 0 5% 0 5%;
+  width: auto;
+
+  .dvProdHead {
+    .dvHeading {
+      width: fit-content;
+      margin: auto;
+      text-align: center;
+      img {
+        position: relative;
+        top: 53px;
+      }
+      .head {
+        font-family: BitterBold;
+        font-size: $Header;
+      }
+    }
+  }
+
+  .dvTags {
+    grid-template-columns: repeat(3, auto);
+    grid-template-areas: "dv-trend dv-offer dv-arrival";
+    display: grid;
+    font-family: BitterBold;
+    font-size: $SubHeader;
+    padding: 20px;
+    .activeTag {
+      color: $smaYellow !important;
+      border: 2px solid $smaYellow;
+    }
+    .dvTrend {
+      grid-area: dv-trend;
+      width: fit-content;
+      justify-self: center;
+
+      .tag {
+        padding: 5px;
+        color: $smaDarkGray;
+        &:hover {
+          color: $smaYellow;
+        }
+      }
+    }
+    .dvOffer {
+      grid-area: dv-offer;
+      width: fit-content;
+      justify-self: center;
+      .tag {
+        padding: 5px;
+        color: $smaDarkGray;
+        &:hover {
+          color: $smaYellow;
+        }
+      }
+    }
+    .dvArrival {
+      grid-area: dv-arrival;
+      width: fit-content;
+      justify-self: center;
+      .tag {
+        padding: 5px;
+        color: $smaDarkGray;
+        &:hover {
+          color: $smaYellow;
+        }
+      }
+    }
+  }
+
+  .dvCatMain {
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    width: auto;
+    margin: 5%;
+
+    .dvCard {
+      padding: 6%;
+      border-bottom: 1px solid $smaLightGray;
+
+      .dvCardLogo {
+        grid-template-columns: 35% auto;
+        grid-template-areas: "dv-logo dv-seller";
+        display: grid;
+
+        .dvLogo {
+          grid-area: dv-logo;
+          width: fit-content;
+          border-radius: 50%;
+          background: $smaLightGray;
+          justify-self: center;
+          box-shadow: 1px 1px 10px 0 $smaLightGray;
+          z-index: 1;
+
+          .imgLogo {
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+        .dvSeller {
+          grid-area: dv-seller;
+          width: auto;
+          cursor: pointer;
+
+          .dvShopName {
+            border-bottom: 1px solid $smaGray;
+            p {
+              font-family: Bitter;
+              font-size: $SubHeader;
+            }
+            @include sm-lesser {
+              p {
+                font-size: $Text;
+              }
+            }
+            @include lg {
+              p {
+                font-size: $Text;
+              }
+            }
+          }
+          .dvSellerName {
+            p {
+              font-family: Bitter;
+              font-size: $SubHeader;
+              color: $smaGray;
+            }
+            @include sm-lesser {
+              p {
+                font-size: $Text;
+              }
+            }
+            @include lg {
+              p {
+                font-size: $SubText;
+              }
+            }
+          }
+        }
+      }
+
+      .dvCardBanner {
+        cursor: pointer;
+        padding: 10px;
+        background: $smaLightGray;
+        box-shadow: 1px 1px 10px 0px $smaGray;
+        border-radius: 5px;
+
+        .imgBanner {
+          width: inherit;
+        }
+        .dvUndeliver {
+          position: relative;
+          .overlay {
+            position: absolute;
+            bottom: 0;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+            color: #f1f1f1;
+            width: 100%;
+            transition: 0.5s ease;
+            opacity: 0;
+            color: white;
+            font-size: $Text;
+            font-family: Bitter;
+            padding: 20px;
+            text-align: center;
+          }
+        }
+        .dvUndeliver:hover .overlay {
+          opacity: 1;
+        }
+        @include lg {
+          .overlay {
+            font-size: 14px !important;
+            padding: 10px !important;
+          }
+        }
+      }
+
+      .dvCardName {
+        cursor: default;
+        .dvProduct {
+          grid-template-columns: auto auto;
+          grid-template-areas: "dv-prod dv-rate";
+          display: grid;
+          padding-top: 20px;
+
+          .dvProdName {
+            grid-area: dv-prod;
+
+            p {
+              font-size: $SubHeader;
+              font-family: BitterBold;
+              margin: auto;
+            }
+            @include sm-lesser {
+              p {
+                font-size: $Text;
+              }
+            }
+            @include lg {
+              p {
+                font-size: 16px;
+              }
+            }
+          }
+          .dvRating {
+            grid-area: dv-rate;
+            color: $smaYellow;
+            // font-size: 25px;
+            justify-self: end;
+            width: fit-content;
+
+            p {
+              font-size: $SubHeader;
+              font-family: BitterBold;
+            }
+
+            @include sm-lesser {
+              p {
+                font-size: $Text;
+              }
+            }
+            @include lg {
+              .fa {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .dvDetails {
+          padding-top: 10px;
+          p {
+            font-family: Bitter;
+            font-size: $Text;
+            text-align: justify;
+            line-height: 1.3;
+            color: $smaDarkGray;
+          }
+          @include sm-lesser {
+            p {
+              font-size: $SubText;
+            }
+          }
+          @include lg {
+            p {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+    .dvCardPrice {
+      grid-template-columns: auto auto auto auto;
+      grid-template-areas: "p-price ac-price p-offer btn-rfq";
+      display: grid;
+      p {
+        font-family: BitterBold;
+        font-size: $SubHeader;
+        display: inline;
+      }
+      @include sm-lesser {
+        p {
+          font-size: $Text;
+        }
+      }
+      @include lg {
+        p {
+          font-size: 16px;
+        }
+      }
+
+      .pPrice {
+        grid-area: p-price;
+      }
+
+      .pActualPrice {
+        grid-area: ac-price;
+        text-decoration: line-through;
+        color: $smaGray;
+      }
+      @include sm-lesser {
+        .pActualPrice {
+          justify-self: center;
+        }
+      }
+      @include lg {
+        .pActualPrice {
+          justify-self: center;
+        }
+      }
+      .pOffer {
+        grid-area: p-offer;
+        color: $smaGreen;
+      }
+      @include sm-lesser {
+        .pOffer {
+          justify-self: end;
+        }
+      }
+      @include lg {
+        .pOffer {
+          justify-self: end;
+        }
+      }
+
+      .btnRfq {
+        cursor: pointer;
+        grid-area: btn-rfq;
+        font-family: BitterBold;
+        font-size: inherit;
+        border: none;
+        border-radius: 5px;
+        background: $smaRed;
+        padding: 5px;
+        color: white;
+        float: right;
+      }
+      @include sm-lesser {
+        .btnRfq {
+          font-size: inherit;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+      @include lg {
+        .btnRfq {
+          font-size: inherit;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+      @include xlg {
+        .btnRfq {
+          font-size: inherit;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+    }
+  }
+
+  .dvMore {
+    text-align: center;
+    padding: 2%;
+    
+    .btnMore {
+      cursor: pointer;
+      font-family: BitterBold;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      background: #efbe24;
+      box-shadow: 2px 2px 10px -5px black;
+      padding: 5px;
+    }
+  }
+}
+
+.dvSubHead {
+
+  .dvSubHeading {
+    width: fit-content;
+    margin: auto;
+
+    img {
+      width: inherit;
+      position: relative;
+      top: 48px;
+    }
+
+    .head {
+      font-size: $SubHeader;
+      font-family: BitterBold;
+      text-align: center;
+    }
+  }
+}
+
+.dvGallery {
+  grid-template-columns: auto auto;
+  grid-template-areas: "dv-left dv-right";
+  height: 400px;
+  margin: 5%;
+  width: auto;
+  display: grid;
+
+  .dvLeft {
+    padding: 10px;
+    grid-area: dv-left;
+    height: fit-content;
+
+    img {
+      width: inherit;
+      object-fit: cover;
+    }
+    .dvText{
+      position: absolute;
+      width: fit-content;
+    }
+  }
+  .dvRight {
+    grid-area: dv-right;
+
+    grid-template-columns: auto;
+    grid-template-rows: 30% auto;
+    grid-template-areas: "dv-RT"
+                         "dv-RB";
+    display: grid;
+
+    .dvRTop {
+      padding: 10px;
+      grid-area: dv-RT;
+      display: flex;
+
+      img {
+        width: inherit;
+        object-fit: cover;
+      }
+      .dvText{
+        position: absolute;
+        width: fit-content;
+      }
+    }
+    .dvRBtm {
+      grid-area: dv-RB;
+
+      grid-template-columns: auto auto;
+      grid-template-areas: "dv-RBL dv-RBR";
+      display: grid;
+
+      .dvRBL {
+        padding: 10px;
+        grid-area: dv-RBL;
+        display: flex;
+        height: fit-content;
+        
+        img {
+          width: inherit;
+          object-fit: cover;
+        }
+        .dvText{
+          position: absolute;
+          width: fit-content;
+        }
+      }
+      .dvRBR {
+        padding: 10px;
+        grid-area: dv-RBR;
+        display: flex;
+        height: fit-content;
+
+        img {
+          width: inherit;
+          object-fit: cover;
+        }
+        .dvText{
+          position: absolute;
+          width: fit-content;
+        }
+      }
+    }
+  }
+}
+.dvPartnerHead{
+  
+  .dvPHeading {
+    width: fit-content;
+    margin: auto;
+
+    img {
+      width: inherit;
+      position: relative;
+      top: 48px;
+    }
+
+    .head {
+      font-size: $SubHeader;
+      font-family: BitterBold;
+      text-align: center;
+    }
+  }
+}
+.dvPartDesc{
+  grid-template-columns: auto 50%;
+  grid-template-areas: "dv-left dv-right";
+  display: grid;
+  margin: 10%;
+  width: auto;
+  
+  .dvPartLeft{
+    grid-area: dv-left;
+    
+    .dvText{
+      text-align: justify;
+
+      .subText{
+        font-family: Bitter;
+        font-size: $SubText;
+      }
+    }
+
+    .btnSell{
+      font-family: BitterBold;
+      font-size: $Text;
+      color: white;
+      background: $smaYellow;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+  .dvPartRight{
+    grid-area: dv-right;
+    text-align: center;
+  }
+}
+
+.imgPop{
+    width: inherit;
+}
+.popHeadText{
+  font-family: Bitter !important;
+}
+.popText{
+  font-family: Bitter !important;
+  text-align: justify !important;
+}

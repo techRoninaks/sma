@@ -1,0 +1,280 @@
+<div class="slideshow-container">
+
+    <div class="slideDots">
+        <span class="dot" (click)="currentSlide(1)"></span><br>
+        <span class="dot" (click)="currentSlide(2)"></span><br>
+        <span class="dot" (click)="currentSlide(3)"></span>
+    </div>
+    <div class="mySlides fade">
+        <img class="slideImg" src="{{pageData['ad_banner_1']}}" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+        <img class="slideImg" src="{{pageData['ad_banner_2']}}" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+        <img class="slideImg" src="{{pageData['ad_banner_3']}}" style="width:100%">
+    </div>
+    <div class="">
+        <div class="dvPrev" id="prev">
+            <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+        </div>
+        <div class="dvNext" if="next">
+            <a class="next" (click)="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+</div>
+<div class="dvFeature">
+    <div class="dvFeatureImg">
+        <div class="dvFeatureHead">
+            <img src=" assets/images/icons/resources (HP)-19.png">
+            <p class="head">OUR FEATURES</p>
+        </div>
+    </div>
+    <div class="dvFeatureSet">
+        <div class="dvLeft">
+            <div class="dvIcon">
+                <img src=" {{pageData['feature_ico_1']}}">
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['feature_head_1']}}</p>
+                <p class="subText">{{pageData['feature_desc_1']}}</p>
+            </div>
+            <div class="dvBtn">
+                <button class="btnRead" (click)="readMore('about-1')">Read More</button>
+            </div>
+        </div>
+        <div class="dvMid">
+            <div class="dvIcon">
+                <img src=" {{pageData['feature_ico_2']}}">
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['feature_head_2']}}</p>
+                <p class="subText">{{pageData['feature_desc_2']}}</p>
+            </div>
+            <div class="dvBtn">
+                <button class="btnRead" (click)="readMore('about-2')">Read More</button>
+            </div>
+        </div>
+        <div class="dvRight">
+            <div class="dvIcon">
+                <div>
+                    <img src=" {{pageData['feature_ico_3']}}">
+                </div>
+
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['feature_head_3']}}</p>
+                <p class="subText">{{pageData['feature_desc_3']}}</p>
+            </div>
+            <div class="dvBtn">
+                <div>
+                    <button class="btnRead" (click)="readMore('about-3')">Read More</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dvProduct">
+    <div class="dvProdHead">
+        <div class="dvHeading">
+            <img src=" assets/images/icons/resources (HP)-19.png">
+            <p class="head">OUR PRODUCTS</p>
+        </div>
+    </div>
+    <div class="dvTags">
+        <div class="dvTrend">
+            <p class="tag activeTag" (click)="toggleTags('tag-1')" id="tag-1">TRENDING</p>
+        </div>
+        <div class="dvOffer">
+            <p class="tag" (click)="toggleTags('tag-2')" id="tag-2">TOP OFFER</p>
+        </div>
+        <div class="dvArrival">
+            <p class="tag" (click)="toggleTags('tag-3')" id="tag-3">NEW ARRIVALS</p>
+        </div>
+    </div>
+    <div class="dvCatMain">
+        <div class="dvCard" *ngFor="let item of array12">
+            <div class="dvCardLogo">
+                <div class="dvLogo">
+                    <img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png"
+                        [routerLink]="['/listing']" [queryParams]="{shop_id:item}">
+                </div>
+                <div class="dvSeller" [routerLink]="['/listing']" [queryParams]="{shop_id:item}">
+                    <div class="dvShopName">
+                        <p>DressHut</p>
+                    </div>
+                    <div class="dvSellerName">
+                        <p>Srinath Kamath</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvCardBanner" [routerLink]="['/listing']" [queryParams]="{shop_id:item, prod_id:item}">
+                <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
+                <div class="dvUndeliver">
+                    <div class="overlay">UNDELIVERABLE</div>
+                </div>
+            </div>
+            <div class="dvCardName">
+                <div class="dvProduct">
+                    <div class="dvProdName">
+                        <p>Lorem Ipsum</p>
+                    </div>
+                    <div class="dvRating">
+                        <div>
+                            <i class="fa fa-star" *ngFor="let item of filledStar"></i>
+                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="dvDetails">
+                    <p>{{dummyText}}</p>
+                </div>
+            </div>
+            <div class="dvCardPrice">
+                <p class="pPrice"><i class="fa fa-rupee"></i>{{price}}&emsp;</p>
+                <p class="pActualPrice"><i class="fa fa-rupee"></i>{{actualPrice}}</p>
+                <p class="pOffer">({{offer}})</p>
+                <button type="button" class="btnRfq">RFQ</button>
+            </div>
+        </div>
+    </div>
+    <div class="dvMore">
+        <button class="btnMore" id="btnSeeMore" (click)="seeMore()">See More</button>
+    </div>
+</div>
+<div class="dvFeature" id="dvWork">
+    <div class="dvFeatureImg">
+        <div class="dvFeatureHead">
+            <img src=" assets/images/icons/resources (HP)-19.png">
+            <p class="head">HOW WE WORK</p>
+        </div>
+    </div>
+    <div class="dvFeatureSet">
+        <div class="dvLeft" id="dvWorkLeft">
+            <div class="dvIcon">
+                <img src="{{pageData['work_ico_1']}}">
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['work_head_1']}}</p>
+                <p class="subText">{{pageData['work_desc_1']}}</p>
+            </div>
+            <div class="dvBtn">
+                <button class="btnRead" (click)="readMore('work-1')">Read More</button>
+            </div>
+        </div>
+        <div class="dvMid" id="dvWorkMid">
+            <div class="dvIcon">
+                <img src=" {{pageData['work_ico_2']}}">
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['work_head_2']}}</p>
+                <p class="subText">{{pageData['work_desc_2']}}</p>
+            </div>
+            <div class="dvBtn">
+                <button class="btnRead" (click)="readMore('work-2')">Read More</button>
+            </div>
+        </div>
+        <div class="dvRight" id="dvWorkRight">
+            <div class="dvIcon">
+                <div>
+                    <img src=" {{pageData['work_ico_3']}}">
+                </div>
+
+            </div>
+            <div class="dvText">
+                <p class="head">{{pageData['work_head_3']}}</p>
+                <p class="subText">{{pageData['work_desc_3']}}</p>
+            </div>
+            <div class="dvBtn">
+                <div>
+                    <button class="btnRead" (click)="readMore('work-3')">Read More</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dvSubHead">
+    <div class="dvSubHeading">
+        <img src=" assets/images/icons/resources (HP)-19.png">
+        <p class="head">SUB CATEGORIES</p>
+    </div>
+</div>
+<div class="dvGallery">
+    <div class="dvLeft">
+        <div class="dvText">
+            <p class="textImg">{{pageData['tile_desc_1']}}</p>
+        </div>
+        <img src="{{pageData['tile_img_1']}}">
+    </div>
+    <div class="dvRight">
+        <div class="dvRTop">
+            <div class="dvText">
+                <p class="textImg">{{pageData['tile_desc_2']}}</p>
+            </div>
+            <img src="{{pageData['tile_img_2']}}">
+        </div>
+        <div class="dvRBtm">
+            <div class="dvRBR">
+                <div class="dvText">
+                    <p class="textImg">{{pageData['tile_desc_3']}}</p>
+                </div>
+                <img src="{{pageData['tile_img_3']}}">
+            </div>
+            <div class="dvRBL">
+                <div class="dvText">
+                    <p class="textImg">{{pageData['tile_desc_4']}}</p>
+                </div>
+                <img src="{{pageData['tile_img_4']}}">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dvPartnerHead">
+    <div class="dvPHeading">
+        <img src=" assets/images/icons/resources (HP)-19.png">
+        <p class="head">PARTNER WITH US</p>
+    </div>
+</div>
+<div class="dvPartDesc">
+    <div class="dvPartLeft">
+        <div class="dvText">
+            <p class="subText">{{pageData['partner_with_desc']}}</p>
+        </div>
+        <button class="btnSell">SELL WITH US</button>
+    </div>
+    <div class="dvPartRight">
+        <img src="assets/images/icons/resources (HP)-20.png">
+    </div>
+</div>
+
+<!-- Popup here -->
+
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="display: block !important;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title popHeadText">{{popHeader}}</h4>
+                </div>
+                <div class="dvImgPop">
+                    <img src="{{popImgSrc}}" class="imgPop">
+                </div>
+                <div class="modal-body popText">
+                    <p>{{popContent}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
