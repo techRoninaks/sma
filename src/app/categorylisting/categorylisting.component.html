@@ -1,1 +1,251 @@
-<p>categorylisting works!</p>
+<div id="main">
+    <!-- Header -->
+    <div class="dvCatHeader" id="dvCatHeader">
+        <div class="dvBreadcrumbs">
+            <a routerLink="">Home</a> > <a style="color: gray;">Category listing</a>
+        </div>
+        <div class="dvFilterSet">
+            <div class="dvCheckbox">
+                <input class="checkBox" type="checkbox" style="cursor: pointer;"> SHOW UNDELIVERABLE
+            </div>
+            <div class="dvFilter">
+                <div class="dvBtnFilter">
+                    <button type="button" class="btnFilter" data-toggle="collapse" href="#collapseOne"
+                        (click)="toggleBtns('collapseTwo')"><i class="fa fa-filter"></i>&emsp;FILTER</button>
+                    <button type="button" class="btnFilterSide" (click)="openNav()"><i
+                            class="fa fa-filter"></i>&emsp;FILTER</button>
+                </div>
+                <div class="dvBtnSort">
+                    <button type="button" class="btnSort" data-toggle="collapse" href="#collapseTwo"
+                        (click)="toggleBtns('collapseOne')"><i class="fa fa-sort"></i>&emsp;SORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Collapse -->
+    <div class="dvFilterCollapse" id="filter-set">
+        <div class="accordion">
+            <div class="card">
+                <div id="collapseOne" class="collapse hide">
+                    <div class="card-body" id="filterbody">
+                        <div class="filterSet1">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Category</a>
+                                    <ul id="ulCategory">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Price</a>
+                                    <ul id="ulPrice">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Rating</a>
+                                    <ul id="ulRating">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Free Shipping</a>
+                                    <ul class="ulShipping">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="filterSet2">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Customisible</a>
+                                    <ul id="ulCustom">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Variants</a>
+                                    <ul id="ulVariants">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">RFQ Enabled</a>
+                                    <ul id="ulRfq">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Order Status</a>
+                                    <ul id="ulOrder">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="filterSet3">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Instant Buy</a>
+                                    <ul id="ulInstBuy">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Delivery Methods</a>
+                                    <ul id="ulDelivery">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="filterSet4">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Inactive Products</a>
+                                    <ul id="ulInactiveProd">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Coming Soon</a>
+                                    <ul id="ulComingSoon">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Stock</a>
+                                    <ul id="ulStock">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="filterSet5">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Rejected</a>
+                                    <ul id="ulRejected">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Pending Approval</a>
+                                    <ul id="ulPendingApprov">
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Pick Up</a>
+                                    <ul id="ulPickUp">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="collapse hide">
+                    <div class="card-body" id="sortbody">
+                        <div class="sortSet1">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Price</a>
+
+                                <li class="liFilterHeads"><a href="#nowhere">Latest</a>
+                                    <ul>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="sortSet2">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Popularity</a>
+                                    <ul>
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads">
+                                    <a href="#nowhere">Processing Time</a>
+                                    <ul class="">
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sortSet3">
+                            <ul class="ulFilterHeads">
+                                <li class="liFilterHeads"><a href="#nowhere">Rating</a>
+                                    <ul>
+
+                                    </ul>
+                                </li>
+                                <li class="liFilterHeads"><a href="#nowhere">Shipping Price</a>
+                                    <ul>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SideBarFilter -->
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">×</a>
+            <ul>Echo & Alexa</ul>
+            <ul>Western Wear</ul>
+            <ul>Top Brands</ul>
+            <ul>Contact</ul>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="dvCatMain">
+        <div class="dvCard" *ngFor="let item of array12">
+            <div class="dvCardLogo">
+                <div class="dvLogo">
+                    <img class="imgLogo" src="../../assets/images/logo/resources (CL)-21.png"
+                        [routerLink]="['/listing']" [queryParams]="{shop_id:item}">
+                </div>
+                <div class="dvSeller" [routerLink]="['/listing']" [queryParams]="{shop_id:item}">
+                    <div class="dvShopName">
+                        <p>DressHut</p>
+                    </div>
+                    <div class="dvSellerName">
+                        <p>Srinath Kamath</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvCardBanner" [routerLink]="['/listing']" [queryParams]="{shop_id:item, prod_id:item}">
+                <img class="imgBanner" src="../../assets/images/banner/Screenshot_20190711-012413[1].png">
+                <div class="dvUndeliver">
+                    <div class="overlay">UNDELIVERABLE</div>
+                </div>
+            </div>
+            <div class="dvCardName">
+                <div class="dvProduct">
+                    <div class="dvProdName">
+                        <p>Lorem Ipsum</p>
+                    </div>
+                    <div class="dvRating">
+                        <div>
+                            <i class="fa fa-star" *ngFor="let item of filledStar"></i>
+                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="dvDetails">
+                    <p>{{dummyText}}</p>
+                </div>
+            </div>
+            <div class="dvCardPrice">
+                <p class="pPrice"><i class="fa fa-rupee"></i>{{price}}&emsp;</p>
+                <p class="pActualPrice"><i class="fa fa-rupee"></i>{{actualPrice}}</p>
+                <p class="pOffer">({{offer}})</p>
+                <!-- <button type="button" class="btnRfq" [routerLink]="['/listing']" [queryParams]="{shop_id:item,prod_id:item}">RFQ</button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dvCatFooter">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </div>
+
+</div>
