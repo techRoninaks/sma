@@ -68,7 +68,6 @@ export class CategorylistingComponent implements OnInit {
     });
 
     if (!isNaN(this.token)) {
-      console.log(this.token);
 
     }
   }

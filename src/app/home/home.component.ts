@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
 //Data service beg
     this.data.getPageData("home").subscribe(data =>{
       this.pageData = data;
-      console.log(this.pageData);
     })
 //Data service ends
 
