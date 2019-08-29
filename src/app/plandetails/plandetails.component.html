@@ -1,0 +1,107 @@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+<div class="breadcrumb-layout">
+        <ul class="breadcrumb">
+          <li><a href="#homepage">Home</a></li>
+          <li>Plan Details</li>
+        </ul>
+<hr class="hrdiv">
+</div>
+<div>
+        <button><a href="http://localhost:4200/Login" (click)="signOut()">Sign out Google</a></button>
+        <button (click)="fblogout();">Sign out FB</button>
+        <button routerLink="/Login">Logout</button>
+        
+
+</div>
+<div class="main-title">
+        Which Plan Is Right For You?
+        <br>
+        <br>
+</div>
+
+<div class="main-grid">
+
+        <div class="zoom card-1">
+                <mat-card class="card-style-1">
+                        <mat-card-header>
+                            <!-- <div mat-card-avatar ></div> -->
+                            <mat-card-title class="card-title">FREE</mat-card-title>
+                            <mat-card-subtitle></mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="image-style"><img src="./assets/images/img_pd_free.png"></div>
+                        <mat-card-content>
+                            <p class="text-style">
+                                Free
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button class="btn-style">TRY NOW</button>
+                        </mat-card-actions>
+                </mat-card>
+        </div>
+        <div class="zoom card-2">
+                <mat-card class="card-style-2">
+                        <mat-card-header>
+                            <!-- <div mat-card-avatar ></div> -->
+                            <mat-card-title class="card-title">BASIC</mat-card-title>
+                            <mat-card-subtitle></mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="image-style"><img src="./assets/images/img_pd_basic.png"></div>
+                        <mat-card-content>
+                        <p class="text-style">
+                            Basic Version
+                        </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                        <button mat-button class="btn-style">TRY NOW</button>
+                        </mat-card-actions>
+                </mat-card>
+        </div>
+        <div class="zoom card-3">
+                <mat-card class="card-style-3">
+                        <mat-card-header>
+                            <!-- <div mat-card-avatar ></div> -->
+                            <mat-card-title class="card-title">PREMIUM</mat-card-title>
+                            <mat-card-subtitle></mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="image-style"><img src="./assets/images/img_pd_premium.png"></div>
+                        <mat-card-content>
+                        <p class="text-style">
+                            Premium Version
+                        </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                        <button mat-button class="btn-style">TRY NOW</button>
+                        </mat-card-actions>
+                </mat-card>
+        </div>
+        <div class="zoom card-4">
+                <mat-card class="card-style-4">
+                        <mat-card-header>
+                            <!-- <div mat-card-avatar ></div> -->
+                            <mat-card-title class="card-title">PLUS</mat-card-title>
+                            <mat-card-subtitle></mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="image-style"><img src="./assets/images/img_pd_plus.png"></div>
+                        <mat-card-content>
+                        <p class="text-style">
+                            Plus Version
+                        </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                        <button mat-button class="btn-style">TRY NOW</button>
+                        </mat-card-actions>
+                </mat-card>
+        </div>
+
+</div>
+<br>
+<br>
+<br>
+<div>
+    <button class="btn-compare">COMPARE OUR PLANS ></button>
+</div>
+<br>
+<br>

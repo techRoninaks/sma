@@ -1,0 +1,135 @@
+// breadcrumb
+.breadcrumb {
+    margin-top: 2%;
+    // margin-left: 5%;
+    padding: 8px 16px;
+    list-style: none;
+    background-color: inherit;
+    font-family: "BitterBold";
+  }
+  .breadcrumb li {
+    display: inline;
+    font-size: 14px;
+  }
+  .breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: ">\00a0";
+  }
+  .breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+  }
+  .breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+  .breadcrumb-layout{
+      margin-left: 10%;
+  }
+
+  .hrdiv{
+      margin-right: 20%;
+  }
+
+.main-title{
+    margin-top: 8%;
+    font-family: BitterBold;
+    font-size: 200%;
+    text-align: center;
+    color: black;
+}
+
+.card-title{
+  font-family: BitterBold;
+  text-align: center;
+}
+.text-style{
+  text-align: center;
+}
+.btn-style{
+  width: -moz-available;
+  background: #EFBE24;
+  font-family: BitterBold;
+}
+.btn-compare{
+  background: #009145;
+  border-radius: 4px;
+  margin-left: 43%;
+  width: 15%;
+  font-family: BitterBold;
+  color: white;
+}
+//hoverzoom
+* {
+    box-sizing: content-box;
+  }
+  
+  .zoom {
+    padding: 50px;
+    // background-color: green;
+    transition: transform .2s;
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+  }
+
+//card-style
+.card-style-1{
+    background: #DBDBDB;
+    background-size: cover;
+    width: 200px;
+    height: 300px;
+    font-family: BitterBold;
+}
+.card-style-2{
+  background: #DBDBDB;
+  background-size: cover;
+  width: 200px;
+  height: 300px;
+  font-family: BitterBold;
+}
+.card-style-3{
+  background: #DBDBDB;
+  background-size: cover;
+  width: 200px;
+  height: 300px;
+  font-family: BitterBold;
+}
+.card-style-4{
+  background: #DBDBDB;
+  background-size: cover;
+  width: 200px;
+  height: 300px;
+  font-family: BitterBold;
+}
+.image-style{
+  width: min-content;
+  margin: auto;
+}
+//grid
+.main-grid{
+  font-family: "BitterRegular";
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto ;
+  grid-template-areas: "card-1 card-2 card-3 card-4";
+}
+.card-1{
+  grid-area: card-1;
+}
+.card-2{
+  grid-area: card-2;
+}
+.card-3{
+  grid-area: card-3;
+}
+.card-4{
+  grid-area: card-4;
+}

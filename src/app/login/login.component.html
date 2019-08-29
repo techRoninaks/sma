@@ -1,0 +1,190 @@
+<div class="breadcrumb-layout">
+    <ul class="breadcrumb">
+      <li><a href="#homepage">Home</a></li>
+      <li>SignIn</li>
+    </ul>
+    <hr class="hrdiv">
+</div>
+
+<div class="main-grid">
+  <div class="right-grid">
+    <div class="button-green-layout">
+      <!-- <ul> -->
+        <div><button class="button-green-login">LOGIN</button></div>
+      <!-- </ul> -->
+    </div>
+    <br>
+    <div class="login-layout" id="login-layout">
+      <br>
+      <br>
+      <!-- <ul> -->
+        <div class="title">SCOOPMYART</div>
+      <!-- </ul> -->
+
+      <!-- <form name="form1" action="#homepage" onsubmit="validateForm()" id="form1"> -->
+        <!-- <ul> -->
+            <form [formGroup]="loginForm">
+                <div class="login-layout-2">
+                  <div>
+                    <input type="email" placeholder="Email ID  :" class="text-input-style" formControlName="login_email" id="login_email">
+                    <div *ngIf="submitted && loginForm.controls.login_email.errors" class="error validator-style">
+                        <div *ngIf="loginForm.controls.login_email.errors.required">
+                          Enter Email !
+                        </div>
+                        <div *ngIf="loginForm.controls.login_email.hasError('pattern')">
+                          Invalid Email !
+                        </div>
+                    </div>
+                  </div>
+                  <br>
+
+                  <div>
+                    <input type="password" placeholder="Password  :" class="text-input-style" formControlName="login_password" id="login_password">
+                    <div *ngIf="submitted && loginForm.controls.login_password.errors" class="error validator-style">
+                        <div *ngIf="loginForm.controls.login_password.errors.required">
+                          Enter Password !
+                        </div>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+                <div class="text-style">or</div>
+                <div>
+                  <div>
+                    <!-- <button class="button-signin-fb" type="button" scope="public_profile,email" onlogin="checkLoginState();"><img src="/assets/images/icons/ic_fb.png" class="img-style"> Login with facebook
+                    </button>      -->
+                    
+                    <!-- <div class="fb-login-button button-signin-fb" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+                    <div class="fb-login-button   button-signin-fb" data-width="180" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
+                  </div>
+                </div>
+                <br>
+                <div>
+                    <!-- <button class="g-signin2" type="button" data-onsuccess="onSignIn"><img src="/assets/images/icons/ic_google.png"
+                      class="img-style"> Login with Google</button> -->
+                      <div class="g-signin2  button-signin-google" data-width="220" data-height="40" data-longtitle="true" value="Login with Google"></div>
+
+                </div>
+                <!-- </div> -->
+                <br>
+                <div>
+                  <div><button class="button-signin-insta" type="button"><img src="/assets/images/icons/ic_insta.png"
+                    class="img-style"> Login with Instagram</button></div>
+                </div>
+                <br>
+                <div class="login-layout-3">
+                  <div>
+                    <input type="checkbox" formControlName="login_checkbox" required> I read the agreement & not going back from success
+                  </div>
+                  <br>
+                </div>
+                <div>
+                  <button class="button-login" type="button" [disabled]="!loginForm.controls.login_checkbox.valid" (click)="onSubmitLogin()">LOGIN</button>
+                </div>
+
+                <div class="text-signup" ><a routerLink="/SignUp">Sign Up</a></div>
+        <!-- </ul> -->
+        </form>
+
+        
+          <div class="container" id="modalContainer">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+              Forgot Password
+            </button>
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content dvModalContent">
+                  <div class="modal-header dvModalHeader">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                      <form [formGroup]="fpFormMobile">
+                          <div class="title-fp">
+                            <h3>Forgot Password</h3>
+                          </div>
+                          <div>
+                            <input type="text" size="20" placeholder="Enter Mobile No:" formControlName="fp_mobile_no" id="fp_mobile_no">
+                            <div *ngIf="submitted && fpFormMobile.controls.fp_mobile_no.errors" class="error validator-style">
+                                <div *ngIf="fpFormMobile.controls.fp_mobile_no.errors.required">
+                                  Mobile no is required !
+                                </div>
+                                <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('minlength')">
+                                  Enter valid Mobile Number !
+                                </div>
+                                <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('maxlength')">
+                                  Enter valid Mobile Number !
+                                </div>
+                                <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('pattern')">
+                                  Enter Only digits !
+                                </div>
+                            </div>
+                          </div>
+                          <br>
+                          <div>
+                            <button class="button-otp" type="submit" (click)="onSubmitSendOtp()">
+                              SEND OTP
+                            </button>
+                          </div>
+                          </form>
+                          <br>
+                          <form [formGroup]="fpFormOtp">
+                          <div>
+                              <div>
+                                <input type="text" size="20" placeholder="Enter OTP:" formControlName="fp_otp">
+                                <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                                    <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                                      Enter OTP !
+                                    </div>
+                                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                                      Enter valid OTP !
+                                    </div>
+                                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                                      Enter valid OTP !
+                                    </div>
+                                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                                      Enter Only digits !
+                                    </div>
+                                </div>
+                              </div>
+                              <br>
+                              <div>
+                                <button class="button-fp" type="submit" (click)="onSubmit()">
+                                  SUBMIT
+                                </button>
+                              </div>
+                              <br>
+                              <br>
+                          </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+
+  <div class="left-grid">
+    <div class="side-layout">
+      <ul>
+        <div class="left-grid-title-1">Lets Open</div>
+        <div class="left-grid-title-2">The Door To Success</div>
+        <br>
+        <br>
+        <br>
+        <div class="left-grid-title-3">Our Features :</div>
+        <br>
+        <div class="left-grid-feature"><img src="/assets/images/img_painting.png" class="img-style">&emsp;Paintings & Art</div>
+        <br>
+        <div class="left-grid-feature"><img src="/assets/images/img_dress.png" class="img-style">&emsp;Ladies &
+          Kids dress</div>
+        <br>
+        <div class="left-grid-feature"><img src="/assets/images/img_cake.png" class="img-style">&emsp;Cakes &
+          pastries</div>
+      </ul>
+    </div>
+  </div>
+</div>
+

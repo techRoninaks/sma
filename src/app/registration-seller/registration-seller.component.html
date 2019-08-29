@@ -1,0 +1,100 @@
+<div class="breadcrumb-layout">
+    <ul class="breadcrumb">
+      <li><a href="#homepage">Home</a></li>
+      <li>Registration</li>
+    </ul>
+    <hr class="hrdiv">
+  </div>
+  
+  <div class="main-grid" id="main-grid">
+      <div class="right-grid" id="right-grid">
+              <div class="button-green-layout">
+                <!-- <ul> -->
+                  <div><button class="button-green-login">REGISTRATION</button></div>
+                <!-- </ul> -->
+              </div>
+              <br>
+        <div class="login-layout">
+          <br>
+            <div class="title">SCOOPMYART</div>
+          <form name="form1" action="#homepage" id="form1" onsubmit="validateForm()">
+            <!-- <ul> -->
+              <div class="login-layout-2">
+                <div><input type="text" placeholder="Owner Name :"  size="40" class="text-input-style" id="fullname"></div>
+                <br>
+                <div><input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email">Verify</div>
+                <br>
+                <div><input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Verify</button></div>
+                <br>
+                <div><input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password"></div>
+                <br>
+                <div><input type="password" placeholder="Confirm Password  :" size="40" class="text-input-style" id="reg_conf_password"></div>
+              </div>
+
+              <br>
+              <div class="login-layout-3">
+                <div><input type="checkbox"> I read the agreement & not going back from success</div>
+                <br>
+              </div>
+              <div><button class="button-login" type="submit">CONTINUE</button></div>
+            <!-- </ul> -->
+          </form>
+        </div>
+        <!-- verify pop-up -->
+        <!-- <ul> -->
+            <div class="container" id="modalContainer" style="z-index: 10001;">
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+            
+                  <div class="modal-content dvModalContent">
+                    <div class="modal-header dvModalHeader">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="padding:0 10% 0 10%;">
+                            <div class="title-verify"><h3>Verify Mobile</h3></div>
+                            <div><input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:"></div>
+                            <br>
+                            <div><button class="button-otp" type="submit" (click)="otp_validation()">SEND OTP</button></div>
+                            <br>
+                            <div>
+                                <div><input type="text" class="pop-up-input-style" placeholder="Enter OTP:"></div>
+                                <br>
+                                <div><button class="button-submit" type="submit">SUBMIT</button></div>
+                                <br>
+                                <br>
+                            </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- </ul> -->
+      </div>
+    
+    
+    
+      <div class="left-grid">
+        <div class="side-layout">
+          <!-- <ul> -->
+            <div class="left-grid-title-1">Lets Open</div>
+            <div class="left-grid-title-2">The Door To Success</div>
+            <br>
+            <br>
+            <br>
+            <div class="left-grid-title-3">Our Features :</div>
+            <br>
+            <div class="left-grid-feature"><img src="/assets/images/img_painting.png" Height="10%"
+                Width="10%">&emsp;Paintings & Art</div>
+            <br>
+            <div class="left-grid-feature"><img src="/assets/images/img_dress.png" Height="10%" Width="10%">&emsp;Ladies &
+              Kids dress</div>
+            <br>
+            <div class="left-grid-feature"><img src="/assets/images/img_cake.png" Height="10%" Width="10%">&emsp;Cakes &
+              pastries</div>
+          <!-- </ul> -->
+        </div>
+      </div>
+  </div>
+    
+    
+  

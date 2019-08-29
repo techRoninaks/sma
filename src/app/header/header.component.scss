@@ -43,9 +43,11 @@ li{
 
 .header-category-bar{
     height: 4rem;
-    width: 94%;
+    width: 98%;
     margin: auto;
     color: $primaryFontColor;
+    position: relative;
+    display: inline-block;
 
     div.scrollmenu {
         overflow: auto;
@@ -62,6 +64,13 @@ li{
         padding-left: $categorySidePadding;
         padding-right: $categorySidePadding;
       }
+      div.scrollmenu a:hover {
+        background-color: #DBDBDB;
+      }
+      div.hamburgermenu{
+        position: fixed;
+        align-content: inherit;
+      }
       
 }
 
@@ -76,4 +85,86 @@ li{
     height: 15px;
     margin: auto;
     margin-bottom: 5px;
+}
+
+.dropbtn {
+    background-color: #f9f9f9;
+    color: black;
+    width: 202px;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  
+  .dropbtn-login {
+    background-color: #f9f9f9;
+    color: black;
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropbtn-cat {
+    background-color: #f9f9f9;
+    color: black;
+    width: auto;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    // border-radius: 10px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #DBDBDB;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #DBDBDB;
+  }
+
+  .dropdown:hover .dropbtn-login{
+    background-color: #DBDBDB;
+  }
+
+.input_style{
+  border-style: none;
+  padding: 1%;
+  border-radius: 5px;
+  text-align: center;
+}
+.btn_style{
+  border-radius: 2px;
+  background:#EFBE24;
+  border: none;
+  color: white;
 }
