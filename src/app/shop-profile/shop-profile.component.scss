@@ -1,0 +1,439 @@
+@mixin sm {
+	@media (max-width: 1050px) {
+		@content;
+	}
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+.breadcrumb {
+	padding: 10px 10px;
+	list-style: none;
+	background-color: transparent;
+	li + li:before {
+		padding: 8px;
+		color: gray;
+		content: ">";
+	}
+	li {
+		display: inline;
+		font-size: 1rem;
+		a {
+			color: gray;
+			text-decoration: none;
+
+			&:hover {
+				color: red;
+			}
+		}
+	}
+	text-decoration: none;
+}
+.divMargin {
+	margin: 5%;
+	width: auto;
+}
+
+// main
+
+.gridT {
+	display: grid;
+	grid-template-columns: auto;
+	width: 100%;
+	grid-template-rows: repeat(6, auto);
+	grid-template-areas:
+		"shopBg"
+		"shopDescBio"
+		"shopProducts"
+		"shopShipment"
+		"shopPolicies"
+		"shopRatingReview";
+
+	.shopBg {
+		grid-area: shopBg;
+		background-color: whitesmoke;
+		height: auto;
+		width: 100%;
+		img {
+			width: 100%;
+		}
+	}
+	.shopDescBio {
+		grid-area: shopDescBio;
+		background-color: white;
+		height: auto;
+		margin-top: 5%;
+		display: grid;
+		grid-template-columns: 49% 2% 49%;
+		grid-template-rows: auto;
+		grid-template-areas: "shopDesc . shopBio";
+		@include sm {
+			display: grid;
+			grid-template-columns: Auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"shopDesc"
+				"shopBio";
+		}
+		#shopDesc {
+			grid-area: shopDesc;
+			background-color: whitesmoke;
+			padding-bottom: 15%;
+			margin-bottom: 5%;
+			display: grid;
+			grid-template-columns: 25% 25% 50%;
+			grid-template-rows: auto;
+			grid-template-areas: ". shopLogo shopInfo";
+			#shopLogo {
+				margin-block-start: 43%;
+				grid-area: shopLogo;
+				img{
+					width:100%;
+					height:10rem;
+					object-fit: contain;
+				}
+			}
+			#shopInfo {
+				grid-area: shopInfo;
+				margin-block-start:25%;
+
+				#shopStarFoll {
+				}
+				#shopDetails {
+				}
+				#shopBtnInfo {
+					display: grid;
+					grid-template-columns: 50% 50%;
+					grid-template-rows: auto;
+					grid-template-areas: "dvFromRfq dvShipsFollow";
+					#dvFromRfq {
+						grid-area: dvFromRfq;
+						#btnRfq {
+						}
+					}
+					#dvShipsFollow {
+						grid-area: dvShipsFollow;
+						#btnFollowShop {
+						}
+					}
+				}
+			}
+		}
+		#shopBio {
+			grid-area: shopBio;
+			background-color: whitesmoke;
+			h3 {
+				margin-block-start: 5%;
+				margin-inline-start: 5%;
+			}
+			p {
+				margin-inline-end: 10%;
+				margin-inline-start: 5%;
+			}
+		}
+	}
+	.shopProducts {
+		grid-area: shopProducts;
+		background-color: wheat;
+		height: 400px;
+		margin-top: 5%;
+	}
+	.shopShipment {
+		grid-area: shopShipment;
+		background-color: whitesmoke;
+		height: auto;
+		margin-top: 5%;
+		width: auto;
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 300px;
+			transform: translate(0rem, 2rem);
+			z-index: 0;
+		}
+		h2 {
+			text-align: center;
+			transform: translate(0px, -0.45em);
+			z-index: 1;
+		}
+		#dvForm {
+			display: block;
+			text-align: justify;
+			text-align: center;
+			form {
+				display: inline-block;
+				margin-left: auto;
+				margin-right: auto;
+				text-align: left;
+				#odDelivery {
+					margin-inline-end: 20px;
+				}
+				#coDelivery {
+					margin-inline-end: 20px;
+				}
+				#dtdDelivery {
+					margin-inline-end: 20px;
+				}
+				a {
+					border: 1px solid black;
+					background-color: white;
+					width: 10rem;
+				}
+			}
+		}
+	}
+	.shopPolicies {
+		grid-area: shopPolicies;
+		height: auto;
+		width: 100%;
+		margin-top: 5%;
+		box-sizing: border-box;
+		#shopPolicy {
+			margin-left: 5%;
+			margin-right: 5%;
+			width: auto;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				transform: translate(0rem, 2rem);
+				z-index: 0;
+			}
+			h2 {
+				text-align: center;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			p {
+				text-align: justify;
+				text-align: center;
+			}
+		}
+	}
+	.shopRatingReview {
+		grid-area: shopRatingReview;
+		background-color: whitesmoke;
+		width: 100%;
+		height: auto;
+		font-weight: 300px;
+		margin-top: 5%;
+		// margin-bottom: 5%
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 300px;
+			transform: translate(0rem, 2rem);
+			z-index: 0;
+		}
+		h2 {
+			text-align: center;
+			transform: translate(0px, -0.45em);
+			z-index: 1;
+		}
+		.rating {
+			grid-area: rating;
+			width: 400px;
+			margin: 0 auto;
+			margin-top: 3em;
+			background-color: whitesmoke;
+			padding: 4px;
+			margin-bottom: 3em;
+			.inner {
+				padding: 1em;
+				background-color: white;
+				overflow: hidden;
+				position: relative;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+			}
+
+			.rating {
+				float: left;
+				width: 45%;
+				margin-right: 5%;
+				text-align: center;
+			}
+
+			.rating-num {
+				color: #333333;
+				font-size: 72px;
+				font-weight: 100;
+				line-height: 1em;
+			}
+
+			.rating-stars {
+				font-size: 20px;
+				color: #e3e3e3;
+				margin-bottom: 0.5em;
+			}
+			.rating-stars .active {
+				color: #737373;
+			}
+
+			.rating-users {
+				font-size: 14px;
+			}
+
+			.histo {
+				float: left;
+				width: 50%;
+				font-size: 13px;
+				transform: translate(0px, 50px);
+			}
+
+			.histo-star {
+				float: left;
+				padding: 3px;
+			}
+
+			.histo-rate {
+				width: 100%;
+				display: block;
+				clear: both;
+			}
+
+			.bar-block {
+				margin-left: 5px;
+				color: black;
+				display: block;
+				float: left;
+				width: 75%;
+				position: relative;
+			}
+
+			.bar {
+				padding: 4px;
+				display: block;
+			}
+
+			#bar-five {
+				width: 0;
+				background-color: #9fc05a;
+			}
+
+			#bar-four {
+				width: 0;
+				background-color: #add633;
+			}
+
+			#bar-three {
+				width: 0;
+				background-color: #ffd834;
+			}
+
+			#bar-two {
+				width: 0;
+				background-color: #ffb234;
+			}
+
+			#bar-one {
+				width: 0;
+				background-color: #ff8b5a;
+				// margin-left: 2px;
+			}
+		}
+
+		.review {
+			// margin: 0% 5% 0% 5%;
+			background-color: white;
+			margin-top: 50px;
+			margin-bottom: 50px;
+			grid-area: revData;
+			display: grid;
+			grid-template-columns: 10% 20% 50% 10%;
+			border-top: 3px lightgray solid;
+			grid-template-rows: 5% 95%;
+			grid-template-areas: ". revName revData .";
+			#revName {
+				grid-area: revName;
+				#rName {
+					grid-area: rName;
+				}
+				#rAgo {
+					grid-area: rAgo;
+				}
+			}
+			#revData {
+				grid-area: revData;
+				grid-template-columns: auto;
+				grid-template-rows: repeat(4, auto);
+				grid-template-areas:
+					"rTitile"
+					"rDesc"
+					"rstarLikes"
+					"revIcon";
+				#rTitle {
+					grid-area: rTitle;
+				}
+				#rDesc {
+					grid-area: rDesc;
+				}
+				#starLikes {
+					display: grid;
+					grid-template-columns: 3rem 3rem 3rem 3rem 5rem auto;
+					grid-template-rows: auto auto;
+					grid-template-areas: "icLike likeCount icDislike dislikeCount btnReport ";
+					grid-area: starLikes;
+					#icLike {
+						grid-area: icLike;
+						width: 30px;
+						height: 30px;
+						transform: translate(0px, 0px);
+					}
+					#likeCount {
+						grid-area: likeCount;
+						transform: translate(0px, 0px);
+					}
+					#icDislike {
+						grid-area: icDislike;
+						width: 30px;
+						height: 30px;
+						transform: translate(0px, 0px);
+					}
+					#dislikeCount {
+						grid-area: dislikeCount;
+						transform: translate(0px, 0px);
+					}
+					#btnReport {
+						grid-area: btnReport;
+					}
+				}
+				#revIcon {
+					grid-area: revIcon;
+					width: 100px;
+					height: 100px;
+					float: left;
+				}
+			}
+		}
+		.writeReview {
+			background-color: white;
+			margin-bottom: 5%;
+			margin-top: 2%;
+			height: auto;
+			text-align: center;
+			#btnWriteReview {
+				width: max-content;
+			}
+		}
+	}
+}

@@ -1,1 +1,433 @@
-<p>listing works!</p>
+<div class="divMargin">
+	<ul class="breadcrumb">
+		<li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
+		<li><a [routerLink]="[ '/categorylisting' ]" routerLinkActive="active">Category Listing</a></li>
+		<li><a [routerLink]="[ '/listing' ]" routerLinkActive="active">Listing</a></li>
+	</ul>
+	<!-- [queryParams]="[prodid:'{{prodId}}']" -->
+	<hr />
+	<div class="container" id="undeliverableModalContainer" (load)="function()" style="z-index: 10001;">
+		<button type="button" class="btn btn-warning" data-toggle="modal"
+			data-target="#undeliverableModal">undeliverable</button>
+		<!-- Modal -->
+		<div class="modal fade" id="undeliverableModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content dvModalContent">
+					<div class="modal-header dvModalHeader">
+					</div>
+					<div class="modal-body" style="padding:0 10% 0 10%;">
+						<div>
+
+							<img class="undeliverableIcon" src="assets/icons/img_549368.png">
+							<ul>
+								<ul>
+									UNDELIVERABLE TO <span>{{dynamicData.pincode}}</span>
+								</ul>
+								<form>
+									<input type="text" placeholder="Enter Pincode">
+									<br>
+									<label for="changePincode"> Change Pincode</label><br>
+									<input type="radio" class="aP" name="drone" value="availableProducts">
+									<label for="availableProducts"> Available Products</label><br>
+									<input type="radio" class="cP" name="drone" value="continue">
+									<label for="continue"> Continue on this page</label><br>
+									<button class="btnRfq">Apply</button>
+								</form>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="gridT">
+	<div class="divSelDesc">
+		<!-- SELLER -->
+		<div class="divSeller">
+
+			<div class="sellerDetails">
+				<img src="assets/images/dentalia-demo-deoctor-3-1-750x750.jpg" class="sellerIcon">
+				<div class="sellerInfo">
+					<p class="companyName">{{sellerDetails.shopName}}</p>
+					<a class="sellerName">{{sellerDetails.sellerName}}</a>
+				</div>
+				<!-- <img src="assets/icons/resources (IL)-04.png"> -->
+				<div class="follow">
+					<ng-container *ngIf="folResult; else notFollowing">
+						<button class="btnFollow"><img class="followIcon"
+								src="assets/icons/resources (IL)-04.png">Unfollow</button>
+					</ng-container>
+					<ng-template #notFollowing>
+						<button class="btnFollow"><img class="followIcon"
+								src="assets/icons/resources (IL)-04.png">Follow</button>
+					</ng-template>
+
+				</div>
+			</div>
+
+			<div class="prodImage">
+				<div class="pImage">
+					<!-- <input type='file' (change)="readURL($event);" /> -->
+					<!-- <img src="assets/images/Screenshot_20190712-201603.png" class="productImageLarge"> -->
+					<img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
+						(click)="openModal();currentSlide(1)">
+					<img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
+				</div>
+				<div class="imageSlider">
+					<img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg"
+						(click)="myFunction('img1');" id="img1">
+					<br>
+					<img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_4.jpg"
+						(click)="myFunction('img2');" id="img2">
+					<br>
+					<img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_5.jpg"
+						(click)="myFunction('img3');" id="img3">
+					<br>
+					<img class="smallImage" src="assets/images/dentalia-demo-deoctor-3-1-750x750.jpg"
+						(click)="myFunction('img4');" id="img4">
+					<br>
+					<img class="smallImage" src="assets/images/Screenshot_20190712-201603.png"
+						(click)="myFunction('img5');" id="img5">
+				</div>
+			</div>
+
+			<div class="btnsSel">
+				<button class="btnRfq">RFQ</button>
+				<button class="btnAtcart">ADD TO CART</button>
+			</div>
+
+		</div>
+		<!-- DESCRIPTION -->
+		<div class="divDescription">
+			<div class="desc">
+				<h3>Description</h3>
+				<hr />
+				<h6>Specification:</h6>
+				<li *ngFor="let specifications of Object.keys(spec)">
+					<p>{{spec[specifications]}}</p>
+				</li>
+				<br>
+				<h6>Product Details:</h6>
+				<div class="longD">
+					<p id="lDesc">{{ dynamicData.longDesc }}</p>
+				</div>
+				<button id="seeMore" (click)="readMore();">SEE MORE</button>
+			</div>
+		</div>
+	</div>
+	<div class="divQuanDel">
+		<!-- QUANTITY -->
+		<div class="pName">
+			<h3>{{dynamicData.name}}</h3>
+			<p>{{dynamicData.shortDesc}}</p>
+		</div>
+		<div class="pDiscount">
+			<p>60% off</p>
+			<p>00.00 <del>{{dynamicData.basePrice}}</del></p>
+		</div>
+		<!-- <div class="pSize">
+			<div *ngFor="let items  of {{variantNumber.numVar}}">
+				<p>{{variantCount.name}}</p>
+				<select class="dropdown">
+					<option>Select An Option</option>
+					<option *ngFor="let item of {{variantCount.varCount}}"> {{variantData[item].value}} </option>
+				</select>
+			</div>
+		</div> -->
+		<!-- Object.keys(variantData) -->
+		<div class="pQuantity">
+			<p>Quantity</p>
+			<input type="number">
+		</div>
+		<div class="pAvailable">
+			Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span>
+			Remaining Cake:<span>{{dynamicData.qtyAvailable}}</span>
+		</div>
+		<div class="pMessage">
+			<p>Add Your Message:</p>
+			<input type="text">
+		</div>
+		<div class="pImages">
+			<p>Product Image</p>
+			<input type="file" name="pic" accept="image/*">
+			<!-- <input type="submit"> -->
+		</div>
+		<div class="pdatePicker">
+			<span>Pick desired date for delivery:</span>
+			<input type="date">
+		</div>
+		<div class="pButton">
+			<div class="container" id="buyModalContainer" style="z-index: 10001;">
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#buyModal">BUY
+					NOW</button>
+				<div class="modal fade" id="buyModal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content dvModalContent">
+							<div class="modal-header dvModalHeader">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container" id="giftModalContainer" style="z-index: 10001;">
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#giftModal">GIFT</button>
+				<!-- Modal -->
+				<div class="modal fade" id="giftModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content dvModalContent">
+							<div class="modal-header dvModalHeader">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body" style="padding:0 10% 0 10%;">
+								<form>
+									Title : <input type="text" name="text" id="fText"><br>
+									Note : <input type="text" name="note" id="fNote"><br>
+									Address: <input type="text" name="address" id="fAddress"><br>
+									<div class="modal-footer dvModalFooter" style="justify-content: center;">
+										<input type="submit" class="btn btn-default btnText" value="Apply">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pConfirmation" style="background-color: whitesmoke">
+			<p>ORDER CONFIRMATION PERIOD: </p>
+			<p style="background-color: white; height: 25px; width: 50px;">{{dynamicData.avgConfirmTime}}</p>
+		</div>
+		<div class="pDelivery">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h3>DELIVERY OPTIONS</h3>
+		</div>
+		<div class="pCourier">
+			<div>
+				<input type="radio" id="nC" name="drone" value="normalCourier">
+				<label for="normalCourier">Normal Courier</label>
+			</div>
+
+			<div>
+				<input type="radio" id="fC" name="drone" value="fastCourier">
+				<label for="fastCourier">Fast Courier</label>
+			</div>
+		</div>
+		<div class="pTime">
+			<div style="background-color: whitesmoke">
+				Processing Time :<span>{{dynamicData.avgProcessTime}}</span>
+			</div>
+			<div style="background-color: whitesmoke">
+				Shipping Charge :<span>{{dynamicData.avgProcessTime}}</span>
+			</div>
+			<div style="background-color: whitesmoke">
+				Shipping Duration :<span>{{dynamicData.avgShipTime}}</span>
+			</div>
+		</div>
+		<div class="pDate">
+			<p>THE PRODUCT WILL BE DELIVERED BEFORE</p>
+		</div>
+		<!-- </div> -->
+	</div>
+	<!-- POLICY -->
+	<div class="divPolicy">
+		<div class="prodPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>PRODUCT POLICIES</h2>
+			<p>{{dynamicData.prodPolicy}}</p>
+		</div>
+		<div class="shopPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>SHOP POLICIES</h2>
+			<p>{{dynamicData.prodPolicy}}</p>
+		</div>
+		<div class="shipPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>SHIP POLICIES</h2>
+			<p>{{dynamicData.shipPolicy}}</p>
+
+		</div>
+	</div>
+	<!-- REVIEW -->
+	<div class="divReview ">
+		<img src="assets/icons/resources (IL)-18.png">
+		<h2>RATING & REVIEWS</h2>
+		<div>
+
+			<div class="rating">
+				<div class="inner">
+					<div class="rating">
+						<span class="rating-num">{{dynamicData.rating}}</span>
+						<div class="rating-stars">
+							<span><i class="active icon-star"></i></span>
+							<span><i class="active icon-star"></i></span>
+							<span><i class="active icon-star"></i></span>
+							<span><i class="active icon-star"></i></span>
+							<span><i class="icon-star"></i></span>
+						</div>
+						<div class="rating-users">
+							<i class="icon-user"></i> 1,014,004 total
+						</div>
+					</div>
+
+					<div class="histo">
+						<div class="five histo-rate">
+							<span class="histo-star">
+								<i class="active icon-star"></i> 5 </span>
+							<span class="bar-block">
+								<span id="bar-five" class="bar">
+									<span>566,784</span>&nbsp;
+								</span>
+							</span>
+						</div>
+
+						<div class="four histo-rate">
+							<span class="histo-star">
+								<i class="active icon-star"></i> 4 </span>
+							<span class="bar-block">
+								<span id="bar-four" class="bar">
+									<span>171,298</span>&nbsp;
+								</span>
+							</span>
+						</div>
+
+						<div class="three histo-rate">
+							<span class="histo-star">
+								<i class="active icon-star"></i> 3 </span>
+							<span class="bar-block">
+								<span id="bar-three" class="bar">
+									<span>94,940</span>&nbsp;
+								</span>
+							</span>
+						</div>
+
+						<div class="two histo-rate">
+							<span class="histo-star">
+								<i class="active icon-star"></i> 2 </span>
+							<span class="bar-block">
+								<span id="bar-two" class="bar">
+									<span>44,525</span>&nbsp;
+								</span>
+							</span>
+						</div>
+
+						<div class="one histo-rate">
+							<span class="histo-star">
+								<i class="active icon-star"></i> 1 </span>
+							<span class="bar-block">
+								<span id="bar-one" class="bar">
+									<span>136,457</span>&nbsp;
+								</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="review">
+				<div class="revName">
+					<p class=rName>Lorem</p>
+					<p class="rAgo">8days ago</p>
+				</div>
+				<div class="revData">
+					<p class="rTitle">Title</p>
+					<p class="rDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut
+						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut
+						aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+						esse
+						cillum
+						dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+						culpa
+						qui officia
+						deserunt mollit anim class est laborum.</p>
+					<div class="starLikes">
+						<img class="icLike" src="assets/icons/resources (IL)-10.png">
+						<p class="likeCount">000</p>
+						<img class="icDislike" src="assets/icons/resources (IL)-11.png">
+						<p class="dislikeCount">000</p>
+						<button class="btnReport">Report</button>
+					</div>
+					<img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+				</div>
+			</div>
+
+			<div class="writeReview">
+				<button class="btnWriteReview">WRITE PRODUCT REVIEW</button>
+			</div>
+		</div>
+	</div>
+	<!-- QUESTION -->
+	<div class="divQuestion ">
+		<img src="assets/icons/resources (IL)-18.png">
+		<h2>CUSTOMER QUESTIONS & ANSWERS</h2>
+		<div class="divCustomerQA">
+			<div class="divSA">
+				<form class="search">
+					<input type="text" placeholder="Search.." name="search" class="searchBox">
+					<button type="submit"><img src="/assets/icons/resources (IL)-07.png"></button>
+				</form>
+				<form class="askQ">
+					<input type="text" placeholder="Ask a Question" name="search">
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+			<div class="divQA">
+				<form class="qA">
+					Q:<span class="question">Question</span>?<br>
+					A:<span class="answer">Answer</span>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="myModal" class="imgPopup">
+	<span class="close cursor" (click)="closeModal()">&times;</span>
+	<div class="modal-content" style="background-color: #000000e8;">
+
+		<div class="mySlides" style="background-color: #000000e8; transform: translate(25%);">
+			<div class="numbertext">1 / 4</div>
+			<img src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg" style="width:50%">
+		</div>
+
+		<div class="mySlides" style="background-color: #000000e8; transform: translate(25%);">
+			<div class="numbertext">2 / 4</div>
+			<img src="assets/images/chocolate-cream-cake-half-kg-eggless_4.jpg" style="width:50%">
+		</div>
+
+		<div class="mySlides" style="background-color: #000000e8; transform: translate(25%);">
+			<div class="numbertext">3 / 4</div>
+			<img src="assets/images/chocolate-cream-cake-half-kg-eggless_5.jpg" style="width:50%">
+		</div>
+
+		<div class="mySlides" style="background-color: #000000e8; transform: translate(25%);">
+			<div class="numbertext">4 / 4</div>
+			<img src="assets/images/photo3.jpg" style="width:50%;">
+		</div>
+
+		<a class="prev" (click)="plusSlides(-1)" style="margin-top: -15%;">&#10094;</a>
+		<a class="next" (click)="plusSlides(1)" style="margin-top: -15%;">&#10095;</a>
+		<div class="thumbRow">
+			<div class="column">
+				<img class="demo cursor" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg"
+					style="width:75%" (click)="currentSlide(1)">
+			</div>
+			<div class="column">
+				<img class="demo cursor" src="assets/images/chocolate-cream-cake-half-kg-eggless_4.jpg"
+					style="width:75%" (click)="currentSlide(2)">
+			</div>
+			<div class="column">
+				<img class="demo cursor" src="assets/images/chocolate-cream-cake-half-kg-eggless_5.jpg"
+					style="width:75%" (click)="currentSlide(3)">
+			</div>
+			<div class="column">
+				<img class="demo cursor" src="assets/images/photo3.jpg" style="width:75%" (click)="currentSlide(4)">
+			</div>
+		</div>
+	</div>
+</div>

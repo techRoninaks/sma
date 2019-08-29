@@ -1,1 +1,12 @@
-<p>categorylisting works!</p>
+<div class="divMargin" >
+    <ul class="breadcrumb">
+            <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
+            <li><a [routerLink]="[ '/categorylisting' ]" routerLinkActive="active">Category Listing</a></li>
+        </ul>
+    <hr />
+    <!-- <p>{{ dynamicData.para }}</p> -->
+    <div>
+        <button [routerLink]="[ '/listing' ]" routerLinkActive="active" [queryParams]="{prod_id:'1'}">{{dynamicData.name}}</button>
+        <!-- <button [routerLink]="[ '/listing' ]" routerLinkActive="active">{{dynamicData.username}}</button> -->
+    </div>
+</div>

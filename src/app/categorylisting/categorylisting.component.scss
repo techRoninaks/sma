@@ -1,0 +1,27 @@
+.breadcrumb {
+	padding: 10px 10px;
+	list-style: none;
+	background-color: transparent;
+	li + li:before {
+		padding: 8px;
+		color: gray;
+		content: ">";
+	}
+	li {
+		display: inline;
+		font-size: 1rem;
+		a {
+			color: gray;
+			text-decoration: none;
+
+			&:hover {
+				color: red;
+			}
+		}
+	}
+	text-decoration: none;
+}
+.divMargin{
+  margin: 5%;
+  width: auto;
+}  

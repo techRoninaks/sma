@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+div,body{
+   padding: 0;
+   margin: 0;
+   width: 100%;
+}
+@font-face{
+   font-family: "BitterBold";
+   src: url(assets/Fonts/Bitter-Bold.ttf);
+}
+@font-face{
+   font-family: "BitterItalics";
+   src: url(assets/Fonts/Bitter-Italic.ttf);
+}
+@font-face{
+   font-family: "Bitter";
+   src: url(assets/Fonts/Bitter-Regular.ttf);
+}
+//Color Palette
+$smaYellow : #EFBE24;
+$smaLightGray : #F1F1F1;
+$smaGray : #DBDBDB;
+$smaGreen : #009145;
+$smaRed : #FF1D25;
+$smaDarkGray : #333333;
+//Color Palette
