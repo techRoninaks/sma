@@ -1,6 +1,8 @@
 <?php
+
     header("Access-Control-Allow-Origin: *");
     header('Content-Type: text/html; charset=utf-8');
+
     $db_name1 = "smapr";
     $db_name2 = "smausr";
     $user_name = "root";

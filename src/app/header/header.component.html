@@ -3,9 +3,30 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">SCOOP<span>MY</span>ART</a>
+      <a class="navbar-brand" href="#homepage"><img src="/assets/images/icons/ic_title.png" Height="70%" Width="70%"></a>
+      <!-- SCOOP<span>MY</span>ART -->
       <li class="nav-item">
-        <a class="nav-link" href="#">PopUp</a>
+        <!-- <div onmouseover="true" style="background-color: #959e97"> -->
+          <a class="nav-link" href="#">
+            <div class="dropdown">
+                <button class="dropbtn"><img src="/assets/images/icons/ic_location.png" Height="10%" Width="10%"> Deliver to</button>
+                  <div class="dropdown-content">
+                  <li>
+                    <div>
+                      <input type="text" size= "16" class="input_style" placeholder="Enter pincode">
+                    </div>
+                  </li>
+                  <li>
+                      <div>
+                          <button type="submit" class="btn_style">Apply</button>
+                      </div>
+                  </li>
+                  </div>
+            </div>
+          </a>
+
+            
+        <!-- </div> -->
       </li>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control-custom" type="search" placeholder="Search" aria-label="Search">
@@ -13,28 +34,39 @@
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
-          <a class="nav-link header-sell-with-us" href="#">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/SignupSeller">Sell with Us <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link" href="#">Login</a>
+          <div class="dropdown">
+              <button class="dropbtn-login" routerLink="/Login"><img src="/assets/images/icons/ic_user.png" height="25px" width="25px">  Login</button>
+                <div class="dropdown-content">
+                <li><a href="#myorders">My orders</a></li>
+                <li><a href="#mymessages">My messages</a></li>
+                <li><a href="#notifications">My notifications</a></li>
+                <li><a href="#favshops">My fav shops</a></li>
+                <li><a href="#myaccounts">My accounts</a></li>
+                </div>
+          </div>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link" href="#">Cart</a>
+          <a class="nav-link" href="#"><img src="/assets/images/icons/ic_cart.png" Height="40%" Width="40%"></a>
         </li>
       </ul>
     </div>
   </nav>
   <div class="header-category-bar">
       <div class="scrollmenu">
-          <a href="#home">Mom & Kids</a>
-          <a href="#news">Mens</a>
-          <a href="#contact">Womens</a>
-          <a href="#contact">Painting & Arts</a>
-          <a href="#contact">Hand Craft</a>
-          <a href="#contact">Accessories</a>
-          <a href="#contact">Apperels</a>
-          <a href="#contact">Cakes</a>
-          <a href="#contact">Woodworks</a>
-          <a href="#contact">Glassworks</a>
-        </div> 
+        <div class="dropdown">
+          <button class="dropbtn-cat"><a href="#mom_kids">Mom & Kids</a></button>
+          <button class="dropbtn-cat"><a href="#mens">Mens</a></button>
+          <button class="dropbtn-cat"><a href="#womens">Womens</a></button>
+          <button class="dropbtn-cat"><a href="#paintings">Painting & Arts</a></button>
+          <button class="dropbtn-cat"><a href="#handcrafts">Hand Craft</a></button>
+          <button class="dropbtn-cat"><a href="#accessories">Accessories</a></button>
+          <button class="dropbtn-cat"><a href="#apparels">Apperels</a></button>
+          <button class="dropbtn-cat"><a href="#cakes">Cakes</a></button>
+          <button class="dropbtn-cat"><a href="#woodworks">Woodworks</a></button>
+          <button class="dropbtn-cat"><a href="#glassworks">Glassworks</a></button>
+        </div>
+      </div> 
   </div>

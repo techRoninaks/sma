@@ -1,0 +1,344 @@
+// Media Query
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm{
+  @media (min-width: 600px) {    
+      @content;
+  }
+} 
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+  @media (min-width: 768px) {    
+      @content;
+  }
+} 
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+  @media (min-width: 992px) {    
+      @content;
+  }
+} 
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+  @media (min-width: 1200px) {    
+      @content;
+  }
+}
+
+// @include sm{
+//   // height: max-content;
+//   grid-template-areas: "left-grid"
+//                        "right-grid";
+//   grid-template-columns: 100%;
+// }
+
+// @include md{
+
+// }
+// @include lg{
+
+// }
+// @include xlg{
+
+// }
+
+// grid
+
+.main-grid{
+  font-family: "BitterRegular";
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 10% 90% ;
+  grid-template-areas: "left-grid  right-grid"
+                       "left-grid  right-grid";
+}
+.left-grid{
+  grid-area: left-grid;
+}
+.right-grid{
+  grid-area: right-grid;
+}
+.centre-grid{
+  grid-area: left-grid;
+  background: none;
+  margin-left: 1%;
+}
+
+.breadcrumb-layout{
+  margin-left: 5%;
+}
+.hrdiv{
+  margin-right: 10%;
+}
+.button-login
+{
+  width: 30%;
+  text-align: center;
+  margin-left:35%;
+  padding: 0.7%;
+  color: white;
+  background: #EFBE24;
+  border-radius: 2px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-fp{
+  width: 30%;
+  text-align: center;
+  // margin-left:35%;
+  padding: 0.7%;
+  color: white;
+  background: #EFBE24;
+  border-radius: 2px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-otp{
+  width: 30%;
+  text-align: center;
+  // margin-left:35%;
+  padding: 0.7%;
+  color: white;
+  background: #EFBE24;
+  border-radius: 2px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-login :focus {
+  cursor: pointer
+}
+.img-style{
+  height: 10%;
+  width: 10%;
+}
+.button-signup-fb
+{
+  width: 40%;
+  text-align: center;
+  margin-left:30%;
+  padding: 1%;
+  color: white;
+  background: rgb(22, 65, 145);
+  border-radius: 6px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-signup-google
+{
+  width: 40%;
+  text-align: center;
+  margin-left:30%;
+  padding: 1%;
+  color: white;
+  background: rgb(52, 117, 236);
+  border-radius: 6px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-signup-insta
+{
+  width: 40%;
+  text-align: center;
+  margin-left:30%;
+  padding: 1%;
+  color: white;
+  // background: rgb(228, 56, 128);
+  background-image: linear-gradient(to right,purple,rgb(255, 102, 0));
+  border-radius: 6px;
+  border: none;
+  font-family: "BitterBold";
+}
+.button-green-layout{
+  margin-left: 6%;
+  margin-top: 2%;
+}
+.button-green-login
+{
+  width: 80%;
+  padding: 0.7%;
+  text-align: center;
+  color: white;
+  background: #009145;
+  border-radius: 2px;
+  border: none;
+  font-family: "BitterBold";
+}
+.login-layout{
+  background-color: #F1F1F1;
+  margin-left: 6%;
+  margin-right: 10%;
+  margin-top: 0;
+  margin-bottom: 10%;
+  font-family: "BitterBold";
+  width: 80%;
+  height: 90%;
+  font-size: 14px;
+}
+.side-layout{
+  background-color: white;
+  margin-left: 25%;
+  margin-right: 10%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  font-family: "BitterBold";
+  width: 80%;
+  height: 80%;
+  font-size: 14px;
+}
+.login-layout-2{
+  margin-left: 3%;
+  margin-top: 15%;
+  font-family: "BitterBold";
+}
+.text-input-style{
+  border-radius: 4px;
+  border-style: none;
+  padding: 1%;
+  width: 60%;
+  margin-left: 18%;
+}
+.validator-style{
+  margin-left: 20%;
+  color: #e75c4a;
+  font-family: BitterRegular;
+}
+.login-layout-3{
+  margin-left: 12%;
+  border-style: none;
+  font-family: "BitterBold";
+}
+ul {
+  list-style-type: none;
+}
+.title{
+  font-family: "BitterBold";
+  font-weight: 100;
+  text-align: center;
+  font-size: 200%;
+}
+.title-fp{
+  text-align: center;
+}
+.text-style{
+  text-align: center;
+}
+.left-grid-title-1{
+  font-size: 250%;
+  color: rgb(128, 123, 123);
+}
+.left-grid-title-2{
+  font-size: 210%;
+}
+.left-grid-title-3{
+  font-size: 180%;
+}
+.left-grid-feature{
+  padding: 0 0 0 20px;
+}
+
+.text-signup{
+  width: 30%;
+  text-align: center;
+  margin-left:35%;
+  padding: 0.7%;
+  font-family: "BitterBold";
+  margin-top: 1%;
+  text-decoration-color: black;
+}
+// Breadcrumb
+
+.breadcrumb {
+  margin-top: 2%;
+  padding: 8px 16px;
+  list-style: none;
+  font-family: "BitterBold";
+  background-color: inherit;
+}
+.breadcrumb li {
+  display: inline;
+  font-size: 14px;
+}
+.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: ">\00a0";
+}
+.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+//forgot password pop-up
+.container{
+  .btn{
+      font-family: "BitterBold";
+      color: white;
+      margin-left: 34%;
+      padding: 0.7%;
+      height: 1%;
+      width: 32%;
+    }
+  }
+.modal-header{
+  background: #EFBE24;
+  color:white;
+  font-family: "BitterBold";
+  display: table-cell;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.modal-content{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: #F1F1F1;
+}
+.modal-body{
+    text-align: center;
+    font-family: "BitterBold";
+}
+
+.btn btn-warning{
+    font-family: "BitterBold";
+}        
+           
+input[type=submit] {
+    background-color: #009145;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+input[type=submit]:hover {
+    background-color: #009145;
+}
+
+
+/* Clear floats after the columns */
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+      
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+    
+  }
+}
+
+.title-verify{
+  text-align: center;
+}
+.pop-up-input-style{
+  width: 100%;
+  padding: 5px;
+  margin-left: 2px;
+  border-radius: 2px;
+  resize: vertical;
+  background: white;
+  border: none;
+}
