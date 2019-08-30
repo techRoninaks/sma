@@ -131,16 +131,31 @@ export class LoginComponent implements OnInit {
                 {
                   alert('Something went wrong..')
                 }
-                else
-                {
-                  this.validateOtp();
-                }
+                // else
+                // {
+                //   this.validateOtp();
+                // }
              },
              error=> console.error(error)
      );
     }
-    validateOtp()
-    {
-      
+    verifySubmit(){
+      this.submitted =true;
+      if(this.fpFormOtp.valid)
+      {
+        this.data.verifyOtp(this.fpFormOtp.value).subscribe(
+          data=>{
+                  if(data == "Found")
+                  {
+                    // goto next pop up new password,confirm password
+                  }
+                  else
+                  {
+                    alert('OTP VERIFIED');
+                  }
+                },
+            error=> console.error(error)
+          );
+      }
     }
 }

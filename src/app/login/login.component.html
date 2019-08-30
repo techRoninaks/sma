@@ -130,7 +130,7 @@
                           <form [formGroup]="fpFormOtp">
                           <div>
                               <div>
-                                <input type="text" size="20" placeholder="Enter OTP:" formControlName="fp_otp">
+                                <input type="text" size="20" placeholder="Enter OTP:" formControlName="fp_otp" id="fp_otp">
                                 <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
                                     <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
                                       Enter OTP !
@@ -148,7 +148,7 @@
                               </div>
                               <br>
                               <div>
-                                <button class="button-fp" type="submit" (click)="onSubmit()">
+                                <button class="button-fp" type="submit" (click)="verifySubmit()">
                                   SUBMIT
                                 </button>
                               </div>

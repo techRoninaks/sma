@@ -8,7 +8,7 @@ export class DataService {
 
   constructor( private http: HttpClient ) { }
 
-  getProductData(data: Object){
+  addData(data: Object){
     let httpParams= new HttpParams()
     .append("fullname", data['fullname'])
     .append("reg_address", data['reg_address'])
@@ -48,5 +48,11 @@ export class DataService {
     .append("message",messageObj['message']);
     
     return this.http.post('http://localhost/sma/src/assets/api/sendOtp.php',httpParams);
+  }
+
+  verifyOtp(data: Object){
+    let httpParams= new HttpParams()
+    // .append();
+    return this.http.post('http://localhost/sma/src/assets/api/verifyOtp.php',httpParams);
   }
 }

@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   dynamicData: any = "";
 
   ngOnInit() {
-    this.data.getProductData(this.data).subscribe(data=>{
+    this.data.addData(this.data).subscribe(data=>{
       this.dynamicData = data;
     })
   }
