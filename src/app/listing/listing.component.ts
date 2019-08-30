@@ -143,7 +143,8 @@ export class ListingComponent implements OnInit {
 		// var expandImg.src:HTMLImageElement;
 		// var expandImg = document.getElementById("largeImage");
 		// console.log(imgs);
-		this.largeSrc = document.getElementById(imgs).src;
+		var ele = document.getElementById(imgs) as HTMLImageElement;
+		this.largeSrc = ele.src;
 		// console.log(expandImg.src);
 		// expandImg.parentElement.style.display = "block";
 	}
