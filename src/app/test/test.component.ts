@@ -12,7 +12,7 @@ export class TestComponent implements OnInit {
   varient:  any = "";
 
   ngOnInit() {
-    this.data.getvariantInfo().subscribe(data=>{
+    this.data.getvariantInfor().subscribe(data=>{
       this.varient = data;
       // this.stage1 = true;
       console.log(this.varient);

@@ -9,8 +9,8 @@ export class DataService {
   constructor( private http: HttpClient ) { }
 
 
-  getvariantInfo(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/variantinfocheckout.php');
+  getvariantInfor(){
+    return this.http.get('http://localhost/scoopmyart/src/assets/api/variantinforcheckout.php');
   }
   getaddress(){
     return this.http.get('http://localhost/scoopmyart/src/assets/api/addresscheckout.php');

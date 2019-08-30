@@ -31,7 +31,7 @@ constructor( private data: DataService,private formBuilder: FormBuilder) {
   stage1 : boolean = false;
 
   ngOnInit() {
-    this.data.getvariantInfo().subscribe(data=>{
+    this.data.getvariantInfor().subscribe(data=>{
       this.varient = data;
       this.stage1 = true;
       console.log(this.varient);
