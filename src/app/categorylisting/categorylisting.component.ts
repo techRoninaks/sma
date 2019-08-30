@@ -22,7 +22,7 @@ export class CategorylistingComponent implements OnInit {
   filledStar: any = [];
   unFilledStar: any = [];
   j: number = 0;
-  token: number;
+
 
   // heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
   constructor(private route: ActivatedRoute, private cookieService: CookieService) { }

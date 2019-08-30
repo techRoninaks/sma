@@ -5,7 +5,7 @@
     $pageName = $_POST["pageName"];
 
     $sql = "select * from web_settings where page ='$pageName'";
-    $result = mysqli_query($con,$sql);
+    $result = mysqli_query($con1,$sql);
     $data = array();
     $count = 0;
     // echo $;
