@@ -1,8 +1,12 @@
+
 import { Component, OnInit, HostListener, ɵCompiler_compileModuleAndAllComponentsAsync__POST_R3__ } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from "@angular/router";
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 var slideIndex = 1;
+declare var Razorpay: any;
 // var expandImg:HTMLImageElement;
+
 
 @Component({
 	selector: 'app-listing',
@@ -22,15 +26,33 @@ export class ListingComponent implements OnInit {
 	unfollow: any = "";
 	folResult: boolean;
 	followInfo: any ="";
-	constructor(private data: DataService, private route: ActivatedRoute) { }
+	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+		this.checkoutForm = this.formBuilder.group({
+      customername: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['',[Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
+      contact: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      
+    })
+	 }
 	dynamicData: any = "";
 	imageSrc: string;
 	Object = Object;
 	tokenObj: object;
+	checkoutForm: FormGroup;
+	submitted: boolean;
+	dynamicdata: any = "";
+  varient: any = "";
+  stage1 : boolean = false;
 	largeSrc :any="/assets/images/Screenshot_20190712-201603.png";
 
 	ngOnInit() {
 
+		this.data.getvariantInfor().subscribe(data=>{
+      this.varient = data;
+      this.stage1 = true;
+      console.log(this.varient);
+    })
 
 		this.route.queryParams.subscribe(params => {
 			this.token = params['prod_id'];
@@ -168,4 +190,50 @@ export class ListingComponent implements OnInit {
 
 		// document.getElementById("demo").innerHTML = res;
 	}
+
+	onSubmit(){
+			//   var options = {
+			//     "key": "rzp_test_dveDexCQKoGszl",
+			//     "amount": 1000, // 2000 paise = INR 20
+			//     "currency": "INR",
+			//     "name": "ScoopMyArt",
+			//     "description": "Test description",
+			//     "image": "assets/images/samagra_circle.png",      
+			//     "handler": response=>{
+			//         alert("Booking successful. Thank you!");
+			//        },
+			//     "prefill": {
+			//         "name": this.bookingForm.controls['name'].value,
+			//         "email": this.bookingForm.controls['email'].value,
+			//         "contact": this.bookingForm.controls['contact'].value,
+			//     },
+			//     "notes": {  },
+			//     "theme": {
+			//         "color": "#133E4B"
+			//     },
+			//     "modal": {
+			//       "ondismiss": function(){        }
+			//     }
+			// };
+		// var razorpay = new Razorpay({ key:"rzp_test_dveDexCQKoGszl", callback_url:'https://your-site.com/callback-url', redirect:true});
+		// razorpay.once('ready',function(response){
+		//   console.log(response.methods);
+		//   response.methods.networking contains list of all banks
+		// })
+			this.submitted=true;
+			
+
+			if (this.checkoutForm.invalid) {
+				// alert('form invalid');
+				return;
+			}
+
+
+    }  
 }
+
+
+  
+
+
+

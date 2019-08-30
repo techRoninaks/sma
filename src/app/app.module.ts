@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserprofileBuyerComponent } from './userprofile-buyer/userprofile-buyer.component';
 import { RegistrationSellerComponent } from './registration-seller/registration-seller.component';
 import { RouterModule } from '@angular/router';
+import { CartComponent } from './cart/cart.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
@@ -40,6 +41,7 @@ import { DataService } from './data.service';
     RegistrationComponent,
     PlandetailsComponent,
     UserprofileBuyerComponent,
+    CartComponent,
     RegistrationSellerComponent
   ],
   imports: [

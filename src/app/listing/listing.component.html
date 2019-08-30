@@ -1,3 +1,4 @@
+
 <div class="divMargin">
 	<ul class="breadcrumb">
 		<li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
@@ -430,4 +431,161 @@
 			</div>
 		</div>
 	</div>
-</div>
+	<div class="container">
+
+		<!-- Trigger the modal with a button -->
+		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">BUY NOW</button>
+	
+	
+	
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+	
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div align="center">
+							<h5>ORDER SUMMARY:</h5>
+						</div>
+	
+	
+					</div>
+					<div class="modal-body">
+						<h5>Sehaz Artworks Wall Photo Painting</h5>
+	
+	
+						<div class="dvModelSpec">
+							<p>Material :{{ varient }}<br>
+								Size :{{ varient }}<br>
+								Qty :<input type="number" formControlName="qty" name="qty" placeholder="" class="dvqty"></p>
+	
+						</div>
+	
+	
+	
+						<form [formGroup]=checkoutForm (ngSubmit)="onSubmit()">
+							<div class="row">
+								<div class="col-25">
+									<label for="customername"><b>Customer Name :</b></label>
+								</div>
+								<div class="col-75">
+									<input type="text" formControlName="customername" name="Customer Name" placeholder="">
+									<div *ngIf="submitted && checkoutForm.controls.customername.errors" class="error">
+										<div *ngIf="checkoutForm.controls.name.errors.required">Your name is required</div>
+									</div>
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-25">
+									<label for="address"><b>Address :</b></label>
+								</div>
+								<div class="col-75">
+									<input type="text" formControlName="address" name="Address" placeholder="">
+									<div *ngIf="submitted && checkoutForm.controls.address.errors" class="error">
+										<div *ngIf="checkoutForm.controls.address.errors.required">Your address is required
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-25">
+									<label for="email"><b>Email :</b></label>
+								</div>
+								<div class="col-75">
+									<input type="text" formControlName="email" name="Email" placeholder="">
+									<div *ngIf="submitted && checkoutForm.controls.email.errors" class="error">
+										<div *ngIf="checkoutForm.controls.email.errors.required">Your email is required
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-25">
+									<label for="Contact"><b>Contact :</b></label>
+								</div>
+								<div class="col-75">
+									<input type="text" formControlName="contact" name="Contact" placeholder="">
+									<div *ngIf="submitted && checkoutForm.controls.contact.errors" class="error">
+										<div *ngIf="checkoutForm.controls.contact.errors.required">Your contact is required
+										</div>
+									</div>
+								</div>
+	
+	
+							</div>
+	
+	
+							<div class="dvDeliveryText"><br>
+								<h6>DELIVERY OPTIONS:</h6>
+							</div>
+							<div class="btnRadio">
+	
+								<input type="radio" name="DeliveryOption" value="Cash On Delivery"> Cash On Delivery
+	
+								<input type="radio" name="DeliveryOption" value="Pickup"> Pickup
+	
+								<input type="radio" name="DeliveryOption" value="Shipping"> Shipping
+	
+							</div>
+	
+							<div class="dvProductDate">
+								<h6>THE PRODUCT WILL BE DELIVERED BEFORE</h6>
+	
+								<div>
+									<p>Product Date :</p>
+								</div>
+	
+							</div>
+	
+	
+							<div class="dvDate">
+								<input formControlName="date" type="Date" class="inpText" placeholder="Date">
+							</div>
+	
+							<button type="button" class="btn btn-warning">APPLY</button>
+	
+	
+	
+							<div class="dvGiftNote" style="padding: 15px">
+								<form>
+									<input formControlName="Gift Note" type="text" class="inpText" placeholder="Gift Note"
+										required><br>
+	
+								</form>
+							</div>
+	
+							<div class="dvPriceInfo" style="padding: 10px">
+								<h6>PRICE FOR VARIATIONS & QUALITY</h6>
+								<p>Frame : 00.00<br>
+									Base Price : 00.00<br>
+									Variance : 00.00<br>
+									Tax : 00.00<br>
+									Shipping : 00,00</p>
+								<h4>Total : 00,00</h4>
+							</div>
+	
+							<div class="modal-footer dvModalFooter" style="justify-content: center;">
+								<button type="submit" class="btn btn-warning" id="btnPayment">PAYMENT</button>
+								<button type="submit" class="btn btn-warning" style="display: none;"
+									id="btnRfq">RFQ</button>
+	
+							</div>
+						</form>
+	
+					</div>
+	
+	
+					<!-- <div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div> -->
+				</div>
+	
+			</div>
+		</div>
+	
+	</div>

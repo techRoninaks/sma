@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="box a">
+    MY CART
+
+     <!-- <div class="boxacount"><input type="number" class="count" name="qty" value="1"></div> -->
+
+  </div>
+  <div class="col-deliverText">
+    <label for="deliver to">DELIVER TO</label>
+  </div>
+  <div class="col-75">
+    <select id="deliver to" name="">
+      <option value=""></option>
+      <option value=""></option>
+      <option value=""></option>
+    </select>
+  </div>
+
+<div class="box c" *ngFor="let item of Objects.keys(dynamicdata)"> 
+  <!-- <div>
+    <p>{{ dynamicdata[item].cart }}</p>
+  </div> -->
+
+  <div class="box e">
+    <img src="/assets/images/tshirt.png" width="160" height="160" class="img1">
+      
+  </div>   
+  
+  <div class="box d">
+    <div class="row2text" >SAF Radha Krishna UV Ink 12 inch x 12 inch Painting </div>
+    <div class="row2-sub-text">Seller:</div>
+    <div class="row2-sub1-text">₹ {{ dynamicdata[item].totalPrice }}</div>
+    
+  </div>
+  
+  <div class="box h" *ngFor="let item of Objects.keys(dynamicdata)" >
+    <div class="row2-sub2-text">Delivery By,{{ dynamicdata[item].deliveryOn }}</div>
+  </div>
+
+  <div class="box j">
+      <div class="qty mt-5">
+        <span class="minus bg-dark">-</span>
+        <input type="number" class="count" name="qty" value="1">
+        <span class="plus bg-dark">+</span>
+      </div>
+  </div>
+
+  <div class="box k">
+      <button class="button button1">REMOVE</button>
+  </div>
+
+  <div class="box m"></div>
+
+  <!-- <div class="box f">
+    <img src="/assets/images/henna.png" width="160" height="160" class="img2">
+  </div> -->
+
+  <!-- <div class="box l">
+    <div class="qty mt-5">
+      <span class="minus bg-dark">-</span>
+      <input type="number" class="count" name="qty" value="1">
+      <span class="plus bg-dark">+</span>
+    </div>
+              
+  </div> -->
+
+  <!-- <div class="box g">
+    <div class="row2text1">Women A-line Dark Blue</div>
+    <div class="row2-sub-text1">Seller:</div>
+    <div class="row2-sub1-text1">₹ 00.00</div>
+  </div> -->
+
+  <!-- <div class="box n">
+      <button class="button button2">REMOVE</button>
+  </div> -->
+  
+  <!-- <div class="box i">
+      <div class="row2-sub2-text1">Delivery By, Tue Jul 00 </div>
+  </div> -->
+
+  <!-- <div class="box o">O</div> -->
+
+</div>
+
+<div class="box b">
+    <button class="button">PLACE ORDER</button>
+</div> 
+
+</div>
+
+<div class="container2">
+  <div class="box a1">PRICE DETAILS</div>
+  <div class="box a2">You will save ₹ 00.00 on this order</div>
+  <div class="box a3">Price (2 items)<br><br>
+                      Delivery<br><hr>
+                      Total Payable</div>
+</div>
+  
+  
