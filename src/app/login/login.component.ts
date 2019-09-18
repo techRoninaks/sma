@@ -6,6 +6,8 @@ import { DataService } from '../data.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
+
 
 @Component({
   selector: 'app-login',
@@ -17,30 +19,54 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   fpFormMobile: FormGroup;
   fpFormOtp: FormGroup;
+  fpFormPassword: FormGroup;
   submitted: boolean;
+  otpData : object;
 
-    constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder, private router: Router){ 
+  fpmobile : string=""; 
+  fpOTP : string="";
+
+  gotp: any ="" ;
+  mobileNo: any= "";
+  fp_mobile: any ="" ;
+  fp_new_password: any ="" ;
+  username: any ="";
+
+    constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
       this.loginForm = this.formBuilderLogin.group({
         login_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
         login_password: ['',Validators.required],
         login_checkbox:['',Validators.required],
       })
       this.fpFormMobile = this.formBuilderMobile.group({
-        fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+        fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
       })
       this.fpFormOtp = this.formBuilderOtp.group({
-        fp_otp:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
+        fp_otp:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?([0-9]\d*)?$/)]]
+      })
+      this.fpFormPassword = this.formBuilderPassword.group({
+        new_password:['',Validators.required],
+        confirm_password:['',Validators.required],
       })
     }
 
     dynamicData: any ="";
+    otpVerified: boolean = false;
+    otpNotVerified: boolean = true;
+    timeout: boolean = false;
     
     ngOnInit() {
-        // this.data.attemptLogin(this.data).subscribe(data=>{
-        //   this.dynamicData = data;
-        // })
+      FB.XFBML.parse();
+      // signin2.render();
     }
-
+    callg(){
+       var element: HTMLElement = document.getElementsByClassName("abcRioButton abcRioButtonLightBlue")[0] as HTMLElement;
+       element.click();
+    }
+    callfb(){
+      var element: HTMLElement = document.getElementsByClassName("fb-login-button fb_iframe_widget")[0] as HTMLElement;
+       element.click();
+    }
     onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
       console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -49,11 +75,21 @@ export class LoginComponent implements OnInit {
       console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     }
 
+    // Cookie Section
+    setCookie(cname, value) {
+      this.cookieService.set(cname, value);
+    }
+    getCookie(cname) {
+      return this.cookieService.get(cname);
+    }
+    deleteCookie(cname) {
+      this.cookieService.delete(cname);
+    }
+
     onSubmitLogin()
     {
       this.submitted =true;
       var response ;
-      // alert('Form valid');
       if (this.loginForm.invalid) 
       {
         alert('Enter Required Fields');
@@ -61,15 +97,17 @@ export class LoginComponent implements OnInit {
       }
       else
       {  
-        console.log(this.loginForm.value);
+        // console.log(this.loginForm.value);
         this.data.attemptLogin(this.loginForm.value).subscribe(
           data=>{
-                  this.loginForm.controls['login_email'].setValue('');
-                  this.loginForm.controls['login_password'].setValue('');
-                  if(data == "Success")
+                  // this.username=this.loginForm.controls['login_email'].value;
+                  console.log(data);
+                  if(data !=="")
                   {
                     alert('Login Successfully');
-                        this.router.navigate(['/Plandetails']);
+                    this.setCookie("userName",data['username']);
+                    console.log(this.getCookie('userName'));
+                    this.router.navigate(['/Plandetails']);
                   }
                   else
                   {
@@ -80,35 +118,31 @@ export class LoginComponent implements OnInit {
           );
       }
     }
-
     onSubmitSendOtp(){
-      this.submitted =true;
-      var response ;
-      var otp="";
-
-      if(this.fpFormMobile.valid)
+      this.submitted = true;
+      var response;
+      if (this.fpFormMobile.valid) 
       {
-        var mobileNo = this.fpFormMobile.value;
-        console.log(mobileNo);
-        this.data.checkMobile(mobileNo).subscribe(
-          data=>{
-                  // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
-                  if(data == "Found")
-                  {
-                    alert('Mobile No Found');
-                    otp = this.generateOTP();
-                    this.requestOtp(otp,mobileNo);
-                  }
-                  else
-                  {
-                    alert('Mobile No not Found');
-                  }
-                },
-            error=> console.error(error)
-          );
+        
+        this.fpmobile = this.fpFormMobile.controls['fp_mobile_no'].value;
+        // alert(typeof(this.fpmobile));
+        this.data.checkMobile(this.fpmobile).subscribe(
+          data => {
+            // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
+            if (data == "Found") {
+              alert('Mobile No Found');
+              this.gotp = this.generateOTP();
+              this.requestOtp(this.gotp, this.fpmobile);
+
+            }
+            else {
+              alert('Mobile No not Found');
+            }
+          },
+          error => console.error(error)
+        );
       }
     }
-
     onSubmit(){
       this.submitted =true;
       var response ;
@@ -121,41 +155,65 @@ export class LoginComponent implements OnInit {
       }
       return OTP;
     }
-    requestOtp(otp,mobileNo){
-      var message ="OTP VERIFICATION";
-     this.data.sendOtp(otp,mobileNo,message).subscribe(
-       data=>{
-                // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
-                console.log(data);
-                if(data == "0")
-                {
-                  alert('Something went wrong..')
-                }
-                // else
-                // {
-                //   this.validateOtp();
-                // }
-             },
-             error=> console.error(error)
-     );
+    
+    requestOtp(gotp, mobileNo) {
+    var msg :any = "Your verification code is: "+gotp;
+  
+    this.data.sendOtp(gotp, mobileNo, msg).subscribe(
+      data => {
+        // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
+        console.log(data);
+        if (data == "0") {
+          alert('Something went wrong..')
+        }
+      },
+      error => console.error(error)
+    );
     }
-    verifySubmit(){
-      this.submitted =true;
-      if(this.fpFormOtp.valid)
-      {
-        this.data.verifyOtp(this.fpFormOtp.value).subscribe(
-          data=>{
-                  if(data == "Found")
-                  {
-                    // goto next pop up new password,confirm password
-                  }
-                  else
-                  {
-                    alert('OTP VERIFIED');
-                  }
-                },
-            error=> console.error(error)
-          );
-      }
+
+  verifyOTP(){
+    this.fpOTP = this.fpFormOtp.controls['fp_otp'].value;
+    
+    if(this.fpOTP == "")
+    {
+      alert('OTP cannot be null');
     }
+    else
+    {
+          if(this.fpOTP == this.gotp)
+          {
+            alert('OTP verified');
+            this.otpVerified = true;
+            this.otpNotVerified = false;
+          }
+          else
+          {
+            alert('Incorrect OTP');
+            this.fpFormOtp.controls['fp_otp'].setValue('');
+          }
+    }
+  }
+  changePassword(){
+    this.fp_mobile = this.fpFormMobile.controls['fp_mobile_no'].value;
+    this.fp_new_password = this.fpFormPassword.controls['new_password'].value;
+    this.data.setPassword(this.fp_mobile,this.fp_new_password).subscribe(
+      data => 
+        {
+          if(data =="ChangedPassword")
+          {
+            alert('Password Changed Successfully');
+            $("#myModal").modal('hide');
+            this.router.navigate(['/Login']);
+          }
+          else
+          {
+            alert('Error Try Again');
+            $("#myModal").modal('hide');
+            this.router.navigate(['/Login']);
+          }
+        },
+      error => console.error(error)
+    );
+  }
+
 }

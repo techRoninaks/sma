@@ -8,8 +8,6 @@ import { CategorylistingComponent } from './categorylisting/categorylisting.comp
 import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './home/home.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
-
-
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion'; 
@@ -28,6 +26,10 @@ import { ListingComponent } from './listing/listing.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import * as bootstrap from 'bootstrap';
+import * as $ from "jquery";
+import { MatInputModule, MatFormFieldModule} from '@angular/material';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,14 +45,17 @@ import { DataService } from './data.service';
     PlandetailsComponent,
     UserprofileBuyerComponent,
     CartComponent,
-    RegistrationSellerComponent
+    RegistrationSellerComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatInputModule,
     // ActivatedRoute,
+    MatFormFieldModule,
     MatExpansionModule,
     AppRoutingModule,
     FormsModule,

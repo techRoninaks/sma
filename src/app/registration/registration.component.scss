@@ -65,6 +65,7 @@
 
 .breadcrumb-layout{
   margin-left: 5%;
+  width: auto;
 }
 .hrdiv{
   margin-right: 10%;
@@ -150,10 +151,11 @@
 .button-green-layout{
   margin-left: 6%;
   margin-top: 2%;
+  width: auto;
 }
 .button-green-login
 {
-  width: 80%;
+  width: 85%;
   padding: 0.7%;
   text-align: center;
   color: white;
@@ -195,6 +197,14 @@
   padding: 1%;
   width: 60%;
   margin-left: 18%;
+}
+.text-input-style-address{
+  border-radius: 4px;
+  border-style: none;
+  padding: 3%;
+  width: 60%;
+  margin-left: 18%;
+  text-align: left;
 }
 .validator-style{
   margin-left: 20%;

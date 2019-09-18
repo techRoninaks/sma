@@ -1,0 +1,45 @@
+.main-grid{
+    display: grid;
+    grid-template-columns: auto 33% auto;
+    grid-template-rows: 7% 10% 15% auto;
+    grid-template-areas: "heading heading heading"
+                         "mod-date mod-date ."
+                         "sub-heading-1 . ."
+                         "description description description";
+    width: 65%;
+    background: rgb(212, 206, 206);
+    margin-left: 18%;
+    border-radius: 18px;
+}
+.heading{
+    grid-area: heading;
+    background: #EFBE24;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    font-family: BitterBold;
+    text-align: center;
+}
+.head-style{
+    color: white;
+    margin-top: 1%;
+}
+.mod-date{
+    grid-area: mod-date;
+    padding: 5% 0% 0% 5%;
+    font-family: BitterBold;
+}
+.sub-heading-1{
+    grid-area: sub-heading-1;
+    padding: 5% 0% 0% 23%;
+    font-family: BitterBold;
+}
+.description{
+    grid-area: description;
+    padding: 1% 7% 3% 3%;
+    font-family: BitterRegular;
+    height: auto;
+}
+.doc-style{
+    width: 105%;
+    height: 500px;
+}

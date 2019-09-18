@@ -26,6 +26,7 @@
   }
   .breadcrumb-layout{
       margin-left: 10%;
+      width: auto;
   }
 
   .hrdiv{
@@ -81,33 +82,16 @@
   }
 
 //card-style
-.card-style-1{
+.card-style{
     background: #DBDBDB;
     background-size: cover;
     width: 200px;
-    height: 300px;
+    height: 350px;
     font-family: BitterBold;
 }
-.card-style-2{
-  background: #DBDBDB;
-  background-size: cover;
-  width: 200px;
-  height: 300px;
-  font-family: BitterBold;
-}
-.card-style-3{
-  background: #DBDBDB;
-  background-size: cover;
-  width: 200px;
-  height: 300px;
-  font-family: BitterBold;
-}
-.card-style-4{
-  background: #DBDBDB;
-  background-size: cover;
-  width: 200px;
-  height: 300px;
-  font-family: BitterBold;
+.p-style{
+  font-size: 24px;
+  text-align: center;
 }
 .image-style{
   width: min-content;

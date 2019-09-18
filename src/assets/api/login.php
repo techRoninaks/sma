@@ -25,7 +25,7 @@ $error = "";            //Variable for storing our errors.
         //     $password = md5($password);
 
             //Check username and password from database
-            $sql="SELECT Name FROM user WHERE email = '$username' and password = '$password' ";
+            $sql="SELECT username FROM user WHERE email = '$username' and password = '$password' ";
             $result=mysqli_query($con2,$sql);
             $row=mysqli_fetch_array($result);
 
@@ -34,9 +34,9 @@ $error = "";            //Variable for storing our errors.
 
             if($row)
             {
-                    $_SESSION['username'] = $row["Name"]; // Initializing Session
-                    $error = "Success";
-                    echo json_encode($error);
+                    $_SESSION['username'] = $row["username"]; // Initializing Session
+                    // $error = "Success";
+                    echo json_encode($row);
             }
             else
             {
