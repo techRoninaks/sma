@@ -13,8 +13,8 @@ var slideIndex = 1;
 })
 export class HomeComponent implements OnInit {
 
-  dummyText: string="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
-  i: number=0;
+  dummyText: string = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+  i: number = 0;
   price: string = "00.00";
   actualPrice: string = "00.00";
   offer: string = "-25% off";
@@ -23,18 +23,18 @@ export class HomeComponent implements OnInit {
   unFilledStar: any = [];
   j: number = 0;
   cookieValue = 'UNKNOWN';
-  popHeader: string="";
-  popContent: string="";
-  pageData: any="";
+  popHeader: string = "";
+  popContent: string = "";
+  pageData: any = "";
   popImgSrc: any;
-  constructor( private cookieService: CookieService, private router: Router, private data : DataService ) { }
+  constructor(private cookieService: CookieService, private router: Router, private data: DataService) { }
 
   ngOnInit() {
-//Data service beg
-    this.data.getPageData("home").subscribe(data =>{
+    //Data service beg
+    this.data.getPageData("home").subscribe(data => {
       this.pageData = data;
     })
-//Data service ends
+    //Data service ends
 
     this.showSlides(slideIndex);
     for (this.i = 0; this.i < 6; this.i++) {
@@ -48,8 +48,8 @@ export class HomeComponent implements OnInit {
       }
     }
 
-  } 
-// Carousel
+  }
+  // Carousel
   plusSlides(n) {
     this.showSlides(slideIndex += n);
   }
@@ -58,82 +58,82 @@ export class HomeComponent implements OnInit {
   }
   showSlides(n) {
     var i;
-    var slides = document.getElementsByClassName("mySlides")  as HTMLCollectionOf<HTMLElement>;
-    var dots = document.getElementsByClassName("dot")  as HTMLCollectionOf<HTMLElement>;
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
+    var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
+    var dots = document.getElementsByClassName("dot") as HTMLCollectionOf<HTMLElement>;
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
     for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+      slides[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+      dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].className += " active";
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
   }
-// Carousel
+  // Carousel
 
-//Cookies
-setCookie(cname, value) {
-  this.cookieService.set(cname, value);
-}
-getCookie(cname) {
-  return this.cookieService.get(cname);
-}
-deleteCookie(cname) {
-  this.cookieService.delete(cname);
-}
-//Cookies
+  //Cookies
+  setCookie(cname, value) {
+    this.cookieService.set(cname, value);
+  }
+  getCookie(cname) {
+    return this.cookieService.get(cname);
+  }
+  deleteCookie(cname) {
+    this.cookieService.delete(cname);
+  }
+  //Cookies
 
-  toggleTags(id){
+  toggleTags(id) {
     var activeTag = document.getElementsByClassName("activeTag");
-    if(activeTag.length !== 0){
+    if (activeTag.length !== 0) {
       activeTag[0].classList.remove("activeTag");
     }
     document.getElementById(id).classList.add("activeTag");
   }
 
-  seeMore(){
+  seeMore() {
     var activeTag = document.getElementsByClassName("activeTag");
     var id = activeTag[0].id;
-    switch(id){
-      case "tag-1": this.setCookie("sold","max");
-                    break;
-      case "tag-2": this.setCookie("discounts","available");
-                    break;
-      case "tag-3": this.setCookie("arrivals","date");
-                    break;
+    switch (id) {
+      case "tag-1": this.setCookie("sold", "max");
+        break;
+      case "tag-2": this.setCookie("discounts", "available");
+        break;
+      case "tag-3": this.setCookie("arrivals", "date");
+        break;
     }
     this.router.navigate(['/category']);
   }
 
-  readMore(id){
+  readMore(id) {
     $("#myModal").modal();
-    switch(id){
+    switch (id) {
       case "about-1": this.popHeader = this.pageData.feature_head_1;
-                      this.popContent = this.pageData.feature_desc_1;
-                      this.popImgSrc = this.pageData.feature_img_1;
-                      break;
+        this.popContent = this.pageData.feature_desc_1;
+        this.popImgSrc = this.pageData.feature_img_1;
+        break;
       case "about-2": this.popHeader = this.pageData.feature_head_2;
-                      this.popContent = this.pageData.feature_desc_2;
-                      this.popImgSrc = this.pageData.feature_img_2;
-                      break;
+        this.popContent = this.pageData.feature_desc_2;
+        this.popImgSrc = this.pageData.feature_img_2;
+        break;
       case "about-3": this.popHeader = this.pageData.feature_head_3;
-                      this.popContent = this.pageData.feature_desc_3;
-                      this.popImgSrc = this.pageData.feature_img_3;
-                      break;
-      case "work-1":  this.popHeader = this.pageData.work_head_1;
-                      this.popContent = this.pageData.work_desc_1;
-                      this.popImgSrc = this.pageData.work_img_1;
-                      break;
-      case "work-2":  this.popHeader = this.pageData.work_head_2;
-                      this.popContent = this.pageData.work_desc_2;
-                      this.popImgSrc =  this.pageData.work_img_2;
-                      break;
-      case "work-3":  this.popHeader = this.pageData.work_head_3;
-                      this.popContent = this.pageData.work_desc_3;
-                      this.popImgSrc = this.pageData.work_img_3;
-                      break;
+        this.popContent = this.pageData.feature_desc_3;
+        this.popImgSrc = this.pageData.feature_img_3;
+        break;
+      case "work-1": this.popHeader = this.pageData.work_head_1;
+        this.popContent = this.pageData.work_desc_1;
+        this.popImgSrc = this.pageData.work_img_1;
+        break;
+      case "work-2": this.popHeader = this.pageData.work_head_2;
+        this.popContent = this.pageData.work_desc_2;
+        this.popImgSrc = this.pageData.work_img_2;
+        break;
+      case "work-3": this.popHeader = this.pageData.work_head_3;
+        this.popContent = this.pageData.work_desc_3;
+        this.popImgSrc = this.pageData.work_img_3;
+        break;
     }
   }
 

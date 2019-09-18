@@ -1,4 +1,4 @@
-<div class="divMargin">
+<!-- <div class="divMargin">
   <ul class="breadcrumb">
     <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
   </ul>
@@ -6,192 +6,283 @@
   <div>
     <button [routerLink]="[ '/categorylisting' ]" routerLinkActive="active">Go to Category Listing</button>
   </div>
-</div>
+</div> -->
 <div class="gridT">
-  <!-- shop background image -->
-  <div class=shopBg>
-    <img src="/assets/images/1920x640.jpg">
-  </div>
-  <!-- shop description -->
-  <div class=shopDescBio>
-    <div id="shopDesc">
-      <div id="shopLogo">
-        <img src="/assets/images/photo3.jpg">
-      </div>
-      <div id=shopInfo>
-        <div id=shopStarFoll>
+	<!-- shop background image -->
+	<div class=shopBg>
+		<img src="/assets/images/1920x640.jpg">
+	</div>
+	<!-- shop description -->
+	<div class=shopDescBio>
+		<div id="shopDesc">
+			<div id="shopLogo">
+				<img src="/assets/images/photo3.jpg">
+			</div>
+			<div id=shopInfo>
+				<div id=shopStarFoll>
 
-        </div>
-        <div id=shopDetails>
-          <h4>SHOP NAME</h4>
-          <h5>By Seller Name</h5>
-          <a>Main Selling Items</a>
-        </div>
-        <div id=shopBtnInfo>
-          <div id="dvFromRFQ">
-            From:<a>kochi</a><br>
-            <button id="btnRfq">RFQ</button>
-          </div>
-          <div id="dvShipsFollow">
-            Ships to:<a>All over India</a><br>
-            <button id="btnFollowShop">FOLLOW SHOP</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="shopBio">
-      <h3>Bio</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-        culpa qui officia deserunt mollit anim id est laborum.</p>
-      <br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip ex ea commodo consequat.</p>
-    </div>
-  </div>
-  <!-- shop products -->
-  <div class=shopProducts>
+				</div>
+				<div id=shopDetails>
+					<h4>{{shopData.shopName}}</h4>
+					<h5>By {{sellerDataShop.sellerName}}</h5>
+					<a>Main Selling Items</a>
+				</div>
+				<div id=shopBtnInfo>
+					<div id="dvFromRFQ">
+						From:<a>kochi</a><br>
+						<button id="btnRfq">RFQ</button>
+					</div>
+					<div id="dvShipsFollow">
+						Ships to:<a>All over India</a><br>
+						<ng-container *ngIf="folResult; else notFollowing">
+							<button type="button" class="btnFollowShop" (click)="unfollowShop();"><img
+									class="followIcon" src="assets/icons/resources (IL)-04.png">Unfollow</button>
+						</ng-container>
+						<ng-template #notFollowing>
+							<button type="button" class="btnFollowShop" (click)="followShop();"><img class="followIcon"
+									src="assets/icons/resources (IL)-04.png">Follow</button>
+						</ng-template>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="shopBio">
+			<h3>Bio</h3>
+			<p>{{shopData.descriptionShop}}</p>
+		</div>
+	</div>
+	<!-- shop products -->
+	<div class=shopProducts>
+		<div class="dvCatMain">
 
-  </div>
-  <!-- shop shipment info -->
-  <div class=shopShipment>
-    <img src="assets/icons/resources (IL)-18.png">
-    <h2>SHIPMENT INFO</h2>
-    <div id="dvForm">
-      <form>
-        ONE DAY DELIVERY<input type="radio" value="oneDay" id="odDelivery" name="delivery" checked>
-        CASH ON DELIVERY<input type="radio" value="cashOn" id="coDelivery" name="delivery">
-        DOOR TO DOOR DELIVERY<input type="radio" value="doorTD" id="dtdDelivery" name="delivery">
-        <br>
-        <br>
-        Average Processing Time : <a>5days</a><br>
-        Average Shipping Time : <a> 5days</a><br>
-        Average Response Time : <a> 5days</a><br>
-      </form>
-    </div>
+			<div class="dvCard" *ngFor="let item of Object.keys(array12)">
 
-  </div>
-  <!-- shop policies -->
-  <div class=shopPolicies>
-    <div id="shopPolicy">
-      <img src="assets/icons/resources (IL)-18.png">
-      <h2>SHOP POLICIES</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.</p>
-    </div>
-  </div>
-  <!-- shop ratings and reviews -->
-  <div class=shopRatingReview>
-    <img src="assets/icons/resources (IL)-18.png">
-    <h2>RATING & REVIEWS</h2>
-    <div>
-      <div class="rating">
-        <div class="inner">
-          <div class="rating">
-            <span class="rating-num">4.0</span>
-            <div class="rating-stars">
-              <span><i class="active icon-star"></i></span>
-              <span><i class="active icon-star"></i></span>
-              <span><i class="active icon-star"></i></span>
-              <span><i class="active icon-star"></i></span>
-              <span><i class="icon-star"></i></span>
-            </div>
-            <div class="rating-users">
-              <i class="icon-user"></i> 1,014,004 total
-            </div>
-          </div>
+				<div class="dvCardLogo">
 
-          <div class="histo">
-            <div class="five histo-rate">
-              <span class="histo-star">
-                <i class="active icon-star"></i> 5 </span>
-              <span class="bar-block">
-                <span id="bar-five" class="bar">
-                  <span>566,784</span>&nbsp;
-                </span>
-              </span>
-            </div>
+					<div class="dvLogo">
 
-            <div class="four histo-rate">
-              <span class="histo-star">
-                <i class="active icon-star"></i> 4 </span>
-              <span class="bar-block">
-                <span id="bar-four" class="bar">
-                  <span>171,298</span>&nbsp;
-                </span>
-              </span>
-            </div>
+						<img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png" [routerLink]="['/shop']"
+							[queryParams]="{shop_id:item}">
 
-            <div class="three histo-rate">
-              <span class="histo-star">
-                <i class="active icon-star"></i> 3 </span>
-              <span class="bar-block">
-                <span id="bar-three" class="bar">
-                  <span>94,940</span>&nbsp;
-                </span>
-              </span>
-            </div>
+					</div>
 
-            <div class="two histo-rate">
-              <span class="histo-star">
-                <i class="active icon-star"></i> 2 </span>
-              <span class="bar-block">
-                <span id="bar-two" class="bar">
-                  <span>44,525</span>&nbsp;
-                </span>
-              </span>
-            </div>
+					<div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
 
-            <div class="one histo-rate">
-              <span class="histo-star">
-                <i class="active icon-star"></i> 1 </span>
-              <span class="bar-block">
-                <span id="bar-one" class="bar">
-                  <span>136,457</span>&nbsp;
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+						<div class="dvShopName">
 
-      <div class="review">
-        <div id="revName">
-          <p id=rName>Lorem</p>
-          <p id="rAgo">8days ago</p>
-        </div>
-        <div id="revData">
-          <p id="rTitle">Title</p>
-          <p id="rDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-            qui officia
-            deserunt mollit anim id est laborum.</p>
-          <div id="starLikes">
-            <img id="icLike" src="assets/icons/resources (IL)-10.png">
-            <p id="likeCount">000</p>
-            <img id="icDislike" src="assets/icons/resources (IL)-11.png">
-            <p id="dislikeCount">000</p>
-            <button id="btnReport">Report</button>
-          </div>
-          <img id="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
-        </div>
-      </div>
+							<p>{{array12[item].sellerName}}</p>
 
-      <div class="writeReview">
-        <button id="btnWriteReview">WRITE PRODUCT REVIEW</button>
-      </div>
-    </div>
+						</div>
 
-  </div>
+						<div class="dvSellerName">
+
+							<p>{{array12[item].sellerName}}</p>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="dvCardBanner" [routerLink]="['/listing']"
+					[queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
+
+					<img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
+
+					<div class="dvUndeliver">
+
+						<div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
+
+					</div>
+
+				</div>
+
+				<div class="dvCardName">
+
+					<div class="dvProduct">
+
+						<div class="dvProdName">
+
+							<p>{{array12[item].prodName}}</p>
+
+						</div>
+
+						<div class="dvRating">
+
+							<div>
+
+								<i class="fa fa-star" *ngFor="let item of filledStar"></i>
+
+								<i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+
+							</div>
+
+
+
+						</div>
+
+					</div>
+
+					<div class="dvDetails">
+
+						<p>{{array12[item].desc}}</p>
+
+					</div>
+
+				</div>
+
+				<div class="dvCardPrice">
+
+					<p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
+
+					<p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
+
+					<!-- <p class="pOffer">({{array12[item].offerPercent}}%)</p> -->
+
+					<button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- shop shipment info -->
+	<div class=shopShipment>
+		<img src="assets/icons/resources (IL)-18.png">
+		<h2>SHIPMENT INFO</h2>
+		<div id="dvForm">
+			<form>
+				ONE DAY DELIVERY<input type="radio" value="oneDay" id="odDelivery" name="delivery" checked>
+				CASH ON DELIVERY<input type="radio" value="cashOn" id="coDelivery" name="delivery">
+				DOOR TO DOOR DELIVERY<input type="radio" value="doorTD" id="dtdDelivery" name="delivery">
+				<br>
+				<br>
+				Average Processing Time : <a>5days</a><br>
+				Average Shipping Time : <a> 5days</a><br>
+				Average Response Time : <a> 5days</a><br>
+			</form>
+		</div>
+
+	</div>
+	<!-- shop policies -->
+	<div class=shopPolicies>
+		<div class="prodPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>PRODUCT POLICIES</h2>
+			<p>{{dynamicData.prodPolicy}}</p>
+		</div>
+		<div class="shopPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>SHOP POLICIES</h2>
+			<p>{{shopData.shopPolicy}}</p>
+		</div>
+		<div class="shipPolicy">
+			<img src="assets/icons/resources (IL)-18.png">
+			<h2>SHIP POLICIES</h2>
+			<p>{{dynamicData.shipPolicy}}</p>
+		</div>
+	</div>
+
+	<!-- shop ratings and reviews -->
+	<div class=shopRatingReview>
+		<img src="assets/icons/resources (IL)-18.png">
+		<h2>RATING & REVIEWS</h2>
+		<div class="rating">
+			<div class="inner">
+				<div class="rating">
+					<span class="rating-num">{{shopData.ratingShop}}</span>
+					<div class="rating-stars">
+						<div>
+							<i class="fa fa-star active" *ngFor="let item of filledStar"></i>
+							<i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+						</div>
+					</div>
+					<div class="rating-users">
+						<i class="icon-user"></i> {{shopData.ratingCountShop}}
+					</div>
+				</div>
+
+				<div class="histo">
+					<div class="five histo-rate">
+						<span class="histo-star">
+							<i class="active icon-star"></i> 5 </span>
+						<span class="bar-block">
+							<span id="bar-five" class="bar">
+								<span>566,784</span>&nbsp;
+							</span>
+						</span>
+					</div>
+
+					<div class="four histo-rate">
+						<span class="histo-star">
+							<i class="active icon-star"></i> 4 </span>
+						<span class="bar-block">
+							<span id="bar-four" class="bar">
+								<span>171,298</span>&nbsp;
+							</span>
+						</span>
+					</div>
+
+					<div class="three histo-rate">
+						<span class="histo-star">
+							<i class="active icon-star"></i> 3 </span>
+						<span class="bar-block">
+							<span id="bar-three" class="bar">
+								<span>94,940</span>&nbsp;
+							</span>
+						</span>
+					</div>
+
+					<div class="two histo-rate">
+						<span class="histo-star">
+							<i class="active icon-star"></i> 2 </span>
+						<span class="bar-block">
+							<span id="bar-two" class="bar">
+								<span>44,525</span>&nbsp;
+							</span>
+						</span>
+					</div>
+
+					<div class="one histo-rate">
+						<span class="histo-star">
+							<i class="active icon-star"></i> 1 </span>
+						<span class="bar-block">
+							<span id="bar-one" class="bar">
+								<span>136,457</span>&nbsp;
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="review" *ngFor="let item of Object.keys(ratingReviewShop)" id="{{item}}">
+			<div class="revProfIcon">
+				<img class="revProfImg" src="assets/icons/resources (IL)-21.png">
+			</div>
+			<div class="revName">
+				<p class=rName>Lorem</p>
+				<p class="rAgo">{{reviewDateDiff[item]}}</p>
+			</div>
+			<div class="revData">
+				<p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
+				<p class="rDesc">{{ratingReviewShop[item].review}}</p>
+				<div class="starLikes">
+					<img class="icLike" id="likeImg" (click)="likeCount(ratingReviewShop[item].reviewId);"
+						src="assets/icons/resources (IL)-10.png">
+					<p class="likeCount">{{ratingReviewShop[item].likes}}</p>
+					<img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
+						src="assets/icons/resources (IL)-11.png">
+					<p class="dislikeCount">{{ratingReviewShop[item].dislikes}}</p>
+					<button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
+					<div>
+						<i class="fa fa-star active" *ngFor="let item of filledStarRat"></i>
+						<i class="fa fa-star-o" *ngFor="let item of unFilledStarRat"></i>
+					</div>
+				</div>
+				<img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+			</div>
+		</div>
+	</div>
 </div>

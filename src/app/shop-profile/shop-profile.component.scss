@@ -102,15 +102,15 @@
 			#shopLogo {
 				margin-block-start: 43%;
 				grid-area: shopLogo;
-				img{
-					width:100%;
-					height:10rem;
+				img {
+					width: 100%;
+					height: 10rem;
 					object-fit: contain;
 				}
 			}
 			#shopInfo {
 				grid-area: shopInfo;
-				margin-block-start:25%;
+				margin-block-start: 25%;
 
 				#shopStarFoll {
 				}
@@ -128,7 +128,17 @@
 					}
 					#dvShipsFollow {
 						grid-area: dvShipsFollow;
-						#btnFollowShop {
+						.btnFollowShop{
+							width: 125px;
+							margin: auto;
+							z-index: 0;
+							background-color: #ff1d25;
+						}
+						img {
+							z-index: 1;
+							transform: translate(-2rem, 2px);
+							position: absolute;
+							height: 20px;
 						}
 					}
 				}
@@ -137,6 +147,7 @@
 		#shopBio {
 			grid-area: shopBio;
 			background-color: whitesmoke;
+			height: 22.5rem;
 			h3 {
 				margin-block-start: 5%;
 				margin-inline-start: 5%;
@@ -149,9 +160,411 @@
 	}
 	.shopProducts {
 		grid-area: shopProducts;
-		background-color: wheat;
-		height: 400px;
-		margin-top: 5%;
+		// background-color: wheat;
+		height: auto;
+		// margin-top: 5%;
+
+		.dvCatMain {
+			grid-template-columns: repeat(3, 1fr);
+
+			display: grid;
+
+			width: auto;
+
+			margin: 5%;
+
+			.dvCard {
+				padding: 6%;
+
+				border-bottom: 1px solid lightgray;
+
+				.dvCardLogo {
+					grid-template-columns: 35% auto;
+
+					grid-template-areas: "dv-logo dv-seller";
+
+					display: grid;
+
+					.dvLogo {
+						grid-area: dv-logo;
+
+						width: fit-content;
+
+						border-radius: 50%;
+
+						background: lightgray;
+
+						justify-self: center;
+
+						box-shadow: 1px 1px 10px 0 lightgray;
+
+						z-index: 1;
+
+						.imgLogo {
+							border-radius: 50%;
+
+							object-fit: cover;
+
+							cursor: pointer;
+						}
+					}
+
+					.dvSeller {
+						grid-area: dv-seller;
+
+						width: auto;
+
+						cursor: pointer;
+
+						.dvShopName {
+							border-bottom: 1px solid gray;
+
+							p {
+								font-family: Bitter;
+
+								font-size: 24px;
+							}
+
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+
+							// @include lg {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+						}
+
+						.dvSellerName {
+							p {
+								font-family: Bitter;
+
+								font-size: 24px;
+
+								color: gray;
+							}
+
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+
+							// @include lg {
+							// 	p {
+							// 		font-size: $SubText;
+							// 	}
+							// }
+						}
+					}
+				}
+
+				.dvCardBanner {
+					cursor: pointer;
+
+					padding: 10px;
+
+					background: lightgray;
+
+					box-shadow: 1px 1px 10px 0px gray;
+
+					border-radius: 5px;
+
+					.imgBanner {
+						width: inherit;
+					}
+
+					.dvUndeliver {
+						position: relative;
+
+						.overlay {
+							position: absolute;
+
+							bottom: 0;
+
+							background: rgb(0, 0, 0);
+
+							background: rgba(0, 0, 0, 0.5); /* Black see-through */
+
+							color: #f1f1f1;
+
+							width: 100%;
+
+							transition: 0.5s ease;
+
+							opacity: 0;
+
+							color: white;
+
+							font-size: 20px;
+
+							font-family: Bitter;
+
+							padding: 20px;
+
+							text-align: center;
+						}
+					}
+
+					.dvUndeliver:hover .overlay {
+						opacity: 1;
+					}
+
+					// @include lg {
+					// 	.overlay {
+					// 		font-size: 14px !important;
+
+					// 		padding: 10px !important;
+					// 	}
+					// }
+				}
+
+				.dvCardName {
+					cursor: default;
+
+					.dvProduct {
+						grid-template-columns: auto auto;
+
+						grid-template-areas: "dv-prod dv-rate";
+
+						display: grid;
+
+						padding-top: 20px;
+
+						.dvProdName {
+							grid-area: dv-prod;
+
+							p {
+								font-size: 24px;
+
+								font-family: BitterBold;
+
+								margin: auto;
+							}
+
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+
+							// @include lg {
+							// 	p {
+							// 		font-size: 16px;
+							// 	}
+							// }
+						}
+
+						.dvRating {
+							grid-area: dv-rate;
+
+							color: yellow;
+
+							// font-size: 25px;
+
+							justify-self: end;
+
+							width: fit-content;
+
+							p {
+								font-size: 24px;
+
+								font-family: BitterBold;
+							}
+
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+
+							// @include lg {
+							// 	.fa {
+							// 		font-size: 16px;
+							// 	}
+							// }
+						}
+					}
+
+					.dvDetails {
+						padding-top: 10px;
+
+						p {
+							font-family: Bitter;
+
+							font-size: 20px;
+
+							text-align: justify;
+
+							line-height: 1.3;
+
+							color: darkgray;
+						}
+
+						// @include sm-lesser {
+						// 	p {
+						// 		font-size: $SubText;
+						// 	}
+						// }
+
+						// @include lg {
+						// 	p {
+						// 		font-size: 16px;
+						// 	}
+						// }
+					}
+				}
+			}
+
+			.dvCardPrice {
+				grid-template-columns: auto auto auto;
+
+				// auto
+
+				grid-template-areas: "p-price ac-price p-offer";
+
+				// btn-rfq
+
+				display: grid;
+
+				p {
+					font-family: BitterBold;
+
+					font-size: 24px;
+
+					display: inline;
+				}
+
+				// @include sm-lesser {
+				// 	p {
+				// 		font-size: 20px;
+				// 	}
+				// }
+
+				// @include lg {
+				// 	p {
+				// 		font-size: 16px;
+				// 	}
+				// }
+
+				.pPrice {
+					grid-area: p-price;
+				}
+
+				.pActualPrice {
+					grid-area: ac-price;
+
+					text-decoration: line-through;
+
+					color: gray;
+				}
+
+				// @include sm-lesser {
+				// 	.pActualPrice {
+				// 		justify-self: center;
+				// 	}
+				// }
+
+				// @include lg {
+				// 	.pActualPrice {
+				// 		justify-self: center;
+				// 	}
+				// }
+
+				.pOffer {
+					grid-area: p-offer;
+
+					color: green;
+				}
+
+				// @include sm-lesser {
+				// 	.pOffer {
+				// 		justify-self: end;
+				// 	}
+				// }
+
+				// @include lg {
+				// 	.pOffer {
+				// 		justify-self: end;
+				// 	}
+				// }
+
+				// .btnRfq{
+
+				//     cursor: pointer;
+
+				//     grid-area: btn-rfq;
+
+				//     font-family: BitterBold;
+
+				//     font-size: 20px;
+
+				//     border: none;
+
+				//     border-radius: 5px;
+
+				//     background: red;
+
+				//     padding: 5px;
+
+				//     color: white;
+
+				//     float: right;
+
+				// }
+
+				// @include sm-lesser{
+
+				//     .btnRfq{
+
+				//         font-size: inherit;
+
+				//         margin-top: auto;
+
+				//         margin-bottom: auto;
+
+				//     }
+
+				// }
+
+				// @include lg{
+
+				//     .btnRfq{
+
+				//         font-size: 16px;
+
+				//     }
+
+				// }
+			}
+
+			// @include sm-lesser {
+			// 	.dvCardPrice {
+			// 		display: grid;
+
+			// 		grid-template-columns: auto auto auto;
+
+			// 		grid-template-rows: auto auto;
+
+			// 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+			// 	}
+			// }
+
+			// @include lg {
+			// 	.dvCardPrice {
+			// 		display: grid;
+
+			// 		grid-template-columns: auto auto auto;
+
+			// 		grid-template-rows: auto auto;
+
+			// 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+			// 	}
+			// }
+		}
 	}
 	.shopShipment {
 		grid-area: shopShipment;
@@ -204,10 +617,29 @@
 		width: 100%;
 		margin-top: 5%;
 		box-sizing: border-box;
-		#shopPolicy {
-			margin-left: 5%;
-			margin-right: 5%;
-			width: auto;
+		.prodPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				z-index: 0;
+				transform: translate(0rem, 2rem);
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			p {
+				text-align: justify;
+				text-align: center;
+			}
+		}
+		.shopPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
 			img {
 				display: block;
 				margin-left: auto;
@@ -215,9 +647,33 @@
 				width: 300px;
 				transform: translate(0rem, 2rem);
 				z-index: 0;
+				// position: absolute;
 			}
 			h2 {
 				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			p {
+				text-align: justify;
+				text-align: center;
+			}
+		}
+		.shipPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				transform: translate(0rem, 2rem);
+				z-index: 0;
+				// position: absolute;
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
 				transform: translate(0px, -0.45em);
 				z-index: 1;
 			}
@@ -354,25 +810,34 @@
 
 		.review {
 			// margin: 0% 5% 0% 5%;
-			background-color: white;
 			margin-top: 50px;
 			margin-bottom: 50px;
 			grid-area: revData;
 			display: grid;
-			grid-template-columns: 10% 20% 50% 10%;
+			grid-template-columns: 10% 10% 20% 50%;
 			border-top: 3px lightgray solid;
 			grid-template-rows: 5% 95%;
-			grid-template-areas: ". revName revData .";
-			#revName {
+			grid-template-areas: ". revProfIcon revName revData ";
+			.revProfIcon {
+				grid-area: revProfIcon;
+				.revProfImg {
+					height: 100px;
+					width: 100px;
+				}
+			}
+			.revName {
+				margin-top: 1%;
 				grid-area: revName;
-				#rName {
+				.rName {
 					grid-area: rName;
 				}
-				#rAgo {
+				.rAgo {
 					grid-area: rAgo;
 				}
 			}
-			#revData {
+			.revData {
+				margin-top: 1%;
+	
 				grid-area: revData;
 				grid-template-columns: auto;
 				grid-template-rows: repeat(4, auto);
@@ -381,58 +846,48 @@
 					"rDesc"
 					"rstarLikes"
 					"revIcon";
-				#rTitle {
+				.rTitle {
 					grid-area: rTitle;
 				}
-				#rDesc {
+				.rDesc {
 					grid-area: rDesc;
 				}
-				#starLikes {
+				.starLikes {
 					display: grid;
 					grid-template-columns: 3rem 3rem 3rem 3rem 5rem auto;
 					grid-template-rows: auto auto;
 					grid-template-areas: "icLike likeCount icDislike dislikeCount btnReport ";
 					grid-area: starLikes;
-					#icLike {
+					.icLike {
 						grid-area: icLike;
 						width: 30px;
 						height: 30px;
 						transform: translate(0px, 0px);
 					}
-					#likeCount {
+					.likeCount {
 						grid-area: likeCount;
 						transform: translate(0px, 0px);
 					}
-					#icDislike {
+					.icDislike {
 						grid-area: icDislike;
 						width: 30px;
 						height: 30px;
 						transform: translate(0px, 0px);
 					}
-					#dislikeCount {
+					.dislikeCount {
 						grid-area: dislikeCount;
 						transform: translate(0px, 0px);
 					}
-					#btnReport {
+					.btnReport {
 						grid-area: btnReport;
 					}
 				}
-				#revIcon {
+				.revIcon {
 					grid-area: revIcon;
 					width: 100px;
 					height: 100px;
 					float: left;
 				}
-			}
-		}
-		.writeReview {
-			background-color: white;
-			margin-bottom: 5%;
-			margin-top: 2%;
-			height: auto;
-			text-align: center;
-			#btnWriteReview {
-				width: max-content;
 			}
 		}
 	}

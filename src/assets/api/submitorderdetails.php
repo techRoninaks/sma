@@ -2,6 +2,13 @@
     require "init.php";
     $prodId = $_POST["prodId"];
     $userId = $_POST["userId"];
+    $quantity = $_POST["quantity"];
+    $message = $_POST["message"];
+    $uploadProductImage = $_POST["uploadProductImage"];
+    $deliveryDatePicker = $_POST["deliveryDatePicker"];
+    $shippingOption = $_POST["shippingOption"];
+
+ 
     $data = array();
 
     $sql_query1 = "SELECT `shop_id` FROM `product` where prodid =  $prodId ";

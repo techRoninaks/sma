@@ -28,6 +28,8 @@ import { ListingComponent } from './listing/listing.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import { TransactionComponent } from './transaction/transaction.component';
+import { SellerlandingComponent } from './sellerlanding/sellerlanding.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,9 @@ import { DataService } from './data.service';
     PlandetailsComponent,
     UserprofileBuyerComponent,
     CartComponent,
-    RegistrationSellerComponent
+    RegistrationSellerComponent,
+    TransactionComponent,
+    SellerlandingComponent
   ],
   imports: [
     BrowserModule,
