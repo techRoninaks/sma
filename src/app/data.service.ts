@@ -106,46 +106,56 @@ export class DataService {
   }
 
   getvariantInfor(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/variantinforcheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/variantinforcheckout.php');
   }
   getaddress(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/addresscheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/addresscheckout.php');
   }
   getaddressType(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/addresstypecheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/addresstypecheckout.php');
   }
   getbulkDiscount(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/bulkdiscountcheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/bulkdiscountcheckout.php');
   }
   getcustomerOrder(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/customerordercheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/customerordercheckout.php');
   }
   getorderMessage(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/ordermessagecheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/ordermessagecheckout.php');
   }
   getorderstatus(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/orderstatuscheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/orderstatuscheckout.php');
   }
   getpurchaseOrder(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/purchaseordercheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/purchaseordercheckout.php');
   }
-  getproduct(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/productcheckout.php');
+  getproduct(id: any){
+    let httpParams= new HttpParams()
+    .append("prodIds",id);
+    return this.http.post('http://localhost/sma3/src/assets/api/productcheckout.php',httpParams);
   }
   getproductstatus(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/prodstatuscheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/prodstatuscheckout.php');
   }
   getproductshipprice(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/prodshippricecheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/prodshippricecheckout.php');
   }
   getoffer(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/offercheckout.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/offercheckout.php');
   }
   getsellercart(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/sellercart.php');
+    return this.http.get('http://localhost/sma3/src/assets/api/sellercart.php');
   }
-  getcart(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/cart.php');
+  getcart(userId){
+    let httpParams = new HttpParams()
+    .append("userId",userId);
+    return this.http.post('http://localhost/sma3/src/assets/api/cart.php',httpParams);
+  }
+  deleteCartProductfn(id: any, userId: any){
+    let httpParams = new HttpParams()
+    .append("id",id)
+    .append("userId",userId);
+    return this.http.post('http://localhost/sma3/src/assets/api/deleteCartProduct.php',httpParams);
   }
 
 
@@ -154,4 +164,8 @@ export class DataService {
 
     return this.http.get('assets/api/bulkdiscountcheckout.php');
   }
+
+  // deleteCart(id: number) {
+  //     const i = this.DataService.findIndex(d => )
+  // }
 }
