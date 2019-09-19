@@ -26,10 +26,13 @@ import { ListingComponent } from './listing/listing.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import { TransactionComponent } from './transaction/transaction.component';
+import { SellerlandingComponent } from './sellerlanding/sellerlanding.component';
 import * as bootstrap from 'bootstrap';
 import * as $ from "jquery";
 import { MatInputModule, MatFormFieldModule} from '@angular/material';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,9 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
     UserprofileBuyerComponent,
     CartComponent,
     RegistrationSellerComponent,
-    TermsConditionsComponent
+    TransactionComponent,
+    SellerlandingComponent,
+    TermsConditionsComponent,
   ],
   imports: [
     BrowserModule,

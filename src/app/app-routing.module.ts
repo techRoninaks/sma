@@ -8,7 +8,9 @@ import { LoginComponent } from './login/login.component'
 import { RegistrationComponent } from './registration/registration.component';
 import { PlandetailsComponent } from './plandetails/plandetails.component';
 import { UserprofileBuyerComponent } from './userprofile-buyer/userprofile-buyer.component';
-import{ RegistrationSellerComponent } from './registration-seller/registration-seller.component';
+import { RegistrationSellerComponent } from './registration-seller/registration-seller.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { SellerlandingComponent } from './sellerlanding/sellerlanding.component';
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
@@ -24,9 +26,12 @@ const routes: Routes = [
   { path: 'Plandetails',component:PlandetailsComponent},
   { path: 'Userprofile',component:UserprofileBuyerComponent},
   { path: 'SignupSeller',component:RegistrationSellerComponent},
-  { path:'cart', component: CartComponent },
-  { path: 'terms&conditions',component: TermsConditionsComponent}
-  { path: 'addProduct', component: AddProductComponent }
+  { path: 'cart', component: CartComponent },
+  { path: 'shop', component: ShopProfileComponent},
+  { path: 'transaction', component: TransactionComponent},
+  { path: 'terms&conditions',component: TermsConditionsComponent},
+  { path: 'addProduct', component: AddProductComponent },
+  { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 
 @NgModule({

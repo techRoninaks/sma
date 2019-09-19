@@ -1,0 +1,207 @@
+<div class="mGrid">
+    <div class="banner">
+        <div class="slideshow-container">
+
+            <div class="slideDots">
+                <span class="dot" (click)="currentSlide(1)"></span><br>
+                <span class="dot" (click)="currentSlide(2)"></span><br>
+                <span class="dot" (click)="currentSlide(3)"></span>
+            </div>
+            <div class="mySlides fade">
+                <img class="slideImg" src="{{pageData['ad_banner_1']}}">
+            </div>
+
+            <div class="mySlides fade">
+                <img class="slideImg" src="{{pageData['ad_banner_2']}}">
+            </div>
+
+            <div class="mySlides fade">
+                <img class="slideImg" src="{{pageData['ad_banner_3']}}">
+            </div>
+
+            <div class="">
+                <div class="dvPrev" id="prev">
+                    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+                </div>
+                <div class="dvNext" if="next">
+                    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
+        </div>
+        <div class="slideVideo">
+            <video width="320" height="240" controls>
+                <source src="assets/videos/vid001.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="about">
+        <div class="aboutHeader">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>ABOUT US</h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. </p>
+    </div>
+    <div class="spec">
+    </div>
+    <div class="banSmall">
+        <div class="banLeft">
+            <p class="p1" id="leftWhite">3 Million</p>
+            <p class="p2" id="leftBlack">Satisfied Customers</p>
+            <p class="p3" id="leftWhite">70,000</p>
+            <p class="p4" id="leftBlack">Trusted sellers</p>
+        </div>
+        <div class="banRight">
+            <p>Setup Your shop <label style="color: #efbe24">NOW</label>!</p>
+        </div>
+    </div>
+    <div class="howWork">
+    </div>
+    <div class="quote">
+    </div>
+    <div class="blogPosts">
+    </div>
+    <div class="plans">
+        <div class="main-title">
+            Which Plan Is Right For You?
+            <br>
+            <br>
+        </div>
+        <div class="main-grid">
+            <div class="zoom card-1">
+                <mat-card class="card-style">
+                    <mat-card-header>
+                        <!-- <div mat-card-avatar ></div> -->
+                        <mat-card-title class="card-title">FREE</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="image-style"><img src="./assets/images/img_pd_free.png"></div>
+                    <mat-card-content>
+                        <p class="text-style">
+                            {{dynamicDataFree.planDescription}}
+                        </p>
+                        <div>
+                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataFree.planPrice}}/month</p>
+                        </div>
+                        <div>
+                            <p>DISCOUNT: ₹{{dynamicDataFree.planDiscount}}</p>
+                        </div>
+                        <div>
+                            <p>DURATION: {{dynamicDataFree.duration}} days</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button class="btn-style" (click)=redirect();>SELECT</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="zoom card-2">
+                <mat-card class="card-style">
+                    <mat-card-header>
+                        <!-- <div mat-card-avatar ></div> -->
+                        <mat-card-title class="card-title">BASIC</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="image-style"><img src="./assets/images/img_pd_basic.png"></div>
+                    <mat-card-content>
+                        <p class="text-style">
+                            {{dynamicDataBasic.planDescription}}
+                        </p>
+                        <div>
+                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataBasic.planPrice}}/month</p>
+                        </div>
+                        <div>
+                            <p>DISCOUNT: ₹{{dynamicDataBasic.planDiscount}}</p>
+                        </div>
+                        <div>
+                            <p>DURATION: {{dynamicDataBasic.duration}} days</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button class="btn-style" (click)=redirect();>SELECT</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="zoom card-3">
+                <mat-card class="card-style">
+                    <mat-card-header>
+                        <!-- <div mat-card-avatar ></div> -->
+                        <mat-card-title class="card-title">PREMIUM</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="image-style"><img src="./assets/images/img_pd_premium.png"></div>
+                    <mat-card-content>
+                        <p class="text-style">
+                            {{dynamicDataPremium.planDescription}}
+                        </p>
+                        <div>
+                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPremium.planPrice}}/month</p>
+                        </div>
+                        <div>
+                            <p>DISCOUNT: ₹{{dynamicDataPremium.planDiscount}}</p>
+                        </div>
+                        <div>
+                            <p>DURATION: {{dynamicDataPremium.duration}} days</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button class="btn-style" (click)=redirect();>SELECT</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="zoom card-4">
+                <mat-card class="card-style">
+                    <mat-card-header>
+                        <!-- <div mat-card-avatar ></div> -->
+                        <mat-card-title class="card-title">PLUS</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="image-style"><img src="./assets/images/img_pd_plus.png"></div>
+                    <mat-card-content>
+                        <p class="text-style">
+                            {{dynamicDataPlus.planDescription}}
+                        </p>
+                        <div>
+                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPlus.planPrice}}/month</p>
+                        </div>
+                        <div>
+                            <p>DISCOUNT: ₹{{dynamicDataPlus.planDiscount}}</p>
+                        </div>
+                        <div>
+                            <p>DURATION: {{dynamicDataPlus.duration}} days</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button class="btn-style" (click)=redirect();>SELECT</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+    <div class="customerQA">
+        <img src="assets/icons/resources (IL)-18.png">
+        <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
+        <div class="divCustomerQA">
+            <div class="divSA">
+                <form class="search">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox">
+                    <button type="submit"><img src="/assets/icons/resources (IL)-07.png"></button>
+                </form>
+                <form class="askQ">
+                    <input type="text" placeholder="Ask a Question" name="search">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="divQA">
+                <form class="qA">
+                    Q:<span class="question">Question</span>?<br> A:
+                    <span class="answer">Answer</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
