@@ -49,27 +49,39 @@
                   <br>
                 </div>
                 <div class="text-style">or</div>
-                <div>
-                  <div>
-                    <!-- <button class="button-signin-fb" type="button" scope="public_profile,email" onlogin="checkLoginState();"><img src="/assets/images/icons/ic_fb.png" class="img-style"> Login with facebook
-                    </button>      -->
-                    
-                    <!-- <div class="fb-login-button button-signin-fb" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
-                    <div class="fb-login-button   button-signin-fb" data-width="180" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
-                  </div>
-                </div>
-                <br>
-                <div>
-                    <!-- <button class="g-signin2" type="button" data-onsuccess="onSignIn"><img src="/assets/images/icons/ic_google.png"
-                      class="img-style"> Login with Google</button> -->
-                      <div class="g-signin2  button-signin-google" data-width="220" data-height="40" data-longtitle="true" value="Login with Google"></div>
+                
+                  <!-- <div class="fb-login-button" scope="public_profile,email" data-width="180" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"> -->
+                    <!-- <button class="button-signin-fb" type="button">
+                      <img src="/assets/images/icons/ic_fb.png" class="img-style">
+                      Login with facebook
+                    </button> -->
 
-                </div>
+                    <!-- <button class="button-signin-fb" type="button" scope="public_profile,email" onlogin="checkLoginState();" (click)="callfb();">
+                      <img src="/assets/images/icons/ic_fb.png" class="img-style"> 
+                      Login with facebook
+                    </button>  -->
+
+                    <div class="fb-login-button button-signin-fb" data-width="5px" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
+
+                  <!-- </div> -->
+                
+                <br>
+                
+                    <button class="button-signin-google" type="button" data-onsuccess="onSignIn" (click)="callg();"><img src="/assets/images/icons/ic_google.png"
+                      class="img-style"> Login with Google</button>
+
+                      <div class="g-signin2" style="display: none;" data-width="220" data-height="40" data-longtitle="true" value="Login with Google"  id="google_signin"></div>
+                
+                
                 <!-- </div> -->
                 <br>
                 <div>
-                  <div><button class="button-signin-insta" type="button"><img src="/assets/images/icons/ic_insta.png"
-                    class="img-style"> Login with Instagram</button></div>
+                  <div>
+                    <button class="button-signin-insta" type="button">
+                        <img src="/assets/images/icons/ic_insta.png" class="img-style">
+                        Login with Instagram
+                    </button>
+                  </div>
                 </div>
                 <br>
                 <div class="login-layout-3">
@@ -97,6 +109,8 @@
                   <div class="modal-header dvModalHeader">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
+
+                  <div  *ngIf="otpNotVerified">
                   <div class="modal-body">
                       <form [formGroup]="fpFormMobile">
                           <div class="title-fp">
@@ -148,7 +162,7 @@
                               </div>
                               <br>
                               <div>
-                                <button class="button-fp" type="submit" (click)="verifySubmit()">
+                                <button class="button-fp" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid">
                                   SUBMIT
                                 </button>
                               </div>
@@ -157,12 +171,49 @@
                           </div>
                       </form>
                   </div>
+                  </div>
+
+                  <div *ngIf="otpVerified">
+                  <form [formGroup]="fpFormPassword">
+                    
+                      <div class="modal-body">
+                        <div class="title-fp">
+                          <h3>Reset Password</h3>
+                        </div>
+                        <div>
+                          <input type="password" size="20" class="password_style" placeholder="Enter New Password:"  id="new_password" formControlName="new_password">
+                          <div *ngIf="submitted && fpFormPassword.controls.new_password.errors" class="error validator-style">
+                            <div *ngIf="fpFormPassword.controls.new_password.errors.required">
+                              Enter New Password !
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                        <div>
+                          <input type="password" size="20" class="password_style" placeholder="Confirm Password:"  id="confirm_password" formControlName="confirm_password">
+                          <div *ngIf="submitted && fpFormPassword.controls.confirm_password.errors" class="error validator-style">
+                            <div *ngIf="fpFormPassword.controls.confirm_password.errors.required">
+                              Confirm New Password !
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                        <div>
+                          <button class="button-fp" type="submit" (click)="changePassword()" data-dismiss="modal">
+                            &times;Change Password
+                          </button>
+                        </div>
+                      </div>
+                    
+                  </form>
+                </div>
+                 </div>
+
                 </div>
               </div>
             </div>
           </div>
     </div>
-  </div>
 
 
 
@@ -176,12 +227,12 @@
         <br>
         <div class="left-grid-title-3">Our Features :</div>
         <br>
-        <div class="left-grid-feature"><img src="/assets/images/img_painting.png" class="img-style">&emsp;Paintings & Art</div>
+        <div class="left-grid-feature"><img src="assets/images/img_painting.png" class="img-style">&emsp;Paintings & Art</div>
         <br>
-        <div class="left-grid-feature"><img src="/assets/images/img_dress.png" class="img-style">&emsp;Ladies &
+        <div class="left-grid-feature"><img src="assets/images/img_dress.png" class="img-style">&emsp;Ladies &
           Kids dress</div>
         <br>
-        <div class="left-grid-feature"><img src="/assets/images/img_cake.png" class="img-style">&emsp;Cakes &
+        <div class="left-grid-feature"><img src="assets/images/img_cake.png" class="img-style">&emsp;Cakes &
           pastries</div>
       </ul>
     </div>

@@ -12,9 +12,9 @@ var slideIndex = 1;
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  dummyText: string = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
-  i: number = 0;
+  Object = Object;
+  dummyText: string="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+  i: number=0;
   price: string = "00.00";
   actualPrice: string = "00.00";
   offer: string = "-25% off";
@@ -27,12 +27,25 @@ export class HomeComponent implements OnInit {
   popContent: string = "";
   pageData: any = "";
   popImgSrc: any;
-  constructor(private cookieService: CookieService, private router: Router, private data: DataService) { }
+  trendingProducts: Object;
+  newProducts: Object;
+  offerProducts: Object;
+  constructor( private cookieService: CookieService, private router: Router, private data : DataService ) { }
 
   ngOnInit() {
     //Data service beg
     this.data.getPageData("home").subscribe(data => {
       this.pageData = data;
+      this.data.getTrending(this.pageData["no_of_tagged_products"],1).subscribe(dataTrend =>{
+        this.trendingProducts = dataTrend["data"];
+        this.array12 = dataTrend["data"];
+      })
+      this.data.getNewArrivals(this.pageData["no_of_tagged_products"],1).subscribe(dataNew =>{
+        this.newProducts = dataNew["data"];
+      })
+      this.data.getTopOffers(this.pageData["no_of_tagged_products"],1).subscribe(dataOffer =>{
+        this.offerProducts = dataOffer["data"];
+      })
     })
     //Data service ends
 
@@ -40,6 +53,7 @@ export class HomeComponent implements OnInit {
     for (this.i = 0; this.i < 6; this.i++) {
       this.array12[this.i] = this.i + 1;
     }
+  
     for (this.i = 0; this.i < 5; this.i++) {
       if (this.i < 3) {
         this.filledStar[this.i] = this.i;
@@ -47,6 +61,7 @@ export class HomeComponent implements OnInit {
         this.unFilledStar[this.j++] = this.i;
       }
     }
+    this.showSlides(slideIndex);
 
   }
   // Carousel
@@ -85,17 +100,27 @@ export class HomeComponent implements OnInit {
   }
   //Cookies
 
-  toggleTags(id) {
-    var activeTag = document.getElementsByClassName("activeTag");
-    if (activeTag.length !== 0) {
+  toggleTags(id){
+    var activeTag = document.getElementsByClassName("activeTag"); 
+    if(activeTag.length !== 0){
       activeTag[0].classList.remove("activeTag");
     }
     document.getElementById(id).classList.add("activeTag");
+    switch(id){
+      case "tag-1": this.array12 = this.trendingProducts;
+                    break;
+      case "tag-2": this.array12 = this.offerProducts;
+                    break;
+      case "tag-3": this.array12 = this.newProducts;
+                    break;
+    }
+    console.log(typeof(this.array12));
   }
 
   seeMore() {
     var activeTag = document.getElementsByClassName("activeTag");
     var id = activeTag[0].id;
+    
     switch (id) {
       case "tag-1": this.setCookie("sold", "max");
         break;

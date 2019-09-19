@@ -58,7 +58,7 @@ $SubText: 18px;
 .slideImg {
   vertical-align: middle;
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -517,7 +517,7 @@ $SubText: 18px;
             text-align: center;
           }
         }
-        .dvUndeliver:hover .overlay {
+        .dvUndeliver .overlay {
           opacity: 1;
         }
         @include lg {
@@ -755,7 +755,7 @@ $SubText: 18px;
     grid-area: dv-right;
 
     grid-template-columns: auto;
-    grid-template-rows: 30% auto;
+    grid-template-rows: 30% 35%;
     grid-template-areas: "dv-RT"
                          "dv-RB";
     display: grid;
@@ -842,6 +842,8 @@ $SubText: 18px;
   
   .dvPartLeft{
     grid-area: dv-left;
+    padding: 5%;
+    background: $smaLightGray;
     
     .dvText{
       text-align: justify;
@@ -864,6 +866,8 @@ $SubText: 18px;
   .dvPartRight{
     grid-area: dv-right;
     text-align: center;
+    padding: 5%;
+    background: $smaLightGray;
   }
 }
 
@@ -877,3 +881,108 @@ $SubText: 18px;
   font-family: Bitter !important;
   text-align: justify !important;
 }
+
+//Media queries
+
+@include sm-lesser{
+  .slideDots{
+    top: 25%;
+  }
+  .mySlides{
+    height: 200px;
+    .prev{
+      right: 15%;
+    }
+  }
+  .dvFeature{
+    .dvFeatureSet{
+      grid-template-columns: auto;
+      grid-template-areas: "dv-left" "dv-mid" "dv-right";
+      .dv-left{
+        padding: 10px;
+      }
+      .dv-mid{
+        padding: 10px;
+      }
+      .dv-right{
+        padding: 10px;
+      }
+    }
+  }
+  .dvGallery{
+    grid-template-columns: auto;
+    grid-template-areas: "dv-left" "dv-right";
+  }
+  .dvPartDesc{
+    grid-template-columns: 100%;
+    grid-template-areas: "dv-left";
+    .dvPartRight{
+      display: none;
+    }
+  }
+  .dvProduct{
+    .dvTags{
+      grid-template-columns: auto 40% auto;
+      text-align: center;
+      font-size: 14px;
+
+    }
+    .dvCatMain{
+      grid-template-columns: 100%;
+    }
+  }
+  .subText{
+    text-align: justify !important;
+  }
+}
+
+// @include sm{
+//   .slideDots{
+//     top: 25%;
+//   }
+//   .mySlides{
+//     height: 200px;
+//     .prev{
+//       right: 15%;
+//     }
+//   }
+//   .dvFeature{
+//     .dvFeatureSet{
+//       grid-template-areas: "dv-left" "dv-mid" "dv-right";
+//       .dv-left{
+//         padding: 10px;
+//       }
+//       .dv-mid{
+//         padding: 10px;
+//       }
+//       .dv-right{
+//         padding: 10px;
+//       }
+//     }
+//   }
+//   .dvGallery{
+//     grid-template-columns: auto;
+//     grid-template-areas: "dv-left" "dv-right";
+//   }
+//   .dvPartDesc{
+//     grid-template-columns: 100%;
+//     grid-template-areas: "dv-left";
+//     .dvPartRight{
+//       display: none;
+//     }
+//   }
+//   .dvProduct{
+//     .dvTags{
+//       grid-template-columns: auto 40% auto;
+//       text-align: center;
+//       font-size: 14px;
+
+//     }
+//     .dvCatMain{
+//       grid-template-columns: repeat(2, 1fr);
+//     }
+//   }
+//   .subText{
+//     text-align: justify !important;
+//   }
+// }

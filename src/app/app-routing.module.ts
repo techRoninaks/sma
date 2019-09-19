@@ -13,6 +13,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { SellerlandingComponent } from './sellerlanding/sellerlanding.component';
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -27,11 +29,13 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'shop', component: ShopProfileComponent},
   { path: 'transaction', component: TransactionComponent},
-  { path: 'sellerlanding', component: SellerlandingComponent}
+  { path: 'terms&conditions',component: TermsConditionsComponent},
+  { path: 'addProduct', component: AddProductComponent },
+  { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes,{scrollPositionRestoration: 'top'})],
   exports: [RouterModule]
   
 

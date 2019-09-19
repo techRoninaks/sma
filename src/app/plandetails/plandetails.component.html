@@ -24,25 +24,34 @@
 <div class="main-grid">
 
         <div class="zoom card-1">
-                <mat-card class="card-style-1">
+                <mat-card class="card-style">
                         <mat-card-header>
                             <!-- <div mat-card-avatar ></div> -->
                             <mat-card-title class="card-title">FREE</mat-card-title>
                             <mat-card-subtitle></mat-card-subtitle>
                         </mat-card-header>
                         <div class="image-style"><img src="./assets/images/img_pd_free.png"></div>
-                        <mat-card-content>
+                        <mat-card-content >
                             <p class="text-style">
-                                Free
+                                {{dynamicDataFree.planDescription}}
                             </p>
+                            <div>
+                                <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataFree.planPrice}}/month</p>
+                            </div>
+                            <div>
+                                <p>DISCOUNT: ₹{{dynamicDataFree.planDiscount}}</p>
+                            </div>
+                            <div>
+                                <p>DURATION: {{dynamicDataFree.duration}} days</p>
+                            </div>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-button class="btn-style">TRY NOW</button>
+                            <button mat-button class="btn-style" (click)=redirect();>TRY NOW</button>
                         </mat-card-actions>
                 </mat-card>
         </div>
         <div class="zoom card-2">
-                <mat-card class="card-style-2">
+                <mat-card class="card-style">
                         <mat-card-header>
                             <!-- <div mat-card-avatar ></div> -->
                             <mat-card-title class="card-title">BASIC</mat-card-title>
@@ -50,17 +59,26 @@
                         </mat-card-header>
                         <div class="image-style"><img src="./assets/images/img_pd_basic.png"></div>
                         <mat-card-content>
-                        <p class="text-style">
-                            Basic Version
-                        </p>
+                                <p class="text-style">
+                                        {{dynamicDataBasic.planDescription}}
+                                </p>
+                                <div>
+                                        <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataBasic.planPrice}}/month</p>
+                                </div>
+                                <div>
+                                        <p>DISCOUNT: ₹{{dynamicDataBasic.planDiscount}}</p>
+                                </div>
+                                <div>
+                                        <p>DURATION: {{dynamicDataBasic.duration}} days</p>
+                                </div>
                         </mat-card-content>
                         <mat-card-actions>
-                        <button mat-button class="btn-style">TRY NOW</button>
+                        <button mat-button class="btn-style" (click)=redirect();>TRY NOW</button>
                         </mat-card-actions>
                 </mat-card>
         </div>
         <div class="zoom card-3">
-                <mat-card class="card-style-3">
+                <mat-card class="card-style">
                         <mat-card-header>
                             <!-- <div mat-card-avatar ></div> -->
                             <mat-card-title class="card-title">PREMIUM</mat-card-title>
@@ -68,17 +86,26 @@
                         </mat-card-header>
                         <div class="image-style"><img src="./assets/images/img_pd_premium.png"></div>
                         <mat-card-content>
-                        <p class="text-style">
-                            Premium Version
-                        </p>
+                                <p class="text-style">
+                                        {{dynamicDataPremium.planDescription}}
+                                </p>
+                                <div>
+                                        <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPremium.planPrice}}/month</p>
+                                </div>
+                                <div>
+                                        <p>DISCOUNT: ₹{{dynamicDataPremium.planDiscount}}</p>
+                                </div>
+                                <div>
+                                        <p>DURATION: {{dynamicDataPremium.duration}} days</p>
+                                </div>
                         </mat-card-content>
                         <mat-card-actions>
-                        <button mat-button class="btn-style">TRY NOW</button>
+                        <button mat-button class="btn-style" (click)=redirect();>TRY NOW</button>
                         </mat-card-actions>
                 </mat-card>
         </div>
         <div class="zoom card-4">
-                <mat-card class="card-style-4">
+                <mat-card class="card-style">
                         <mat-card-header>
                             <!-- <div mat-card-avatar ></div> -->
                             <mat-card-title class="card-title">PLUS</mat-card-title>
@@ -86,12 +113,21 @@
                         </mat-card-header>
                         <div class="image-style"><img src="./assets/images/img_pd_plus.png"></div>
                         <mat-card-content>
-                        <p class="text-style">
-                            Plus Version
-                        </p>
+                                <p class="text-style">
+                                        {{dynamicDataPlus.planDescription}}
+                                </p>
+                                <div>
+                                        <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPlus.planPrice}}/month</p>
+                                </div>
+                                <div>
+                                        <p>DISCOUNT: ₹{{dynamicDataPlus.planDiscount}}</p>
+                                </div>
+                                <div>
+                                        <p>DURATION: {{dynamicDataPlus.duration}} days</p>
+                                </div>
                         </mat-card-content>
                         <mat-card-actions>
-                        <button mat-button class="btn-style">TRY NOW</button>
+                        <button mat-button class="btn-style" (click)=redirect();>TRY NOW</button>
                         </mat-card-actions>
                 </mat-card>
         </div>

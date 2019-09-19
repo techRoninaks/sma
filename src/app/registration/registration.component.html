@@ -31,8 +31,9 @@
           </div> <br>
 
           <div>
-            <input type="text" placeholder="Address  :" class="text-input-style" id="reg_address"
+            <textarea type="text" placeholder="Address  :" class="text-input-style-address" id="reg_address"
               formControlName="reg_address">
+            </textarea>
             <div *ngIf="submitted && registrationForm.controls.reg_address.errors" class="error validator-style">
               <div *ngIf="registrationForm.controls.reg_address.errors.required">
                 Address is required !
@@ -87,12 +88,21 @@
                 <div *ngIf="registrationForm.controls.reg_age.hasError('pattern')">
                   Enter Valid Age !
                 </div>
+                <div *ngIf="registrationForm.controls.reg_age.hasError('min')">
+                  Age should be above 18 !
+                </div>
               </div>
             </div> <br>
               
-            <div class="text-input-style">
-                <input type="radio" formControlName="gender" value="M"> Male &nbsp; &nbsp;<input type="radio" formControlName="gender"
-                  value="F"> Female &nbsp; &nbsp;<input type="radio" formControlName="gender" value="O"> Other
+            <div class="text-input-style" ng-app="myApp" ng-controller="myCtrl" >
+                <!-- <input type="radio" formControlName="gender" value="M"> Male &nbsp; &nbsp;<input type="radio" formControlName="gender"
+                  value="F"> Female &nbsp; &nbsp;<input type="radio" formControlName="gender" value="O"> Other -->
+                  <!-- <select ng-model="selectedName" ng-options="x for x in names" formControlName="gender">
+                  </select> -->
+                  <select [(ngModel)]="selectedLevel" formControlName="gender">
+                      <option *ngFor="let item of data1" [ngValue]="item">{{item.name}}</option>
+                  </select>
+                  
                   <div *ngIf="submitted && registrationForm.controls.gender.errors" class="error validator-style">
                     <div *ngIf="registrationForm.controls.gender.errors.required">
                       This is required !
@@ -113,14 +123,17 @@
 
                 <div>
                   <input type="password" placeholder="Confirm Password  :" class="text-input-style"
-                    id="reg_conf_password" formControlName="reg_conf_password">
-                  <div *ngIf="submitted && registrationForm.controls.reg_conf_password.errors" class="error validator-style">
+                    id="reg_conf_password" formControlName="reg_conf_password" >
+                  <div *ngIf="submitted && registrationForm.controls.reg_conf_password.errors" class="error validator-style" >
                     <div *ngIf="registrationForm.controls.reg_conf_password.errors.required">
                       Re-enter Password !
                     </div>
+                    <div *ngIf="registrationForm.controls.reg_conf_password.hasError('notSame')" >
+                      Passwords do not match   
+                    </div>
                   </div>
                 </div>
-
+                <!-- [errorStateMatcher]="matcher" -->
                 <div class="text-style">or</div>
                 <div>
                   <div>
@@ -172,7 +185,7 @@
               </div>
               <div><input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:"></div>
               <br>
-              <div><button class="button-otp" type="submit" (click)="otp_validation()">SEND OTP</button></div>
+              <div><button class="button-otp" type="submit">SEND OTP</button></div>
               <br>
               <div>
                 <div><input type="text" class="pop-up-input-style" placeholder="Enter OTP:"></div>
