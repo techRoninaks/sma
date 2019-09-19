@@ -11,50 +11,50 @@ export class DataService {
   getProductData(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
-    return this.http.post('http://localhost:81/sma/src/assets/api/datagetter.php',httpParams);
+    return this.http.post('assets/api/datagetter.php',httpParams);
   }
   getVariantInfo(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
-    return this.http.post('http://localhost:81/sma/src/assets/api/variant.php',httpParams);
+    return this.http.post('assets/api/variant.php',httpParams);
   }
   getSellerDetails(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
-    return this.http.post('http://localhost:81/sma/src/assets/api/sellerdetails.php',httpParams);
+    return this.http.post('assets/api/sellerdetails.php',httpParams);
   }
   getVariantCount(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
-    return this.http.post('http://localhost:81/sma/src/assets/api/varcount.php',httpParams);
+    return this.http.post('assets/api/varcount.php',httpParams);
   }
   getVariantNumber(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
-    return this.http.post('http://localhost:81/sma/src/assets/api/numvar.php',httpParams);
+    return this.http.post('assets/api/numvar.php',httpParams);
   }
   getFollowInfo(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data['prod_id'])
     .append("userId",data['user_id'])
-    return this.http.post('http://localhost:81/sma/src/assets/api/folunfol.php',httpParams);
+    return this.http.post('assets/api/folunfol.php',httpParams);
   }
   getFollowShop(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data['prod_id'])
     .append("userId",data['user_id'])
-    return this.http.post('http://localhost:81/sma/src/assets/api/follow.php',httpParams);
+    return this.http.post('assets/api/follow.php',httpParams);
   }
   getUnfollowShop(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data['prod_id'])
     .append("userId",data['user_id'])
-    return this.http.post('http://localhost:81/sma/src/assets/api/follow.php',httpParams);
+    return this.http.post('assets/api/follow.php',httpParams);
   }
   getPageData(page: string){
     let httpParams = new HttpParams()
     .append("pageName", page);
-    return this.http.post('http://localhost/SMA/src/assets/api/getPage.php', httpParams);
+    return this.http.post('assets/api/getPage.php', httpParams);
   }
 
   getPlanDetailsFree(data: Object){
@@ -107,24 +107,21 @@ export class DataService {
     .append("reg_age", data['reg_age'])
     .append("gender", name)
     .append("reg_password", data['reg_password']);
-
-    return this.http.post('http://localhost/sma2/src/assets/api/registration.php',httpParams);
+    return this.http.post('assets/api/registration.php',httpParams);
   }
 
   attemptLogin(data: Object){
     let httpParams= new HttpParams()
     .append("login_email", data['login_email'])
     .append("login_password", data['login_password']);
-
-    return this.http.post('http://localhost/sma2/src/assets/api/login.php',httpParams);
+    return this.http.post('assets/api/login.php',httpParams);
   }
 
   checkMobile(data: string){
     let httpParams= new HttpParams()
     .append("fp_mobile_no", data);
     console.log(data);
-
-    return this.http.post('http://localhost/sma2/src/assets/api/checkMobileNo.php',httpParams);
+    return this.http.post('assets/api/checkMobileNo.php',httpParams);
   }
 
   sendOtp(otp:any, mobileNo:any, message:any){
@@ -132,60 +129,99 @@ export class DataService {
     .append("otp",otp)
     .append("mobile",mobileNo)
     .append("message",message);
-    return this.http.post('http://localhost/sma2/src/assets/api/sendOtp.php',httpParams);
+    return this.http.post('assets/api/sendOtp.php',httpParams);
   }
+  
   setPassword(fp_mobile_no:any, new_password:any){
     let httpParams= new HttpParams()
     .append("fp_mobile_no",fp_mobile_no)
     .append("new_password",new_password);
     console.log(fp_mobile_no);
     console.log(new_password);
-    return this.http.post('http://localhost/sma2/src/assets/api/changePassword.php',httpParams);
+    return this.http.post('assets/api/verifyOtp.php',httpParams);
   }
 
   getvariantInfor(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/variantinforcheckout.php');
+    return this.http.get('assets/api/variantinforcheckout.php');
   }
   getaddress(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/addresscheckout.php');
+    return this.http.get('assets/api/addresscheckout.php');
   }
   getaddressType(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/addresstypecheckout.php');
+    return this.http.get('assets/api/addresstypecheckout.php');
   }
   getbulkDiscount(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/bulkdiscountcheckout.php');
+    return this.http.get('assets/api/bulkdiscountcheckout.php');
   }
   getcustomerOrder(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/customerordercheckout.php');
+    return this.http.get('assets/api/customerordercheckout.php');
   }
   getorderMessage(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/ordermessagecheckout.php');
+    return this.http.get('assets/api/ordermessagecheckout.php');
   }
   getorderstatus(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/orderstatuscheckout.php');
+    return this.http.get('assets/api/orderstatuscheckout.php');
   }
   getpurchaseOrder(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/purchaseordercheckout.php');
+    return this.http.get('assets/api/purchaseordercheckout.php');
   }
-  getproduct(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/productcheckout.php');
+  getproduct(id: any){
+    let httpParams= new HttpParams()
+    .append("prodIds",id);
+    return this.http.post('assets/api/productcheckout.php',httpParams);
   }
   getproductstatus(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/prodstatuscheckout.php');
+    return this.http.get('assets/api/prodstatuscheckout.php');
   }
   getproductshipprice(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/prodshippricecheckout.php');
+    return this.http.get('assets/api/prodshippricecheckout.php');
   }
   getoffer(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/offercheckout.php');
+    return this.http.get('assets/api/offercheckout.php');
   }
   getsellercart(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/sellercart.php');
+    return this.http.get('assets/api/sellercart.php');
   }
-  getcart(){
-    return this.http.get('http://localhost/scoopmyart/src/assets/api/cart.php');
+  getcart(userId){
+    let httpParams = new HttpParams()
+    .append("userId",userId);
+    return this.http.post('assets/api/cart.php',httpParams);
+  }
+  deleteCartProductfn(id: any, userId: any){
+    let httpParams = new HttpParams()
+    .append("id",id)
+    .append("userId",userId);
+    return this.http.post('assets/api/deleteCartProduct.php',httpParams);
+  }
+  
+  getTrending(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getTrendingProducts.php', httpParams);
+    }
+  getNewArrivals(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getNewProducts.php', httpParams);
+  }
+  getTopOffers(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getOfferProducts.php', httpParams);
+  }
+  verifyURLInject(key: any){
+    let httpParams= new HttpParams()
+    .append("key",key);
+    return this.http.post('assets/api/verifyUrl.php', httpParams);
   }
   getUser(){
     return this.http.get('assets/api/bulkdiscountcheckout.php');
   }
+
+  // deleteCart(id: number) {
+  //     const i = this.DataService.findIndex(d => )
+  // }
 }

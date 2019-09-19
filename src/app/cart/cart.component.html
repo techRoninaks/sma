@@ -1,99 +1,108 @@
-<div class="container">
-  <div class="box a">
-    MY CART
+<!-- MAIN 1 -->
+<!-- HEAD -->
+<div class="dvMain">
+	<div class="dvHead">
+		<div class="dvTitle">
+			<p>MY CART</p>
+			<div class="dvCartCount">
+				<button class="btnCartCount">{{dynamicData.length}}</button>
+			</div>
+		</div>
+		<div class="dvDeliverTitle">
+			<p>DELIVER TO</p>
+		</div>
+		<div class="dvDropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+				<span class="caret"></span></button>
+			<ul class="dropdown-menu">
+				<li><a href="#"> Roninaks [h], maradu </a></li>
+				<li><a href="#"> vyttila </a></li>
+				<li><a href="#">EKM</a></li>
+			</ul>
+		</div>
+	</div>
 
-     <!-- <div class="boxacount"><input type="number" class="count" name="qty" value="1"></div> -->
+	<!-- BODY	 -->
+	<div class="dvBody" *ngFor="let item of Objects.keys(dynamicData)" id="product{{dynamicData[item].productId}}">
+		<!-- GRID LEFT -->
+		<div class="gridLeft">
+			<div class="gridImg">
+				<img src="/assets/images/tshirt.png" width="140" height="140" class="imgItem1">
+			</div>
+			<div class="gridCounter">
+				<div class="qtyCounter">
+					<button (click)="count_dec(dynamicData[item].productId,dynamicData[item].minOrderQuant)"
+						class="minus">-</button>
+					<input class="counter" id={{dynamicData[item].productId}}>
+					<button (click)="count_inc(dynamicData[item].productId,dynamicData[item].maxOrderQuant)"
+						class="plus">+</button>
+				</div>
+			</div>
 
-  </div>
-  <div class="col-deliverText">
-    <label for="deliver to">DELIVER TO</label>
-  </div>
-  <div class="col-75">
-    <select id="deliver to" name="">
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-    </select>
-  </div>
-
-<div class="box c" *ngFor="let item of Objects.keys(dynamicdata)"> 
-  <!-- <div>
-    <p>{{ dynamicdata[item].cart }}</p>
-  </div> -->
-
-  <div class="box e">
-    <img src="/assets/images/tshirt.png" width="160" height="160" class="img1">
-      
-  </div>   
-  
-  <div class="box d">
-    <div class="row2text" >SAF Radha Krishna UV Ink 12 inch x 12 inch Painting </div>
-    <div class="row2-sub-text">Seller:</div>
-    <div class="row2-sub1-text">₹ {{ dynamicdata[item].totalPrice }}</div>
-    
-  </div>
-  
-  <div class="box h" *ngFor="let item of Objects.keys(dynamicdata)" >
-    <div class="row2-sub2-text">Delivery By,{{ dynamicdata[item].deliveryOn }}</div>
-  </div>
-
-  <div class="box j">
-      <div class="qty mt-5">
-        <span class="minus bg-dark">-</span>
-        <input type="number" class="count" name="qty" value="1">
-        <span class="plus bg-dark">+</span>
-      </div>
-  </div>
-
-  <div class="box k">
-      <button class="button button1">REMOVE</button>
-  </div>
-
-  <div class="box m"></div>
-
-  <!-- <div class="box f">
-    <img src="/assets/images/henna.png" width="160" height="160" class="img2">
-  </div> -->
-
-  <!-- <div class="box l">
-    <div class="qty mt-5">
-      <span class="minus bg-dark">-</span>
-      <input type="number" class="count" name="qty" value="1">
-      <span class="plus bg-dark">+</span>
-    </div>
-              
-  </div> -->
-
-  <!-- <div class="box g">
-    <div class="row2text1">Women A-line Dark Blue</div>
-    <div class="row2-sub-text1">Seller:</div>
-    <div class="row2-sub1-text1">₹ 00.00</div>
-  </div> -->
-
-  <!-- <div class="box n">
-      <button class="button button2">REMOVE</button>
-  </div> -->
-  
-  <!-- <div class="box i">
-      <div class="row2-sub2-text1">Delivery By, Tue Jul 00 </div>
-  </div> -->
-
-  <!-- <div class="box o">O</div> -->
-
+		</div>
+		<!-- GRID MID -->
+		<div class="gridMid">
+			<div class="gridDetails">
+				<div class="detailItemName">
+					<p>{{ dynamicData[item].name }}</p>
+				</div>
+				<div class="detailItemSeller">
+					<p>Seller:</p>
+				</div>
+				<p class="detailItemPrice"><i class="fa fa-rupee"></i>{{ dynamicData[item].basePrice }}</p>
+			</div>
+			<div class="gridBodyButton">
+				<button class="btnBodyRemove" (click)="remove(dynamicData[item].productId)">REMOVE</button>
+			</div>
+		</div>
+		<!-- GRID RIGHT -->
+		<div class="gridRight">
+			<div class="gridDeliveryDate">
+				<p>Delivery By,{{ dynamicDataDate[item].deliveryDate }}</p>
+			</div>
+			<div class="gridRightButton">
+				<button class="btnRightDelivery">Free</button>
+				<button class="btnPlaceOrder">PLACE ORDER</button>
+			</div>
+		</div>
+	</div>
+	<!-- FOOT -->
+	<div class="dvFoot">
+	</div>
 </div>
 
-<div class="box b">
-    <button class="button">PLACE ORDER</button>
-</div> 
+<!-- MAIN 2 -->
+<div class="dvMain2">
+	<div class="dvHead2">
+		<div class="dvHeadTitle2">
+			<p>PRICE DETAILS</p>
+		</div>
+	</div>
+	<!-- BODY 2 -->
+	<div class="dvBody2">
+		<div class="dvPriceText">
+			<p>Price( {{dynamicData.length}} items )</p>
+		</div>
+		<div class="dvPrice">
+			<p>₹ </p>
+			<!-- {{ dynamicDataPrice[0].totalPrice }} -->
+		</div>
+		<div class="dvDeliveryText">
+			<p>Delivery</p>
+		</div>
+		<div class="dvFree">
+			<p>FREE</p>
+		</div>
+		<div class="dvTotalPayable">
+			<p>Total Payable</p>
+		</div>
+		<div class="dvTotalPrice">
+			<p>₹ </p>
 
+		</div>
+	</div>
+	<!-- FOOT 2	 -->
+	<div class="dvFoot2">
+		<p>You will save ₹ 00.00 on this order</p>
+	</div>
 </div>
-
-<div class="container2">
-  <div class="box a1">PRICE DETAILS</div>
-  <div class="box a2">You will save ₹ 00.00 on this order</div>
-  <div class="box a3">Price (2 items)<br><br>
-                      Delivery<br><hr>
-                      Total Payable</div>
-</div>
-  
-  
