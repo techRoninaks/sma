@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="header-style">
+<nav class="navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,7 +8,7 @@
       <!-- SCOOP<span>MY</span>ART -->
       <li class="nav-item">
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
-          <a class="nav-link" href="#">
+          <a class="nav-link">
             <div class="dropdown">
                 <button class="dropbtn"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%"> Deliver to</button>
                   <div class="dropdown-content">
@@ -36,10 +37,14 @@
         <li class="nav-item active ml-auto">
           <a class="nav-link header-sell-with-us" routerLink="/SignupSeller">Sell with Us <span class="sr-only">(current)</span></a>
         </li>
+        <!-- <li class="nav-item active ml-auto">
+          <a class="nav-link header-sell-with-us" routerLink="/category">Shop by Store <span class="sr-only">(current)</span></a>
+        </li> -->
         <li class="nav-item ml-auto">
           <div class="dropdown">
-              <button class="dropbtn-login" routerLink="/Login"><img src="assets/images/icons/ic_user.png" height="25px" width="25px">  Login</button>
-                <div class="dropdown-content">
+
+              <button class="dropbtn-login" routerLink="/Login"><img src="/assets/images/icons/ic_user.png" height="25px" width="25px">  Login</button>
+                <div class="dropdown-content2">
                 <li><a href="#myorders">My orders</a></li>
                 <li><a href="#mymessages">My messages</a></li>
                 <li><a href="#notifications">My notifications</a></li>
@@ -49,13 +54,26 @@
           </div>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link" href="#"><img src="assets/images/icons/ic_cart.png" Height="40%" Width="40%"></a>
+          <a class="nav-link" routerLink="/cart"><img src="/assets/images/icons/ic_cart.png" Height="40%" Width="40%"></a>
         </li>
       </ul>
     </div>
   </nav>
   <div class="header-category-bar">
+    <div class="hamburger-div">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <li><a href="#aboutus">About Us</a></li>
+            <li><a href="#contactus">Contact Us</a></li>
+            <li><a href="#blogs">Blogs</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
+            <li><a href="#career">Career</a></li>
+            <li><a routerLink="/terms&conditions">Terms & conditions</a></li>
+        </div>
+          
+    </div>
       <div class="scrollmenu">
+          <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
         <div class="dropdown">
           <button class="dropbtn-cat"><a href="#mom_kids">Mom & Kids</a></button>
           <button class="dropbtn-cat"><a href="#mens">Mens</a></button>
@@ -65,8 +83,36 @@
           <button class="dropbtn-cat"><a href="#accessories">Accessories</a></button>
           <button class="dropbtn-cat"><a href="#apparels">Apperels</a></button>
           <button class="dropbtn-cat"><a href="#cakes">Cakes</a></button>
-          <button class="dropbtn-cat"><a href="#woodworks">Woodworks</a></button>
-          <button class="dropbtn-cat"><a href="#glassworks">Glassworks</a></button>
+          <!-- <button class="dropbtn-cat"><a href="#woodworks">Woodworks</a></button>
+          <button class="dropbtn-cat"><a href="#glassworks">Glassworks</a></button> -->
         </div>
       </div> 
   </div>
+</div>
+  <!-- login popup -->
+      <div class="container" id="modalContainer">
+          <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+            Forgot Password
+          </button> -->
+          <div class="modal" id="myModal-1" role="dialog" >
+            <div class="modal-dialog">
+              <div class="modal-content ">
+                <div class="modal-header ">
+                  <button type="button" class="close" data-dismiss="modal" (click)="dispNone();">&times;</button>
+                </div>
+                  <div class="modal-body">
+                      <button type="button" routerLink="/Login">
+                          LOGIN TO SCOOPMYART
+                      </button>
+                      <br>
+                      <label>or</label>
+                      <br>
+                      <button type="button" routerLink="/SignUp">
+                          SIGN UP
+                      </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    <!-- login popup -->

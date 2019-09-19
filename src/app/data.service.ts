@@ -51,57 +51,93 @@ export class DataService {
     .append("userId",data['user_id'])
     return this.http.post('assets/api/follow.php',httpParams);
   }
-
   getPageData(page: string){
     let httpParams = new HttpParams()
     .append("pageName", page);
     return this.http.post('assets/api/getPage.php', httpParams);
   }
-  addData(data: Object){
+
+  getPlanDetailsFree(data: Object){
+    let httpParams= new HttpParams()
+    .append("planDescription", data['planDescription'])
+    .append("planPrice", data['planPrice'])
+    .append("taxPrice", data['taxPrice'])
+    .append("planDiscount", data['planDiscount'])
+    .append("duration", data['duration']);
+
+    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchFree.php',httpParams);
+  }
+  getPlanDetailsBasic(data: Object){
+    let httpParams= new HttpParams()
+    .append("planDescription", data['planDescription'])
+    .append("planPrice", data['planPrice'])
+    .append("taxPrice", data['taxPrice'])
+    .append("planDiscount", data['planDiscount'])
+    .append("duration", data['duration']);
+
+    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchBasic.php',httpParams);
+  }
+  getPlanDetailsPremium(data: Object){
+    let httpParams= new HttpParams()
+    .append("planDescription", data['planDescription'])
+    .append("planPrice", data['planPrice'])
+    .append("taxPrice", data['taxPrice'])
+    .append("planDiscount", data['planDiscount'])
+    .append("duration", data['duration']);
+
+    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchPremium.php',httpParams);
+  }
+  getPlanDetailsPlus(data: Object){
+    let httpParams= new HttpParams()
+    .append("planDescription", data['planDescription'])
+    .append("planPrice", data['planPrice'])
+    .append("taxPrice", data['taxPrice'])
+    .append("planDiscount", data['planDiscount'])
+    .append("duration", data['duration']);
+
+    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchPlus.php',httpParams);
+  }
+  addData(data: Object,name: any){
+    // console.log(name);
     let httpParams= new HttpParams()
     .append("fullname", data['fullname'])
     .append("reg_address", data['reg_address'])
     .append("reg_email", data['reg_email'])
     .append("reg_mobile_no", data['reg_mobile_no'])
     .append("reg_age", data['reg_age'])
-    .append("gender", data['gender'])
+    .append("gender", name)
     .append("reg_password", data['reg_password']);
-
     return this.http.post('assets/api/registration.php',httpParams);
   }
 
   attemptLogin(data: Object){
-    console.log(data);
     let httpParams= new HttpParams()
     .append("login_email", data['login_email'])
     .append("login_password", data['login_password']);
-
     return this.http.post('assets/api/login.php',httpParams);
   }
 
-  checkMobile(data: Object){
-    console.log(data);
+  checkMobile(data: string){
     let httpParams= new HttpParams()
-    .append("fp_mobile_no", data['fp_mobile_no']);
-
+    .append("fp_mobile_no", data);
+    console.log(data);
     return this.http.post('assets/api/checkMobileNo.php',httpParams);
   }
 
-  sendOtp(mobileObj:Object,messageObj:Object,otpObj:Object){
-    console.log(mobileObj);
-    console.log(otpObj);
-    console.log(messageObj);
+  sendOtp(otp:any, mobileNo:any, message:any){
     let httpParams= new HttpParams()
-    .append("mobileNo",mobileObj['mobileNo'])
-    .append("otp",otpObj['otp'])
-    .append("message",messageObj['message']);
-    
+    .append("otp",otp)
+    .append("mobile",mobileNo)
+    .append("message",message);
     return this.http.post('assets/api/sendOtp.php',httpParams);
   }
-
-  verifyOtp(data: Object){
+  
+  setPassword(fp_mobile_no:any, new_password:any){
     let httpParams= new HttpParams()
-    // .append();
+    .append("fp_mobile_no",fp_mobile_no)
+    .append("new_password",new_password);
+    console.log(fp_mobile_no);
+    console.log(new_password);
     return this.http.post('assets/api/verifyOtp.php',httpParams);
   }
 
@@ -181,11 +217,7 @@ export class DataService {
     .append("key",key);
     return this.http.post('assets/api/verifyUrl.php', httpParams);
   }
-
-
-  
   getUser(){
-
     return this.http.get('assets/api/bulkdiscountcheckout.php');
   }
 

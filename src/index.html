@@ -37,11 +37,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
-  <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
-
-  <!-- srinath -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -74,28 +70,43 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));  
 </script>
+<!-- Facebook API -->
   <!-- Google button -->
-<script>
-  function onSuccess(googleUser) {
+  <script>
+    function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
-  function onFailure(error) {
+    function onFailure(error) {
       console.log(error);
     }
+    // function renderButton() {
+    //   gapi.signin2.render('my-signin2', {
+    //     'scope': 'profile email',
+    //     'width': 240,
+    //     'height': 50,
+    //     'longtitle': true,
+    //     'theme': 'dark',
+    //     'onsuccess': onSuccess,
+    //     'onfailure': onFailure
+    //   });
+    // }
+  </script>
 
-  function renderButton() {
-    gapi.signin2.render('my-signin2', {
-      'scope': 'profile email',
-      'width': 240,
-      'height': 40,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': onSuccess,
-      'onfailure': onFailure
-    });
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+  <!-- Google button -->
+  <!-- hamburger menu -->
+  <script>
+  function openNav() 
+  {
+    document.getElementById("mySidenav").style.width = "300px";
+  }
+  function closeNav() 
+  {
+    document.getElementById("mySidenav").style.width = "0";
   }
   </script>
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <!-- hamburger menu -->
   <app-root></app-root>
 </body>
 </html>
