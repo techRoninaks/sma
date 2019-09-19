@@ -157,6 +157,30 @@ export class DataService {
     .append("userId",userId);
     return this.http.post('assets/api/deleteCartProduct.php',httpParams);
   }
+  
+  getTrending(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getTrendingProducts.php', httpParams);
+    }
+  getNewArrivals(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getNewProducts.php', httpParams);
+  }
+  getTopOffers(tagNum: any, pageNum: any){
+    let httpParams= new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+    return this.http.post('assets/api/getOfferProducts.php', httpParams);
+  }
+  verifyURLInject(key: any){
+    let httpParams= new HttpParams()
+    .append("key",key);
+    return this.http.post('assets/api/verifyUrl.php', httpParams);
+  }
 
 
   
