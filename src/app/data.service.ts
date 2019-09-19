@@ -129,8 +129,10 @@ export class DataService {
   getpurchaseOrder(){
     return this.http.get('assets/api/purchaseordercheckout.php');
   }
-  getproduct(){
-    return this.http.get('assets/api/productcheckout.php');
+  getproduct(id: any){
+    let httpParams= new HttpParams()
+    .append("prodIds",id);
+    return this.http.post('assets/api/productcheckout.php',httpParams);
   }
   getproductstatus(){
     return this.http.get('assets/api/prodstatuscheckout.php');
@@ -144,8 +146,16 @@ export class DataService {
   getsellercart(){
     return this.http.get('assets/api/sellercart.php');
   }
-  getcart(){
-    return this.http.get('assets/api/cart.php');
+  getcart(userId){
+    let httpParams = new HttpParams()
+    .append("userId",userId);
+    return this.http.post('assets/api/cart.php',httpParams);
+  }
+  deleteCartProductfn(id: any, userId: any){
+    let httpParams = new HttpParams()
+    .append("id",id)
+    .append("userId",userId);
+    return this.http.post('assets/api/deleteCartProduct.php',httpParams);
   }
 
 
@@ -154,4 +164,8 @@ export class DataService {
 
     return this.http.get('assets/api/bulkdiscountcheckout.php');
   }
+
+  // deleteCart(id: number) {
+  //     const i = this.DataService.findIndex(d => )
+  // }
 }

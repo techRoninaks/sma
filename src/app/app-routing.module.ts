@@ -11,6 +11,7 @@ import { UserprofileBuyerComponent } from './userprofile-buyer/userprofile-buyer
 import{ RegistrationSellerComponent } from './registration-seller/registration-seller.component';
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'Plandetails',component:PlandetailsComponent},
   { path: 'Userprofile',component:UserprofileBuyerComponent},
   { path: 'SignupSeller',component:RegistrationSellerComponent},
-  { path:'cart', component: CartComponent }
+  { path: 'cart', component: CartComponent },
+  { path: 'addProduct', component: AddProductComponent }
 ];
 
 @NgModule({
