@@ -517,7 +517,7 @@ $SubText: 18px;
             text-align: center;
           }
         }
-        .dvUndeliver:hover .overlay {
+        .dvUndeliver .overlay {
           opacity: 1;
         }
         @include lg {
@@ -842,6 +842,8 @@ $SubText: 18px;
   
   .dvPartLeft{
     grid-area: dv-left;
+    padding: 5%;
+    background: $smaLightGray;
     
     .dvText{
       text-align: justify;
@@ -864,6 +866,8 @@ $SubText: 18px;
   .dvPartRight{
     grid-area: dv-right;
     text-align: center;
+    padding: 5%;
+    background: $smaLightGray;
   }
 }
 
