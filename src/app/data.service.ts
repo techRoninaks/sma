@@ -51,6 +51,140 @@ export class DataService {
     .append("userId",data['user_id'])
     return this.http.post('assets/api/follow.php',httpParams);
   }
+  getDiscountLabel(data: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data)
+		return this.http.post('assets/api/discountlabel.php', httpParams);
+	}
+	getRatingReview(data: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data)
+		return this.http.post('assets/api/ratingreview.php', httpParams);
+	}
+	// getLikeDislikeInfo(data : any){
+	//   let httpParams = new HttpParams()
+	//   .append("prodId",data['prod_id'])
+	//   .append("userId",data['user_id'])
+	//   return this.http.post('assets/api/folunfol.php',httpParams);
+	// }
+	sendReport(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data['prod_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+		// console.log(data);
+		// console.log(rev);
+		return this.http.post('assets/api/report.php', httpParams);
+	}
+	likeRev(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data['prod_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+		// console.log(data);
+		// console.log(rev);
+		return this.http.post('assets/api/likeproduct.php', httpParams);
+	}
+	dislikeRev(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data['prod_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+		// console.log(data);
+		// console.log(rev);
+		return this.http.post('assets/api/dislikeproduct.php', httpParams);
+	}
+	getDateDiff(data: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data)
+		return this.http.post('assets/api/datediff.php', httpParams);
+	}
+	setData(data: any) {
+		let httpParams = new HttpParams()
+			.append("", data['quantity'])
+			.append("", data['message'])
+			.append("", data['uploadProductImage'])
+			.append("", data['deliveryDatePicker'])
+			.append("", data['shippingOption'])
+		return this.http.post('assets/api/submitorderdetails.php', httpParams);
+
+	}
+	// shop Component
+
+	getShopData(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data)
+		return this.http.post('assets/api/shopgetter.php', httpParams);
+	}
+	getSellerDetailsShop(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data)
+		return this.http.post('assets/api/sellerdetailshop.php', httpParams);
+	}
+	getProductList(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data)
+		return this.http.post('assets/api/productslist.php', httpParams);
+	}
+	getFollowInfoShop(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+		return this.http.post('assets/api/folunfolshop.php', httpParams);
+	}
+	getFollowShopPage(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+		return this.http.post('assets/api/followshop.php', httpParams);
+	}
+	getUnfollowShopPage(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+		return this.http.post('assets/api/unfollowshop.php', httpParams);
+	}
+	getRatingReviewShop(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data)
+		return this.http.post('assets/api/ratingreviewshop.php', httpParams);
+	}
+
+	sendReportShop(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+
+		return this.http.post('assets/api/reportshop.php', httpParams);
+	}
+	likeRevShop(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+
+		return this.http.post('assets/api/likeproductshop.php', httpParams);
+	}
+	dislikeRevShop(data: any, rev: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data['shop_id'])
+			.append("userId", data['user_id'])
+			.append("reviewId", rev)
+
+		return this.http.post('assets/api/dislikeproductshop.php', httpParams);
+	}
+
+	getFaqProduct(data: any) {
+		let httpParams = new HttpParams()
+			.append("prodId", data)
+		return this.http.post('assets/api/faqproduct.php', httpParams);
+	}
+	getFaqShop(data: any) {
+		let httpParams = new HttpParams()
+			.append("shopId", data)
+		return this.http.post('assets/api/faqshop.php', httpParams);
+	}
   getPageData(page: string){
     let httpParams = new HttpParams()
     .append("pageName", page);
@@ -64,8 +198,7 @@ export class DataService {
     .append("taxPrice", data['taxPrice'])
     .append("planDiscount", data['planDiscount'])
     .append("duration", data['duration']);
-
-    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchFree.php',httpParams);
+    return this.http.post('assets/api/plandetailsFetchFree.php',httpParams);
   }
   getPlanDetailsBasic(data: Object){
     let httpParams= new HttpParams()
@@ -75,7 +208,7 @@ export class DataService {
     .append("planDiscount", data['planDiscount'])
     .append("duration", data['duration']);
 
-    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchBasic.php',httpParams);
+    return this.http.post('assets/api/plandetailsFetchBasic.php',httpParams);
   }
   getPlanDetailsPremium(data: Object){
     let httpParams= new HttpParams()
@@ -85,7 +218,7 @@ export class DataService {
     .append("planDiscount", data['planDiscount'])
     .append("duration", data['duration']);
 
-    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchPremium.php',httpParams);
+    return this.http.post('assets/api/plandetailsFetchPremium.php',httpParams);
   }
   getPlanDetailsPlus(data: Object){
     let httpParams= new HttpParams()
@@ -94,8 +227,7 @@ export class DataService {
     .append("taxPrice", data['taxPrice'])
     .append("planDiscount", data['planDiscount'])
     .append("duration", data['duration']);
-
-    return this.http.post('http://localhost/sma2/src/assets/api/plandetailsFetchPlus.php',httpParams);
+    return this.http.post('assets/api/plandetailsFetchPlus.php',httpParams);
   }
   addData(data: Object,name: any){
     // console.log(name);
