@@ -35,8 +35,8 @@ $error = "";            //Variable for storing our errors.
             if($row)
             {
                     $_SESSION['username'] = $row["username"]; // Initializing Session
-                    // $error = "Success";
-                    echo json_encode($row);
+                    $error = "Success";
+                    echo json_encode($error);
             }
             else
             {
