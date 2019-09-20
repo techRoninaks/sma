@@ -27,6 +27,7 @@ export class CategorylistingComponent implements OnInit {
   deleteCookieCount: any = 0;
   deleteCookieArray: any = [];
   pageData: Object;
+  filterCount: number = 0;
 
   constructor(private route: ActivatedRoute, private cookieService: CookieService,  private data : DataService) { }
 

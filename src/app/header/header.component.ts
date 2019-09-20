@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
     setTimeout(function(){ 
       document.getElementById('myModal-1').style.display="contents";
-     }, 1200000);
+     }, 120000);
   }
   dispNone(){
     document.getElementById("myModal-1").style.display="none";

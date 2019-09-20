@@ -8,12 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { stringify } from '@angular/compiler/src/util';
 
-
+var gapi;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   
   loginForm: FormGroup;
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
     
     ngOnInit() {
       FB.XFBML.parse();
+      this.googleSignIn();
       // signin2.render();
     }
     callg(){
@@ -66,13 +68,21 @@ export class LoginComponent implements OnInit {
     callfb(){
       var element: HTMLElement = document.getElementsByClassName("fb-login-button fb_iframe_widget")[0] as HTMLElement;
        element.click();
-    }
+    } 
+
     onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
       console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
       console.log('Name: ' + profile.getName());
       console.log('Image URL: ' + profile.getImageUrl());
       console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
+    googleSignIn(){
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signin2().then(function () {
+        console.log('User signed in');
+      });
     }
 
     // Cookie Section
@@ -102,7 +112,7 @@ export class LoginComponent implements OnInit {
           data=>{
                   // this.username=this.loginForm.controls['login_email'].value;
                   console.log(data);
-                  if(data !=="")
+                  if(data =="Success")
                   {
                     alert('Login Successfully');
                     this.setCookie("userName",data['username']);

@@ -74,20 +74,20 @@ export class CartComponent implements OnInit {
 
   //Qty counter
   count_inc(id, maxOrderQuant) {
-    this.curVal = (document.getElementById(id).value as HTMLElement);
+    this.curVal = (<HTMLInputElement>document.getElementById(id)).value;
     this.curVal = Number(this.curVal);
     if (this.curVal < maxOrderQuant) {
       this.curVal++;
-      document.getElementById(id).value = this.curVal.toString();
+      (<HTMLInputElement>document.getElementById(id)).value = this.curVal.toString();
 
     }
   }
   count_dec(id, minOrderQuant) {
-    this.curVal = (document.getElementById(id).value as HTMLElement);
+    this.curVal = (<HTMLInputElement>document.getElementById(id)).value;
     this.curVal = Number(this.curVal);
     if (this.curVal > minOrderQuant) {
       this.curVal -= 1;
-      document.getElementById(id).value = this.curVal.toString();
+      (<HTMLInputElement>document.getElementById(id)).value = this.curVal.toString();
     }
   }
 
@@ -97,7 +97,7 @@ export class CartComponent implements OnInit {
     // this.setCookie("userId",1);
     var userId = this.getCookie("userId");
     this.data.deleteCartProductfn(id,userId).subscribe(data =>{
-      alert("success");
+      // alert("success");
     })
     
   }

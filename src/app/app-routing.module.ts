@@ -14,7 +14,6 @@ import { SellerlandingComponent } from './sellerlanding/sellerlanding.component'
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
-import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -30,7 +29,6 @@ const routes: Routes = [
   { path: 'shop', component: ShopProfileComponent},
   { path: 'transaction', component: TransactionComponent},
   { path: 'terms&conditions',component: TermsConditionsComponent},
-  { path: 'addProduct', component: AddProductComponent },
   { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 

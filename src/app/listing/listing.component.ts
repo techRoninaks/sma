@@ -64,7 +64,7 @@ export class ListingComponent implements OnInit {
 	dynamicdata: any = "";
 	varient: any = "";
 	stage1: boolean = false;
-	largeSrc: any = "/assets/images/Screenshot_20190712-201603.png";
+	largeSrc: any = "assets/images/Screenshot_20190712-201603.png";
 	public counter: number;
 	revId: number;
 	ngOnInit() {
