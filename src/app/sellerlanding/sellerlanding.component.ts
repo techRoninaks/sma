@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 declare var $: any;
 var slideIndex = 1;
@@ -16,7 +17,7 @@ export class SellerlandingComponent implements OnInit {
 	dynamicDataBasic: any = "";
 	dynamicDataPremium: any = "";
 	dynamicDataPlus: any = "";
-
+	Object = Object;
 	dummyText: string = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
 	i: number = 0;
 	price: string = "00.00";
@@ -31,9 +32,37 @@ export class SellerlandingComponent implements OnInit {
 	popContent: string = "";
 	pageData: any = "";
 	popImgSrc: any;
+	faqSite: any = [];
+	repeatPost: any = [0, 1, 2, 3, 4, 5];
+	imgPost: any = [];
+	descPost: any = [];
+	authorPost: any = [];
+	testimonal: any;
+	testimonal1: any;
+	testimonal2: any;
+	total: any;
+	vidPlay: number;
+	first: number;
 	constructor(private router: Router, private data: DataService) { }
 	ngOnInit() {
+		// console.log(Object.keys(this.repeatPost));
+		// this.testimonal = 0;
+		this.vidPlay = 1;
+		this.first = 1;
 
+		document.getElementById("imgC").style.display = "none";
+		this.testimonal1 = 0;
+		this.testimonal2 = 1;
+		this.total = Object.keys(this.repeatPost).length;
+		console.log(this.total);
+		for (var i: any = 0; i <= this.total; i = i + 2) {
+			this.imgPost[i] = "assets/images/user-pic.jpg";
+			this.descPost[i] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			this.authorPost[i] = "author" + [i];
+			this.imgPost[i + 1] = "assets/images/user-pic-2.jpg";
+			this.descPost[i + 1] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			this.authorPost[i + 1] = "author" + [i + 1];
+		}
 		this.data.getPlanDetailsFree(this.data).subscribe(
 			data => {
 				this.dynamicDataFree = data;
@@ -77,8 +106,57 @@ export class SellerlandingComponent implements OnInit {
 				this.unFilledStar[this.j++] = this.i;
 			}
 		}
+		this.data.getFaqSite().subscribe(
+			data => {
+				this.faqSite = data;
+				// console.log(this.faqSite);
+
+			}
+		);
+		//testimonal
+		if (this.testimonal1 == 0 && this.testimonal2 == 1) {
+			document.getElementById("leftA").style.display = "none";
+		}
+		else {
+			document.getElementById("leftA").style.display = "block";
+		}
+		if (this.testimonal1 == this.total - 1 && this.testimonal2 == this.total) {
+			document.getElementById("rightA").style.display = "none";
+		}
+		else {
+			document.getElementById("rightA").style.display = "block";
+		}
+		//blog
+		if (this.testimonal == 0) {
+			document.getElementById("leftAB").style.display = "none";
+		}
+		else {
+			document.getElementById("leftAB").style.display = "block";
+		}
+		if (this.testimonal == this.total) {
+			document.getElementById("rightAB").style.display = "none";
+		}
+		else {
+			document.getElementById("rightAB").style.display = "block";
+		}
 
 	}
+	readMore(x: any) {
+		// var res = str.split(" ");
+		if (x == 'lDesc1') {
+			document.getElementById("lDesc1").style.overflow = "visible";
+			document.getElementById("seeMore1").style.display = "none";
+		}
+		if (x == 'lDesc2') {
+			document.getElementById("lDesc2").style.overflow = "visible";
+			document.getElementById("seeMore2").style.display = "none";
+		}
+		if (x == 'lDesc3') {
+			document.getElementById("lDesc3").style.overflow = "visible";
+			document.getElementById("seeMore3").style.display = "none";
+		}
+	}
+
 	// Carousel
 	plusSlides(n) {
 		this.showSlides(slideIndex += n);
@@ -106,5 +184,92 @@ export class SellerlandingComponent implements OnInit {
 		this.router.navigate(['/SignupSeller']);
 
 
+	}
+	next() {
+		if (this.testimonal1 == this.total || this.testimonal2 == this.total) {
+			document.getElementById("rightA").style.display = "none";
+			document.getElementById("leftA").style.display = "block";
+			console.log(this.testimonal1 + "hi");
+			console.log(this.testimonal2 + "hi");
+		}
+		else {
+			document.getElementById("rightA").style.display = "block";
+			this.testimonal1 = this.testimonal1 + 2;
+			this.testimonal2 = this.testimonal2 + 2;
+			document.getElementById("leftA").style.display = "block";
+			console.log(this.testimonal1);
+			console.log(this.testimonal2);
+
+		}
+
+
+	}
+	prev() {
+		if (this.testimonal1 == 0 && this.testimonal2 == 1) {
+			document.getElementById("leftA").style.display = "none";
+			document.getElementById("rightA").style.display = "block";
+			console.log(this.testimonal1 + "hi");
+			console.log(this.testimonal2 + "hi");
+
+		}
+		else {
+			this.testimonal1 = this.testimonal1 - 2;
+			this.testimonal2 = this.testimonal2 - 2;
+			document.getElementById("leftA").style.display = "block";
+			document.getElementById("rightA").style.display = "block";
+			console.log(this.testimonal1);
+			console.log(this.testimonal2);
+
+		}
+	}
+	nextB() {
+		if (this.testimonal == this.total) {
+			document.getElementById("rightAB").style.display = "none";
+			document.getElementById("leftAB").style.display = "block";
+			console.log(this.testimonal1 + "hi");
+			console.log(this.testimonal2 + "hi");
+		}
+		else {
+			document.getElementById("rightAB").style.display = "block";
+			this.testimonal = this.testimonal + 1;
+			document.getElementById("leftAB").style.display = "block";
+			console.log(this.testimonal1);
+			console.log(this.testimonal2);
+
+		}
+
+
+	}
+	prevB() {
+		if (this.testimonal == 0) {
+			document.getElementById("leftAB").style.display = "none";
+			document.getElementById("rightAB").style.display = "block";
+			console.log(this.testimonal1 + "hi");
+			console.log(this.testimonal2 + "hi");
+
+		}
+		else {
+			this.testimonal = this.testimonal - 1;
+			document.getElementById("leftAB").style.display = "block";
+			document.getElementById("rightAB").style.display = "block";
+			console.log(this.testimonal1);
+			console.log(this.testimonal2);
+
+		}
+	}
+	expandVid() {
+		this.vidPlay = 0;
+		document.getElementById("slides").style.display = "none";
+		document.getElementById("imgC").style.display = "block";
+		document.getElementById("imgP").style.display = "none";
+		this.first=0;
+
+	}
+	shrinkVid() {
+		document.getElementById("slides").style.display = "block";
+		this.vidPlay = 1;
+		document.getElementById("imgP").style.display = "block";
+		document.getElementById("imgC").style.display = "none";
+		// document.getElementById("vidTag").style.top ='-36rem';
 	}
 }

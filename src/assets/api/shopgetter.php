@@ -14,7 +14,7 @@
             'shopLocation' => $row["shop_location"], 'issueReturn' => $row["issue_return"], 'issueRefund' => $row["issue_refund"],
             'reqConf' => $row["requires_confirmation"], 'giftOption' => $row["gift_option"], 'orderConf' => $row["order_confirmation"],
             'ratingShop' => $row["rating"], 'vacStartDate' => $row["vacation_start_date"], 'onVac' => $row["on_vacation"],
-            'vacEndStart' => $row["vacation_end_date"], 'ratingCountShop' => $row["rating_count"], 'reviewCountShop' => $row["review_count"],
+            'vacEndDate' => $row["vacation_end_date"], 'ratingCountShop' => $row["rating_count"], 'reviewCountShop' => $row["review_count"],
             'returningCustCount' => $row["returning_customers_count"], 'shopViewCount' => $row["shop_view_count"],
             'privateAccount' => $row["private_acc"], 'followerCount' => $row["follower_count"], 'tAndC' => $row["t_and_c"],
             'shopPolicy' => $row["shop_policy"], 'planId' => $row["plan_id"], 'planJoinDate' => $row["plan_join_date"],

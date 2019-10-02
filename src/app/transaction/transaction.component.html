@@ -1,3 +1,10 @@
+<!-- <div class="divMargin">
+    <ul class="breadcrumb">
+        <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
+        <li><a>Transaction</a></li>
+    </ul>
+    <hr/>
+</div> -->
 <div class="transHeader">
     <img src="assets/icons/resources (IL)-18.png">
     <h2>TRANSACTIONS</h2>
@@ -17,31 +24,48 @@
 <div class="transactionTable">
     <div class="transTbHeader">
         <div id="transHeader" class="transNoHeader">
-            <p>TRANSACTION No.</p>
+            <p><img class="icon" src="assets/icons/resources (TP)-19.png">TRANSACTION No.</p>
         </div>
         <div id="transHeader" class="custNameHeader">
-            <p>CUSTOMER NAME</p>
+            <p><img class="icon" src="assets/icons/resources (TP)-20.png">PRODUCT NAME</p>
         </div>
         <div id="transHeader" class="orderNoHeader">
-            <p>ORDER No.</p>
+            <p><img class="icon" src="assets/icons/resources (TP)-17.png">ORDER No.</p>
         </div>
         <div id="transHeader" class="statusHeader">
-            <p>Status</p>
+            <div class="dropdown">
+                <!-- dropdown-toggle -->
+                <button type="button" class="btn btn-warning" style="color: white;display: contents;"
+                    data-toggle="dropdown"><img class="icon" src="assets/icons/resources (TP)-18.png">Status </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" (click)="allStatus();" style="height: 40px;">All</div>
+                    <div *ngFor="let sta of Object.keys(this.transactionStatus)">
+                        <div class="dropdown-item" (click)="stat(transactionStatus[sta].status);" style="height: 40px;">
+                            {{transactionStatus[sta].status}}</div>
+                    </div>
+                    <!-- <div class="dropdown-item" (click)="refund();" style="height: 40px;">Refund</div>
+                    <div class="dropdown-item" (click)="processing();" style="height: 40px;">Processing</div> -->
+                </div>
+            </div>
         </div>
     </div>
     <!-- *ngFor="let item of items" -->
     <div class="transTbData">
-        <div id="transData" class="transNoData">
-            <p>TRANSACTION No.</p>
-        </div>
-        <div id="transData" class="custNameData">
-            <p>CUSTOMER NAME</p>
-        </div>
-        <div id="transData" class="orderNoData">
-            <p>ORDER No.</p>
-        </div>
-        <div id="transData" class="statusData">
-            <p>Status</p>
+        <div class="tbData" *ngFor="let item of Object.keys(this.transactionData)">
+            <div id="transData" class="transNoData">
+                <p>{{this.transactionData[item].transactionId}}</p>
+                <p><span>MODE:</span>{{this.transactionData[item].paymentMode}}</p>
+
+            </div>
+            <div id="transData" class="prodNameData">
+                <p>{{this.transactionData[item].productName}}</p>
+            </div>
+            <div id="transData" class="orderNoData">
+                <p>{{this.transactionData[item].orderId}}</p>
+            </div>
+            <div id="transData" class="statusData">
+                <p>{{this.transactionData[item].status}}</p>
+            </div>
         </div>
     </div>
 </div>
