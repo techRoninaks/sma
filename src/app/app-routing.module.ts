@@ -19,6 +19,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 import { OrdersComponent } from './orders/orders.component';
 import { ContactComponent } from './contact/contact.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'manageorders', component: ManageOrdersComponent},
+  { path: 'addproduct', component: AddProductComponent },
   { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 
