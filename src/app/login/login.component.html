@@ -50,30 +50,17 @@
                 </div>
                 <div class="text-style">or</div>
                 
-                  <!-- <div class="fb-login-button" scope="public_profile,email" data-width="180" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"> -->
-                    <!-- <button class="button-signin-fb" type="button">
-                      <img src="/assets/images/icons/ic_fb.png" class="img-style">
-                      Login with facebook
-                    </button> -->
-
-                    <!-- <button class="button-signin-fb" type="button" scope="public_profile,email" onlogin="checkLoginState();" (click)="callfb();">
-                      <img src="/assets/images/icons/ic_fb.png" class="img-style"> 
-                      Login with facebook
-                    </button>  -->
+             
 
                     <div class="fb-login-button button-signin-fb" data-width="5px" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="true"></div>
 
-                  <!-- </div> -->
+        
                 
                 <br>
                 
-                    <button class="button-signin-google" type="button" data-onsuccess="onSignIn" (click)="callg();"><img src="assets/images/icons/ic_google.png"
+                    <button class="button-signin-google" style="cursor: pointer;" type="button" data-onsuccess="onSignIn" (click)="callg();"><img src="assets/images/icons/ic_google.png"
                       class="img-style"> Login with Google</button>
-                      <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                      <div class="g-signin2" style="display: none;" data-width="220" data-height="40" data-longtitle="true" value="Login with Google"  id="google_signin"></div>
-                
-                
-                <!-- </div> -->
+                      
                 <br>
                 <div>
                   <div>
@@ -84,18 +71,12 @@
                   </div>
                 </div>
                 <br>
-                <div class="login-layout-3">
-                  <div>
-                    <input type="checkbox" formControlName="login_checkbox" required> I read the agreement & not going back from success
-                  </div>
-                  <br>
-                </div>
                 <div>
-                  <button class="button-login" type="button" [disabled]="!loginForm.controls.login_checkbox.valid" (click)="onSubmitLogin()">LOGIN</button>
+                  <button class="button-login" type="button" (click)="onSubmitLogin()">LOGIN</button>
                 </div>
 
-                <div class="text-signup" ><a routerLink="/SignUp">Sign Up</a></div>
-        <!-- </ul> -->
+                <div class="text-signup" ><a routerLink="/signup">Sign Up</a></div>
+        
         </form>
 
         

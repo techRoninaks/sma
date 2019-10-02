@@ -1,0 +1,378 @@
+.grid-order-history{
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+    grid-template-rows: 10% 30% auto auto auto;
+    grid-template-areas: "orders status feedback"
+                         "prod-name . feedback-stat"
+                         "desc . feedback-desc"
+                         "order-no . btn-req-update"
+                         "invoice . btn-complaint";
+    border-radius: 18px;
+    width: 90%;
+    background: rgb(241, 239, 239);
+    margin-left: 5%;
+    margin-top: 10%;
+    font-family: BitterBold;
+    font-size: 14px;
+    padding-bottom: 6%;
+    margin-bottom: 8%;
+}
+.feedback-stat{
+    grid-area: feedback-stat;
+    border-left: 1px solid rgb(114, 114, 114);
+    padding-left: 25px;
+}
+.feedback-desc{
+    grid-area: feedback-desc;
+    margin-top: -46%;
+    border-left: 1px solid rgb(114, 114, 114);
+    padding-left: 25px;
+}
+.btn-req-update{
+    grid-area: btn-req-update;
+    margin-top: -24%;
+    border-left: 1px solid rgb(114, 114, 114);
+    padding-left: 25px;
+}
+.btn-req-update-style{
+    background-color: rgb(12, 112, 12);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 67%;
+    height: 58%;
+}
+.btn-complaint{
+    grid-area: btn-complaint;
+    border-left: 1px solid rgb(114, 114, 114);
+    padding-left: 25px;
+    margin-top: -7%;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -12%;
+}
+.btn-complaint-style{
+    background-color: #EFBE24;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 67%;
+    height: 72%;
+}
+.orders{
+    background: rgb(212, 206, 206);
+    border-top-left-radius: 18px;
+    grid-area: orders;
+    text-align: center;
+    border-right: 1px solid rgb(114, 114, 114);
+    padding: 5px;
+}
+.status{
+    background: rgb(212, 206, 206);
+    grid-area: status;
+    text-align: center;
+    padding: 5px;
+}
+.feedback{
+    background: rgb(212, 206, 206);
+    border-top-right-radius: 18px;
+    grid-area: feedback;
+    text-align: center;
+    padding: 5px;
+    border-left: 1px solid #727272;
+}
+.prod-name{
+    grid-area: prod-name;
+    padding-left: 25px;
+    border-right: 1px solid rgb(114, 114, 114);
+}
+.desc{
+    grid-area: desc;
+    text-align: justify;
+    font-family: BitterRegular;
+    border-right: 1px solid rgb(114, 114, 114);
+    padding-left: 25px;
+    margin-top: -42%;
+}
+.order-no{
+    grid-area: order-no;
+    padding-left: 25px;
+    border-right: 1px solid rgb(114, 114, 114);
+    margin-top: -28%;
+}
+.invoice{
+    grid-area: invoice;
+    padding-left: 25px;
+    border-right: 1px solid rgb(114, 114, 114);
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -12%;
+    margin-top: -12%;
+}
+.btn-invoice-style{
+    background-color: rgb(12, 112, 12);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 56%;
+    height: 61%;
+}
+.grid-status{
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
+                         "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
+                         "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                         "label-1 label-2 label-3 label-4 label-5 label-6";
+    font-size: 8px;
+    align-content: center;
+    text-align: center;
+}
+.pending-conf{
+    grid-area: pending-conf;
+}
+.pending-pay{
+    grid-area: pending-pay;
+}
+.processing{
+    grid-area: processing; 
+}
+.shipped{
+    grid-area: shipped;
+}
+.deliver{
+    grid-area: deliver;
+}
+.closed{
+    grid-area: closed;
+}
+.ic-pending-conf{
+    grid-area: ic-pending-conf;
+}
+.ic-pending-pay{
+    grid-area: ic-pending-pay;
+}
+.ic-processing{
+    grid-area: ic-processing;
+}
+.ic-shipped{
+    grid-area: ic-shipped;
+}
+.ic-deliver{
+    grid-area: ic-deliver;
+}
+.ic-closed{
+    grid-area: ic-closed;
+}
+.label-1{
+    grid-area: label-1;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -24%;
+}
+.label-2{
+    grid-area: label-2;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -24%;
+}
+.label-3{
+    grid-area: label-3;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -24%;
+}
+.label-4{
+    grid-area: label-4;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -24%;
+}
+.label-5{
+    grid-area: label-5;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -24%;
+}
+.label-6{
+    grid-area: label-6;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    margin-bottom: -27%;
+}
+.dot {
+    height: 65px;
+    width: 65px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+  }
+.stat-bar-1{
+    grid-area: stat-bar-1;
+    margin-top: 15%;
+    width: 82%;
+    margin-left: 50%;
+}
+.stat-bar-2{
+    grid-area: stat-bar-2;
+    margin-top: 15%;
+    width: 82%;
+    margin-left: 20%;
+}
+.stat-bar-3{
+    grid-area: stat-bar-3;
+    margin-top: 15%;
+    width: 82%;
+    margin-left:2%;
+}
+.stat-bar-4{
+    grid-area: stat-bar-4;
+    margin-top: 15%;
+    width: 82%;
+    margin-left: -1%;
+}
+.stat-bar-5{
+    grid-area: stat-bar-5;
+    margin-top: 15%;
+    width: 82%;
+    margin-left: -4%;
+}
+.stat-bar-6{
+    grid-area: stat-bar-6;
+    margin-top: 17%;
+    width: 82%;
+    margin-left: -50%;
+}
+// timeline
+.stats-1 {
+    padding: 0px 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-2 {
+    padding: 0px 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-3 {
+    padding: 0px 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-4 {
+    padding: 0px 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-5 {
+    padding: 0px 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-6 {
+    padding: 0px 53px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #EFBE24;
+    position: relative;
+    transition: all 200ms ease-in ;
+  }
+  .stats-1 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-1 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: -8%;
+  }
+  .stats-2 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-2 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 22%;
+  }
+  .stats-3 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-3 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 42%;
+  }
+  .stats-4 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-4 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 44%;
+  }
+  .stats-5 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-5 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 47%;
+  }
+  .stats-6 span {
+    font-weight: 600;
+    padding-top: 20px;
+  }
+  .stats-6 span:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 94%;
+  }
+// timeline

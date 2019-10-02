@@ -1,0 +1,426 @@
+.breadcrumb-layout{
+    margin-left: 5%;
+    width: auto;
+}
+.hrdiv{
+margin-right: 10%;
+width: auto;
+}
+.breadcrumb {
+margin-top: 2%;
+padding: 8px 16px;
+list-style: none;
+background-color: inherit;
+font-family: "BitterBold";
+}
+.breadcrumb li {
+display: inline;
+font-size: 14px;
+}
+.breadcrumb li+li:before {
+padding: 8px;
+color: black;
+content: ">\00a0";
+}
+.breadcrumb li a {
+color: #0275d8;
+text-decoration: none;
+}
+.breadcrumb li a:hover {
+color: #01447e;
+text-decoration: underline;
+}
+.grid-main{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(5,auto);
+    grid-template-areas: "section-1"
+                         "section-2"
+                         "section-3"
+                         "section-4"
+                         "section-5";
+    font-family: BitterBold;
+    .section-1{
+        grid-area: section-1;
+        .grid-1{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 40% 20% 40%;
+            grid-template-areas: "left-sect right-sect-1"
+                                 "left-sect right-sect-2"
+                                 "left-sect right-sect-3";
+            padding-left: 15%;
+            padding-top: 50px;
+            padding-right: 174px;
+            grid-row-gap: 30px;
+            .left-sect{
+                grid-area: left-sect;
+                background: rgb(221, 215, 215);
+                height: 230px;
+                width: 331px;
+                border-radius: 5px;
+                padding-left: 17px;
+                padding-top: 11px;
+            }
+            .right-sect-1{
+                grid-area: right-sect-1;
+                background: rgb(221, 215, 215);
+                height: 60px;
+                width: 430px;
+                border-radius: 5px;
+                .day{
+                    height: 70px;
+                    width: 60px;
+                    background: #eed12f;
+                    margin-top: -9%;
+                    margin-left: 79%;
+                    border-radius: 4px;
+                    color: white;
+                    .day-style{
+                        text-align: center;
+                        padding-top: 11px;
+                        font-size: 30px;
+                    }
+                }
+                .grid-delivery-info{
+                    display: grid;
+                    grid-template-rows: auto;
+                    grid-template-columns: 33% 33% 33%;
+                    grid-template-areas: "label-1 date label-2";
+                }
+                .label-1{
+                    grid-area: label-1;
+                    margin-top: -29px;
+                    margin-left: 12px;
+                }
+                .date{
+                    grid-area: date;
+                    margin-top: -18px;
+                    margin-left: 22px;
+                    color: green;
+                }
+                .label-2{
+                    grid-area: label-2;
+                    margin-left: 43px;
+                }
+            }
+            .right-sect-2{
+                grid-area: right-sect-2;
+                .grid-current-status{
+                    display: grid;
+                    grid-template-columns: 70% 15% 15%;
+                    grid-template-rows: auto;
+                    grid-template-areas: "status nav-1 nav-2";
+                    a{
+                        text-decoration: none;
+                        display: inline-block;
+                        padding: 8px 16px;
+                      }
+                    .a:hover {
+                        background-color: #ddd;
+                        color: black;
+                    }
+                    .previous {
+                        background-color: #e4ca3b;
+                        color: white;
+                        font-size: 17px;
+                    }
+                    .next {
+                        background-color: #e4ca3b;
+                        color: white;
+                        font-size: 17px;
+                    }
+                    .round {
+                        border-radius: 15%;
+                    }
+                    i {
+                        border: solid white;
+                        border-width: 0 3px 3px 0;
+                        display: inline-block;
+                        padding: 6px;
+                      }
+                      .status-style{
+                          color: white;
+                          text-align: center;
+                          padding-top: 8px;
+                      }
+                      .nav-1{
+                        grid-area: nav-1;
+                        margin-left: -25%;
+                        .left {
+                        transform: rotate(135deg);
+                        -webkit-transform: rotate(135deg);
+                        }
+                          
+                    }
+                    .nav-2{
+                        grid-area: nav-2;
+                        margin-left: -43%;
+                        .right {
+                            transform: rotate(-45deg);
+                            -webkit-transform: rotate(-45deg);
+                        }
+                    }
+                    .status{
+                        grid-area: status;
+                        background: rgb(20, 98, 20);
+                        height: 40px;
+                        width: 296px;
+                        border-radius: 5px;
+                    }
+                }
+            }
+            .right-sect-3{
+                grid-area: right-sect-3;
+                background: rgb(221, 215, 215);
+                height: 60px;
+                width: 430px;
+                border-radius: 5px;
+                .grid-pro-desc{
+                    display: grid;
+                    grid-template-rows: 50% 50%;
+                    grid-template-columns: 33% 33% 33%;
+                    grid-template-areas: "qty tax total"
+                                         "var-price . ship-price";
+                    font-size: 13px;
+                    margin-left: 10px;
+                }
+                .qty{
+                    grid-area: qty;
+                }
+                .tax{
+                    grid-area: tax;
+                }
+                .total{
+                    grid-area: total;
+                }
+                .var-price{
+                    grid-area: var-price;
+                }
+                .ship-price{
+                    grid-area: ship-price;
+                }
+            }
+        }
+    }
+    .section-2{
+        grid-area: section-2;
+        .grid-2{
+            display: grid;
+            grid-template-rows: auto;
+            grid-template-columns: 50% 50%;
+            grid-template-areas: "prod-details card-total";
+        }
+        .prod-details{
+            grid-area: prod-details;
+            height: 250px;
+            width: 352px;
+            background: rgb(221, 215, 215);
+            margin-left: 191px;
+            margin-top: 50px;
+            border-radius: 6px;
+            .grid-pro-card{
+                display: grid;
+                grid-template-rows: auto auto auto auto auto auto;
+                grid-template-columns: 50% 50%;
+                grid-template-areas: "prod-name-label prod-name"
+                                     "var-label pincode-label"
+                                     "var-1 pincode"
+                                     "var-2 place"
+                                     "cust-name-label ."
+                                     "attachment .";
+                margin-top: 8px;
+                margin-left: 15px;
+            }
+            .prod-name-label{
+                grid-area: prod-name-label;
+            }
+            .prod-name{
+                grid-area: prod-name;
+                font-family: Bitter;
+            }
+            .var-label{
+                grid-area: var-label;
+            }
+            .pincode-label{
+                grid-area: pincode-label;
+            }
+            .var-1{
+                grid-area: var-1;
+                font-family: Bitter;
+            }
+            .var-2{
+                grid-area: var-2;
+                font-family: Bitter;
+            }
+            .pincode{
+                grid-area: pincode;
+                font-family: Bitter;
+            }
+            .place{
+                grid-area: place;
+                font-family: Bitter;
+            }
+            .cust-name-label{
+                grid-area: cust-name-label;
+            }
+            .attachment{
+                grid-area: attachment;
+            }
+        }
+        .card-total{
+            grid-area: card-total;
+            height: 250px;
+            width: 428px;
+            margin-left: 15px;
+            margin-top: 50px;
+            border-radius: 6px;
+            .grid-total-card{
+                display: grid;
+                grid-template-rows: auto;
+                grid-template-columns: 33% 33% 33%;
+                grid-template-areas: "amount ship subtotal";
+                font-size: 12px;
+                font-family: Bitter;
+                text-align: center;
+                .dot {
+                    height: 90px;
+                    width: 90px;
+                    background-color: #eed12f;
+                    border-radius: 50%;
+                    display: inline-block;
+                    margin-left: 1px;
+                    margin-top: -48px;
+                }
+                .img-style{
+                    margin-top: -120px;
+                    margin-left: 3px;
+                }
+            }
+            .amount{
+                grid-area: amount;
+                height: 113px;
+                width: 117px;
+                background: rgb(221, 215, 215);
+                margin-top: 40px;
+                border-radius: 5px;
+            }
+            .ship{
+                grid-area: ship;
+                height: 113px;
+                width: 117px;
+                background: rgb(221, 215, 215);
+                margin-top: 40px;
+                border-radius: 5px;
+            }
+            .subtotal{
+                grid-area: subtotal;
+                height: 113px;
+                width: 117px;
+                background: rgb(221, 215, 215);
+                margin-top: 40px;
+                border-radius: 5px;
+            }
+        }
+    }
+    .section-3{
+        grid-area: section-3;
+        .grid-3{
+            display: grid;
+            grid-template-rows: auto;
+            grid-template-columns: 50% 50%;
+            grid-template-areas: "gift-details ship-details";
+        }
+        .gift-details{
+            grid-area: gift-details;
+            height: 200px;
+            width: 352px;
+            background: rgb(221, 215, 215);
+            margin-left: 191px;
+            margin-top: 50px;
+            border-radius: 6px;
+            .grid-gift-details{
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+                grid-template-areas: "note"
+                                     "address";
+                margin-left: 10px;
+                margin-top: 11px;
+                .gift-style{
+                    font-family: Bitter;
+                    font-size: 12px;
+                }
+            }
+            .note{
+                grid-area: note;
+            }
+            .address{
+                grid-area: address;
+            }
+        }
+        .ship-details{
+            grid-area: ship-details;
+            height: 200px;
+            width: 400px;
+            background: rgb(221, 215, 215);
+            margin-left: 15px;
+            margin-top: 50px;
+            border-radius: 6px;
+            .grid-ship-details{
+                display: grid;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: auto auto auto auto auto;
+                grid-template-areas: "c-name-label c-name"
+                                     "c-phone-label c-phone"
+                                     "c-address address"
+                                     "track-no-label track-no"
+                                     "ship-type-label ship-type";
+                margin-left: 10px;
+                margin-top: 11px;
+            }
+            .c-name-label{
+                grid-area: c-name-label;
+            }
+            .c-name{
+                grid-area: c-name;
+                font-family: Bitter;
+            }
+            .c-phone-label{
+                grid-area: c-phone-label;
+            }
+            .c-phone{
+                grid-area: c-phone;
+                font-family: Bitter;
+            }
+            .c-address{
+                grid-area: c-address;
+            }
+            .address{
+                grid-area: address;
+                font-family: Bitter;
+            }
+            .track-no-label{
+                grid-area: track-no-label;
+            }
+            .track-no{
+                grid-area: track-no;
+                font-family: Bitter;
+            }
+            .ship-type-label{
+                grid-area: ship-type-label;
+            }
+            .ship-type{
+                grid-area: ship-type;
+                font-family: Bitter;
+            }
+        }
+    }
+    .section-4{
+        grid-area: section-4;
+    }
+    .section-5{
+        grid-area: section-5;
+    }
+}
+

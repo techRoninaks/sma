@@ -19,7 +19,13 @@ export class RegistrationComponent implements OnInit {
   constructor( private data: DataService,private formBuilder: FormBuilder,private router: Router) {
     this.registrationForm = this.formBuilder.group({
       fullname: ['', Validators.required],
-      reg_address:['', Validators.required],
+      reg_address1:['', Validators.required],
+      reg_address2:['', Validators.required],
+      reg_city:['', Validators.required],
+      reg_dist:['', Validators.required],
+      reg_state:['', Validators.required],
+      reg_country:['', Validators.required],
+      reg_pin:['', Validators.required],
       reg_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
       reg_mobile_no: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       reg_age: ['',[Validators.required,Validators.pattern(/^\+?[1-9]\d*$/),Validators.min(18)]],
@@ -57,12 +63,12 @@ export class RegistrationComponent implements OnInit {
                 if(data == "Success")
                 {
                   alert('Registration Successful');
-                  this.router.navigate(['/Login']);
+                  this.router.navigate(['/login']);
                 }
                 else
                 {
                   alert('Error, try again');
-                  this.router.navigate(['/SignUp']);
+                  this.router.navigate(['/signup']);
                 }
               },
           error=> console.error(error)
