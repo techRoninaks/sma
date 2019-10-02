@@ -14,21 +14,30 @@ import { SellerlandingComponent } from './sellerlanding/sellerlanding.component'
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { ManageshopComponent } from './manageshop/manageshop.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ContactComponent } from './contact/contact.component';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'listing', component: ListingComponent},
   { path: 'category', component: CategorylistingComponent},
   { path: 'categorylisting', component : CategorylistingComponent},
-  { path: 'Login', component: LoginComponent},
-  { path: 'SignUp', component: RegistrationComponent},
-  { path: 'Plandetails',component:PlandetailsComponent},
-  { path: 'Userprofile',component:UserprofileBuyerComponent},
-  { path: 'SignupSeller',component:RegistrationSellerComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'signUp', component: RegistrationComponent},
+  { path: 'plandetails',component:PlandetailsComponent},
+  { path: 'managepage', component: ManageshopComponent},
+  { path: 'userprofile',component:UserprofileBuyerComponent},
+  { path: 'signupSeller',component:RegistrationSellerComponent},
   { path: 'cart', component: CartComponent },
   { path: 'shop', component: ShopProfileComponent},
   { path: 'transaction', component: TransactionComponent},
   { path: 'terms&conditions',component: TermsConditionsComponent},
+  { path: 'orders', component: OrdersComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'manageorders', component: ManageOrdersComponent},
   { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 

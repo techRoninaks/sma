@@ -10,6 +10,168 @@ export class DataService {
 
   constructor( private http: HttpClient ) { }
   
+  prodViewIncrement(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/productviewinc.php', httpParams);
+  }
+  getProductRevRatings(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/prodrevratings.php', httpParams);
+  }
+  sendOrderDetails(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+      .append("shopId", data['shop_id'])
+      .append("userId", data['user_id'])
+      .append("message", data['message'])
+      .append("productVariant", data['productVariant'])
+      .append("productQuantity", data['productQuantity'])
+      .append("imageUploaded", data['imageUploaded'])
+      .append("deliveryOption", data['deliveryOption'])
+      .append("sellerId", data['seller_identity'])
+      .append("rfqEnabled", data['rfq_enabled'])
+      .append("desiredDate", data['desiredDate'])
+      .append("giftEnabled", data['gift_enabled'])
+
+    return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
+  }
+  sendCartDetails(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+      .append("shopId", data['shop_id'])
+      .append("userId", data['user_id'])
+      .append("message", data['message'])
+      .append("productVariant", data['productVariant'])
+      .append("productQuantity", data['productQuantity'])
+      .append("imageUploaded", data['imageUploaded'])
+      .append("deliveryOption", data['deliveryOption'])
+      .append("sellerId", data['seller_identity'])
+      .append("rfqEnabled", data['rfq_enabled'])
+      .append("desiredDate", data['desiredDate'])
+      .append("giftEnabled", data['gift_enabled'])
+      .append("giftTitle", data['gift_title'])
+      .append("giftNote", data['gift_note'])
+      .append("giftAddress", data['gift_address'])
+
+
+    return this.http.post(this.baseUrl + 'assets/api/pricingcart.php', httpParams);
+  }
+  getRfqInputs(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/rfqprods.php', httpParams);
+  }
+  getRfqAddress(data: any) {
+    let httpParams = new HttpParams()
+      .append("userId", data)
+    return this.http.post(this.baseUrl + 'assets/api/rfqaddress.php', httpParams);
+  }
+  getPriceDate(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
+  }
+  sendRfq(data :any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+      .append("hasImage", data['imageUploaded'])
+      .append("userId", data['user_id'])
+      .append("shopLocation", data['shop_location'])
+      .append("note", data['note'])
+      .append("productRef", data['product_ref'])
+    return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
+  }
+  // shop Component
+  getProductListManage(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/productlistmanage.php', httpParams);
+  }
+  getShopRevRatings(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/shoprevratings.php', httpParams);
+  }
+  shopViewIncrement(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/shopviewinc.php', httpParams);
+  }
+  getMostSelling(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/mostshopitem.php', httpParams);
+  }
+  getFolCount(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/folCountShop.php', httpParams);
+  }
+delProdManage(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/delprodmanage.php', httpParams);
+  }
+  privacyManage(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("val", data['val'])
+    return this.http.post(this.baseUrl + 'assets/api/privacymanage.php', httpParams);
+  }
+  vacationManage(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("val", data['val'])
+    return this.http.post(this.baseUrl + 'assets/api/vacationmanage.php', httpParams);
+  }
+  editManage(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("val", data['val'])
+      .append("type", data['type']);
+    return this.http.post(this.baseUrl + 'assets/api/editmanage.php', httpParams);
+  }
+  vacationSave(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("start", data['start'])
+      .append("end", data['end'])
+      .append("type", data['type']);
+    return this.http.post(this.baseUrl + 'assets/api/vacationsave.php', httpParams);
+  }
+getDateDiffShop(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/datediffshop.php', httpParams);
+  }
+
+  //transaction page
+  getTransStatus(data: any) {
+    let httpParams = new HttpParams()
+      .append("sellerId", data)
+    return this.http.post(this.baseUrl + 'assets/api/transtatus.php', httpParams);
+  }
+  getTransactionDetails(data: any) {
+    let httpParams = new HttpParams()
+      .append("sellerId", data)
+    return this.http.post(this.baseUrl + 'assets/api/transaction.php', httpParams);
+  }
+  getTransFiltered(data: any) {
+    let httpParams = new HttpParams()
+      .append("sellerId", data['seller_id'])
+      .append("statusDetail", data['status_name'])
+    return this.http.post(this.baseUrl + 'assets/api/transfiltered.php', httpParams);
+  }
+
+  //sellerPage
+  getFaqSite() {
+    let httpParams = new HttpParams()
+    // .append("sellerId", data)
+    return this.http.post(this.baseUrl + 'assets/api/faqsite.php', httpParams);
+  }
+  
   getProductData(data : any){
     let httpParams = new HttpParams()
     .append("prodId",data)
@@ -354,6 +516,77 @@ export class DataService {
   getUser(){
     return this.http.get(this.baseUrl+'assets/api/bulkdiscountcheckout.php');
   }
+  getUsercardData(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/userCardData.php',httpParams);
+ }
+ getPendingPayCount(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/pendingPayCount.php',httpParams);
+ }
+ getShopFollowingCount(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/shopFollowingCount.php',httpParams);
+ }
+ getShopName(data: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   return this.http.post(this.baseUrl+'assets/api/shopName.php',httpParams);
+ }
+ followShopPage(data: any,shopId: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   .append("shopId", shopId);
+   return this.http.post(this.baseUrl+'assets/api/followShopPage.php',httpParams);
+ }
+ unFollowShopPage(data: any,shopId: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   .append("shopId", shopId);
+   return this.http.post(this.baseUrl+'assets/api/unFollowShopPage.php',httpParams);
+ }
+ getSavedCardData(data: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   return this.http.post(this.baseUrl+'assets/api/savedCardData.php',httpParams);
+ }
+addSellerData(data: Object){
+   let httpParams= new HttpParams()
+   .append("fullname", data['fullname'])
+   .append("reg_email", data['reg_email'])
+   .append("reg_mobile_no", data['reg_mobile_no'])
+   .append("reg_password", data['reg_password']);
+   return this.http.post(this.baseUrl+'assets/api/sellerRegistration.php',httpParams);
+ }
+addData(data: Object,name: any){
+   let httpParams= new HttpParams()
+   .append("fullname", data['fullname'])
+   .append("reg_address1", data['reg_address1'])
+   .append("reg_address2", data['reg_address2'])
+   .append("reg_city", data['reg_city'])
+   .append("reg_dist", data['reg_dist'])
+   .append("reg_state", data['reg_state'])
+   .append("reg_country", data['reg_country'])
+   .append("reg_pin", data['reg_pin'])
+   .append("reg_email", data['reg_email'])
+   .append("reg_mobile_no", data['reg_mobile_no'])
+   .append("reg_age", data['reg_age'])
+   .append("gender", name)
+   .append("reg_password", data['reg_password']);
+   return this.http.post(this.baseUrl+'assets/api/registration.php',httpParams);
+ }
+addContact(data: Object){
+   let httpParams= new HttpParams()
+   .append("name", data['name'])
+   .append("email", data['email'])
+   .append("phone", data['mobile'])
+   .append("remarks", data['remarks'])
+   .append("purpose", data['purpose']);
+   return this.http.post(this.baseUrl+'assets/api/addContact.php',httpParams);
+ }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )

@@ -80,6 +80,7 @@
     border-radius: 2px;
     border: none;
     font-family: "BitterBold";
+    cursor: pointer;
   }
   .button-submit{
     width: 30%;
@@ -119,7 +120,11 @@
     border: none;
     font-family: "BitterBold";
   }
-  
+  .validator-style{
+    margin-left: 4px;
+    color: #e75c4a;
+    font-family: BitterRegular;
+  }
   
   .button-green-layout{
     margin-left: 6%;

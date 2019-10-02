@@ -1,5 +1,5 @@
 
-import { Component, OnInit, HostListener, ɵCompiler_compileModuleAndAllComponentsAsync__POST_R3__ } from '@angular/core';
+import { Component, OnInit, HostListener, ɵCompiler_compileModuleAndAllComponentsAsync__POST_R3__, NgZone } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export interface User {
 	name: string;
 }
+
 var slideIndex = 1;
 declare var Razorpay: any;
 
@@ -26,7 +27,7 @@ export class ListingComponent implements OnInit {
 	public token: any;
 	current: any;
 	variantData: any = [];
-	sellerDetails: any = "";
+	sellerDetails: any = [];
 	variantCount: any = [];
 	variantNum: any = [];
 	spec: any = [];
@@ -50,7 +51,23 @@ export class ListingComponent implements OnInit {
 	success = false;
 	reviewDateDiff: any = "";
 	faqProduct: any = [];
-	dynamicDataProName: Object;
+	ratingData: any = [];
+	activeStatusProd: any;
+	priv: any;
+	selName: string;
+	giftOpn: any;
+	sellerIdentity: any;
+	varName: any;
+	rfqInput: any = [];
+	userId: any;
+	rfqAddress: any = [];
+	prod: any = [];
+	idP: any;
+	priceDate: any = [];
+	titleGift: any;
+	noteGift: any;
+	addressGift: string;
+  dynamicDataProName: Object;
 	prodId: any;
 	dynamicDataUser: Object;
 	dynamicDataVariant: Object;
@@ -63,22 +80,13 @@ export class ListingComponent implements OnInit {
 	dynamicNewAddr: any = "";
 	dynamicDataCheckOutPrice: any = "";
 	TotalPrice:any ; 
-
-
-	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute,private cookieService: CookieService) {
+	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
 			customername: ['', Validators.required],
 			address: ['', Validators.required],
 			email: ['', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
 			contact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
 
-		})
-		this.fgOrderDetails = this.formBuilder.group({
-			quantity: [''],
-			message: [''],
-			uploadProductImage: [''],
-			deliveryDatePicker: [''],
-			shippingOption: ['']
 		})
 	}
 	dynamicData: any = "";
@@ -88,6 +96,7 @@ export class ListingComponent implements OnInit {
 	tokenObj: object;
 	formAddress: object;
 	fgOrderDetails: FormGroup;
+	tokenPrice: object;
 	checkoutForm: FormGroup;
 	dynamicdata: any = "";
 	varient: any = "";
@@ -96,32 +105,35 @@ export class ListingComponent implements OnInit {
 	public counter: number;
 	revId: number;
 
+	bar1: any;
+	bar2: any;
+	bar3: any;
+	bar4: any;
+	bar5: any;
+	datePickerDefault: number;
+	shopIdentity: any;
+	rfqEnabled: any = 0;
+	giftEnable: any = 0;
+	defRfqTag: any = 1;
 
-	//checkout formGroup
-	myControl = new FormControl();
-	options: User[] = [
-		{ name: 'India' },
-		{ name: 'USA' },
-		{ name: 'Indonesia' }
-	];
-	filteredOptions: Observable<User[]>;
-	id: any;
 	ngOnInit() {
+		// this.setCookie("userId", 2);
+		this.userId = this.getCookie("userId");
 
-		// let pincode = "notAvailable";
-		// if (pincode == "available") {
-		// }
-		// else {
-		//   alert("Page is loaded");
-		// }
-		// function(void){
-		// 	alert("page is loaded");
-		// }
+		//undeliverable popup show on page load
+		$("#undeliverableModal").modal('show');
+		(<HTMLInputElement><any>document.getElementById("sh")).checked = true;
+
+		//datepicker
+		document.getElementById("buyNowId").style.display = "block";
+		document.getElementById("reqNowId").style.display = "none";
+		this.datePickerDefault = 1;
+
 		this.route.queryParams.subscribe(params => {
 			this.token = params['prod_id'];
 			// console.log(this.token);
-			this.tokenObj = { prod_id: this.token, user_id: "2" };
-			console.log(this.tokenObj);
+			this.tokenObj = { prod_id: this.token, user_id: this.userId };
+			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
 		this.data.getProductData(this.token).subscribe(
@@ -134,6 +146,9 @@ export class ListingComponent implements OnInit {
 				this.minOQuant = this.dynamicData.minOrderQuant;
 				this.maxOQuant = this.dynamicData.maxOrderQuant;
 				this.counter = this.dynamicData.minOrderQuant;
+				//rfq 1st prod
+				this.prod[0] = this.dynamicData.name;
+
 				// console.log(res);
 				this.productRating = this.dynamicData.rating;
 				for (this.i = 0; this.i < 5; this.i++) {
@@ -143,9 +158,23 @@ export class ListingComponent implements OnInit {
 						this.unFilledStar[this.j++] = this.i;
 					}
 				}
+				this.activeStatusProd = this.dynamicData.activeStatus;
+				if (this.activeStatusProd == "inactive") {
+					document.getElementById("buyNowId").style.display = "none";
+					document.getElementById("reqNowId").style.display = "block";
+				}
+				this.giftOpn = this.dynamicData.hasGift;
+				if (this.giftOpn == 0) {
+					(<HTMLInputElement><any>document.getElementById("giftButton")).style.display = "none";
+				}
+				else if (this.giftOpn == 1) {
+					(<HTMLInputElement><any>document.getElementById("giftButton")).style.display = "block";
+				}
+
 			},
 			error => console.error(error)
 		);
+
 		this.data.getFollowInfo(this.tokenObj).subscribe(
 			data => {
 				// console.log(data);
@@ -166,6 +195,15 @@ export class ListingComponent implements OnInit {
 			data => {
 				// console.log(data);
 				this.variantData = data;
+
+			},
+			error => console.error(error)
+		);
+		this.data.getPriceDate(this.token).subscribe(
+			data => {
+				// console.log(data);
+				this.priceDate = data;
+
 			},
 			error => console.error(error)
 		);
@@ -187,6 +225,17 @@ export class ListingComponent implements OnInit {
 			data => {
 				// console.log(data);
 				this.sellerDetails = data;
+				this.priv = this.sellerDetails.privateAccount;
+				this.shopIdentity = this.sellerDetails.shopId;
+				this.sellerIdentity = this.sellerDetails.sellerId;
+
+				if (this.priv == 0) {
+					this.selName = "" + this.sellerDetails.sellerName;
+
+				}
+				else {
+					this.selName = "";
+				}
 			},
 			error => console.error(error)
 		);
@@ -223,29 +272,47 @@ export class ListingComponent implements OnInit {
 				this.faqProduct = data;
 
 			}
-		)
+		);
 
-		// this.data.getLikeDislikeInfo(this.tokenObj).subscribe(
-		// 	data => {
-		// 		console.log(data);
-		// 		this.likeDislikeInfo = data;
-		// 		var x = this.likeDislikeInfo.response;
-		// 		console.log(x);
-		// 		if (this.likeDislikeInfo.response == "successful") {
-		// 			this.lik = true;
-		// 			this.follow();
-		// 		}
-		// 		else if (this.likeDislikeInfo.response == "unsuccessful") {
-		// 			this.folResult = false;
-		// 		}
-		// 	},
-		// 	error => console.error(error)
-		// );
-		document.getElementById('bar-five').style.width = '90%';
-		document.getElementById('bar-four').style.width = '75%';
-		document.getElementById('bar-three').style.width = '40%';
-		document.getElementById('bar-two').style.width = '60%';
-		document.getElementById('bar-one').style.width = '10%';
+		this.data.prodViewIncrement(this.token).subscribe();
+
+		this.data.getRfqInputs(this.token).subscribe(
+			data => {
+				this.rfqInput = data;
+
+			}
+		);
+
+		this.data.getRfqAddress(this.userId).subscribe(
+			data => {
+				this.rfqAddress = data;
+
+			}
+		);
+
+		this.data.getProductRevRatings(this.token).subscribe(
+			data => {
+				this.ratingData = data;
+				var totalRatings = this.ratingData.totRat;
+				var rat1 = this.ratingData.rat1;
+				var rat2 = this.ratingData.rat2;
+				var rat3 = this.ratingData.rat3;
+				var rat4 = this.ratingData.rat4;
+				var rat5 = this.ratingData.rat5;
+				this.bar1 = (rat1 * 100) / totalRatings;
+				this.bar2 = (rat2 * 100) / totalRatings;
+				this.bar3 = (rat3 * 100) / totalRatings;
+				this.bar4 = (rat4 * 100) / totalRatings;
+				this.bar5 = (rat5 * 100) / totalRatings;
+			}
+		);
+
+		// $('#bar-five').css({'width':this.bar5% });
+		// document.getElementById('bar-five').style.width = this.bar5;
+		// document.getElementById('bar-four').style.width = this.bar4;
+		// document.getElementById('bar-three').style.width = this.bar3;
+		// document.getElementById('bar-two').style.width = this.bar2;
+		// document.getElementById('bar-one').style.width = this.bar1;
 
 		this.showSlides(slideIndex);
 
@@ -471,53 +538,51 @@ export class ListingComponent implements OnInit {
 	}
 
 	filterFunction() {
-		var input, filter, ul, li, a, i, div, txtValue;
+		var input, filter, ul, li, a, i, txtValue;
 		input = document.getElementById("myInput");
 		filter = input.value.toUpperCase();
-		div = document.getElementById("rfqDropdown");
-		a = div.getElementsById("rfqDrp");
-		for (i = 0; i < a.length; i++) {
-			txtValue = a[i].textContent || a[i].innerText;
+		ul = document.getElementById("myUL");
+		li = ul.getElementsByTagName("li");
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			txtValue = a.textContent || a.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				a[i].style.display = "";
+				li[i].style.display = "";
 			} else {
-				a[i].style.display = "none";
+				li[i].style.display = "none";
 			}
+		}
+
+		var rfqSearchInput = (<HTMLInputElement><any>document.getElementById("myInput")).value.length;
+		if (rfqSearchInput >= 3) {
+			(<HTMLInputElement><any>document.getElementById("myUL")).style.display = "block";
+		}
+		else {
+			(<HTMLInputElement><any>document.getElementById("myUL")).style.display = "none";
+
 		}
 	}
 	count_inc() {
-		// alert("counterinc");
-		// if (this.counter < this.maxOQuant)
-		// 	this.counter++;
-		// console.log("count_inc");
-		// console.log(this.counter);
-		// this.counter = (document.getElementById("count").value);
-		// this.counter = Number(this.counter);
+
 		if (this.counter < this.maxOQuant) {
 			this.counter++;
 			var xy: HTMLElement = document.getElementById("count") as HTMLElement;
-			this.fgOrderDetails.controls['quantity'].setValue(this.counter);
-			// xy.value = this.counter;
+
+			// this.fgOrderDetails.controls['quantity'].setValue(this.counter);
 		}
 	}
 	count_dec() {
-		// alert("counterdec");
 
 		if (this.counter > this.minOQuant) {
 			this.counter--;
 			var xy = document.getElementById("count") as HTMLElement;
-			this.fgOrderDetails.controls['quantity'].setValue(this.counter);
+			// this.fgOrderDetails.controls['quantity'].setValue(this.counter);
 		}
 
 	}
 	myFunction(imgs) {
-		// var expandImg.src:HTMLImageElement;
-		// var expandImg = document.getElementById("largeImage");
-		// console.log(imgs);
 		var ele = document.getElementById(imgs) as HTMLImageElement;
 		this.largeSrc = ele.src;
-		// console.log(expandImg.src);
-		// expandImg.parentElement.style.display = "block";
 	}
 	openModal() {
 		document.getElementById("myModal").style.display = "block";
@@ -535,7 +600,6 @@ export class ListingComponent implements OnInit {
 		var i;
 		var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
 		var dots = document.getElementsByClassName("demo") as HTMLCollectionOf<HTMLElement>;
-		// var captionText = document.getElementById("caption");
 		if (n > slides.length) { slideIndex = 1 }
 		if (n < 1) { slideIndex = slides.length }
 		for (i = 0; i < slides.length; i++) {
@@ -546,7 +610,6 @@ export class ListingComponent implements OnInit {
 		}
 		slides[slideIndex - 1].style.display = "block";
 		dots[slideIndex - 1].className += " active";
-		// captionText.innerHTML = dots[slideIndex - 1].alt;
 	}
 	readMore() {
 		// var res = str.split(" ");
@@ -586,19 +649,242 @@ export class ListingComponent implements OnInit {
 		var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
 		ele1.src = "assets/icons/resources (IL)-24.png";
 	}
-	onSubmit() {
 
-		this.submitted = true;
-		this.data.setData(this.fgOrderDetails.value).subscribe(
-			data => {
-				this.success = true;
-				this.fgOrderDetails.controls['quantity'].setValue('');
-				this.fgOrderDetails.controls['message'].setValue('');
-				this.fgOrderDetails.controls['uploadProductImage'].setValue('');
-				this.fgOrderDetails.controls['deliveryDatePicker'].setValue('');
-				this.fgOrderDetails.controls['shippingOption'].setValue('');
-			},
-			error => console.error(error)
-		)
+	reqDate() {
+		var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
+		// console.log(x);
+		if (x != 0) {
+			if (this.activeStatusProd == "inactive") {
+				document.getElementById("buyNowId").style.display = "none";
+				document.getElementById("reqNowId").style.display = "block";
+			} else {
+				this.datePickerDefault = 0;
+				document.getElementById("buyNowId").style.display = "none";
+				document.getElementById("reqNowId").style.display = "block";
+				alert("Buy now changed to Request Order");
+			}
+		}
+		else {
+			if (this.activeStatusProd == "inactive") {
+				document.getElementById("buyNowId").style.display = "none";
+				document.getElementById("reqNowId").style.display = "block";
+			} else {
+				this.datePickerDefault = 1;
+				document.getElementById("buyNowId").style.display = "block";
+				document.getElementById("reqNowId").style.display = "none";
+				alert("Request Order changed to Buy now");
+			}
+		}
+	}
+	// Cookie Section BEGN
+	setCookie(cname, value) {
+		this.cookieService.set(cname, value);
+	}
+	getCookie(cname) {
+		return this.cookieService.get(cname);
+	}
+	deleteCookie(cname) {
+		this.cookieService.delete(cname);
+	}
+	gift() {
+		var title = (<HTMLInputElement><any>document.getElementById("fText")).value;
+		var note = (<HTMLInputElement><any>document.getElementById("fNote")).value;
+		var address = (<HTMLInputElement><any>document.getElementById("fAddress")).value;
+		this.giftEnable = 1;
+		this.titleGift = title;
+		this.addressGift = address;
+		this.noteGift = note;
+		// console.log(title);
+		// console.log(note);
+		// console.log(address);
+		this.setCookie("giftTitle", title);
+		this.setCookie("giftNote", note);
+		this.setCookie("giftAddress", address);
+		// console.log(this.cookieService.get("giftTitle")+"cookie");
+		// console.log(this.cookieService.get("giftNote")+"cookie");
+		// console.log(this.cookieService.get("giftAddress")+"cookie");
+	}
+
+	rfqSubmit() {
+		// alert("loaded");
+		this.rfqEnabled = 1;
+		var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;
+		var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
+		var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
+		var productRef = this.prod[0];
+
+		this.tokenPrice = { prod_id: this.token, user_id: this.userId, imageUploaded: 0, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
+
+		this.data.sendRfq(this.tokenPrice).subscribe();
+
+	}
+
+	undeliverable() {
+		var pincodeU = (<HTMLInputElement><any>document.getElementById("undPincode")).checked;
+		var categoryU = (<HTMLInputElement><any>document.getElementById("undCategory")).checked;
+		var continueU = (<HTMLInputElement><any>document.getElementById("undContinue")).checked;
+		if (pincodeU == true) {
+
+		}
+		if (categoryU == true) {
+			// var self = this;
+			// self.router.navigate(['/categorylisting']);
+			this.router.navigate(['/categorylisting/']);
+			// this.ngZone.run(() => this.router.navigateByUrl('/categorylisting'));
+		}
+		if (continueU == true) {
+			$("#undeliverableModal").modal('hide');
+		}
+	}
+	addTagProduct(x: any) {
+		var y = this.defRfqTag;
+		this.prod[y++] = x;
+		this.defRfqTag = y;
+		console.log(this.prod);
+	}
+	delProduct(id: any) {
+		var n = this.Object.keys(this.prod).length;
+		var chiP = id.split("!");
+		this.idP = chiP[0];
+		var chiIndex = chiP[1];
+		// console.log(this.idP);
+		// console.log(chiIndex);
+
+
+		document.getElementById(this.idP).style.display = "none";
+		var removed = this.prod.splice(chiIndex, 1);
+		// this.prod[chiIndex] = x;
+		// if (chiIndex < n) 
+		// { 
+		//     n = n - 1; 
+		//     for (var j:any =chiIndex; j<n; j++) 
+		// 	this.prod[j] = this.prod[j+1]; 
+		// } 
+		// this.prod.length = n;
+		console.log(removed);
+		console.log(this.prod);
+		this.defRfqTag = this.prod.length;
+
+
+	}
+	submitPrice(x: any) {
+		if (x == 'buyNow') {
+			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+			var desiredDate = "none";
+			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+
+			var res = productVariant.split(" ");
+			this.varName = res[0];
+
+			if (ship == true) {
+				var deliveryOption = "shipping";
+			}
+			else if (cod == true) {
+				var deliveryOption = "cod";
+			}
+			else if (pickup == true) {
+				var deliveryOption = "pickup";
+			}
+			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
+
+			this.data.sendOrderDetails(this.tokenPrice).subscribe();
+		}
+		if (x == 'requestOrder') {
+			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+			var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+			var res = productVariant.split(" ");
+			this.varName = res[0];
+
+			if (ship == true) {
+				var deliveryOption = "shipping";
+			}
+			else if (cod == true) {
+				var deliveryOption = "cod";
+			}
+			else if (pickup == true) {
+				var deliveryOption = "pickup";
+			}
+			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
+
+			this.data.sendOrderDetails(this.tokenPrice).subscribe();
+		}
+	}
+	submitCart() {
+		if (this.giftEnable == 0) {
+			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+			var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
+			if (x == 0) {
+				var desiredDate = "none";
+			} else {
+				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+			}
+			var res = productVariant.split(" ");
+			this.varName = res[0];
+
+			if (ship == true) {
+				var deliveryOption = "shipping";
+			}
+			else if (cod == true) {
+				var deliveryOption = "cod";
+			}
+			else if (pickup == true) {
+				var deliveryOption = "pickup";
+			}
+			this.tokenPrice = { gift_title: null, gift_note: null, gift_address: null, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
+
+			this.data.sendCartDetails(this.tokenPrice).subscribe();
+		}
+		if (this.giftEnable == 1) {
+			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+			// var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+			var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
+			if (x == 0) {
+				var desiredDate = "none";
+			} else {
+				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+			}
+			var res = productVariant.split(" ");
+			this.varName = res[0];
+
+			if (ship == true) {
+				var deliveryOption = "shipping";
+			}
+			else if (cod == true) {
+				var deliveryOption = "cod";
+			}
+			else if (pickup == true) {
+				var deliveryOption = "pickup";
+			}
+			this.tokenPrice = { gift_title: this.titleGift, gift_note: this.noteGift, gift_address: this.addressGift, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
+
+			this.data.sendCartDetails(this.tokenPrice).subscribe();
+		}
 	}
 }

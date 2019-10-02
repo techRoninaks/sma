@@ -278,6 +278,56 @@
 		}
 	}
 	.pButton {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: repeat(14, auto);
+	grid-template-areas:
+		"pName pName"
+		"pDiscount pRating"
+		"pSize pSize"
+		"pQuantity pQuantity"
+		"pAvailable pAvailable"
+		"pMessage pMessage"
+		"pImages pImages"
+		"pdatePicker pdatePicker"
+		"pButton pButton"
+		"pConfirmation pConfirmation"
+		"pDelivery pDelivery"
+		"pCourier pCourier"
+		"pTime pTime"
+		"pDate pDate";
+	.pName {
+		grid-area: pName;
+	}
+	.pRating {
+		grid-area: pRating;
+	}
+	.pDiscount {
+		grid-area: pDiscount;
+	}
+	.pSize {
+		grid-area: pSize;
+	}
+	.pQuantity {
+		grid-area: pQuantity;
+	}
+	.pAvailable {
+		grid-area: pAvailable;
+	}
+	.pMessage {
+		grid-area: pMessage;
+	}
+	.pImages {
+		grid-area: pImages;
+	}
+	.pdatePicker {
+		grid-area: pdatePicker;
+		margin:5px;
+	}
+	.pButton {
+		grid-area: pButton;
+		margin:5px;
+
 		form {
 			background-color: whitesmoke;
 			#fText {
@@ -303,6 +353,50 @@
 				background-color: whitesmoke;
 			}
 		}
+		display: grid;
+		grid-template-columns: 25% auto;
+		grid-template-areas: "dvBuyBtn dvGiftBtn";
+		.dvBuyBtn {
+			grid-area: dvBuyBtn;
+		}
+		.dvGiftBtn {
+			grid-area: dvGiftBtn;
+		}
+	}
+	.pConfirmation {
+		grid-area: pConfirmation;
+	}
+	.pDelivery {
+		grid-area: pDelivery;
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 300px;
+			z-index: 0;
+			transform: translate(-10rem, 2.75rem);
+		}
+	}
+	.pCourier {
+		grid-area: pCourier;
+		display: grid;
+		grid-template-columns: 30% 30% 30% ;
+		grid-template-areas: "dvShip dvCod dvPickup";
+		.dvShip {
+			grid-area: dvShip;
+		}
+		.dvCod {
+			grid-area: dvCod;
+		}
+		.dvPickup {
+			grid-area: dvPickup;
+		}
+	}
+	.pTime {
+		grid-area: pTime;
+	}
+	.pDate {
+		grid-area: pDate;
 	}
 }
 
@@ -363,6 +457,29 @@
 		}
 	}
 	.shipPolicy {
+		// margin: 0rem 1rem 5rem 1rem;
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 300px;
+			transform: translate(0rem, 2rem);
+			z-index: 0;
+			// position: absolute;
+		}
+		h2 {
+			text-align: center;
+			//   position: absolute;
+			transform: translate(0px, -0.45em);
+			z-index: 1;
+		}
+		p {
+			text-align: justify;
+			text-align: center;
+		}
+	}
+
+	.retPolicy {
 		// margin: 0rem 1rem 5rem 1rem;
 		img {
 			display: block;
@@ -654,6 +771,14 @@
 			}
 		}
 	}
+
+	.dvMore {
+		img {
+			height: 50px;
+			width: 50px;
+		}
+	}
+
 }
 
 .imgPopup {
@@ -773,7 +898,157 @@
 	}
 }
 
-.rfqPopup {
+.rfqForm {
+	/* Dropdown Button */
+	// .dropBtnRfq {
+	// 	background-color: #4caf50;
+	// 	color: white;
+	// 	padding: 16px;
+	// 	font-size: 16px;
+	// 	border: none;
+	// 	cursor: pointer;
+	// }
+	/* Dropdown button on hover & focus */
+	// .dropBtnRfq:hover,
+	// .dropBtnRfq:focus {
+	// 	background-color: #3e8e41;
+	// }
+	#myInput {
+		background-image: url("/css/searchicon.png");
+		background-position: 10px 12px;
+		background-repeat: no-repeat;
+		width: 100%;
+		font-size: 16px;
+		// padding: 12px 20px 12px 40px;
+		border: 1px solid #ddd;
+		margin-bottom: 12px;
+	}
+
+	#myUL {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	#myUL li a {
+		border: 1px solid #ddd;
+		margin-top: -1px; /* Prevent double borders */
+		background-color: #f6f6f6;
+		// padding: 12px;
+		text-decoration: none;
+		font-size: 18px;
+		color: black;
+		display: block;
+	}
+
+	#myUL li a:hover:not(.header) {
+		background-color: #eee;
+	}
+	.rfqUL {
+		display: none;
+	}
+}
+.rfqForm {
+	display: grid;
+	padding-bottom: 25%;
+	grid-template-columns: auto;
+	grid-row-gap: 5%;
+	grid-template-rows: repeat(6, auto);
+	grid-template-areas:
+		"rfqSN"
+		"rfqSL"
+		"rfqN"
+		"rfqTag"
+		"chips"
+		"btnRfq";
+	.rfqSN {
+		grid-area: rfqSN;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqShopName rfqShopNameInput";
+		.rfqShopName {
+			grid-area: rfqShopName;
+		}
+		.rfqShopNameInput {
+			grid-area: rfqShopNameInput;
+		}
+	}
+	.rfqSL {
+		grid-area: rfqSL;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqLocation rfqLocationInput";
+		.rfqLocation {
+			grid-area: rfqLocation;
+		}
+		.rfqLocationInput {
+			grid-area: rfqLocationInput;
+		}
+	}
+	.rfqN {
+		grid-area: rfqN;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqNote rfqNoteInput";
+		.rfqNote {
+			grid-area: rfqNote;
+		}
+		.rfqNoteInput {
+			grid-area: rfqNoteInput;
+		}
+	}
+	.rfqTag {
+		grid-area: rfqTag;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "dropBtnRfq dropdownRfq";
+		.dropBtnRfq {
+			grid-area: dropBtnRfq;
+		}
+		.dropdownRfq {
+			grid-area: dropdownRfq;
+		}
+	}
+	.chips {
+		grid-area: chips;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(auto, 1fr);
+		.chipsOuter {
+			margin: 5px;
+			.chip {
+				display: inline-block;
+				padding: 0 25px;
+				height: auto;
+				font-size: 16px;
+				width: max-content;
+				line-height: auto;
+				border-radius: 25px;
+				background-color: #efbe24;
+			}
+
+			.closebtn {
+				padding-left: 10px;
+				color: #888;
+				font-weight: bold;
+				float: right;
+				font-size: 20px;
+				cursor: pointer;
+			}
+
+			.closebtn:hover {
+				color: #000;
+			}
+		}
+	}
+	.btnRfq {
+		grid-area: btnRfq;
+	}
+  .rfqPopup {
 	/* Dropdown Button */
 	.dropBtnRfq {
 		background-color: #4caf50;
@@ -1238,5 +1513,4 @@
 				border-radius: 5px;
 			}
 		}
-	}
 }
