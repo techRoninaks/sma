@@ -73,13 +73,16 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
     MatGridListModule,
     MatCardModule, 
     MatButtonModule, 
+    OrdersComponent,
+    ContactComponent,
+    ManageOrdersComponent,
     RouterModule.forRoot([
       {
-        path: 'Plandetails',
+        path: 'plandetails',
         component: PlandetailsComponent,
       },
       {
-        path: 'Login',
+        path: 'login',
         component: LoginComponent
       },
     ])
