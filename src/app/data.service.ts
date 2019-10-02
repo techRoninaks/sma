@@ -516,6 +516,77 @@ getDateDiffShop(data: any) {
   getUser(){
     return this.http.get(this.baseUrl+'assets/api/bulkdiscountcheckout.php');
   }
+  getUsercardData(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/userCardData.php',httpParams);
+ }
+ getPendingPayCount(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/pendingPayCount.php',httpParams);
+ }
+ getShopFollowingCount(data: any){
+   let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/shopFollowingCount.php',httpParams);
+ }
+ getShopName(data: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   return this.http.post(this.baseUrl+'assets/api/shopName.php',httpParams);
+ }
+ followShopPage(data: any,shopId: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   .append("shopId", shopId);
+   return this.http.post(this.baseUrl+'assets/api/followShopPage.php',httpParams);
+ }
+ unFollowShopPage(data: any,shopId: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   .append("shopId", shopId);
+   return this.http.post(this.baseUrl+'assets/api/unFollowShopPage.php',httpParams);
+ }
+ getSavedCardData(data: any){
+   let httpParams= new HttpParams()
+   .append("userId", data)
+   return this.http.post(this.baseUrl+'assets/api/savedCardData.php',httpParams);
+ }
+addSellerData(data: Object){
+   let httpParams= new HttpParams()
+   .append("fullname", data['fullname'])
+   .append("reg_email", data['reg_email'])
+   .append("reg_mobile_no", data['reg_mobile_no'])
+   .append("reg_password", data['reg_password']);
+   return this.http.post(this.baseUrl+'assets/api/sellerRegistration.php',httpParams);
+ }
+addData(data: Object,name: any){
+   let httpParams= new HttpParams()
+   .append("fullname", data['fullname'])
+   .append("reg_address1", data['reg_address1'])
+   .append("reg_address2", data['reg_address2'])
+   .append("reg_city", data['reg_city'])
+   .append("reg_dist", data['reg_dist'])
+   .append("reg_state", data['reg_state'])
+   .append("reg_country", data['reg_country'])
+   .append("reg_pin", data['reg_pin'])
+   .append("reg_email", data['reg_email'])
+   .append("reg_mobile_no", data['reg_mobile_no'])
+   .append("reg_age", data['reg_age'])
+   .append("gender", name)
+   .append("reg_password", data['reg_password']);
+   return this.http.post(this.baseUrl+'assets/api/registration.php',httpParams);
+ }
+addContact(data: Object){
+   let httpParams= new HttpParams()
+   .append("name", data['name'])
+   .append("email", data['email'])
+   .append("phone", data['mobile'])
+   .append("remarks", data['remarks'])
+   .append("purpose", data['purpose']);
+   return this.http.post(this.baseUrl+'assets/api/addContact.php',httpParams);
+ }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
