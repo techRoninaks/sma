@@ -32,6 +32,7 @@ import * as bootstrap from 'bootstrap';
 import * as $ from "jquery";
 import { MatInputModule, MatFormFieldModule} from '@angular/material';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { ManageshopComponent } from './manageshop/manageshop.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
     MatExpansionModule,
     AppRoutingModule,
     FormsModule,
+    ManageshopComponent,
     BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule, 
