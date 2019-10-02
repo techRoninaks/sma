@@ -33,6 +33,9 @@ import * as $ from "jquery";
 import { MatInputModule, MatFormFieldModule} from '@angular/material';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { ManageshopComponent } from './manageshop/manageshop.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ContactComponent } from './contact/contact.component';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 
 @NgModule({
   declarations: [
