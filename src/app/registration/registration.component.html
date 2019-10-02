@@ -31,16 +31,74 @@
           </div> <br>
 
           <div>
-            <textarea type="text" placeholder="Address  :" class="text-input-style-address" id="reg_address"
-              formControlName="reg_address">
-            </textarea>
-            <div *ngIf="submitted && registrationForm.controls.reg_address.errors" class="error validator-style">
-              <div *ngIf="registrationForm.controls.reg_address.errors.required">
+            <input type="text" placeholder="Address1  :" class="text-input-style" id="reg_address1"
+              formControlName="reg_address1">
+            <div *ngIf="submitted && registrationForm.controls.reg_address1.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_address1.errors.required">
                 Address is required !
               </div>
             </div>
           </div> <br>
 
+          <div>
+            <input type="text" placeholder="Address2  :" class="text-input-style" id="reg_address2"
+              formControlName="reg_address2">
+            <div *ngIf="submitted && registrationForm.controls.reg_address2.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_address2.errors.required">
+                Address is required !
+              </div>
+            </div>
+          </div> <br>
+
+          <div>
+            <input type="text" placeholder="City  :" class="text-input-style" id="reg_city"
+              formControlName="reg_city">
+            <div *ngIf="submitted && registrationForm.controls.reg_city.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_city.errors.required">
+                City is required !
+              </div>
+            </div>
+          </div> <br>
+
+          <div>
+            <input type="text" placeholder="District  :" class="text-input-style" id="reg_dist"
+              formControlName="reg_dist">
+            <div *ngIf="submitted && registrationForm.controls.reg_dist.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_dist.errors.required">
+                District is required !
+              </div>
+            </div>
+          </div> <br>
+
+          <div>
+            <input type="text" placeholder="State  :" class="text-input-style" id="reg_state"
+              formControlName="reg_state">
+            <div *ngIf="submitted && registrationForm.controls.reg_state.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_state.errors.required">
+                State is required !
+              </div>
+            </div>
+          </div> <br>
+
+          <div>
+            <input type="text" placeholder="Country  :" class="text-input-style" id="reg_country"
+              formControlName="reg_country">
+            <div *ngIf="submitted && registrationForm.controls.reg_country.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_country.errors.required">
+                Country is required !
+              </div>
+            </div>
+          </div> <br>
+
+          <div>
+            <input type="text" placeholder="Pincode  :" class="text-input-style" id="reg_pin"
+              formControlName="reg_pin">
+            <div *ngIf="submitted && registrationForm.controls.reg_pin.errors" class="error validator-style">
+              <div *ngIf="registrationForm.controls.reg_pin.errors.required">
+                Pincode is required !
+              </div>
+            </div>
+          </div> <br>
 
           <div>
             <input type="email" placeholder="Email ID  :" class="text-input-style" id="reg_email"

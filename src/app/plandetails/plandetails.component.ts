@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { DataService } from '../data.service';
+import { CookieService } from 'ngx-cookie-service';
 declare var gapi : any; 
 
 // check this
@@ -11,7 +12,7 @@ declare var gapi : any;
 })
 export class PlandetailsComponent implements OnInit {
 
-  constructor(private data: DataService,private router: Router) { }
+  constructor(private data: DataService,private router: Router,private cookieService: CookieService) { }
   dynamicDataFree: any = "";
   dynamicDataBasic: any = "";
   dynamicDataPremium: any = "";
@@ -49,6 +50,10 @@ export class PlandetailsComponent implements OnInit {
       console.log('User signed out');
     });
   }
+  signOut2(){
+    this.cookieService.delete('userName');
+    document.getElementById("headerLogin").innerText ="Login";
+  }
   fblogout(){
       FB.logout(function(response) {
         // user is now logged out
@@ -56,6 +61,6 @@ export class PlandetailsComponent implements OnInit {
       }
       )};
   redirect(){
-    this.router.navigate(['/SignupSeller']);
+    this.router.navigate(['/signupseller']);
   }
 }

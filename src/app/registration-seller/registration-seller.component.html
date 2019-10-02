@@ -17,26 +17,127 @@
         <div class="login-layout">
           <br>
             <div class="title">SCOOPMYART</div>
-          <form name="form1" action="#homepage" id="form1" onsubmit="validateForm()">
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <!-- <ul> -->
               <div class="login-layout-2">
-                <div><input type="text" placeholder="Owner Name :"  size="40" class="text-input-style" id="fullname"></div>
-                <br>
-                <div><input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email">Verify</div>
-                <br>
-                <div><input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Verify</button></div>
-                <br>
-                <div><input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password"></div>
-                <br>
-                <div><input type="password" placeholder="Confirm Password  :" size="40" class="text-input-style" id="reg_conf_password"></div>
+                <div *ngIf="stage_1">
+                    <div>
+                      <input type="text" placeholder="Owner Name :"  size="40" class="text-input-style" id="fullname" formControlName="fullname">
+                      <div *ngIf="submitted && registrationForm.controls.fullname.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.fullname.errors.required">
+                            Name is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email" formControlName="reg_email">Verify
+                      <div *ngIf="submitted && registrationForm.controls.reg_email.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_email.errors.required">
+                            Email is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no" formControlName="reg_mobile_no">
+                        <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
+                            <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
+                              Mobile no is required !
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Verify</button>
+                    </div><br>
+                    <div>
+                      <input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password" formControlName="reg_password">
+                      <div *ngIf="submitted && registrationForm.controls.reg_password.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_password.errors.required">
+                            Password is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="password" placeholder="Confirm Password  :" size="40" class="text-input-style" id="reg_conf_password" formControlName="reg_conf_password">
+                      <div *ngIf="submitted && registrationForm.controls.reg_conf_password.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_conf_password.errors.required">
+                            Password is required !
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- stage2 -->
+                  <!-- <div *ngIf="stage_2">
+                    <form [formGroup]="sellerRegForm" (ngSubmit)="onSubmit2()">
+                      <div>
+                          <input type="text" placeholder="Shop Name :"  size="40" class="text-input-style" id="shopname" formControlName="shopname">
+                          <div *ngIf="submitted && sellerRegForm.controls.shopname.errors" class="error validator-style">
+                              <div *ngIf="sellerRegForm.controls.shopname.errors.required">
+                                Shop Name is required !
+                              </div>
+                          </div>
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="Owners Name :"  size="40" class="text-input-style" id="ownername" formControlName="ownername">
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="Shop Address :"  size="40" class="text-input-style" id="shopaddress" formControlName="shopaddress">
+                          <div *ngIf="submitted && sellerRegForm.controls.shopaddress.errors" class="error validator-style">
+                              <div *ngIf="sellerRegForm.controls.shopaddress.errors.required">
+                                  Shop Address is required !
+                              </div>
+                          </div>
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="Main Category :"  size="40" class="text-input-style" id="maincategory" formControlName="maincategory">
+                          <div *ngIf="submitted && sellerRegForm.controls.maincategory.errors" class="error validator-style">
+                              <div *ngIf="sellerRegForm.controls.maincategory.errors.required">
+                                  Main Category is required !
+                              </div>
+                          </div>
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="Contact Number :"  size="40" class="text-input-style" id="contactno" formControlName="contactno">
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="Email ID :"  size="40" class="text-input-style" id="selleremail" formControlName="selleremail">
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="GST No :"  size="40" class="text-input-style" id="gstno" formControlName="gstno">
+                          <div *ngIf="submitted && sellerRegForm.controls.gstno.errors" class="error validator-style">
+                              <div *ngIf="sellerRegForm.controls.gstno.errors.required">
+                                  GST is required !
+                              </div>
+                          </div>
+                      </div><br>
+
+                      <div>
+                          <input type="text" placeholder="GST No :"  size="40" class="text-input-style" id="gstno" formControlName="gstno">
+                          <div *ngIf="submitted && sellerRegForm.controls.gstno.errors" class="error validator-style">
+                              <div *ngIf="sellerRegForm.controls.gstno.errors.required">
+                                  GST is required !
+                              </div>
+                          </div>
+                      </div><br>
+
+                    </form>
+                  </div> -->
+                  <!-- stage3 -->
               </div>
+
+
 
               <br>
               <div class="login-layout-3">
-                <div><input type="checkbox"> I read the agreement & not going back from success</div>
+                <div><input type="checkbox" formControlName="reg_checkbox"> I read the agreement & not going back from success</div>
                 <br>
               </div>
-              <div><button class="button-login" type="submit">CONTINUE</button></div>
+              <div>
+                <button class="button-login" type="submit" [disabled]="!registrationForm.controls.reg_checkbox.valid">CONTINUE</button>
+              </div>
             <!-- </ul> -->
           </form>
         </div>

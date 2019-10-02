@@ -2,54 +2,564 @@
         <div class="sub-grid-1">
                 <div class="main-grid-1">
                         <div class="primary-card-grid">
-                                <div class="primary-card-style">
-                                        <div class="profile-card-grid-left">
-                                                <div class="profile-card-style">
-                                                        
+                                <div class="grid-profile-card">
+                                        <div class="left-sect">
+                                                <div class="text-style">
+                                                        <div class="grid-user-info-1" style="visibility: visible">
+                                                                <div class="l-name">
+                                                                        Name
+                                                                </div>
+                                                                <div class="r-name">
+                                                                        {{dynamicDataUsercard.name}}
+                                                                </div>
+                                                                <div class="l-address">
+                                                                        Address
+                                                                </div>
+                                                                <div class="r-address">
+                                                                        <label>
+                                                                                {{dynamicDataUsercard.address}}
+                                                                                {{dynamicDataUsercard.city}},
+                                                                                {{dynamicDataUsercard.district}},
+                                                                                <br>
+                                                                                {{dynamicDataUsercard.state}},
+                                                                                <br>
+                                                                                {{dynamicDataUsercard.country}},
+                                                                                <br>
+                                                                                {{dynamicDataUsercard.pincode}}
+                                                                        </label>
+                                                                </div>
+                                                                <div class="l-phone">
+                                                                        Phone
+                                                                </div>
+                                                                <div class="r-phone">
+                                                                        {{dynamicDataUsercard.phoneNo}}
+                                                                </div>
+                                                                <div class="l-email">
+                                                                        Email
+                                                                </div>
+                                                                <div class="r-email">
+                                                                        {{dynamicDataUsercard.email}}
+                                                                </div>
+                                                                <div class="col-1">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="col-3">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                        <label>:</label>
+                                                                </div>
+                                                        </div>
+                                                        <!-- <div class="grid-user-info-2" style="visibility: visible">
+                                                                        <div class="l-name">
+                                                                                        Name
+                                                                                </div>
+                                                                                <div class="r-name">
+                                                                                        <input type="text">
+                                                                                </div>
+                                                                                <div class="l-address">
+                                                                                        Address
+                                                                                </div>
+                                                                                <div class="r-address">
+                                                                                       <input type="text">
+                                                                                </div>
+                                                                                <div class="l-phone">
+                                                                                        Phone
+                                                                                </div>
+                                                                                <div class="r-phone">
+                                                                                        <input type="tel">
+                                                                                </div>
+                                                                                <div class="l-email">
+                                                                                        Email
+                                                                                </div>
+                                                                                <div class="r-email">
+                                                                                        <input type="email">
+                                                                                </div>
+                                                                                <div class="col-1">
+                                                                                        <label>:</label>
+                                                                                </div>
+                                                                                <div class="col-2">
+                                                                                        <label>:</label>
+                                                                                </div>
+                                                                                <div class="col-3">
+                                                                                        <label>:</label>
+                                                                                </div>
+                                                                                <div class="col-4">
+                                                                                        <label>:</label>
+                                                                                </div>
+                                                        </div> -->
                                                 </div>
                                         </div>
-                                        <div class="profile-card-grid-right">
-                                                                
-                                        </div>   
+                                        <div class="right-sect-1">
+                                                <button class="btn-style-1">SHOP FOLLOWING:
+                                                        {{dynamicDataShopCount.count}}</button>
+                                        </div>
+                                        <div class="right-sect-2">
+                                                <button class="btn-style-2">EDIT</button>
+                                        </div>
                                 </div>
                         </div>
-                                    
-                                        <div class="sub-card-grid-1">
-                                                <div class="sub-card-style-1">
-                                                        <p>PENDING</p>
-                                                        <br>
-                                                        <p>PAYMENT</p>
-                                                </div>
-                                        </div>
-                                        
-                                        <div class="sub-card-grid-2">
-                                                <div class="sub-card-style-2">
-                                                        <p>ORDER</p>
-                                                        <br>
-                                                        <p>HISTORY</p>
-                                                </div>
-                                        </div>
-                </div>                      
+
+                        <div class="sub-card-grid-1">
+                                <div class="sub-card-style-1">
+                                        <p><img src="assets/icons/userProfile/pendingPayment.png"></p>
+                                        <a href="" class="notif"><span
+                                                        class="num">{{dynamicDataPendingPayCount.pcount}}</span></a>
+                                </div>
+                                <div class="sub-card-style-3">
+                                        <p>PENDING<br>PAYMENT</p>
+                                </div>
+                        </div>
+
+                        <div class="sub-card-grid-1">
+                                <div class="sub-card-style-2">
+                                        <p><a routerLink="/orders"><img
+                                                                src="assets/icons/userProfile/orderHistory.png"></a></p>
+                                </div>
+                                <div class="sub-card-style-4">
+                                        <p><a routerLink="/orders" class="link-style">ORDER<br>HISTORY</a></p>
+                                </div>
+                        </div>
+                </div>
         </div>
 
         <div class="sub-grid-2">
-                        <br>
-                        <br>
-                        <br>
-                GRID-2
-                <br>
-                <br>
-                <br>
+                <div class="grid-2">
+                        <div class="shop-following">
+                                <mat-accordion>
+                                        <mat-expansion-panel class="style-body">
+                                                <mat-expansion-panel-header class="style-header">
+                                                        <mat-panel-title>
+                                                                SHOP FOLLOWING
+                                                        </mat-panel-title>
+                                                        <mat-panel-description>
+                                                        </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div>
+                                                        <div class="grid-shop-following" *ngFor="let item of Object.keys(dynamicDataShopName)">
+                                                                <div class="shop-image">
+                                                                        <p><img src="assets/images/userProfile/shopFollowing.jpg"
+                                                                                        height=50px; width=50px;>
+                                                                        </p>
+                                                                </div>
+                                                                <div class="shop-description-1">
+                                                                        Shop Name: {{dynamicDataShopName[item].shopname}}
+                                                                </div>
+                                                                <div class="shop-description-2">
+                                                                        {{dynamicDataShopName[item].count}} sold by
+                                                                        {{dynamicDataShopName[item].seller_name}}
+                                                                </div>
+                                                                <div class="shop-description-3">
+                                                                        {{dynamicDataShopName[item].prodCount}} products
+                                                                </div>
+                                                                <div class="shop-follow">
+                                                                        <!-- <button class="button-style-follow">Follow</button> -->
+                                                                        <ng-container
+                                                                                *ngIf="folResult; else notFollowing">
+                                                                                <button type="button"
+                                                                                        class="button-style-follow"
+                                                                                        (click)="unfollowShop(dynamicDataShopName[item].shopid);">
+                                                                                        Unfollow
+                                                                                </button>
+                                                                        </ng-container>
+                                                                        <ng-template #notFollowing>
+                                                                                <button type="button"
+                                                                                        class="button-style-follow"
+                                                                                        (click)="followShop(dynamicDataShopName[item].shopid);">
+                                                                                        Follow
+                                                                                </button>
+                                                                        </ng-template>
+                                                                </div>
+                                                                <div class="shop-rating">
+                                                                        Rate
+                                                                </div>
+                                                                <div class="shop-rating-icon">
+                                                                        <div>
+                                                                                <i class="fa fa-star"
+                                                                                        *ngFor="let item of filledStar"></i>
+                                                                                <i class="fa fa-star-o"
+                                                                                        *ngFor="let item of unFilledStar"></i>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </mat-expansion-panel>
+                                </mat-accordion>
+
+                        </div>
+                        <div class="saved-cards">
+                                <mat-accordion>
+                                        <mat-expansion-panel class="style-body">
+                                                <mat-expansion-panel-header class="style-header">
+                                                        <mat-panel-title>
+                                                                SAVED CARDS
+                                                        </mat-panel-title>
+                                                        <mat-panel-description>
+                                                        </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div class="grid-saved-cards">
+                                                        <div class="expiry-label">
+                                                                <label>Expires on</label>
+                                                        </div>
+                                                        <div class="card-no">
+                                                                XXXXXXXXXXXX0000
+                                                        </div>
+                                                        <div class="expiry">
+                                                                00/0000
+                                                        </div>
+                                                        <div class="delete">
+                                                                <img src="assets/icons/userProfile/ic_delete.png"
+                                                                        height=20px; width=20px;>
+                                                        </div>
+                                                        <div class="select">
+                                                                <input type="radio">
+                                                        </div>
+                                                        <div class="new-card">
+                                                                <label>ADD NEW CARD</label>
+                                                                <br>
+                                                                <input type="text" class="new-card-box">
+                                                        </div>
+                                                        <div class="cvv">
+                                                                <input type="text" size="8" class="card-input-style"
+                                                                        placeholder="CVV">
+                                                        </div>
+                                                        <div class="val-label">
+                                                                <label>VALID TILL</label>
+                                                        </div>
+                                                        <div class="val">
+                                                                <input type="date" size="8" class="card-input-style">
+                                                        </div>
+                                                        <div class="ver-gif">
+                                                                <img src="assets/icons/userProfile/ic_ver_gif.png"
+                                                                        height=20px; width=20px;>
+                                                        </div>
+                                                </div>
+                                        </mat-expansion-panel>
+                                </mat-accordion>
+                        </div>
+                </div>
+                <div class="grid-3">
+                        <div class="updates-card">
+                                <mat-accordion>
+                                        <mat-expansion-panel class="style-body">
+                                                <mat-expansion-panel-header class="style-header">
+                                                        <mat-panel-title>
+                                                                UPDATES
+                                                        </mat-panel-title>
+                                                        <mat-panel-description>
+                                                        </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div class="grid-update-card">
+                                                        <div class="update-message">
+                                                                <p>SELLER HAS APPROVED PURCHASE</p>
+                                                        </div>
+                                                        <div class="update-date">
+                                                                <p>00/00/0000 | 00:00</p>
+                                                        </div>
+                                                        <div class="update-expiry">
+                                                                <p>Expires In : 2Hrs</p>
+                                                        </div>
+                                                        <div class="update-button">
+                                                                <button class="button-style-update">BUY NOW</button>
+                                                        </div>
+                                                </div>
+                                        </mat-expansion-panel>
+                                </mat-accordion>
+                        </div>
+                        <div class="address-card">
+                                <mat-accordion>
+                                        <mat-expansion-panel class="style-body ">
+                                                <mat-expansion-panel-header class="style-header">
+                                                        <mat-panel-title>
+                                                                SAVED ADDRESS
+                                                        </mat-panel-title>
+                                                        <mat-panel-description>
+                                                        </mat-panel-description>
+                                                </mat-expansion-panel-header>
+
+                                                <div class="mat-style">
+                                                        <div class="grid-saved-address">
+                                                                <div class="address">
+                                                                        <label>ADDRESS 1</label>
+                                                                </div>
+                                                                <div class="address-label">
+                                                                        <label>ADD ADDRESS</label>
+                                                                </div>
+                                                                <div class="delete">
+                                                                        <img src="assets/icons/userProfile/ic_delete.png"
+                                                                                height=20px; width=20px;>
+                                                                </div>
+                                                                <div class="select">
+                                                                        <input type="radio">
+                                                                </div>
+                                                        </div>
+                                                        <div class="grid-add-address">
+                                                                <div class="country">
+                                                                        <label>Country</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="state">
+                                                                        <label>State</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="city">
+                                                                        <label>City</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="pin">
+                                                                        <label>Pin</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="email">
+                                                                        <label>Email</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="phone">
+                                                                        <label>Phone</label>
+                                                                        <br>
+                                                                        <input type="text" size="24"
+                                                                                class="card-input-style-address">
+                                                                </div>
+                                                                <div class="button">
+                                                                        <button class="button-style-save">SAVE</button>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </mat-expansion-panel>
+                                </mat-accordion>
+                        </div>
+                </div>
         </div>
 
         <div class="sub-grid-3">
-                        <br>
-                        <br>
-                        <br>
-                GRID-3
-                <br>
-                <br>
-                <br>
-        </div>
+                <div class="grid-order-history-head" style="width: 90%; margin-left: 5%;">
+                        <div class="orders">
+                                <label>ORDERS</label>
+                        </div>
+                        <div class="status">
+                                <label>STATUS</label>
+                        </div>
+                        <div class="feedback">
+                                <label>FEEDBACK</label>
+                        </div>
+                </div>
 
+                <div class="grid-order-history">
+                        <div class="prod-name">
+                                <label>PAINTING</label>
+                        </div>
+                        <div class="desc">
+                                <p>fine crafted masterpiece</p>
+                        </div>
+                        <div class="order-no">
+                                <label>#00000000ABC</label>
+                        </div>
+                        <div class="invoice">
+                                <button class="btn-invoice-style">VIEW INVOICE</button>
+                        </div>
+
+                        <div class="grid-status">
+                                <div class="pending-conf">
+                                        <label>Pending Confirmation</label>
+                                </div>
+                                <div class="pending-pay">
+                                        <label>Pending Payment</label>
+                                </div>
+                                <div class="processing">
+                                        <label>Processing</label>
+                                </div>
+                                <div class="shipped">
+                                        <label>Shipped</label>
+                                </div>
+                                <div class="deliver">
+                                        <label>Delivered</label>
+                                </div>
+                                <div class="closed">
+                                        <label>Closed</label>
+                                </div>
+                                <div class="ic-pending-conf">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_pending_conf.png"
+                                                        style="padding-top: 11%;">
+                                        </span>
+                                </div>
+                                <div class="ic-pending-pay">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_pending_pay.png"
+                                                        style="padding-top: 20%;">
+                                        </span>
+                                </div>
+                                <div class="ic-processing">
+                                        <img src="assets/images/userProfile/ic_processing.jpg" width="65px"
+                                                height="60px" style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-shipped">
+                                        <img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
+                                                style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-deliver">
+                                        <img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
+                                                style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-closed">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_closed.png"
+                                                        style="padding-top: 7%; margin-top: 7%;" width="50px"
+                                                        height="53px">
+                                        </span>
+                                </div>
+                                <div class="stat-bar-1">
+                                        <div class="stats-1">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="stat-bar-2">
+                                        <div class="stats-2">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="stat-bar-3">
+                                        <div class="stats-3">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="stat-bar-4">
+                                        <div class="stats-4">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="stat-bar-5">
+                                        <div class="stats-5">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="stat-bar-6">
+                                        <div class="stats-6">
+                                                <span>
+                                                </span>
+                                        </div>
+                                </div>
+                                <div class="label-1">
+                                        Mon,11th Dec | 7:35pm
+                                </div>
+                                <div class="label-2">
+                                        Tue,12th Dec | 7:35pm
+                                </div>
+                                <div class="label-3">
+                                        Wed,13th Dec | 7:35pm
+                                </div>
+                                <div class="label-4">
+                                        Thu,14th Dec | 7:35pm
+                                </div>
+                                <div class="label-5">
+                                        Fri,12th Dec | 7:35pm
+                                </div>
+                                <div class="label-6">
+                                        Sat,12th Dec | 7:35pm
+                                </div>
+                        </div>
+                        <div class="feedback-stat">
+                                <label>Delivery pending</label>
+                        </div>
+                        <div class="feedback-desc">
+                                <p>delivery before</p>
+                                <br>
+                                <p style="margin-top: -16%;">00-00-0000</p>
+                        </div>
+                        <div class="btn-req-update">
+                                <button class="btn-req-update-style">REQUEST UPDATE</button>
+                        </div>
+
+                        <div class="btn-complaint">
+                                <!-- <button class="btn-complaint-style">COMPLAINT</button> -->
+
+                                <div class="container" style="height: auto;">
+                                        <!-- Trigger the modal with a button -->
+                                        <button type="button" class="btn btn-info btn-lg btn-complaint-style"
+                                                style="height: 30px;" data-toggle="modal"
+                                                data-target="#myModal">COMPLAINT</button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                        <h4 class="modal-title"
+                                                                                style="text-align: center; margin-left: auto;">
+                                                                                COMPLAINT</h4>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                        <div class="grid-complaint">
+                                                                                <div class="username">
+                                                                                        <label>Username</label>
+                                                                                        <br>
+                                                                                        <input type="text"
+                                                                                                class="user-style">
+                                                                                </div>
+                                                                                <div class="write-complaint">
+                                                                                        <textarea
+                                                                                                placeholder="Write your complaint"
+                                                                                                class="text-area-style"></textarea>
+                                                                                        <br>
+                                                                                        <button
+                                                                                                class="submit">Submit</button>
+                                                                                </div>
+                                                                                <div class="add-image">
+                                                                                        <label>Add image</label>
+                                                                                        <br>
+                                                                                        <div class="flex-container">
+                                                                                                <div>
+                                                                                                        <img src="assets/images/userProfile/ic_complaint.jpg"
+                                                                                                                height=90px;
+                                                                                                                width=90px;>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                        <img src="assets/images/userProfile/ic_complaint2.jpg"
+                                                                                                                height=90px;
+                                                                                                                width=90px;>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                        <img src="assets/images/userProfile/ic_complaint3.jpg"
+                                                                                                                height=90px;
+                                                                                                                width=90px;>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">Close</button>
+                                                                </div>
+                                                        </div>
+
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                </div>
+        </div>
 </div>

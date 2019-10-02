@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
   fp_mobile: any ="" ;
   fp_new_password: any ="" ;
   username: any ="";
+  cookie_uname: String;
+  cookie_user_id: String;
 
     constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
       this.loginForm = this.formBuilderLogin.group({
         login_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
         login_password: ['',Validators.required],
-        login_checkbox:['',Validators.required],
       })
       this.fpFormMobile = this.formBuilderMobile.group({
         fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
@@ -76,6 +77,7 @@ export class LoginComponent implements OnInit {
       console.log('Name: ' + profile.getName());
       console.log('Image URL: ' + profile.getImageUrl());
       console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      this.router.navigate(['/plandetails']);
     }
 
     googleSignIn(){
@@ -107,17 +109,21 @@ export class LoginComponent implements OnInit {
       }
       else
       {  
-        // console.log(this.loginForm.value);
         this.data.attemptLogin(this.loginForm.value).subscribe(
           data=>{
-                  // this.username=this.loginForm.controls['login_email'].value;
+                  
                   console.log(data);
-                  if(data =="Success")
+                  if(data['status'] =="Success")
                   {
                     alert('Login Successfully');
-                    this.setCookie("userName",data['username']);
-                    console.log(this.getCookie('userName'));
-                    this.router.navigate(['/Plandetails']);
+                    this.cookie_uname = data['username'];
+                    this.cookie_user_id = data['userid'];
+                    this.setCookie("userName",this.cookie_uname);
+                    this.setCookie("userId",this.cookie_user_id);
+                    document.getElementById("headerLogin").innerText = this.cookie_uname as string;
+                    document.getElementById("loginButton").innerText ="Log Out";
+                    // document.getElementById("profilemenu").style.display="block";
+                    this.router.navigate(['/']);
                   }
                   else
                   {
@@ -213,13 +219,13 @@ export class LoginComponent implements OnInit {
           {
             alert('Password Changed Successfully');
             $("#myModal").modal('hide');
-            this.router.navigate(['/Login']);
+            this.router.navigate(['/login']);
           }
           else
           {
             alert('Error Try Again');
             $("#myModal").modal('hide');
-            this.router.navigate(['/Login']);
+            this.router.navigate(['/login']);
           }
         },
       error => console.error(error)
