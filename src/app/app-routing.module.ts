@@ -14,6 +14,7 @@ import { SellerlandingComponent } from './sellerlanding/sellerlanding.component'
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { ManageshopComponent } from './manageshop/manageshop.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'Login', component: LoginComponent},
   { path: 'SignUp', component: RegistrationComponent},
   { path: 'Plandetails',component:PlandetailsComponent},
+  { path: 'managepage', component: ManageshopComponent},
   { path: 'Userprofile',component:UserprofileBuyerComponent},
   { path: 'SignupSeller',component:RegistrationSellerComponent},
   { path: 'cart', component: CartComponent },
