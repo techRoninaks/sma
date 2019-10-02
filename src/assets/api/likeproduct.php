@@ -11,7 +11,6 @@
     {
         $sql_query1 ="UPDATE like_dislike SET likeordislike= b'1' WHERE review_id = $reviewId AND customer_id = $userId ";
         $result1 = mysqli_query($con2, $sql_query1);
-        // echo $sql_query1;
     }
     else if(mysqli_num_rows ($result2) == 0 )
     {

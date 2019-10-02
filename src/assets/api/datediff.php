@@ -7,14 +7,14 @@
     $sql_query ="SELECT rr.* FROM review_rating rr  WHERE `mappingid` = $prodId ";
     $result = mysqli_query($con2, $sql_query);
     $today=date_create(date("Y-m-d"));
-    echo $today; 
+    // echo $today; 
     $count = 0;
     while($row=mysqli_fetch_assoc($result)){
         $data=date_create($row["date"]);
         $diff=date_diff($data,$today);
-        $diff->days;
-        $dateDiff[$count++]=$diff;
+        $x=$diff->days;
+        $dateDiff[$count++]=$x;
     }
-    echo $diff;
-    echo json_encode($diff);
+    // echo $diff;
+    echo json_encode($dateDiff);
 ?>

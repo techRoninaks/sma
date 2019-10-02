@@ -11,12 +11,12 @@
     // echo $shopId;
     // var_dump($shopId);
 
-    $sql_query2 = "SELECT s.seller_name, sd.shopname from seller s JOIN shop_details sd on sd.seller_id = s.id where sd.id = $shopId ";
+    $sql_query2 = "SELECT s.seller_name,s.id, sd.shopname ,sd.private_acc,sd.gift_option from seller s JOIN shop_details sd on sd.seller_id = s.id where sd.id = $shopId ";
     // var_dump($sql_query2);
     $result2 = mysqli_query($con2 , $sql_query2);
     // var_dump($result2);
     $row2=mysqli_fetch_array($result2);
-    $data=array('shopName'=>$row2["shopname"],'sellerName'=>$row2["seller_name"]);
+    $data=array('shopName'=>$row2["shopname"],'sellerName'=>$row2["seller_name"],'privateAccount'=>$row2["private_acc"],'giftOption'=>$row2["gift_option"],'shopId'=>$shopId,'sellerId'=>$row2["id"]);
     // var_dump($data);
     echo json_encode($data);
 ?>
