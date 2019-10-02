@@ -62,7 +62,8 @@
 			</div>
 			<div class="gridRightButton">
 				<button class="btnRightDelivery">Free</button>
-				<button class="btnPlaceOrder">PLACE ORDER</button>
+				<button type="button" class="btnPlaceOrder" data-toggle="modal" data-target="#buyNowPopup">PLACE
+					ORDER</button>
 			</div>
 		</div>
 	</div>
@@ -104,5 +105,238 @@
 	<!-- FOOT 2	 -->
 	<div class="dvFoot2">
 		<p>You will save ₹ 00.00 on this order</p>
+	</div>
+</div>
+
+<!-- CHECKOUT POPUP (PLACE ORDER) -->
+<div class="container">
+	<!-- Trigger the modal with a button -->
+	<!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#buyNowPopup">BUY
+        NOW</button> -->
+	<!-- Modal -->
+	<div class="modal fade" id="buyNowPopup" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<div align="center">
+						<h5>ORDER SUMMARY:</h5>
+					</div>
+				</div>
+				<!-- PRODUCT -->
+				<div class="dvProductName">
+					<!-- <h5>Sehaz Artworks 'shiva' Wall Photo Painting</h5> -->
+					{{dynamicDataProName.name}}
+				</div>
+				<div class="dvSub1">
+					<div class="dvProductSpec">
+						<div class="dvProdSpec1">
+							<p>{{ dynamicDataVariants.value }} {{ dynamicDataVariant.name }}</p>
+						</div>
+						<div class="dvProdSpec2">
+							<!-- <p>Size : </p> -->
+						</div>
+					</div>
+
+					<div class="dvCustomerName">
+						<p>Customer Name : {{dynamicDataUser.Name}}</p>
+					</div>
+
+					<div class="dvQty">
+						<p>Qty :</p>
+						<button class="btnQtyCount">{{ dynamicData.length }}</button>
+					</div>
+				</div>
+				<!-- ADDRESS -->
+				<div class="dvAddress">
+					<p>ADDRESS</p>
+				</div>
+				<div class="dvSub2">
+					<div class="dvAddrText">
+						<!-- <p>Roninaks House</p> -->
+						{{dynamicDataAddress.address}}
+					</div>
+					<div class="btnAddrChange">
+						<button type="change" class="btnChange btn-warning" id="btnChange"
+							(click)=showSavedAddr()>Change</button>
+					</div>
+				</div>
+				<!-- SAVED ADDRESS -->
+
+				<div class="dvSub3" id="savedAddr" style="display: none">
+					<div class="dvSavedAddr">
+						<p>SAVED ADDRESS</p>
+						<div class="dvCardAddrLeft">
+							<p>Roninaks</p>
+						</div>
+						<div class="btnCardAddrLeft">
+							<button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft">DELIVER TO
+								THIS
+								ADDRESS</button>
+						</div>
+						<div class="dvCardAddrRight">
+							<p>Roninaks</p>
+						</div>
+						<div class="btnCardAddrRight">
+							<button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight">DELIVER
+								TO
+								THIS
+								ADDRESS</button>
+						</div>
+					</div>
+				</div>
+				<!-- ADD ADDR BTN -->
+				<div class="btnNewAddr">
+					<button type="newAddr" class="btnNewAddr btn-success" id="btnNewAddr" (click)="showFormGrp()">ADD A
+						NEW
+						DELIVERY
+						ADDRESS</button>
+				</div>
+				<!-- FORM GROUP -->
+				<div class="dvSub4" id="formGroup" style="display :none">
+					<form class="formGroup">
+						<div class="grid-dvSub4">
+
+							<div class="grid-FormLeft">
+								<div class="dvCountry">
+									<label>Country</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address" matInput
+										[formControl]="myControl" [matAutocomplete]="auto">
+									<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+										<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+											{{option.name}}
+										</mat-option>
+									</mat-autocomplete>
+								</div>
+								<div class="dvCity">
+									<label>City</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address">
+								</div>
+								<div class="dvEmail">
+									<label>Email</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address">
+								</div>
+							</div>
+							<div class="grid-FormRight">
+								<div class="dvState">
+									<label>State</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address">
+								</div>
+								<div class="dvPincode">
+									<label>PinCode</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address">
+								</div>
+								<div class="dvPhone">
+									<label>Phone</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address">
+								</div>
+							</div>
+							<div class="btnSaveForm">
+								<button type="save" class="btnSave btn-warning" id="btnSave"
+									(click)=formSave()>Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- DELIVERY OPTION -->
+				<div class="dvDeliveryText">
+					<p>DELIVERY OPTIONS:</p>
+				</div>
+				<div class="dvSub5">
+					<div class="btnRadio1">
+						<input type="radio" name="DeliveryOption" value="Shipping"> Shipping
+					</div>
+					<div class="btnRadio2">
+						<input type="radio" name="DeliveryOption" value="homedelivery"> Home Delivery
+					</div>
+					<div class="btnRadio3">
+						<input type="radio" name="DeliveryOption" value="pickup"> Pickup
+					</div>
+				</div>
+				<!-- PRODUCT DELIVERED -->
+				<div class="dvProdDeliText">
+					<p>THE PRODUCT WILL BE DELIVERED BEFORE</p>
+				</div>
+				<div class="dvSub6">
+					<div class="dvDisplayDate">
+						<!-- <p>00-SEPT-2019</p> -->
+						{{ dynamicDataCartDate.deliveryDate }}
+					</div>
+					<div class="dvDisplayPrice">
+						<p>PRICE : {{ dynamicDataCartDate.totalPrice }}</p>
+					</div>
+					<div class="dvDate">
+						<input formControlName="date" type="Date" class="dateText" placeholder="Date">
+					</div>
+					<div class="dvApply">
+						<button type="apply" class="btnApply btn-warning" id="btnApply">Apply</button>
+					</div>
+				</div>
+				<!-- GIFT NOTE -->
+				<div class="dvSub7">
+					<div class="dvGiftOptionText">
+						<p>Gift Option :</p>
+					</div>
+					<div class="btnGiftOption" id="btn-Gift-Option">
+						<label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
+							<input type="checkbox">
+							<span class="slider round"></span>
+						</label>
+					</div>
+					<div class="dvNote" id="showGiftCard" style="display: none;">
+						<input type=text class="Gift-Note-Style" id="Gift-Note-Sect1">
+					</div>
+					<div class="dvNoteText">
+
+					</div>
+					<div class="dvMessageTitle">
+
+					</div>
+				</div>
+				<!-- PRODUCT IMAGE -->
+				<div class="dvProdText">
+					<p>PRODUCT IMAGES</p>
+				</div>
+				<div class="dvSub8">
+					<div class="dvCheckImg1">
+						<img src="assets/images/wall.png" width="140" height="140" class="imgItem1">
+					</div>
+					<div class="dvCheckImg2">
+						<img src="assets/images/wall2.jpg" width="140" height="140" class="imgItem1">
+					</div>
+					<div class="dvCheckImg3">
+						<img src="assets/images/wall3.jpg" width="140" height="140" class="imgItem1">
+					</div>
+				</div>
+				<!-- PRICE VARIATION -->
+				<div class="dvPriceVariText">
+					<h6>PRICE FOR VARIATIONS & QUALITY</h6>
+				</div>
+				<div class="dvSub9">
+					<div class="dvPriceList">
+						<p>Frame : 00.00<br>
+							Base Price : 00.00<br>
+							Variance : 00.00<br>
+							Tax : 00.00<br>
+							Shipping : 00,00</p>
+						<h4>Total : 00,00</h4>
+
+					</div>
+					<div class="btnCheckOut">
+						<button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
+							data-target="#checkOut">CHECK OUT</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 </div>

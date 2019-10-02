@@ -1,13 +1,13 @@
 <?php
     require "init.php";
     // header("Access-Control-Allow-Origin: *");
-    $userId = $_POST['userId'] ;
+    $id = $_POST['id'] ;
     $data = array();
-    $count = 0;
-    $sql_query = "SELECT * FROM cart where user_id = $userId ";
+    // $count = 0;
+    $sql_query = "SELECT * FROM cart where id = id ";
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
-        $data[$count++]=array(
+        $data=array(
         'id'=>$row["id"],
         'prodId'=>$row["prodid"],
         'quantity'=>$row["quantity"],
