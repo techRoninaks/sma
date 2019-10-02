@@ -36,6 +36,8 @@ import { ManageshopComponent } from './manageshop/manageshop.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ContactComponent } from './contact/contact.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { MatAutocompleteModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
     MatButtonModule, 
     OrdersComponent,
     ContactComponent,
+    AddProductComponent,
+    MatAutocompleteModule,
     ManageOrdersComponent,
     RouterModule.forRoot([
       {
