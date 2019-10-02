@@ -587,6 +587,172 @@ addContact(data: Object){
    .append("purpose", data['purpose']);
    return this.http.post(this.baseUrl+'assets/api/addContact.php',httpParams);
  }
+  dataPostAddProduct: any;
+
+
+  //checkout popup
+
+  getvariantInfor(id: any) {
+    let httpParams = new HttpParams()
+      .append("variantid", id);
+    return this.http.post(this.baseUrl + 'assets/api/variantinforcheckout.php', httpParams);
+  }
+  getaddress(data: any) {
+    let httpParams = new HttpParams()
+      .append("id", data);
+    return this.http.post(this.baseUrl + 'assets/api/addresscheckout.php', httpParams);
+  }
+  getaddressType() {
+    return this.http.get(this.baseUrl + 'assets/api/addresstypecheckout.php');
+  }
+  getbulkDiscount() {
+    return this.http.get(this.baseUrl + 'assets/api/bulkdiscountcheckout.php');
+  }
+  getcustomerOrder() {
+    return this.http.get(this.baseUrl + 'assets/api/customerordercheckout.php');
+  }
+  getorderMessage() {
+    return this.http.get(this.baseUrl + 'assets/api/ordermessagecheckout.php');
+  }
+  getorderstatus() {
+    return this.http.get(this.baseUrl + 'assets/api/orderstatuscheckout.php');
+  }
+  getpurchaseOrder() {
+    return this.http.get(this.baseUrl + 'assets/api/purchaseordercheckout.php');
+  }
+  getproduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("prodIds", id);
+    return this.http.post(this.baseUrl + 'assets/api/productcheckout.php', httpParams);
+  }
+  getprodCheckout(id: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", id);
+    return this.http.post(this.baseUrl + 'assets/api/prodCheckoutNew.php', httpParams);
+  }
+  getPolicyAddProduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("prodid", id);
+    return this.http.post(this.baseUrl + 'assets/api/PolicyAddProduct.php', httpParams);
+  }
+  getuserCheckout(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/userCheckout.php', httpParams);
+  }
+  getsaveNewAddress(data: any) {
+    let httpParams = new HttpParams()
+      .append("contact_name", data['contact_name'])
+      .append("addr1", data['addr1'])
+      .append("addr2", data['addr2'])
+      .append("country", data['country'])
+      .append("state", data['state'])
+      .append("city", data['city'])
+      .append("pincode", data['pincode'])
+      .append("contact_email", data['contact_email'])
+      .append("contact_number", data['contact_number']);
+    console.log(httpParams);
+    return this.http.post(this.baseUrl + 'assets/api/saveNewAddress.php', httpParams);
+  }
+  getcheckoutFinal(id: any, shippingType) {
+    let httpParams = new HttpParams()
+      .append("user_id", id)
+      .append("shippingType", shippingType);
+    return this.http.post(this.baseUrl + 'assets/api/checkoutFinal.php', httpParams);
+  }
+
+getcheckoutFinal(id: any, shippingType) {
+    let httpParams = new HttpParams()
+      .append("user_id", id)
+      .append("shippingType", shippingType);
+    return this.http.post(this.baseUrl + 'assets/api/checkoutFinal.php', httpParams);
+  }
+
+  getAddressChange(id: any) {
+    let httpParams = new HttpParams()
+      .append("id",id);
+    console.log(httpParams);
+    return this.http.post(this.baseUrl + 'assets/api/getAddressChange.php', httpParams);
+  }
+
+  getNewAddr(id: any) {
+    let httpParams = new HttpParams()
+      .append("id",id);
+    console.log(httpParams);
+    return this.http.post(this.baseUrl + 'assets/api/getNewAddr.php', httpParams);
+  }
+
+  getproductstatus() {
+    return this.http.get(this.baseUrl + 'assets/api/prodstatuscheckout.php');
+  }
+  getproductshipprice() {
+    return this.http.get(this.baseUrl + 'assets/api/prodshippricecheckout.php');
+  }
+  getoffer() {
+    return this.http.get(this.baseUrl + 'assets/api/offercheckout.php');
+  }
+  getdataPostAddProduct(data: any) {
+    let httpParams = new HttpParams()
+      .append("name", data['name'])
+      .append("short_desc", data['short_desc'])
+      .append("long_desc", data['long_desc'])
+      .append("spec", data['spec'])
+      .append("shipping_option", data['shipping_option'])
+      .append("base_price", data['base_price'])
+      .append("bulk_discount_id", data['bulk_discount_id'])
+      .append("offer_id", data['offer_id'])
+      .append("returning_customer_count", data['returning_customer_count'])
+      .append("cmsn_dedtd", data['cmsn_dedtd'])
+      .append("shop_id", data['shop_id'])
+      .append("category_id", data['category_id'])
+      .append("sub_catgry_id", data['sub_catgry_id'])
+      .append("active_status", data['active_status'])
+      .append("qty_avble", data['qty_avble'])
+      .append("safe_qty", data['safe_qty'])
+      .append("is_returnable", data['is_returnable'])
+      .append("label_id", data['label_id'])
+      .append("tags", data['tags'])
+      .append("avg_confrmn_time", data['avg_confrmn_time'])
+      .append("avg_response_time", data['avg_response_time'])
+      .append("avg_prcessing_time", data['avg_prcessing_time'])
+      .append("avg_shpping_time", data['avg_shpping_time'])
+      .append("auto_cancel_time", data['auto_cancel_time'])
+      .append("has_rfq", data['has_rfq'])
+      .append("has_gift", data['has_gift'])
+      .append("has_order_confmn", data['has_order_confmn'])
+      .append("can_orderbydate", data['can_orderbydate'])
+      .append("has_instant_buy", data['has_instant_buy'])
+      .append("min_order_quant", data['min_order_quant'])
+      .append("max_order_quant", data['max_order_quant'])
+      .append("shipping_policy", data['shipping_policy'])
+      .append("return_policy", data['return_policy'])
+      .append("product_policy", data['product_policy'])
+      .append("shipping_location_id", data['shipping_location_id'])
+      .append("rating", data['rating'])
+      .append("rating_count", data['rating_count'])
+      .append("review_count", data['review_count'])
+      .append("revenue_generated", data['revenue_generated'])
+      .append("promo_id", data['promo_id'])
+      .append("sold_count", data['sold_count'])
+      .append("created_date", data['created_date']);
+    return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
+  }
+  getsellercart() {
+    return this.http.get(this.baseUrl + 'assets/api/sellercart.php');
+  }
+  getcart(userId: any) {
+    let httpParams = new HttpParams()
+      .append("userId", userId);
+    return this.http.post(this.baseUrl + 'assets/api/cart.php', httpParams);
+  }
+  getcartCheckout(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/cartCheckout.php', httpParams);
+  }
+getUser() {
+    return this.http.get(this.baseUrl + 'assets/api/bulkdiscountcheckout.php');
+  }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
