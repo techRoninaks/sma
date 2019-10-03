@@ -38,6 +38,9 @@ import { ContactComponent } from './contact/contact.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { MatAutocompleteModule} from '@angular/material';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,7 @@ import { MatAutocompleteModule} from '@angular/material';
     ManageshopComponent,
     OrdersComponent,
     ManageOrdersComponent,
+    DashboardComponent,
     ContactComponent,
     AddProductComponent,
     SellerlandingComponent,
@@ -72,6 +76,7 @@ import { MatAutocompleteModule} from '@angular/material';
     MatInputModule,
     // ActivatedRoute,
     MatFormFieldModule,
+    ChartsModule ,
     MatExpansionModule,
     AppRoutingModule,
     FormsModule,
