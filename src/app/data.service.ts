@@ -393,18 +393,6 @@ getDateDiffShop(data: any) {
     .append("duration", data['duration']);
     return this.http.post(this.baseUrl+'assets/api/plandetailsFetchPlus.php',httpParams);
   }
-  addData(data: Object,name: any){
-    // console.log(name);
-    let httpParams= new HttpParams()
-    .append("fullname", data['fullname'])
-    .append("reg_address", data['reg_address'])
-    .append("reg_email", data['reg_email'])
-    .append("reg_mobile_no", data['reg_mobile_no'])
-    .append("reg_age", data['reg_age'])
-    .append("gender", name)
-    .append("reg_password", data['reg_password']);
-    return this.http.post(this.baseUrl+'assets/api/registration.php',httpParams);
-  }
 
   attemptLogin(data: Object){
     let httpParams= new HttpParams()
@@ -437,52 +425,6 @@ getDateDiffShop(data: any) {
     return this.http.post(this.baseUrl+'assets/api/verifyOtp.php',httpParams);
   }
 
-  getvariantInfor(){
-    return this.http.get(this.baseUrl+'assets/api/variantinforcheckout.php');
-  }
-  getaddress(){
-    return this.http.get(this.baseUrl+'assets/api/addresscheckout.php');
-  }
-  getaddressType(){
-    return this.http.get(this.baseUrl+'assets/api/addresstypecheckout.php');
-  }
-  getbulkDiscount(){
-    return this.http.get(this.baseUrl+'assets/api/bulkdiscountcheckout.php');
-  }
-  getcustomerOrder(){
-    return this.http.get(this.baseUrl+'assets/api/customerordercheckout.php');
-  }
-  getorderMessage(){
-    return this.http.get(this.baseUrl+'assets/api/ordermessagecheckout.php');
-  }
-  getorderstatus(){
-    return this.http.get(this.baseUrl+'assets/api/orderstatuscheckout.php');
-  }
-  getpurchaseOrder(){
-    return this.http.get(this.baseUrl+'assets/api/purchaseordercheckout.php');
-  }
-  getproduct(id: any){
-    let httpParams= new HttpParams()
-    .append("prodIds",id);
-    return this.http.post(this.baseUrl+'assets/api/productcheckout.php',httpParams);
-  }
-  getproductstatus(){
-    return this.http.get(this.baseUrl+'assets/api/prodstatuscheckout.php');
-  }
-  getproductshipprice(){
-    return this.http.get(this.baseUrl+'assets/api/prodshippricecheckout.php');
-  }
-  getoffer(){
-    return this.http.get(this.baseUrl+'assets/api/offercheckout.php');
-  }
-  getsellercart(){
-    return this.http.get(this.baseUrl+'assets/api/sellercart.php');
-  }
-  getcart(userId){
-    let httpParams = new HttpParams()
-    .append("userId",userId);
-    return this.http.post(this.baseUrl+'assets/api/cart.php',httpParams);
-  }
   deleteCartProductfn(id: any, userId: any){
     let httpParams = new HttpParams()
     .append("id",id)
@@ -513,9 +455,7 @@ getDateDiffShop(data: any) {
     .append("key",key);
     return this.http.post(this.baseUrl+'assets/api/verifyUrl.php', httpParams);
   }
-  getUser(){
-    return this.http.get(this.baseUrl+'assets/api/bulkdiscountcheckout.php');
-  }
+
   getUsercardData(data: any){
    let httpParams= new HttpParams()
    .append("id", data)
@@ -653,12 +593,6 @@ addContact(data: Object){
       .append("contact_number", data['contact_number']);
     console.log(httpParams);
     return this.http.post(this.baseUrl + 'assets/api/saveNewAddress.php', httpParams);
-  }
-  getcheckoutFinal(id: any, shippingType) {
-    let httpParams = new HttpParams()
-      .append("user_id", id)
-      .append("shippingType", shippingType);
-    return this.http.post(this.baseUrl + 'assets/api/checkoutFinal.php', httpParams);
   }
 
 getcheckoutFinal(id: any, shippingType) {

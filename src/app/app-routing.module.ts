@@ -13,7 +13,6 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { SellerlandingComponent } from './sellerlanding/sellerlanding.component';
 import { CartComponent } from './cart/cart.component';
 import { from } from 'rxjs';
-import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { ManageshopComponent } from './manageshop/manageshop.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { OrdersComponent } from './orders/orders.component';
