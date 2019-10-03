@@ -499,8 +499,39 @@ $SubText: 18px;
 		}
 		.ulFilterHeads {
 			font-family: BitterBold !important;
+			.slider {
+				-webkit-appearance: none;
+				width: 50%;
+				height: 25px;
+				background: #d3d3d3;
+				outline: none;
+				opacity: 0.7;
+				-webkit-transition: .2s;
+				transition: opacity .2s;
+			  }
+			  
+			  .slider:hover {
+				opacity: 1;
+			  }
+			  
+			  .slider::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				appearance: none;
+				width: 25px;
+				height: 25px;
+				background: #4CAF50;
+				cursor: pointer;
+			  }
+			  
+			  .slider::-moz-range-thumb {
+				width: 25px;
+				height: 25px;
+				background: #4CAF50;
+				cursor: pointer;
+			  }
 		}
 		.liFilterHeads {
+			padding: 10px;
 			&:hover {
 				background: $smaGray;
 			}
@@ -531,8 +562,8 @@ $SubText: 18px;
 		}
 		#filterbody {
 			display: grid;
-			grid-template-columns: repeat(5, 1fr);
-			grid-template-areas: "fil-1 fil-2 fil-3 fil-4 fil-5";
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-areas: "fil-1 fil-2 fil-3";
 
 			.filterSet1 {
 				grid-area: fil-1;
@@ -544,10 +575,12 @@ $SubText: 18px;
 				grid-area: fil-3;
 			}
 			.filterSet4 {
-				grid-area: fil-4;
+				display: none;
+				// grid-area: fil-4;
 			}
 			.filterSet5 {
-				grid-area: fil-5;
+				display: none;
+				// grid-area: fil-5;
 			}
 		}
 		#sortbody {
@@ -563,6 +596,39 @@ $SubText: 18px;
 			}
 			.sortSet3 {
 				grid-area: sort-3;
+			}
+			
+		}
+		.dvSortSummary {
+			grid-template-columns: auto;
+			grid-template-areas: "dv-Sbtn";
+			border-top: 2px solid $smaGray;
+			display: grid;
+			margin: 0 5% 0 5%;
+			padding: 20px;
+			width: auto;
+			
+			.dvBtnSApply {
+				grid-area: dv-Sbtn;
+				width: fit-content;
+				justify-self: end;
+
+				.btnSApply {
+					cursor: pointer;
+					font-family: BitterBold;
+					border: none;
+					border-radius: 5px;
+					color: white;
+					background: #efbe24;
+					box-shadow: 2px 2px 10px -5px black;
+					padding: 10px;
+				}
+				@include lg{
+					.btnApply {
+						font-size: small;
+						width: 100px;
+					}
+				}
 			}
 		}
 		.dvFilterSummary {
@@ -745,11 +811,11 @@ $SubText: 18px;
 }
 @include lg {
 	.dvCatMain {
-		grid-template-columns: repeat(4, auto);
+		grid-template-columns: repeat(4, 30%);
 	}
 }
 @include xlg {
 	.dvCatMain {
-		grid-template-columns: repeat(4, auto);
+		grid-template-columns: repeat(4, 30%);
 	}
 }
