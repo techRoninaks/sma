@@ -67,13 +67,13 @@ export class ListingComponent implements OnInit {
 	titleGift: any;
 	noteGift: any;
 	addressGift: string;
-  dynamicDataProName: Object;
+  	dynamicDataProName: Object;
 	prodId: any;
+	filteredOptions: any;
 	dynamicDataUser: Object;
 	dynamicDataVariant: Object;
 	dynamicDataVariants: Object;
 	dynamicDataCartDate: Object;
-	userId: string;
 	dynamicDatatotalPrice: Object;
 	dynamicDataContactName: object;
 	dynamicDataSecondAddress: any = "";
@@ -104,7 +104,7 @@ export class ListingComponent implements OnInit {
 	largeSrc: any = "assets/images/Screenshot_20190712-201603.png";
 	public counter: number;
 	revId: number;
-
+	id: any;
 	bar1: any;
 	bar2: any;
 	bar3: any;
@@ -115,6 +115,7 @@ export class ListingComponent implements OnInit {
 	rfqEnabled: any = 0;
 	giftEnable: any = 0;
 	defRfqTag: any = 1;
+	myControl:any ;
 
 	ngOnInit() {
 		// this.setCookie("userId", 2);
@@ -389,12 +390,12 @@ export class ListingComponent implements OnInit {
 		);
 
 		//checkout popup
-		this.filteredOptions = this.myControl.valueChanges
-			.pipe(
-				startWith(''),
-				map(value => typeof value === 'string' ? value : value.name),
-				map(name => name ? this._filter(name) : this.options.slice())
-			);
+		// this.filteredOptions = this.myControl.valueChanges
+		// 	.pipe(
+		// 		startWith(''),
+		// 		map(value => typeof value === 'string' ? value : value.name),
+		// 		map(name => name ? this._filter(name) : this.options.slice())
+		// 	);
 
 
 
@@ -406,11 +407,11 @@ export class ListingComponent implements OnInit {
 		return user ? user.name : undefined;
 	}
 
-	private _filter(name: string): User[] {
-		const filterValue = name.toLowerCase();
+	// private _filter(name: string): User[] {
+	// 	const filterValue = name.toLowerCase();
 
-		return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
-	}
+	// 	return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+	// }
 
 
 	//checkout pop showformgrp
@@ -677,12 +678,6 @@ export class ListingComponent implements OnInit {
 		}
 	}
 	// Cookie Section BEGN
-	setCookie(cname, value) {
-		this.cookieService.set(cname, value);
-	}
-	getCookie(cname) {
-		return this.cookieService.get(cname);
-	}
 	deleteCookie(cname) {
 		this.cookieService.delete(cname);
 	}
