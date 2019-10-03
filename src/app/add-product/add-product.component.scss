@@ -1,0 +1,1345 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
+// Class List
+
+.dvProdHeader {
+	grid-template-columns: 100%;
+	grid-template-areas: "breadcrumbs";
+	display: grid;
+	width: auto;
+	background: white;
+	margin: 5% 5% 0 5%;
+	padding: 30px;
+
+	.dvBreadcrumbs {
+		display: inline-block;
+		grid-area: breadcrumbs;
+		margin: auto;
+
+		a {
+			font-family: Bitter;
+			text-decoration: none;
+			color: $smaDarkGray;
+
+			&:hover {
+				color: $smaGray;
+			}
+		}
+	}
+}
+
+.dvMain-Grid {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(11, auto);
+	grid-template-areas:
+		"grid-AddProducts"
+		"grid-PrimaryDetails"
+		"grid-AddVarients"
+		"grid-Price"
+		"grid-AdvanceSettings"
+		"grid-MsgTitle"
+		"grid-ShippingOptions"
+		"grid-ShippingDetails"
+		"grid-Discount"
+		"grid-ProdPolicies"
+		"grid-Faq"
+		"grid-BtnLast";
+}
+// ADD PRODUCTS
+.dvAddProdText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvAddProducts {
+	grid-area: grid-AddProducts;
+}
+.grid-AddProductBtn {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "btnDuplicate btnToggleActive";
+	.btnDuplicate {
+		grid-area: btnDuplicate;
+		.btnDupli {
+			margin-left: 80%;
+			background: #efbe24;
+			color: white;
+			font-family: BitterBold;
+			border-radius: 5px;
+			height: 40px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			width: 140px;
+			cursor: pointer;
+		}
+	}
+	.btnToggleActive {
+		grid-area: btnToggleActive;
+	}
+}
+.grid-AddProductCat {
+	display: grid;
+	grid-template-columns: auto 10% auto 10% auto;
+	grid-template-rows: auto;
+	grid-template-areas: "main-cat timeline1 med-cat timeline2 sub-cat";
+	.main-cat {
+		grid-area: main-cat;
+		.dropcat1 {
+			background: #009145;
+			color: #dbdbdb;
+			width: 300px;
+			font-family: BitterBold;
+			border-radius: 5px;
+			height: 50px;
+			margin-left: 100px;
+			cursor: pointer;
+		}
+	}
+	.timeline1 {
+	}
+	.med-cat {
+		grid-area: med-cat;
+		.dropcat2 {
+			background: #009145;
+			color: #dbdbdb;
+			width: 300px;
+			font-family: BitterBold;
+			border-radius: 5px;
+			height: 50px;
+			margin-right: 50px;
+			cursor: pointer;
+		}
+	}
+	.timeline2 {
+	}
+	.sub-cat {
+		grid-area: sub-cat;
+		.dropcat3 {
+			background: #009145;
+			color: #dbdbdb;
+			width: 300px;
+			font-family: BitterBold;
+			border-radius: 5px;
+			height: 50px;
+			margin-right: 50px;
+			margin-left: -200px;
+			cursor: pointer;
+		}
+	}
+}
+.grid-AddSubCatBtn {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: ". btnAddSubCat";
+	.btnAddSubCat {
+		grid-area: btnAddSubCat;
+		margin-left: 383%;
+		.btnSubCat {
+			background: #efbe24;
+			color: white;
+			font-family: BitterBold;
+			border-radius: 5px;
+			height: 40px;
+			cursor: pointer;
+		}
+	}
+}
+// PRIMARY DETAILS
+.dvPriDetailsText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvPrimaryDetails {
+	grid-area: grid-PrimaryDetails;
+}
+.grid-ImagesPrimaryDetails {
+}
+.grid-PrimaryDesc {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	grid-template-rows: auto;
+	grid-template-areas: "grid-LeftProd grid-MedProd1 grid-MedProd2 grid-RightProd";
+	.grid-LeftProd {
+		grid-area: grid-LeftProd;
+	}
+	.grid-MedProd1 {
+		grid-area: grid-MedProd1;
+		.text-Product-Name-Style {
+			width: 400px;
+			height: 30px;
+			background: #dbdbdb;
+			border: none;
+		}
+	}
+	.grid-MedProd2 {
+		grid-area: grid-MedProd2;
+	}
+	.grid-RightProd {
+		grid-area: grid-RightProd;
+		.text-Product-BasePrice-Style {
+			background: #dbdbdb;
+			border: none;
+		}
+	}
+}
+.grid-PrimaryDesc1 {
+	display: grid;
+	grid-template-columns: 30% 70%;
+	grid-template-rows: auto auto auto;
+	grid-template-areas:
+		"grid-ShortDescLeft grid-ShortDescRight"
+		"grid-LongDescLeft grid-LongDescRight"
+		"grid-SpecLeft grid-SpecRight";
+	.grid-ShortDescLeft {
+		grid-area: grid-ShortDescLeft;
+	}
+	.grid-LongDescLeft {
+		grid-area: grid-LongDescLeft;
+		margin-top: 10px;
+	}
+	.grid-SpecLeft {
+		grid-area: grid-SpecLeft;
+		margin-top: 10px;
+	}
+	.grid-ShortDescRight {
+		grid-area: grid-ShortDescRight;
+		.text-Product-ShortDesc-Style {
+			background: #dbdbdb;
+			border: none;
+			height: 50px;
+			width: 800px;
+		}
+	}
+	.grid-LongDescRight {
+		grid-area: grid-LongDescRight;
+		margin-top: 10px;
+		.text-Product-LongDesc-Style {
+			background: #dbdbdb;
+			border: none;
+			height: 50px;
+			width: 800px;
+		}
+	}
+	.grid-SpecRight {
+		grid-area: grid-SpecRight;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		.text-Product-Spec-Style {
+			background: #dbdbdb;
+			border: none;
+			height: 50px;
+			width: 800px;
+		}
+	}
+}
+.grid-PrimaryDesc2 {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto auto auto;
+	grid-template-areas:
+		"grid-NoOfPieceLeft grid-QtyCountRight"
+		"grid-MaxQtyOrderLeft grid-MaxQtyOrderRight"
+		"grid-MiniQtyOrderLeft grid-MiniQtyOrderRight";
+	.grid-NoOfPieceLeft {
+		grid-area: grid-NoOfPieceLeft;
+	}
+	.grid-MaxQtyOrderLeft {
+		grid-area: grid-MaxQtyOrderLeft;
+	}
+	.grid-MiniQtyOrderLeft {
+		grid-area: grid-MiniQtyOrderLeft;
+	}
+	.grid-QtyCountRight {
+		grid-area: grid-QtyCountRight;
+		.btnMinQtyCount {
+			background: #dbdbdb;
+		}
+		.counterLabel {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+			width: 110px;
+		}
+		.btnMaxQtyCount {
+			background: #dbdbdb;
+		}
+	}
+	.grid-MaxQtyOrderRight {
+		grid-area: grid-MaxQtyOrderRight;
+		.Max-Qty-Style {
+			background: #dbdbdb;
+			border: none;
+		}
+	}
+	.grid-MiniQtyOrderRight {
+		grid-area: grid-MiniQtyOrderRight;
+		.Min-Qty-Style {
+			background: #dbdbdb;
+			border: none;
+		}
+	}
+}
+
+// ADD VARIENTS
+.dvAddVarientsText {
+	// .imgBord {
+	// 	display: block;
+	// 	margin-left: auto;
+	// 	margin-right: auto;
+	// 	width: 300px;
+	// 	transform: translate(0rem, 2rem);
+	// 	z-index: 0;
+	// }
+	h4 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvAddVarients {
+	grid-area: grid-AddVarients;
+}
+
+// PRICE
+
+.dvPriceText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 150px;
+		height: 50px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvPrice {
+	grid-area: grid-Price;
+}
+.grid-PriceDetails {
+	display: grid;
+	grid-template-columns: 40% 20% 40%;
+	grid-template-rows: repeat(5, auto);
+	grid-template-areas:
+		"grid-LeftPrice grid-Med grid-RightPrice"
+		"grid-LeftPrice1 grid-Med1 grid-RightPrice1"
+		"grid-LeftPrice2 grid-Med2 grid-RightPrice2"
+		"grid-LeftPrice3 grid-Med3 grid-RightPrice3"
+		"grid-LeftPrice4 grid-Med4 grid-RightPrice4";
+	.grid-LeftPrice {
+		grid-area: grid-LeftPrice;
+	}
+	.grid-LeftPrice1 {
+		grid-area: grid-LeftPrice1;
+	}
+	.grid-LeftPrice2 {
+		grid-area: grid-LeftPrice2;
+	}
+	.grid-LeftPrice3 {
+		grid-area: grid-LeftPrice3;
+	}
+	.grid-LeftPrice4 {
+		grid-area: grid-LeftPrice4;
+	}
+	.grid-Med {
+		grid-area: grid-Med;
+	}
+	.grid-Med1 {
+		grid-area: grid-Med1;
+	}
+	.grid-Med2 {
+		grid-area: grid-Med2;
+	}
+	.grid-Med3 {
+		grid-area: grid-Med3;
+	}
+	.grid-Med4 {
+		grid-area: grid-Med4;
+	}
+	.grid-RightPrice {
+		grid-area: grid-RightPrice;
+		.grid-Right-Price-Style {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+		}
+	}
+	.grid-RightPrice1 {
+		grid-area: grid-RightPrice1;
+		.grid-Right-Price1-Style {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+		}
+	}
+	.grid-RightPrice2 {
+		grid-area: grid-RightPrice2;
+		.grid-Right-Price2-Style {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+		}
+	}
+	.grid-RightPrice3 {
+		grid-area: grid-RightPrice3;
+		.grid-Right-Price3-Style {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+		}
+	}
+	.grid-RightPrice4 {
+		grid-area: grid-RightPrice4;
+		.grid-Right-Price4-Style {
+			background: #dbdbdb;
+			border: none;
+			text-align: center;
+		}
+	}
+}
+
+// ADVANCED SETTINGS
+.dvAdvanceSettingsText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 330px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvAdvanceSettings {
+	grid-area: grid-AdvanceSettings;
+}
+.grid-AdvanceSettings1 {
+	display: grid;
+	grid-template-columns: 10% 90%;
+	grid-template-rows: auto;
+	grid-template-areas: "grid-AdvanceTextLeft grid-AdvanceDropDownRight";
+	.grid-AdvanceTextLeft {
+		grid-area: grid-AdvanceTextLeft;
+	}
+	.grid-AdvanceDropDownRight {
+		grid-area: grid-AdvanceDropDownRight;
+	}
+}
+.grid-AdvanceSettings2 {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto;
+	grid-template-areas: "grid-AdvanceSettingsLeft grid-AdvanceSettingsRight";
+	.grid-AdvanceSettingsLeft {
+		grid-area: grid-AdvanceSettingsLeft;
+		.grid-Advance2 {
+			display: grid;
+			grid-template-columns: 50% 50%;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"grid-AvgLeft grid-LabelRight"
+				"grid-AvgLeft1 grid-LabelRight1";
+			.grid-AvgLeft {
+				grid-area: grid-AvgLeft;
+			}
+			.grid-AvgLeft1 {
+				grid-area: grid-AvgLeft1;
+			}
+			.grid-LabelRight {
+				grid-area: grid-LabelRight;
+				.AvgProTimeLabel {
+					.AvgProTimeLabel-Style {
+						text-align: center;
+						background: #dbdbdb;
+						border: none;
+					}
+				}
+			}
+			.grid-LabelRight1 {
+				grid-area: grid-LabelRight1;
+				.AvgShipTimeLabel {
+					.AvgShipTimeLabel-Style {
+						text-align: center;
+						background: #dbdbdb;
+						border: none;
+					}
+				}
+			}
+		}
+	}
+	.grid-AdvanceSettingsRight {
+		grid-area: grid-AdvanceSettingsRight;
+		.grid-Advance3 {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"grid-TagText"
+				"grid-TagCard";
+			.grid-TagText {
+				grid-area: grid-TagText;
+			}
+			.grid-TagCard {
+				grid-area: grid-TagCard;
+				.AdvanceTagCard {
+					.AdvanceTagCard-Style {
+						background: #dbdbdb;
+						width: 300px;
+						height: 50px;
+						border: none;
+					}
+				}
+			}
+		}
+	}
+}
+.grid-AdvanceSettings3 {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas: "grid-Advance3Left grid-Advance3Med grid-Advance3Right";
+	.grid-Advance3Left {
+		grid-area: grid-Advance3Left;
+		.grid-AdLeft {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: repeat(3, auto);
+			grid-template-areas:
+				"grid-GiftOptionTextLeft1 grid-GiftOptionToggleRight1"
+				"grid-OrderConfrmTextLeft1 grid-OrderConfrmToggleRight1"
+				"grid-UploadImgTextLeft1 grid-UploadImgToggleRight1";
+			.grid-GiftOptionTextLeft1 {
+				grid-area: grid-GiftOptionTextLeft1;
+			}
+			.grid-OrderConfrmTextLeft1 {
+				grid-area: grid-OrderConfrmTextLeft1;
+			}
+			.grid-UploadImgTextLeft1 {
+				grid-area: grid-UploadImgTextLeft1;
+			}
+			.grid-GiftOptionToggleRight1 {
+				grid-area: grid-GiftOptionToggleRight1;
+			}
+			.grid-OrderConfrmToggleRight1 {
+				grid-area: grid-OrderConfrmToggleRight1;
+			}
+			.grid-UploadImgToggleRight1 {
+				grid-area: grid-UploadImgToggleRight1;
+			}
+		}
+	}
+	.grid-Advance3Med {
+		grid-area: grid-Advance3Med;
+		.grid-AdMed {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: repeat(3, auto);
+			grid-template-areas:
+				"grid-DeliveryDateTextLeft2 grid-DeliveryDateToggleRight2"
+				"grid-AutoCancelTextLeft2 grid-AdvanceLabelRight2"
+				"grid-AddCustomTextLeft2 grid-AdvanceToggleRight2";
+			.grid-DeliveryDateTextLeft2 {
+				grid-area: grid-DeliveryDateTextLeft2;
+			}
+			.grid-DeliveryDateToggleRight2 {
+				grid-area: grid-DeliveryDateToggleRight2;
+			}
+			.grid-AutoCancelTextLeft2 {
+				grid-area: grid-AutoCancelTextLeft2;
+			}
+			.grid-AdvanceLabelRight2 {
+				grid-area: grid-AdvanceLabelRight2;
+				.AutoCancelLabel {
+					.AutoCancelLabel-Style {
+						background: #dbdbdb;
+						border: none;
+					}
+				}
+			}
+			.grid-AddCustomTextLeft2 {
+				grid-area: grid-AddCustomTextLeft2;
+			}
+			.grid-AdvanceToggleRight2 {
+				grid-area: grid-AdvanceToggleRight2;
+			}
+		}
+	}
+	.grid-Advance3Right {
+		grid-area: grid-Advance3Right;
+	}
+	.grid-AdRight {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-template-rows: repeat(3, auto);
+		grid-template-areas:
+			"grid-RfqText grid-RfqToggle"
+			". ."
+			"grid-MaxNoText grid-CountLabel";
+		.grid-RfqText {
+			grid-area: grid-RfqText;
+		}
+		.grid-RfqToggle {
+			grid-area: grid-RfqToggle;
+		}
+		.grid-MaxNoText {
+			grid-area: grid-MaxNoText;
+		}
+		.grid-CountLabel {
+			grid-area: grid-CountLabel;
+			.CountLabel-Style {
+				border: none;
+				background: #dbdbdb;
+				width: 40px;
+				text-align: center;
+			}
+		}
+	}
+}
+// MESSAGE TITLE
+.dvMsgTitleText {
+	// .imgBord {
+	// 	display: block;
+	// 	margin-left: auto;
+	// 	margin-right: auto;
+	// 	width: 300px;
+	// 	transform: translate(0rem, 2rem);
+	// 	z-index: 0;
+	// }
+	h4 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvMsgTitle {
+	grid-area: grid-MsgTitle;
+}
+// .grid-MsgTitleContainer {
+// 	display: grid;
+// 	grid-template-columns: auto;
+// 	grid-template-rows: repeat(2, auto);
+// 	grid-template-areas:
+// 		"grid-MsgTitleHead"
+// 		"grid-MsgTitleFoot";
+// 	.grid-MsgTitleHead {
+// 		grid-area: grid-MsgTitleHead;
+// 		background: #f1f1f1;
+// 		width: 600px;
+// 		margin-left: 450px;
+// 		.grid-MsgTitle-Head {
+// 			display: grid;
+// 			grid-template-columns: 80% 20%;
+// 			grid-template-rows: repeat(2, auto);
+// 			grid-template-areas: "grid-MsgTitle-Sect1 grid-Msg-Add";
+// 			.grid-MsgTitle-Sect1 {
+// 				grid-area: grid-Ques-Sect1;
+// 				.MsgTitle-Sect1-Style {
+// 					background: white;
+// 					width: 450px;
+// 					border: none;
+// 					margin-left: 20px;
+// 				}
+// 			}
+// 			.grid-Msg-Add {
+// 				grid-area: grid-Add;
+// 				margin-top: 40px;
+// 				.imgPlus {
+// 					cursor: pointer;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	.grid-MsgTitleFoot {
+// 		grid-area: grid-MsgTitleFoot;
+// 		background: #dbdbdb;
+// 		width: 600px;
+// 		margin-left: 450px;
+// 		.grid-MsgTitle-Foot {
+// 			display: grid;
+// 			grid-template-columns: 80% 20%;
+// 			grid-template-rows: auto;
+// 			grid-template-areas: ". grid-MsgTitle-Edit-Close";
+// 			.grid-MsgTitle-Edit-Close {
+// 				grid-area: grid-Faq-Edit-Close;
+// 				.imgEdit {
+// 					cursor: pointer;
+// 				}
+// 				.imgClose {
+// 					cursor: pointer;
+// 				}
+// 			}
+// 		}
+// 	}
+
+// SHIPPING OPTIONS
+.dvShippingOptionsText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvShippingOptions {
+	grid-area: grid-ShippingOptions;
+}
+.grid-RadioBtn {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "grid-RadioShipping grid-RadioHomeDelivery grid-RadioPickup";
+	.grid-RadioShipping {
+		grid-area: grid-RadioShipping;
+		.grid-Shipping {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "grid-ShippingText grid-ShippingRadioBtn";
+			.grid-ShippingText {
+				grid-area: grid-ShippingText;
+			}
+			.grid-ShippingRadioBtn {
+				grid-area: grid-ShippingRadioBtn;
+			}
+		}
+	}
+	.grid-RadioHomeDelivery {
+		grid-area: grid-RadioHomeDelivery;
+		.grid-HomeDelivery {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "grid-HomeDeliveryText grid-HomeDeliveryRadioBtn";
+			.grid-HomeDeliveryText {
+				grid-area: grid-HomeDeliveryText;
+			}
+			.grid-HomeDeliveryRadioBtn {
+				grid-area: grid-HomeDeliveryRadioBtn;
+			}
+		}
+	}
+	.grid-RadioPickup {
+		grid-area: grid-RadioPickup;
+		.grid-Pickup {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "grid-PickupText grid-PickupRadioBtn";
+			.grid-PickupText {
+				grid-area: grid-PickupText;
+			}
+			.grid-PickupRadioBtn {
+				grid-area: grid-PickupRadioBtn;
+			}
+		}
+	}
+}
+// SHIPPING DETAILS
+
+.dvShippingDetailsText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvShippingDetails {
+	grid-area: grid-ShippingDetails;
+}
+// DELIVERABLE LOCATIONS
+.dvDeliverableLocationText {
+	// .imgBord {
+	// 	display: block;
+	// 	margin-left: auto;
+	// 	margin-right: auto;
+	// 	width: 300px;
+	// 	transform: translate(0rem, 2rem);
+	// 	z-index: 0;
+	// }
+	h4 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+// DISCOUNT
+.dvDiscountText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 200px;
+		height: 50px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvDiscount {
+	grid-area: grid-Discount;
+}
+.grid-Discount-Container {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto;
+	grid-template-areas: "grid-Pro-Discount-Left grid-Bundle-Discount-Right";
+	.grid-Pro-Discount-Left {
+		grid-area: grid-Pro-Discount-Left;
+		.grid-Pro-Discount {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"grid-Pro-Disc-Text"
+				"grid-Pro-Disc-Container";
+			.grid-Pro-Disc-Text {
+				grid-area: grid-Pro-Disc-Text;
+				text-align: center;
+			}
+			.grid-Pro-Disc-Container {
+				grid-area: grid-Pro-Disc-Container;
+				background: #f1f1f1;
+				.grid-Pro-Disc {
+					display: grid;
+					grid-template-columns: auto auto auto auto;
+					grid-template-rows: repeat(4, auto);
+					grid-template-areas:
+						"grid-Pro-Date-Text grid-Label-1 grid-minus grid-Label-2"
+						"grid-Pro-Disc-Text grid-Price-Label grid-Price-Label grid-Price-Label"
+						". grid-Disc-Label grid-Disc-Label grid-Disc-Label"
+						". . . btnPro-Disc";
+					.grid-Pro-Date-Text {
+						grid-area: grid-Pro-Date-Text;
+					}
+					.grid-Label-1 {
+						grid-area: grid-Label-1;
+						.Pro-Date-Label-Style-1 {
+							background: #dbdbdb;
+							border: none;
+						}
+					}
+					.grid-minus {
+						grid-area: grid-minus;
+					}
+					.grid-Label-2 {
+						grid-area: grid-Label-2;
+						.Pro-Date-Label-Style-2 {
+							background: #dbdbdb;
+							border: none;
+						}
+					}
+					.grid-Pro-Disc-Text {
+						grid-area: grid-Pro-Disc-Text;
+					}
+					.grid-Price-Label {
+						grid-area: grid-Price-Label;
+						.Pro-Price-Label-Style-2 {
+							background: #dbdbdb;
+							border: none;
+							text-align: center;
+						}
+					}
+					.grid-Disc-Label {
+						grid-area: grid-Disc-Label;
+						.Pro-Disc-Label-Style-2 {
+							background: #dbdbdb;
+							border: none;
+							text-align: center;
+						}
+					}
+					.btnPro-Disc {
+						grid-area: btnPro-Disc;
+						.btnPro-Sumit {
+							background: #efbe24;
+						}
+					}
+				}
+			}
+		}
+	}
+	.grid-Bundle-Discount-Right {
+		grid-area: grid-Bundle-Discount-Right;
+		.grid-Bundle-Discount {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"grid-Pro-Disc-Text"
+				"grid-Pro-Disc-Container";
+			.grid-Pro-Disc-Text {
+				grid-area: grid-Pro-Disc-Text;
+				text-align: center;
+			}
+			.grid-Pro-Disc-Container {
+				grid-area: grid-Pro-Disc-Container;
+				.grid-Bundle-Disc {
+					display: grid;
+					grid-template-columns: auto;
+					grid-template-rows: auto auto;
+					grid-template-areas:
+						"grid-Bundle-Head"
+						"grid-Bundle-Foot";
+					.grid-Bundle-Head {
+						grid-area: grid-Bundle-Head;
+						background: #f1f1f1;
+						.grid-Bundle-Body {
+							display: grid;
+							grid-template-columns: auto auto auto auto;
+							grid-template-rows: repeat(2, auto);
+							grid-template-areas:
+								"grid-Qty-Text grid-Disc-Price grid-Actual-Price ."
+								"grid-Qty-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
+							.grid-Qty-Text {
+								grid-area: grid-Qty-Text;
+								text-align: center;
+							}
+							.grid-Disc-Price {
+								grid-area: grid-Disc-Price;
+								text-align: center;
+							}
+							.grid-Actual-Price {
+								grid-area: grid-Actual-Price;
+								text-align: center;
+							}
+							.grid-Qty-Label {
+								grid-area: grid-Qty-Label;
+								.Bun-Qty-Label-Style {
+									background: white;
+									border: none;
+									text-align: center;
+								}
+							}
+							.grid-Disc-Price-Label {
+								grid-area: grid-Disc-Price-Label;
+								.Disc-Price-Label-Style {
+									background: white;
+									border: none;
+									text-align: center;
+								}
+							}
+							.grid-Actual-Price-Label {
+								grid-area: grid-Actual-Price-Label;
+								.Actual-Price-Label-Style {
+									background: white;
+									border: none;
+									text-align: center;
+								}
+							}
+							.grid-Add-Bundle {
+								grid-area: grid-Add-Bundle;
+								.imgPlus {
+									cursor: pointer;
+								}
+							}
+						}
+					}
+					.grid-Bundle-Foot {
+						grid-area: grid-Bundle-Foot;
+						background: #dbdbdb;
+						.grid-Bundle-Body-1 {
+							display: grid;
+							grid-template-columns: auto auto auto auto;
+							grid-template-rows: auto;
+							grid-template-areas: "grid-Qty-Label-1 grid-Disc-Price-Label-1 grid-Actual-Price-1 grid-Add-Bundle-1";
+							.grid-Qty-Label-1 {
+								grid-area: grid-Qty-Label-1;
+								background: #dbdbdb;
+								.Bundle-Qty-Label-Style {
+									background: #dbdbdb;
+									text-align: center;
+									border: none;
+								}
+							}
+							.grid-Disc-Price-Label-1 {
+								grid-area: grid-Disc-Price-Label-1;
+								background: #dbdbdb;
+								.Bundle-Qty-Label-Style {
+									background: #dbdbdb;
+									text-align: center;
+									border: none;
+								}
+							}
+							.grid-Actual-Price-1 {
+								grid-area: grid-Actual-Price-1;
+								background: #dbdbdb;
+								.Bundle-Actual-Label-Style {
+									background: #dbdbdb;
+									text-align: center;
+									border: none;
+								}
+							}
+							.grid-Edit-Close-Bundle-1 {
+								grid-area: grid-Add-Bundle-1;
+								.imgEdit {
+									cursor: pointer;
+								}
+								.imgClose {
+									cursor: pointer;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+// POLICIES
+.ProdPoliciesText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 780px;
+		height: 50px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvProdPolicies {
+	grid-area: grid-ProdPolicies;
+}
+.policyTxt {
+	font-family: Bitter;
+	width: 800px;
+	margin-left: 345px;
+}
+.btnPolicyEdit {
+	.button {
+		margin-left: 720px;
+		width: 80px;
+		height: 30px;
+		background: #efbe24;
+		color: white;
+		font-family: BitterBold;
+	}
+}
+.policyTxtArea {
+	font-family: Bitter;
+	width: 800px;
+	margin-left: 345px;
+}
+.btnpolicySubmit {
+	.button {
+		margin-top: 20px;
+		margin-left: 720px;
+		width: 80px;
+		height: 30px;
+		background: #efbe24;
+		color: white;
+		font-family: BitterBold;
+	}
+}
+// .grid-Policy {
+// 	display: grid;
+// 	grid-template-columns: auto;
+// 	grid-template-rows: repeat(2, auto);
+// 	grid-template-areas:
+// 		"grid-Policies"
+// 		"grid-PoliciesBtn";
+// 	.grid-Policies {
+// 		grid-area: grid-Policies;
+// 		.textPolicy-Style {
+// 			margin-left: 300px;
+// 			width: 900px;
+// 		}
+// 	}
+// .grid-PoliciesBtn {
+// 	grid-area: grid-PoliciesBtn;
+// 	.policyBtn {
+// 		background: #efbe24;
+// 		margin-left: 710px;
+// 		width: 80px;
+// 		height: 40px;
+// 		margin-top: 20px;
+// 	}
+// }
+// }
+// FAQ
+.dvFaqText {
+	.imgBord {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 150px;
+		height: 50px;
+		transform: translate(0rem, 2rem);
+		z-index: 0;
+	}
+	h2 {
+		text-align: center;
+		// position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+	}
+	p {
+		text-align: justify;
+		text-align: center;
+	}
+}
+.dvFaq {
+	grid-area: grid-Faq;
+}
+.grid-FaqContainer {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(2, auto);
+	grid-template-areas:
+		"grid-FaqHead"
+		"grid-FaqFoot";
+	.grid-FaqHead {
+		grid-area: grid-FaqHead;
+		background: #f1f1f1;
+		width: 600px;
+		margin-left: 450px;
+		.grid-Faq-Head {
+			display: grid;
+			grid-template-columns: 80% 20%;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"grid-Ques-Sect1 grid-Add"
+				"grid-Ans-Sect2 .";
+			.grid-Ques-Sect1 {
+				grid-area: grid-Ques-Sect1;
+				.Ques-Sect1-Style {
+					background: white;
+					width: 450px;
+					border: none;
+					margin-left: 20px;
+				}
+			}
+			.grid-Add {
+				grid-area: grid-Add;
+				margin-top: 40px;
+				.imgPlus {
+					cursor: pointer;
+				}
+			}
+			.grid-Ans-Sect2 {
+				grid-area: grid-Ans-Sect2;
+				.Ans-Sect2-Style {
+					background: white;
+					width: 450px;
+					border: none;
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+	.grid-FaqFoot {
+		grid-area: grid-FaqFoot;
+		background: #dbdbdb;
+		width: 600px;
+		margin-left: 450px;
+		.grid-Faq-Foot {
+			display: grid;
+			grid-template-columns: 80% 20%;
+			grid-template-rows: auto;
+			grid-template-areas: ". grid-Faq-Edit-Close";
+			.grid-Faq-Edit-Close {
+				grid-area: grid-Faq-Edit-Close;
+				.imgEdit {
+					cursor: pointer;
+				}
+				.imgClose {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+// BUTTON LAST
+.grid-BtnLast {
+	grid-area: grid-BtnLast;
+}
+.grid-dvBtnLast {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "grid-BtnLastLeft grid-BtnLastRight";
+	.grid-BtnLastLeft {
+		grid-area: grid-BtnLastLeft;
+		.btnSaveAsDraft {
+			margin-top: 40px;
+			margin-bottom: 40px;
+			margin-left: 600px;
+			background: #efbe24;
+			color: white;
+			font-family: BitterBold;
+			border-radius: 5px;
+		}
+	}
+	.grid-BtnLastRight {
+		grid-area: grid-BtnLastRight;
+		.btnPublish {
+			margin-top: 40px;
+			margin-bottom: 40px;
+			margin-right: 650px;
+			background: #efbe24;
+			color: white;
+			font-family: BitterBold;
+			border-radius: 5px;
+		}
+	}
+}

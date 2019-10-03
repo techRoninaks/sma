@@ -265,6 +265,19 @@
 	align-self: center;
 	margin: 5% 10% auto 10%;
 	width: auto;
+	// .pSize {
+	// }
+	.pDelivery {
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 300px;
+			z-index: 0;
+			transform: translate(-10rem, 2.75rem);
+		}
+	}
+	.pButton {
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-template-rows: repeat(14, auto);
@@ -465,6 +478,7 @@
 			text-align: center;
 		}
 	}
+
 	.retPolicy {
 		// margin: 0rem 1rem 5rem 1rem;
 		img {
@@ -757,12 +771,14 @@
 			}
 		}
 	}
+
 	.dvMore {
 		img {
 			height: 50px;
 			width: 50px;
 		}
 	}
+
 }
 
 .imgPopup {
@@ -938,7 +954,6 @@
 	grid-template-columns: auto;
 	grid-row-gap: 5%;
 	grid-template-rows: repeat(6, auto);
-
 	grid-template-areas:
 		"rfqSN"
 		"rfqSL"
@@ -1033,4 +1048,469 @@
 	.btnRfq {
 		grid-area: btnRfq;
 	}
+  .rfqPopup {
+	/* Dropdown Button */
+	.dropBtnRfq {
+		background-color: #4caf50;
+		color: white;
+		padding: 16px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+	}
+	/* Dropdown button on hover & focus */
+	.dropBtnRfq:hover,
+	.dropBtnRfq:focus {
+		background-color: #3e8e41;
+	}
+	/* The search field */
+	#myInput {
+		box-sizing: border-box;
+		// background-image: url("searchicon.png");
+		background-position: 14px 12px;
+		background-repeat: no-repeat;
+		font-size: 16px;
+		padding: 14px 20px 12px 45px;
+		border: none;
+		border-bottom: 1px solid #ddd;
+	}
+	/* The search field when it gets focus/clicked on */
+	#myInput:focus {
+		outline: 3px solid #ddd;
+	}
+	/* The container <div> - needed to position the dropdown content */
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+	/* Dropdown Content (Hidden by Default) */
+	.dropdown-contentRfq {
+		display: none;
+		position: absolute;
+		background-color: #f6f6f6;
+		min-width: 230px;
+		border: 1px solid #ddd;
+		z-index: 1;
+	}
+	/* Links inside the dropdown */
+	.dropdown-contentRfq a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+	/* Change color of dropdown links on hover */
+	.dropdown-contentRfq a:hover {
+		background-color: #f1f1f1;
+	}
+	/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+	.show {
+		display: block;
+	}
+}
+// CHECKOUT POPUP (BUY NOW)
+.container {
+	margin: 20px;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(9, auto);
+	grid-template-areas:
+		"dvSub1"
+		"dvSub2"
+		"dvSub3"
+		"dvSub4"
+		"dvSub5"
+		"dvSub6"
+		"dvSub7"
+		"dvSub8"
+		"dvSub9";
+
+	.btn {
+		font-family: "BitterBold";
+		color: white;
+	}
+
+	.modal-header {
+		background: #efbe24;
+		color: white;
+		font-family: "BitterBold";
+		display: table-cell;
+		border-top-right-radius: 15px;
+		border-top-left-radius: 15px;
+	}
+
+	.modal-content {
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+		background: #f1f1f1;
+	}
+	.dvProductName {
+		display: grid;
+		grid-area: dvProductName;
+		text-align: center;
+		font-family: "BitterBold";
+		padding: 20px;
+	}
+	.dvSub1 {
+		display: grid;
+		grid-area: dvSub1;
+		align-items: center;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"dvProductSpec"
+			"dvCustomerName"
+			"dvQty";
+		.dvProductSpec {
+			display: grid;
+			grid-area: dvProductSpec;
+			border: 2px solid #efbe24;
+			font-family: "Bitter";
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+			grid-template-columns: 50% 50%;
+			grid-template-rows: auto;
+			grid-template-areas: "dvProdSpec1   dvProdSpec2";
+			.dvProdSpec1 {
+				display: grid;
+				grid-area: dvProdSpec1;
+				margin: 20px;
+			}
+			.dvProdSpec2 {
+				display: grid;
+				grid-area: dvProdSpec2;
+				margin-left: 10px;
+				margin-top: 20px;
+			}
+		}
+		.dvCustomerName {
+			display: grid;
+			grid-area: dvCustomerName;
+			font-family: "Bitter";
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+		.dvQty {
+			display: grid;
+			grid-area: dvQty;
+			margin-left: 250px;
+			font-family: "Bitter";
+			grid-auto-columns: auto;
+			grid-template-areas: "btnQtyCount";
+			.btnQtyCount {
+				grid-area: btnQtyCount;
+				font-family: BitterBold;
+				display: grid;
+				border: none;
+				margin-left: 50px;
+				background-color: #efbe24;
+				color: white;
+				border-radius: 5px;
+				height: 30px;
+				width: 30px;
+			}
+		}
+	}
+	.dvAddress {
+		text-align: center;
+		font-family: "BitterBold";
+	}
+	.dvSub2 {
+		display: grid;
+		grid-area: dvSub2;
+		background-color: #dbdbdb;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
+		grid-template-areas:
+			"dvAddrText"
+			"btnAddrChange";
+		.dvAddrText {
+			display: grid;
+			grid-area: dvAddrText;
+			margin-top: 10px;
+			font-family: "Bitter";
+			text-align: center;
+		}
+		.btnAddrChange {
+			display: grid;
+			grid-area: btnAddrChange;
+			margin-left: 43%;
+			margin-bottom: 10px;
+			width: 20px;
+			.btnChange {
+				color: white;
+				font-family: "BitterBold";
+			}
+		}
+	}
+	.dvSavedAddr {
+		text-align: center;
+		margin-top: 10px;
+		font-family: "BitterBold";
+	}
+	.dvSub3 {
+		display: grid;
+		grid-area: dvSub3;
+		grid-template-rows: repeat(2, auto);
+		grid-template-columns: 50% 50%;
+		grid-template-areas:
+			"dvCardAddrLeft dvCardAddrRight"
+			"btnCardAddrLeft btnCardAddrRight";
+		.dvCardAddrLeft {
+			display: grid;
+			grid-area: dvCardAddrLeft;
+			background-color: white;
+			text-align: center;
+			padding: 10px;
+		}
+		.btnCardAddrLeft {
+			display: grid;
+			grid-area: btnCardAddrLeft;
+			.btnDeliverLeft {
+				color: white;
+				font-family: "BitterBold";
+			}
+		}
+		.dvCardAddrRight {
+			display: grid;
+			grid-area: dvCardAddrRight;
+			background-color: white;
+			text-align: center;
+			padding: 10px;
+		}
+		.btnCardAddrRight {
+			.btnDeliverRight {
+				color: white;
+				font-family: "BitterBold";
+			}
+		}
+	}
+	.btnNewAddr {
+		color: white;
+		font-family: "BitterBold";
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: 20px;
+		width: 90%;
+	}
+	.dvSub4 {
+		grid-area: dvSub4;
+	}
+	.grid-dvSub4 {
+		display: grid;
+		background-color: #dbdbdb;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: repeat(5, auto);
+		grid-template-areas:
+			"grid-FormLeft grid-FormRight"
+			"btnSaveForm"
+			"..";
+		.grid-FormLeft {
+			// background: #4caf50;
+		}
+		.grid-FormRight {
+			// background: #add633;
+		}
+
+		.btnSaveForm {
+			display: grid;
+			grid-area: btnSaveForm;
+			width: 60px;
+			margin-top: 10px;
+			margin-left: -300px;
+
+			.btnSave {
+				color: white;
+				font-family: "BitterBold";
+			}
+		}
+	}
+	.dvDeliveryText {
+		text-align: center;
+		margin-top: 10px;
+		font-family: "BitterBold";
+	}
+	.dvSub5 {
+		display: grid;
+		grid-area: dvSub5;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto auto;
+		grid-template-areas: "btnRadio1 btnRadio2 btnRadio3";
+		.btnRadio1 {
+			display: grid;
+			grid-area: btnRadio1;
+		}
+		.btnRadio2 {
+			display: grid;
+			grid-area: btnRadio2;
+		}
+		.btnRadio3 {
+			display: grid;
+			grid-area: btnRadio3;
+			margin-left: 25px;
+		}
+	}
+	.dvProdDeliText {
+		text-align: center;
+		margin-top: 10px;
+		font-family: "BitterBold";
+	}
+	.dvSub6 {
+		display: grid;
+		grid-area: dvSub6;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
+		grid-template-areas:
+			"dvDisplayDate dvDisplayPrice"
+			"dvDate btnApply";
+		.dvDisplayDate {
+			display: grid;
+			grid-area: dvDisplayDate;
+		}
+		.dvDisplayPrice {
+			display: grid;
+			grid-area: dvDisplayPrice;
+		}
+		.dvDate {
+			display: grid;
+			grid-area: dvDate;
+			margin-left: 20px;
+			.dateText {
+				border: 2px solid #efbe24;
+			}
+		}
+		.dvApply {
+			display: grid;
+			grid-area: dvApply;
+			.btnApply {
+				color: white;
+				font-family: "BitterBold";
+			}
+		}
+	}
+	.dvSub7 {
+		.dvGiftOptionText {
+		}
+		.btnGiftOption {
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 34px;
+			}
+
+			.switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #ccc;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 26px;
+				width: 26px;
+				left: 4px;
+				bottom: 4px;
+				background-color: white;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			input:checked + .slider {
+				background-color: #2196f3;
+			}
+
+			input:focus + .slider {
+				box-shadow: 0 0 1px #2196f3;
+			}
+
+			input:checked + .slider:before {
+				-webkit-transform: translateX(26px);
+				-ms-transform: translateX(26px);
+				transform: translateX(26px);
+			}
+
+			/* Rounded sliders */
+			.slider.round {
+				border-radius: 34px;
+			}
+
+			.slider.round:before {
+				border-radius: 50%;
+			}
+		}
+		.dvNote {
+			.Gift-Note-Style {
+				border: none;
+				background: #dbdbdb;
+				width: 450px;
+				margin-left: 20px;
+				height: 80px;
+			}
+		}
+		.dvNoteText {
+		}
+		.dvMessageTitle {
+		}
+	}
+	.dvProdText {
+		text-align: center;
+		margin-top: 10px;
+		font-family: "BitterBold";
+	}
+	.dvSub8 {
+		.dvCheckImg1 {
+			width: fit-content;
+			border-radius: 5px;
+			display: grid;
+			padding-inline: 20px;
+			padding: 20px;
+		}
+		.dvCheckImg2 {
+			width: fit-content;
+			border-radius: 5px;
+			display: grid;
+			padding-inline: 20px;
+			padding: 20px;
+		}
+		.dvCheckImg3 {
+			width: fit-content;
+			border-radius: 5px;
+			display: grid;
+			padding-inline: 20px;
+			padding: 20px;
+		}
+	}
+	.dvPriceVariText {
+		text-align: center;
+		margin-top: 10px;
+		font-family: "BitterBold";
+	}
+	.dvSub9 {
+		.dvPriceList {
+			text-align: center;
+		}
+		.btnCheckOut {
+			margin-top: 10px;
+			margin-left: 40%;
+			.btnPayment {
+				color: white;
+				font-family: "BitterBold";
+				border-radius: 5px;
+			}
+		}
 }
