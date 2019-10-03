@@ -687,6 +687,42 @@ getcheckoutFinal(id: any, shippingType) {
 getUser() {
     return this.http.get(this.baseUrl + 'assets/api/bulkdiscountcheckout.php');
   }
+  
+   getCharts(sellerId: any, scenario: any){
+    let httpParams = new HttpParams()
+    .append("sellerId",sellerId)
+    .append("scenario",scenario);
+    return this.http.post(this.baseUrl+'assets/api/getChartData.php', httpParams);
+  }
+
+  getSellCount(sellerId: any){
+    let httpParams = new HttpParams()
+    .append("sellerId",sellerId);
+    return this.http.post(this.baseUrl+'assets/api/getSellerCount.php', httpParams);    
+  }
+  getPurchasCount(sellerId: any){
+    let httpParams = new HttpParams()
+    .append("sellerId",sellerId);
+    return this.http.post(this.baseUrl+'assets/api/getPurchaseData.php', httpParams);
+  }
+  getNotifyCount(sellerId: any){
+    let httpParams = new HttpParams()
+    .append("sellerId",sellerId);
+    return this.http.post(this.baseUrl+'assets/api/getNotifyDashboard.php', httpParams);
+  }
+
+  getListing(catId: any, sKey: any, pin: any, filterSet: any, sortSet: any, tagNum: any, pageNum: any){
+    let httpParams = new HttpParams()
+    .append("catId",catId)
+    .append("key",sKey)
+    .append("pin",pin)
+    .append("filterSet",filterSet)
+    .append("sortSet",sortSet)
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum);
+
+    return this.http.post(this.baseUrl+'assets/api/fetchLists.php', httpParams);
+  }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
