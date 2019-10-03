@@ -28,17 +28,22 @@ export class CategorylistingComponent implements OnInit {
   deleteCookieArray: any = [];
   pageData: Object;
   filterCount: number = 0;
+  pageCount: number = 0;
+  totPages: any = [];
+  ratingView: any = 0;
+  pages: any = 0;
 
-  constructor(private route: ActivatedRoute, private cookieService: CookieService,  private data : DataService) { }
+  constructor(private route: ActivatedRoute, private cookieService: CookieService, private data: DataService) { }
 
   ngOnInit() {
     //Php files
-    this.data.getPageData("category").subscribe(data =>{
+    this.data.getPageData("category").subscribe(data => {
       this.pageData = data;
+      this.pages = this.pageData["no_of_products"];
       this.loadFilters(this.pageData["no_of_products"]);
     })
 
-    for (this.i = 0,this.j = 0; this.i < 5; this.i++) {
+    for (this.i = 0, this.j = 0; this.i < 5; this.i++) {
       if (this.i < 3) {
         this.filledStar[this.i] = this.i;
       } else {
@@ -56,18 +61,21 @@ export class CategorylistingComponent implements OnInit {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
-  toggleBtns(oldBtn){
-    if(document.getElementById(oldBtn).classList.contains("show")){
+  toggleBtns(oldBtn) {
+    if (document.getElementById(oldBtn).classList.contains("show")) {
       document.getElementById(oldBtn).classList.remove('show');
     }
   }
-  getParams() {
+  getParams(urlParam) {
     var keyToken = "";
     this.route.queryParams.subscribe(params => {
-      keyToken = params["key"];
+      keyToken = params[urlParam];
     });
-
-    return keyToken;
+    if(keyToken !== undefined){
+      return keyToken;
+    }
+    return "";
+    
   }
 
   // Cookie Section BEGN
@@ -80,82 +88,116 @@ export class CategorylistingComponent implements OnInit {
   deleteCookie(cname) {
     this.cookieService.delete(cname);
   }
-
+  addToFilterArray(parentCookie, cname, cdata) {
+    var filterJson = this.getCookie(parentCookie);
+    var jsonParsed = JSON.parse(filterJson);
+    jsonParsed[cname] = cdata;
+    this.setCookie(parentCookie, JSON.stringify(jsonParsed));
+    console.log(this.getCookie(parentCookie));
+  }
   //filter cookies to be deleted
-  deleteFilter(id){
+  deleteFilter(id) {
     document.getElementById(id).style.display = "none";
     this.deleteCookieArray[this.deleteCookieCount++] = id;
   }
-
-  //get filters from cookies
-  getFilters(){
-    var cookieCount = 0;
-    var cookieName = "";
-
-    this.cookieArray = this.cookieService.getAll();
-
-    cookieCount = Object.keys(this.cookieArray).length;
-    
-    //filters to be displayed as chips
-    for(this.i = 0, this.j = 0; this.i< cookieCount; this.i++){
-      cookieName =  Object.keys(this.cookieArray)[this.i];
-      switch(cookieName){
-        case "pin": break;
-        case "selectedItem": break;
-        case "userId": break;
-        case "userName": break;
-        case "isLogged": break  
-        case "isAdmin": break;
-        case "sellerId": break;
-        case "sellerName": break;
-        case "shopId": break;
-        case "shopName": break;
-        default: this.filterArray[this.j++] = cookieName;
-                  break;
-      }
-    }
-    return this.filterArray;
+  selectRating(){
+    var rating = document.getElementById("tRating").value;
+    document.getElementById("tRatDisp").innerHTML = rating;
+    console.log(rating);
   }
-
   //apply filter functionality
-  applyFilters(){ 
-    //check for filters to be deleted
-    if(this.deleteCookieArray.length>0){
-      for(this.i = 0; this.i<this.deleteCookieArray.length; this.i++){
-        this.deleteCookie(this.deleteCookieArray[this.i]);
-      }
-    }
+  applyFilters() {
+    var rating = document.getElementById("tRating").value;
+    var freeShip = document.getElementById("tFShip").value;
+    var rfq = document.getElementById("tRfq").value;
+    var instBuy = document.getElementById("tRfq").value;
+    var ordConfm = document.getElementById("orderCon").value;
+
+    this.addToFilterArray("filterSet","rating",rating);
+    this.addToFilterArray("filterSet","freeShipping",freeShip);
+    this.addToFilterArray("filterSet","rfq",rfq);
+    this.addToFilterArray("filterSet","instantBuy",instBuy);
+    this.addToFilterArray("filterSet","orderConfirm",ordConfm);
+    this.loadFilters(this.pages);
+    console.log(this.getCookie("filterSet"));
+
   }
+  applySort(){
+    var PLH = document.getElementById("tpriceLow").value;
+    var PHL = document.getElementById("tpriceHigh").value;
+    var latest = document.getElementById("tlatest").value;
+    var pop = document.getElementById("popular").value;
+    var prLH = document.getElementById("tproLH").value;
+    var prHL = document.getElementById("tproHL").value;
+    var sLH = document.getElementById("tShipLH").value;
+    var sHL = document.getElementById("tShipHL").value;
 
+    this.addToFilterArray("SortSet","priceLH",PLH);
+    this.addToFilterArray("SortSet","priceHL",PHL);
+    this.addToFilterArray("SortSet","latest",latest);
+    this.addToFilterArray("SortSet","popular",pop);
+    this.addToFilterArray("SortSet","processLH",prLH);
+    this.addToFilterArray("SortSet","processHL",prHL);
+    this.addToFilterArray("SortSet","shipLH",sLH);
+    this.addToFilterArray("SortSet","shipHL",sHL);
+    this.loadFilters(this.pages);
+    console.log(this.getCookie("sortSet"));
+  }
   //load related filters in filter dropdown based on scenarios
-  loadFilters(prodNum){
-
-    var filters = this.getFilters();
-    var srchKey = this.getParams();
+  loadFilters(prodNum) {
+    this.setCookie("pin",682020);
+    var filters = JSON.parse(this.getCookie("filterSet"));
+    var sortSet = JSON.parse(this.getCookie("sortSet"));
+    var srchKey = this.getParams("key");
+    var catId = this.getParams("cat_id");
     var location = this.getCookie("pin");
-    var selectedItem = this.getCookie("selectedItem"); 
+    
+    var pageCount = 0;
 
-    for(this.i = 0; this.i < filters.length; this.i++){
-      if(filters[this.i] == "trending"){
-          this.data.getTrending(prodNum,1).subscribe(dataTrend =>{
-            this.array12 = dataTrend["data"];
-            console.log(typeof(this.array12));
-          })
-        break;
-      } else if(filters[this.i] == "offer"){
-          this.data.getTopOffers(prodNum,1).subscribe(dataOffer =>{
-            this.array12 = dataOffer["data"];
-          })
-        break;
-      } else if(filters[this.i] == "arrivals"){
-          this.data.getNewArrivals(prodNum,1).subscribe(dataNew =>{
-            this.array12 = dataNew["data"];
-          })
-        break;
+    console.log("sort "+sortSet+" filter "+filters);
+
+    if(filters.quickLink !== ""){
+      if (filters.quickLink == "trending") {
+        this.data.getTrending(prodNum, 1).subscribe(dataTrend => {
+          this.array12 = dataTrend["data"];
+          pageCount = dataTrend["pages"];
+          this.loadPages(pageCount);
+        })
+      } else if (filters.quickLink == "offer") {
+        this.data.getTopOffers(prodNum, 1).subscribe(dataOffer => {
+          this.array12 = dataOffer["data"];
+          pageCount = dataOffer["pages"];
+          this.loadPages(pageCount);
+        })
+      } else if (filters.quickLink == "arrivals") {
+        this.data.getNewArrivals(prodNum, 1).subscribe(dataNew => {
+          this.array12 = dataNew["data"];
+          pageCount = dataNew["pages"];
+          this.loadPages(pageCount);
+        })
       }
+    } else if(srchKey !== ""){
+
+    } else if(catId !== ""){
+      
+      this.data.getListing(catId,srchKey,location,JSON.stringify(filters),JSON.stringify(sortSet),prodNum,1).subscribe(dataList=>{
+        if(dataList["response"] == "success"){
+          this.array12 = dataList["data"];
+          pageCount = dataList["pages"];
+          alert("Filters Applied!");
+        } else {
+          alert("Sorry, match not found!");
+        }
+      })
+    } else {
+      //error
     }
     
-
+  }
+  loadPages(PageCount) {
+    for (var i = 0; i < PageCount; i++) {
+      this.totPages[i] = i + 1;
+    }
   }
 }
 
