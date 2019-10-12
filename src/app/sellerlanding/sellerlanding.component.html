@@ -33,7 +33,7 @@
                 <div class="slideVideoSmall" style="width: 55rem;" id="vidTag">
                     <video id="smallVideo" loop muted autoplay oncanplay="this.play()"
                         onloadedmetadata="this.muted = true">
-                        <source src="assets/videos/vid001.mp4" type="video/mp4">
+                        <source src="assets/videos/site/video.mp4" type="video/mp4">
                     </video>
                 </div>
             </ng-container>
@@ -41,7 +41,7 @@
                 <div class="slideVideoSmall" style="width: 55rem;top:-36rem;" id="vidTag">
                     <video id="smallVideo" loop muted autoplay oncanplay="this.play()"
                         onloadedmetadata="this.muted = true">
-                        <source src="assets/videos/vid001.mp4" type="video/mp4">
+                        <source src="assets/videos/site/video.mp4" type="video/mp4">
                     </video>
                 </div>
             </ng-template>
@@ -51,7 +51,7 @@
         <ng-template #fullVideo>
             <div class="slideVideoLarge" style="top: -5rem;">
                 <video width="1980" height="640" controls>
-                    <source src="assets/videos/vid001.mp4" type="video/mp4">
+                    <source src="assets/videos/site/video.mp4" type="video/mp4">
                 </video>
             </div>
         </ng-template>
@@ -347,6 +347,7 @@
                     </form>
                 </div>
             </div>
+            <div class="dvMore" id="moreFaq" (click)="faqMore();"><img src="assets/icons/resources (IL)-22.png"></div>
         </div>
     </div>
 </div>

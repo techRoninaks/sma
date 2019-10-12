@@ -54,6 +54,7 @@ export class ShopProfileComponent implements OnInit {
 	defRfqTag: any=0;
 	prod: any=[];
 	idP: any;
+	tokenProd:object;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
@@ -65,6 +66,7 @@ export class ShopProfileComponent implements OnInit {
 			this.token = params['shop_id'];
 			// console.log(this.token);
 			this.tokenObj = { shop_id: this.token, user_id: this.userId };
+			this.tokenProd = { shop_id: this.token, prod_number: 0};
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
@@ -173,7 +175,7 @@ export class ShopProfileComponent implements OnInit {
 			},
 			error => console.error(error)
 		);
-		this.data.getProductList(this.token).subscribe(
+		this.data.getProductList(this.tokenProd).subscribe(
 			data => {
 				this.array12 = data;
 			},
@@ -227,6 +229,18 @@ export class ShopProfileComponent implements OnInit {
 			}
 		);
 	}
+	showMoreProducts(){
+		this.tokenProd = { shop_id: this.token, prod_number: 1};
+		this.data.getProductList(this.tokenProd).subscribe(
+			data => {
+				this.array12 = data;
+			},
+			error => console.error(error)
+		);
+		(<HTMLInputElement><any>document.getElementById("prodMore")).style.display = "none";
+
+	}
+
 	addTagProduct(x: any) {
 		var y = this.defRfqTag;
 		this.prod[y++] = x;

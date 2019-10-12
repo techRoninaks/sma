@@ -15,6 +15,7 @@
     $giftTitle =$_POST["giftTitle"];
     $giftNote =$_POST["giftNote"];
     $giftAddress =$_POST["giftAddress"];
+    $msgCount =$_POST["msgCount"];
 
     $data = array();
 
@@ -109,10 +110,15 @@
     $disc=$discountInfo["percentage"];
 
     //total price calc
-    $basePriceTotal=$basePrice*$productQuantity;
-    $amount=$basePriceTotal*($disc/100);
-    $totalAmount=$amount+$varPrice;
+    // $basePriceTotal=$basePrice*$productQuantity;
+    // $amount=$basePriceTotal*($disc/100);
+    // $totalAmount=$amount+$varPrice;
+    $amountDisc=$basePrice*($disc/100);
+    $price=$basePrice-$amountDisc;
+    $basePriceTotal=$price*$productQuantity;
+    $totalAmount=$basePriceTotal+$varPrice;
 
+    
     $sqlQuery4 ="INSERT INTO `cart`(`prodid`, `quantity`, `variants_chosen`, `gift_address`, `gift_note`, `total_price`, `discount`, `variant_price`, `has_image`, `delivery_date`, `require_delivery_date`, `is_ordered`, `user_id`, `gift_title`, `gift_option`) VALUES ($prodId,$productQuantity,$varId,'$giftAddress','$giftNote',$totalAmount,$disc,$varPrice,0,'$deliveryDate',$reqDD,0,$userId,'$giftTitle',$isGift)";
     $result4= mysqli_query($con2,$sqlQuery4);
 
