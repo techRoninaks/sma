@@ -36,6 +36,7 @@ export class UserprofileBuyerComponent implements OnInit {
   dynamicDataSavedCard:any ="";
   dynamicData:any ="";
   id:any;
+  submitted :boolean;
   tokenObj: object;
   ngOnInit() {
     this.id="1";

@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
   dummySales: any = [1, 2, 3, 4, 5, 6];
   amountArray: any = [];
   xAxis: any = [];
-  countArray: Object = {};
-  purchaseArray: Object = {};
-  notifyArray: Object = {};
+  countArray: any = "";
+  purchaseArray: any = "";
+  notifyArray: any = "";
 
   //Chart details
   public lineChartOptions = {
