@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this.cookieService.delete('userName');
+    this.cookieService.delete('userId');
     document.getElementById("headerLogin").innerText ="Login";
     document.getElementById("loginButton").innerText ="";
     document.getElementById("profilemenu").style.display="none";

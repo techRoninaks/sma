@@ -64,7 +64,7 @@
   }
   
   .breadcrumb-layout{
-    margin-left: 5%;
+    margin-left: 0%;
   }
   .hrdiv{
     margin-right: 10%;
@@ -127,7 +127,6 @@
   }
   
   .button-green-layout{
-    margin-left: 6%;
     margin-top: 2%;
   }
   .button-green-login
@@ -140,6 +139,7 @@
     border-radius: 2px;
     border: none;
     font-family: "BitterBold";
+    margin-left: 41px;
   }
   .login-layout{
     background-color: #F1F1F1;
@@ -164,7 +164,7 @@
     font-size: 14px;
   }
   .login-layout-2{
-    margin-left: 24%;
+    margin-left: 15%;
     margin-top: 15%;
     font-family: "BitterBold";
   }
@@ -265,19 +265,7 @@
   
   .btn btn-warning{
       font-family: "BitterBold";
-  }        
-        // input[type=text], select, textarea {
-          
-        //   width: 100%;
-        //   padding: 5px;
-        //   border: 25px ;
-        //   margin-left: 2px;
-        //   border-radius: 2px;
-        //   resize: vertical;
-        //   background: white;
-        //   border:none;
-        // }
-            
+  }          
   input[type=submit] {
       background-color: #009145;
       color: white;
@@ -337,4 +325,249 @@
     resize: vertical;
     background: white;
     border: none;
+  }
+  .background-div{
+    display: grid;
+    grid-template-rows: 10% auto;
+    grid-template-columns: auto;
+    grid-template-areas: "header"
+                          "body";
+    margin-top: 100px;
+  }
+  .header{
+      grid-area: header;
+      background: #DBDBDB;
+      width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 4px;
+      height: 70px;
+      font-family: BitterBold;
+      .grid-header{
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: auto auto auto auto auto;
+        grid-template-areas: "div-shop-det div-owner-info div-payment div-terms div-launch"
+                            "shop-det owner-info payment terms launch";
+        margin-left: 37px;
+        .prime-label-style-stage-1{
+          color: black;
+        }
+        .label-style-stage-1{
+          color: #777676;
+        }
+        .img-style-1{
+        height: 73px;
+        margin-top: -56px;
+        }
+        .img-style-2{
+          height: 73px;
+          margin-top: -56px;
+          }
+        .img-style-3{
+          height: 73px;
+          margin-top: -56px;
+          margin-left: -34px;
+          }
+        .img-style-4{
+          height: 73px;
+          margin-top: -56px;
+          }
+        .img-style-5{
+          height: 73px;
+          margin-top: -56px;
+          }
+        .img-style-line{
+          height: 13px;
+          margin-left: -57px;
+          margin-top: -51px;
+        }
+        .img-style-line-2{
+          height: 13px;
+          margin-left: -57px;
+          margin-top: -51px;
+        }
+      }
+      .shop-det{
+        grid-area: shop-det;
+        margin-left: 27px;
+        font-weight: 100;
+      }
+      .owner-info{
+        grid-area: owner-info;
+      }
+      .payment{
+        grid-area: payment;
+      }
+      .terms{
+        grid-area: terms;
+      }
+      .launch{
+        grid-area: launch;
+      }
+      .div-shop-det{
+        grid-area: div-shop-det;
+        margin-left: 20px;
+      }
+      .div-owner-info{
+        grid-area: div-owner-info;
+        margin-left: 16px;
+      }
+      .div-payment{
+        grid-area: div-payment;
+        margin-left: 43px;
+      }
+      .div-terms{
+        grid-area: div-terms;
+        margin-left: 49px;
+      }
+      .div-launch{
+        grid-area: div-launch;
+      }
+  }
+  .grid-form{
+    display: grid;
+    grid-template-columns: 20% 30% 20% 30%;
+    grid-template-rows: auto auto auto auto auto auto auto auto;
+    grid-template-areas: "shop-name-label    shop-name    owner-name-label   owner-name"
+                          "shop-addr-label   shop-addr  shop-addr  city"
+                          ".  state state pin"
+                          "main-cat-label  main-cat-drop-down  contact-label  contact"
+                          ". main-cat-drop-down-1 . ."
+                          ". main-cat-drop-down-2 . ."
+                          "email-id-label  email-id  gst-no-label  gst-no"
+                          ". . . btn-next";
+  }
+  .div-body{
+    grid-area: body;
+    background: inherit;
+    background: rgb(235, 232, 232);
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 665px;
+  }
+  .main-cat-drop-down-1{
+    grid-area: main-cat-drop-down-1;
+  }
+  .main-cat-drop-down-2{
+    grid-area: main-cat-drop-down-2;
+  }
+  .gst-no-label{
+    grid-area: gst-no-label;
+  }
+  .gst-no{
+    grid-area: gst-no;
+  }
+  .btn-next{
+    grid-area: btn-next;
+  }
+  .shop-name-label{
+    grid-area: shop-name-label; 
+  }
+  .shop-name{
+    grid-area: shop-name;
+  }
+  .owner-name-label{
+    grid-area: owner-name-label;
+  }
+  .owner-name{
+    grid-area: owner-name;
+  }
+  .shop-addr-label{
+    grid-area: shop-addr-label;
+  }
+  .shop-addr{
+    grid-area: shop-addr;
+  }
+  .city{
+    grid-area: city;
+  }
+  .state{
+    grid-area: state;
+  }
+  .pin{
+    grid-area: pin;
+  }
+  .main-cat-label{
+    grid-area: main-cat-label;
+  }
+  .main-cat-drop-down{
+    grid-area: main-cat-drop-down;
+  }
+  .contact-label{
+    grid-area: contact-label;
+  }
+  .contact{
+    grid-area: contact;
+  }
+  .email-id-label{
+    grid-area: email-id-label;
+  }
+  .email-id{
+    grid-area: email-id;
+  }
+  .grid-stage-2{
+    display: grid;
+    grid-template-columns: 15% auto 15% 15% 15%;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas: "owner-name-label owner-name . . ."
+                         "email-label email contact-label contact contact"
+                         "dob-label dob id-no-label id-no id-no"
+                         "id-type-label id-drop-down . upload-label ."
+                         ". . . front back"
+                         ". . . . btn-next";
+  }
+  .front{
+    grid-area: front;
+  }
+  .back{
+    grid-area: back;
+  }
+  .owner-name-label{
+    grid-area: owner-name-label;
+  }
+  .owner-name{
+    grid-area: owner-name;
+  }
+  .email-label{
+    grid-area: email-label;
+  }
+  .email{
+    grid-area: email;
+  }
+  .contact-label{
+    grid-area: contact-label;
+  }
+  .contact{
+    grid-area: contact;
+  }
+  .dob-label{
+    grid-area: dob-label;
+  }
+  .dob{
+    grid-area: dob;
+  }
+  .id-no-label{
+    grid-area: id-no-label;
+  }
+  .id-no{
+    grid-area: id-no;
+  }
+  .id-type-label{
+    grid-area: id-type-label;
+  }
+  .id-drop-down{
+    grid-area: id-drop-down;
+  }
+  .upload-label{
+    grid-area: upload-label;
+  }
+  .btn-next{
+    grid-area: btn-next;
+  }
+  .front-body{
+    height: 100px;
+    width: 100px;
+    background: white;
   }

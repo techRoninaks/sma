@@ -202,40 +202,62 @@
                                                 </mat-expansion-panel-header>
                                                 <div class="grid-saved-cards">
                                                         <div class="expiry-label">
-                                                                <label>Expires on</label>
+                                                                <label style="margin-left: 190px;">Expires on</label>
                                                         </div>
+                                                </div>
+                                                <div class="grid-saved-cards" *ngFor="let item of Object.keys(dynamicDataSavedCard)">
+                                                        
                                                         <div class="card-no">
-                                                                XXXXXXXXXXXX0000
+                                                                XXXXXXXXXXXX{{dynamicDataSavedCard[item].cardno}}
                                                         </div>
                                                         <div class="expiry">
-                                                                00/0000
+                                                                {{dynamicDataSavedCard[item].expmon}}/{{dynamicDataSavedCard[item].exp_year}}
                                                         </div>
                                                         <div class="delete">
                                                                 <img src="assets/icons/userProfile/ic_delete.png"
                                                                         height=20px; width=20px;>
                                                         </div>
                                                         <div class="select">
-                                                                <input type="radio">
+                                                                <input type="radio" id=select[item]>
                                                         </div>
-                                                        <div class="new-card">
-                                                                <label>ADD NEW CARD</label>
-                                                                <br>
-                                                                <input type="text" class="new-card-box">
-                                                        </div>
-                                                        <div class="cvv">
-                                                                <input type="text" size="8" class="card-input-style"
-                                                                        placeholder="CVV">
-                                                        </div>
-                                                        <div class="val-label">
-                                                                <label>VALID TILL</label>
-                                                        </div>
-                                                        <div class="val">
-                                                                <input type="date" size="8" class="card-input-style">
-                                                        </div>
-                                                        <div class="ver-gif">
-                                                                <img src="assets/icons/userProfile/ic_ver_gif.png"
-                                                                        height=20px; width=20px;>
-                                                        </div>
+                                                </div>
+                                                <div class="grid-saved-cards">
+                                                        <form [formGroup]="cardForm">
+                                                                <div class="new-card">
+                                                                        <label>ADD NEW CARD</label>
+                                                                        <br>
+                                                                        <input type="text" class="new-card-box" formControlName="cardno">
+                                                                        <div *ngIf="submitted && cardForm.controls.cardno.errors" class="error validator-style">
+                                                                                <div *ngIf="cardForm.controls.cardno.errors.required">
+                                                                                        Enter Card No !
+                                                                                </div>
+                                                                                <div *ngIf="cardForm.controls.cardno.hasError('minlength')">
+                                                                                        Enter valid Mobile Number !
+                                                                                </div>
+                                                                                <div *ngIf="cardForm.controls.cardno.hasError('maxlength')">
+                                                                                        Enter valid Mobile Number !
+                                                                                </div>
+                                                                                <div *ngIf="cardForm.controls.cardno.hasError('pattern')">
+                                                                                        Enter Only digits !
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="cvv">
+                                                                        <input type="text" size="8" class="card-input-style"
+                                                                                placeholder="CVV" formControlName="cardno">
+                                                                </div>
+                                                                <div class="val-label">
+                                                                        <label>VALID TILL</label>
+                                                                </div>
+                                                                <div class="val">
+                                                                        <input type="date" size="8" class="card-input-style">
+                                                                </div>
+                                                                <div class="ver-gif">
+                                                                        <button (click)="submitCardData()" style="background: inherit;border: none;" type="submit"><img src="assets/icons/userProfile/ic_ver_gif.png"
+                                                                                height=20px; width=20px;>
+                                                                        </button>
+                                                                </div>
+                                                        </form>
                                                 </div>
                                         </mat-expansion-panel>
                                 </mat-accordion>
