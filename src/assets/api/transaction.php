@@ -6,6 +6,7 @@
     $count=0;
     // $sql_query="SELECT c.prodid,t.txnid,t.status,t.orderid,t.payment_mode FROM customer_order c INNER JOIN transaction_details t on c.orderid = t.orderid WHERE c.orderid IN (SELECT orderid FROM purchase_order WHERE sellerid =$sellerId)";
     $sql_query="SELECT c.prodid,t.txnid,t.status,t.orderid,t.payment_mode FROM customer_order c INNER JOIN transaction_details t on c.orderid = t.orderid WHERE c.orderid IN (SELECT orderid FROM purchase_order WHERE sellerid =$sellerId)";
+    // echo $sql_query;
     $result = mysqli_query($con2, $sql_query);
     while ($row = mysqli_fetch_assoc($result)) {
         $prod=$row["prodid"];

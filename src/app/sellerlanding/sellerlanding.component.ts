@@ -43,12 +43,14 @@ export class SellerlandingComponent implements OnInit {
 	total: any;
 	vidPlay: number;
 	first: number;
+	tokenFaq: object;
 	constructor(private router: Router, private data: DataService) { }
 	ngOnInit() {
 		// console.log(Object.keys(this.repeatPost));
 		// this.testimonal = 0;
 		this.vidPlay = 1;
 		this.first = 1;
+		this.tokenFaq = { number_faq:0};
 
 		document.getElementById("imgC").style.display = "none";
 		this.testimonal1 = 0;
@@ -106,7 +108,7 @@ export class SellerlandingComponent implements OnInit {
 				this.unFilledStar[this.j++] = this.i;
 			}
 		}
-		this.data.getFaqSite().subscribe(
+		this.data.getFaqSite(this.tokenFaq).subscribe(
 			data => {
 				this.faqSite = data;
 				// console.log(this.faqSite);
@@ -139,6 +141,16 @@ export class SellerlandingComponent implements OnInit {
 		else {
 			document.getElementById("rightAB").style.display = "block";
 		}
+
+	}
+	faqMore(){
+		this.tokenFaq = { number_faq:1};
+		this.data.getFaqSite(this.tokenFaq).subscribe(
+			data => {
+				this.faqSite = data;
+			}
+		);
+		(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
 
 	}
 	readMore(x: any) {
