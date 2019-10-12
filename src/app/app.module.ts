@@ -68,6 +68,7 @@ import { ChartsModule } from 'ng2-charts';
     SellerlandingComponent,
     MessagesComponent,
     TermsConditionsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +87,7 @@ import { ChartsModule } from 'ng2-charts';
     MatCardModule, 
     MatButtonModule, 
     MatAutocompleteModule,
+    
     RouterModule.forRoot([
       {
         path: 'plandetails',
