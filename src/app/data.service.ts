@@ -773,7 +773,6 @@ getUser() {
        .append("revenue_generated", data['revenue_generated'])
        .append("promo_id", data['promo_id'])
        .append("sold_count", data['sold_count'])
-      .append("created_date", data['created_date']);
       .append("created_date", data['created_date'])
       .append("remarks", data['remarks'])
       .append("can_upload_image", data['can_upload_image'])
