@@ -62,7 +62,8 @@ export class HomeComponent implements OnInit {
       }
     }
     this.showSlides(slideIndex);
-
+    this.setCookie("filterSet",JSON.stringify({"filterCount": "","priceRange":[], "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"", "quickLink": "", "catId": ""}));
+    this.setCookie("sortSet", JSON.stringify({"priceLH": "", "priceHL": "", "latest": "", "popular": "", "processLH": "", "processHL": "", "shipLH": "", "shipHL": ""}));
   }
   // Carousel
   plusSlides(n) {
@@ -122,11 +123,11 @@ export class HomeComponent implements OnInit {
     var id = activeTag[0].id;
     
     switch (id) {
-      case "tag-1": this.setCookie("sold", "max");
+      case "tag-1": this.addToFilterArray("quickLink", "trending");
         break;
-      case "tag-2": this.setCookie("discounts", "available");
+      case "tag-2": this.addToFilterArray("quickLink", "offer");
         break;
-      case "tag-3": this.setCookie("arrivals", "date");
+      case "tag-3": this.addToFilterArray("quickLink","arrivals");
         break;
     }
     this.router.navigate(['/category']);
@@ -162,4 +163,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  addToFilterArray(cname,cdata){
+    var filterJson = this.getCookie("filterSet");
+    var jsonParsed = JSON.parse(filterJson);
+    jsonParsed[cname] = cdata;
+    this.setCookie("filterSet",JSON.stringify(jsonParsed));
+    alert(this.getCookie("filterSet"));
+  }
 }

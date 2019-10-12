@@ -12,6 +12,10 @@
     $isRfq =$_POST["rfqEnabled"];
     $isGift =$_POST["giftEnabled"];
     $reqDDate =$_POST["desiredDate"];
+    $msgCount =$_POST["msgCount"];
+    // $image = $_POST["image"];
+    $mob = 0;
+
     $data = array();
 
 
@@ -84,6 +88,7 @@
     $basePrice=$row1["base_price"];
     //get variant info
     $sqlVariant = "SELECT * FROM `variant_info` where `value` =  '$productVariant'";    
+    // echo $sqlVariant;
     $resVariant=mysqli_query($con1,$sqlVariant);
     $rowVariant=mysqli_fetch_array($resVariant);
     // echo $sqlVariant;
@@ -105,15 +110,33 @@
     $disc=$discountInfo["percentage"];
 
     //total price calc
-    $basePriceTotal=$basePrice*$productQuantity;
-    $amount=$basePriceTotal*($disc/100);
-    $totalAmount=$amount+$varPrice;
+    // $basePriceTotal=$basePrice*$productQuantity;
+    // $amount=$basePriceTotal*($disc/100);
+    // $totalAmount=$amount+$varPrice;
+    $amountDisc=$basePrice*($disc/100);
+    $price=$basePrice-$amountDisc;
+    $basePriceTotal=$price*$productQuantity;
+    $totalAmount=$basePriceTotal+$varPrice;
+    //is image uploaded
+    if($imageUploaded==null){
+        $imageUploaded=0;
+    }
+    else{
+        $imageUploaded=1;
+    }
+
+
+
+
+   //purchase order insertion
 
     $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,
     `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'pending_confirmation',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
     0,0,$reqDD,$varId,0)";
     $result2 = mysqli_query($con2, $sql_query2);
     // echo $sql_query2;
+
+    //orderid selection
 
     $sqlOrder="SELECT `orderid` FROM `purchase_order`  where `sellerid`=$sellerId and `customerid`=$userId ORDER BY orderid DESC LIMIT 1";
     $resOrder=mysqli_query($con2,$sqlOrder);
@@ -124,12 +147,59 @@
     
     $orderId=$orderInfo["orderId"];
 
+    // echo $image;
+    //upload image
+    // if($image != 1){
+    //     define('UPLOAD_DIR', '../assets/images/order/'.$orderId.'/');
+    //     $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
+    //     if($mob == 0){
+            // $img =explode(",", $image);
+            // echo $img;
+            // $img[1] = str_replace(' ', '+', $img[1]);
+            // echo $img;
+            // $data = base64_decode($img[1]);
+            // echo $data;
+
+    //     }else{
+    //         $data = base64_decode($image);
+    //     }
+    //     $success = file_put_contents($file, $data);
+    // }
+
+
+
+    //insertion in customer order
     $sql_query3 = "INSERT INTO `customer_order`(`prodid`, `quantity`, `variants_chosen`, `gift_option`, `gift_note`, `gift_title`, `gift_address`, `is_rfq`,
     `base_price`, `qty_price`, `total_price`, `discount`, `shippingprice`, `tax`, `variantprice`, `has_image`, `orderid`, `promo_disc`, `invoice_number`, 
     `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,0,
     $totalAmount,$disc,0,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
     
+    //customer order id
+    $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
+    $resCustOrder=mysqli_query($con2,$sqlCustOrder);
+    $rowCustOrder=mysqli_fetch_assoc($resCustOrder);
+    // echo $sqlOrder;
+    // var_dump($rowOrder);
+    $orderCustInfo=array('coid'=>$rowCustOrder["coid"]);
+    
+    $coId=$orderCustInfo["coid"];
+
+    //message decode
+    // for($msgC=0;$msgC<$msgCount;$msgC++){
+    //     $msgValue=$message[$msgC];
+    //     $sql_query4="INSERT INTO `order_message`(`coid`, `message`) VALUES ($coId,$msgValue)";
+    //     $result4 = mysqli_query($con2, $sql_query4);
+    //     echo $sql_query4;
+    // }
+    $spiltMsg = explode(",", $message);  
+    for($msgC=0;$msgC<$msgCount;$msgC++){
+        $sql_query4="INSERT INTO `order_message`(`coid`, `message`) VALUES ($coId,'$spiltMsg[$msgC]')";
+        $result4 = mysqli_query($con2, $sql_query4);
+        // echo $sql_query4;
+    }
+
+
     // echo $sql_query3;
-    echo $result3;
+    echo $result4;
 ?>

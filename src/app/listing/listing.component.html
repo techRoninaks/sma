@@ -47,9 +47,8 @@
     <div class="divSelDesc">
         <!-- SELLER -->
         <div class="divSeller">
-
             <div class="sellerDetails">
-                <img src="assets/images/dentalia-demo-deoctor-3-1-750x750.jpg" class="sellerIcon">
+                <img src="assets/images/shop/{{dynamicData.shopId}}/{{dynamicData.shopId}}_logo.jpg" class="sellerIcon">
                 <div class="sellerInfo" [routerLink]="['/shop']" [queryParams]="{shop_id:dynamicData.shopId}">
                     <a class="companyName">{{sellerDetails.shopName}}</a>
                     <!-- <p class="sellerName">{{sellerDetails.sellerName}}</p> -->
@@ -69,10 +68,8 @@
                 </div>
             </div>
 
-            <div class="prodImage">
+            <!-- <div class="prodImage">
                 <div class="pImage">
-                    <!-- <input type='file' (change)="readURL($event);" /> -->
-                    <!-- <img src="assets/images/Screenshot_20190712-201603.png" class="productImageLarge"> -->
                     <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
                         (click)="openModal();currentSlide(1)">
                     <img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
@@ -93,8 +90,22 @@
                     <img class="smallImage" src="assets/images/Screenshot_20190712-201603.png"
                         (click)="myFunction('img5');" id="img5">
                 </div>
+            </div> -->
+            <div class="prodImage">
+                <div class="pImage">
+                    <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
+                        (click)="openModal();currentSlide(1)">
+                    <img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
+                </div>
+                <div class="imageSlider">
+                    <div *ngFor="let imageC of Object.keys(imagesCount)">
+                        <img class="smallImage"
+                            src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
+                            (click)="myFunction('img'+imageC);" id="img{{imageC}}">
+                        <br>
+                    </div>
+                </div>
             </div>
-
             <div class="btnsSel">
                 <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal">RFQ</button>
                 <button class="btnAtcart" (click)="submitCart();">ADD TO CART</button>
@@ -137,16 +148,18 @@
         </div>
         <div class="pDiscount">
             <p style="color: #009145;">{{discountLabel.discountText}}</p>
-            <p>{{priceDate.tPrice}}&nbsp;&nbsp;<del>{{dynamicData.basePrice}}</del></p>
+            <p><i class="fa fa-rupee" style="font-size:16px"></i>{{priceDate.tPrice}}&nbsp;&nbsp;
+                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicData.basePrice}}</del>
+            </p>
         </div>
         <div class="pSize">
-            <select class="dropdown">
-                <option>Select An Option</option>
-                <option id="variantValue" *ngFor="let item of Object.keys(variantData)"> {{variantData[item].value}}
+            <p>Select An Option</p>
+            <select id="variantValue" class="dropdown">
+                <option *ngFor="let item of Object.keys(variantData)"> {{variantData[item].value}}
                 </option>
             </select>
         </div>
-        <div class="pQuantity">
+        <div class="pQuantity" style="margin-top:10px;">
             <p>Quantity</p>
             <button type="button" id='1' (click)="count_dec()" class="minus">-</button>
             <input type="text" id="count" id="productQuantity" value="{{counter}}">
@@ -156,18 +169,22 @@
             Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Cake:
             <span>{{dynamicData.qtyAvailable}}</span>
         </div>
-        <div class="pMessage">
-            <p>Add Your Message:</p>
-            <input id="productMessage" type="text">
+        <div class="pMessage" id="msgShowOrNot">
+            <div *ngFor="let titl of Object.keys(messageTitle)">
+                <p>{{messageTitle[titl].title}}:</p>
+                <input id="productMessage_{{titl}}" type="text" required>
+            </div>
         </div>
-        <div class="pImages">
+        <div class="pImages" id="imageShowOrNot">
             <p>Product Image</p>
-            <input type="file" name="pic" id="productImage" accept="image/*">
+            <input style="display: none" type="file" name="pic" id="productImage" accept="image/*" #fileInput>
+            <button type="button" (click)="fileInput.click()" style="background-color: #efbe24;color: white;">Upload
+                Image</button>
             <!-- <input type="submit"> -->
         </div>
         <div class="pdatePicker">
             <span>Pick desired date for delivery:</span>
-            <input type="date" id="datePickerId" (click)="reqDate();">
+            <input type="date" id="datePickerId" (change)="reqDate();">
         </div>
         <div class="pButton">
             <div class="dvBuyBtn">
@@ -412,7 +429,7 @@
                 </div>
             </div>
         </div>
-        <div class="dvMore"><img src="assets/icons/resources (IL)-22.png"></div>
+        <div class="dvMore" id="moreFaq" (click)="faqMore();"><img src="assets/icons/resources (IL)-22.png"></div>
     </div>
 </div>
 
@@ -421,7 +438,7 @@
     <span class="close cursor " (click)="closeModal()">&times;</span>
     <div class="modal-content " style="background-color: #000000e8; ">
 
-        <div class="mySlides " style="background-color: #000000e8; transform: translate(25%); ">
+        <!-- <div class="mySlides " style="background-color: #000000e8; transform: translate(25%); ">
             <div class="numbertext ">1 / 4</div>
             <img src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg " style="width:50% ">
         </div>
@@ -439,12 +456,19 @@
         <div class="mySlides " style="background-color: #000000e8; transform: translate(25%); ">
             <div class="numbertext ">4 / 4</div>
             <img src="assets/images/photo3.jpg " style="width:50%; ">
+        </div> -->
+        <div class="mySlides" style="background-color: #000000e8; transform: translate(25%); "
+            *ngFor="let imageC of Object.keys(imagesCount)">
+            <div>
+                <div class="numbertext ">{{imageC}} / {{prodImageCount.countPI}}</div>
+                <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
+                    style="width:50% ">
+            </div>
         </div>
-
         <a class="prev " (click)="plusSlides(-1) " style="margin-top: -15%; ">&#10094;</a>
         <a class="next " (click)="plusSlides(1) " style="margin-top: -15%; ">&#10095;</a>
         <div class="thumbRow ">
-            <div class="column ">
+            <!-- <div class="column ">
                 <img class="demo cursor " src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg "
                     style="width:75% " (click)="currentSlide(1) ">
             </div>
@@ -458,7 +482,15 @@
             </div>
             <div class="column ">
                 <img class="demo cursor " src="assets/images/photo3.jpg " style="width:75% " (click)="currentSlide(4) ">
+            </div> -->
+            <!-- <div class="column"> -->
+            <div *ngFor="let imageC of Object.keys(imagesCount)">
+                <img class="demo cursor"
+                    src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
+                    style="width:75%;height: 100%;" (click)="currentSlide(imageC) ">
             </div>
+            <!-- </div> -->
+
         </div>
     </div>
 

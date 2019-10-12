@@ -19,6 +19,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { ContactComponent } from './contact/contact.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -39,6 +41,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent},
   { path: 'manageorders', component: ManageOrdersComponent},
   { path: 'addproduct', component: AddProductComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'sellerlanding', component: SellerlandingComponent},
 ];
 

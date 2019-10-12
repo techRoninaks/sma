@@ -54,7 +54,7 @@ export class ManageshopComponent implements OnInit {
 	bar3: any;
 	bar4: any;
 	bar5: any;
-	faqProduct: any = [];
+	faqShop: any = [];
 	idP: any;
 	privOption: any;
 	vacOption: any;
@@ -66,6 +66,7 @@ export class ManageshopComponent implements OnInit {
 	x: any;
 	z: any;
 	userId: any;
+	tokenFaq: object;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
@@ -75,6 +76,8 @@ export class ManageshopComponent implements OnInit {
 			this.token = params['shop_id'];
 			// console.log(this.token);
 			this.tokenObj = { shop_id: this.token, user_id: this.userId };
+			this.tokenFaq = { shop_id: this.token, number_faq:0};
+
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
@@ -174,13 +177,23 @@ export class ManageshopComponent implements OnInit {
 		);
 		this.data.shopViewIncrement(this.token).subscribe();
 
-		this.data.getFaqProduct(this.token).subscribe(
+		this.data.getFaqShop(this.tokenFaq).subscribe(
 			data => {
-				this.faqProduct = data;
+				this.faqShop = data;
 
 			}
 		);
 		// console.log(this.ratingReviewShop);
+	}
+	faqMore(){
+		this.tokenFaq = { shop_id: this.token, number_faq:1};
+		this.data.getFaqShop(this.tokenFaq).subscribe(
+			data => {
+				this.faqShop = data;
+			}
+		);
+		(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+
 	}
 
 	// Cookie Section BEGN

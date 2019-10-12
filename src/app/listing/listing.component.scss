@@ -201,7 +201,10 @@
 				grid-column-start: imageSlider-end;
 				grid-column-end: auto;
 				scrollbar-width: thin;
+				display:grid;
+				grid-template-rows: auto;
 				.smallImage {
+					
 					height: 5rem;
 					// width: 5rem;
 					padding-bottom: 0.5rem;
@@ -304,6 +307,8 @@
 	}
 	.pMessage {
 		grid-area: pMessage;
+		display:grid;
+		grid-template-rows: auto;
 	}
 	.pImages {
 		grid-area: pImages;
@@ -740,8 +745,9 @@
 		.questionAnswer {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			margin: 0px 40px 0px 40px;
+			margin: 10px 40px 0px 40px;
 			width: auto;
+			grid-row-gap: 25px;
 			.divQA {
 				// grid-area: divQA;
 				// height: auto;
@@ -764,6 +770,9 @@
 		img {
 			height: 50px;
 			width: 50px;
+		}
+		&:hover{
+			cursor:pointer;
 		}
 	}
 }
@@ -788,10 +797,10 @@
 		display: table;
 		clear: both;
 	}
-	.column {
-		float: left;
-		width: 15%;
-	}
+	// .column {
+	// 	float: left;
+	// 	width: 15%;
+	// }
 	/* Modal Content */
 	.modal-content {
 		position: relative;
@@ -859,6 +868,9 @@
 	}
 	img {
 		margin-bottom: -4px;
+		width: 35rem;
+		height: 25rem;
+	
 	}
 	.caption-container {
 		text-align: center;
@@ -882,6 +894,8 @@
 	.thumbRow {
 		width: auto;
 		margin-top: 50px;
+		display:grid;
+		grid-template-columns:repeat(10,auto);
 	}
 }
 
