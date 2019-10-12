@@ -3,8 +3,8 @@
     header("Access-Control-Allow-Origin: *");
     header('Content-Type: text/html; charset=utf-8');
 
-    $db_name1 = "smapr";
-    $db_name2 = "smausr";
+    $db_name1 = "roninaks_smapr";
+    $db_name2 = "roninaks_smausr";
     $user_name = "root";
     $user_pass = "";
     $server_name = "localhost";

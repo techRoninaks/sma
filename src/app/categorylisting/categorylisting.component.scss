@@ -430,7 +430,6 @@ $SubText: 18px;
 		}
 
 		.btnRfq{
-		    cursor: pointer;
 			grid-area: btn-rfq;
 			font-family: BitterBold;
 			font-size: inherit;
@@ -736,6 +735,20 @@ $SubText: 18px;
 #main {
 	transition: margin-left 0.5s;
 	padding: 16px;
+	grid-template-columns: auto;
+	grid-template-areas: "load";
+	display: grid;
+
+	.imgPop{
+		width: inherit;
+	}
+	.popHeadText{
+	  font-family: Bitter !important;
+	}
+	.popText{
+	  font-family: Bitter !important;
+	  text-align: justify !important;
+	}
 }
 
 .sticky {
@@ -811,11 +824,35 @@ $SubText: 18px;
 }
 @include lg {
 	.dvCatMain {
-		grid-template-columns: repeat(4, 30%);
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
 @include xlg {
 	.dvCatMain {
-		grid-template-columns: repeat(4, 30%);
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
+
+.loader {
+	grid-area: load;
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #efbe24;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 5s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	z-index: 99;
+	justify-self: center;
+}
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg)}
+  }

@@ -135,10 +135,10 @@
                 </div>
             </div>
             <div class="dvCardPrice">
-                <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
-                <p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
-                <p class="pOffer">({{array12[item].offerPercent}}%)</p>
-                <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+                <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice - (array12[item].basePrice*array12[item].offerPercent/100)}}&emsp;</p>
+                <p class="pActualPrice" *ngIf="array12[item].offerPercent > 0"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
+                <p class="pOffer" *ngIf="array12[item].offerPercent > 0">({{array12[item].offerPercent}}%)</p>
+                <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1" disabled>RFQ</button>
             </div>
         </div>
     </div>

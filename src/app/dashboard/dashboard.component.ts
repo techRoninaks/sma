@@ -45,9 +45,9 @@ export class DashboardComponent implements OnInit {
   constructor(private cookieService: CookieService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.setCookie("userId", "1");
-    if (this.getCookie("userId")) {
-      this.loadDashboard(this.getCookie("userId"));
+
+    if (this.getCookie("sellerId")) {
+      this.loadDashboard(this.getCookie("sellerId"));
     } else {
       this.router.navigate(['/login']);
     }
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleGraph(type) {
-    var sellerId = this.getCookie("userId");
+    var sellerId = this.getCookie("sellerId");
     var i = 0;
     var amar = [];
     var x = [];
