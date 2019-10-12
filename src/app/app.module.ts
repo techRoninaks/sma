@@ -66,6 +66,7 @@ import { ChartsModule } from 'ng2-charts';
     ContactComponent,
     AddProductComponent,
     SellerlandingComponent,
+    MessagesComponent,
     TermsConditionsComponent,
   ],
   imports: [
