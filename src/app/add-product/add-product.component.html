@@ -12,7 +12,7 @@
     <!-- Add Products -->
     <div class="dvAddProdText">
         <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-        <h2>ADD PRODUCTS</h2>
+        <h3>ADD PRODUCTS</h3>
     </div>
     <div class="dvAddProducts">
         <div class="grid-AddProductBtn">
@@ -20,7 +20,15 @@
                 <button class="btnDupli">DUPLICATE</button>
             </div>
             <div class="btnToggleActive">
-
+                <div class="toggleTextActive">
+                    <p>ACTIVE</p>
+                </div>
+                <div class="btnToggleActive1">
+                    <label class="switchActive" name="answer" value="Show giftCard" (click)=toggleActive()>
+                        <input type="checkbox" style="margin-left: 20px;">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="grid-AddProductCat">
@@ -58,7 +66,7 @@
     <!-- PRIMARY DETAILS -->
     <div class="dvPriDetailsText">
         <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-        <h2>PRIMARY DETAILS</h2>
+        <h3>PRIMARY DETAILS</h3>
     </div>
     <div class="dvPrimaryDetails">
         <div class="grid-ImagesPrimaryDetails">
@@ -72,7 +80,7 @@
                 <input type="text" class="text-Product-Name-Style" id="product-Name">
             </div>
             <div class="grid-MedProd2">
-                <p>PRODUCT BASE PRICE</p>
+                <p class="productBasePriceText">PRODUCT BASE PRICE</p>
             </div>
             <div class="grid-RightProd">
                 <input type="text" class="text-Product-BasePrice-Style" id="product-BasePrice">
@@ -125,59 +133,93 @@
     <hr>
     <!-- ADD VARIENTS -->
     <div class="dvAddVarientsText">
-        <h4>ADD VARIENTS</h4>
+        <h5>ADD VARIENTS</h5>
     </div>
+    <div class="grid-Tab-Form">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+            <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+            <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+            <button class="btn btn-default" ng-click="addTab()">+</button>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam.</p>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
     <!-- PRICE -->
     <div class="dvPrice">
         <div class="dvPriceText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>PRICE</h2>
+            <h3>PRICE</h3>
         </div>
         <div class="grid-PriceDetails">
             <div class="grid-LeftPrice">
-                <p>PRICE BREAKDOWN</p>
+                <p class="priceBreakDownText">TAX</p>
             </div>
             <div class="grid-LeftPrice1">
-                <p>DISCOUNT</p>
+                <p class="dicountText">DISCOUNT</p>
             </div>
             <div class="grid-LeftPrice2">
-                <p>ACTUAL PRICE</p>
+                <p class="actualPriceText">ACTUAL PRICE</p>
             </div>
             <div class="grid-LeftPrice3">
-                <p>COMMISSION DEDUCTION</p>
+                <p class="commissionDecuctionText">COMMISSION DEDUCTION</p>
             </div>
             <div class="grid-LeftPrice4">
-                <p>FINAL</p>
+                <p class="finalText">FINAL</p>
             </div>
             <div class="grid-Med">
-                <p>:</p>
+                <p class="dotMed">:</p>
             </div>
             <div class="grid-Med1">
-                <p>:</p>
+                <p class="dotMed1">:</p>
             </div>
             <div class="grid-Med2">
-                <p>:</p>
+                <p class="dotMed2">:</p>
             </div>
             <div class="grid-Med3">
-                <p>:</p>
+                <p class="dotMed3">:</p>
             </div>
             <div class="grid-Med4">
-                <p>:</p>
+                <p class="dotMed4">:</p>
             </div>
             <div class="grid-RightPrice">
-                <input class="grid-Right-Price-Style" id="Right-Price">
+                {{ dynamicDataPriceDiscTotal.tax }}
             </div>
             <div class="grid-RightPrice1">
-                <input placeholder="%" class="grid-Right-Price1-Style" id="Right-Price1">
+                {{ dynamicDataPriceDiscTotal.discount }}
             </div>
             <div class="grid-RightPrice2">
-                <input class="grid-Right-Price2-Style" id="Right-Price2">
+                {{ dynamicDataPrice.basePrice }}
             </div>
             <div class="grid-RightPrice3">
-                <input class="grid-Right-Price3-Style" id="Right-Price3">
+                {{ dynamicDataPrice.commisionDedtd }}
             </div>
             <div class="grid-RightPrice4">
-                <input class="grid-Right-Price4-Style" id="Right-Price4">
+                {{ dynamicDataPriceDiscTotal.totalPrice }}
             </div>
         </div>
         <hr>
@@ -186,11 +228,11 @@
     <div class="dvAdvanceSettings">
         <div class="dvAdvanceSettingsText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>ADVANCED SETTINGS</h2>
+            <h3>ADVANCED SETTINGS</h3>
         </div>
         <div class="grid-AdvanceSettings1">
             <div class="grid-AdvanceTextLeft">
-                <h6>LABEL</h6>
+                <h6 class="labelText">LABEL</h6>
             </div>
             <div class="grid-AdvanceDropDownRight">
 
@@ -200,10 +242,10 @@
             <div class="grid-AdvanceSettingsLeft">
                 <div class="grid-Advance2">
                     <div class="grid-AvgLeft">
-                        <p>AVERAGE PROCESSING TIME</p>
+                        <p class="avgProcessingTimeText">AVERAGE PROCESSING TIME</p>
                     </div>
                     <div class="grid-AvgLeft1">
-                        <P>AVERAGE SHIPPING TIME</P>
+                        <p class="avgShippingTimeText">AVERAGE SHIPPING TIME</p>
                     </div>
                     <div class="grid-LabelRight">
                         <div class="AvgProTimeLabel">
@@ -220,7 +262,7 @@
             <div class="grid-AdvanceSettingsRight">
                 <div class="grid-Advance3">
                     <div class="grid-TagText">
-                        <h6>TAG :</h6>
+                        <h6 class="tagText">TAG :</h6>
                     </div>
                     <div class="grid-TagCard">
                         <div class="AdvanceTagCard">
@@ -234,59 +276,77 @@
             <div class="grid-Advance3Left">
                 <div class="grid-AdLeft">
                     <div class="grid-GiftOptionTextLeft1">
-                        <p>Gift Option</p>
+                        <p class="giftOptionText">Gift Option</p>
                     </div>
                     <div class="grid-OrderConfrmTextLeft1">
-                        <p>Order Confirmation</p>
+                        <p class="orderConfirmationText">Order Confirmation</p>
                     </div>
                     <div class="grid-UploadImgTextLeft1">
-                        <p>Upload Images</p>
+                        <p class="uploadImgText">Upload Images</p>
                     </div>
                     <div class="grid-GiftOptionToggleRight1">
-
+                        <label class="switchGiftOption" name="answer" value="Show giftCard" id="giftOption" (click)=giftOption()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                     <div class="grid-OrderConfrmToggleRight1">
-
+                        <label class="switchOrderConfrm" name="answer" value="Show giftCard" id="orderConfrm" (click)=orderConfrm()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                     <div class="grid-UploadImgToggleRight1">
-
+                        <label class="switchUploadImg" name="answer" value="Show giftCard" id="uploadImg"  (click)=uploadImg()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
             </div>
             <div class="grid-Advance3Med">
                 <div class="grid-AdMed">
                     <div class="grid-DeliveryDateTextLeft2">
-                        <p>Delivery date</p>
+                        <p class="deliveryDateText">Delivery date</p>
                     </div>
                     <div class="grid-DeliveryDateToggleRight2">
-
+                        <label class="switchDeliveryDate" name="answer" value="Show giftCard" (click)=deliveryDate()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                     <div class="grid-AutoCancelTextLeft2">
-                        <p>Set Auto Cancellation Time</p>
+                        <p class="setAutoCancelText">Set Auto Cancellation Time</p>
                     </div>
-                    <div class="grid-AdvanceLabelRight2">
+                    <div class="grid-AutoCancelLabelRight2">
                         <div class="AutoCancelLabel">
                             <input class="AutoCancelLabel-Style" id="Auto-Cancel">
                         </div>
                     </div>
                     <div class="grid-AddCustomTextLeft2">
-                        <p>Add Custom Message Fields</p>
+                        <p class="addCustomText">Add Custom Message Fields</p>
                     </div>
-                    <div class="grid-AdvanceToggleRight2">
-
+                    <div class="grid-AutoCustomToggleRight2">
+                        <label class="switchAutoCustom" name="answer" value="Show giftCard" id="autoCustom"  (click)=autoCustom()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
             </div>
             <div class="grid-Advance3Right">
                 <div class="grid-AdRight">
                     <div class="grid-RfqText">
-                        <p>RFQ</p>
+                        <p class="rfqText">RFQ</p>
                     </div>
                     <div class="grid-RfqToggle">
-
+                        <label class="switchRfq" name="answer" value="Show giftCard" id="rfq" (click)=rfq()>
+                            <input type="checkbox" style="margin-left: 20px;">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                     <div class="grid-MaxNoText">
-                        <p>MAX NO :</p>
+                        <p class="maxNoText">MAX NO :</p>
                     </div>
                     <div class="grid-CountLabel">
                         <input class="CountLabel-Style" id="Max-Count-Label">
@@ -298,7 +358,7 @@
     <!-- MESSAGE TITLE -->
     <div class="dvMsgTitle">
         <div class="dvMsgTitleText">
-            <h4>MESSAGE TITLE</h4>
+            <h5>MESSAGE TITLE</h5>
         </div>
         <div class="grid-MsgTitleContainer">
             <div class="grid-MsgTitleHead">
@@ -332,7 +392,7 @@
     <div class="dvShippingOptions">
         <div class="dvShippingOptionsText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>SHIPPING OPTIONS :</h2>
+            <h3>SHIPPING OPTIONS :</h3>
         </div>
         <div class="grid-RadioBtn">
             <div class="grid-RadioShipping">
@@ -341,7 +401,7 @@
                         <p>Shipping</p>
                     </div>
                     <div class="grid-ShippingRadioBtn">
-                        <input type="radio" value="Shipping">
+                        <input type="radio" value="Shipping" id="shippingRadio">
                     </div>
                 </div>
             </div>
@@ -351,7 +411,7 @@
                         <p>HomeDelivery</p>
                     </div>
                     <div class="grid-HomeDeliveryRadioBtn">
-                        <input type="radio" value="HomeDelivery">
+                        <input type="radio" value="HomeDelivery" id="homedeliveryRadio">
                     </div>
                 </div>
             </div>
@@ -361,7 +421,7 @@
                         <p>Pickup</p>
                     </div>
                     <div class="grid-PickupRadioBtn">
-                        <input type="radio" value="Pickup">
+                        <input type="radio" value="Pickup" id="pickupRadio">
                     </div>
                 </div>
             </div>
@@ -370,30 +430,30 @@
     <div class="dvShippingDetails">
         <div class="dvShippingDetailsText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>SHIPPING DETAILS :</h2>
+            <h3>SHIPPING DETAILS :</h3>
         </div>
     </div>
     <!-- DELIVERABLE LOCATIONS -->
     <div class="dvDeliverableLocationText">
-        <h4>DELIVERABLE LOCATIONS</h4>
+        <h5>DELIVERABLE LOCATIONS</h5>
     </div>
     <hr>
     <!-- DISCOUNT -->
     <div class="dvDiscount">
         <div class="dvDiscountText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>DISCOUNT</h2>
+            <h3>DISCOUNT</h3>
         </div>
         <div class="grid-Discount-Container">
             <div class="grid-Pro-Discount-Left">
                 <div class="grid-Pro-Discount">
                     <div class="grid-Pro-Disc-Text">
-                        <h4>PRODUCT DISCOUNT</h4>
+                        <h6 class="proDiscText">PRODUCT DISCOUNT</h6>
                     </div>
                     <div class="grid-Pro-Disc-Container">
                         <div class="grid-Pro-Disc">
                             <div class="grid-Pro-Date-Text">
-                                <p>DATE :</p>
+                                <p class="dateText">DATE :</p>
                             </div>
                             <div class="grid-Label-1">
                                 <input type=date class="Pro-Date-Label-Style-1" id="Pro-Date-1">
@@ -414,7 +474,7 @@
                                 <input type=text placeholder="%" class="Pro-Disc-Label-Style-2" id="Pro-Disc-1">
                             </div>
                             <div class="btnPro-Disc">
-                                <button class="btnPro-Sumit">SUBMIT</button>
+                                <button class="btnPro-Sumit" (click)= prodDiscSubmit()>SUBMIT</button>
                             </div>
                         </div>
                     </div>
@@ -423,20 +483,20 @@
             <div class="grid-Bundle-Discount-Right">
                 <div class="grid-Bundle-Discount">
                     <div class="grid-Pro-Disc-Text">
-                        <h4>ADD BUNDLE DISCOUNT</h4>
+                        <h6 class="addBundleText">ADD BUNDLE DISCOUNT</h6>
                     </div>
                     <div class="grid-Pro-Disc-Container">
                         <div class="grid-Bundle-Disc">
                             <div class="grid-Bundle-Head">
                                 <div class="grid-Bundle-Body">
                                     <div class="grid-Qty-Text">
-                                        <p>QTY</p>
+                                        <p class="qtyText">QTY</p>
                                     </div>
                                     <div class="grid-Disc-Price">
-                                        <P>DISCOUNTED PRICE</P>
+                                        <p class="discPriceText">DISCOUNTED PRICE</p>
                                     </div>
                                     <div class="grid-Actual-Price">
-                                        <P>ACTUAL PRICE</P>
+                                        <p class="actualPriceText">ACTUAL PRICE</p>
                                     </div>
                                     <div class="grid-Qty-Label">
                                         <input type=text class="Bun-Qty-Label-Style" id="Bundle-Qty">
@@ -448,7 +508,7 @@
                                         <input type=text class="Actual-Price-Label-Style" id="Actual-Price">
                                     </div>
                                     <div class="grid-Add-Bundle">
-                                        <img class="imgPlus" src="assets/icons/plus.png">
+                                        <img class="imgPlus" src="assets/icons/plus.png" id="addBulkDisc" (click)=addBulkDisc()>
                                     </div>
                                 </div>
                             </div>
@@ -481,7 +541,7 @@
     <div class="dvProdPolicies">
         <div class="ProdPoliciesText">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>PRODUCT POLICIES & PRODUCT SHIPPING POLICIES</h2>
+            <h3>PRODUCT POLICIES & PRODUCT SHIPPING POLICIES</h3>
         </div>
         <!-- <div class="grid-Policy">
             <div class="grid-Policies">
@@ -520,7 +580,7 @@
     <div class="dvFaq">
         <div class="dvFaqText ">
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
-            <h2>FAQ</h2>
+            <h3>FAQ</h3>
         </div>
         <div class="grid-FaqContainer">
             <div class="grid-FaqHead">
@@ -555,7 +615,7 @@
                 <button class="btnSaveAsDraft" (click)="saveDraft()">SAVE AS DRAFT</button>
             </div>
             <div class="grid-BtnLastRight">
-                <button class="btnPublish" (click)="publishBtn()">PUBLISH</button>
+                <button class="btnPublish" (click)="publishBtn('publish')">PUBLISH</button>
             </div>
         </div>
     </div>
