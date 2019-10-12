@@ -33,10 +33,20 @@ export class DataService {
       .append("sellerId", data['seller_identity'])
       .append("rfqEnabled", data['rfq_enabled'])
       .append("desiredDate", data['desiredDate'])
-      .append("giftEnabled", data['gift_enabled'])
+      .append("giftEnabled", data['gift_enabled'])      
+      .append("msgCount", data['msgCount'])
+      // .append("image", data['image'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
+  
+  	getProductList(data: any) {
+		let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("productCount", data['prod_number'])
+		return this.http.post(this.baseUrl+'assets/api/productslist.php', httpParams);
+	}
+  
   sendCartDetails(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
@@ -54,6 +64,7 @@ export class DataService {
       .append("giftTitle", data['gift_title'])
       .append("giftNote", data['gift_note'])
       .append("giftAddress", data['gift_address'])
+      .append("msgCount", data['msgCount'])
 
 
     return this.http.post(this.baseUrl + 'assets/api/pricingcart.php', httpParams);
@@ -89,6 +100,17 @@ export class DataService {
       .append("shopId", data)
     return this.http.post(this.baseUrl + 'assets/api/productlistmanage.php', httpParams);
   }
+  readFileProdImage(data: any){
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/readFileProdImage.php', httpParams);
+  }
+  getMessageTitle(data: any){
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/messagetitle.php', httpParams);
+  } 
+
   getShopRevRatings(data: any) {
     let httpParams = new HttpParams()
       .append("shopId", data)
@@ -169,6 +191,8 @@ getDateDiffShop(data: any) {
   getFaqSite() {
     let httpParams = new HttpParams()
     // .append("sellerId", data)
+    .append("numberFaq", data)
+
     return this.http.post(this.baseUrl + 'assets/api/faqsite.php', httpParams);
   }
   
@@ -341,12 +365,14 @@ getDateDiffShop(data: any) {
 
 	getFaqProduct(data: any) {
 		let httpParams = new HttpParams()
-			.append("prodId", data)
+      .append("prodId", data['prod_id'])
+      .append("numberFaq", data['number_faq'])
 		return this.http.post(this.baseUrl+'assets/api/faqproduct.php', httpParams);
 	}
 	getFaqShop(data: any) {
 		let httpParams = new HttpParams()
-			.append("shopId", data)
+      .append("shopId", data['shop_id'])
+      .append("numberFaq", data['number_faq'])
 		return this.http.post(this.baseUrl+'assets/api/faqshop.php', httpParams);
 	}
   getPageData(page: string){
