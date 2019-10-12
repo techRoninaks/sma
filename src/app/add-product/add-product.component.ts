@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Location } from '@angular/common';
 // import { data } from 'jquery';
 
 @Component({
@@ -16,8 +17,13 @@ export class AddProductComponent implements OnInit {
   dynamicDataShipPolicy: any = [];
   dynamicDataReturnPolicy: any = [];
   dynamicDataName: any;
+  addProduct: any;
+  addProductDisc: any;
+  id: any;
+  dynamicDataPrice: any = [];
+  dynamicDataPriceDiscTotal: any =[];
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService,private location: Location) { }
 
   ngOnInit() {
     this.prodid = 1;
@@ -30,6 +36,7 @@ export class AddProductComponent implements OnInit {
       // error => console.error(error)
     );
   }
+
   myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -61,40 +68,115 @@ export class AddProductComponent implements OnInit {
     // this.data.editManage(this.z).subscribe();
   }
 
-  publishBtn(id: any) {
-    this.data.dataPostAddProduct(this.data).subscribe(data => {
-      // this.dynamicDataName = data;
-      // var pnData = document.getElementById("product-Name").value;
-      // var pbpData = document.getElementById("product-BasePrice").value;
-      // var psdData = document.getElementById("product-ShortDesc").value;
-      // var pdData = document.getElementById("product-Desc").value;
-      // var psData = document.getElementById("product-Spec").value;
-      // var clData = document.getElementById("Counter-Label").value;
-      // var maqoData = document.getElementById("Max-Qty-Order").value;
-      // var miqoData = document.getElementById("Min-Qty-Order").value;
-      // var rpData = document.getElementById("Right-Price").value;
-      // var rp1Data = document.getElementById("Right-Price1").value;
-      // var rp2Data = document.getElementById("Right-Price2").value;
-      // var rp3Data = document.getElementById("Right-Price3").value;
-      // var rp4Data = document.getElementById("Right-Price4").value;
-      // var aptData = document.getElementById("Avg-ProTime").value;
-      // var astData = document.getElementById("Avg-ShipTime").value;
-      // var tcData = document.getElementById("Tag-Card").value;
-      // var mclData = document.getElementById("Max-Count-Label").value;
-      // var mtData = document.getElementById("Msg-Title").value;
-      // var pd1Data = document.getElementById("Pro-Date-1").value;
-      // var pd2Data = document.getElementById("Pro-Date-2").value;
-      // var pp1Data = document.getElementById("Pro-Price-1").value;
-      // var pdiscData = document.getElementById("Pro-Disc-1").value;
-      // var bqData = document.getElementById("Bundle-Qty").value;
-      // var apData = document.getElementById("Actual-Price").value;
-      // var ptaData = document.getElementById("policyTxtAr").value;
-      // var qsData = document.getElementById("Ques-Sect1").value;
-      // var asData = document.getElementById("Ans-Sect2").value;
-      // var b = document.getElementById(" ").value;
-      // var b = document.getElementById(" ").value;
-      // var b = document.getElementById(" ").value;
-      // var b = document.getElementById(" ").value;
-    });
+    publishBtn(x: any) {
+
+      if (x == 'publish') {
+      var name = (<HTMLInputElement><any>document.getElementById("product-Name")).value;
+      var base_price = (<HTMLInputElement><any>document.getElementById("product-BasePrice")).value;
+      var short_desc = (<HTMLInputElement><any>document.getElementById("product-ShortDesc")).value;
+      var Long_desc = (<HTMLInputElement><any>document.getElementById("product-Desc")).value;
+      var spec = (<HTMLInputElement><any>document.getElementById("product-Spec")).value;
+      var qty_avble = (<HTMLInputElement><any>document.getElementById("Counter-Label")).value;
+      var max_order_quant = (<HTMLInputElement><any>document.getElementById("Max-Qty-Order")).value;
+      var min_order_quant = (<HTMLInputElement><any>document.getElementById("Min-Qty-Order")).value;
+      // var rpData = (<HTMLInputElement><any>document.getElementById("Right-Price")).value;
+      // var rp1Data = (<HTMLInputElement><any>document.getElementById("Right-Price1")).value;
+      // var rp2Data = (<HTMLInputElement><any>document.getElementById("Right-Price2")).value;
+      // var rp3Data = (<HTMLInputElement><any>document.getElementById("Right-Price3")).value;
+      // var rp4Data = (<HTMLInputElement><any>document.getElementById("Right-Price4")).value;
+
+      var avg_prcessing_time = (<HTMLInputElement><any>document.getElementById("Avg-ProTime")).value;
+      var avg_shpping_time = (<HTMLInputElement><any>document.getElementById("Avg-ShipTime")).value;
+      var tags = (<HTMLInputElement><any>document.getElementById("Tag-Card")).value;
+      var auto_cancel_time = (<HTMLInputElement><any>document.getElementById("Auto-Cancel")).value;
+      var max_no_of_image = (<HTMLInputElement><any>document.getElementById("Max-Count-Label")).value;
+      var has_gift = (<HTMLInputElement><any>document.getElementById("giftOption")).value;
+      var has_order_confmn = (<HTMLInputElement><any>document.getElementById("orderConfrm")).value;
+      var can_upload_image = (<HTMLInputElement><any>document.getElementById("uploadImg")).value;
+      var add_custom_message_field = (<HTMLInputElement><any>document.getElementById("autoCustom")).value;
+      var has_rfq = (<HTMLInputElement><any>document.getElementById("rfq")).value;
+
+      // var mtData = (<HTMLInputElement><any>document.getElementById("Msg-Title")).value;
+
+      var ship = (<HTMLInputElement><any>document.getElementById('shippingRadio')).checked;
+      var cod = (<HTMLInputElement><any>document.getElementById('homedeliveryRadio')).checked;
+      var pickup = (<HTMLInputElement><any>document.getElementById('pickupRadio')).checked;
+
+
+        // var res = shipping_option.split(" ");
+        // this.varName = res[0];
+
+        if (ship == true) {
+          var shipping_option = "shipping";
+        }
+        else if (cod == true) {
+          var shipping_option = "cod";
+        }
+        else if (pickup == true) {
+          var shipping_option = "pickup";
+        }
+        this.addProduct = {name: name, base_price: base_price, short_desc: short_desc, Long_desc: Long_desc, spec: spec, qty_avble: qty_avble, max_order_quant: max_order_quant, min_order_quant: min_order_quant, avg_prcessing_time: avg_prcessing_time, avg_shpping_time: avg_shpping_time, tags: tags, auto_cancel_time: auto_cancel_time, max_no_of_image: max_no_of_image, has_gift: has_gift, shipping_option: shipping_option, has_order_confmn: has_order_confmn, can_upload_image: can_upload_image, add_custom_message_field: add_custom_message_field, has_rfq: has_rfq }
+      this.data.getdataPostAddProduct(this.addProduct).subscribe(data => {
+        // this.location.replaceState('/');
+        window.location.href = './';
+        });
+		}
+
+    this.id = "prodid";
+		this.data.getdynamicPriceAddProduct(this.id).subscribe(
+			data => {
+				this.dynamicDataPrice = data;
+			},
+			error => console.error(error)
+		);
+
+    this.id = "prodid";
+		this.data.getdynamicPriceDiscTotalAddProd(this.id).subscribe(
+			data => {
+				this.dynamicDataPriceDiscTotal = data;
+			},
+			error => console.error(error)
+		);
+    
+
+
+    // var pd1Data = (<HTMLInputElement><any>document.getElementById("Pro-Date-1")).value;
+    // var pd2Data = (<HTMLInputElement><any>document.getElementById("Pro-Date-2")).value;
+    // var pp1Data = (<HTMLInputElement><any>document.getElementById("Pro-Price-1")).value;
+
+    // var pdiscData = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
+    // var bqData = (<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value;
+    // var apData = (<HTMLInputElement><any>document.getElementById("Actual-Price")).value;
+
+    // var ptaData = (<HTMLInputElement><any>document.getElementById("policyTxtAr")).value;
+    // var qsData = (<HTMLInputElement><any>document.getElementById("Ques-Sect1")).value;
+    // var asData = (<HTMLInputElement><any>document.getElementById("Ans-Sect2")).value;
+
   }
+
+  // prodDiscSubmit() {
+    
+  //   var	from_time_stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-1")).value;
+  //   var to_tme_Stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-2")).value;
+  //   var percentage = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
+
+  //   this.addProductDisc = { from_time_stamp: from_time_stamp, to_tme_Stamp: to_tme_Stamp,percentage: percentage }
+  
+  //   this.data.getdataPostAddProduct(this.addProductDisc).subscribe(data => {
+  //     console.log("Sent");
+  //   })
+  // }
+
+  // addBulkDisc() {
+  //   var	from_time_stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-1")).value;
+  //   var to_tme_Stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-2")).value;
+  //   var percentage = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
+
+  //   this.addProductDisc = { from_time_stamp: from_time_stamp, to_tme_Stamp: to_tme_Stamp,percentage: percentage }
+  
+  //   this.data.getdataPostAddProduct(this.addProductDisc).subscribe(data => {
+  //     console.log("Sent");
+  //   })
+    
+  // }
 }

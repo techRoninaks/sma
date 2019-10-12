@@ -10,7 +10,7 @@
 <div class="gridT">
     <!-- shop background image -->
     <div class=shopBg>
-        <img src="assets/images/1920x640.jpg">
+        <img src="assets/images/shop/{{token}}/{{token}}_cover.jpg">
         <div class="upload-btn-wrapper">
             <button class="btn">Upload a file</button>
             <input type="file" name="myfile" />
@@ -20,7 +20,7 @@
     <div class="shopDescBio">
         <div class="shopDesc">
             <div class="shopLogo">
-                <img src="assets/images/logo/resources (CL)-21.png">
+                <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
                 <div class="upload-btn-wrapper">
                     <button class="btn">Upload a file</button>
                     <input type="file" name="myfile" />
@@ -108,7 +108,7 @@
             <div class="dvCard" *ngFor="let item of Object.keys(array12)" id="product{{array12[item].prodId}}">
                 <div class="dvCardBanner" [routerLink]="['/listing']"
                     [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-                    <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
+                    <img class="imgBanner" src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
                     <div class="dvUndeliver">
                         <div class="overlay" *ngIf="array12[item].status == 'inactive'"
                             style="background-color: #FF1D25">INACTIVE</div>
@@ -211,15 +211,15 @@
                 </form>
             </div>
             <div class="questionAnswer">
-                <div class="divQA" *ngFor=" let faq of Object.keys(faqProduct)">
+                <div class="divQA" *ngFor=" let faq of Object.keys(faqShop)">
                     <form class="qA">
-                        Q:<span class=" question ">{{faqProduct[faq].question}}</span>?<br> A:
-                        <span class="answer ">{{faqProduct[faq].answer}}</span>
+                        Q:<span class=" question ">{{faqShop[faq].question}}</span>?<br> A:
+                        <span class="answer ">{{faqShop[faq].answer}}</span>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="dvMore"><img src="assets/icons/resources (IL)-22.png"></div>
+        <div class="dvMore" id="moreFaq" (click)="faqMore()"><img src="assets/icons/resources (IL)-22.png"></div>
     </div>
 </div>
 <!-- rfqPopup -->

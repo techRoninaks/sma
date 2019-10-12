@@ -207,6 +207,8 @@
                             border-radius: 50%;
                             object-fit: cover;
                             cursor: pointer;
+                            width: 6rem;
+                            height: 6.25rem;
                         }
                     }
                     .dvSeller {
@@ -450,6 +452,16 @@
             // 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
             // 	}
             // }
+        }
+        .dvMore {
+            background-color: #efbe24;
+            color:white;
+            margin-left: 50%;
+            width: fit-content;
+            padding: 5px;
+            &:hover{
+                cursor:pointer;
+            }
         }
     }
     .shopShipment {

@@ -105,8 +105,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -121,13 +122,13 @@ $SubText: 18px;
 }
 .grid-AddProductBtn {
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: auto auto auto;
 	grid-template-rows: auto;
-	grid-template-areas: "btnDuplicate btnToggleActive";
+	grid-template-areas: "btnDuplicate btnToggleActive btnToggleActive1";
 	.btnDuplicate {
 		grid-area: btnDuplicate;
 		.btnDupli {
-			margin-left: 80%;
+			margin-left: 180%;
 			background: #efbe24;
 			color: white;
 			font-family: BitterBold;
@@ -141,6 +142,75 @@ $SubText: 18px;
 	}
 	.btnToggleActive {
 		grid-area: btnToggleActive;
+		.toggleTextActive {
+			margin-left: 130%;
+			margin-top: 26px;
+			font-family: "BitterBold";
+		}
+		.btnToggleActive1 {
+			grid-area: btnToggleActive1;
+		}
+		.switchActive {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 40px;
+			margin-left: 145%;
+			margin-bottom: 10px;
+		}
+
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #f1f1f1;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 30px;
+			width: 30px;
+			left: 4px;
+			bottom: 4px;
+			background-color: #efbe24;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+		}
+
+		input:checked + .slider {
+			background-color: #dbdbdb;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: 34px;
+		}
+
+		.slider.round:before {
+			border-radius: 50%;
+		}
 	}
 }
 .grid-AddProductCat {
@@ -152,7 +222,7 @@ $SubText: 18px;
 		grid-area: main-cat;
 		.dropcat1 {
 			background: #009145;
-			color: #dbdbdb;
+			color: white;
 			width: 300px;
 			font-family: BitterBold;
 			border-radius: 5px;
@@ -167,12 +237,12 @@ $SubText: 18px;
 		grid-area: med-cat;
 		.dropcat2 {
 			background: #009145;
-			color: #dbdbdb;
+			color: white;
 			width: 300px;
 			font-family: BitterBold;
 			border-radius: 5px;
 			height: 50px;
-			margin-right: 50px;
+			margin-right: 205px;
 			cursor: pointer;
 		}
 	}
@@ -182,7 +252,7 @@ $SubText: 18px;
 		grid-area: sub-cat;
 		.dropcat3 {
 			background: #009145;
-			color: #dbdbdb;
+			color: white;
 			width: 300px;
 			font-family: BitterBold;
 			border-radius: 5px;
@@ -200,13 +270,16 @@ $SubText: 18px;
 	grid-template-areas: ". btnAddSubCat";
 	.btnAddSubCat {
 		grid-area: btnAddSubCat;
-		margin-left: 383%;
+		margin-left: 238%;
+		margin-bottom: 50%;
 		.btnSubCat {
 			background: #efbe24;
 			color: white;
 			font-family: BitterBold;
 			border-radius: 5px;
-			height: 40px;
+			height: 50px;
+			width: 300px;
+			margin-left: 82px;
 			cursor: pointer;
 		}
 	}
@@ -217,12 +290,13 @@ $SubText: 18px;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 300px;
+		width: 350px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -244,24 +318,34 @@ $SubText: 18px;
 	grid-template-areas: "grid-LeftProd grid-MedProd1 grid-MedProd2 grid-RightProd";
 	.grid-LeftProd {
 		grid-area: grid-LeftProd;
+		margin-left: 100px;
+		// .p {
+		// 	margin-left: 100px;
+		// }
 	}
 	.grid-MedProd1 {
 		grid-area: grid-MedProd1;
 		.text-Product-Name-Style {
-			width: 400px;
+			width: 600px;
 			height: 30px;
 			background: #dbdbdb;
 			border: none;
+			margin-right: -130px;
 		}
 	}
 	.grid-MedProd2 {
 		grid-area: grid-MedProd2;
+		.productBasePriceText {
+			margin-right: 0px;
+			margin-left: 150px;
+		}
 	}
 	.grid-RightProd {
 		grid-area: grid-RightProd;
 		.text-Product-BasePrice-Style {
 			background: #dbdbdb;
 			border: none;
+			margin-right: 100px;
 		}
 	}
 }
@@ -275,14 +359,17 @@ $SubText: 18px;
 		"grid-SpecLeft grid-SpecRight";
 	.grid-ShortDescLeft {
 		grid-area: grid-ShortDescLeft;
+		margin-left: 100px;
 	}
 	.grid-LongDescLeft {
 		grid-area: grid-LongDescLeft;
 		margin-top: 10px;
+		margin-left: 100px;
 	}
 	.grid-SpecLeft {
 		grid-area: grid-SpecLeft;
 		margin-top: 10px;
+		margin-left: 100px;
 	}
 	.grid-ShortDescRight {
 		grid-area: grid-ShortDescRight;
@@ -290,7 +377,8 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 800px;
+			width: 1063px;
+			margin-left: -170px;
 		}
 	}
 	.grid-LongDescRight {
@@ -300,7 +388,8 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 800px;
+			width: 1063px;
+			margin-left: -170px;
 		}
 	}
 	.grid-SpecRight {
@@ -311,7 +400,8 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 800px;
+			width: 1063px;
+			margin-left: -170px;
 		}
 	}
 }
@@ -325,26 +415,35 @@ $SubText: 18px;
 		"grid-MiniQtyOrderLeft grid-MiniQtyOrderRight";
 	.grid-NoOfPieceLeft {
 		grid-area: grid-NoOfPieceLeft;
+		margin-left: 550px;
 	}
 	.grid-MaxQtyOrderLeft {
 		grid-area: grid-MaxQtyOrderLeft;
+		margin-left: 550px;
 	}
 	.grid-MiniQtyOrderLeft {
 		grid-area: grid-MiniQtyOrderLeft;
+		margin-left: 550px;
 	}
 	.grid-QtyCountRight {
 		grid-area: grid-QtyCountRight;
+		margin-left: 80px;
 		.btnMinQtyCount {
 			background: #dbdbdb;
+			margin-left: 20px;
+			// border: none;
 		}
 		.counterLabel {
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
-			width: 110px;
+			width: 30px;
+			margin-left: -4px;
 		}
 		.btnMaxQtyCount {
 			background: #dbdbdb;
+			// border: none;
+			height: 27px;
 		}
 	}
 	.grid-MaxQtyOrderRight {
@@ -352,6 +451,9 @@ $SubText: 18px;
 		.Max-Qty-Style {
 			background: #dbdbdb;
 			border: none;
+			margin-left: 100px;
+			width: 80px;
+			text-align: center;
 		}
 	}
 	.grid-MiniQtyOrderRight {
@@ -359,6 +461,9 @@ $SubText: 18px;
 		.Min-Qty-Style {
 			background: #dbdbdb;
 			border: none;
+			margin-left: 100px;
+			width: 80px;
+			text-align: center;
 		}
 	}
 }
@@ -373,8 +478,9 @@ $SubText: 18px;
 	// 	transform: translate(0rem, 2rem);
 	// 	z-index: 0;
 	// }
-	h4 {
+	h5 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -386,6 +492,22 @@ $SubText: 18px;
 }
 .dvAddVarients {
 	grid-area: grid-AddVarients;
+}
+.grid-Tab-Form {
+	grid-area: grid-Tab-Form;
+	.nav {
+		grid-area: nav;
+		margin-left: 300px;
+		color: white;
+		.active{
+			border-radius: 5px;
+			background: #009145;
+			width: 150px; 
+			text-align: center;
+			color: white;
+			font-family: "BitterBold";
+		}
+	}
 }
 
 // PRICE
@@ -400,8 +522,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -426,33 +549,63 @@ $SubText: 18px;
 		"grid-LeftPrice4 grid-Med4 grid-RightPrice4";
 	.grid-LeftPrice {
 		grid-area: grid-LeftPrice;
+		.priceBreakDownText {
+			margin-left: 77%;
+		}
 	}
 	.grid-LeftPrice1 {
 		grid-area: grid-LeftPrice1;
+		.dicountText {
+			margin-left: 77%;
+		}
 	}
 	.grid-LeftPrice2 {
 		grid-area: grid-LeftPrice2;
+		.actualPriceText {
+			margin-left: 77%;
+		}
 	}
 	.grid-LeftPrice3 {
 		grid-area: grid-LeftPrice3;
+		.commissionDecuctionText {
+			margin-left: 77%;
+		}
 	}
 	.grid-LeftPrice4 {
 		grid-area: grid-LeftPrice4;
+		.finalText {
+			margin-left: 77%;
+		}
 	}
 	.grid-Med {
 		grid-area: grid-Med;
+		.dotMed {
+			margin-left: 200px;
+		}
 	}
 	.grid-Med1 {
 		grid-area: grid-Med1;
+		.dotMed1 {
+			margin-left: 200px;
+		}
 	}
 	.grid-Med2 {
 		grid-area: grid-Med2;
+		.dotMed2 {
+			margin-left: 200px;
+		}
 	}
 	.grid-Med3 {
 		grid-area: grid-Med3;
+		.dotMed3 {
+			margin-left: 200px;
+		}
 	}
 	.grid-Med4 {
 		grid-area: grid-Med4;
+		.dotMed4 {
+			margin-left: 200px;
+		}
 	}
 	.grid-RightPrice {
 		grid-area: grid-RightPrice;
@@ -460,6 +613,7 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
+			width: 100px;
 		}
 	}
 	.grid-RightPrice1 {
@@ -468,6 +622,7 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
+			width: 100px;
 		}
 	}
 	.grid-RightPrice2 {
@@ -476,6 +631,7 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
+			width: 100px;
 		}
 	}
 	.grid-RightPrice3 {
@@ -484,6 +640,7 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
+			width: 100px;
 		}
 	}
 	.grid-RightPrice4 {
@@ -492,6 +649,7 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
+			width: 100px;
 		}
 	}
 }
@@ -502,12 +660,13 @@ $SubText: 18px;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 330px;
+		width: 370px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -527,6 +686,10 @@ $SubText: 18px;
 	grid-template-areas: "grid-AdvanceTextLeft grid-AdvanceDropDownRight";
 	.grid-AdvanceTextLeft {
 		grid-area: grid-AdvanceTextLeft;
+		.labelText {
+			margin-left: 100px;
+			font-family: "BitterBold";
+		}
 	}
 	.grid-AdvanceDropDownRight {
 		grid-area: grid-AdvanceDropDownRight;
@@ -548,9 +711,15 @@ $SubText: 18px;
 				"grid-AvgLeft1 grid-LabelRight1";
 			.grid-AvgLeft {
 				grid-area: grid-AvgLeft;
+				.avgProcessingTimeText {
+					margin-left: 100px;
+				}
 			}
 			.grid-AvgLeft1 {
 				grid-area: grid-AvgLeft1;
+				.avgShippingTimeText {
+					margin-left: 100px;
+				}
 			}
 			.grid-LabelRight {
 				grid-area: grid-LabelRight;
@@ -585,6 +754,7 @@ $SubText: 18px;
 				"grid-TagCard";
 			.grid-TagText {
 				grid-area: grid-TagText;
+				font-family: "BitterBold";
 			}
 			.grid-TagCard {
 				grid-area: grid-TagCard;
@@ -617,21 +787,213 @@ $SubText: 18px;
 				"grid-UploadImgTextLeft1 grid-UploadImgToggleRight1";
 			.grid-GiftOptionTextLeft1 {
 				grid-area: grid-GiftOptionTextLeft1;
+				.giftOptionText {
+					margin-left: 100px;
+				}
 			}
 			.grid-OrderConfrmTextLeft1 {
 				grid-area: grid-OrderConfrmTextLeft1;
+				.orderConfirmationText {
+					margin-left: 100px;
+				}
 			}
 			.grid-UploadImgTextLeft1 {
 				grid-area: grid-UploadImgTextLeft1;
+				.uploadImgText {
+					margin-left: 100px;
+				}
 			}
 			.grid-GiftOptionToggleRight1 {
 				grid-area: grid-GiftOptionToggleRight1;
+				.switchGiftOption {
+					position: relative;
+					display: inline-block;
+					width: 60px;
+					height: 40px;
+					margin-left: 0px;
+					margin-bottom: 10px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 			.grid-OrderConfrmToggleRight1 {
 				grid-area: grid-OrderConfrmToggleRight1;
+				.switchOrderConfrm {
+					position: relative;
+					display: inline-block;
+					width: 60px;
+					height: 40px;
+					margin-left: 0px;
+					margin-bottom: 10px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 			.grid-UploadImgToggleRight1 {
 				grid-area: grid-UploadImgToggleRight1;
+				.switchUploadImg {
+					position: relative;
+					display: inline-block;
+					width: 60px;
+					height: 40px;
+					margin-left: 0px;
+					margin-bottom: 10px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 		}
 	}
@@ -643,19 +1005,84 @@ $SubText: 18px;
 			grid-template-rows: repeat(3, auto);
 			grid-template-areas:
 				"grid-DeliveryDateTextLeft2 grid-DeliveryDateToggleRight2"
-				"grid-AutoCancelTextLeft2 grid-AdvanceLabelRight2"
-				"grid-AddCustomTextLeft2 grid-AdvanceToggleRight2";
+				"grid-AutoCancelTextLeft2 grid-AutoCancelLabelRight2"
+				"grid-AddCustomTextLeft2 grid-AutoCustomToggleRight2";
 			.grid-DeliveryDateTextLeft2 {
 				grid-area: grid-DeliveryDateTextLeft2;
+				.deliveryDateText {
+				}
 			}
 			.grid-DeliveryDateToggleRight2 {
 				grid-area: grid-DeliveryDateToggleRight2;
+				.switchDeliveryDate {
+					position: relative;
+					display: inline-block;
+					width: 60px;
+					height: 40px;
+					margin-left: 0px;
+					margin-bottom: 10px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 			.grid-AutoCancelTextLeft2 {
 				grid-area: grid-AutoCancelTextLeft2;
+				.setAutoCancelText {
+				}
 			}
-			.grid-AdvanceLabelRight2 {
-				grid-area: grid-AdvanceLabelRight2;
+			.grid-AutoCancelLabelRight2 {
+				grid-area: grid-AutoCancelLabelRight2;
 				.AutoCancelLabel {
 					.AutoCancelLabel-Style {
 						background: #dbdbdb;
@@ -665,9 +1092,72 @@ $SubText: 18px;
 			}
 			.grid-AddCustomTextLeft2 {
 				grid-area: grid-AddCustomTextLeft2;
+				.addCustomText {
+				}
 			}
-			.grid-AdvanceToggleRight2 {
-				grid-area: grid-AdvanceToggleRight2;
+			.grid-AutoCustomToggleRight2 {
+				grid-area: grid-AutoCustomToggleRight2;
+				.switchAutoCustom {
+					position: relative;
+					display: inline-block;
+					width: 60px;
+					height: 40px;
+					margin-left: 0px;
+					margin-bottom: 10px;
+				}
+
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 		}
 	}
@@ -684,12 +1174,77 @@ $SubText: 18px;
 			"grid-MaxNoText grid-CountLabel";
 		.grid-RfqText {
 			grid-area: grid-RfqText;
+			.rfqText {
+			}
 		}
 		.grid-RfqToggle {
 			grid-area: grid-RfqToggle;
+			.switchRfq {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 40px;
+				margin-left: 0px;
+				margin-bottom: 10px;
+			}
+
+			.switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #f1f1f1;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 30px;
+				width: 30px;
+				left: 4px;
+				bottom: 4px;
+				background-color: #efbe24;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			input:checked + .slider {
+				background-color: #dbdbdb;
+			}
+
+			input:focus + .slider {
+				box-shadow: 0 0 1px #2196f3;
+			}
+
+			input:checked + .slider:before {
+				-webkit-transform: translateX(26px);
+				-ms-transform: translateX(26px);
+				transform: translateX(26px);
+			}
+
+			/* Rounded sliders */
+			.slider.round {
+				border-radius: 34px;
+			}
+
+			.slider.round:before {
+				border-radius: 50%;
+			}
 		}
 		.grid-MaxNoText {
 			grid-area: grid-MaxNoText;
+			.maxNoText {
+			}
 		}
 		.grid-CountLabel {
 			grid-area: grid-CountLabel;
@@ -712,8 +1267,9 @@ $SubText: 18px;
 	// 	transform: translate(0rem, 2rem);
 	// 	z-index: 0;
 	// }
-	h4 {
+	h5 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -793,8 +1349,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -869,8 +1426,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -893,8 +1451,9 @@ $SubText: 18px;
 	// 	transform: translate(0rem, 2rem);
 	// 	z-index: 0;
 	// }
-	h4 {
+	h5 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -915,8 +1474,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -946,10 +1506,17 @@ $SubText: 18px;
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
+				.proDiscText {
+					font-family: "BitterBold";
+				}
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
 				background: #f1f1f1;
+				width: 500px;
+				height: 250px;
+				margin-left: 150px;
+				border-radius: 5px;
 				.grid-Pro-Disc {
 					display: grid;
 					grid-template-columns: auto auto auto auto;
@@ -961,22 +1528,31 @@ $SubText: 18px;
 						". . . btnPro-Disc";
 					.grid-Pro-Date-Text {
 						grid-area: grid-Pro-Date-Text;
+						.dateText {
+							margin-top: 20px;
+							margin-left: 20px;
+						}
 					}
 					.grid-Label-1 {
 						grid-area: grid-Label-1;
 						.Pro-Date-Label-Style-1 {
 							background: #dbdbdb;
 							border: none;
+							margin-top: 20px;
+							border-radius: 5px;
 						}
 					}
 					.grid-minus {
 						grid-area: grid-minus;
+						margin-top: 20px;
 					}
 					.grid-Label-2 {
 						grid-area: grid-Label-2;
 						.Pro-Date-Label-Style-2 {
 							background: #dbdbdb;
 							border: none;
+							margin-top: 20px;
+							border-radius: 5px;
 						}
 					}
 					.grid-Pro-Disc-Text {
@@ -988,6 +1564,7 @@ $SubText: 18px;
 							background: #dbdbdb;
 							border: none;
 							text-align: center;
+							border-radius: 5px;
 						}
 					}
 					.grid-Disc-Label {
@@ -996,12 +1573,17 @@ $SubText: 18px;
 							background: #dbdbdb;
 							border: none;
 							text-align: center;
+							border-radius: 5px;
 						}
 					}
 					.btnPro-Disc {
 						grid-area: btnPro-Disc;
 						.btnPro-Sumit {
 							background: #efbe24;
+							color: white;
+							border-radius: 5px;
+							font-family: "BitterBold";
+							cursor: pointer;
 						}
 					}
 				}
@@ -1010,6 +1592,9 @@ $SubText: 18px;
 	}
 	.grid-Bundle-Discount-Right {
 		grid-area: grid-Bundle-Discount-Right;
+		.addBundleText {
+			font-family: "BitterBold";
+		}
 		.grid-Bundle-Discount {
 			display: grid;
 			grid-template-columns: auto;
@@ -1043,14 +1628,20 @@ $SubText: 18px;
 							.grid-Qty-Text {
 								grid-area: grid-Qty-Text;
 								text-align: center;
+								.qtyText {
+								}
 							}
 							.grid-Disc-Price {
 								grid-area: grid-Disc-Price;
 								text-align: center;
+								.discPriceText {
+								}
 							}
 							.grid-Actual-Price {
 								grid-area: grid-Actual-Price;
 								text-align: center;
+								.actualPriceText {
+								}
 							}
 							.grid-Qty-Label {
 								grid-area: grid-Qty-Label;
@@ -1058,6 +1649,9 @@ $SubText: 18px;
 									background: white;
 									border: none;
 									text-align: center;
+									margin-left: 40px;
+									width: 50px;
+									border-radius: 5px;
 								}
 							}
 							.grid-Disc-Price-Label {
@@ -1066,6 +1660,8 @@ $SubText: 18px;
 									background: white;
 									border: none;
 									text-align: center;
+									border-radius: 5px;
+									margin-left: 40px;
 								}
 							}
 							.grid-Actual-Price-Label {
@@ -1074,6 +1670,8 @@ $SubText: 18px;
 									background: white;
 									border: none;
 									text-align: center;
+									border-radius: 5px;
+									margin-left: 40px;
 								}
 							}
 							.grid-Add-Bundle {
@@ -1146,8 +1744,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -1172,7 +1771,9 @@ $SubText: 18px;
 		height: 30px;
 		background: #efbe24;
 		color: white;
-		font-family: BitterBold;
+		font-family: "BitterBold";
+		cursor: pointer;
+		border-radius: 5px;
 	}
 }
 .policyTxtArea {
@@ -1188,7 +1789,9 @@ $SubText: 18px;
 		height: 30px;
 		background: #efbe24;
 		color: white;
-		font-family: BitterBold;
+		font-family: "BitterBold";
+		cursor: pointer;
+		border-radius: 5px;
 	}
 }
 // .grid-Policy {
@@ -1227,8 +1830,9 @@ $SubText: 18px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
-	h2 {
+	h3 {
 		text-align: center;
+		font-family: "BitterBold";
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -1328,6 +1932,7 @@ $SubText: 18px;
 			color: white;
 			font-family: BitterBold;
 			border-radius: 5px;
+			cursor: pointer;
 		}
 	}
 	.grid-BtnLastRight {
@@ -1340,6 +1945,7 @@ $SubText: 18px;
 			color: white;
 			font-family: BitterBold;
 			border-radius: 5px;
+			cursor: pointer;
 		}
 	}
 }

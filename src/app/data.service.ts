@@ -33,10 +33,20 @@ export class DataService {
       .append("sellerId", data['seller_identity'])
       .append("rfqEnabled", data['rfq_enabled'])
       .append("desiredDate", data['desiredDate'])
-      .append("giftEnabled", data['gift_enabled'])
+      .append("giftEnabled", data['gift_enabled'])      
+      .append("msgCount", data['msgCount'])
+      // .append("image", data['image'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
+  
+  	getProductList(data: any) {
+		let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("productCount", data['prod_number'])
+		return this.http.post(this.baseUrl+'assets/api/productslist.php', httpParams);
+	}
+  
   sendCartDetails(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
@@ -54,6 +64,7 @@ export class DataService {
       .append("giftTitle", data['gift_title'])
       .append("giftNote", data['gift_note'])
       .append("giftAddress", data['gift_address'])
+      .append("msgCount", data['msgCount'])
 
 
     return this.http.post(this.baseUrl + 'assets/api/pricingcart.php', httpParams);
@@ -89,6 +100,17 @@ export class DataService {
       .append("shopId", data)
     return this.http.post(this.baseUrl + 'assets/api/productlistmanage.php', httpParams);
   }
+  readFileProdImage(data: any){
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/readFileProdImage.php', httpParams);
+  }
+  getMessageTitle(data: any){
+    let httpParams = new HttpParams()
+      .append("prodId", data)
+    return this.http.post(this.baseUrl + 'assets/api/messagetitle.php', httpParams);
+  } 
+
   getShopRevRatings(data: any) {
     let httpParams = new HttpParams()
       .append("shopId", data)
@@ -166,9 +188,11 @@ getDateDiffShop(data: any) {
   }
 
   //sellerPage
-  getFaqSite() {
+  getFaqSite(data :any) {
     let httpParams = new HttpParams()
     // .append("sellerId", data)
+    .append("numberFaq", data)
+
     return this.http.post(this.baseUrl + 'assets/api/faqsite.php', httpParams);
   }
   
@@ -285,11 +309,7 @@ getDateDiffShop(data: any) {
 			.append("shopId", data)
 		return this.http.post(this.baseUrl+'assets/api/sellerdetailshop.php', httpParams);
 	}
-	getProductList(data: any) {
-		let httpParams = new HttpParams()
-			.append("shopId", data)
-		return this.http.post(this.baseUrl+'assets/api/productslist.php', httpParams);
-	}
+
 	getFollowInfoShop(data: any) {
 		let httpParams = new HttpParams()
 			.append("shopId", data['shop_id'])
@@ -341,12 +361,14 @@ getDateDiffShop(data: any) {
 
 	getFaqProduct(data: any) {
 		let httpParams = new HttpParams()
-			.append("prodId", data)
+      .append("prodId", data['prod_id'])
+      .append("numberFaq", data['number_faq'])
 		return this.http.post(this.baseUrl+'assets/api/faqproduct.php', httpParams);
 	}
 	getFaqShop(data: any) {
 		let httpParams = new HttpParams()
-			.append("shopId", data)
+      .append("shopId", data['shop_id'])
+      .append("numberFaq", data['number_faq'])
 		return this.http.post(this.baseUrl+'assets/api/faqshop.php', httpParams);
 	}
   getPageData(page: string){
@@ -723,6 +745,62 @@ getUser() {
 
     return this.http.post(this.baseUrl+'assets/api/fetchLists.php', httpParams);
   }
+  
+  // getdataPostAddProduct(data: any) {
+  //    let httpParams = new HttpParams()
+  //     // .append("prodid", data['prodid'])
+  //      .append("name", data['name'])
+  //      .append("short_desc", data['short_desc'])
+  //     .append("Long_desc", data['Long_desc'])
+  //      .append("spec", data['spec'])
+  //      .append("shipping_option", data['shipping_option'])
+  //      .append("base_price", data['base_price'])
+  //      .append("bulk_discount_id", data['bulk_discount_id'])
+  //      .append("offer_id", data['offer_id'])
+  //     .append("returning_customers_count", data['returning_customers_count'])
+  //     .append("product_view_count", data['product_view_count'])
+  //      .append("cmsn_dedtd", data['cmsn_dedtd'])
+  //      .append("shop_id", data['shop_id'])
+  //      .append("category_id", data['category_id'])
+  //      .append("sub_catgry_id", data['sub_catgry_id'])
+  //      .append("active_status", data['active_status'])
+  //      .append("rating_count", data['rating_count'])
+  //      .append("review_count", data['review_count'])
+  //      .append("revenue_generated", data['revenue_generated'])
+  //      .append("promo_id", data['promo_id'])
+  //      .append("sold_count", data['sold_count'])
+  //     .append("created_date", data['created_date'])
+  //     .append("remarks", data['remarks'])
+  //     .append("can_upload_image", data['can_upload_image'])
+  //     .append("max_no_of_image", data['max_no_of_image'])
+  //     .append("add_custom_message_field", data['add_custom_message_field'])
+
+  //     .append("from_time_stamp",data['from_time_stamp'])
+  //     .append("to_tme_Stamp",data['to_tme_Stamp'])
+  //     .append("percentage",data['percentage'])
+
+  //     .append("quant",data['quant'])
+  //     .append("fdiscount",data['fdiscount']);
+
+  //    return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
+  //  }
+
+  getOrderDetailsCheckout(id: any) {
+    let httpParams = new HttpParams()
+      .append("orderId", id);
+    return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
+  }
+getdynamicPriceAddProduct(prodid: any) {
+    let httpParams = new HttpParams()
+      .append("prodid", prodid);
+    return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceAddProduct.php', httpParams);
+  }
+
+   getdynamicPriceDiscTotalAddProd(prodid: any) {
+    let httpParams = new HttpParams()
+      .append("prodid", prodid);
+    return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceDiscTotalAddProd.php', httpParams);
+ }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
