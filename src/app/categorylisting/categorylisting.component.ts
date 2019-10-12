@@ -101,17 +101,17 @@ export class CategorylistingComponent implements OnInit {
     this.deleteCookieArray[this.deleteCookieCount++] = id;
   }
   selectRating(){
-    var rating = document.getElementById("tRating").value;
+    var rating = (<HTMLInputElement><any>document.getElementById("tRating")).value;
     document.getElementById("tRatDisp").innerHTML = rating;
     console.log(rating);
   }
   //apply filter functionality
   applyFilters() {
-    var rating = document.getElementById("tRating").value;
-    var freeShip = document.getElementById("tFShip").value;
-    var rfq = document.getElementById("tRfq").value;
-    var instBuy = document.getElementById("tRfq").value;
-    var ordConfm = document.getElementById("orderCon").value;
+    var rating = (<HTMLInputElement><any>document.getElementById("tRating")).value;
+    var freeShip = (<HTMLInputElement><any>document.getElementById("tFShip")).value;
+    var rfq = (<HTMLInputElement><any>document.getElementById("tRfq")).value;
+    var instBuy =  (<HTMLInputElement><any>document.getElementById("tRfq")).value;
+    var ordConfm = (<HTMLInputElement><any>document.getElementById("orderCon")).value;
 
     this.addToFilterArray("filterSet","rating",rating);
     this.addToFilterArray("filterSet","freeShipping",freeShip);
@@ -123,14 +123,14 @@ export class CategorylistingComponent implements OnInit {
 
   }
   applySort(){
-    var PLH = document.getElementById("tpriceLow").value;
-    var PHL = document.getElementById("tpriceHigh").value;
-    var latest = document.getElementById("tlatest").value;
-    var pop = document.getElementById("popular").value;
-    var prLH = document.getElementById("tproLH").value;
-    var prHL = document.getElementById("tproHL").value;
-    var sLH = document.getElementById("tShipLH").value;
-    var sHL = document.getElementById("tShipHL").value;
+    var PLH = (<HTMLInputElement><any>document.getElementById("tpriceLow")).value;
+    var PHL = (<HTMLInputElement><any>document.getElementById("tpriceHigh")).value;
+    var latest = (<HTMLInputElement><any>document.getElementById("tlatest")).value;
+    var pop = (<HTMLInputElement><any>document.getElementById("popular")).value;
+    var prLH = (<HTMLInputElement><any>document.getElementById("tproLH")).value;
+    var prHL = (<HTMLInputElement><any>document.getElementById("tproHL")).value;
+    var sLH = (<HTMLInputElement><any>document.getElementById("tShipLH")).value;
+    var sHL = (<HTMLInputElement><any>document.getElementById("tShipHL")).value;
 
     this.addToFilterArray("SortSet","priceLH",PLH);
     this.addToFilterArray("SortSet","priceHL",PHL);
