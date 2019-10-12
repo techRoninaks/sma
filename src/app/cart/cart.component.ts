@@ -19,6 +19,12 @@ export class CartComponent implements OnInit {
   dynamicDataDate: any = "";
   dynamicDataPrice: any = "";
   dynamicDataAddress: any = "";
+  dynamicDataProName: any = "";
+  dynamicDataVariant: any = "";
+  dynamicDataVariants: any = "";
+  dynamicDataUser: any = "";
+  filteredOptions: any = "";
+  dynamicDataCartDate: any = "";
   varient: any = "";
   maxOrderQuant: any;
   minOrderQuant: any;
