@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import {Router, RouterLink} from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-userprofile-buyer',
   templateUrl: './userprofile-buyer.component.html',
@@ -23,7 +24,12 @@ export class UserprofileBuyerComponent implements OnInit {
   Object = Object;
   dynamicDataShopName: any = [];
   shopId: any ="";
-  constructor(private data: DataService,private router: Router,private route: ActivatedRoute) { }
+  cardForm: FormGroup;
+  constructor(private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder) { 
+    this.cardForm = this.formBuilderCard.group({
+      cardno: ['', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+    })
+  }
   dynamicDataUsercard: any = "";
   dynamicDataShopCount: any = "";
   dynamicDataPendingPayCount: any = "";
@@ -94,6 +100,9 @@ export class UserprofileBuyerComponent implements OnInit {
     alert(shopId);
     this.folResult = false;
     this.data.unFollowShopPage(this.id,this.shopId).subscribe();
+  }
+  submitCardData(){
+
   }
   remove(id){
     document.getElementById("shop"+id).style.display="none";

@@ -4,9 +4,13 @@
     $reg_email = $_POST['reg_email'];
     $reg_mobile_no = $_POST['reg_mobile_no'];
     $reg_password = $_POST['reg_password'];
+    $response =array();
     
     $sql_query ="INSERT INTO `seller` (seller_name,email,phone1,password) VALUES ('$fullname','$reg_email','$reg_mobile_no','$reg_password')";
     $result = mysqli_query($con2, $sql_query);
+    $sql_query2 ="SELECT id FROM `seller` WHERE email= '$reg_email' ";
+    $result2 = mysqli_query($con2, $sql_query2);
+    $row2=mysqli_fetch_array($result2);
     if(! $result )
     {
         $status="Error";
@@ -15,6 +19,7 @@
     else
     {
         $status="Success";
-        echo json_encode($status);
+        $response = array('seller_id'=>$row2['id'],'status'=>$status);
+        echo json_encode($response);
     }
 ?>
