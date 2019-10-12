@@ -67,7 +67,7 @@ export class ListingComponent implements OnInit {
 	titleGift: any;
 	noteGift: any;
 	addressGift: string;
-  	dynamicDataProName: any = "";
+	dynamicDataProName: any = "";
 	prodId: any;
 	filteredOptions: any;
 	dynamicDataUser: any = "";
@@ -79,7 +79,7 @@ export class ListingComponent implements OnInit {
 	dynamicDataSecondAddress: any = "";
 	dynamicNewAddr: any = "";
 	dynamicDataCheckOutPrice: any = "";
-	TotalPrice:any ; 
+	TotalPrice: any;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
 			customername: ['', Validators.required],
@@ -115,7 +115,8 @@ export class ListingComponent implements OnInit {
 	rfqEnabled: any = 0;
 	giftEnable: any = 0;
 	defRfqTag: any = 1;
-	myControl:any ;
+	myControl: any;
+	orderId: any = "";
 
 	ngOnInit() {
 		// this.setCookie("userId", 2);
@@ -318,76 +319,8 @@ export class ListingComponent implements OnInit {
 		this.showSlides(slideIndex);
 
 		//checkout popup
-		this.id = "1";
-		this.data.getaddress(this.id).subscribe(
-			data => {
-				this.dynamicDataAddress = data;
-			},
-			error => console.error(error)
-		);
-		this.prodId = "3";
-		this.data.getprodCheckout(this.prodId).subscribe(
-			data => {
-				this.dynamicDataProName = data;
-			},
-			error => console.error(error)
-		);
-		this.id = "1";
-		this.data.getuserCheckout(this.id).subscribe(
-			data => {
-				this.dynamicDataUser = data;
-			},
-			error => console.error(error)
-		);
-		this.id = "6";
-		this.data.getvariantInfor(this.id).subscribe(
-			data => {
-				this.dynamicDataVariant = data;
-				this.dynamicDataVariants = data;
-			},
-			error => console.error(error)
-		);
-		this.id = "5";
-		this.data.getcartCheckout(this.id).subscribe(
-			data => {
-				this.dynamicDataCartDate = data;
-			},
-			error => console.error(error)
-		);
-		this.id = "5";
-		this.data.getcartCheckout(this.id).subscribe(
-			data => {
-				this.dynamicDatatotalPrice = data;
-				// console.log("Toatal proice"+ this.dynamicDatatotalPrice)
-			},
-			error => console.error(error)
-		);
-		this.id = "1";
-		this.data.getAddressChange(this.id).subscribe(
-			data => {
-				this.dynamicDataSecondAddress = data[0];
-				console.log(this.dynamicDataSecondAddress);
-			},
-			error => console.error(error)
-		);
-		this.id = "3";
-		this.data.getNewAddr(this.id).subscribe(
-			data => {
-				this.dynamicNewAddr = data[0];
-				console.log(this.dynamicNewAddr);
-			},
-			error => console.error(error)
-		);
-		this.id = "3";
-		this.data.getcart(this.id).subscribe(
-			data => {
-				this.dynamicDataCheckOutPrice = data[0];
-				// alert(this.dynamicDataCheckOutPrice);
-				this.TotalPrice = this.dynamicDataCheckOutPrice.totalPrice;
 
-			},
-			error => console.error(error)
-		);
+		
 
 		//checkout popup
 		// this.filteredOptions = this.myControl.valueChanges
@@ -450,10 +383,10 @@ export class ListingComponent implements OnInit {
 
 	setCookie(cname, value) {
 		this.cookieService.set(cname, value);
-	  }
+	}
 	getCookie(cname) {
 		return this.cookieService.get(cname);
-	  }
+	}
 
 	//checkout giftoption
 	giftoption() {
@@ -465,7 +398,7 @@ export class ListingComponent implements OnInit {
 		// Cookie Section BEGN
 
 		//setting cookies , remove on commit
-		
+
 
 		//get data from cookies
 		var giftTitle = this.getCookie("giftTitle");
@@ -474,68 +407,66 @@ export class ListingComponent implements OnInit {
 
 
 		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + giftNote + giftAdd);
-		
-		
+
+
 
 	}
 
 	// address change
 	btnDeliverAddress1() {
-		document.getElementById('Main-Address').innerHTML =document.getElementById('Deliver-Addr1').innerHTML;
+		document.getElementById('Main-Address').innerHTML = document.getElementById('Deliver-Addr1').innerHTML;
 	}
 
 	btnDeliverAddress2() {
-		document.getElementById('Main-Address').innerHTML =document.getElementById('Deliver-Addr2').innerHTML;
+		document.getElementById('Main-Address').innerHTML = document.getElementById('Deliver-Addr2').innerHTML;
 	}
 	rfqDropdown() {
 		document.getElementById("rfqDropdown").classList.toggle("show");
 	}
 	// checkout final
-	checkout(){
-		var shippingtType ;
+	checkout() {
+		var shippingtType;
 		// this.shipping_id = (<HTMLInputElement>document.querySelector('DeliveryOption')).value;
-		if((<HTMLInputElement><any>document.getElementById("shipping")).checked){
+		if ((<HTMLInputElement><any>document.getElementById("shipping")).checked) {
 			shippingtType = "1";
 		}
-		else if((<HTMLInputElement><any>document.getElementById("homedelivery")).checked){
+		else if ((<HTMLInputElement><any>document.getElementById("homedelivery")).checked) {
 			shippingtType = "2";
 		}
-		else if((<HTMLInputElement><any>document.getElementById("pickup")).checked){
+		else if ((<HTMLInputElement><any>document.getElementById("pickup")).checked) {
 			shippingtType = "3";
 		}
-		else{
+		else {
 			alert("Select a delivery type");
 			return;
 		}
 		// this.data.getcheckoutFinal(this.formAddress).subscribe();
 
-		 this.id = "3";
-
+		this.id = "3";
 		this.data.getcheckoutFinal(this.getCookie("userId"), shippingtType).subscribe();
-
 		var options = {
 			"key": "rzp_test_dveDexCQKoGszl",
-			"amount": this.TotalPrice*100, // 2000 paise = INR 20
+			"amount": this.TotalPrice * 100, // 2000 paise = INR 20
 			"currency": "INR",
 			"name": "ScoopMyArt",
 			"description": "Test description",
-			"image": "favicon.ico",      "handler": response=>{
-					 alert("Booking successful. Thank you!");
-			   },
+			"image": "favicon.ico", "handler": response => {
+				alert("Booking successful. Thank you!");
+			},
 			"prefill": {
 				"name": "Test",
 				"email": "test@testing.com",
 				"contact": "9874563210",
 			},
-			"notes": {  },
+			"notes": {},
 			"theme": {
 				"color": "#133E4B"
 			},
 			"modal": {
-			  "ondismiss": function(){        }
+				"ondismiss": function () { }
 			}
 		};
-		var rzp1 = new Razorpay(options);  rzp1.open();
+		var rzp1 = new Razorpay(options); rzp1.open();
 	}
 
 	filterFunction() {
@@ -766,12 +697,12 @@ export class ListingComponent implements OnInit {
 		if (x == 'buyNow') {
 			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
 			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
-			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
-			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
+			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
 			var desiredDate = "none";
-			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
-			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+			var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById('cOD')).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
 
 
 			var res = productVariant.split(" ");
@@ -786,9 +717,85 @@ export class ListingComponent implements OnInit {
 			else if (pickup == true) {
 				var deliveryOption = "pickup";
 			}
-			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
+			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption  };
 
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
+
+			//sonu
+			this.id = "orderId";
+		this.data.getaddress(this.id).subscribe(
+			data => {
+				this.dynamicDataAddress = data;
+			},
+			error => console.error(error)
+		);
+		this.prodId = "orderId";
+		this.data.getprodCheckout(this.prodId).subscribe(
+			data => {
+				this.dynamicDataProName = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getuserCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDataUser = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getvariantInfor(this.id).subscribe(
+			data => {
+				this.dynamicDataVariant = data;
+				this.dynamicDataVariants = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcartCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDataCartDate = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcartCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDatatotalPrice = data;
+				// console.log("Toatal proice"+ this.dynamicDatatotalPrice)
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getAddressChange(this.id).subscribe(
+			data => {
+				this.dynamicDataSecondAddress = data[0];
+				console.log(this.dynamicDataSecondAddress);
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getNewAddr(this.id).subscribe(
+			data => {
+				this.dynamicNewAddr = data[0];
+				console.log(this.dynamicNewAddr);
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcart(this.id).subscribe(
+			data => {
+				this.dynamicDataCheckOutPrice = data[0];
+				// alert(this.dynamicDataCheckOutPrice);
+				this.TotalPrice = this.dynamicDataCheckOutPrice.totalPrice;
+
+			},
+			error => console.error(error)
+		);
+			this.data.getOrderDetailsCheckout(this.data).subscribe(data => {
+				this.orderId = data;
+				console.log(this.orderId);
+			});
 		}
 		if (x == 'requestOrder') {
 			var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
@@ -815,6 +822,82 @@ export class ListingComponent implements OnInit {
 			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption };
 
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
+
+			//sonu
+					this.id = "orderId";
+		this.data.getaddress(this.id).subscribe(
+			data => {
+				this.dynamicDataAddress = data;
+			},
+			error => console.error(error)
+		);
+		this.prodId = "orderId";
+		this.data.getprodCheckout(this.prodId).subscribe(
+			data => {
+				this.dynamicDataProName = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getuserCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDataUser = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getvariantInfor(this.id).subscribe(
+			data => {
+				this.dynamicDataVariant = data;
+				this.dynamicDataVariants = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcartCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDataCartDate = data;
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcartCheckout(this.id).subscribe(
+			data => {
+				this.dynamicDatatotalPrice = data;
+				// console.log("Toatal proice"+ this.dynamicDatatotalPrice)
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getAddressChange(this.id).subscribe(
+			data => {
+				this.dynamicDataSecondAddress = data[0];
+				console.log(this.dynamicDataSecondAddress);
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getNewAddr(this.id).subscribe(
+			data => {
+				this.dynamicNewAddr = data[0];
+				console.log(this.dynamicNewAddr);
+			},
+			error => console.error(error)
+		);
+		this.id = "orderId";
+		this.data.getcart(this.id).subscribe(
+			data => {
+				this.dynamicDataCheckOutPrice = data[0];
+				// alert(this.dynamicDataCheckOutPrice);
+				this.TotalPrice = this.dynamicDataCheckOutPrice.totalPrice;
+
+			},
+			error => console.error(error)
+		);
+			this.data.getOrderDetailsCheckout(this.data).subscribe(data => {
+				this.orderId = data;
+				console.log(this.orderId);
+			});
 		}
 	}
 	submitCart() {

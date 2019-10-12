@@ -173,8 +173,8 @@
             <div class="dvBuyBtn">
                 <div class="container" id="buyModalContainer" style="z-index: 10001;">
                     <!-- <ng-container *ngIf="datePickerDefault; else reqOrder"> -->
-                    <button type="submit"id="buyNowId" class="btn btn-warning" data-toggle="modal" data-target="#buyNowPopup"
-                         (click)="submitPrice('buyNow');">BUY NOW</button>
+                    <button type="submit" id="buyNowId" class="btn btn-warning" data-toggle="modal"
+                        data-target="#buyNowPopup" (click)="submitPrice('buyNow');">BUY NOW</button>
                     <!-- </ng-container> -->
                     <!-- <ng-template #reqOrder> -->
                     <button type="submit" class="btn btn-warning" data-toggle="modal" id="reqNowId"
@@ -595,20 +595,21 @@
                 <div class="dvSub3" id="savedAddr" style="display: none">
                     <div class="dvSavedAddr">
                         <p>SAVED ADDRESS</p>
-                        <div class="dvCardAddrLeft"id="Deliver-Addr1">
-                                {{dynamicDataSecondAddress.contact_name}}
-                                {{dynamicDataSecondAddress.addr1}},
-                                {{dynamicDataSecondAddress.addr2}},
-                                {{dynamicDataSecondAddress.city}},
-                                <!-- {{dynamicDataDistrict}} -->
-                                {{dynamicDataSecondAddress.state}},
-                                {{dynamicDataSecondAddress.country}},
-                                {{dynamicDataSecondAddress.pincode}}
-                                <!-- {{dynamicDataSecondAddress.contact_number}} -->
-                                <!-- {{dynamicDataSecondAddress.contact_email}} -->
+                        <div class="dvCardAddrLeft" id="Deliver-Addr1">
+                            {{dynamicDataSecondAddress.contact_name}}
+                            {{dynamicDataSecondAddress.addr1}},
+                            {{dynamicDataSecondAddress.addr2}},
+                            {{dynamicDataSecondAddress.city}},
+                            <!-- {{dynamicDataDistrict}} -->
+                            {{dynamicDataSecondAddress.state}},
+                            {{dynamicDataSecondAddress.country}},
+                            {{dynamicDataSecondAddress.pincode}}
+                            <!-- {{dynamicDataSecondAddress.contact_number}} -->
+                            <!-- {{dynamicDataSecondAddress.contact_email}} -->
                         </div>
                         <div class="btnCardAddrLeft">
-                            <button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft"(click)="btnDeliverAddress1()">DELIVER TO THIS ADDRESS</button>
+                            <button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft"
+                                (click)="btnDeliverAddress1()">DELIVER TO THIS ADDRESS</button>
                         </div>
                         <div class="dvCardAddrRight" id="Deliver-Addr2">
                             {{dynamicNewAddr.contact_name}},
@@ -617,11 +618,12 @@
                             {{dynamicNewAddr.city}},
                             {{dynamicNewAddr.state}},
                             {{dynamicNewAddr.country}},
-                            {{dynamicNewAddr.pincode}}   
-                           
+                            {{dynamicNewAddr.pincode}}
+
                         </div>
                         <div class="btnCardAddrRight">
-                            <button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight"(click)="btnDeliverAddress2()">DELIVER TO THIS ADDRESS</button>
+                            <button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight"
+                                (click)="btnDeliverAddress2()">DELIVER TO THIS ADDRESS</button>
                         </div>
                     </div>
                 </div>
@@ -715,7 +717,7 @@
                     <div class="btnRadio3">
                         <input type="radio" id="pickup" name="DeliveryOption" value="3"> Pickup
                     </div>
-                    
+
                 </div>
                 <!-- PRODUCT DELIVERED -->
                 <div class="dvProdDeliText">
@@ -746,13 +748,13 @@
                             <input type="checkbox">
                             <span class="slider round"></span>
                         </label>
+                        <p>Note</p>
                     </div>
                     <div class="dvNote" id="showGiftCard" style="display: none;">
                         <textarea type=text class="Gift-Note-Style" id="Gift-Note-Sect1"></textarea>
-                        <p>Note</p>
                     </div>
                     <div class="dvNoteText">
-                       
+
                     </div>
                     <div class="dvMessageTitle">
 
@@ -784,7 +786,7 @@
                             Variance : {{dynamicDataCheckOutPrice.variantPrice}}<br>
                             Tax :00.00<br>
                             Shipping : 00.00</p>
-                            <!-- Tax : {{dynamicDataCheckOutPrice.name}}<br>
+                        <!-- Tax : {{dynamicDataCheckOutPrice.name}}<br>
                             Shipping : {{dynamicDataCheckOutPrice.name}}</p> -->
                         <h4>Total : {{dynamicDataCheckOutPrice.totalPrice}}</h4>
 
