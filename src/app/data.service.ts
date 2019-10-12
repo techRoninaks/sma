@@ -801,6 +801,76 @@ getdynamicPriceAddProduct(prodid: any) {
       .append("prodid", prodid);
     return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceDiscTotalAddProd.php', httpParams);
  }
+  
+  loadShopList(pincode : any, tagNum : any, pageNum : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("pincode",pincode);
+    return this.http.post(this.baseUrl + 'assets/api/loadShops.php', httpParams);
+  }
+  loadFavorites(userId : any, tagNum : any, pageNum : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("userId",userId);
+    return this.http.post(this.baseUrl + 'assets/api/loadFavShops.php', httpParams);
+  }
+  loadShopWiseProducts(shopId : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("shopId",shopId)
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum).append("filters",filters)
+    .append("sort",sorters);
+    return this.http.post(this.baseUrl + 'assets/api/loadShopProducts.php', httpParams);
+  }
+  loadSearchResults(key : any, pincode : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("key",key)
+    .append("pincode",pincode)
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("filters",filters)
+    .append("sort",sorters);
+    return this.http.post(this.baseUrl + 'assets/api/srchQuery.php', httpParams);
+  }
+  loadCatIdData(catId : any, pincode : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("catId",catId)
+    .append("pincode",pincode)
+    .append("filters",filters)
+    .append("sort",sorters);
+    return this.http.post(this.baseUrl + 'assets/api/loadCategory.php', httpParams);
+  }
+  loadTrending(pincode : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("filters",filters)
+    .append("sort",sorters)
+    .append("pincode",pincode);
+    return this.http.post(this.baseUrl + 'assets/api/loadTrending.php', httpParams);
+  }
+  loadNewProd(pincode : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("filters",filters)
+    .append("sort",sorters)
+    .append("pincode",pincode);
+    return this.http.post(this.baseUrl + 'assets/api/loadNewProducts.php', httpParams);
+  }
+  loadOfferProd(pincode : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum)
+    .append("filters",filters)
+    .append("sort",sorters)
+    .append("pincode",pincode);
+    return this.http.post(this.baseUrl + 'assets/api/loadTopOffers.php', httpParams);
+  }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
