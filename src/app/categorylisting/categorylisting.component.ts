@@ -235,11 +235,13 @@ export class CategorylistingComponent implements OnInit {
 		if (shopId == "all") {
 
 			//all shop listing
+			(<any>document.getElementById("productListing")).style.display = "none";
+			(<any>document.getElementById("shopByStore")).style.display = "grid";
 			this.data.loadShopList(pincode, 12, 1).subscribe(shopData => {
 
 				request = shopData["request"];
 				if(request == "success"){
-
+					this.array12 = shopData["data"];
 				}
 				this.requestHandler(request);
 			})
@@ -247,6 +249,8 @@ export class CategorylistingComponent implements OnInit {
 		} else if (shopId == "favorites") {
 
 			//list favorite shops
+			(<any>document.getElementById("productListing")).style.display = "none";
+			(<any>document.getElementById("shopByStore")).style.display = "grid";
 			var userId = this.getCookie("userId");
 			this.data.loadFavorites(userId, 12, 1).subscribe(favShops => {
 
@@ -442,6 +446,9 @@ export class CategorylistingComponent implements OnInit {
 	goHome(){
 		$("#myModal").modal("hide");
 		this.router.navigate(['']);
+	}
+	shopById(shopId){
+		this.router.navigate(['/category'] ,{queryParams:{shop_id:shopId}});
 	}
 }
 

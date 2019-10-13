@@ -479,7 +479,302 @@ $SubText: 18px;
 		}
 	}
 }
+.dvShopMain {
+	grid-template-columns: repeat(3, 1fr);
+	display: grid;
+	width: auto;
+	margin: 5%;
 
+	.dvCard {
+		padding: 6%;
+		border-bottom: 1px solid $smaLightGray;
+
+		.dvCardLogo {
+			grid-template-columns: 35% auto;
+			grid-template-areas: "dv-logo dv-seller";
+			display: grid;
+
+			.dvLogo {
+				grid-area: dv-logo;
+				width: fit-content;
+				border-radius: 50%;
+				background: $smaLightGray;
+				justify-self: center;
+				box-shadow: 1px 1px 10px 0 $smaLightGray;
+				z-index: 1;
+				padding: 10px;
+
+				.imgLogo {
+					border-radius: 50%;
+					object-fit: cover;
+					cursor: pointer;
+					width: 100%;
+				}
+			}
+			.dvSeller {
+				grid-area: dv-seller;
+				width: auto;
+				cursor: pointer;
+				margin: auto 0;
+
+				.dvShopName {
+					padding: 10px;
+					border-bottom: 1px solid $smaGray;
+					p {
+						font-family: Bitter;
+						font-size: $SubHeader;
+					}
+					@include sm-lesser {
+						p {
+							font-size: $Text;
+						}
+					}
+					@include lg {
+						p {
+							font-size: $Text;
+						}
+					}
+				}
+				.dvSellerName {
+					padding: 10px;
+					p {
+						font-family: Bitter;
+						font-size: $SubHeader;
+						color: $smaGray;
+					}
+					@include sm-lesser {
+						p {
+							font-size: $Text;
+						}
+					}
+					@include lg {
+						p {
+							font-size: $SubText;
+						}
+					}
+				}
+			}
+		}
+
+		.dvCardBanner {
+			cursor: pointer;
+			padding: 10px;
+			background: $smaLightGray;
+			box-shadow: 1px 1px 10px 0px $smaGray;
+			border-radius: 5px;
+
+			.imgBanner {
+				width: inherit;
+			}
+			.dvUndeliver {
+				position: relative;
+				.overlay {
+					position: absolute;
+					bottom: 0;
+					background: rgb(0, 0, 0);
+					background: rgba(0, 0, 0, 0.5); /* Black see-through */
+					color: #f1f1f1;
+					width: 100%;
+					transition: 0.5s ease;
+					opacity: 0;
+					color: white;
+					font-size: $Text;
+					font-family: Bitter;
+					padding: 20px;
+					text-align: center;
+				}
+			}
+			.dvUndeliver .overlay {
+				opacity: 1;
+			}
+			@include lg {
+				.overlay {
+					font-size: 14px !important;
+					padding: 10px !important;
+				}
+			}
+		}
+
+		.dvCardName {
+			cursor: default;
+			.dvProduct {
+				grid-template-columns: auto auto;
+				grid-template-areas: "dv-prod dv-rate";
+				display: grid;
+				padding-top: 20px;
+
+				.dvProdName {
+					grid-area: dv-prod;
+
+					p {
+						font-size: $SubHeader;
+						font-family: BitterBold;
+						margin: auto;
+					}
+					@include sm-lesser {
+						p {
+							font-size: $Text;
+						}
+					}
+					@include lg {
+						p {
+							font-size: 16px;
+						}
+					}
+				}
+				.dvRating {
+					grid-area: dv-rate;
+					color: $smaYellow;
+					// font-size: 25px;
+					justify-self: end;
+					width: fit-content;
+
+					p {
+						font-size: $SubHeader;
+						font-family: BitterBold;
+					}
+
+					@include sm-lesser {
+						p {
+							font-size: $Text;
+						}
+					}
+					@include lg {
+						.fa {
+							font-size: 16px;
+						}
+					}
+				}
+			}
+
+			.dvDetails {
+				padding-top: 10px;
+				p {
+					font-family: Bitter;
+					font-size: $Text;
+					text-align: justify;
+					line-height: 1.3;
+					color: $smaDarkGray;
+				}
+				@include sm-lesser {
+					p {
+						font-size: $SubText;
+					}
+				}
+				@include lg {
+					p {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+	.dvCardPrice {
+		grid-template-columns: auto auto auto auto;
+		// auto
+		grid-template-areas: "p-price ac-price p-offer btn-rfq";
+		// btn-rfq
+		display: grid;
+		p {
+			font-family: BitterBold;
+			font-size: $SubHeader;
+			display: inline;
+		}
+		@include sm-lesser {
+			p {
+				font-size: $Text;
+			}
+		}
+		@include lg {
+			p {
+				font-size: 16px;
+			}
+		}
+
+		.pPrice {
+			grid-area: p-price;
+		}
+
+		.pActualPrice {
+			grid-area: ac-price;
+			text-decoration: line-through;
+			color: $smaGray;
+		}
+		@include sm-lesser {
+			.pActualPrice {
+				justify-self: center;
+			}
+		}
+		@include lg {
+			.pActualPrice {
+				justify-self: center;
+			}
+		}
+		.pOffer {
+			grid-area: p-offer;
+			color: $smaGreen;
+		}
+		@include sm-lesser {
+			.pOffer {
+				justify-self: end;
+			}
+		}
+		@include lg {
+			.pOffer {
+				justify-self: end;
+			}
+		}
+
+		.btnRfq{
+			grid-area: btn-rfq;
+			font-family: BitterBold;
+			font-size: inherit;
+			border: none;
+			border-radius: 5px;
+			background: $smaRed;
+			padding: 5px;
+			color: white;
+			float: right;
+		}
+		@include sm-lesser{
+		    .btnRfq{
+		        font-size: inherit;
+		        margin-top: auto;
+		        margin-bottom: auto;
+		    }
+		}
+		@include lg{
+		    .btnRfq{
+				font-size: 16px;
+				margin-top: auto;
+          		margin-bottom: auto;
+		    }
+		}
+		@include xlg {
+			.btnRfq {
+			  font-size: inherit;
+			  margin-top: auto;
+			  margin-bottom: auto;
+			}
+		  }
+	}
+	@include sm-lesser {
+		.dvCardPrice {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto auto;
+			grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+		}
+	}
+	@include lg {
+		.dvCardPrice {
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "p-price ac-price p-offer btn-rfq";
+		}
+	}
+}
 .dvFilterCollapse {
 	display: grid;
 	width: auto;
@@ -808,6 +1103,9 @@ $SubText: 18px;
 	.dvCatMain {
 		grid-template-columns: 100%;
 	}
+	.dvShopMain{
+		grid-template-columns: 100%;
+	}
 	.card {
 		display: none;
 	}
@@ -816,9 +1114,15 @@ $SubText: 18px;
 	.dvCatMain {
 		grid-template-columns: repeat(2, 1fr);
 	}
+	.dvShopMain {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 @include md {
 	.dvCatMain {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.dvShopMain {
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
@@ -826,9 +1130,15 @@ $SubText: 18px;
 	.dvCatMain {
 		grid-template-columns: repeat(4, 1fr);
 	}
+	.dvShopMain {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 @include xlg {
 	.dvCatMain {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.dvShopMain {
 		grid-template-columns: repeat(4, 1fr);
 	}
 }
