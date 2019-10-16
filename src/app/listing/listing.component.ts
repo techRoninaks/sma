@@ -89,6 +89,7 @@ export class ListingComponent implements OnInit {
 	Name: any;
 	email: any;
 	phone1: any;
+  imageUploaded:any;
 	tokenFaq: object;
 	uploadImageCount: any = [];
 	orderid: any = "";
@@ -217,6 +218,7 @@ export class ListingComponent implements OnInit {
 
 		//UPLOAD IMAGE
 		// for(var imageCU:any=0;imageCU<this.uploadImageCount;imageCU++){
+    this.imageUploaded=0;
 		imageValue=document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
 		// console.log(this.imageValue);
 		// }
@@ -798,19 +800,20 @@ export class ListingComponent implements OnInit {
 
 
 	onClick(event) {
-		console.log(event.target.files[0]);
+    this.imageUploaded=1;
+// 		console.log(event.target.files[0]);
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
 		// reader.onLoad = onLoadCallback;
 		reader.onload = (event)=>{
 			var text :any = reader.result;
 			imageValue = text;
-			console.log(imageValue);
+// 			console.log(imageValue);
 		};
 		// this.imageValue = reader.readAsDataURL(event.target.files[0]);
-		setTimeout(function(){ 
-			console.log("xyz" + imageValue);
-		}, 3000);
+// 		setTimeout(function(){ 
+// // 			console.log("xyz" + imageValue);
+// 		}, 3000);
 		
 
 	}
@@ -831,7 +834,7 @@ export class ListingComponent implements OnInit {
 			var message = z;
 			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
 			var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
-			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
+// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
 			var desiredDate = "none";
 			var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
 			var cod = (<HTMLInputElement><any>document.getElementById('cOD')).checked;
@@ -855,7 +858,7 @@ export class ListingComponent implements OnInit {
 				var deliveryOption = "pickup";
 			}
 
-			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 			// image:image ,
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
@@ -940,7 +943,7 @@ export class ListingComponent implements OnInit {
 			var message = z;
 			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
 			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
-			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
 			var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
 			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
 			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
@@ -959,7 +962,7 @@ export class ListingComponent implements OnInit {
 			else if (pickup == true) {
 				var deliveryOption = "pickup";
 			}
-			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
