@@ -44,6 +44,8 @@ export class SellerlandingComponent implements OnInit {
 	vidPlay: number;
 	first: number;
 	tokenFaq: object;
+	tokenFaqSubmit: object;
+
 	constructor(private router: Router, private data: DataService) { }
 	ngOnInit() {
 		// console.log(Object.keys(this.repeatPost));
@@ -56,13 +58,13 @@ export class SellerlandingComponent implements OnInit {
 		this.testimonal1 = 0;
 		this.testimonal2 = 1;
 		this.total = Object.keys(this.repeatPost).length;
-		console.log(this.total);
+		// console.log(this.total);
 		for (var i: any = 0; i <= this.total; i = i + 2) {
-			this.imgPost[i] = "assets/images/user-pic.jpg";
-			this.descPost[i] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			this.imgPost[i] = "assets/images/site/testimonal/user-pic.jpg";
+			this.descPost[i] = "Soo happy to work with this site";
 			this.authorPost[i] = "author" + [i];
-			this.imgPost[i + 1] = "assets/images/user-pic-2.jpg";
-			this.descPost[i + 1] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			this.imgPost[i + 1] = "assets/images/site/testimonal/user-pic-2.jpg";
+			this.descPost[i + 1] = "the selling and buying of products is very simple and elegant";
 			this.authorPost[i + 1] = "author" + [i + 1];
 		}
 		this.data.getPlanDetailsFree(this.data).subscribe(
@@ -193,7 +195,7 @@ export class SellerlandingComponent implements OnInit {
 	}
 
 	redirect() {
-		this.router.navigate(['/SignupSeller']);
+		this.router.navigate(['/plandetails']);
 
 
 	}
@@ -201,16 +203,16 @@ export class SellerlandingComponent implements OnInit {
 		if (this.testimonal1 == this.total || this.testimonal2 == this.total) {
 			document.getElementById("rightA").style.display = "none";
 			document.getElementById("leftA").style.display = "block";
-			console.log(this.testimonal1 + "hi");
-			console.log(this.testimonal2 + "hi");
+			// console.log(this.testimonal1 + "hi");
+			// console.log(this.testimonal2 + "hi");
 		}
 		else {
 			document.getElementById("rightA").style.display = "block";
 			this.testimonal1 = this.testimonal1 + 2;
 			this.testimonal2 = this.testimonal2 + 2;
 			document.getElementById("leftA").style.display = "block";
-			console.log(this.testimonal1);
-			console.log(this.testimonal2);
+			// console.log(this.testimonal1);
+			// console.log(this.testimonal2);
 
 		}
 
@@ -220,8 +222,8 @@ export class SellerlandingComponent implements OnInit {
 		if (this.testimonal1 == 0 && this.testimonal2 == 1) {
 			document.getElementById("leftA").style.display = "none";
 			document.getElementById("rightA").style.display = "block";
-			console.log(this.testimonal1 + "hi");
-			console.log(this.testimonal2 + "hi");
+			// console.log(this.testimonal1 + "hi");
+			// console.log(this.testimonal2 + "hi");
 
 		}
 		else {
@@ -229,8 +231,8 @@ export class SellerlandingComponent implements OnInit {
 			this.testimonal2 = this.testimonal2 - 2;
 			document.getElementById("leftA").style.display = "block";
 			document.getElementById("rightA").style.display = "block";
-			console.log(this.testimonal1);
-			console.log(this.testimonal2);
+			// console.log(this.testimonal1);
+			// console.log(this.testimonal2);
 
 		}
 	}
@@ -238,15 +240,15 @@ export class SellerlandingComponent implements OnInit {
 		if (this.testimonal == this.total) {
 			document.getElementById("rightAB").style.display = "none";
 			document.getElementById("leftAB").style.display = "block";
-			console.log(this.testimonal1 + "hi");
-			console.log(this.testimonal2 + "hi");
+			// console.log(this.testimonal1 + "hi");
+			// console.log(this.testimonal2 + "hi");
 		}
 		else {
 			document.getElementById("rightAB").style.display = "block";
 			this.testimonal = this.testimonal + 1;
 			document.getElementById("leftAB").style.display = "block";
-			console.log(this.testimonal1);
-			console.log(this.testimonal2);
+			// console.log(this.testimonal1);
+			// console.log(this.testimonal2);
 
 		}
 
@@ -256,16 +258,16 @@ export class SellerlandingComponent implements OnInit {
 		if (this.testimonal == 0) {
 			document.getElementById("leftAB").style.display = "none";
 			document.getElementById("rightAB").style.display = "block";
-			console.log(this.testimonal1 + "hi");
-			console.log(this.testimonal2 + "hi");
+			// console.log(this.testimonal1 + "hi");
+			// console.log(this.testimonal2 + "hi");
 
 		}
 		else {
 			this.testimonal = this.testimonal - 1;
 			document.getElementById("leftAB").style.display = "block";
 			document.getElementById("rightAB").style.display = "block";
-			console.log(this.testimonal1);
-			console.log(this.testimonal2);
+			// console.log(this.testimonal1);
+			// console.log(this.testimonal2);
 
 		}
 	}
@@ -283,5 +285,26 @@ export class SellerlandingComponent implements OnInit {
 		document.getElementById("imgP").style.display = "block";
 		document.getElementById("imgC").style.display = "none";
 		// document.getElementById("vidTag").style.top ='-36rem';
+	}
+	filterFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("searchFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("searchFaq")).value.length;
+		if (faqSearchInputLength >= 3) {
+			this.tokenFaq = { number_faq:1, filterFaq: faqSearchInput};
+			this.data.getFaqSiteFiltered(this.tokenFaq).subscribe(
+				data => {
+					this.faqSite = data;
+				}
+			);
+			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+	}
+	submitFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
+		if (faqSearchInputLength >= 5) {
+			this.tokenFaqSubmit = {submitFaq: faqSearchInput};
+			this.data.getFaqSiteSubmit(this.tokenFaqSubmit).subscribe();
+		}
 	}
 }

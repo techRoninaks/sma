@@ -30,3 +30,4 @@
         }
     }
     echo json_encode($a);
+?>

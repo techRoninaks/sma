@@ -202,19 +202,19 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox"id="searchFaq" (keyup)="filterFaq();">
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search">
-                    <button type="submit">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search"id="submitFaq">
+                    <button type="submit"(click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
                 <div class="divQA" *ngFor=" let faq of Object.keys(faqShop)">
                     <form class="qA">
                         Q:<span class=" question ">{{faqShop[faq].question}}</span>?<br> A:
-                        <span class="answer ">{{faqShop[faq].answer}}</span>
+                        <span class="answer " >{{faqShop[faq].answer}}</span>
                     </form>
                 </div>
             </div>

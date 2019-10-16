@@ -412,12 +412,12 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq" (keyup)="filterFaq();">
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search">
-                    <button type="submit">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
+                    <button type="submit"  (click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
@@ -487,7 +487,7 @@
             <div *ngFor="let imageC of Object.keys(imagesCount)">
                 <img class="demo cursor"
                     src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
-                    style="width:75%;height: 100%;" (click)="currentSlide(imageC) ">
+                    style="width:10rem;height: 10rem;" (click)="currentSlide(imageC) ">
             </div>
             <!-- </div> -->
 
