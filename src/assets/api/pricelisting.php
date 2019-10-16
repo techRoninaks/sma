@@ -118,12 +118,12 @@
     $basePriceTotal=$price*$productQuantity;
     $totalAmount=$basePriceTotal+$varPrice;
     //is image uploaded
-    if($imageUploaded==null){
-        $imageUploaded=0;
-    }
-    else{
-        $imageUploaded=1;
-    }
+//     if($imageUploaded==null){
+//         $imageUploaded=0;
+//     }
+//     else{
+//         $imageUploaded=1;
+//     }
 
 
 
@@ -149,40 +149,89 @@
 
     // echo $image;
     // upload image
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/order/'.$orderId.'/')) {
-            mkdir('../images/order/'.$orderId.'/', 0777, true);
-            $dir='../images/order/'.$orderId.'/';
+           if($imageUploaded==0){
+
+            $imageUploaded=0;
 
         }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
 
-        // }
-        define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
+        else if($imageUploaded==1){
 
-        }else{
-            $data = base64_decode($image);
+            $imageUploaded=1;
+
+            if($image != 1){
+
+                // $dir='../assets/images/order/'.$orderId.'/';
+
+                // mkdir($dir);
+
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+
+                    $dir='../images/order/'.$orderId.'/';
+
+        
+
+                }
+
+                // if (!file_exists('../'.$orderId.'/')) {
+
+                //     mkdir('../'.$orderId.'/', 0777, true);
+
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+        
+
+                // }
+
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+
+                //  echo $image;
+
+                $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
+
+                if($mob == 0){
+
+                    $img =explode(",", $image);
+
+                    // echo $img;
+
+                    $img[1] = str_replace(' ', '+', $img[1]);
+
+                    // echo $img[1];
+
+                    $data = base64_decode($img[1]);
+
+                    // echo $data;
+
+        
+
+                }else{
+
+                    $data = base64_decode($image);
+
+                }
+
+                $success = file_put_contents($file, $data);
+
+                // echo "<br>";        
+
+                // echo "<br>";
+
+                // echo $success;
+
+                // echo "<br>";
+
+                // echo $dir.$file;
+
+            }
+
         }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
+
+    // echo $image;
+
+    // upload image
 
 
 
