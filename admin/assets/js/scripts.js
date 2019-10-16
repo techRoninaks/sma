@@ -25,3 +25,116 @@ function includeHTML() {
       }
     }
 }
+
+function deleteData(id,pageName){
+  var confirmTxt = "Confirm deletion?";
+  if(pageName == "posts"){
+      confirmTxt = "Remove comment?";
+  }
+  if(confirm(confirmTxt)){
+      var phpFile = "";
+      switch(pageName){
+          case 'customer': phpFile = "delete_user";
+                      break;
+          case 'user': phpFile = "delete_customer_order";
+                      break;
+          case 'admin': phpFile = "delete_Admin";
+                      break;            
+      }
+      var xhr =  new XMLHttpRequest();
+      var params = 'id='+id;
+      xhr.onreadystatechange  =  function() {
+              if (this.readyState == 4 && this.status == 200) {//if result successful
+                  var message = 'Deletion successful!';
+                  if(pageName == "posts"){
+                          message = 'Removed successfully!';
+                  }
+                  if(xhr.responseText !== "0"){
+                          alert(message);
+                          window.location.reload();
+                  } else {
+                      alert('Deletion Failed!');
+                  }
+              }
+      };
+      xhr.open("POST", "assets/php/"+phpFile+".php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(params);
+  } else {
+      return;
+  }
+}
+
+function deleteData(id,pageName){
+  var confirmTxt = "Confirm deletion?";
+  if(pageName == "posts"){
+      confirmTxt = "Remove comment?";
+  }
+  if(confirm(confirmTxt)){
+      var phpFile = "";
+      switch(pageName){
+          case 'customer': phpFile = "delete_user";
+                      break;
+          case 'user': phpFile = "delete_customer_order";
+                      break;
+          case 'admin': phpFile = "delete_Admin";
+                      break;            
+      }
+      var xhr =  new XMLHttpRequest();
+      var params = 'id='+id;
+      xhr.onreadystatechange  =  function() {
+              if (this.readyState == 4 && this.status == 200) {//if result successful
+                  var message = 'Deletion successful!';
+                  if(pageName == "posts"){
+                          message = 'Removed successfully!';
+                  }
+                  if(xhr.responseText !== "0"){
+                          alert(message);
+                          window.location.reload();
+                  } else {
+                      alert('Deletion Failed!');
+                  }
+              }
+      };
+      xhr.open("POST", "assets/php/"+phpFile+".php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(params);
+  } else {
+      return;
+  }
+}
+
+function refund(id,pageName){
+  var confirmTxt = "Confirm Refund ?";
+  if(pageName == "user"){
+      confirmTxt = "Confirming Refund ?";
+  }
+  if(confirm(confirmTxt)){
+      var phpFile = "";
+      switch(pageName){
+          case 'user': phpFile = "refund";
+                      break;
+      }
+      var xhr =  new XMLHttpRequest();
+      var params = 'id='+id;
+      xhr.onreadystatechange  =  function() {
+              if (this.readyState == 4 && this.status == 200) {//if result successful
+                  var message = 'Refund message posted successfully !';
+                  if(pageName == "posts"){
+                          message = 'Refund message posted !';
+                  }
+                  if(xhr.responseText !== "0"){
+                          alert(message);
+                          window.location.reload();
+                  } else {
+                      alert('Refund message posting unsuccessfull');
+                  }
+              }
+      };
+      xhr.open("POST", "assets/php/"+phpFile+".php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(params);
+  } else {
+      return;
+  }
+}
