@@ -29,14 +29,19 @@ $uname =array();
             $result=mysqli_query($con2,$sql);
             $row=mysqli_fetch_array($result);
 
-            //If username and password exist in our database then create a session.
-            //Otherwise echo error.
+            $sql1="SELECT id,seller_name FROM seller WHERE email = '$username' and password = '$password' ";
+            $result1=mysqli_query($con2,$sql1);
+            $row1=mysqli_fetch_array($result1);
+            $seller_id = $row1['id'];
+            $sql_query = "SELECT city, pincode FROM `address` WHERE mapping_id ='$seller_id'";
+            $result2 = mysqli_query($con2, $sql_query);
+            $row2=mysqli_fetch_assoc($result2);
 
-            if($row)
+            if($row || $row1)
             {
                     // $_SESSION['username'] = $row["username"]; // Initializing Session
                     $error = "Success";
-                    $uname = array('username'=>$row['username'],'status'=>$error,'userid'=>$row['id']);
+                    $uname = array('username'=>$row['username'],'status'=>$error,'userid'=>$row['id'],'sellerId'=>$row1['id'],'seller_name'=>$row1['seller_name'],'city'=>$row2['city'],'pincode'=>$row2['pincode']);
                     echo json_encode($uname);
             }
             else
