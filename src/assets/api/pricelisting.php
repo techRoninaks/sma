@@ -13,7 +13,7 @@
     $isGift =$_POST["giftEnabled"];
     $reqDDate =$_POST["desiredDate"];
     $msgCount =$_POST["msgCount"];
-    // $image = $_POST["image"];
+    $image = $_POST["image"];
     $mob = 0;
 
     $data = array();
@@ -148,23 +148,41 @@
     $orderId=$orderInfo["orderId"];
 
     // echo $image;
-    //upload image
-    // if($image != 1){
-    //     define('UPLOAD_DIR', '../assets/images/order/'.$orderId.'/');
-    //     $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
-    //     if($mob == 0){
-            // $img =explode(",", $image);
+    // upload image
+    if($image != 1){
+        // $dir='../assets/images/order/'.$orderId.'/';
+        // mkdir($dir);
+        if (!file_exists('../images/order/'.$orderId.'/')) {
+            mkdir('../images/order/'.$orderId.'/', 0777, true);
+            $dir='../images/order/'.$orderId.'/';
+
+        }
+        // if (!file_exists('../'.$orderId.'/')) {
+        //     mkdir('../'.$orderId.'/', 0777, true);
+        //     $dir='../assets/images/order/'.$orderId.'/';
+
+        // }
+        define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+        //  echo $image;
+        $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
+        if($mob == 0){
+            $img =explode(",", $image);
             // echo $img;
-            // $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img;
-            // $data = base64_decode($img[1]);
+            $img[1] = str_replace(' ', '+', $img[1]);
+            // echo $img[1];
+            $data = base64_decode($img[1]);
             // echo $data;
 
-    //     }else{
-    //         $data = base64_decode($image);
-    //     }
-    //     $success = file_put_contents($file, $data);
-    // }
+        }else{
+            $data = base64_decode($image);
+        }
+        $success = file_put_contents($file, $data);
+        // echo "<br>";        
+        // echo "<br>";
+        // echo $success;
+        // echo "<br>";
+        // echo $dir.$file;
+    }
 
 
 
@@ -174,7 +192,7 @@
     `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,0,
     $totalAmount,$disc,0,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
-    
+    // echo $sql_query3;
     //customer order id
     $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);
@@ -201,5 +219,5 @@
 
 
     // echo $sql_query3;
-    echo $result4;
+    // echo $result4;
 ?>

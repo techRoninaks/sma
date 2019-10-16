@@ -9,6 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
 //checkout formGroup
+var imageValue: any = "";
 export interface User {
 	name: string;
 }
@@ -90,9 +91,9 @@ export class ListingComponent implements OnInit {
 	phone1: any;
 	tokenFaq: object;
 	uploadImageCount: any = [];
-	imageValue: any = "";
 	orderid: any = "";
 	dynamicDataCustomerOrder: any = "";
+	tokenFaqSubmit:object;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private elementRef: ElementRef, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
 			customername: ['', Validators.required],
@@ -216,7 +217,7 @@ export class ListingComponent implements OnInit {
 
 		//UPLOAD IMAGE
 		// for(var imageCU:any=0;imageCU<this.uploadImageCount;imageCU++){
-		// document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
+		imageValue=document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
 		// console.log(this.imageValue);
 		// }
 		this.data.getFollowInfo(this.tokenObj).subscribe(
@@ -557,6 +558,8 @@ export class ListingComponent implements OnInit {
 
 		}
 	}
+
+
 	count_inc() {
 
 		if (this.counter < this.maxOQuant) {
@@ -591,6 +594,8 @@ export class ListingComponent implements OnInit {
 	currentSlide(n) {
 		this.showSlides(slideIndex = n);
 	}
+
+
 	faqMore() {
 		this.tokenFaq = { prod_id: this.token, number_faq: 1 };
 		this.data.getFaqProduct(this.tokenFaq).subscribe(
@@ -601,6 +606,30 @@ export class ListingComponent implements OnInit {
 		(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
 
 	}
+	filterFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("searchFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("searchFaq")).value.length;
+		if (faqSearchInputLength >= 3) {
+			this.tokenFaq = { prod_id:this.token,number_faq:1, filterFaq: faqSearchInput};
+			this.data.getFaqProductFiltered(this.tokenFaq).subscribe(
+				data => {
+					this.faqProduct = data;
+				}
+			);
+			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+	}
+	submitFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
+		if (faqSearchInputLength >= 5) {
+			this.tokenFaqSubmit = {prod_id:this.token,submitFaq: faqSearchInput};
+			this.data.getFaqProductSubmit(this.tokenFaqSubmit).subscribe();
+		}
+	}
+	
+		
+	
 	showSlides(n) {
 		var i;
 		var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
@@ -768,21 +797,23 @@ export class ListingComponent implements OnInit {
 	}
 
 
-	// onClick(event) {
-	// console.log(event.target.files[0]);
-	// var reader = new FileReader();
-	// reader.readAsDataURL(event.target.files[0]);
-	// reader.onLoad = onLoadCallback;
-	// reader.onload = function () {
-	// 	var text=<File>reader.result;
-	// console.log(reader.result);
-	// this.data.s
-	// 	this.imageValue = text;
-	// };
-	// this.imageValue=reader.readAsDataURL(event.target.files[0]);
-	// console.log("xyz"+this.imageValue);
+	onClick(event) {
+		console.log(event.target.files[0]);
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		// reader.onLoad = onLoadCallback;
+		reader.onload = (event)=>{
+			var text :any = reader.result;
+			imageValue = text;
+			console.log(imageValue);
+		};
+		// this.imageValue = reader.readAsDataURL(event.target.files[0]);
+		setTimeout(function(){ 
+			console.log("xyz" + imageValue);
+		}, 3000);
+		
 
-	// }
+	}
 
 	submitPrice(x: any) {
 		if (x == 'buyNow') {
@@ -806,9 +837,9 @@ export class ListingComponent implements OnInit {
 			var cod = (<HTMLInputElement><any>document.getElementById('cOD')).checked;
 			var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
 
-			// var image = 0;	
+			var image = imageValue;	
 
-			// console.log(image);
+			console.log(image);
 			// alert("working");
 
 			var res = productVariant.split(" ");
@@ -824,7 +855,7 @@ export class ListingComponent implements OnInit {
 				var deliveryOption = "pickup";
 			}
 
-			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 			// image:image ,
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
@@ -914,6 +945,7 @@ export class ListingComponent implements OnInit {
 			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
 			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
 			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+			var image = imageValue;	
 
 			var res = productVariant.split(" ");
 			this.varName = res[0];
@@ -927,7 +959,7 @@ export class ListingComponent implements OnInit {
 			else if (pickup == true) {
 				var deliveryOption = "pickup";
 			}
-			this.tokenPrice = { seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 

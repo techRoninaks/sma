@@ -3,6 +3,7 @@ import { stringify } from 'querystring';
 import { CookieService } from 'ngx-cookie-service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 import {Router, RouterLink} from '@angular/router';
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,14 +13,17 @@ import {Router, RouterLink} from '@angular/router';
 export class HeaderComponent implements OnInit {
   document: any;
 
-  constructor(private cookieService: CookieService, private router: Router) { 
+  constructor(private cookieService: CookieService, private router: Router,private data: DataService) { 
   }
   flag: String="";
+  flag2: String="";
   temp: String="Login";
   temp1: String="Logout";
+  location: String="";
+  dynamicDataLocation :any ="";
   ngOnInit() {
 
-    if(! this.getCookie("userName"))
+    if(! this.getCookie("userName") || !this.getCookie("sellerId"))
     {
         setTimeout(function(){ 
           document.getElementById('myModal-1').style.display="contents";
@@ -37,13 +41,16 @@ export class HeaderComponent implements OnInit {
   logOut(){
     this.cookieService.delete('userName');
     this.cookieService.delete('userId');
+    this.cookieService.delete('sellerId');
+    this.cookieService.delete('sellerName');
     document.getElementById("headerLogin").innerText ="Login";
     document.getElementById("loginButton").innerText ="";
     document.getElementById("profilemenu").style.display="none";
+    document.getElementById("locationlabel").innerText = "";
     this.router.navigate(['/']);
   }
   open(){
-    if(this.getCookie("userName")){
+    if(this.getCookie("userName") || this.getCookie("sellerName")){
       document.getElementById("profilemenu").style.display="block";
     }
     else

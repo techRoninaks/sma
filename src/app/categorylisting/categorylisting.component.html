@@ -205,7 +205,7 @@
     </div>
 
     <!-- Main -->
-    <div class="dvCatMain">
+    <div class="dvCatMain" id="productListing">
         <div class="dvCard" *ngFor="let item of Object.keys(array12)">
             <div class="dvCardLogo">
                 <div class="dvLogo">
@@ -254,28 +254,24 @@
         </div>
     </div>
     <!-- Shop by store -->
-    <div class="dvCatMain" id="shopByStore" style="display: none;">
+    <div class="dvShopMain" id="shopByStore" style="display: none;">
         <div class="dvCard" *ngFor="let item of Object.keys(array12)">
             <div class="dvCardLogo">
                 <div class="dvLogo">
-                    <img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png" [routerLink]="['/shop']"
+                    <img class="imgLogo" src=" assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopId}}_logo.jpg" [routerLink]="['/shop']"
                         [queryParams]="{shop_id:array12[item].shopId}">
                 </div>
                 <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
                     <div class="dvShopName">
-                        <p>{{array12[item].sellerName}}</p>
+                        <p>{{array12[item].shopName}}</p>
                     </div>
                     <div class="dvSellerName">
                         <p>{{array12[item].sellerName}}</p>
                     </div>
                 </div>
             </div>
-            <div class="dvCardBanner" [routerLink]="['/listing']"
-                [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-                <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
-                <div class="dvUndeliver">
-                    <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
-                </div>
+            <div class="dvCardBanner" (click)="shopById(array12[item].shopId)">
+                <img class="imgBanner" src=" assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopId}}_cover.jpg">
             </div>
             <div class="dvCardName">
                 <div class="dvProduct">
@@ -295,10 +291,10 @@
                 </div>
             </div>
             <div class="dvCardPrice">
-                <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
-                <p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
-                <p class="pOffer">({{array12[item].offerPercent}}%)</p>
-                <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+                <img class="pPrice" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <img class="pActualPrice" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <img class="pOffer" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <!-- <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button> -->
             </div>
         </div>
     </div>

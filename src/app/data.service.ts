@@ -35,7 +35,7 @@ export class DataService {
       .append("desiredDate", data['desiredDate'])
       .append("giftEnabled", data['gift_enabled'])      
       .append("msgCount", data['msgCount'])
-      // .append("image", data['image'])
+      .append("image", data['image'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
@@ -444,7 +444,7 @@ getDateDiffShop(data: any) {
     .append("new_password",new_password);
     console.log(fp_mobile_no);
     console.log(new_password);
-    return this.http.post(this.baseUrl+'assets/api/verifyOtp.php',httpParams);
+    return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
   deleteCartProductfn(id: any, userId: any){
@@ -933,7 +933,58 @@ getdynamicPriceAddProduct(prodid: any) {
   .append("pincode",pincode );
   return this.http.post(this.baseUrl+'assets/api/getLocationList.php',httpParams);
  }
+  
+    getFaqSiteFiltered(data: any) {
+    let httpParams = new HttpParams()
+      // .append("sellerId", data)
+      .append("numberFaq", data['number_faq'])
+      .append("filterFaq", data['filterFaq'])
 
+    return this.http.post(this.baseUrl + 'assets/api/faqsitefiltered.php', httpParams);
+  }
+  getFaqSiteSubmit(data: any) {
+    let httpParams = new HttpParams()
+      // .append("sellerId", data)
+      .append("submitFaq", data['submitFaq'])
+
+    return this.http.post(this.baseUrl + 'assets/api/faqsitesubmit.php', httpParams);
+  }
+  getFaqProductFiltered(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+    .append("numberFaq", data['number_faq'])
+    .append("filterFaq", data['filterFaq'])
+
+    return this.http.post(this.baseUrl + 'assets/api/faqproductfiltered.php', httpParams);	
+  }
+  getFaqProductSubmit(data: any) {
+    let httpParams = new HttpParams()
+    .append("prodId", data['prod_id'])
+    .append("submitFaq", data['submitFaq'])
+
+    return this.http.post(this.baseUrl + 'assets/api/faqproductsubmit.php', httpParams);	
+  }
+  getFaqShopFiltered(data: any) {
+    let httpParams = new HttpParams()
+    .append("shopId", data['shop_id'])
+    .append("numberFaq", data['number_faq'])
+    .append("filterFaq", data['filterFaq'])
+
+    return this.http.post(this.baseUrl + 'assets/api/faqshopfiltered.php', httpParams);	
+  }
+  getFaqShopSubmit(data: any) {
+    let httpParams = new HttpParams()
+    .append("shopId", data['shop_id'])
+    .append("submitFaq", data['submitFaq'])
+
+    return this.http.post(this.baseUrl + 'assets/api/faqshopsubmit.php', httpParams);	
+  }
+
+  sendVerifyMail(data: any){
+    let httpParams= new HttpParams()
+    .append("email", data);
+    return this.http.post(this.baseUrl+'assets/api/sendVerifyMail.php',httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
