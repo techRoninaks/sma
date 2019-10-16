@@ -610,6 +610,7 @@ addContact(data: Object){
       .append("country", data['country'])
       .append("state", data['state'])
       .append("city", data['city'])
+      .append("district",data['district'])
       .append("pincode", data['pincode'])
       .append("contact_email", data['contact_email'])
       .append("contact_number", data['contact_number']);
@@ -985,6 +986,41 @@ getdynamicPriceAddProduct(prodid: any) {
     .append("email", data);
     return this.http.post(this.baseUrl+'assets/api/sendVerifyMail.php',httpParams);
   }
+  
+  getvariantInfor(id: any) {
+     let httpParams = new HttpParams()
+      .append("prodid", id);
+     return this.http.post(this.baseUrl + 'assets/api/variantinforcheckout.php', httpParams);
+   }
+
+ getaddress(data: any) {
+    let httpParams = new HttpParams()
+      .append("id", data);
+    return this.http.post(this.baseUrl + 'assets/api/addresscheckout.php', httpParams);
+  }
+
+getPurchaseOrderDateReqOrderCheckout(orderid: any) {
+   let httpParams = new HttpParams()
+      .append("orderid", orderid);
+    return this.http.post(this.baseUrl + 'assets/api/getPurchaseOrderDateReqOrderCheckout.php', httpParams);
+ }
+  getMsgTitleProCheckout(prodid: any) {
+    let httpParams = new HttpParams()
+     .append("prodid", prodid);
+    return this.http.post(this.baseUrl + 'assets/api/getMsgTitleProCheckout.php', httpParams);
+  }
+
+getCustomerOrderCheckout(orderid: any) {
+     let httpParams = new HttpParams()
+     .append("orderid", orderid);
+    return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
+   }
+
+getOrderDetailsCheckout(orderid: any) {
+     let httpParams = new HttpParams()
+      .append("orderid", orderid);
+     return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
+   }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
