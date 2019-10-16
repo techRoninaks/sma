@@ -10,7 +10,7 @@
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
           <a class="nav-link">
             <div class="dropdown">
-                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%"> Deliver to</button>
+                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;&nbsp;<label id="locationlabel">{{location}}</label></button>
                   <div class="dropdown-content" id="location_drop_down">
                   <li>
                     <div>
@@ -81,16 +81,16 @@
       <div class="scrollmenu">
           <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
         <div class="dropdown">
-          <button class="dropbtn-cat"><a href="#mom_kids">Mom & Kids</a></button>
-          <button class="dropbtn-cat"><a href="#mens">Mens</a></button>
-          <button class="dropbtn-cat"><a href="#womens">Womens</a></button>
-          <button class="dropbtn-cat"><a href="#paintings">Painting & Arts</a></button>
-          <button class="dropbtn-cat"><a href="#handcrafts">Hand Craft</a></button>
-          <button class="dropbtn-cat"><a href="#accessories">Accessories</a></button>
-          <button class="dropbtn-cat"><a href="#apparels">Apperels</a></button>
-          <button class="dropbtn-cat"><a href="#cakes">Cakes</a></button>
-
-          <!-- <div class="header-navbar">
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:13}">Painting & Arts</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:14}">Hand Craft</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button>
+              
+            <!-- <div class="header-navbar">
                 <div class="dropbtn-cat">
                   <div class="header-subnav">
                       <button class="header-subnavbtn">Mom & Kids</button>

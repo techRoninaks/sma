@@ -19,16 +19,22 @@
     $result = mysqli_query($con2, $sql_query);
 
     $sql_query1 ="INSERT INTO `address` (city,district,state,country,mapping_id) VALUES ('$ship_city','$district','$state','$country','$ifsc','$seller_id')";
-    $result = mysqli_query($con2, $sql_query);
+    $result1 = mysqli_query($con2, $sql_query1);
 
-    if(! $result )
+    $sql_query2 ="SELECT `seller_name` FROM `seller` WHERE id='$seller_id'";
+    $result2 = mysqli_query($con2, $sql_query2);
+    $row2 = mysqli_fetch_array($result2);
+
+    if(! $result && ! $result1)
     {
         $status="Error";
-        echo json_encode($status);
+        $data=array('status'=>$status);
+        echo json_encode($data);
     }
     else
     {
         $status="Success";
-        echo json_encode($status);
+        $data=array('seller_name'=>$row2["seller_name"],'status'=>$status);
+        echo json_encode($data);
     }
 ?>

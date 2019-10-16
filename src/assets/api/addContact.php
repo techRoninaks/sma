@@ -17,8 +17,8 @@
         $status="Success";
         echo json_encode($status);
     }
-    $to = "mail.thirdeyecreations1296@gmail.com";
+    $to = $email;
     $subject = "Scoop My Art";
     $txt = "Thanks for the feedback $name!";
-    // mail($to,$subject,$txt);
+    mail($to,$subject,$txt);
 ?>

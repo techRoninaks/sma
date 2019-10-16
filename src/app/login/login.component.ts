@@ -32,8 +32,13 @@ export class LoginComponent implements OnInit {
   fp_mobile: any ="" ;
   fp_new_password: any ="" ;
   username: any ="";
+  location: any ="";
   cookie_uname: String;
   cookie_user_id: String;
+  city: String;
+  seller_name: String;
+  cookie_seller_id: String;
+  dynamicDataLocation :any ="";
 
     constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
       this.loginForm = this.formBuilderLogin.group({
@@ -118,11 +123,17 @@ export class LoginComponent implements OnInit {
                     alert('Login Successfully');
                     this.cookie_uname = data['username'];
                     this.cookie_user_id = data['userid'];
+                    this.cookie_seller_id = data['sellerId'];
+                    this.city =data['city'];
+                    this.seller_name =data['seller_name'];
+                    this.setCookie("sellerId",this.cookie_seller_id);
                     this.setCookie("userName",this.cookie_uname);
                     this.setCookie("userId",this.cookie_user_id);
                     document.getElementById("headerLogin").innerText = this.cookie_uname as string;
+                    document.getElementById("headerLogin").innerText = this.seller_name as string;
                     document.getElementById("loginButton").innerText ="Log Out";
-                    // document.getElementById("profilemenu").style.display="block";
+                    document.getElementById("locationlabel").innerText = this.city as string;
+                    
                     this.router.navigate(['/']);
                   }
                   else
@@ -146,13 +157,13 @@ export class LoginComponent implements OnInit {
           data => {
             // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
             if (data == "Found") {
-              alert('Mobile No Found');
+              alert('OTP Sent Successfully');
               this.gotp = this.generateOTP();
               this.requestOtp(this.gotp, this.fpmobile);
 
             }
             else {
-              alert('Mobile No not Found');
+              alert('Mobile Number is not Registered');
             }
           },
           error => console.error(error)

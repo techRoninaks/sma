@@ -26,7 +26,7 @@
                       </div>
                     </div><br>
                     <div>
-                      <input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email" formControlName="reg_email">Verify
+                      <input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email" formControlName="reg_email">
                       <div *ngIf="submitted && registrationForm.controls.reg_email.errors" class="error validator-style">
                           <div *ngIf="registrationForm.controls.reg_email.errors.required">
                             Email is required !
@@ -40,7 +40,7 @@
                               Mobile no is required !
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Verify</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">Verify</button>
                     </div><br>
                     <div>
                       <input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password" formControlName="reg_password">
@@ -79,18 +79,62 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body" style="padding:0 10% 0 10%;">
-                            <div class="title-verify"><h3>Verify Mobile</h3></div>
-                            <div><input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:"></div>
-                            <br>
-                            <div><button class="button-otp" type="submit" >SEND OTP</button></div>
+                        <form [formGroup]="fpFormMobile">
+                            <div class="title-verify">
+                              <h3>Verify Mobile</h3>
+                            </div>
+                            <div>
+                              <input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:" formControlName="fp_mobile_no" id="fp_mobile_no">
+                              <div *ngIf="submitted && fpFormMobile.controls.fp_mobile_no.errors" class="error validator-style">
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.errors.required">
+                                    Mobile no is required !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('minlength')">
+                                    Enter valid Mobile Number !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('maxlength')">
+                                    Enter valid Mobile Number !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('pattern')">
+                                    Enter Only digits !
+                                  </div>
+                              </div>
+                            </div>
                             <br>
                             <div>
-                                <div><input type="text" class="pop-up-input-style" placeholder="Enter OTP:"></div>
-                                <br>
-                                <div><button class="button-submit" type="submit">SUBMIT</button></div>
-                                <br>
-                                <br>
+                              <button class="button-otp" type="submit" (click)="onSubmitSendOtp()">SEND OTP</button>
                             </div>
+                        </form>
+                            <br>
+                            <form [formGroup]="fpFormOtp">
+                              <div>
+                                  <div>
+                                    <input type="text" class="pop-up-input-style" placeholder="Enter OTP:" formControlName="fp_otp" id="fp_otp">
+                                    <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                                          Enter OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                                          Enter valid OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                                          Enter valid OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                                          Enter Only digits !
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <br>
+                                  <div>
+                                    <button class="button-submit" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid">
+                                      SUBMIT
+                                    </button>
+                                  </div>
+                                  <br>
+                                  <br>
+                              </div>
+                            </form>
                     </div>
                   </div>
                 </div>
