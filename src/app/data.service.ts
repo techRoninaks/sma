@@ -444,7 +444,7 @@ getDateDiffShop(data: any) {
     .append("new_password",new_password);
     console.log(fp_mobile_no);
     console.log(new_password);
-    return this.http.post(this.baseUrl+'assets/api/verifyOtp.php',httpParams);
+    return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
   deleteCartProductfn(id: any, userId: any){
@@ -980,6 +980,11 @@ getdynamicPriceAddProduct(prodid: any) {
     return this.http.post(this.baseUrl + 'assets/api/faqshopsubmit.php', httpParams);	
   }
 
+  sendVerifyMail(data: any){
+    let httpParams= new HttpParams()
+    .append("email", data);
+    return this.http.post(this.baseUrl+'assets/api/sendVerifyMail.php',httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
