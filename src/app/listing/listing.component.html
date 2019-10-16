@@ -596,7 +596,7 @@
 
                     <div class="dvQty">
                         <p>Qty :</p>
-                        <button class="btnQtyCount">{{ dynamicData.length }}</button>
+                        <button class="btnQtyCount">{{ dynamicDataCustomerOrder.quantity }}</button>
                     </div>
                 </div>
                 <!-- ADDRESS -->
@@ -605,15 +605,14 @@
                 </div>
                 <div class="dvSub2">
                     <div class="dvAddrText" style="display: 1" id="Main-Address">
-                        <!-- <p>Roninaks House</p> -->
-                        {{dynamicDataSecondAddress.contact_name}}
-                        {{dynamicDataSecondAddress.addr1}},
-                        {{dynamicDataSecondAddress.addr2}},
-                        {{dynamicDataSecondAddress.city}},
-                        <!-- {{dynamicDataDistrict}} -->
-                        {{dynamicDataSecondAddress.state}},
-                        {{dynamicDataSecondAddress.country}},
-                        {{dynamicDataSecondAddress.pincode}}
+                        <!-- {{dynamicDataAddress.contact_name}}, -->
+                        {{dynamicDataAddress.addr1}},
+                        {{dynamicDataAddress.addr2}},
+                        {{dynamicDataAddress.city}},
+                        {{dynamicDataAddress.district}},
+                        {{dynamicDataAddress.state}},
+                        {{dynamicDataAddress.country}},
+                        {{dynamicDataAddress.pincode}}
                         <!-- {{dynamicDataSecondAddress.contact_number}} -->
                         <!-- {{dynamicDataSecondAddress.contact_email}} -->
                     </div>
@@ -632,7 +631,7 @@
                             {{dynamicDataSecondAddress.addr1}},
                             {{dynamicDataSecondAddress.addr2}},
                             {{dynamicDataSecondAddress.city}},
-                            <!-- {{dynamicDataDistrict}} -->
+                            {{dynamicDataSecondAddress.district}},
                             {{dynamicDataSecondAddress.state}},
                             {{dynamicDataSecondAddress.country}},
                             {{dynamicDataSecondAddress.pincode}}
@@ -648,6 +647,7 @@
                             {{dynamicNewAddr.addr1}},
                             {{dynamicNewAddr.addr2}},
                             {{dynamicNewAddr.city}},
+                            {{dynamicNewAddr.district}},
                             {{dynamicNewAddr.state}},
                             {{dynamicNewAddr.country}},
                             {{dynamicNewAddr.pincode}}
@@ -721,6 +721,11 @@
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address" id="pincode-Form">
                                 </div>
+                                <div class="dvDistrict">
+                                    <label>District</label>
+                                    <br>
+                                    <input type="text" size="24" class="card-input-style-address" id="District-Form">
+                                </div>
                                 <div class="dvPhone">
                                     <label>Phone</label>
                                     <br>
@@ -758,10 +763,10 @@
                 <div class="dvSub6">
                     <div class="dvDisplayDate">
                         <!-- <p>00-SEPT-2019</p> -->
-                        {{ dynamicDataCartDate.deliveryDate }}
+                        <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
                     </div>
                     <div class="dvDisplayPrice">
-                        <p>PRICE : {{ dynamicDataCartDate.totalPrice }}</p>
+                        <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
                     </div>
                     <div class="dvDate">
                         <input type="Date" class="dateText" placeholder="Date">
@@ -788,15 +793,21 @@
                     <div class="dvNoteText">
 
                     </div>
-                    <div class="dvMessageTitle">
+                    <!-- <div class="dvMessageTitle">
 
-                    </div>
+                    </div> -->
                 </div>
+                <!-- MESSAGE TITLE -->
+                <div class="dvMsgTitle">
+                    <p>Message Title : {{ dynamicMsgTitle.title }}</p>
+                </div>
+
+
                 <!-- PRODUCT IMAGE -->
-                <div class="dvProdText">
+                <div class="dvProdText" style="display: none;">
                     <p>PRODUCT IMAGES</p>
                 </div>
-                <div class="dvSub8">
+                <div class="dvSub8" style="display: none;">
                     <div class="dvCheckImg1">
                         <img src="assets/images/wall.png" width="140" height="140" class="imgItem1">
                     </div>
@@ -814,18 +825,19 @@
                 <div class="dvSub9">
                     <div class="dvPriceList">
                         <p><br>
-                            Base Price : {{dynamicDataProName.basePrice}}<br>
-                            Variance : {{dynamicDataCheckOutPrice.variantPrice}}<br>
-                            Tax :00.00<br>
-                            Shipping : 00.00</p>
-                        <!-- Tax : {{dynamicDataCheckOutPrice.name}}<br>
-                            Shipping : {{dynamicDataCheckOutPrice.name}}</p> -->
-                        <h4>Total : {{dynamicDataCheckOutPrice.totalPrice}}</h4>
-
+                            <!-- Product Price : {{dynamicDataCustomerOrder.basePrice}}<br> -->
+                            Base Price : {{dynamicDataCustomerOrder.basePrice}}<br>
+                            Shipping Price : {{dynamicDataCustomerOrder.shippingPrice}}<br>
+                            Variant Price : {{dynamicDataCustomerOrder.variantPrice}}<br>
+                            Tax :{{ dynamicDataCustomerOrder.tax }}</p>
+                        <h4>Total : {{dynamicDataCustomerOrder.totalPrice}}</h4>
                     </div>
                     <div class="btnCheckOut">
                         <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
                             data-target="#checkOut" (click)="checkout()">CHECK OUT</button>
+
+                        <!-- <button type="btnRequest" class="btn btn-warning" data-toggle="modal" id="reqNowId"
+                            data-target="#requestOrder" (click)="submitPrice('requestOrder');">REQUEST ORDER</button> -->
                     </div>
                 </div>
 

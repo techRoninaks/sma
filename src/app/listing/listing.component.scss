@@ -201,10 +201,9 @@
 				grid-column-start: imageSlider-end;
 				grid-column-end: auto;
 				scrollbar-width: thin;
-				display:grid;
+				display: grid;
 				grid-template-rows: auto;
 				.smallImage {
-					
 					height: 5rem;
 					// width: 5rem;
 					padding-bottom: 0.5rem;
@@ -307,7 +306,7 @@
 	}
 	.pMessage {
 		grid-area: pMessage;
-		display:grid;
+		display: grid;
 		grid-template-rows: auto;
 	}
 	.pImages {
@@ -771,8 +770,8 @@
 			height: 50px;
 			width: 50px;
 		}
-		&:hover{
-			cursor:pointer;
+		&:hover {
+			cursor: pointer;
 		}
 	}
 }
@@ -870,7 +869,6 @@
 		margin-bottom: -4px;
 		width: 35rem;
 		height: 25rem;
-	
 	}
 	.caption-container {
 		text-align: center;
@@ -894,8 +892,8 @@
 	.thumbRow {
 		width: auto;
 		margin-top: 50px;
-		display:grid;
-		grid-template-columns:repeat(10,auto);
+		display: grid;
+		grid-template-columns: repeat(10, auto);
 	}
 }
 
@@ -1407,9 +1405,16 @@
 		}
 		.dvNoteText {
 		}
-		.dvMessageTitle {
+		.dvMsgTitle {
+			.p {
+				font-family: "BitterBold";
+				text-align: center;
+				margin-top: 10px;
+			}
 		}
 	}
+	
+
 	.dvProdText {
 		text-align: center;
 		margin-top: 10px;

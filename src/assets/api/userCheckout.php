@@ -5,7 +5,8 @@
     $sql_query = "SELECT * FROM `user` WHERE id= $id ";
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
-        $data = array('Name'=>$row["Name"]);
+        $data = array('Name'=>$row["Name"],'email'=>$row["email"],'phone1'=>$row["phone1"]);
+    
     }
     echo json_encode($data);
     
