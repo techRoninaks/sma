@@ -23,7 +23,7 @@ export class ManageshopComponent implements OnInit {
 	folResult: boolean;
 	followInfo: any = "";
 	tokenObj: object;
-
+	tokenFaqSubmit:object;
 	revId: number;
 	ratingReviewShop: any = [];
 	filledStarRat: any = [];
@@ -194,6 +194,27 @@ export class ManageshopComponent implements OnInit {
 		);
 		(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
 
+	}
+	filterFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("searchFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("searchFaq")).value.length;
+		if (faqSearchInputLength >= 3) {
+			this.tokenFaq = { shop_id:this.token,number_faq:1, filterFaq: faqSearchInput};
+			this.data.getFaqShopFiltered(this.tokenFaq).subscribe(
+				data => {
+					this.faqShop = data;
+				}
+			);
+			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+	}
+	submitFaq() {
+		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
+		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
+		if (faqSearchInputLength >= 5) {
+			this.tokenFaqSubmit = {shop_id:this.token,submitFaq: faqSearchInput};
+			this.data.getFaqShopSubmit(this.tokenFaqSubmit).subscribe();
+		}
 	}
 
 	// Cookie Section BEGN

@@ -570,7 +570,7 @@
 		display: grid;
 		width: auto;
 		grid-template-rows: 15% auto;
-		grid-template-columns: 5% 45% 45% 5%;
+		grid-template-columns: 5% 44% 44% 5%;
 		grid-template-areas: ". imgPost imgPost ." "leftArrow post1 post2 rightArrow";
 		.leftArrow {
 			grid-area: leftArrow;
@@ -677,7 +677,7 @@
 		display: grid;
 		width: auto;
 		grid-template-rows: 15% auto;
-		grid-template-columns: 5% auto auto 5%;
+		grid-template-columns: 5% 44% 44% 5%;
 		grid-template-areas: ". imgPost imgPost ." "leftArrow post post rightArrow";
 		.leftArrow {
 			grid-area: leftArrow;

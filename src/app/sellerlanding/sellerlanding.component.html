@@ -7,15 +7,19 @@
                 <span class="dot" (click)="currentSlide(3)"></span>
             </div>
             <div class="mySlides fade" id="slides">
-                <img class="slideImg" src="{{pageData['ad_banner_1']}}">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_1']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_1.jpg">
+                
             </div>
 
             <div class="mySlides fade" id="slides">
-                <img class="slideImg" src="{{pageData['ad_banner_2']}}">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_2']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_2.jpg">
             </div>
 
             <div class="mySlides fade" id="slides">
-                <img class="slideImg" src="{{pageData['ad_banner_3']}}">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_3']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_3.jpg">
             </div>
         </div>
         <div class="nextPrev" id="slides">
@@ -125,7 +129,7 @@
             <p class="p3" id="leftWhite">70,000</p>
             <p class="p4" id="leftBlack">Trusted sellers</p>
         </div> -->
-        <div class="banRight" [routerLink]="['/contacts']">
+        <div class="banRight" [routerLink]="['/signupseller']">
             <p>Setup Your shop <label style="color: #efbe24">NOW</label>!</p>
         </div>
     </div>
@@ -203,7 +207,8 @@
             </div>
         </div>
     </div>
-    <div class="plans">
+    <!-- style="display: none;" -->
+    <div class="plans" >
         <div class="main-title">
             Which Plan Is Right For You?
             <br>
@@ -331,12 +336,20 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq" (keyup)="filterFaq();">
+                    <!-- <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()"> -->
+                    <!-- <ul id="myUL" class="rfqUL" style="display: none;">
+                        <li *ngFor="let inp of Object.keys(fa)">
+                            <a (click)="addTagProduct(rfqInput[inp].name);">
+                                {{rfqInput[inp].name}}
+                            </a>
+                        </li>
+                    </ul> -->
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search">
-                    <button type="submit">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
+                    <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
