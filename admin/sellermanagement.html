@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Light Bootstrap Dashboard by Creative Tim</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</head>
+
+<body>
+
+        <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Seller Notification </h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5><strong>Seller Id : </strong>
+                                <p id="userIdPopup"></p>
+                            </h5>
+                            <h5><strong> Notify seller :</strong></h5>
+                            <p style="display:inline;color:red;">*</p>
+                            <input type="text" class="form-control" placeholder="Seller Notification" id="notificationMSg"
+                                required><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" style="display:inline" class="btn btn-secondary-outline"
+                                value="Submit" onclick="sellernotpopup();" id="submitbutton">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg" w3-include-html="sidenav.html">
+
+            <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+        </div>
+
+        <div class="main-panel">
+            <div w3-include-html="header.html">
+            </div>
+            <div class="header">
+                <h4 class="title">SELLER MANAGEMENT</h4>
+            </div>
+
+            <body>
+                    <button type="close" id="closeButton" style='display: none' onclick="closeButton()">
+                            <img src="assets/img/deleteButton.png"  id='img_close_button' style='height:25px;' >
+                      </button>
+                
+
+                <div class="topnav" style="padding-top: 8px;">
+                    
+                    <form enctype="multipart/form-data" action="javascript:searchseller()" method="post">
+                        <div class="search-container" style="float:left;">
+                        </div>
+                        
+                        <div class="content table-responsive table-full-width" id="prodmgmtTable" >
+                            
+                        </div>
+                    </form>
+            </div>
+
+
+
+
+
+
+            </body>
+            <div class="col-md-3" id="fullSellers_card" style="display: inline-block; width: 100%;">
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search" id="search_name" style="
+                    margin-left: 850px;">
+                    <button type="submit"><i class="fa fa-search" onclick="searchseller()"></i></button>
+                  </div>
+                <div style="padding-top: 8px;">
+                    <button class="btn  btn-fill" onclick="toggleTabs('All')" id="btnAll">ALL</button>
+                    <select class="" id="location" onchange="location_filter()">
+                        <option value="" disabled selected>LOCATION</option>
+                    </select>
+                    <select class="" id="category" onchange="category_filter()">
+                        <option value="" disabled selected>CATEGORY</option>
+                    </select>
+                    <button class="btn btn-fill" onclick="toggleTabs('Planexpired')" id="btnPlanexpired">PLAN
+                        EXPIRED</button>
+                    <button class="btn btn-fill" onclick="toggleTabs('Planexpiringsoon')" id="btnPlanexpiringsoon">PLAN
+                        EXPIRING SOON</button>
+                    <button class="btn btn-fill" onclick="toggleTabs('Pendingapproval')" id="btnPendingapproval">PENDING
+                        APPROVAL</button>
+                </div>
+                <div class="col-md-3">
+                    <div style="padding-top: 8px;width: 430%;" align="right">
+                        <button class="btn btn-info btn-fill" onclick="toggleTabs('userForm')" id="btnAddSeller" href="signupseller.html" >Add New
+                            Seller +</button>
+                    </div>
+                </div>
+
+
+                <br>
+                <br>
+                <br>
+
+                <div id="cardHolder"></div>
+
+                <!-- <div class="col-md-4" id="cardHolder"> -->
+                <!-- <div class="card card-user"  id="cardHolder2"> -->
+                <!-- <div class="image">
+                    <img src="../src/assets/images/seller/1/01.jpg">
+                </div>
+                
+                <div class="content">
+                    <div class="author">
+                         <a href="#">
+                        <img class="avatar border-gray" src="../src/assets/images/seller/1/1.jpg" alt="..."/>
+                        <div><p>Verify ?</p></div>
+
+                          <h4 class="title">Seller Name<br />
+                             <small>Seller Id</small>
+                          </h4>
+                        </a>
+                    </div>
+                   
+                </div> -->
+                <!-- <hr>
+                <div class="text-center">
+                    
+                    <button title="Login as seller" href="#" class="btn btn-loginasseller"><i class="fa pe-7s-key"></i></button>
+                    <button title="Edit seller" href="#" class="btn btn-editseller"><i class="fa pe-7s-note"></i></button>
+                    <button title="Delete seller" href="#" class="btn btn-deleteseller"><i class="fa pe-7s-trash"></i></button>
+                    <button title="Manage product" href="#" class="btn btn-manageproduct"><i class="fa pe-7s-cart"></i></button>
+                    
+
+                </div> -->
+                <!-- </div> -->
+            </div>
+
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    </div>
+
+
+</body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+
+<script src="assets/js/scripts.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        includeHTML();
+        allsellers_filter();
+        locationdropdown();
+        categorydropdown();
+        sellerdetails();
+        location_filter();
+        category_filter();
+        planexpired_filter();
+        planexpiringsoon_filter();
+        pendingseller_filter();
+        deleteData();
+        sellernotpopup();
+       
+
+    });
+    // window.onload = function(){
+    //     document.getElementsByClassName('navbar-brand')[0].innerHTML = "Test";
+    // }
+
+
+    function toggleTabs(type) {
+        switch (type) {
+            case "All":
+                $('#btnAll').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnPlanexpired').removeClass().addClass('btn  btn-fill');
+                $('#btnPlanexpiringsoon').removeClass().addClass('btn btn-fill');
+                $('#btnPendingapproval').removeClass().addClass('btn btn-fill');
+                allsellers_filter();
+
+
+                break;
+            case "Planexpired":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnPlanexpired').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnPlanexpiringsoon').removeClass().addClass('btn btn-fill');
+                $('#btnPendingapproval').removeClass().addClass('btn btn-fill');
+                $('#all').hide();
+                planexpired_filter();
+                $('#planexpiringsoon_filter').hide();
+
+
+                break;
+
+            case "Planexpiringsoon":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnPlanexpired').removeClass().addClass('btn  btn-fill');
+                $('#btnPlanexpiringsoon').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnPendingapproval').removeClass().addClass('btn btn-fill');
+                $('#all').hide();
+                $('#planexpired_filter').hide();
+                planexpiringsoon_filter();
+                // pendingseller_filter();
+
+                break;
+
+            case "Pendingapproval":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnPlanexpired').removeClass().addClass('btn  btn-fill');
+                $('#btnPlanexpiringsoon').removeClass().addClass('btn  btn-fill');
+                $('#btnPendingapproval').removeClass().addClass('btn btn-info btn-fill');
+                $('#all').hide();
+                $('#planexpired_filter').hide();
+                $('#planexpiringsoon_filter').hide();
+                pendingseller_filter();
+
+
+        }
+    }
+
+
+    // cookie section //
+
+    function setCookie(cname,id,exdays=1 ) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + id + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function deleteCookie(cname) {
+  var value = getCookie(cname);
+  if (value === "null" || value === "" || value === "0") {
+    return false;
+  }
+  return true;
+}
+
+// setCookie(id)
+//     {
+//      this.cookieService.set(id, value);
+//      }
+// getCookie(id)
+//     {
+//      return this.cookieService.get(id);
+//    }
+//  deleteCookie(id)
+//     {
+//      this.cookieService.delete(id);
+//    }
+
+
+   function loginas_seller(id) {
+           
+                // if (responseData.data.success == "successful") {
+                //     console.log(responseData)
+                    alert('Login Successfully');
+                    this.cookie_id = id;
+                   this.setCookie("id",this.cookie_id);
+                   this.deleteCookie("sellerId");
+                //    document.getElementById("loginButton").innerText ="Log Out";
+                   // document.getElementById("profilemenu").style.display="block";
+                //    this.router.navigate(['/']);
+                
+                // } 
+                // else {
+                    // demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                // }
+        
+            // error: function (XMLHttpRequest, textStatus, errorThrown) {
+                // demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            // }
+       
+    }
+
+
+   
+    function sellerdetails() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'assets/php/seller.php',
+            success: function (responseData) {
+                // var optionUnions = "<option>LOCATION<option>";
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("sellercard", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+
+
+                } else {
+                    demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            }
+        });
+    }
+    
+    function searchseller() {
+        var search_name = document.getElementById("search_name").value;
+        $.ajax({
+            type: 'POST',
+            dataType:'json',
+            data:({"search_name":search_name}),
+            url: 'assets/php/searchseller.php', 
+             success: function(responseData) {
+                    if(responseData.data.success == "successful"){
+                        var response = responseData.data.result;
+                        var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("basicSearch", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                        
+                    }else{
+                        demo.showNotification('top','center', 'Match not found!', 4);
+                        // window.location = window.location.origin;
+                    }
+                },
+                // error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    // demo.showNotification('top','center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                // }
+                });
+     }
+
+
+    function allsellers_filter() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'assets/php/allfilter.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("allSellers", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function locationdropdown() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'assets/php/location.php',
+            success: function (responseData) {
+                var optionUnions = "<option>LOCATION<option>";
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+
+                    for (var i = 0; i < response.length; i++) {
+                        //console.log(response[i].state);
+                        var opt = new Option(response[i].state);
+                        $("#location").append(opt);
+                    }
+
+                } else {
+                    demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            }
+        });
+    }
+    function location_filter() {
+        var state = document.getElementById("location").value;
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: { "state": state },
+            url: 'assets/php/locationfilter.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("locationFilter", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    //window.location = window.location.origin;
+                }
+            },
+        });
+    }
+
+    function category_filter() {
+        var category = document.getElementById("category").value;
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: { "category": category },
+            url: 'assets/php/categoryfilter.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("categoryFilter", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    //window.location = window.location.origin;
+                }
+            },
+        });
+    }
+
+    function categorydropdown() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'assets/php/category.php',
+            success: function (responseData) {
+                var optionUnions = "<option>CATEGORY<option>";
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+
+                    for (var i = 0; i < response.length; i++) {
+
+                        var opt = new Option(response[i].name);
+                        $("#category").append(opt);
+                    }
+                }
+            }
+        });
+    }
+
+    function planexpired_filter() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'assets/php/planexpired.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("planExpiredfilter", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function planexpiringsoon_filter() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'assets/php/planexpsoon.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("planexpSoonfilter", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function pendingseller_filter() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: 'assets/php/pendingsellers.php',
+            success: function (responseData) {
+                if (responseData.data.success == "successful") {
+                    console.log(responseData)
+                    var response = responseData.data.result;
+                    var Seller_name = "";
+                    response.forEach(element => {
+                        Seller_name = Seller_name + buildHtml("pendingSellerfilter", element);
+                        console.log(Seller_name);
+                        document.getElementById('cardHolder').innerHTML = Seller_name;
+
+                    });
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function verification(id) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: { "id": id},
+            url: 'assets/php/sellerverification.php',
+            success: function (responseData) {
+                var y=responseData.data.response;
+                if (y == "successful") {
+                    document.getElementById("verify_btn").innerText="Verified";
+                    console.log(responseData.data.response)
+                    // alert("verified Successfully");
+                    var response = responseData.data.result;
+                    
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function sendpopupdata(id){
+        var id=id;
+        var id = document.getElementById("userIdPopup").innerHTML = id;
+       
+        
+    }
+
+    function sellernotpopup(id)
+    {
+       var msg = document.getElementById("notificationMSg").value;
+        var id = document.getElementById("userIdPopup").innerHTML;
+        // var user1=document.getElementById("").value;
+        // var user2=document.getElementById("").value;
+        
+
+    //    var prodid = document.getElementById("prodidPopup").innerHTML;
+       $.ajax({
+           type: 'POST',
+           data: { "threadid" : id, "message": msg,"id":id,"user1" :1 , "user2" : id },
+           url: 'assets/php/notificationmsg.php',
+           success: function (responseData) {
+               if (responseData.status == "successful") {
+                  console.log("Success");
+               } else {
+                   demo.showNotification('top', 'center', 'Something went wrong', 4);
+                   // window.location = window.location.origin;
+               }
+           },
+           error: function (XMLHttpRequest, textStatus, errorThrown) {
+               demo.showNotification('top', 'center', 'Something went wrong', 4);
+               // window.location = window.location.origin;
+           }
+       });
+    }
+
+    function accept(prod_id) { 
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: { "prodid": prod_id, "active_status": "accepted" },
+            url: 'assets/php/accept.php',
+            success: function (responseData) {
+                var optionCategories = "<option>Select<option>";
+                var optionId = "<option>Select<option>";
+                if (responseData == "successful") {
+                    alert("Product accepted successfully");
+                    window.location.reload();
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    //window.location = window.location.origin;
+                }
+            },
+        });
+    }
+
+    function rejectShow(prod_id){
+        document.getElementById(prod_id).style.display = 'block';
+    }
+    function reject(prod_id) { 
+        var submitReason = document.getElementById(prod_id+"input").value;
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: { "prodid": prod_id, "active_status": "reject","remarks": submitReason},
+            url: 'assets/php/accept.php',
+            success: function (responseData) {
+                var optionCategories = "<option>Select<option>";
+                var optionId = "<option>Select<option>";
+                if (responseData == "successful") {
+
+                    window.location.reload();
+                    
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Product accepted successfully', 4);
+                    //window.location = window.location.origin;
+                }
+            },
+        });
+    }
+
+    function individualprod(id) {
+       
+       // var id = document.getElementById("manageproduct").innerHTML;
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: {"id" : id},
+            url: 'assets/php/individualproduct.php',
+            success: function (responseData) {
+                console.log(responseData);
+                if (responseData.data.success == "successful") {
+                    var response = responseData.data.result;
+                    globCopy2 = response;
+                    var tabHeader2 = "<table class='table table-hover table-striped'><thead><th>ID</th><th>Seller Name</th><th>Product Id</th><th>Product Name</th><th>Price</th>";
+                    var tabCategories = tabHeader2;
+                    response.forEach(element => {
+                        tabCategories = tabCategories + buildHtml("individualproductlist", element);
+                    });
+                    tabCategories = tabCategories + "</table>";
+                    document.getElementById("prodmgmtTable").innerHTML = tabCategories;
+                } else {
+                    demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            }
+
+        });
+        document.getElementById("fullSellers_card").style.display='none';
+        document.getElementById("closeButton").style.display='block';
+
+    }
+
+    function closeButton(){
+        document.getElementById("fullSellers_card").style.display='block';
+        document.getElementById("prodmgmtTable").style.display='none';
+
+    }
+
+
+
+
+    function deleteData(id) {
+        $.ajax({
+            type: 'POST',
+            data: {"id":id},
+            url: 'assets/php/deleteseller.php',
+            success: function (responseData) {
+                if (responseData== "successful") {
+                    console.log(responseData)
+                    // var response = responseData.data.result;
+                    
+                }
+                else {
+                    demo.showNotification('top', 'center', 'Deleted successfully', 4);
+                    // window.location = window.location.reload;
+                }
+            },
+        });
+    }
+
+    function buildHtml(template, data) {
+        var htmlString = "";
+        var pageName = "'sellermanagement'";
+        switch (template) {
+            case "userTable":
+                htmlString = "<tr><td>" + data.state + "</td></tr>";
+                break;
+            case "locationFilter":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify' id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller' href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller' onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "categoryFilter":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + " ><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "planExpiredfilter":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "planexpSoonfilter":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "pendingSellerfilter":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+
+                break;
+            case "allSellers":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "basicSearch":
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+
+                break;
+            case "sellercard":
+                //  htmlString = "<div class='image'><img src='../src/assets/images/seller/"+data.id+"/01.jpg'</div><div class='author'><a href='#'><img class='avatar border-gray' src='../src/assets/images/seller/"+data.id+"/1.jpg' alt='...'/><div><p>Verify ?</p></div><h4 class='title'>"+data.seller_name+"<br /> <small>"+data.id+"</small></h4></a></div>";
+
+
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                break;
+            
+                case "individualproductlist":
+                
+                var tabHeader = "</div><table class='table table-hover table-striped'><thead><th>ID</th><th>Seller Name</th><th>Product Id</th><th>Product Name</th><th>Price</th>";
+
+                htmlString = "<tr><td>" 
+                + data.id + "</td><td>" 
+                + data.seller_name + "</td><td>" 
+                + data.prod_id + "</td><td>" 
+                + data.prod_name + "</td><td>" 
+                + data.prod_price + 
+                "</td><td><img src='assets/img/Tickmark.png'  id='img_tick_accept' style='height:35px;' onclick=" + "accept("+data.prod_id+")></td><td><img src='assets/img/crossmark.png'  id='img_cross_reject' style='height:25px;' onclick='rejectShow("+data.prod_id+")'><td><img src='assets/img/eye.png'  id='img_eye_view' style='height:25px;' 'href='/listing?shop_id=("+data.shop_id+")& prod_id=("+data.prod_id+").html';'></td></tr><tr id='"+data.prod_id+"' style='display:none;'><td><input type='text' id='"+data.prod_id+"input'></td><td><button type='submit' value='Submit' onclick='reject("+data.prod_id+");'>Submit</button>&emsp;<button type='cancel value='Cancel' >Cancel</button></td></tr>";
+        }
+        return htmlString;
+    }
+</script>
+
+</html>
