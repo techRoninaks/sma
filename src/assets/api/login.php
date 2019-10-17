@@ -37,11 +37,17 @@ $uname =array();
             $result2 = mysqli_query($con2, $sql_query);
             $row2=mysqli_fetch_assoc($result2);
 
-            if($row || $row1)
+            if($row)
             {
                     // $_SESSION['username'] = $row["username"]; // Initializing Session
-                    $error = "Success";
-                    $uname = array('username'=>$row['username'],'status'=>$error,'userid'=>$row['id'],'sellerId'=>$row1['id'],'seller_name'=>$row1['seller_name'],'city'=>$row2['city'],'pincode'=>$row2['pincode']);
+                    $error = "Success1";
+                    $uname = array('username'=>$row['username'],'status'=>$error,'userid'=>$row['id'],'city'=>$row2['city'],'pincode'=>$row2['pincode']);
+                    echo json_encode($uname);
+            }
+            else if($row1)
+            {
+                    $error = "Success2";
+                    $uname = array('status'=>$error,'sellerId'=>$row1['id'],'seller_name'=>$row1['seller_name'],'city'=>$row2['city'],'pincode'=>$row2['pincode']);
                     echo json_encode($uname);
             }
             else

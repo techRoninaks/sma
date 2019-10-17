@@ -5,8 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class DataService {
-  baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma4/src/";
+  // baseUrl = "";
+  baseUrl = "http://roninaks.com/sma/";
 
   constructor( private http: HttpClient ) { }
   
@@ -553,17 +553,6 @@ addContact(data: Object){
 
 
   //checkout popup
-
-  getvariantInfor(id: any) {
-    let httpParams = new HttpParams()
-      .append("variantid", id);
-    return this.http.post(this.baseUrl + 'assets/api/variantinforcheckout.php', httpParams);
-  }
-  getaddress(data: any) {
-    let httpParams = new HttpParams()
-      .append("id", data);
-    return this.http.post(this.baseUrl + 'assets/api/addresscheckout.php', httpParams);
-  }
   getaddressType() {
     return this.http.get(this.baseUrl + 'assets/api/addresstypecheckout.php');
   }
@@ -786,11 +775,6 @@ getUser() {
   //    return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
   //  }
 
-  getOrderDetailsCheckout(id: any) {
-    let httpParams = new HttpParams()
-      .append("orderId", id);
-    return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
-  }
 getdynamicPriceAddProduct(prodid: any) {
     let httpParams = new HttpParams()
       .append("prodid", prodid);

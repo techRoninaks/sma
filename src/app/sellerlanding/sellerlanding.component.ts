@@ -53,6 +53,7 @@ export class SellerlandingComponent implements OnInit {
 		this.vidPlay = 1;
 		this.first = 1;
 		this.tokenFaq = { number_faq:0};
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "none";
 
 		document.getElementById("imgC").style.display = "none";
 		this.testimonal1 = 0;

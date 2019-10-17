@@ -23,7 +23,7 @@ export class TransactionComponent implements OnInit {
   constructor(private data: DataService, private route: ActivatedRoute, private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.setCookie("sellerId", 2);
+    // this.setCookie("sellerId", 2);
     this.tokenSel = this.getCookie("sellerId");
 
     this.route.queryParams.subscribe(params => {

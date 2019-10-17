@@ -33,12 +33,12 @@
         <!-- </div> -->
       </li>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control-custom" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-custom btn-outline-success my-2 my-sm-0" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button>
+        <input class="form-control-custom" type="search"(enter)="searchKeyLog()" id="searchField" placeholder="Search" aria-label="Search">
+        <button class="btn btn-custom btn-outline-success my-2 my-sm-0"(click)="searchKeyLog()" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button>
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
-          <a class="nav-link header-sell-with-us" routerLink="/signupseller">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding">Sell with Us <span class="sr-only">(current)</span></a>
         </li>
         <!-- <li class="nav-item active ml-auto">
           <a class="nav-link header-sell-with-us" routerLink="/category">Shop by Store <span class="sr-only">(current)</span></a>
@@ -65,7 +65,7 @@
       </ul>
     </div>
   </nav>
-  <div class="header-category-bar">
+  <div class="header-category-bar" id="sellerHeader">
     <div class="hamburger-div">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

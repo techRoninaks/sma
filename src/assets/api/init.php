@@ -5,8 +5,8 @@
 
     $db_name1 = "roninaks_smapr";
     $db_name2 = "roninaks_smausr";
-    $user_name = "root";
-    $user_pass = "";
+    $user_name = "roninaks";
+    $user_pass = "complexP@ssw0rd";
     $server_name = "localhost";
     $con1 = mysqli_connect($server_name,$user_name,$user_pass,$db_name1);
     mysqli_set_charset($con1,'utf8');
