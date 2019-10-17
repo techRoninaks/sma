@@ -97,7 +97,7 @@
 
     $varId=$variantInfo["variantId"];
     $varPrice=$variantInfo["price"];
-
+    // echo $varId;
 
     //get discount info
     $sqlDisc = "SELECT * FROM `offer` where prodid =  $prodId  ";    
@@ -117,6 +117,7 @@
     $price=$basePrice-$amountDisc;
     $basePriceTotal=$price*$productQuantity;
     $totalAmount=$basePriceTotal+$varPrice;
+    $totalAmount=round($totalAmount);
     //is image uploaded
 //     if($imageUploaded==null){
 //         $imageUploaded=0;
@@ -246,7 +247,7 @@
     $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);
     $rowCustOrder=mysqli_fetch_assoc($resCustOrder);
-    // echo $sqlOrder;
+    // echo $sqlCustOrder;
     // var_dump($rowOrder);
     $orderCustInfo=array('coid'=>$rowCustOrder["coid"]);
     

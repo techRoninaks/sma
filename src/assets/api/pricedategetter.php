@@ -39,6 +39,7 @@
     // $amount = $basePrice * ($disc / 100);
     $amountDisc=$basePrice*($disc/100);
     $price=$basePrice-$amountDisc;
+    $price=round($price);
     // $basePriceTotal=$price*$productQuantity;
     // $totalAmount=$basePriceTotal+$varPrice;
     echo json_encode($data = array('tPrice' => $price, 'dDate' => $deliveryDate));

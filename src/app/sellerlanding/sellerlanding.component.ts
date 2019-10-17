@@ -43,7 +43,7 @@ export class SellerlandingComponent implements OnInit {
 	total: any;
 	vidPlay: number;
 	first: number;
-	tokenFaq: object;
+	tokenFaq: any;
 	tokenFaqSubmit: object;
 
 	constructor(private router: Router, private data: DataService) { }
@@ -52,7 +52,8 @@ export class SellerlandingComponent implements OnInit {
 		// this.testimonal = 0;
 		this.vidPlay = 1;
 		this.first = 1;
-		this.tokenFaq = { number_faq:0};
+		// { number_faq:0};
+		this.tokenFaq = 0;
 		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "none";
 
 		document.getElementById("imgC").style.display = "none";
@@ -147,7 +148,7 @@ export class SellerlandingComponent implements OnInit {
 
 	}
 	faqMore(){
-		this.tokenFaq = { number_faq:1};
+		this.tokenFaq = 1;
 		this.data.getFaqSite(this.tokenFaq).subscribe(
 			data => {
 				this.faqSite = data;
@@ -301,11 +302,13 @@ export class SellerlandingComponent implements OnInit {
 		}
 	}
 	submitFaq() {
+		alert("Question submitted");
 		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
 		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
 		if (faqSearchInputLength >= 5) {
 			this.tokenFaqSubmit = {submitFaq: faqSearchInput};
 			this.data.getFaqSiteSubmit(this.tokenFaqSubmit).subscribe();
 		}
+		(<HTMLInputElement><any>document.getElementById("submitFaq")).value="";
 	}
 }

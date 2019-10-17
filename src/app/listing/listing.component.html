@@ -583,7 +583,7 @@
                 <div class="dvSub1">
                     <div class="dvProductSpec">
                         <div class="dvProdSpec1">
-                            <p>{{ dynamicDataVariants.value }} {{ dynamicDataVariant.name }}</p>
+                            <p>{{ dynamicDataVariant.name }} {{ dynamicDataVariant.value }}</p>
                         </div>
                         <div class="dvProdSpec2">
                             <!-- <p>Size : </p> -->
@@ -627,31 +627,14 @@
                     <div class="dvSavedAddr">
                         <p>SAVED ADDRESS</p>
                         <div class="dvCardAddrLeft" id="Deliver-Addr1">
-                            {{dynamicDataSecondAddress.contact_name}}
-                            {{dynamicDataSecondAddress.addr1}},
-                            {{dynamicDataSecondAddress.addr2}},
-                            {{dynamicDataSecondAddress.city}},
-                            {{dynamicDataSecondAddress.district}},
-                            {{dynamicDataSecondAddress.state}},
-                            {{dynamicDataSecondAddress.country}},
-                            {{dynamicDataSecondAddress.pincode}}
-                            <!-- {{dynamicDataSecondAddress.contact_number}} -->
-                            <!-- {{dynamicDataSecondAddress.contact_email}} -->
+                            {{ dynamicDataSecondAddress }}
                         </div>
                         <div class="btnCardAddrLeft">
                             <button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft"
                                 (click)="btnDeliverAddress1()">DELIVER TO THIS ADDRESS</button>
                         </div>
                         <div class="dvCardAddrRight" id="Deliver-Addr2">
-                            {{dynamicNewAddr.contact_name}},
-                            {{dynamicNewAddr.addr1}},
-                            {{dynamicNewAddr.addr2}},
-                            {{dynamicNewAddr.city}},
-                            {{dynamicNewAddr.district}},
-                            {{dynamicNewAddr.state}},
-                            {{dynamicNewAddr.country}},
-                            {{dynamicNewAddr.pincode}}
-
+                            {{ dynamicNewAddr }}
                         </div>
                         <div class="btnCardAddrRight">
                             <button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight"
@@ -769,10 +752,10 @@
                         <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
                     </div>
                     <div class="dvDate">
-                        <input type="Date" class="dateText" placeholder="Date">
+                        <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
                     </div>
                     <div class="dvApply">
-                        <button type="apply" class="btnApply btn-warning" id="btnApply">Apply</button>
+                        <button type="apply" class="btnApply btn-warning" id="btnApply" (click)= "applyRequest()">Apply</button>
                     </div>
                 </div>
                 <!-- GIFT NOTE -->
@@ -828,16 +811,18 @@
                             <!-- Product Price : {{dynamicDataCustomerOrder.basePrice}}<br> -->
                             Base Price : {{dynamicDataCustomerOrder.basePrice}}<br>
                             Shipping Price : {{dynamicDataCustomerOrder.shippingPrice}}<br>
+                            Discount : {{dynamicDataCustomerOrder.discount}}%<br>
                             Variant Price : {{dynamicDataCustomerOrder.variantPrice}}<br>
+                            Qty : {{ dynamicDataCustomerOrder.quantity }}<br>
                             Tax :{{ dynamicDataCustomerOrder.tax }}</p>
                         <h4>Total : {{dynamicDataCustomerOrder.totalPrice}}</h4>
                     </div>
                     <div class="btnCheckOut">
                         <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
-                            data-target="#checkOut" (click)="checkout()">CHECK OUT</button>
+                            data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
 
-                        <!-- <button type="btnRequest" class="btn btn-warning" data-toggle="modal" id="reqNowId"
-                            data-target="#requestOrder" (click)="submitPrice('requestOrder');">REQUEST ORDER</button> -->
+                        <button type="btnCheckOut" style="display: none;" class="btn btn-warning" data-toggle="modal" id="reqId"
+                            data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
                     </div>
                 </div>
 
