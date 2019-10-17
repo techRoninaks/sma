@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   cookie_uname: String;
   cookie_user_id: String;
   city: String;
+  pin: String;
   seller_name: String;
   cookie_seller_id: String;
   dynamicDataLocation :any ="";
@@ -124,11 +125,16 @@ export class LoginComponent implements OnInit {
                     this.cookie_uname = data['username'];
                     this.cookie_user_id = data['userid'];
                     this.city =data['city'];
+                    this.pin =data['pincode'];
+                    this.setCookie("isLoggedIn",1);
+                    this.setCookie("userCity",this.city);
+                    this.setCookie("userPin",this.pin);
                     this.setCookie("userName",this.cookie_uname);
                     this.setCookie("userId",this.cookie_user_id);
                     document.getElementById("headerLogin").innerText = this.cookie_uname as string;
                     document.getElementById("loginButton").innerText ="Log Out";
                     document.getElementById("locationlabel").innerText = this.city as string;
+                    document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/']);
                   }
                   else if(data['status'] =="Success2")
@@ -136,10 +142,16 @@ export class LoginComponent implements OnInit {
                     this.cookie_seller_id = data['sellerId'];
                     this.seller_name =data['seller_name'];
                     this.city =data['city'];
+                    this.pin =data['pincode'];
+                    this.setCookie("isLoggedIn",1);
+                    this.setCookie("sellerCity",this.city);
+                    this.setCookie("sellerPin",this.pin);
                     this.setCookie("sellerId",this.cookie_seller_id);
+                    this.setCookie("sellerName",this.seller_name);
                     document.getElementById("headerLogin").innerText = this.seller_name as string;
                     document.getElementById("loginButton").innerText ="Log Out";
                     document.getElementById("locationlabel").innerText = this.city as string;
+                    document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/dashboard']);
                   }
                   else

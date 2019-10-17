@@ -10,7 +10,7 @@
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
           <a class="nav-link">
             <div class="dropdown">
-                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;&nbsp;<label id="locationlabel">{{location}}</label></button>
+                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;<label id="locationlabel">{{location}}</label>&nbsp;<label id="pinlabel">{{pin}}</label></button>
                   <div class="dropdown-content" id="location_drop_down">
                   <li>
                     <div>
@@ -180,18 +180,26 @@
             <div class="modal-dialog">
               <div class="modal-content ">
                 <div class="modal-header ">
+                  <label style="color: white; margin-left:138px;"><h4>LOGIN / SIGNUP</h4></label>
                   <button type="button" class="close" data-dismiss="modal" (click)="dispNone();">&times;</button>
                 </div>
                   <div class="modal-body">
-                      <button type="button" routerLink="/login">
+                      <!-- <button type="button" routerLink="/login" style="margin-left: 126px;">
                           LOGIN TO SCOOPMYART
                       </button>
                       <br>
-                      <label>or</label>
+                      <label style="margin-left: 224px;">or</label>
                       <br>
-                      <button type="button" routerLink="/signup">
+                      <button type="button" routerLink="/signup" style="margin-left: 184px;">
                           SIGN UP
-                      </button>
+                      </button> -->
+                      <input type="email" placeholder="Email:" style="border: none; margin-left: 135px;">
+                      <br>
+                      <input type="password" placeholder="Password:" style="border: none; margin-left: 135px;">
+                      <br>
+                      <label style="margin-left: 135px;">forget password</label>
+                      <br>
+                      <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;<label>I agree to the terms</label> &nbsp;&nbsp; <button style="background: #EFBE24; border: none;" routerLink="/login" (click)=closePop()><label style="color: white">SIGNIN</label></button>
                   </div>
               </div>
             </div>
