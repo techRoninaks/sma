@@ -12,6 +12,12 @@ import { DataService } from '../data.service';
 
 export class HeaderComponent implements OnInit {
   document: any;
+  flag1: any="";
+  flag3: string;
+  flag4: string;
+  flag5: string;
+  flag6: string;
+  flag7: string;
 
   constructor(private cookieService: CookieService, private router: Router,private data: DataService) { 
   }
@@ -20,19 +26,63 @@ export class HeaderComponent implements OnInit {
   temp: String="Login";
   temp1: String="Logout";
   location: String="";
+  pin: String="";
   dynamicDataLocation :any ="";
   ngOnInit() {
-
-    if(! this.getCookie("userName") || !this.getCookie("sellerId"))
+    this.flag=this.getCookie("userName");
+    this.flag1=this.getCookie("sellerName");
+    this.flag3=this.getCookie("sellerCity");
+    this.flag4=this.getCookie("userCity");
+    this.flag5=this.getCookie("sellerPin");
+    this.flag6=this.getCookie("userPin");
+    if(this.getCookie("isLoggedIn") == "0" || this.getCookie("isLoggedIn")== null)
     {
         setTimeout(function(){ 
           document.getElementById('myModal-1').style.display="contents";
-        }, 120000);
+        }, 2000);
     }
-    this.flag=this.getCookie("userName");
-    if(this.flag){
+    else if(this.getCookie("isLoggedIn") == "1" ){
+      // exit(0);
+    }
+    else{
+      this.setCookie("isLoggedIn",null);
+      setTimeout(function(){ 
+        document.getElementById('myModal-1').style.display="contents";
+      }, 2000);
+    }
+
+    if(this.flag!= null)
+    {
       this.temp = this.flag;
-      this.document.getElementById("profilemenu").style.display="block";
+      if(this.temp == "")
+      {
+        document.getElementById("headerLogin").innerText = "Login";
+        document.getElementById("profilemenu").style.display="none";
+      }
+      else
+      {
+        document.getElementById("profilemenu").style.display="block";
+        document.getElementById("headerLogin").innerText = this.flag as string;
+        document.getElementById("loginButton").innerText ="Log Out";
+        document.getElementById("locationlabel").innerText = this.flag4 as string;
+        document.getElementById("pinlabel").innerText = this.flag6 as string;
+      }
+    }
+    else if(this.flag1!=null){
+      this.temp = this.flag1;
+      if(this.temp == "")
+      {
+        document.getElementById("headerLogin").innerText = "Login";
+        document.getElementById("profilemenu").style.display="none";
+      }
+      else
+      {
+        document.getElementById("profilemenu").style.display="block";
+        document.getElementById("headerLogin").innerText = this.flag1 as string;
+        document.getElementById("loginButton").innerText ="Log Out";
+        document.getElementById("locationlabel").innerText = this.flag3 as string;
+        document.getElementById("pinlabel").innerText = this.flag5 as string;
+      }
     }
   }
   dispNone(){
@@ -43,10 +93,16 @@ export class HeaderComponent implements OnInit {
     this.cookieService.delete('userId');
     this.cookieService.delete('sellerId');
     this.cookieService.delete('sellerName');
+    this.cookieService.delete('userCity');
+    this.cookieService.delete('userPin');
+    this.cookieService.delete('sellerPin');
+    this.cookieService.delete('sellerCity');
+    this.setCookie("isLoggedIn",0);
     document.getElementById("headerLogin").innerText ="Login";
     document.getElementById("loginButton").innerText ="";
     document.getElementById("profilemenu").style.display="none";
     document.getElementById("locationlabel").innerText = "";
+    document.getElementById("pinlabel").innerText = "";
     this.router.navigate(['/']);
   }
   searchKeyLog(){
@@ -59,7 +115,14 @@ export class HeaderComponent implements OnInit {
       document.getElementById("profilemenu").style.display="block";
     }
     else
+    {
+      document.getElementById("profilemenu").style.display="none";
       this.router.navigate(['/login']);
+    }
+
+  }
+  closePop(){
+   $("#myModal-1").modal('hide');
   }
   close(){
     document.getElementById("profilemenu").style.display="none";

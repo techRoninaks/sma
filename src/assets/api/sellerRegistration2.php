@@ -16,7 +16,7 @@
 
     $sql_query1 ="INSERT INTO `shop_details` (seller_id,shopname,shop_location,category_id) VALUES ('$seller_id ','$shop_name','$shop_address','$cat_id')";
     $result1 = mysqli_query($con2, $sql_query1);
-    $sql_query2 ="INSERT INTO `address` (addr1,city,state,pincode) VALUES ('$shop_address','$city','$state','$pin')";
+    $sql_query2 ="INSERT INTO `address` (addr1,city,state,pincode,mapping_id) VALUES ('$shop_address','$city','$state','$pin','$seller_id')";
     $result2 = mysqli_query($con2, $sql_query2);
    
     $sql_query4 ="SELECT `id`,`pincode` FROM `address` WHERE `addr1`= '$shop_address'";

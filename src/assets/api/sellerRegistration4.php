@@ -14,11 +14,12 @@
     $accnt_no = $_POST['accnt_no'];
     $ifsc = $_POST['ifsc'];
     $seller_id = $_POST['seller_id'];
+    $addr_type = "shipping address";
     
     $sql_query ="UPDATE `seller` SET account_no='$accnt_no',account_holder='$accnt_holder_name',account_type='$accnt_type',bankname='$bank_name',ifsc='$ifsc' WHERE id='$seller_id'";
     $result = mysqli_query($con2, $sql_query);
 
-    $sql_query1 ="INSERT INTO `address` (city,district,state,country,mapping_id) VALUES ('$ship_city','$district','$state','$country','$ifsc','$seller_id')";
+    $sql_query1 ="INSERT INTO `address` (city,district,state,country,addr_type) VALUES ('$ship_city','$district','$state','$country','$seller_id','$addr_type')";
     $result1 = mysqli_query($con2, $sql_query1);
 
     $sql_query2 ="SELECT `seller_name` FROM `seller` WHERE id='$seller_id'";

@@ -5,7 +5,8 @@
     $mobile = $_POST['phone'];
     $purpose = $_POST['purpose'];
     $remarks = $_POST['remarks'];
-    $sql_query = " INSERT INTO contact (name,phone,email,purpose,remarks) VALUES ('$name','$mobile','$email','$purpose','$remarks')";
+    $sendstatus ="unanswered";
+    $sql_query = " INSERT INTO contact (name,phone,email,purpose,note,status) VALUES ('$name','$mobile','$email','$purpose','$remarks','$sendstatus')";
     $result = mysqli_query($con2, $sql_query);
     if(! $result)
     {
