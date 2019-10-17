@@ -124,8 +124,8 @@
                 </div>
                 <div class="col-md-3">
                     <div style="padding-top: 8px;width: 430%;" align="right">
-                        <button class="btn btn-info btn-fill" onclick="toggleTabs('userForm')" id="btnAddSeller" href="signupseller.html" >Add New
-                            Seller +</button>
+                        <a class="btn btn-info btn-fill" onclick="toggleTabs('userForm')" id="btnAddSeller" href="roninaks.com/sma/signupseller" >Add New
+                            Seller +</a>
                     </div>
                 </div>
 
@@ -214,9 +214,9 @@
         sellerdetails();
         location_filter();
         category_filter();
-        planexpired_filter();
-        planexpiringsoon_filter();
-        pendingseller_filter();
+        //planexpired_filter();
+        //planexpiringsoon_filter();
+        //pendingseller_filter();
         deleteData();
         sellernotpopup();
        
@@ -309,28 +309,19 @@ function deleteCookie(cname) {
   return true;
 }
 
-// setCookie(id)
-//     {
-//      this.cookieService.set(id, value);
-//      }
-// getCookie(id)
-//     {
-//      return this.cookieService.get(id);
-//    }
-//  deleteCookie(id)
-//     {
-//      this.cookieService.delete(id);
-//    }
-
 
    function loginas_seller(id) {
+       var sellerName;
            
                 // if (responseData.data.success == "successful") {
-                //     console.log(responseData)
+                //     console.log(responseData);
                     alert('Login Successfully');
                     this.cookie_id = id;
+                    // this.cookie_sellerName=sellerName
                    this.setCookie("id",this.cookie_id);
-                   this.deleteCookie("sellerId");
+                   sellerName=this.getCookie("sellerName");
+                   window.location="http://roninaks.com/sma/dashboard";
+                //    this.deleteCookie("sellerId");
                 //    document.getElementById("loginButton").innerText ="Log Out";
                    // document.getElementById("profilemenu").style.display="block";
                 //    this.router.navigate(['/']);
@@ -358,12 +349,13 @@ function deleteCookie(cname) {
             success: function (responseData) {
                 // var optionUnions = "<option>LOCATION<option>";
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);  
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
+                        console.log(element);
                         Seller_name = Seller_name + buildHtml("sellercard", element);
-                        console.log(Seller_name);
+                        // console.log(Seller_name);
                         document.getElementById('cardHolder').innerHTML = Seller_name;
 
                     });
@@ -419,12 +411,12 @@ function deleteCookie(cname) {
             url: 'assets/php/allfilter.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    // console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
                         Seller_name = Seller_name + buildHtml("allSellers", element);
-                        console.log(Seller_name);
+                        // console.log(Seller_name);
                         document.getElementById('cardHolder').innerHTML = Seller_name;
 
                     });
@@ -445,7 +437,7 @@ function deleteCookie(cname) {
             success: function (responseData) {
                 var optionUnions = "<option>LOCATION<option>";
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
 
                     for (var i = 0; i < response.length; i++) {
@@ -474,7 +466,7 @@ function deleteCookie(cname) {
             url: 'assets/php/locationfilter.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
@@ -501,7 +493,7 @@ function deleteCookie(cname) {
             url: 'assets/php/categoryfilter.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
@@ -527,7 +519,7 @@ function deleteCookie(cname) {
             success: function (responseData) {
                 var optionUnions = "<option>CATEGORY<option>";
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
 
                     for (var i = 0; i < response.length; i++) {
@@ -547,7 +539,7 @@ function deleteCookie(cname) {
             url: 'assets/php/planexpired.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
@@ -572,7 +564,7 @@ function deleteCookie(cname) {
             url: 'assets/php/planexpsoon.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
@@ -597,12 +589,11 @@ function deleteCookie(cname) {
             url: 'assets/php/pendingsellers.php',
             success: function (responseData) {
                 if (responseData.data.success == "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     var response = responseData.data.result;
                     var Seller_name = "";
                     response.forEach(element => {
                         Seller_name = Seller_name + buildHtml("pendingSellerfilter", element);
-                        console.log(Seller_name);
                         document.getElementById('cardHolder').innerHTML = Seller_name;
 
                     });
@@ -625,7 +616,7 @@ function deleteCookie(cname) {
                 var y=responseData.data.response;
                 if (y == "successful") {
                     document.getElementById("verify_btn").innerText="Verified";
-                    console.log(responseData.data.response)
+                    console.log(responseData.data.response);
                     // alert("verified Successfully");
                     var response = responseData.data.result;
                     
@@ -773,7 +764,7 @@ function deleteCookie(cname) {
             url: 'assets/php/deleteseller.php',
             success: function (responseData) {
                 if (responseData== "successful") {
-                    console.log(responseData)
+                    console.log(responseData);
                     // var response = responseData.data.result;
                     
                 }
@@ -793,42 +784,40 @@ function deleteCookie(cname) {
                 htmlString = "<tr><td>" + data.state + "</td></tr>";
                 break;
             case "locationFilter":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify' id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller' href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller' onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/0"+data.id+".jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/"+data.id+".jpg' alt='...'/><div><button class='btn_Verify' id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller' onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "categoryFilter":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + " ><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/2.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + " ><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "planExpiredfilter":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "planexpSoonfilter":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/0" + data.id + ".jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/" + data.id + ".jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "pendingSellerfilter":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
 
                 break;
             case "allSellers":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/0" + data.id + ".jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/" + data.id + ".jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "basicSearch":
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
 
                 break;
             case "sellercard":
-                //  htmlString = "<div class='image'><img src='../src/assets/images/seller/"+data.id+"/01.jpg'</div><div class='author'><a href='#'><img class='avatar border-gray' src='../src/assets/images/seller/"+data.id+"/1.jpg' alt='...'/><div><p>Verify ?</p></div><h4 class='title'>"+data.seller_name+"<br /> <small>"+data.id+"</small></h4></a></div>";
-
-
-                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/01.jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/1.jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'  href'/dashboard.html' class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
+               
+                htmlString = "<div class='col-md-4'><div class='card card-user'  id='cardHolder2'> <div class='image'><img src='../src/assets/images/seller/" + data.id + "/0" + data.id + ".jpg'></div><div class='content'><div class='author'><a href='#''><img class='avatar border-gray' src='../src/assets/images/seller/" + data.id + "/" + data.id + ".jpg' alt='...'/><div><button class='btn_Verify'  id='verify_btn' onClick=" + "verification('" + data.id + "')>Verify ?</button></div><h4 class='title'>" + data.seller_name + "<br /><small>" + data.id + "</small></h4></a> </div></div><hr><div class='text-center'><button title='Login as seller'   class='btn btn-loginasseller' onClick=" + "loginas_seller('" + data.id + "')" + " ><i class='fa pe-7s-key'></i></button> <button title='Edit seller' href='#' class='btn btn-editseller'><i class='fa pe-7s-note'></i></button><button title='Delete seller' href='#'class='btn btn-deleteseller'  onClick=" + "deleteData('" + data.id + "')" + "><i class='fa pe-7s-trash'></i></button><button type='button' class='btn  btn-xs' onClick=" + "sendpopupdata('" + data.id + "')" + " data-toggle='modal' data-target='#myModal'><i class='fa pe-7s-mail'style='height: 33px;width: 35px;'></i></button><button title='Manage product' href='#' class='btn btn-manageproduct' id='manageproduct' onClick=" + "individualprod('" + data.id + "')" + "><i class='fa pe-7s-cart'></i></button></div></div></div>"
                 break;
             
-                case "individualproductlist":
+            case "individualproductlist":
                 
                 var tabHeader = "</div><table class='table table-hover table-striped'><thead><th>ID</th><th>Seller Name</th><th>Product Id</th><th>Product Name</th><th>Price</th>";
 
@@ -839,7 +828,8 @@ function deleteCookie(cname) {
                 + data.prod_name + "</td><td>" 
                 + data.prod_price + 
                 "</td><td><img src='assets/img/Tickmark.png'  id='img_tick_accept' style='height:35px;' onclick=" + "accept("+data.prod_id+")></td><td><img src='assets/img/crossmark.png'  id='img_cross_reject' style='height:25px;' onclick='rejectShow("+data.prod_id+")'><td><img src='assets/img/eye.png'  id='img_eye_view' style='height:25px;' 'href='/listing?shop_id=("+data.shop_id+")& prod_id=("+data.prod_id+").html';'></td></tr><tr id='"+data.prod_id+"' style='display:none;'><td><input type='text' id='"+data.prod_id+"input'></td><td><button type='submit' value='Submit' onclick='reject("+data.prod_id+");'>Submit</button>&emsp;<button type='cancel value='Cancel' >Cancel</button></td></tr>";
-        }
+                break;
+            }
         return htmlString;
     }
 </script>
