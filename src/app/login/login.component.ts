@@ -118,23 +118,29 @@ export class LoginComponent implements OnInit {
           data=>{
                   
                   console.log(data);
-                  if(data['status'] =="Success")
+                  if(data['status'] =="Success1")
                   {
                     alert('Login Successfully');
                     this.cookie_uname = data['username'];
                     this.cookie_user_id = data['userid'];
-                    this.cookie_seller_id = data['sellerId'];
                     this.city =data['city'];
-                    this.seller_name =data['seller_name'];
-                    this.setCookie("sellerId",this.cookie_seller_id);
                     this.setCookie("userName",this.cookie_uname);
                     this.setCookie("userId",this.cookie_user_id);
                     document.getElementById("headerLogin").innerText = this.cookie_uname as string;
+                    document.getElementById("loginButton").innerText ="Log Out";
+                    document.getElementById("locationlabel").innerText = this.city as string;
+                    this.router.navigate(['/']);
+                  }
+                  else if(data['status'] =="Success2")
+                  {
+                    this.cookie_seller_id = data['sellerId'];
+                    this.seller_name =data['seller_name'];
+                    this.city =data['city'];
+                    this.setCookie("sellerId",this.cookie_seller_id);
                     document.getElementById("headerLogin").innerText = this.seller_name as string;
                     document.getElementById("loginButton").innerText ="Log Out";
                     document.getElementById("locationlabel").innerText = this.city as string;
-                    
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/dashboard']);
                   }
                   else
                   {

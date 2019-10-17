@@ -509,10 +509,10 @@ export class ListingComponent implements OnInit {
 		this.data.getcheckoutFinal(this.getCookie("userId"), shippingtType).subscribe();
 		var options = {
 			"key": "rzp_test_dveDexCQKoGszl",
-			"amount": this.TotalPrice * 100, // 2000 paise = INR 20
+			"amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
 			"currency": "INR",
 			"name": "ScoopMyArt",
-			"description": "Product",
+			"description": this.dynamicDataProName.name,
 			"image": "favicon.ico", "handler": response => {
 				alert("Booking successful. Thank you!");
 			},
@@ -529,6 +529,8 @@ export class ListingComponent implements OnInit {
 				"ondismiss": function () { }
 			}
 		};
+		console.log(Math.round(this.TotalPrice));
+		console.log(options);
 		var rzp1 = new Razorpay(options); rzp1.open();
 	}
 
@@ -863,10 +865,10 @@ export class ListingComponent implements OnInit {
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
 			//sonu
-			this.data.getOrderDetailsCheckout(this.data).subscribe(data => {
+			this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
 				this.orderid = data["orderid"];
 				console.log(this.orderid);
-				this.data.getaddress(this.orderid).subscribe(
+				this.data.getaddress(this.userId).subscribe(
 					data => {
 						this.dynamicDataAddress = data;
 					},
@@ -878,7 +880,7 @@ export class ListingComponent implements OnInit {
 					},
 					error => console.error(error)
 				);
-				this.data.getuserCheckout(this.orderid).subscribe(
+				this.data.getuserCheckout(this.userId).subscribe(
 					data => {
 						this.dynamicDataUser = data;
 						this.Name = this.dynamicDataUser.Name;

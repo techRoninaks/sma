@@ -5,7 +5,7 @@ $success = "unsucessfull";
 // $customerid = $_POST["customerid"];
 $orderid = $_POST["orderid"];
 $data = array();
-$sql_query = "SELECT `orderid` FROM `purchase_order` WHERE `customerid` = `customerid` ORDER BY `customerid` DESC LIMIT 1";
+$sql_query = "SELECT `orderid` FROM `purchase_order` WHERE `customerid` = $orderid ORDER BY `customerid` DESC LIMIT 1";
 $result = mysqli_query($con2 , $sql_query);
 while($row=mysqli_fetch_assoc($result)){
     $data=array('orderid'=>$row["orderid"]);

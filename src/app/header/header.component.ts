@@ -49,6 +49,11 @@ export class HeaderComponent implements OnInit {
     document.getElementById("locationlabel").innerText = "";
     this.router.navigate(['/']);
   }
+  searchKeyLog(){
+   var searchkey = (<HTMLInputElement><any>document.getElementById('searchField')).value;
+  //  alert(searchkey);
+   this.router.navigate(['category'], { queryParams: { key: searchkey} });
+  }
   open(){
     if(this.getCookie("userName") || this.getCookie("sellerName")){
       document.getElementById("profilemenu").style.display="block";
