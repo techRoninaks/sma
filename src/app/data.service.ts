@@ -591,7 +591,7 @@ addContact(data: Object){
       .append("id", id);
     return this.http.post(this.baseUrl + 'assets/api/userCheckout.php', httpParams);
   }
-  getsaveNewAddress(data: any) {
+  getsaveNewAddress(data: any, orderid) {
     let httpParams = new HttpParams()
       .append("contact_name", data['contact_name'])
       .append("addr1", data['addr1'])
@@ -602,6 +602,7 @@ addContact(data: Object){
       .append("district",data['district'])
       .append("pincode", data['pincode'])
       .append("contact_email", data['contact_email'])
+      .append("mapping_id", orderid)
       .append("contact_number", data['contact_number']);
     console.log(httpParams);
     return this.http.post(this.baseUrl + 'assets/api/saveNewAddress.php', httpParams);
@@ -973,7 +974,8 @@ getdynamicPriceAddProduct(prodid: any) {
   
   getvariantInfor(id: any) {
      let httpParams = new HttpParams()
-      .append("prodid", id);
+      .append("userid",id["userid"])
+      .append("prodid", id["prodid"]);
      return this.http.post(this.baseUrl + 'assets/api/variantinforcheckout.php', httpParams);
    }
 
@@ -1000,9 +1002,9 @@ getCustomerOrderCheckout(orderid: any) {
     return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
    }
 
-getOrderDetailsCheckout(orderid: any) {
+getOrderDetailsCheckout(userid: any) {
      let httpParams = new HttpParams()
-      .append("orderid", orderid);
+      .append("userid", userid);
      return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
    }
   // deleteCart(id: number) {
