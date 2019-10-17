@@ -2,7 +2,7 @@
 <app-header></app-header>
 <!-- <app-test></app-test> -->
 <div class="g-signin2" data-onsuccess="onSignIn" style="display: none;"></div>
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActivate($event)"></router-outlet>
 <app-footer></app-footer>
 
 

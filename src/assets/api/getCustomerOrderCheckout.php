@@ -4,7 +4,7 @@
     $orderid = $_POST['orderid'] ;
     $data = array();
     // $count = 0;
-    $sql_query = "SELECT * FROM `customer_order` where orderid = orderid";
+    $sql_query = "SELECT * FROM `customer_order` where orderid = $orderid";
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
         $data=array(

@@ -9,8 +9,7 @@
     // echo $sql_query;
     $result = mysqli_query($con2 , $sql_query);
     while($row=mysqli_fetch_assoc($result)){
-        $data=array(
-        'id'=>$row["id"],'addr1'=>$row["addr1"],'addr2'=>$row["addr2"],'city'=>$row["city"],'district'=>$row["district"],'state'=>$row["state"],'country'=>$row["country"],'pincode'=>$row["pincode"],'contact_number'=>$row["contact_number"],'contact_name'=>$row["contact_name"]);
+        $data=$row["addr1"].", ".$row["addr2"].", ".$row["city"].", ".$row["district"].", ".$row["state"].", ".$row["country"].", ".$row["pincode"];
     }
     $result = array("success"=>$success,"result"=>$data);
     echo json_encode($data);

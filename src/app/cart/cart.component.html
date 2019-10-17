@@ -49,7 +49,10 @@
 				<div class="detailItemSeller">
 					<p>Seller:</p>
 				</div>
-				<p class="detailItemPrice"><i class="fa fa-rupee"></i>{{ dynamicData[item].basePrice }}</p>
+				<!-- <p class="detailItemPrice"><i class="fa fa-rupee"></i>{{ dynamicData[item].basePrice }}</p> -->
+				<p><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicDataPrice[item].totalPrice}}&nbsp;&nbsp;
+					<del><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicData[item].basePrice}}</del>
+				</p>
 			</div>
 			<div class="gridBodyButton">
 				<button class="btnBodyRemove" (click)="remove(dynamicData[item].productId)">REMOVE</button>

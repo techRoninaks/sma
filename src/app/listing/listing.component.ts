@@ -86,15 +86,18 @@ export class ListingComponent implements OnInit {
 	dynamicDataPurchaseReqCheckout: any ="";
 	dynamicMsgTitle: any ="";
 	TotalPrice: any;
+	variantValue: any;
 	Name: any;
 	email: any;
 	phone1: any;
-  imageUploaded:any;
+	imageUploaded:any;
+	variant:object;
 	tokenFaq: object;
 	uploadImageCount: any = [];
 	orderid: any = "";
 	dynamicDataCustomerOrder: any = "";
 	tokenFaqSubmit:object;
+	dateChoosen : any;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private elementRef: ElementRef, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
 			customername: ['', Validators.required],
@@ -430,12 +433,12 @@ export class ListingComponent implements OnInit {
 
 		this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
 
-		this.data.getsaveNewAddress(this.formAddress).subscribe();
+		this.data.getsaveNewAddress(this.formAddress, this.orderid).subscribe();
 		// this.id = "2";
 		this.data.getNewAddr(this.orderid).subscribe(
 			data => {
 				this.dynamicNewAddr = data;
-				console.log(this.dynamicNewAddr);
+				// console.log(this.dynamicNewAddr);
 			},
 			error => console.error(error)
 		);
@@ -859,8 +862,8 @@ export class ListingComponent implements OnInit {
 			else if (pickup == true) {
 				var deliveryOption = "pickup";
 			}
-
-			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			// shop_id: this.shopIdentity
+			this.tokenPrice = {image:image, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 			// image:image ,
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
@@ -874,7 +877,7 @@ export class ListingComponent implements OnInit {
 					},
 					error => console.error(error)
 				);
-				this.data.getprodCheckout(this.orderid).subscribe(
+				this.data.getprodCheckout(this.token).subscribe(
 					data => {
 						this.dynamicDataProName = data;
 					},
@@ -889,21 +892,23 @@ export class ListingComponent implements OnInit {
 					},
 					error => console.error(error)
 				);
-				this.data.getvariantInfor(this.orderid).subscribe(
-					data => {
-						this.dynamicDataVariant = data;
-						this.dynamicDataVariants = data;
-					},
-					error => console.error(error)
-				);
 				this.data.getCustomerOrderCheckout(this.orderid).subscribe(
 					data => {
 						this.dynamicDataCustomerOrder = data;
 						this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
-
 					},
 					error => console.error(error)
 				);
+				// console.log(this.variantValue);
+				this.variantValue={prodid:this.token,userid:this.userId}
+				this.data.getvariantInfor(this.variantValue).subscribe(
+					data => {
+						this.dynamicDataVariant = data;
+						// this.dynamicDataVariants = data;
+					},
+					error => console.error(error)
+				);
+
 				this.data.getAddressChange(this.userId).subscribe(
 					data => {
 						this.dynamicDataSecondAddress = data;
@@ -911,13 +916,7 @@ export class ListingComponent implements OnInit {
 					},
 					error => console.error(error)
 				);
-				this.data.getNewAddr(this.orderid).subscribe(
-					data => {
-						this.dynamicNewAddr = data;
-						console.log(this.dynamicNewAddr);
-					},
-					error => console.error(error)
-				);
+
 				this.data.getMsgTitleProCheckout(this.orderid).subscribe(
 					data => {
 						this.dynamicMsgTitle = data;
@@ -1039,6 +1038,24 @@ export class ListingComponent implements OnInit {
 				);
 			});
 		}
+	}
+
+
+	applyRequest(){
+		this.dateChoosen = (<HTMLInputElement><any>document.getElementById('reqDatePicker')).value;
+		if(this.dateChoosen != ""){
+			document.getElementById('checkOutId').style.display = "none";
+			document.getElementById('reqId').style.display = "block";
+		}
+		else{
+			alert('pick a date');
+		}
+
+	}
+
+	reqDateNow(){
+		
+		alert("your request has been sent");
 	}
 	submitCart() {
 		if (this.giftEnable == 0) {

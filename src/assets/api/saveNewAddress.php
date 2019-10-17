@@ -1,6 +1,6 @@
 <?php
   require "init.php";
-  $mapping_id = 3;
+  $mapping_id = $_POST['mapping_id'];
   $contact_name = $_POST['contact_name'];
   $addr1 = $_POST['addr1'];
   $addr2 = $_POST['addr2'];
