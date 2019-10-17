@@ -1,4 +1,4 @@
-<!-- <?php
+ <?php
    require 'init.php';  
    $id = $_POST["id"];
    $sql = "DELETE FROM seller WHERE id=$id";
@@ -11,4 +11,4 @@
     {
         echo"unsuccesful";
     }
-?> -->
+?> 
