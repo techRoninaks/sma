@@ -197,7 +197,7 @@
                 htmlString = "<tr><td>" + data.adminid + "</td><td>" + data.name + "</td><td>" + data.username + "</td><td>" + data.role_name + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.adminid + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick=" + "sendPopUpData('" + data.adminid + "','" + data.name + "','" + data.role + "')" + " data-toggle='modal' data-target='#myModal' >Change Roles</button></tr>";
                 break;
             case "roleTable":
-                htmlString = "<tr><td>     </td><td>" + data.id + "</td><td>" + data.role_name + "</td><td><img src='assets/img/delete-button.png' onclick=" + "selectrole('" + data.id + "','" + pageName + "');" + "></td></tr>";
+                htmlString = "<tr><td>     </td><td>" + data.id + "</td><td>" + data.role_name + "</td><td><img src='assets/img/tick-icon.png' onclick=" + "selectrole('" + data.id + "','" + pageName + "');" + "></td></tr>";
                 break;
         }
         return htmlString;
