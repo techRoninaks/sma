@@ -1249,7 +1249,22 @@ fieldset[disabled] .btn-neutral.active {
     padding: 12px 8px;
     vertical-align: middle;
 }
-
+#dragable tr
+{
+ padding:16px;
+ background-color:#f9f9f9;
+ border:1px dotted #ccc;
+ cursor:move;
+ margin-top:12px;
+}
+#dragable tr.ui-state-highlight
+{
+ padding:24px;
+ background-color:#ffffcc;
+ border:1px dotted #ccc;
+ cursor:move;
+ margin-top:12px;
+}
 .table > thead > tr > th {
     border-bottom-width: 1px;
     font-size: 12px;
@@ -3856,7 +3871,34 @@ fieldset[disabled] .btn-neutral.active {
         margin: 0;
     }
 }
-
+.select-editable {
+    position:relative;
+    background-color:white;
+    border:solid grey 1px;
+    width:120px;
+    height:18px;
+}
+.select-editable select {
+    position:absolute;
+    top:0px;
+    left:0px;
+    font-size:14px;
+    border:none;
+    width:120px;
+    margin:0;
+}
+.select-editable input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100px;
+    padding:1px;
+    font-size:12px;
+    border:none;
+}
+.select-editable select:focus, .select-editable input:focus {
+    outline:none;
+}
 @media (max-width: 991px) {
     .table-responsive {
         width: 100%;
