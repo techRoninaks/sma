@@ -711,6 +711,9 @@ function deleteCookie(cname) {
             },
         });
     }
+    function cancel(){
+         window.location = window.location.reload;
+    }
 
     function individualprod(id) {
        
@@ -827,7 +830,7 @@ function deleteCookie(cname) {
                 + data.prod_id + "</td><td>" 
                 + data.prod_name + "</td><td>" 
                 + data.prod_price + 
-                "</td><td><img src='assets/img/Tickmark.png'  id='img_tick_accept' style='height:35px;' onclick=" + "accept("+data.prod_id+")></td><td><img src='assets/img/crossmark.png'  id='img_cross_reject' style='height:25px;' onclick='rejectShow("+data.prod_id+")'><td><img src='assets/img/eye.png'  id='img_eye_view' style='height:25px;' 'href='/listing?shop_id=("+data.shop_id+")& prod_id=("+data.prod_id+").html';'></td></tr><tr id='"+data.prod_id+"' style='display:none;'><td><input type='text' id='"+data.prod_id+"input'></td><td><button type='submit' value='Submit' onclick='reject("+data.prod_id+");'>Submit</button>&emsp;<button type='cancel value='Cancel' >Cancel</button></td></tr>";
+                "</td><td><img src='assets/img/Tickmark.png'  id='img_tick_accept' style='height:35px;' onclick=" + "accept("+data.prod_id+")></td><td><img src='assets/img/crossmark.png'  id='img_cross_reject' style='height:25px;' onclick='rejectShow("+data.prod_id+")'><td><img src='assets/img/eye.png'  id='img_eye_view' style='height:25px;' 'href='/listing?shop_id=("+data.shop_id+")& prod_id=("+data.prod_id+").html';'></td></tr><tr id='"+data.prod_id+"' style='display:none;'><td><input type='text' id='"+data.prod_id+"input'></td><td><button type='submit' value='Submit' onclick='reject("+data.prod_id+");'>Submit</button>&emsp;<button type='cancel value='Cancel' onclick='cancel(); '>Cancel</button></td></tr>";
                 break;
             }
         return htmlString;
