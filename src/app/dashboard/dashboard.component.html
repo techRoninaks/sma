@@ -1,0 +1,157 @@
+<div class="dvBreadCrumbs">
+    <div class="dvCrumbs">
+        <p><a routerLink="dashboard">Home</a> > <a routerLink="dashboard" class="activePage">Dashboard</a></p>
+    </div>
+</div>
+<div class="dvShopHead">
+    <div class="dvHeading">
+        <img src=" assets/images/icons/resources (HP)-19.png">
+        <p class="head">{{shopHead}}</p>
+    </div>
+</div>
+<div class="dvStats">
+    <div class="dvGraph">
+        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [legend]="lineChartLegend" [chartType]="lineChartType">
+        </canvas>
+    </div>
+    <div class="dvSalesText">
+        <h6 class="Head">Total Sales</h6>
+        <div class="dvText">
+            <p class="subText activeText" (click)="toggleGraph('day')" id="day">Day </p>|
+            <p class="subText" (click)="toggleGraph('week')" id="week">Weekly </p>|
+            <p class="subText" (click)="toggleGraph('month')" id="month">Monthly </p>|
+            <p class="subText" (click)="toggleGraph('year')" id="year">Yearly</p>
+        </div>
+    </div>
+    <div class="dvRating">
+        <div class="rating">
+            <p class="subText">Ratings&emsp;:&emsp;{{countArray.rating}}</p>
+        </div>
+        <div class="dvStar">
+            <div class="dvStarRound">
+                <img src=" assets/icons/DB icons-02.png">
+            </div>
+        </div>
+        <div class="review">Reviews&emsp;:&emsp;{{countArray.review}}</div>
+    </div>
+</div>
+<div class="dvNums">
+    <div class="dvFollowBtn">
+        <div class="followIconParent">
+            <div class="followIcon">
+                <img src=" assets/icons/DB icons-03.png">
+            </div>
+        </div>
+        <div class="followText">
+            <p>Followers : {{countArray.followers}}</p>
+        </div>
+    </div>
+    <div class="dvShopBtn">
+        <div class="shopIconParent">
+            <div class="shopIcon">
+                <img src=" assets/icons/DB icons-04.png">
+            </div>
+        </div>
+        <div class="shopText">
+            <p>Shop Views : {{countArray.shopView}}</p>
+        </div>
+    </div>
+    <div class="dvProductBtn">
+        <div class="productIconParent">
+            <div class="productIcon">
+                <img src=" assets/icons/DB icons-04.png">
+            </div>
+        </div>
+        <div class="prodText">
+            <p>Product Views : {{purchaseArray.prodView}}</p>
+        </div>
+    </div>
+</div>  
+<div class="dvBtnSet">
+    <div class="dvBtnLeft">
+        <div class="dvTotal">
+            <div class="dvTIco">
+                <img src=" assets/icons/DB icons-05.png">
+            </div>
+            <div class="dvTText">
+                <p class="subText">Total Sales : {{purchaseArray.totSales}}</p>
+            </div>
+        </div>
+        <div class="dvActiv">
+            <div class="dvAIco">
+                <img src=" assets/icons/DB icons-06.png">
+            </div>
+            <div class="dvAText">
+                <p class="subText">Active Products : {{purchaseArray.actProd}}</p>
+            </div>
+        </div>
+        <div class="dvReturn">
+            <div class="dvRIco">
+                <img src=" assets/icons/DB icons-07.png">
+            </div>
+            <div class="dvRText">
+                <p class="subText">Returning Customers : {{countArray.retCustomers}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="dvBtnRight">
+        <div class="dvAddBtn">
+            <div class="btnText">
+                <p class="subText">Add New Product</p>
+            </div>
+            <div class="btnHolder">
+                <button class="btnAdd" routerLink='/addproduct'><i class="fa fa-plus plusIco"></i></button>
+            </div>
+        </div>
+        <div class="dvNotify">
+            <div class="notHead">
+                <div class="headNotify">
+                    <h6 class="notifyHead">NOTIFICATIONS</h6>
+                </div>
+                <div class="headSee">
+                    <p class="subText" routerLink='/messages'>See more</p>
+                </div>
+            </div>
+            <div class="notBody">
+                <p class="subText" routerLink='/messages'>{{notifyArray.quot}}&emsp;New Quotations</p>
+                <p class="subText" routerLink='/messages'>{{notifyArray.order}}&emsp;New Order</p>
+                <p class="subText" routerLink='/messages'>{{notifyArray.newMsg}}&emsp;New Messages</p>
+                <p class="subText" routerLink='/messages'>{{notifyArray.disc}}&emsp;New Complaints</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dvOrderPlans">
+    <div class="dvOrderBox">
+        <div class="dvOrder">
+            <div class="orderHead">
+                <div class="headertxt"><h6>ORDERS</h6></div>
+                <div class="seetxt"><h6 class="subText" routerLink="/orders">See More</h6></div>
+            </div>
+            <div class="orderDetails">
+                <p class="subText">Pending Confirmation&emsp;:&emsp;{{purchaseArray.pendingCount}}</p>
+                <p class="subText">Processing&emsp;:&emsp;{{purchaseArray.processCount}}</p>
+            </div>
+        </div>
+        <div class="dvTransaction">
+            <button class="btnTrans">TRANSACTION DETAILS&emsp;<i class="fa fa-external-link"></i></button>
+        </div>
+    </div>
+    <div class="dvDaysCount">
+        <div class="dayIcon">
+            <div class="dayIco">
+                <img src=" assets/icons/DB icons-08.png">
+            </div>
+        </div>
+        <div class="dayData">
+            <div class="data">
+                <h5>{{countArray.planExp}} Days</h5>
+                <p class="subText">Till your plan ends</p>
+            </div>
+            <div class="btnUpgrade">
+                <button class="btnUp">Upgrade Plan</button>
+            </div>
+        </div>
+    </div>
+</div>

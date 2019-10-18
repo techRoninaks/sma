@@ -1,0 +1,648 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
+.dvBreadCrumbs {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-areas: "dv-crumbs";
+	margin: 5% 10%;
+	width: auto;
+	border-bottom: 1px solid $smaLightGray;
+
+	.dvCrumbs {
+		p {
+			font-family: Bitter;
+			font-size: $SubText;
+		}
+		a {
+			font-family: Bitter;
+			color: $smaGray;
+			text-decoration: none;
+		}
+		.activePage {
+			color: $smaDarkGray;
+		}
+	}
+}
+
+.dvShopHead {
+	.dvHeading {
+		width: fit-content;
+		margin: auto;
+		text-align: center;
+		img {
+			position: relative;
+			top: 53px;
+		}
+		.head {
+			font-family: BitterBold;
+			font-size: $Header;
+		}
+	}
+}
+
+.dvStats {
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas: "dv-graph" "dv-sales" "dv-rating";
+	margin: 5% 10%;
+	width: auto;
+	background: $smaLightGray;
+
+	.dvGraph {
+		grid-area: dv-graph;
+	}
+	.dvSalesText {
+		grid-area: dv-sales;
+		padding: 10px;
+		.Head {
+			text-align: center;
+			font-family: BitterBold;
+			font-size: $SubHeader;
+		}
+		.dvText {
+			text-align: center;
+			color: $smaGray;
+			p {
+				display: inline;
+			}
+
+			.subText {
+				font-family: Bitter;
+				font-size: $SubText;
+				color: $smaGray;
+				cursor: pointer;
+			}
+			.activeText {
+				color: $smaYellow;
+			}
+		}
+	}
+	.dvRating {
+		grid-area: dv-rating;
+		display: grid;
+		grid-template-columns: 45% 10% 45%;
+		grid-template-areas: "dv-rate dv-star dv-review";
+		padding: 10px;
+		background: $smaGreen;
+		border-radius: 0 0 10px 10px;
+		height: 50px;
+
+		p {
+			margin: 0;
+		}
+		.rating {
+			grid-area: dv-rate;
+			text-align: end;
+			color: white;
+			font-family: BitterBold;
+		}
+		.dvStar {
+			grid-area: dv-star;
+			border-radius: 50%;
+			background: white;
+			width: fit-content;
+			padding: 10px;
+			margin: auto;
+			top: -23px;
+			position: relative;
+			box-shadow: 1px 1px 10px 1px $smaDarkGray;
+			.dvStarRound {
+				border-radius: 50%;
+				padding: 10px;
+				margin: auto;
+				background: $smaYellow;
+				width: fit-content;
+				margin: auto;
+
+				.roundImg {
+					position: relative;
+				}
+			}
+		}
+		.review {
+			grid-area: dv-review;
+			justify-self: initial;
+			color: white;
+			font-family: BitterBold;
+		}
+	}
+}
+.dvNums {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	grid-template-areas: "dv-follow-btn dv-shop-btn dv-prod-btn";
+	margin: 5% 10%;
+	width: auto;
+
+	.dvFollowBtn {
+		grid-area: dv-follow-btn;
+		grid-template-columns: auto auto;
+		grid-template-areas: "dv-icon dv-text";
+		display: grid;
+		.followIconParent {
+			grid-area: dv-icon;
+			background: white;
+			border-radius: 50%;
+			width: fit-content;
+			padding: 10px;
+			justify-self: end;
+			position: relative;
+			box-shadow: 1px 1px 10px 1px grey;
+			right: -7px;
+
+			.followIcon {
+				background: $smaYellow;
+				border-radius: 50%;
+			}
+		}
+
+		img {
+			position: relative;
+			padding: 10px;
+			top: 3px;
+		}
+		.followText {
+			grid-area: dv-text;
+			font-family: BitterBold;
+			font-size: $SubText;
+			color: $smaDarkGray;
+			margin: auto;
+			background: $smaGray;
+			padding: 10px;
+			border-bottom-right-radius: 50px;
+			border-top-right-radius: 50px;
+			box-shadow: 1px 1px 10px 1px $smaLightGray;
+			p {
+				margin: 0;
+			}
+		}
+	}
+	.dvShopBtn {
+		grid-area: dv-shop-btn;
+		grid-template-columns: auto auto;
+		grid-template-areas: "dv-icon dv-text";
+		display: grid;
+		.shopIconParent {
+			grid-area: dv-icon;
+			background: white;
+			border-radius: 50%;
+			width: fit-content;
+			padding: 10px;
+			justify-self: end;
+			position: relative;
+			box-shadow: 1px 1px 10px 1px grey;
+			right: -7px;
+			.shopIcon {
+				background: $smaYellow;
+				border-radius: 50%;
+				height: 64px;
+			}
+		}
+
+		img {
+			position: relative;
+			padding: 10px;
+			top: 8px;
+		}
+
+		.shopText {
+			grid-area: dv-text;
+			font-family: BitterBold;
+			font-size: $SubText;
+			color: $smaDarkGray;
+			margin: 17px 0;
+			background: $smaGray;
+			padding: 10px;
+			border-bottom-right-radius: 50px;
+			border-top-right-radius: 50px;
+			box-shadow: 1px 1px 10px 1px $smaLightGray;
+			p {
+				margin: 0;
+			}
+		}
+	}
+	.dvProductBtn {
+		grid-area: dv-prod-btn;
+		grid-template-columns: auto auto;
+		grid-template-areas: "dv-icon dv-text";
+		display: grid;
+		.productIconParent {
+			grid-area: dv-icon;
+			background: white;
+			border-radius: 50%;
+			width: fit-content;
+			padding: 10px;
+			justify-self: end;
+			position: relative;
+			box-shadow: 1px 1px 10px 1px grey;
+			right: -7px;
+			.productIcon {
+				background: $smaYellow;
+				border-radius: 50%;
+				height: 64px;
+			}
+		}
+
+		img {
+			position: relative;
+			padding: 10px;
+			top: 8px;
+		}
+		.prodText {
+			grid-area: dv-text;
+			font-family: BitterBold;
+			font-size: $SubText;
+			color: $smaDarkGray;
+			margin: 17px 0;
+			background: $smaGray;
+			padding: 10px;
+			border-bottom-right-radius: 50px;
+			border-top-right-radius: 50px;
+			box-shadow: 1px 1px 10px 1px $smaLightGray;
+			p {
+				margin: 0;
+			}
+		}
+	}
+}
+
+.dvBtnSet {
+	display: grid;
+	grid-template-columns: repeat(2, auto);
+	grid-template-areas: "dv-btn-left dv-btn-right";
+	margin: 5% 10%;
+	width: auto;
+
+	.dvBtnLeft {
+		grid-area: dv-btn-left;
+		grid-template-rows: repeat(3, auto);
+		grid-template-areas: "dv-total" "dv-activ" "dv-return";
+		display: grid;
+		padding: 5%;
+
+		.dvTotal {
+			grid-area: dv-total;
+			grid-template-columns: 40% auto;
+			grid-template-areas: "dv-T-Ico dv-T-Text";
+			display: grid;
+			padding: 10px;
+			background: $smaLightGray;
+
+			.dvTIco {
+				grid-area: dv-T-Ico;
+				justify-self: center;
+				width: fit-content;
+				text-align: center;
+				// width: 
+				img{
+					position: relative;
+					width: 50%;
+					top: 7px;
+				}
+			}
+			.dvTText {
+				grid-area: dv-T-Text;
+				margin: auto;
+				padding: 5%;
+				background: white;
+				box-shadow: 1px 1px 10px 1px $smaLightGray;
+				text-align: center;
+				border-radius: 15px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
+				
+				.subText {
+					font-family: BitterBold;
+					color: $smaDarkGray;
+					margin: 0;
+				}
+			}
+		}
+		.dvActiv {
+			grid-area: dv-activ;
+			grid-template-columns: 40% auto;
+			grid-template-areas: "dv-A-Ico dv-A-Text";
+			display: grid;
+			padding: 10px;
+			background: $smaLightGray;
+
+			.dvAIco {
+				grid-area: dv-A-Ico;
+				justify-self: center;
+				width: fit-content;
+				text-align: center;
+				img {
+					width: 51%;
+					top: 7px;
+					position: relative;
+				}
+			}
+			.dvAText {
+				grid-area: dv-A-Text;
+				margin: auto;
+				padding: 5%;
+				background: white;
+				box-shadow: 1px 1px 10px 1px $smaLightGray;
+				text-align: center;
+				border-radius: 15px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
+				
+				.subText {
+					font-family: BitterBold;
+					color: $smaDarkGray;
+					text-align: center;
+					margin: 0;
+				}
+			}
+		}
+		.dvReturn {
+			grid-area: dv-return;
+			grid-template-columns: 40% auto;
+			grid-template-areas: "dv-R-Ico dv-R-Text";
+			display: grid;
+			padding: 10px;
+			background: $smaLightGray;
+
+			.dvRIco {
+				grid-area: dv-R-Ico;
+				justify-self: center;
+				width: fit-content;
+				text-align: center;
+				img {
+					width: 51%;
+					top: 7px;
+					position: relative;
+				}
+			}
+			.dvRText {
+				grid-area: dv-R-Text;
+				margin: auto;
+				padding: 5%;
+				background: white;
+				box-shadow: 1px 1px 10px 1px $smaLightGray;
+				text-align: center;
+				border-radius: 15px;
+				box-shadow: 1px 1px 10px 1px lightgrey;				
+				.subText {
+					font-family: BitterBold;
+					color: $smaDarkGray;
+					text-align: center;
+					margin: 0;
+				}
+			}
+		}
+	}
+	.dvBtnRight {
+		grid-area: dv-btn-right;
+
+		display: grid;
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas: "add-new" "notify";
+
+		.dvAddBtn {
+			grid-area: add-new;
+			grid-template-columns: auto 20%;
+			grid-template-areas: "btn-txt btn-add";
+			display: grid;
+			padding: 10px;
+			.btnText {
+				grid-area: btn-txt;
+				margin: 20px 0 auto 0;
+				background: $smaGreen;
+				border-bottom-left-radius: 50px;
+				border-top-left-radius: 50px;
+				box-shadow: 1px 1px 10px grey;
+				padding: 10px;
+
+				.subText {
+					font-family: BitterBold;
+					text-align: center;
+					margin: 0;
+					color: white;
+				}
+			}
+			.btnHolder {
+				grid-area: btn-add;
+				margin-bottom: auto;
+				background: white;
+				text-align: center;
+				border-radius: 50%;
+				width: fit-content;
+				padding: 10px;
+				position: relative;
+				right: 10px;
+				box-shadow: 1px 1px 10px grey;
+
+				.btnAdd {
+					border: none;
+					background: $smaYellow;
+					border-radius: 50%;
+				}
+				.plusIco {
+					font-size: x-large;
+					color: white;
+					padding: 20px;
+				}
+			}
+		}
+		.dvNotify {
+			grid-area: notify;
+			grid-template-rows: 20% auto;
+			grid-template-areas: "n-head" "n-body";
+			display: grid;
+			box-shadow: 1px 1px 10px 1px lightgrey; 
+			.notHead {
+				grid-area: n-head;
+				background: $smaGreen;
+				display: grid;
+				grid-template-columns: auto auto;
+				grid-template-areas: "head-not head-see";
+				border-top-right-radius: 5px;
+				border-top-left-radius: 5px;
+				padding: 10px 10px 0 10px;
+				.headNotify {
+					grid-area: head-not;
+					margin: auto;
+
+					.notifyHead {
+						font-family: BitterBold;
+						float: left;
+					}
+				}
+				.headSee {
+					grid-area: head-see;
+					margin: auto;
+
+					.subText {
+						font-family: BitterBold;
+						float: right;
+					}
+				}
+			}
+			.notBody {
+				grid-area: n-body;
+				background: $smaLightGray;
+				padding: 20px;
+
+				.subText {
+					font-family: BitterBold;
+				}
+			}
+		}
+	}
+}
+
+.dvOrderPlans {
+	display: grid;
+	grid-template-columns: repeat(2, auto);
+	grid-template-areas: "dv-order dv-days";
+	margin: 5% 10%;
+	width: auto;
+
+	.dvOrderBox {
+		grid-area: dv-order;
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas: "dv-ord" "dv-trans";
+		display: grid;
+		width: fit-content;
+
+		.dvOrder {
+			grid-area: dv-ord;
+			grid-template-rows: 40% auto;
+			grid-template-areas: "ord-head" "ord-details";
+			display: grid;
+
+			.orderHead {
+				grid-area: ord-head;
+				background: $smaGreen;
+				grid-template-columns: repeat(2, auto);
+				grid-template-areas: "headertxt seetxt";
+				display: grid;
+
+				.headertxt {
+					grid-area: headertxt;
+					h6 {
+						font-family: BitterBold;
+						color: white;
+					}
+				}
+
+				.seetxt {
+					grid-area: seetxt;
+					.subText {
+						font-family: BitterBold;
+						color: white;
+					}
+				}
+			}
+			.orderDetails {
+				grid-area: ord-details;
+				.subText {
+					font-family: BitterBold;
+					color: $smaGray;
+				}
+			}
+		}
+		.dvTransaction {
+			grid-area: dv-trans;
+
+			.btnTrans {
+				color: white;
+				background: $smaYellow;
+				font-family: BitterBold;
+				border: none;
+			}
+		}
+	}
+	.dvDaysCount {
+		grid-area: dv-days;
+		grid-template-rows: 40% auto;
+		grid-template-areas: "dv-d-icon" "dv-d-count";
+		display: grid;
+
+		.dayIcon {
+			grid-area: dv-d-icon;
+			border-radius: 50%;
+			width: fit-content;
+			padding: 10px;
+
+			.dayIco {
+				border-radius: 50%;
+				background: $smaYellow;
+				img {
+					position: relative;
+				}
+			}
+		}
+		.dayData {
+			grid-area: dv-d-count;
+			.data {
+				h5 {
+					font-family: BitterBold;
+					color: $smaGreen;
+				}
+				.subText {
+					font-family: BitterBold;
+					color: $smaGray;
+				}
+			}
+			.btnUpgrade {
+				.btnUp {
+					color: white;
+					background: $smaGreen;
+					font-family: Bitter;
+					border: none;
+					// border-radius:
+				}
+			}
+		}
+	}
+}

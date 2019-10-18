@@ -1,0 +1,273 @@
+<!-- <div class="divMargin">
+  <ul class="breadcrumb">
+    <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
+  </ul>
+  <hr />
+  <div>
+    <button [routerLink]="[ '/categorylisting' ]" routerLinkActive="active">Go to Category Listing</button>
+  </div>
+</div> -->
+<div class="gridT">
+    <!-- shop background image -->
+    <div class=shopBg>
+        <img src="assets/images/shop/{{token}}/{{token}}_cover.jpg">
+        <div class="upload-btn-wrapper">
+            <button class="btn">Upload a file</button>
+            <input type="file" name="myfile" />
+        </div>
+    </div>
+    <!-- shop description -->
+    <div class="shopDescBio">
+        <div class="shopDesc">
+            <div class="shopLogo">
+                <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
+                <div class="upload-btn-wrapper">
+                    <button class="btn">Upload a file</button>
+                    <input type="file" name="myfile" />
+                </div>
+            </div>
+            <div class="shopInfo">
+                <div class="shopBtns">
+                    <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}"><button
+                            type="button">View as Customer</button></div>
+                    <div class="btnDescEdit"><button type="button">Edit</button></div>
+                </div>
+                <div class="shopDetails">
+                    <p class="sName">NAME:</p>
+                    <h4 class="sH4">{{shopData.shopName}}</h4>
+                    <p class="sAddress">ADDRESS:</p>
+                    <h5 class="sH5">{{selName}}</h5>
+                    <p class="sCategory">CATEGORY:</p>
+                    <!-- <a class="sCat">{{mostSelling[0].name}}</a> -->
+                </div>
+                <div class="shopPriv">
+                    <div class="privDesc">
+                        <p>ENABLE PRIVACY:</p>
+                    </div>
+                    <div class="privTog">
+                        <label class="switch">
+                            <input id="privacyTog" type="checkbox" (click)="privacy();">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="privDesc2">
+                        <p>Enable this option to hide seller details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shopBio">
+            <div class="btnVacation">
+                <div class="vac">Enable Vacation Mode
+                    <label class="switch">
+                        <input id="vacTog" type="checkbox" (click)="vacation();">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="dropVacation" id="vacationToggle" style="display: none">
+                    <div class="dvRadio">
+                        <input type="radio" name="vacation" (click)="vacationSave('until');" value="until"
+                            id="untilRadio"> Until Cancelled<br>
+                        <input type="radio" name="vacation" value="setDate" (click)="vacationSave('dateSet');"
+                            class="rDate" id="dateSetRadio"> Set Duration<br>
+
+                    </div>
+                    <div class="dvSetDate">
+                        <input type="date" id="startDate" class="sDate" value="{{shopData.vacStartDate}}">
+                        <input type="date" id="endDate" class="eDAte" value="{{shopData.vacEndDate}}">
+                    </div>
+                    <p style="font-size:14px;color:grey;">Select two dates then press checkbox</p>
+                </div>
+            </div>
+            <div class="bio">
+                <h3>Bio</h3>
+                <ng-container *ngIf="editBio==0; else bioEdit">
+                    <p class="bioTxt">{{shopData.descriptionShop}}</p>
+                    <div class="btnBioEdit">
+                        <button type="button" style="margin-left:70%; width:100px;" (click)="edit('bio');">EDIT</button>
+                    </div>
+                </ng-container>
+                <ng-template #bioEdit>
+                    <textarea class="bioTxtArea" id="bioTxtAr">{{shopData.descriptionShop}}</textarea>
+                    <div class="btnBioEdit">
+                        <button type="button" style="margin-left:70%; width:100px;"
+                            (click)="sub('bio');">SUBMIT</button>
+                    </div>
+                </ng-template>
+
+
+            </div>
+            <div class="btnAdvSetting" [routerLink]="['/shopsettings']" [queryParams]="{shop_id:shopData.shopId}">
+                <button type="button">ADVANCED SHOP SETTINGS</button>
+            </div>
+        </div>
+    </div>
+    <!-- shop products -->
+    <div class="shopProducts">
+        <div class="dvCatMain">
+            <div class="dvCard" *ngFor="let item of Object.keys(array12)" id="product{{array12[item].prodId}}">
+                <div class="dvCardBanner" [routerLink]="['/listing']"
+                    [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
+                    <img class="imgBanner" src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
+                    <div class="dvUndeliver">
+                        <div class="overlay" *ngIf="array12[item].status == 'inactive'"
+                            style="background-color: #FF1D25">INACTIVE</div>
+                        <div class="overlay" *ngIf="array12[item].status == 'active'" style="background-color: #009145">
+                            ACTIVE</div>
+                        <div class="overlay" *ngIf="array12[item].status == 'pending'"
+                            style="background-color: #333333">PENDING
+                        </div>
+                    </div>
+                </div>
+                <div class="dvCardName">
+                    <div class="dvProduct">
+                        <div class="dvProdName">
+                            <p>{{array12[item].prodName}}</p>
+                        </div>
+                        <div class="dvPrice">
+                            <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
+                        </div>
+                    </div>
+                    <div class="dvDetails">
+                        <p><label>Quantity Remaining:</label>{{array12[item].qty}}</p>
+                    </div>
+                    <div class="dvBtn">
+                        <button type="button" class="btnEditProduct" [routerLink]="['/addproduct']"
+                            [queryParams]="{prod_id:array12[item].prodId}">EDIT</button>
+                        <button type="button" class="btnDelete" (click)="delProduct(array12[item].prodId);"><img
+                                src="assets/icons/resources (MP)-21.png"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="newProd" [routerLink]="['/addproduct']" [queryParams]="{shop_id:shopData.shopId}">
+            <p>Add Product </p>
+        </div>
+        <button id="showAll">SHOW ALL</button>
+    </div>
+    <!-- shop policies -->
+    <div class="shopPolicies">
+        <div class="prodPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>PRODUCT POLICIES</h2>
+            <ng-container *ngIf="editProdPolicy==0; else prodPol">
+                <p class="policyTxt">{{dynamicData.prodPolicy}}</p>
+                <button id="editPolicy" (click)="edit('prod');">EDIT</button>
+            </ng-container>
+            <ng-template #prodPol>
+                <textarea class="policyTxtArea" id="prodTxtAr">{{dynamicData.prodPolicy}}</textarea>
+                <button id="editPolicy" (click)="sub('prod');">SUBMIT</button>
+            </ng-template>
+        </div>
+        <div class="shopPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>SHOP POLICIES</h2>
+            <ng-container *ngIf="editShopPolicy==0; else shopPol">
+                <p class="policyTxt">{{shopData.shopPolicy}}</p>
+                <button id="editPolicy" (click)="edit('shop');">EDIT</button>
+            </ng-container>
+            <ng-template #shopPol>
+                <textarea class="policyTxtArea" id="shopTxtAr">{{shopData.shopPolicy}}</textarea>
+                <button id="editPolicy" (click)="sub('shop');">SUBMIT</button>
+            </ng-template>
+        </div>
+        <div class="shipPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>SHIP POLICIES</h2>
+            <ng-container *ngIf="editShipPolicy==0; else shipPol">
+                <p class="policyTxt">{{dynamicData.shipPolicy}}</p>
+                <button id="editPolicy" (click)="edit('ship');">EDIT</button>
+            </ng-container>
+            <ng-template #shipPol>
+                <textarea class="policyTxtArea" id="shipTxtAr">{{dynamicData.shipPolicy}}</textarea>
+                <button id="editPolicy" (click)="sub('ship');">SUBMIT</button>
+            </ng-template>
+        </div>
+        <div class="retPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>RETURN POLICIES</h2>
+            <ng-container *ngIf="editReturnPolicy==0; else retPol">
+                <p class="policyTxt">{{dynamicData.returnPolicy}}</p>
+                <button id="editPolicy" (click)="edit('return');">EDIT</button>
+            </ng-container>
+            <ng-template #retPol>
+                <textarea class="policyTxtArea" id="retTxtAr">{{dynamicData.returnPolicy}}</textarea>
+                <button id="editPolicy" (click)="sub('return');">SUBMIT</button>
+            </ng-template>
+        </div>
+    </div>
+    <div class="divQuestion ">
+        <img src="assets/icons/resources (IL)-18.png">
+        <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
+        <div class="divCustomerQA">
+            <div class="divSA">
+                <form class="search">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox"id="searchFaq" (keyup)="filterFaq();">
+                    <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
+                </form>
+                <form class="askQ">
+                    <input type="text" placeholder="Ask a Question" name="search"id="submitFaq">
+                    <button type="submit"(click)="submitFaq()">Submit</button>
+                </form>
+            </div>
+            <div class="questionAnswer">
+                <div class="divQA" *ngFor=" let faq of Object.keys(faqShop)">
+                    <form class="qA">
+                        Q:<span class=" question ">{{faqShop[faq].question}}</span>?<br> A:
+                        <span class="answer " >{{faqShop[faq].answer}}</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="dvMore" id="moreFaq" (click)="faqMore()"><img src="assets/icons/resources (IL)-22.png"></div>
+    </div>
+</div>
+<!-- rfqPopup -->
+<div class="container" id="rfqPopupContainer " style="z-index: 10001; ">
+    <!-- <button type="button " class="btn btn-warning " data-toggle="modal " data-target="#rfqPopUP ">undeliverable</button> -->
+    <!-- Modal -->
+    <div class="modal fade" id="rfqPopup" role="dialog ">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-bod" style="padding:0 10% 0 10%;">
+                    <div>
+                        <form>
+                            <p>Shop Name</p>
+                            <input type="text "><br>
+                            <p>Location:</p>
+                            <select>
+                                <option>
+                                    b
+                                    <!-- {{}} -->
+                                </option>
+                            </select>
+
+                            <p>Note</p>
+                            <input type="text" id="noteRfq">
+                            <div class="dropdownRfq">
+                                <button onclick="rfqDropdown()" class="dropBtnRfq">Tag Products</button>
+                                <div id="rfqDropdown" class="dropdown-contentRfq ">
+                                    <input type="text" placeholder="Search.. " id="myInput " onkeyup="filterFunction()">
+                                    <a id="rfqDrp " href="#about ">About</a>
+                                    <a id="rfqDrp " href="#base ">Base</a>
+                                    <a id="rfqDrp " href="#blog ">Blog</a>
+                                    <a id="rfqDrp " href="#contact ">Contact</a>
+                                    <a id="rfqDrp " href="#custom ">Custom</a>
+                                    <a id="rfqDrp " href="#support ">Support</a>
+                                    <a id="rfqDrp " href="#tools ">Tools</a>
+                                </div>
+                            </div>
+
+
+                            <button class="btnRfq ">Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,47 +1,75 @@
 <div class="breadcrumb-layout">
     <ul class="breadcrumb">
-      <li><a href="#homepage">Home</a></li>
+      <li><a routerLink="/signupseller">Home</a></li>
       <li>Registration</li>
     </ul>
     <hr class="hrdiv">
   </div>
   
-  <div class="main-grid" id="main-grid">
+  <div class="main-grid" id="main-grid" *ngIf="prelim_stage">
       <div class="right-grid" id="right-grid">
               <div class="button-green-layout">
-                <!-- <ul> -->
                   <div><button class="button-green-login">REGISTRATION</button></div>
-                <!-- </ul> -->
               </div>
               <br>
         <div class="login-layout">
           <br>
             <div class="title">SCOOPMYART</div>
-          <form name="form1" action="#homepage" id="form1" onsubmit="validateForm()">
-            <!-- <ul> -->
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
               <div class="login-layout-2">
-                <div><input type="text" placeholder="Owner Name :"  size="40" class="text-input-style" id="fullname"></div>
-                <br>
-                <div><input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email">Verify</div>
-                <br>
-                <div><input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Verify</button></div>
-                <br>
-                <div><input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password"></div>
-                <br>
-                <div><input type="password" placeholder="Confirm Password  :" size="40" class="text-input-style" id="reg_conf_password"></div>
+                    <div>
+                      <input type="text" placeholder="Owner Name :"  size="40" class="text-input-style" id="fullname" formControlName="fullname">
+                      <div *ngIf="submitted && registrationForm.controls.fullname.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.fullname.errors.required">
+                            Name is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="email" placeholder="Email ID  :" size="40" class="text-input-style" id="reg_email" formControlName="reg_email">
+                      <div *ngIf="submitted && registrationForm.controls.reg_email.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_email.errors.required">
+                            Email is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no" formControlName="reg_mobile_no">
+                        <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
+                            <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
+                              Mobile no is required !
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">Verify</button>
+                    </div><br>
+                    <div>
+                      <input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password" formControlName="reg_password">
+                      <div *ngIf="submitted && registrationForm.controls.reg_password.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_password.errors.required">
+                            Password is required !
+                          </div>
+                      </div>
+                    </div><br>
+                    <div>
+                      <input type="password" placeholder="Confirm Password  :" size="40" class="text-input-style" id="reg_conf_password" formControlName="reg_conf_password">
+                      <div *ngIf="submitted && registrationForm.controls.reg_conf_password.errors" class="error validator-style">
+                          <div *ngIf="registrationForm.controls.reg_conf_password.errors.required">
+                            Password is required !
+                          </div>
+                      </div>
+                    </div>
               </div>
-
               <br>
               <div class="login-layout-3">
-                <div><input type="checkbox"> I read the agreement & not going back from success</div>
+                <div><input type="checkbox" formControlName="reg_checkbox"> I read the agreement & not going back from success</div>
                 <br>
               </div>
-              <div><button class="button-login" type="submit">CONTINUE</button></div>
-            <!-- </ul> -->
+              <div>
+                <button class="button-login" type="submit" [disabled]="!registrationForm.controls.reg_checkbox.valid">CONTINUE</button>
+              </div>
           </form>
         </div>
         <!-- verify pop-up -->
-        <!-- <ul> -->
             <div class="container" id="modalContainer" style="z-index: 10001;">
               <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -51,31 +79,72 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body" style="padding:0 10% 0 10%;">
-                            <div class="title-verify"><h3>Verify Mobile</h3></div>
-                            <div><input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:"></div>
-                            <br>
-                            <div><button class="button-otp" type="submit" >SEND OTP</button></div>
+                        <form [formGroup]="fpFormMobile">
+                            <div class="title-verify">
+                              <h3>Verify Mobile</h3>
+                            </div>
+                            <div>
+                              <input type="text" class="pop-up-input-style" placeholder="Enter Mobile No:" formControlName="fp_mobile_no" id="fp_mobile_no">
+                              <div *ngIf="submitted && fpFormMobile.controls.fp_mobile_no.errors" class="error validator-style">
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.errors.required">
+                                    Mobile no is required !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('minlength')">
+                                    Enter valid Mobile Number !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('maxlength')">
+                                    Enter valid Mobile Number !
+                                  </div>
+                                  <div *ngIf="fpFormMobile.controls.fp_mobile_no.hasError('pattern')">
+                                    Enter Only digits !
+                                  </div>
+                              </div>
+                            </div>
                             <br>
                             <div>
-                                <div><input type="text" class="pop-up-input-style" placeholder="Enter OTP:"></div>
-                                <br>
-                                <div><button class="button-submit" type="submit">SUBMIT</button></div>
-                                <br>
-                                <br>
+                              <button class="button-otp" type="submit" (click)="onSubmitSendOtp()">SEND OTP</button>
                             </div>
+                        </form>
+                            <br>
+                            <form [formGroup]="fpFormOtp">
+                              <div>
+                                  <div>
+                                    <input type="text" class="pop-up-input-style" placeholder="Enter OTP:" formControlName="fp_otp" id="fp_otp">
+                                    <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                                          Enter OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                                          Enter valid OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                                          Enter valid OTP !
+                                        </div>
+                                        <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                                          Enter Only digits !
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <br>
+                                  <div>
+                                    <button class="button-submit" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid">
+                                      SUBMIT
+                                    </button>
+                                  </div>
+                                  <br>
+                                  <br>
+                              </div>
+                            </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        <!-- </ul> -->
+        <!-- verify pop-up -->
       </div>
-    
-    
-    
+
       <div class="left-grid">
         <div class="side-layout">
-          <!-- <ul> -->
             <div class="left-grid-title-1">Lets Open</div>
             <div class="left-grid-title-2">The Door To Success</div>
             <br>
@@ -91,10 +160,414 @@
             <br>
             <div class="left-grid-feature"><img src="assets/images/img_cake.png" Height="10%" Width="10%">&emsp;Cakes &
               pastries</div>
-          <!-- </ul> -->
         </div>
       </div>
   </div>
+  <div class="background-div" *ngIf="stage_1">
+    <div class="header">
+        <div class="grid-header">
+          <div class="div-shop-det">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-32.png" class="img-style-line">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-22.png" class="img-style-1">
+          </div>
+          <div class="div-payment">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-29.png" class="img-style-2">
+          </div>
+          <div class="div-owner-info">
+              <img src="assets/icons/sellerReg/Registration(seller side)-28.png" class="img-style-3">
+          </div>
+          <div class="div-terms">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-30.png" class="img-style-4">
+          </div>
+          <div class="div-launch">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-31.png" class="img-style-5">
+          </div>
+          <div class="shop-det">
+            <label class="prime-label-style-stage-1">SHOP DETAILS</label>
+          </div>
+          <div class="owner-info">
+              <label class="label-style-stage-1">OWNER INFO</label>
+          </div>
+          <div class="payment">
+             <label class="label-style-stage-1">PAYMENT & SHIPPING</label>
+          </div>
+          <div class="terms">
+              <label class="label-style-stage-1">TERMS & CONDITIONS</label>
+          </div>
+          <div class="launch">
+              <label class="label-style-stage-1">LAUNCH</label>
+          </div>
+        </div>
+    </div>
+    <div class="div-body">
+      
+        <form [formGroup]="registrationFormStage1" (ngSubmit)="onSubmitStage2()" class="grid-form">
+          <div class="shop-name-label">
+              <label>Shop Name:</label>
+          </div>
+          <div class="shop-name">
+              <input type="text" formControlName="shop_name">
+              <div *ngIf="submitted && registrationFormStage1.controls.shop_name.errors" class="error validator-style">
+                  <div *ngIf="registrationFormStage1.controls.shop_name.errors.required">
+                    Shop Name is required !
+                  </div>
+              </div>
+          </div>
+          <div class="owner-name-label">
+            <label>Owner Name:</label>
+          </div>
+          <div class="owner-name">
+            <label>{{dynamicDataSeller.owner_name}}</label>
+          </div>
+          <div class="shop-addr-label">
+            <label>Shop Address:</label>
+          </div>
+          <div class="shop-addr">
+            <input type="text" style="width: 400px;" placeholder="Address:" formControlName="shop_address">
+            <div *ngIf="submitted && registrationFormStage1.controls.shop_address.errors" class="error validator-style">
+                <div *ngIf="registrationFormStage1.controls.shop_address.errors.required">
+                  Shop Address is required !
+                </div>
+            </div>
+          </div>
+          <div class="city">
+            <input type="text" placeholder="City:" formControlName="city">
+            <div *ngIf="submitted && registrationFormStage1.controls.city.errors" class="error validator-style">
+                <div *ngIf="registrationFormStage1.controls.city.errors.required">
+                  City is required !
+                </div>
+            </div>
+          </div>
+          <div class="state">
+            <input type="text" style="width: 400px;" placeholder="State:" formControlName="state">
+            <div *ngIf="submitted && registrationFormStage1.controls.state.errors" class="error validator-style">
+                <div *ngIf="registrationFormStage1.controls.state.errors.required">
+                  State is required !
+                </div>
+            </div>
+          </div>
+          <div class="pin">
+            <input type="text" placeholder="Pincode:" formControlName="pin">
+            <div *ngIf="submitted && registrationFormStage1.controls.pin.errors" class="error validator-style">
+                <div *ngIf="registrationFormStage1.controls.pin.errors.required">
+                  Pin is required !
+                </div>
+            </div>
+          </div>
+          <div class="main-cat-label">
+            <label>Main Category</label>
+          </div>
+          <div class="main-cat-drop-down">
+            <select formControlName="main_category">
+              <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
+            </select>
+            <div *ngIf="submitted && registrationFormStage1.controls.main_category.errors" class="error validator-style">
+                <div *ngIf="registrationFormStage1.controls.main_category.errors.required">
+                  Minimum one category is required !
+                </div>
+            </div>
+          </div>
+          <div class="main-cat-drop-down-1">
+            <select>
+              <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
+            </select>
+          </div>
+          <div class="main-cat-drop-down-2">
+            <select>
+              <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
+            </select>
+          </div>
+          <div class="contact-label">
+              <label>Contact No:</label>
+          </div>
+          <div class="contact">
+            <label>{{dynamicDataSeller.contact}}</label>
+          </div>
+          <div class="email-id-label">
+            <label>Email ID:</label>
+          </div>
+          <div class="email-id">
+            <label>{{dynamicDataSeller.email}}</label>
+          </div>
+          <div class="gst-no-label">
+            <label>GST No:</label>
+          </div>
+          <div class="gst-no">
+            <input type="text">
+          </div>
+          <div class="btn-next">
+            <button type="submit">NEXT</button>
+          </div>
+        </form>
     
-    
-  
+    </div>
+  </div>
+  <div class="background-div" *ngIf="stage_2">
+      <div class="header">
+          <div class="grid-header">
+            <div class="div-shop-det">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-32.png" class="img-style-line">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-22.png" class="img-style-1">
+            </div>
+            <div class="div-payment">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-29.png" class="img-style-2">
+            </div>
+            <div class="div-owner-info">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-33.png" class="img-style-line-2">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-24.png" class="img-style-3">
+            </div>
+            <div class="div-terms">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-30.png" class="img-style-4">
+            </div>
+            <div class="div-launch">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-31.png" class="img-style-5">
+            </div>
+            <div class="shop-det">
+              <label class="prime-label-style-stage-1">SHOP DETAILS</label>
+            </div>
+            <div class="owner-info">
+                <label class="label-style-stage-1">OWNER INFO</label>
+            </div>
+            <div class="payment">
+               <label class="label-style-stage-1">PAYMENT & SHIPPING</label>
+            </div>
+            <div class="terms">
+                <label class="label-style-stage-1">TERMS & CONDITIONS</label>
+            </div>
+            <div class="launch">
+                <label class="label-style-stage-1">LAUNCH</label>
+            </div>
+          </div>
+      </div>
+      <div class="div-body">
+        <div class="grid-stage-2">
+          <div class="owner-name-label">
+            <label>Owner Name:</label>
+          </div>
+          <div class="owner-name">
+            <label>{{dynamicDataSeller.owner_name}}</label>
+          </div>
+          <div class="email-label">
+            <label>Email:</label>
+          </div>
+          <div class="email">
+            <label>{{dynamicDataSeller.email}}</label>
+          </div>
+          <div class="contact-label">
+            <label>Contact No:</label>
+          </div>
+          <div class="contact">
+            <label>{{dynamicDataSeller.contact}}</label>
+          </div>
+          <div class="dob-label">
+            <label>Date of birth:</label>
+          </div>
+          <div class="dob">
+            <input type="date" id="seller-dob">
+          </div>
+          <div class="id-no-label">
+            <label>ID No:</label>
+          </div>
+          <div class="id-no">
+            <input type="text" id="id-no">
+          </div>
+          <div class="id-type-label">
+            <label>ID Type:</label>
+          </div>
+          <div class="id-drop-down">
+            <select id="id-type" >
+                <option *ngFor="let item of Object.keys(dynamicDataId)">{{dynamicDataId[item].id_card_type}}</option>
+            </select>
+          </div>
+          <div class="upload-label">
+            <label>Upload Scan:</label>
+          </div>
+          <div class="front">
+            <div class="front-body">
+              front
+            </div>
+          </div>
+          <div class="back">
+            <div class="front-body">
+              back
+            </div>
+          </div>
+          <div class="btn-next">
+            <button (click)="onSubmitStage3()">NEXT</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="background-div" *ngIf="stage_3">
+      <div class="header">
+          <div class="grid-header">
+            <div class="div-shop-det">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-32.png" class="img-style-line">
+              <img src="assets/icons/sellerReg/Registration(seller side)-34-22.png" class="img-style-1">
+            </div>
+            <div class="div-payment">
+                <img src="assets/icons/sellerReg/Registration(seller side)-24.png" class="img-style-2">
+            </div>
+            <div class="div-owner-info">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-33.png" class="img-style-line-2">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-24.png" class="img-style-3">
+            </div>
+            <div class="div-terms">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-30.png" class="img-style-4">
+            </div>
+            <div class="div-launch">
+                <img src="assets/icons/sellerReg/Registration(seller side)-34-31.png" class="img-style-5">
+            </div>
+            <div class="shop-det">
+              <label class="prime-label-style-stage-1">SHOP DETAILS</label>
+            </div>
+            <div class="owner-info">
+                <label class="label-style-stage-1">OWNER INFO</label>
+            </div>
+            <div class="payment">
+               <label class="label-style-stage-1">PAYMENT & SHIPPING</label>
+            </div>
+            <div class="terms">
+                <label class="label-style-stage-1">TERMS & CONDITIONS</label>
+            </div>
+            <div class="launch">
+                <label class="label-style-stage-1">LAUNCH</label>
+            </div>
+          </div>
+      </div>
+      <div class="div-body">
+        <label>SHIPPING</label>
+        <br>
+        <label>Shipping From: </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select id="ship-city">
+          <option>Choose City</option>
+          <option *ngFor="let item of Object.keys(dynamicDataLoc)">{{dynamicDataLoc[item].city}}</option>
+        </select>
+        <br>
+        <label>SHIPPING MODE:</label>
+        <br>
+        <input type="checkbox" class="shipping-mode" value="SHIPPING"> <label>SHIPPING</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+        <input type="checkbox" class="shipping-mode" value="HOME DELIVERY"> <label>HOME DELIVERY</label> &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" class="shipping-mode" value="CUSTOMER PICKUP"> <label>CUSTOMER PICKUP</label>
+        <br>
+        <label>SHIPPING TO</label>
+        <br>
+        <input type="checkbox" class="shipping-place" value="Worldwide"> <label>Worldwide</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+        <input type="checkbox" class="shipping-place" value="All over India"> <label>All over India</label> &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" class="shipping-place" value="All over kerala"> <label>All over kerala</label>
+        <br>
+        <input type="checkbox" class="shipping-place" value="Custom"> <label>Custom</label>
+        <br>
+        <label>Country: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <select id="country">
+            <option>Choose Country</option>
+            <option>India</option>
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label>State:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="state">
+              <option>Choose State</option>
+              <option>Kerala</option>
+            </select>
+            <br>
+            <label>District: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="district">
+                <option>Choose District</option>
+                <option>Ernakulam</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>City: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="city">
+                <option>Choose City</option>
+                <option>Kochi</option>
+            </select>
+            <br>
+            <br>
+            <label>PAYMENT</label>
+            <br>
+            <br>
+            <label>Account holder Name: </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <label>Bank Name: </label>
+            <br>
+            <input type="text" id="accnt-holder-name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="bank-name">
+            <br>
+            <label>Account Type: </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>Branch: </label>
+            <br>
+            <input type="text" id="accnt-type">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="branch">
+            <br>
+            <label>Account Number: </label> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>IFSC Code: </label>
+            <br>
+            <input type="text" id="accnt-no">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="ifsc">
+            <br>
+            <label>Confirm Account Number: </label>
+            <br>
+            <input type="text" id="conf-accnt-no">
+            <br>
+            <button (click)="onSubmitStage4()">NEXT</button>
+            <br>
+      </div>
+  </div>
+  <div class="background-div" *ngIf="stage_4">
+    <div class="header">
+      <div class="grid-header">
+        <div class="div-shop-det">
+          <img src="assets/icons/sellerReg/Registration(seller side)-34-32.png" class="img-style-line">
+          <img src="assets/icons/sellerReg/Registration(seller side)-34-22.png" class="img-style-1">
+        </div>
+        <div class="div-payment">
+            <img src="assets/icons/sellerReg/Registration(seller side)-24.png" class="img-style-2">
+        </div>
+        <div class="div-owner-info">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-33.png" class="img-style-line-2">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-24.png" class="img-style-3">
+        </div>
+        <div class="div-terms">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-25.png" class="img-style-4">
+        </div>
+        <div class="div-launch">
+            <img src="assets/icons/sellerReg/Registration(seller side)-34-26.png" class="img-style-5">
+        </div>
+        <div class="shop-det">
+          <label class="prime-label-style-stage-1">SHOP DETAILS</label>
+        </div>
+        <div class="owner-info">
+            <label class="label-style-stage-1">OWNER INFO</label>
+        </div>
+        <div class="payment">
+           <label class="label-style-stage-1">PAYMENT & SHIPPING</label>
+        </div>
+        <div class="terms">
+            <label class="label-style-stage-1">TERMS & CONDITIONS</label>
+        </div>
+        <div class="launch">
+            <label class="label-style-stage-1">LAUNCH</label>
+        </div>
+      </div>
+    </div>
+    <div class="div-body">
+      <h3>WELCOME</h3>
+      <br>
+      <label>WELCOME MESSAGE</label>
+      <br>
+      <p>Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
+        Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
+        Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
+        Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
+      </p>
+      <br>
+      <label>Call/ Email us for any assistance</label>
+      <br>
+      <button (click)="sellerSignIn();">MY DASHBOARD</button>
+    </div>
+  </div>

@@ -1,0 +1,40 @@
+<div class="dvMsgCat">
+    <div class="dvMsgBtn">
+        <button class="btnMsg">ALL&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+    </div>
+    <div class="dvMsgBtn">
+        <button class="btnMsg">RFQ&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+    </div>
+    <div class="dvMsgBtn">
+        <button class="btnMsg">COMPLAINTS&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+    </div>
+    <div class="dvMsgBtn">
+        <button class="btnMsg">MESSAGES&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+    </div>
+    <div class="dvMsgBtn">
+        <button class="btnMsg">NOTIFICATION&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+    </div>
+</div>
+<div class="dvMsgBody">
+    <div class="dvMsgSidebar">
+        <div class="dvSrchBar">
+            <input type="text" placeholder="Search..."><i class="fa fa-search srchBtn" aria-hidden="true"></i>
+        </div>
+        <div class="dvSortBar">
+            <i class="fa fa-sort">&emsp;Sort by&emsp;</i>
+            <select>
+                <option>--- Select ---</option>
+                <option></option>
+                <option>Date</option>
+                <option>Name</option>
+                <option>Type</option>
+            </select>
+            <button><i class="fa fa-arrow-up"></i></button>
+            <button><i class="fa fa-arrow-down"></i></button>
+        </div>
+    </div>
+    <div class="dvMsgContent">
+        <div class="dvMsgUi"></div>
+        <div class="dvMsgInput"></div>
+    </div>
+</div>

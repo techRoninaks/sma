@@ -30,22 +30,33 @@ export class HomeComponent implements OnInit {
   trendingProducts: Object;
   newProducts: Object;
   offerProducts: Object;
+
   constructor( private cookieService: CookieService, private router: Router, private data : DataService ) { }
 
   ngOnInit() {
     //Data service beg
+    this.setCookie("pin","676552");
     this.data.getPageData("home").subscribe(data => {
       this.pageData = data;
-      this.data.getTrending(this.pageData["no_of_tagged_products"],1).subscribe(dataTrend =>{
-        this.trendingProducts = dataTrend["data"];
-        this.array12 = dataTrend["data"];
-      })
-      this.data.getNewArrivals(this.pageData["no_of_tagged_products"],1).subscribe(dataNew =>{
-        this.newProducts = dataNew["data"];
-      })
-      this.data.getTopOffers(this.pageData["no_of_tagged_products"],1).subscribe(dataOffer =>{
-        this.offerProducts = dataOffer["data"];
-      })
+      var pincode = this.getCookie("pin");
+      
+      this.data.loadTrending(pincode, this.pageData["no_of_tagged_products"], 1, this.getCookie("filterSet"), this.getCookie("SortSet")).subscribe(trendingData=>{
+
+        this.trendingProducts = trendingData["data"];
+        this.array12 = trendingData["data"];
+
+      });
+      this.data.loadOfferProd(pincode, this.pageData["no_of_tagged_products"], 1, this.getCookie("filterSet"),this.getCookie("SortSet")).subscribe(offerData=>{
+
+        this.offerProducts = offerData["data"];
+  
+      });
+      this.data.loadNewProd(pincode, this.pageData["no_of_tagged_products"], 1, this.getCookie("filterSet"),this.getCookie("SortSet")).subscribe(newData=>{
+
+        this.newProducts = newData["data"];
+        
+      });
+      
     })
     //Data service ends
 
@@ -62,7 +73,8 @@ export class HomeComponent implements OnInit {
       }
     }
     this.showSlides(slideIndex);
-
+    this.setCookie("filterSet",JSON.stringify({"filterCount": "", "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"","minPrice":"","maxPrice":"","shipMethod":""}));
+    this.setCookie("SortSet", JSON.stringify({"priceLH": "", "priceHL": "", "latest": "", "popular": "", "processLH": "", "processHL": "", "shipLH": "", "shipHL": ""}));
   }
   // Carousel
   plusSlides(n) {
@@ -114,22 +126,23 @@ export class HomeComponent implements OnInit {
       case "tag-3": this.array12 = this.newProducts;
                     break;
     }
-    console.log(typeof(this.array12));
+
   }
 
   seeMore() {
     var activeTag = document.getElementsByClassName("activeTag");
     var id = activeTag[0].id;
-    
+    var catQuery = '';
+
     switch (id) {
-      case "tag-1": this.setCookie("sold", "max");
+      case "tag-1": this.router.navigate(['/category'], { queryParams : { cat_id: 'trending_products'} });
         break;
-      case "tag-2": this.setCookie("discounts", "available");
+      case "tag-2": this.router.navigate(['/category'], { queryParams : { cat_id: 'offer_products'} });
         break;
-      case "tag-3": this.setCookie("arrivals", "date");
+      case "tag-3": this.router.navigate(['/category'], { queryParams : { cat_id: 'new_products'} });
         break;
     }
-    this.router.navigate(['/category']);
+   
   }
 
   readMore(id) {
@@ -162,4 +175,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  addToFilterArray(cname,cdata){
+    var filterJson = this.getCookie("filterSet");
+    var jsonParsed = JSON.parse(filterJson);
+    jsonParsed[cname] = cdata;
+    this.setCookie("filterSet",JSON.stringify(jsonParsed));
+  }
 }

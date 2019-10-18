@@ -1,0 +1,841 @@
+@mixin sm {
+	@media (max-width: 1050px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
+.breadcrumb {
+	padding: 10px 10px;
+	list-style: none;
+	background-color: transparent;
+	li + li:before {
+		padding: 8px;
+		color: gray;
+		content: ">";
+	}
+	li {
+		display: inline;
+		font-size: 1rem;
+		a {
+			color: gray;
+			text-decoration: none;
+			&:hover {
+				color: red;
+			}
+		}
+	}
+	text-decoration: none;
+}
+
+.divMargin {
+	margin: 5%;
+	width: auto;
+}
+
+// main
+.gridT {
+	display: grid;
+	grid-template-columns: auto;
+	width: 100%;
+	grid-template-rows: repeat(6, auto);
+	grid-template-areas: "shopBg" "shopDescBio" "shopProducts" "shopShipment" "shopPolicies" "shopQuestion";
+	.shopBg {
+		grid-area: shopBg;
+		// background-color: whitesmoke;
+		height: auto;
+		width: 100%;
+		img {
+			width: 100%;
+		}
+		.upload-btn-wrapper {
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			top: -90%;
+			right: -90%;
+			width: auto;
+		}
+
+		.btn {
+			border: 2px solid gray;
+			color: gray;
+			width: auto;
+			cursor: pointer;
+			background-color: white;
+			// padding: 8px 20px;
+			// border-radius: 8px;
+			font-size: 16px;
+			font-weight: bold;
+			&:hover {
+				background-color: whitesmoke;
+			}
+		}
+
+		.upload-btn-wrapper input[type="file"] {
+			font-size: 50px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			opacity: 0;
+		}
+	}
+	.shopDescBio {
+		grid-area: shopDescBio;
+		background-color: white;
+		height: auto;
+		// margin-top: 5%;
+		display: grid;
+		grid-template-columns: 49% 2% 49%;
+		grid-template-rows: auto;
+		grid-template-areas: "shopDesc . shopBio";
+		@include sm {
+			display: grid;
+			grid-template-columns: Auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas: "shopDesc" "shopBio";
+		}
+		.shopDesc {
+			grid-area: shopDesc;
+			background-color: whitesmoke;
+			padding-bottom: 15%;
+			margin-bottom: 5%;
+			display: grid;
+			grid-template-columns: 25% 25% 50%;
+			grid-template-rows: auto;
+			grid-template-areas: ". shopLogo shopInfo";
+			.shopLogo {
+				margin-block-start: 43%;
+				grid-area: shopLogo;
+				img {
+					width: 100%;
+					height: 10rem;
+					object-fit: contain;
+				}
+				.upload-btn-wrapper {
+					position: relative;
+					overflow: hidden;
+					display: inline-block;
+				}
+
+				.btn {
+					border: 2px solid gray;
+					color: gray;
+					width: 100%;
+					cursor: pointer;
+					background-color: white;
+					// padding: 8px 20px;
+					// border-radius: 8px;
+					font-size: 16px;
+					font-weight: bold;
+					&:hover {
+						background-color: whitesmoke;
+					}
+				}
+
+				.upload-btn-wrapper input[type="file"] {
+					font-size: 50px;
+					position: absolute;
+					left: 0;
+					top: 0;
+					opacity: 0;
+				}
+			}
+			.shopInfo {
+				grid-area: shopInfo;
+				margin-block-start: 25%;
+				.shopBtns {
+					display: grid;
+					grid-template-columns: auto auto;
+					grid-template-rows: auto;
+					grid-template-areas: "btnCustomer btnDescEdit";
+					margin-bottom: 10px;
+					margin-top: -10px;
+
+					.btnCustomer {
+						grid-area: btnCustomer;
+						margin-left: 100px;
+						button {
+							background-color: #efbe24;
+							color: white;
+						}
+					}
+					.btnDescEdit {
+						grid-area: btnDescEdit;
+						button {
+							background-color: #efbe24;
+							color: white;
+						}
+					}
+				}
+				.shopDetails {
+					display: grid;
+					grid-template-columns: 50% 50%;
+					grid-template-rows: repeat(3, auto);
+					grid-template-areas:
+						"sName sH4"
+						"sAddress sH5"
+						"sCategory sA";
+					.sName {
+						grid-area: sName;
+					}
+					.sAddress {
+						grid-area: sAddress;
+					}
+					.sCategory {
+						grid-area: sCategory;
+					}
+					.sH5 {
+						grid-area: sH5;
+					}
+					.sH6 {
+						grid-area: sH4;
+					}
+					.sA {
+						grid-area: sA;
+					}
+				}
+				.shopPriv {
+					display: grid;
+					grid-template-columns: 40% auto;
+					grid-template-rows: repeat(2, auto);
+					grid-template-areas:
+						"privDesc privTog"
+						"privDesc2 privDesc2";
+					.privDesc {
+						grid-area: privDesc;
+					}
+					.privTog {
+						grid-area: privTog;
+						.switch {
+							position: relative;
+							display: inline-block;
+							width: 55px;
+							height: 27px;
+						}
+
+						.switch input {
+							opacity: 0;
+							width: 0;
+							height: 0;
+						}
+
+						.slider {
+							position: absolute;
+							cursor: pointer;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							background-color: #ccc;
+							-webkit-transition: 0.4s;
+							transition: 0.4s;
+						}
+
+						.slider:before {
+							position: absolute;
+							content: "";
+							height: 20px;
+							width: 20px;
+							left: 4px;
+							bottom: 3px;
+							background-color: white;
+							-webkit-transition: 0.4s;
+							transition: 0.4s;
+						}
+
+						input:checked + .slider {
+							background-color: white;
+							border: 1px solid;
+						}
+
+						input:focus + .slider {
+							box-shadow: 0 0 1px #efbe24;
+						}
+
+						input:checked + .slider:before {
+							-webkit-transform: translateX(26px);
+							-ms-transform: translateX(26px);
+							transform: translateX(26px);
+							background-color: #efbe24;
+						}
+
+						/* Rounded sliders */
+						.slider.round {
+							border-radius: 27px;
+						}
+
+						.slider.round:before {
+							border-radius: 50%;
+						}
+					}
+					.privDesc2 {
+						grid-area: privDesc2;
+						p {
+							font-size: 14px;
+							color: grey;
+						}
+					}
+				}
+			}
+		}
+		.shopBio {
+			grid-area: shopBio;
+			background-color: whitesmoke;
+			height: auto;
+			.btnVacation {
+				.vac {
+					background-color: #efbe24;
+					color: white;
+					width: 250px;
+					padding: 10px 0px 0px 10px;
+
+					justify-self: center;
+					align-self: center;
+					// width:auto;
+					.switch {
+						position: relative;
+						display: inline-block;
+						width: 55px;
+						height: 27px;
+					}
+
+					.switch input {
+						opacity: 0;
+						width: 0;
+						height: 0;
+					}
+
+					.slider {
+						position: absolute;
+						cursor: pointer;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background-color: #ccc;
+						-webkit-transition: 0.4s;
+						transition: 0.4s;
+					}
+
+					.slider:before {
+						position: absolute;
+						content: "";
+						height: 20px;
+						width: 20px;
+						left: 4px;
+						bottom: 3px;
+						background-color: white;
+						-webkit-transition: 0.4s;
+						transition: 0.4s;
+					}
+
+					input:checked + .slider {
+						background-color: white;
+						border: 1px solid;
+					}
+
+					input:focus + .slider {
+						box-shadow: 0 0 1px #efbe24;
+					}
+
+					input:checked + .slider:before {
+						-webkit-transform: translateX(26px);
+						-ms-transform: translateX(26px);
+						transform: translateX(26px);
+						background-color: #efbe24;
+					}
+
+					/* Rounded sliders */
+					.slider.round {
+						border-radius: 27px;
+					}
+
+					.slider.round:before {
+						border-radius: 50%;
+					}
+				}
+				.dropVacation {
+					height: auto;
+					visibility: visible !important;
+					position: absolute;
+					background-color: #dbdbdb;
+					width: auto;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					text-align: center;
+					z-index: 1;
+					.dvSetDate {
+						display: grid;
+						grid-template-rows: auto;
+						grid-template-columns: 50% 50%;
+						grid-template-areas: "sDate eDate";
+						width: auto;
+						// .rDate{
+						// 	grid-area:rDate;
+						// 	height: 50px;
+						// }
+						.sDate {
+							grid-area: sDate;
+						}
+						.eDate {
+							grid-area: eDate;
+						}
+					}
+				}
+			}
+			.bio {
+				background-color: white;
+				margin-left: 5%;
+				margin-right: 5%;
+				width: auto;
+				h3 {
+					margin-block-start: 5%;
+					margin-inline-start: 5%;
+				}
+				.bioTxt {
+					margin-inline-end: 10%;
+					margin-inline-start: 5%;
+				}
+				button {
+					background-color: #efbe24;
+					color: white;
+				}
+				.bioTxtArea {
+					margin-inline-end: 10%;
+					margin-inline-start: 5%;
+					width: 90%;
+					height: 15rem;
+				}
+			}
+			.btnAdvSetting {
+				button {
+					background-color: #efbe24;
+					color: white;
+				}
+			}
+		}
+	}
+	.shopProducts {
+		grid-area: shopProducts;
+		height: auto;
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
+		width: auto;
+		grid-template-areas: "cat" "prod";
+
+		#showAll {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			background-color: #efbe24;
+			color: white;
+		}
+		.dvCatMain {
+			grid-template-columns: repeat(3, 1fr);
+			display: grid;
+			width: auto;
+			margin: 5%;
+			grid-area: cat;
+			.dvCard {
+				padding: 6%;
+				border-bottom: 1px solid lightgray;
+				.dvCardBanner {
+					cursor: pointer;
+					padding: 10px;
+					background: lightgray;
+					box-shadow: 1px 1px 10px 0px gray;
+					border-radius: 5px;
+					.imgBanner {
+						width: inherit;
+					}
+					.dvUndeliver {
+						position: relative;
+						.overlay {
+							position: absolute;
+							bottom: 0;
+							background: rgb(0, 0, 0);
+							background: rgba(0, 0, 0, 0.5);
+							/* Black see-through */
+							color: #f1f1f1;
+							width: 100%;
+							transition: 0.5s ease;
+							opacity: 0;
+							color: white;
+							font-size: 20px;
+							font-family: Bitter;
+							padding: 20px;
+							text-align: center;
+						}
+					}
+					.dvUndeliver:hover .overlay {
+						opacity: 0.8;
+					}
+					// @include lg {
+					// 	.overlay {
+					// 		font-size: 14px !important;
+					// 		padding: 10px !important;
+					// 	}
+					// }
+				}
+				.dvCardName {
+					cursor: default;
+					display: grid;
+					grid-template-columns: auto auto;
+					grid-template-rows: repeat(2, auto);
+					grid-template-areas:
+						"prod prod"
+						"details btns";
+					.dvProduct {
+						grid-area: prod;
+						grid-template-columns: auto auto;
+						grid-template-areas: "dv-prod dv-rate";
+						display: grid;
+						padding-top: 20px;
+						.dvProdName {
+							grid-area: dv-prod;
+							p {
+								font-size: 24px;
+								font-family: BitterBold;
+								margin: auto;
+							}
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+							// @include lg {
+							// 	p {
+							// 		font-size: 16px;
+							// 	}
+							// }
+						}
+						.dvPrice {
+							grid-area: dv-rate;
+							// color: yellow;
+							// font-size: 25px;
+							justify-self: end;
+							width: fit-content;
+							p {
+								font-size: 24px;
+								font-family: BitterBold;
+							}
+							// @include sm-lesser {
+							// 	p {
+							// 		font-size: 20px;
+							// 	}
+							// }
+							// @include lg {
+							// 	.fa {
+							// 		font-size: 16px;
+							// 	}
+							// }
+						}
+					}
+					.dvDetails {
+						grid-area: details;
+						padding-top: 10px;
+						p {
+							font-family: Bitter;
+							font-size: 20px;
+							text-align: justify;
+							line-height: 1.3;
+							color: darkgray;
+						}
+						// @include sm-lesser {
+						// 	p {
+						// 		font-size: $SubText;
+						// 	}
+						// }
+						// @include lg {
+						// 	p {
+						// 		font-size: 16px;
+						// 	}
+						// }
+					}
+					.dvBtn {
+						grid-area: btns;
+						grid-template-columns: auto auto;
+						grid-template-areas: "btnEditProduct btnDelete";
+						display: grid;
+
+						.btnEditProduct {
+							grid-area: btnEditProduct;
+							width: 50px;
+							height: 30px;
+							color: white;
+							background-color: #009145;
+						}
+						.btnDelete {
+							grid-area: btnDelete;
+							width: 50px;
+							height: 30px;
+							background-color: #ff1d25;
+						}
+					}
+				}
+			}
+		}
+		.newProd {
+			grid-area: prod;
+			display: grid;
+			width: auto;
+			margin: 0% 5% 5% 5%;
+			height: 300px;
+			width: 300px;
+			cursor: pointer;
+			background-color: whitesmoke;
+			border-bottom: #009145 50px solid;
+			grid-template-columns: auto;
+			grid-template-rows: 103% auto;
+			grid-template-areas: ".""textP";
+
+			p {
+				grid-area: textP;
+				justify-self: center;
+				color: white;
+				font-size: 24px;
+			}
+		}
+	}
+
+	.shopPolicies {
+		grid-area: shopPolicies;
+		height: auto;
+		width: 100%;
+		margin-top: 5%;
+		box-sizing: border-box;
+		#editPolicy {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			background-color: #efbe24;
+			color: white;
+		}
+		.prodPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				z-index: 0;
+				transform: translate(0rem, 2rem);
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			.policyTxt {
+				text-align: justify;
+				text-align: center;
+			}
+			.policyTxtArea {
+				text-align: justify;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+			}
+		}
+		.shopPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				transform: translate(0rem, 2rem);
+				z-index: 0;
+				// position: absolute;
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			.policyTxt {
+				text-align: justify;
+				text-align: center;
+			}
+			.policyTxtArea {
+				text-align: justify;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+			}
+		}
+		.shipPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				transform: translate(0rem, 2rem);
+				z-index: 0;
+				// position: absolute;
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			.policyTxt {
+				text-align: justify;
+				text-align: center;
+			}
+			.policyTxtArea {
+				text-align: justify;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+			}
+		}
+		.retPolicy {
+			// margin: 0rem 1rem 5rem 1rem;
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				transform: translate(0rem, 2rem);
+				z-index: 0;
+				// position: absolute;
+			}
+			h2 {
+				text-align: center;
+				//   position: absolute;
+				transform: translate(0px, -0.45em);
+				z-index: 1;
+			}
+			.policyTxt {
+				text-align: justify;
+				text-align: center;
+			}
+			.policyTxtArea {
+				text-align: justify;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 50%;
+			}
+		}
+	}
+	.divQuestion {
+		margin: 5% 5% auto 5%;
+		width: Auto;
+		grid-area: shopQuestion;
+		height: 300px;
+		margin-block-end: 2%;
+		box-sizing: border-box;
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 550px;
+			height: 50px;
+			z-index: 0;
+			transform: translate(0rem, 2rem);
+		}
+		h2 {
+			text-align: center;
+			transform: translate(0px, -0.45em);
+			z-index: 1;
+		}
+		.divCustomerQA {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto;
+			grid-template-areas: "divSA ";
+			// "divQA "
+			.divSA {
+				grid-area: divSA;
+				display: grid;
+				grid-template-columns: 5% 45% 45% 5%;
+				grid-template-rows: auto;
+				grid-template-areas: ". search askQ .";
+				.search {
+					grid-area: search;
+					.searchBox {
+						transform: translate(0rem, -0.3rem);
+					}
+					button {
+						img {
+							height: 25px;
+							width: 20px;
+							transform: translate(0rem, 0rem);
+						}
+					}
+				}
+				.askQ {
+					grid-area: askQ;
+					margin-left: 20%;
+				}
+			}
+			.questionAnswer {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				margin: 0px 40px 0px 40px;
+				width: auto;
+				.divQA {
+					// grid-area: divQA;
+					// height: auto;
+					width: 50%;
+					// display: grid;
+					// grid-template-columns: repeat(2, auto);
+					// float: left;
+					.qA {
+						margin-left: 10%;
+						// .question {
+						// }
+						// .answer {
+						// }
+					}
+				}
+			}
+		}
+		.dvMore {
+			img {
+				height: 50px;
+				width: 50px;
+			}
+			&:hover{
+				cursor:pointer;
+			}
+		}
+	}
+}

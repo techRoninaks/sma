@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Light Bootstrap Dashboard by Creative Tim</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script src="assets/js/scripts.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Reject Order</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h5><strong>User Id : </strong><p id="userIdPopup"></p></h5>
+
+                        <h5><strong>Prodid Id : </strong><p id="prodidPopup"></p></h5>
+                        
+                        <h5><strong>Refund Message</strong></h5>
+                        <p style="display:inline;color:red;">*</p>
+                                    <input type="text" class="form-control" placeholder="Refund message" id="refundMsg"required><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" style="display:inline" class="btn btn-secondary-outline"
+                        value="Submit"onclick="refundPopup();" id="submitbutton">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg" w3-include-html="sidenav.html">
+
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="http://www.creative-tim.com" class="simple-text">
+                        Creative Tim
+                    </a>
+                </div>
+
+                <ul class="nav">
+                    <li>
+                        <a href="customerproduct.html">
+                            <i class="pe-7s-graph"></i>
+                            <p>Product Orders</p>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Customer Product Management</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <!-- <a href="#">
+                                    <div style="padding-top: 8px;width: 1500%;" align="right">
+                                        <p>Log out</p>
+                                    </div>
+                                </a> -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Product Orders</h4>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div style="padding-top: 10px;left: 6px;">
+                                        <button class="btn btn-info btn-fill" onclick="toggleTabs('all')"
+                                            id="btnAll">All</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('readyforshipping')"
+                                            id="btnReadyforshipping">Ready For Shipping</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('shipped')"
+                                            id="btnShipped">Shipped</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('delivered')"
+                                            id="btnDelivered">Delivered</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('return')"
+                                            id="btnReturn">Return</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('complined')"
+                                            id="btnComplined">Complined</button>
+                                        <button class="btn btn-fill" onclick="toggleTabs('notrated')"
+                                            id="btnNotrated">Not Rated</button>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="content table-responsive table-full-width" id="allTable">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="readyforshippingTable"
+                                style="display:none;">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="shippedTable"
+                                style="display:none;">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="deliveredTable"
+                                style="display:none;">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="returnTable"
+                                style="display:none;">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="complinedTable"
+                                style="display:none;">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="notratedTable"
+                                style="display:none;">
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="footer" w3-include-html="footer.html">
+                </footer>
+
+
+            </div>
+        </div>
+</body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+<script type="text/javascript">
+    var userId = "";
+    showData();
+    function toggleTabs(type) {
+        switch (type) {
+            case "all":
+                $('#btnAll').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').show();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').hide();
+                $('#deliveredTable').hide();
+                $('#returnTable').hide();
+                $('#complinedTable').hide();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+
+                break;
+            case "readyforshipping":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').show();
+                $('#shippedTable').hide();
+                $('#deliveredTable').hide();
+                $('#returnTable').hide();
+                $('#complinedTable').hide();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+
+                break;
+            case "shipped":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').show();
+                $('#deliveredTable').hide();
+                $('#returnTable').hide();
+                $('#complinedTable').hide();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+                break;
+            case "delivered":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').hide();
+                $('#deliveredTable').show();
+                $('#returnTable').hide();
+                $('#complinedTable').hide();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+                break;
+            case "return":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').hide();
+                $('#deliveredTable').hide();
+                $('#returnTable').show();
+                $('#complinedTable').hide();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+                break;
+            case "complined":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-info btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').hide();
+                $('#deliveredTable').hide();
+                $('#returnTable').hide();
+                $('#complinedTable').show();
+                $('#notratedTable').hide();
+                $('#deletecustomerTable').hide();
+                break;
+            case "notrated":
+                $('#btnAll').removeClass().addClass('btn btn-fill');
+                $('#btnReadyforshipping').removeClass().addClass('btn btn-fill');
+                $('#btnShipped').removeClass().addClass('btn btn-fill');
+                $('#btnDelivered').removeClass().addClass('btn btn-fill');
+                $('#btnReturn').removeClass().addClass('btn btn-fill');
+                $('#btnComplined').removeClass().addClass('btn btn-fill');
+                $('#btnNotrated').removeClass().addClass('btn btn-info btn-fill');
+                $('#btndeletecustomer').removeClass().addClass('btn btn-fill');
+
+                $('#allTable').hide();
+                $('#readyforshippingTable').hide();
+                $('#shippedTable').hide();
+                $('#deliveredTable').hide();
+                $('#returnTable').hide();
+                $('#complinedTable').hide();
+                $('#notratedTable').show();
+                $('#deletecustomerTable').hide();
+                break;
+
+        }
+    }
+
+    function sendPopUpData(id,prodid){
+        var id = id;
+        var prodid = prodid;
+        document.getElementById("userIdPopup").innerHTML = id;
+        document.getElementById("prodidPopup").innerHTML = prodid;
+    }
+    function refundPopup(){
+        var msg = document.getElementById("refundMsg").value;
+        var id = document.getElementById("userIdPopup").innerHTML;
+        var prodid = document.getElementById("prodidPopup").innerHTML;
+        window.location.reload();
+        $.ajax({
+            type: 'POST',
+            data: { userid: id, message : msg,prodid : prodid},
+            url: 'assets/php/refund.php',
+            success: function (responseData) {
+                if (responseData.status == "successful") {
+                   console.log("Success");
+                   
+                } else {
+                    demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            }
+        });
+        
+    }
+
+
+    function showData() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'assets/php/purchase_order.php',
+            success: function (responseData) {
+                if (responseData.success == "successful") {
+                    var response = responseData.result;
+                    var tabHeader = "<table class='table table-hover table-striped'><thead><th>User ID</th><th>User Name</th><th>Name</th><th>email</th><th>Mobile</th><th>Order Status</th><th>Product ID</th><th>Product Name</th><th>Product Discription</th></thead>";
+                    var tabAll = tabHeader;
+                    var tabReadyforshipping = tabHeader;
+                    var tabShipped = tabHeader;
+                    var tabDelivered = tabHeader;
+                    var tabReturn = tabHeader;
+                    var tabComplined = tabHeader;
+                   
+                    responseData.result.forEach(element => {
+                        var ordertyp = (element.order_status).toLowerCase();
+                        tabAll = tabAll + buildHtml("allTable", element);
+
+                        if ((ordertyp).indexOf("ready for shipping") != -1) {
+                            tabReadyforshipping = tabReadyforshipping + buildHtml("readyforshippingTable", element);
+                        }
+                        if ((ordertyp).indexOf("shipped") != -1) {
+                            tabShipped = tabShipped + buildHtml("shippedTable", element);
+                        }
+                        if ((ordertyp).indexOf("delivered") != -1) {
+                            tabDelivered = tabDelivered + buildHtml("deliveredTable", element);
+                        }
+                        if ((ordertyp).indexOf("return") != -1) {
+                            tabReturn = tabReturn + buildHtml("returnTable", element);
+                        }
+                        if ((ordertyp).indexOf("complined") != -1) {
+                            tabComplined = tabComplined + buildHtml("complinedTable", element);
+                        }
+                    });
+                    var tabNotrated = tabHeader;
+                    responseData.result.forEach(element => {
+                        var israted = (element.is_rated);
+                        if ((israted) == "0") {
+                            tabNotrated = tabNotrated + buildHtml("notratedTable", element);
+                        }
+                    });
+                    tabAll = tabAll + "</table>";
+                    tabReadyforshipping = tabReadyforshipping + "</table>";
+                    tabShipped = tabShipped + "</table>";
+                    tabDelivered = tabDelivered + "</table>";
+                    tabReturn = tabReturn + "</table>";
+                    tabComplined = tabComplined + "</table>";
+                    tabNotrated = tabNotrated + "</table>";
+
+                    document.getElementById("allTable").innerHTML = tabAll;
+                    document.getElementById("readyforshippingTable").innerHTML = tabReadyforshipping;
+                    document.getElementById("shippedTable").innerHTML = tabShipped;
+                    document.getElementById("deliveredTable").innerHTML = tabDelivered;
+                    document.getElementById("returnTable").innerHTML = tabReturn;
+                    document.getElementById("complinedTable").innerHTML = tabComplined;
+                    document.getElementById("notratedTable").innerHTML = tabNotrated;
+                } else {
+                    demo.showNotification('top', 'center', 'Something went wrong', 4);
+                    // window.location = window.location.origin;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                demo.showNotification('top', 'center', 'Something went wrong', 4);
+                // window.location = window.location.origin;
+            }
+        });
+    }
+
+    function buildHtml(template, data) {
+        console.log(template);
+        var htmlString = "";
+        var pageName = "user";
+        switch (template) {
+            case "allTable":
+
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td></tr>";
+                break;
+            case "readyforshippingTable":
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick="+"sendPopUpData('"+data.id+"','"+data.prodid+"')"+" data-toggle='modal' data-target='#myModal'>Reject Order</button>";
+                break;
+            case "shippedTable":
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "')";
+                break;
+            case "deliveredTable":
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "');";
+                break;
+            case "returnTable":
+            htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick="+"sendPopUpData('"+data.id+"','"+data.prodid+"')"+" data-toggle='modal' data-target='#myModal'>Reject Order</button>";
+                break;
+            case "complinedTable":
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "');";
+                break;
+            case "notratedTable":
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "');</td>";
+                break;
+        }
+        return htmlString;
+    }
+
+</script>
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="#">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Company
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Blog
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <p class="copyright pull-right">
+            &copy;
+            <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative
+                Tim</a>, made with love for a better web
+        </p>
+    </div>
+</footer>
+</div>
+</div>
+
+</html>

@@ -8,7 +8,7 @@
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
         $data[$count++]=array(
-        'cartId'=>$row["id"],
+        'id'=>$row["id"],
         'prodId'=>$row["prodid"],
         'quantity'=>$row["quantity"],
         'variantsChosen'=>$row["variants_chosen"],

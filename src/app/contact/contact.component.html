@@ -1,0 +1,152 @@
+<div class="breadcrumb-layout">
+    <ul class="breadcrumb">
+      <li><a href="#homepage">Home</a></li>
+      <li>Contact us</li>
+    </ul>
+    <hr class="hrdiv">
+</div>
+<div class="grid-main">
+    <div class="section-1">
+        <label class="text-style">CONTACT US</label>
+        <img src="assets/icons/resources (IL)-18.png" class="img-style">
+        <br>
+        <div class="desc-style">
+            <p class="p-style">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged.
+            </p>
+        </div>
+    </div>
+    <div class="section-2">
+        <form class="grid-form" [formGroup]="contactForm" (ngSubmit)="Submit()">
+                <div class="name">
+                    <input type="text" placeholder="Name:" class="text-field-style" formControlName="name">
+                    <div *ngIf="submitted && contactForm.controls.name.errors" class="error validator-style-1">
+                        <div *ngIf="contactForm.controls.name.errors.required">
+                            Name is required !
+                        </div>
+                    </div>
+                </div>
+                <div class="email">
+                    <input type="text" placeholder="Email:" class="text-field-style"  formControlName="email">
+                    <div *ngIf="submitted && contactForm.controls.email.errors" class="error validator-style-2">
+                        <div *ngIf="contactForm.controls.email.errors.required">
+                            Email is required !
+                        </div>
+                        <div *ngIf="contactForm.controls.email.hasError('pattern')">
+                            Enter valid Email !
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile">
+                    <input type="text" placeholder="Mobile No:" class="text-field-style" formControlName="mobile">
+                    <div *ngIf="submitted && contactForm.controls.mobile.errors" class="error validator-style-3">
+                        <div *ngIf="contactForm.controls.mobile.errors.required">
+                            Mobile no is required !
+                        </div>
+                        <div *ngIf="contactForm.controls.mobile.hasError('minlength')">
+                            Enter valid Mobile Number !
+                        </div>
+                        <div *ngIf="contactForm.controls.mobile.hasError('maxlength')">
+                            Enter valid Mobile Number !
+                        </div>
+                        <div *ngIf="contactForm.controls.mobile.hasError('pattern')">
+                            Enter Only digits !
+                        </div>
+                    </div>
+                </div>
+                <div class="purpose">
+                    <div class="dropdown">
+                        <select name="Purpose" required style="width: 65%;border: none;border-radius: 4px;height: 32px;" formControlName="purpose">
+                            <option value="">Purpose</option>
+                            <option value="Join">Join</option>
+                            <option value="Enquiry">Enquiry</option>
+                            <option value="Career">Career</option>
+                        </select>
+                        <div *ngIf="submitted && contactForm.controls.purpose.errors" class="error validator-style-4">
+                            <div *ngIf="contactForm.controls.purpose.errors.required">
+                                Purpose is required !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="additional-remarks">
+                    <label>Additional Remarks:</label>
+                    <br>
+                    <input type="text" class="text-area-style"  formControlName="remarks">
+                    <div *ngIf="submitted && contactForm.controls.remarks.errors" class="error validator-style-5">
+                        <div *ngIf="contactForm.controls.remarks.errors.required">
+                            This is required !
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-submit">
+                    <button class="btn-style" type="submit">SUBMIT</button>
+                </div>
+        </form>
+    </div>
+    <div class="section-3">
+            <label class="text-style">NEED HELP?</label>
+            <img src="assets/icons/resources (IL)-18.png" class="img-style">
+            <div class="grid-help">
+                <div class="ic-call">
+                        <img src="assets/icons/ic_call.png" class="img-style-call">
+                </div>
+                <div class="call">
+                    <label class="label-style-call">Call us 24x7 on +91 0000 0000</label>
+                </div>
+                <div class="ic-emailus">
+                        <img src="assets/icons/ic_email.png" class="img-style-email">
+                </div>
+                <div class="emailus">
+                    <label class="label-style-email">Email us 24x7 at help@scoopmyart.com</label>
+                </div>
+            </div>
+    </div>
+    <div class="section-4">
+        <div class="grid-footer">
+            <div class="left-sect">
+                <div class="grid-secure">
+                    <div class="img-security">
+                            <img src="assets/icons/ic_security.png">
+                    </div>
+                    <div class="foot-head-1">
+                        <label>100% SECURE PAYMENTS</label>
+                    </div>
+                    <div class="desc-1">
+                        <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-sect">
+                <div class="grid-trustpay">
+                    <div class="img-trustpay">
+                            <img src="assets/icons/ic_trustpay.png">
+                    </div>
+                    <div class="foot-head-2">
+                        <label>100% SECURE PAYMENTS</label>
+                    </div>
+                    <div class="desc-2">
+                        <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="right-sect">
+                <div class="grid-help">
+                    <div class="img-help">
+                            <img src="assets/icons/ic_help.png" height="70px" width="60px">
+                    </div>
+                    <div class="foot-head-3">
+                        <label>100% SECURE PAYMENTS</label>
+                    </div>
+                    <div class="desc-3">
+                        <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

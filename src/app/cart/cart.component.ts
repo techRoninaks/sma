@@ -19,6 +19,12 @@ export class CartComponent implements OnInit {
   dynamicDataDate: any = "";
   dynamicDataPrice: any = "";
   dynamicDataAddress: any = "";
+  dynamicDataProName: any = "";
+  dynamicDataVariant: any = "";
+  dynamicDataVariants: any = "";
+  dynamicDataUser: any = "";
+  filteredOptions: any = "";
+  dynamicDataCartDate: any = "";
   varient: any = "";
   maxOrderQuant: any;
   minOrderQuant: any;
@@ -49,23 +55,23 @@ export class CartComponent implements OnInit {
       var temp = '0';
       this.dynamicDataDate = data;
       this.dynamicDataPrice = data;
-      for(this.i=0;this.i<this.dynamicDataDate.length;this.i++){
+      for (this.i = 0; this.i < this.dynamicDataDate.length; this.i++) {
         temp += "," + this.dynamicDataDate[this.i].prodId;
-      }  
+      }
       this.data.getproduct(temp).subscribe(data => {
         this.dynamicData = data;
         // console.log(this.dynamicData);
-      });   
+      });
     }
     );
-    
-    
 
-    this.data.getaddress().subscribe(data => {
-      this.dynamicDataAddress = data;
-      // console.log(this.dynamicDataAddress);
-    },
-    );
+
+
+    // this.data.getaddress().subscribe(data => {
+    //   this.dynamicDataAddress = data;
+    //   // console.log(this.dynamicDataAddress);
+    // },
+    // );
   }
   // dynamicDataRight(dynamicDataRight: any) {
   //   throw new Error("Method not implemented.");
@@ -74,32 +80,45 @@ export class CartComponent implements OnInit {
 
   //Qty counter
   count_inc(id, maxOrderQuant) {
-    this.curVal = (<HTMLInputElement>document.getElementById(id)).value;
+    this.curVal = (<HTMLInputElement><unknown>document.getElementById(id)).value;
     this.curVal = Number(this.curVal);
     if (this.curVal < maxOrderQuant) {
       this.curVal++;
-      (<HTMLInputElement>document.getElementById(id)).value = this.curVal.toString();
+      (<HTMLInputElement><unknown>document.getElementById(id)).value = this.curVal.toString();
 
     }
   }
   count_dec(id, minOrderQuant) {
-    this.curVal = (<HTMLInputElement>document.getElementById(id)).value;
+    this.curVal = (<HTMLInputElement><unknown>document.getElementById(id)).value;
     this.curVal = Number(this.curVal);
     if (this.curVal > minOrderQuant) {
       this.curVal -= 1;
-      (<HTMLInputElement>document.getElementById(id)).value = this.curVal.toString();
+      (<HTMLInputElement><unknown>document.getElementById(id)).value = this.curVal.toString();
     }
+  }
+
+  //checkout pop showformgrp
+  showFormGrp() {
+    document.getElementById('formGroup').style.display = "block";
+  }
+  //checkout showSavedAddr
+  showSavedAddr() {
+    document.getElementById('savedAddr').style.display = "block";
+  }
+  //checkout giftoption
+  giftoption() {
+    document.getElementById('showGiftCard').style.display = "block";
   }
 
   //removebtn
   remove(id) {
-    document.getElementById("product"+id).style.display="none";
+    document.getElementById("product" + id).style.display = "none";
     // this.setCookie("userId",1);
     var userId = this.getCookie("userId");
-    this.data.deleteCartProductfn(id,userId).subscribe(data =>{
+    this.data.deleteCartProductfn(id, userId).subscribe(data => {
       // alert("success");
     })
-    
+
   }
 
   //Cookies

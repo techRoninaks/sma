@@ -1,894 +1,968 @@
 @mixin sm {
-	@media (max-width: 1050px) {
-		@content;
-	}
+    @media (max-width: 1050px) {
+        @content;
+    }
 }
-/* Medium devices (landscape tablets, 768px and up) */
-@mixin md {
-	@media (min-width: 768px) {
-		@content;
-	}
-}
-/* Large devices (laptops/desktops, 992px and up) */
-@mixin lg {
-	@media (min-width: 992px) {
-		@content;
-	}
-}
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@mixin xlg {
-	@media (min-width: 1200px) {
-		@content;
-	}
-}
-.breadcrumb {
-	padding: 10px 10px;
-	list-style: none;
-	background-color: transparent;
-	li + li:before {
-		padding: 8px;
-		color: gray;
-		content: ">";
-	}
-	li {
-		display: inline;
-		font-size: 1rem;
-		a {
-			color: gray;
-			text-decoration: none;
 
-			&:hover {
-				color: red;
-			}
-		}
-	}
-	text-decoration: none;
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@mixin md {
+    @media (min-width: 768px) {
+        @content;
+    }
 }
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@mixin lg {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@mixin xlg {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+.breadcrumb {
+    padding: 10px 10px;
+    list-style: none;
+    background-color: transparent;
+    li+li:before {
+        padding: 8px;
+        color: gray;
+        content: ">";
+    }
+    li {
+        display: inline;
+        font-size: 1rem;
+        a {
+            color: gray;
+            text-decoration: none;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+    text-decoration: none;
+}
+
 .divMargin {
-	margin: 5%;
-	width: auto;
+    margin: 5%;
+    width: auto;
 }
 
 // main
-
 .gridT {
+    display: grid;
+    grid-template-columns: auto;
+    width: 100%;
+    grid-template-rows: repeat(6, auto);
+    grid-template-areas: "shopBg" "shopDescBio" "shopProducts" "shopShipment" "shopPolicies" "shopRatingReview";
+    .shopBg {
+        grid-area: shopBg;
+        background-color: whitesmoke;
+        height: auto;
+        width: 100%;
+        img {
+            width: 100%;
+        }
+    }
+    .shopDescBio {
+        grid-area: shopDescBio;
+        background-color: white;
+        height: auto;
+        margin-top: 5%;
+        display: grid;
+        grid-template-columns: 49% 2% 49%;
+        grid-template-rows: auto;
+        grid-template-areas: "shopDesc . shopBio";
+        @include sm {
+            display: grid;
+            grid-template-columns: Auto;
+            grid-template-rows: repeat(2, auto);
+            grid-template-areas: "shopDesc" "shopBio";
+        }
+        .shopDesc {
+            grid-area: shopDesc;
+            background-color: whitesmoke;
+            padding-bottom: 15%;
+            margin-bottom: 5%;
+            display: grid;
+            grid-template-columns: 25% 25% 50%;
+            grid-template-rows: auto;
+            grid-template-areas: ". shopLogo shopInfo";
+            .shopLogo {
+                margin-block-start: 43%;
+                grid-area: shopLogo;
+                img {
+                    width: 100%;
+                    height: 10rem;
+                    object-fit: contain;
+                }
+            }
+            .shopInfo {
+                grid-area: shopInfo;
+                margin-block-start: 25%;
+                .shopStarFoll {
+                    display: grid;
+                    grid-template-rows: auto;
+                    grid-template-columns: 50% 50%;
+                    grid-template-areas: "shopStar shopFollowers";
+                    .shopStar {
+                        grid-area: shopStar;
+                    }
+                    .shopFollowers {
+                        grid-area: shopFollowers;
+                        // color: white;
+                        p {
+                            border: 2px solid black;
+                            background-color: whitesmoke;
+                            font-size: 16px;
+                            justify-self: center;
+                            text-align: center;
+                        }
+                    }
+                }
+                .shopDetails {}
+                .shopBtnInfo {
+                    display: grid;
+                    grid-template-columns: 50% 50%;
+                    grid-template-rows: auto;
+                    grid-template-areas: "dvFromRfq dvShipsFollow";
+                    .dvFromRfq {
+                        grid-area: dvFromRfq;
+                        .btRfq {
+                            // grid-area: btnRfq;
+                            width: 125px;
+                            margin: auto;
+                            background-color: #efbe24;
+                        }
+                    }
+                    .dvShipsFollow {
+                        grid-area: dvShipsFollow;
+                        .btnFollowShop {
+                            width: 135px;
+                            margin: auto;
+                            z-index: 0;
+                            background-color: #ff1d25;
+                        }
+                        img {
+                            z-index: 1;
+                            transform: translate(-2rem, 2px);
+                            position: absolute;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        .shopBio {
+            grid-area: shopBio;
+            background-color: whitesmoke;
+            height: 22.5rem;
+            h3 {
+                margin-block-start: 5%;
+                margin-inline-start: 5%;
+            }
+            p {
+                margin-inline-end: 10%;
+                margin-inline-start: 5%;
+            }
+        }
+    }
+    .shopProducts {
+        grid-area: shopProducts;
+        // background-color: wheat;
+        height: auto;
+        // margin-top: 5%;
+        .dvCatMain {
+            grid-template-columns: repeat(3, 1fr);
+            display: grid;
+            width: auto;
+            margin: 5%;
+            .dvCard {
+                padding: 6%;
+                border-bottom: 1px solid lightgray;
+                .dvCardLogo {
+                    grid-template-columns: 35% auto;
+                    grid-template-areas: "dv-logo dv-seller";
+                    display: grid;
+                    .dvLogo {
+                        grid-area: dv-logo;
+                        width: fit-content;
+                        border-radius: 50%;
+                        background: lightgray;
+                        justify-self: center;
+                        box-shadow: 1px 1px 10px 0 lightgray;
+                        z-index: 1;
+                        .imgLogo {
+                            border-radius: 50%;
+                            object-fit: cover;
+                            cursor: pointer;
+                            width: 6rem;
+                            height: 6.25rem;
+                        }
+                    }
+                    .dvSeller {
+                        grid-area: dv-seller;
+                        width: auto;
+                        cursor: pointer;
+                        .dvShopName {
+                            border-bottom: 1px solid gray;
+                            p {
+                                font-family: Bitter;
+                                font-size: 24px;
+                            }
+                            // @include sm-lesser {
+                            // 	p {
+                            // 		font-size: 20px;
+                            // 	}
+                            // }
+                            // @include lg {
+                            // 	p {
+                            // 		font-size: 20px;
+                            // 	}
+                            // }
+                        }
+                        .dvSellerName {
+                            p {
+                                font-family: Bitter;
+                                font-size: 24px;
+                                color: gray;
+                            }
+                            // @include sm-lesser {
+                            // 	p {
+                            // 		font-size: 20px;
+                            // 	}
+                            // }
+                            // @include lg {
+                            // 	p {
+                            // 		font-size: $SubText;
+                            // 	}
+                            // }
+                        }
+                    }
+                }
+                .dvCardBanner {
+                    cursor: pointer;
+                    padding: 10px;
+                    background: lightgray;
+                    box-shadow: 1px 1px 10px 0px gray;
+                    border-radius: 5px;
+                    .imgBanner {
+                        width: inherit;
+                    }
+                    .dvUndeliver {
+                        position: relative;
+                        .overlay {
+                            position: absolute;
+                            bottom: 0;
+                            background: rgb(0, 0, 0);
+                            background: rgba(0, 0, 0, 0.5);
+                            /* Black see-through */
+                            color: #f1f1f1;
+                            width: 100%;
+                            transition: 0.5s ease;
+                            opacity: 0;
+                            color: white;
+                            font-size: 20px;
+                            font-family: Bitter;
+                            padding: 20px;
+                            text-align: center;
+                        }
+                    }
+                    .dvUndeliver:hover .overlay {
+                        opacity: 1;
+                    }
+                    // @include lg {
+                    // 	.overlay {
+                    // 		font-size: 14px !important;
+                    // 		padding: 10px !important;
+                    // 	}
+                    // }
+                }
+                .dvCardName {
+                    cursor: default;
+                    .dvProduct {
+                        grid-template-columns: auto auto;
+                        grid-template-areas: "dv-prod dv-rate";
+                        display: grid;
+                        padding-top: 20px;
+                        .dvProdName {
+                            grid-area: dv-prod;
+                            p {
+                                font-size: 24px;
+                                font-family: BitterBold;
+                                margin: auto;
+                            }
+                            // @include sm-lesser {
+                            // 	p {
+                            // 		font-size: 20px;
+                            // 	}
+                            // }
+                            // @include lg {
+                            // 	p {
+                            // 		font-size: 16px;
+                            // 	}
+                            // }
+                        }
+                        .dvRating {
+                            grid-area: dv-rate;
+                            color: yellow;
+                            // font-size: 25px;
+                            justify-self: end;
+                            width: fit-content;
+                            p {
+                                font-size: 24px;
+                                font-family: BitterBold;
+                            }
+                            // @include sm-lesser {
+                            // 	p {
+                            // 		font-size: 20px;
+                            // 	}
+                            // }
+                            // @include lg {
+                            // 	.fa {
+                            // 		font-size: 16px;
+                            // 	}
+                            // }
+                        }
+                    }
+                    .dvDetails {
+                        padding-top: 10px;
+                        p {
+                            font-family: Bitter;
+                            font-size: 20px;
+                            text-align: justify;
+                            line-height: 1.3;
+                            color: darkgray;
+                        }
+                        // @include sm-lesser {
+                        // 	p {
+                        // 		font-size: $SubText;
+                        // 	}
+                        // }
+                        // @include lg {
+                        // 	p {
+                        // 		font-size: 16px;
+                        // 	}
+                        // }
+                    }
+                }
+            }
+            .dvCardPrice {
+                grid-template-columns: auto auto auto;
+                // auto
+                grid-template-areas: "p-price ac-price p-offer";
+                // btn-rfq
+                display: grid;
+                p {
+                    font-family: BitterBold;
+                    font-size: 24px;
+                    display: inline;
+                }
+                // @include sm-lesser {
+                // 	p {
+                // 		font-size: 20px;
+                // 	}
+                // }
+                // @include lg {
+                // 	p {
+                // 		font-size: 16px;
+                // 	}
+                // }
+                .pPrice {
+                    grid-area: p-price;
+                }
+                .pActualPrice {
+                    grid-area: ac-price;
+                    text-decoration: line-through;
+                    color: gray;
+                }
+                // @include sm-lesser {
+                // 	.pActualPrice {
+                // 		justify-self: center;
+                // 	}
+                // }
+                // @include lg {
+                // 	.pActualPrice {
+                // 		justify-self: center;
+                // 	}
+                // }
+                .pOffer {
+                    grid-area: p-offer;
+                    color: green;
+                }
+                // @include sm-lesser {
+                // 	.pOffer {
+                // 		justify-self: end;
+                // 	}
+                // }
+                // @include lg {
+                // 	.pOffer {
+                // 		justify-self: end;
+                // 	}
+                // }
+                // .btnRfq{
+                //     cursor: pointer;
+                //     grid-area: btn-rfq;
+                //     font-family: BitterBold;
+                //     font-size: 20px;
+                //     border: none;
+                //     border-radius: 5px;
+                //     background: red;
+                //     padding: 5px;
+                //     color: white;
+                //     float: right;
+                // }
+                // @include sm-lesser{
+                //     .btnRfq{
+                //         font-size: inherit;
+                //         margin-top: auto;
+                //         margin-bottom: auto;
+                //     }
+                // }
+                // @include lg{
+                //     .btnRfq{
+                //         font-size: 16px;
+                //     }
+                // }
+            }
+            // @include sm-lesser {
+            // 	.dvCardPrice {
+            // 		display: grid;
+            // 		grid-template-columns: auto auto auto;
+            // 		grid-template-rows: auto auto;
+            // 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+            // 	}
+            // }
+            // @include lg {
+            // 	.dvCardPrice {
+            // 		display: grid;
+            // 		grid-template-columns: auto auto auto;
+            // 		grid-template-rows: auto auto;
+            // 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+            // 	}
+            // }
+        }
+        .dvMore {
+            background-color: #efbe24;
+            color:white;
+            margin-left: 50%;
+            width: fit-content;
+            padding: 5px;
+            &:hover{
+                cursor:pointer;
+            }
+        }
+    }
+    .shopShipment {
+        grid-area: shopShipment;
+        background-color: whitesmoke;
+        height: auto;
+        margin-top: 5%;
+        width: auto;
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+            transform: translate(0rem, 2rem);
+            z-index: 0;
+        }
+        h2 {
+            text-align: center;
+            transform: translate(0px, -0.45em);
+            z-index: 1;
+        }
+        .dvForm {
+            display: block;
+            text-align: justify;
+            text-align: center;
+            form {
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+                .shipDelivery {
+                    margin-inline-end: 20px;
+                }
+                .coDelivery {
+                    margin-inline-end: 20px;
+                }
+                .pckDelivery {
+                    margin-inline-end: 20px;
+                }
+                a {
+                    border: 1px solid black;
+                    background-color: white;
+                    width: 10rem;
+                }
+            }
+        }
+    }
+    .shopPolicies {
+        grid-area: shopPolicies;
+        height: auto;
+        width: 100%;
+        margin-top: 5%;
+        box-sizing: border-box;
+   
+        .prodPolicy {
+            // margin: 0rem 1rem 5rem 1rem;
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+                z-index: 0;
+                transform: translate(0rem, 2rem);
+            }
+            h2 {
+                text-align: center;
+                //   position: absolute;
+                transform: translate(0px, -0.45em);
+                z-index: 1;
+            }
+            p {
+                text-align: justify;
+                text-align: center;
+            }
+            
+        }
+        .shopPolicy {
+            // margin: 0rem 1rem 5rem 1rem;
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+                transform: translate(0rem, 2rem);
+                z-index: 0;
+                // position: absolute;
+            }
+            h2 {
+                text-align: center;
+                //   position: absolute;
+                transform: translate(0px, -0.45em);
+                z-index: 1;
+            }
+            p {
+                text-align: justify;
+                text-align: center;
+            }
+        }
+        .shipPolicy {
+            // margin: 0rem 1rem 5rem 1rem;
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+                transform: translate(0rem, 2rem);
+                z-index: 0;
+                // position: absolute;
+            }
+            h2 {
+                text-align: center;
+                //   position: absolute;
+                transform: translate(0px, -0.45em);
+                z-index: 1;
+            }
+            p {
+                text-align: justify;
+                text-align: center;
+            }
+        }
+        .retPolicy {
+            // margin: 0rem 1rem 5rem 1rem;
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+                transform: translate(0rem, 2rem);
+                z-index: 0;
+                // position: absolute;
+            }
+            h2 {
+                text-align: center;
+                //   position: absolute;
+                transform: translate(0px, -0.45em);
+                z-index: 1;
+            }
+            p {
+                text-align: justify;
+                text-align: center;
+            }
+        }
+    }
+    .shopRatingReview {
+            grid-area: shopRatingReview;
+            background-color: whitesmoke;
+            width: 100%;
+            height: auto;
+            font-weight: 300px;
+            margin-top: 5%;
+            // margin-bottom: 5%
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+                transform: translate(0rem, 2rem);
+                z-index: 0;
+            }
+            h2 {
+                text-align: center;
+                transform: translate(0px, -0.45em);
+                z-index: 1;
+            }
+            .rating {
+                grid-area: rating;
+                width: 400px;
+                margin: 0 auto;
+                margin-top: 3em;
+                background-color: whitesmoke;
+                padding: 4px;
+                margin-bottom: 3em;
+                .inner {
+                    padding: 1em;
+                    background-color: white;
+                    overflow: hidden;
+                    position: relative;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    border-radius: 4px;
+                }
+
+                .rating {
+                    float: left;
+                    width: 45%;
+                    margin-right: 5%;
+                    text-align: center;
+                }
+
+                .rating-num {
+                    color: #333333;
+                    font-size: 72px;
+                    font-weight: 100;
+                    line-height: 1em;
+                }
+
+                .rating-stars {
+                    font-size: 20px;
+                    color: #e3e3e3;
+                    margin-bottom: 0.5em;
+                }
+                .rating-stars .active {
+                    color: #737373;
+                }
+
+                .rating-users {
+                    font-size: 14px;
+                }
+
+                .histo {
+                    float: left;
+                    width: 50%;
+                    font-size: 13px;
+                    transform: translate(0px, 50px);
+                }
+
+                .histo-star {
+                    float: left;
+                    padding: 3px;
+                }
+
+                .histo-rate {
+                    width: 100%;
+                    display: block;
+                    clear: both;
+                }
+
+                .bar-block {
+                    margin-left: 5px;
+                    color: black;
+                    display: block;
+                    float: left;
+                    width: 75%;
+                    position: relative;
+                }
+
+                .bar {
+                    padding: 4px;
+                    display: block;
+                }
+
+                #bar-five {
+                    width: 0;
+                    background-color: #9fc05a;
+                }
+
+                #bar-four {
+                    width: 0;
+                    background-color: #add633;
+                }
+
+                #bar-three {
+                    width: 0;
+                    background-color: #ffd834;
+                }
+
+                #bar-two {
+                    width: 0;
+                    background-color: #ffb234;
+                }
+
+                #bar-one {
+                    width: 0;
+                    background-color: #ff8b5a;
+                    // margin-left: 2px;
+                }
+            }
+            .review {
+                // margin: 0% 5% 0% 5%;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                grid-area: revData;
+                display: grid;
+                grid-template-columns: 10% 10% 20% 50%;
+                border-top: 3px lightgray solid;
+                grid-template-rows: 5% 95%;
+                grid-template-areas: ". revProfIcon revName revData ";
+                .revProfIcon {
+                    grid-area: revProfIcon;
+                    .revProfImg {
+                        height: 100px;
+                        width: 100px;
+                    }
+                }
+                .revName {
+                    margin-top: 1%;
+                    grid-area: revName;
+                    .rName {
+                        grid-area: rName;
+                    }
+                    .rAgo {
+                        grid-area: rAgo;
+                    }
+                }
+                .revData {
+                    margin-top: 1%;
+        
+                    grid-area: revData;
+                    grid-template-columns: auto;
+                    grid-template-rows: repeat(4, auto);
+                    grid-template-areas:
+                        "rTitile"
+                        "rDesc"
+                        "rstarLikes"
+                        "revIcon";
+                    .rTitle {
+                        grid-area: rTitle;
+                    }
+                    .rDesc {
+                        grid-area: rDesc;
+                    }
+                    .starLikes {
+                        display: grid;
+                        grid-template-columns: 3rem 3rem 3rem 3rem 5rem auto;
+                        grid-template-rows: auto auto;
+                        grid-template-areas: "icLike likeCount icDislike dislikeCount btnReport ";
+                        grid-area: starLikes;
+                        .icLike {
+                            grid-area: icLike;
+                            width: 30px;
+                            height: 30px;
+                            transform: translate(0px, 0px);
+                        }
+                        .likeCount {
+                            grid-area: likeCount;
+                            transform: translate(0px, 0px);
+                        }
+                        .icDislike {
+                            grid-area: icDislike;
+                            width: 30px;
+                            height: 30px;
+                            transform: translate(0px, 0px);
+                        }
+                        .dislikeCount {
+                            grid-area: dislikeCount;
+                            transform: translate(0px, 0px);
+                        }
+                        .btnReport {
+                            grid-area: btnReport;
+                        }
+                    }
+                    .revIcon {
+                        grid-area: revIcon;
+                        width: 100px;
+                        height: 100px;
+                        float: left;
+                    }
+                }
+            }
+   }
+
+}
+.rfqForm {
+	/* Dropdown Button */
+	// .dropBtnRfq {
+	// 	background-color: #4caf50;
+	// 	color: white;
+	// 	padding: 16px;
+	// 	font-size: 16px;
+	// 	border: none;
+	// 	cursor: pointer;
+	// }
+	/* Dropdown button on hover & focus */
+	// .dropBtnRfq:hover,
+	// .dropBtnRfq:focus {
+	// 	background-color: #3e8e41;
+	// }
+	#myInput {
+		background-image: url("/css/searchicon.png");
+		background-position: 10px 12px;
+		background-repeat: no-repeat;
+		width: 100%;
+		font-size: 16px;
+		// padding: 12px 20px 12px 40px;
+		border: 1px solid #ddd;
+		margin-bottom: 12px;
+	}
+
+	#myUL {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	#myUL li a {
+		border: 1px solid #ddd;
+		margin-top: -1px; /* Prevent double borders */
+		background-color: #f6f6f6;
+		// padding: 12px;
+		text-decoration: none;
+		font-size: 18px;
+		color: black;
+		display: block;
+	}
+
+	#myUL li a:hover:not(.header) {
+		background-color: #eee;
+	}
+	.rfqUL {
+		display: none;
+	}
+}
+.rfqForm {
 	display: grid;
+	padding-bottom: 25%;
 	grid-template-columns: auto;
-	width: 100%;
+	grid-row-gap: 5%;
 	grid-template-rows: repeat(6, auto);
+
 	grid-template-areas:
-		"shopBg"
-		"shopDescBio"
-		"shopProducts"
-		"shopShipment"
-		"shopPolicies"
-		"shopRatingReview";
-
-	.shopBg {
-		grid-area: shopBg;
-		background-color: whitesmoke;
-		height: auto;
-		width: 100%;
-		img {
-			width: 100%;
-		}
-	}
-	.shopDescBio {
-		grid-area: shopDescBio;
-		background-color: white;
-		height: auto;
-		margin-top: 5%;
+		"rfqSN"
+		"rfqSL"
+		"rfqN"
+		"rfqTag"
+		"chips"
+		"btnRfq";
+	.rfqSN {
+		grid-area: rfqSN;
 		display: grid;
-		grid-template-columns: 49% 2% 49%;
+		grid-template-columns: 35% auto;
 		grid-template-rows: auto;
-		grid-template-areas: "shopDesc . shopBio";
-		@include sm {
-			display: grid;
-			grid-template-columns: Auto;
-			grid-template-rows: repeat(2, auto);
-			grid-template-areas:
-				"shopDesc"
-				"shopBio";
+		grid-template-areas: "rfqShopName rfqShopNameInput";
+		.rfqShopName {
+			grid-area: rfqShopName;
 		}
-		#shopDesc {
-			grid-area: shopDesc;
-			background-color: whitesmoke;
-			padding-bottom: 15%;
-			margin-bottom: 5%;
-			display: grid;
-			grid-template-columns: 25% 25% 50%;
-			grid-template-rows: auto;
-			grid-template-areas: ". shopLogo shopInfo";
-			#shopLogo {
-				margin-block-start: 43%;
-				grid-area: shopLogo;
-				img {
-					width: 100%;
-					height: 10rem;
-					object-fit: contain;
-				}
-			}
-			#shopInfo {
-				grid-area: shopInfo;
-				margin-block-start: 25%;
-
-				#shopStarFoll {
-				}
-				#shopDetails {
-				}
-				#shopBtnInfo {
-					display: grid;
-					grid-template-columns: 50% 50%;
-					grid-template-rows: auto;
-					grid-template-areas: "dvFromRfq dvShipsFollow";
-					#dvFromRfq {
-						grid-area: dvFromRfq;
-						#btnRfq {
-						}
-					}
-					#dvShipsFollow {
-						grid-area: dvShipsFollow;
-						.btnFollowShop{
-							width: 125px;
-							margin: auto;
-							z-index: 0;
-							background-color: #ff1d25;
-						}
-						img {
-							z-index: 1;
-							transform: translate(-2rem, 2px);
-							position: absolute;
-							height: 20px;
-						}
-					}
-				}
-			}
-		}
-		#shopBio {
-			grid-area: shopBio;
-			background-color: whitesmoke;
-			height: 22.5rem;
-			h3 {
-				margin-block-start: 5%;
-				margin-inline-start: 5%;
-			}
-			p {
-				margin-inline-end: 10%;
-				margin-inline-start: 5%;
-			}
+		.rfqShopNameInput {
+			grid-area: rfqShopNameInput;
 		}
 	}
-	.shopProducts {
-		grid-area: shopProducts;
-		// background-color: wheat;
-		height: auto;
-		// margin-top: 5%;
-
-		.dvCatMain {
-			grid-template-columns: repeat(3, 1fr);
-
-			display: grid;
-
-			width: auto;
-
-			margin: 5%;
-
-			.dvCard {
-				padding: 6%;
-
-				border-bottom: 1px solid lightgray;
-
-				.dvCardLogo {
-					grid-template-columns: 35% auto;
-
-					grid-template-areas: "dv-logo dv-seller";
-
-					display: grid;
-
-					.dvLogo {
-						grid-area: dv-logo;
-
-						width: fit-content;
-
-						border-radius: 50%;
-
-						background: lightgray;
-
-						justify-self: center;
-
-						box-shadow: 1px 1px 10px 0 lightgray;
-
-						z-index: 1;
-
-						.imgLogo {
-							border-radius: 50%;
-
-							object-fit: cover;
-
-							cursor: pointer;
-						}
-					}
-
-					.dvSeller {
-						grid-area: dv-seller;
-
-						width: auto;
-
-						cursor: pointer;
-
-						.dvShopName {
-							border-bottom: 1px solid gray;
-
-							p {
-								font-family: Bitter;
-
-								font-size: 24px;
-							}
-
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-
-							// @include lg {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-						}
-
-						.dvSellerName {
-							p {
-								font-family: Bitter;
-
-								font-size: 24px;
-
-								color: gray;
-							}
-
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-
-							// @include lg {
-							// 	p {
-							// 		font-size: $SubText;
-							// 	}
-							// }
-						}
-					}
-				}
-
-				.dvCardBanner {
-					cursor: pointer;
-
-					padding: 10px;
-
-					background: lightgray;
-
-					box-shadow: 1px 1px 10px 0px gray;
-
-					border-radius: 5px;
-
-					.imgBanner {
-						width: inherit;
-					}
-
-					.dvUndeliver {
-						position: relative;
-
-						.overlay {
-							position: absolute;
-
-							bottom: 0;
-
-							background: rgb(0, 0, 0);
-
-							background: rgba(0, 0, 0, 0.5); /* Black see-through */
-
-							color: #f1f1f1;
-
-							width: 100%;
-
-							transition: 0.5s ease;
-
-							opacity: 0;
-
-							color: white;
-
-							font-size: 20px;
-
-							font-family: Bitter;
-
-							padding: 20px;
-
-							text-align: center;
-						}
-					}
-
-					.dvUndeliver:hover .overlay {
-						opacity: 1;
-					}
-
-					// @include lg {
-					// 	.overlay {
-					// 		font-size: 14px !important;
-
-					// 		padding: 10px !important;
-					// 	}
-					// }
-				}
-
-				.dvCardName {
-					cursor: default;
-
-					.dvProduct {
-						grid-template-columns: auto auto;
-
-						grid-template-areas: "dv-prod dv-rate";
-
-						display: grid;
-
-						padding-top: 20px;
-
-						.dvProdName {
-							grid-area: dv-prod;
-
-							p {
-								font-size: 24px;
-
-								font-family: BitterBold;
-
-								margin: auto;
-							}
-
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-
-							// @include lg {
-							// 	p {
-							// 		font-size: 16px;
-							// 	}
-							// }
-						}
-
-						.dvRating {
-							grid-area: dv-rate;
-
-							color: yellow;
-
-							// font-size: 25px;
-
-							justify-self: end;
-
-							width: fit-content;
-
-							p {
-								font-size: 24px;
-
-								font-family: BitterBold;
-							}
-
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-
-							// @include lg {
-							// 	.fa {
-							// 		font-size: 16px;
-							// 	}
-							// }
-						}
-					}
-
-					.dvDetails {
-						padding-top: 10px;
-
-						p {
-							font-family: Bitter;
-
-							font-size: 20px;
-
-							text-align: justify;
-
-							line-height: 1.3;
-
-							color: darkgray;
-						}
-
-						// @include sm-lesser {
-						// 	p {
-						// 		font-size: $SubText;
-						// 	}
-						// }
-
-						// @include lg {
-						// 	p {
-						// 		font-size: 16px;
-						// 	}
-						// }
-					}
-				}
-			}
-
-			.dvCardPrice {
-				grid-template-columns: auto auto auto;
-
-				// auto
-
-				grid-template-areas: "p-price ac-price p-offer";
-
-				// btn-rfq
-
-				display: grid;
-
-				p {
-					font-family: BitterBold;
-
-					font-size: 24px;
-
-					display: inline;
-				}
-
-				// @include sm-lesser {
-				// 	p {
-				// 		font-size: 20px;
-				// 	}
-				// }
-
-				// @include lg {
-				// 	p {
-				// 		font-size: 16px;
-				// 	}
-				// }
-
-				.pPrice {
-					grid-area: p-price;
-				}
-
-				.pActualPrice {
-					grid-area: ac-price;
-
-					text-decoration: line-through;
-
-					color: gray;
-				}
-
-				// @include sm-lesser {
-				// 	.pActualPrice {
-				// 		justify-self: center;
-				// 	}
-				// }
-
-				// @include lg {
-				// 	.pActualPrice {
-				// 		justify-self: center;
-				// 	}
-				// }
-
-				.pOffer {
-					grid-area: p-offer;
-
-					color: green;
-				}
-
-				// @include sm-lesser {
-				// 	.pOffer {
-				// 		justify-self: end;
-				// 	}
-				// }
-
-				// @include lg {
-				// 	.pOffer {
-				// 		justify-self: end;
-				// 	}
-				// }
-
-				// .btnRfq{
-
-				//     cursor: pointer;
-
-				//     grid-area: btn-rfq;
-
-				//     font-family: BitterBold;
-
-				//     font-size: 20px;
-
-				//     border: none;
-
-				//     border-radius: 5px;
-
-				//     background: red;
-
-				//     padding: 5px;
-
-				//     color: white;
-
-				//     float: right;
-
-				// }
-
-				// @include sm-lesser{
-
-				//     .btnRfq{
-
-				//         font-size: inherit;
-
-				//         margin-top: auto;
-
-				//         margin-bottom: auto;
-
-				//     }
-
-				// }
-
-				// @include lg{
-
-				//     .btnRfq{
-
-				//         font-size: 16px;
-
-				//     }
-
-				// }
-			}
-
-			// @include sm-lesser {
-			// 	.dvCardPrice {
-			// 		display: grid;
-
-			// 		grid-template-columns: auto auto auto;
-
-			// 		grid-template-rows: auto auto;
-
-			// 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
-			// 	}
-			// }
-
-			// @include lg {
-			// 	.dvCardPrice {
-			// 		display: grid;
-
-			// 		grid-template-columns: auto auto auto;
-
-			// 		grid-template-rows: auto auto;
-
-			// 		grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
-			// 	}
-			// }
+	.rfqSL {
+		grid-area: rfqSL;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqLocation rfqLocationInput";
+		.rfqLocation {
+			grid-area: rfqLocation;
+		}
+		.rfqLocationInput {
+			grid-area: rfqLocationInput;
 		}
 	}
-	.shopShipment {
-		grid-area: shopShipment;
-		background-color: whitesmoke;
-		height: auto;
-		margin-top: 5%;
-		width: auto;
-		img {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			width: 300px;
-			transform: translate(0rem, 2rem);
-			z-index: 0;
+	.rfqN {
+		grid-area: rfqN;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqNote rfqNoteInput";
+		.rfqNote {
+			grid-area: rfqNote;
 		}
-		h2 {
-			text-align: center;
-			transform: translate(0px, -0.45em);
-			z-index: 1;
+		.rfqNoteInput {
+			grid-area: rfqNoteInput;
 		}
-		#dvForm {
-			display: block;
-			text-align: justify;
-			text-align: center;
-			form {
+	}
+	.rfqTag {
+		grid-area: rfqTag;
+		display: grid;
+		grid-template-columns: 35% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "dropBtnRfq dropdownRfq";
+		.dropBtnRfq {
+			grid-area: dropBtnRfq;
+		}
+		.dropdownRfq {
+			grid-area: dropdownRfq;
+		}
+	}
+	.chips {
+		grid-area: chips;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(auto, 1fr);
+		.chipsOuter {
+			margin: 5px;
+			.chip {
 				display: inline-block;
-				margin-left: auto;
-				margin-right: auto;
-				text-align: left;
-				#odDelivery {
-					margin-inline-end: 20px;
-				}
-				#coDelivery {
-					margin-inline-end: 20px;
-				}
-				#dtdDelivery {
-					margin-inline-end: 20px;
-				}
-				a {
-					border: 1px solid black;
-					background-color: white;
-					width: 10rem;
-				}
-			}
-		}
-	}
-	.shopPolicies {
-		grid-area: shopPolicies;
-		height: auto;
-		width: 100%;
-		margin-top: 5%;
-		box-sizing: border-box;
-		.prodPolicy {
-			// margin: 0rem 1rem 5rem 1rem;
-			img {
-				display: block;
-				margin-left: auto;
-				margin-right: auto;
-				width: 300px;
-				z-index: 0;
-				transform: translate(0rem, 2rem);
-			}
-			h2 {
-				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
-			}
-			p {
-				text-align: justify;
-				text-align: center;
-			}
-		}
-		.shopPolicy {
-			// margin: 0rem 1rem 5rem 1rem;
-			img {
-				display: block;
-				margin-left: auto;
-				margin-right: auto;
-				width: 300px;
-				transform: translate(0rem, 2rem);
-				z-index: 0;
-				// position: absolute;
-			}
-			h2 {
-				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
-			}
-			p {
-				text-align: justify;
-				text-align: center;
-			}
-		}
-		.shipPolicy {
-			// margin: 0rem 1rem 5rem 1rem;
-			img {
-				display: block;
-				margin-left: auto;
-				margin-right: auto;
-				width: 300px;
-				transform: translate(0rem, 2rem);
-				z-index: 0;
-				// position: absolute;
-			}
-			h2 {
-				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
-			}
-			p {
-				text-align: justify;
-				text-align: center;
-			}
-		}
-	}
-	.shopRatingReview {
-		grid-area: shopRatingReview;
-		background-color: whitesmoke;
-		width: 100%;
-		height: auto;
-		font-weight: 300px;
-		margin-top: 5%;
-		// margin-bottom: 5%
-		img {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			width: 300px;
-			transform: translate(0rem, 2rem);
-			z-index: 0;
-		}
-		h2 {
-			text-align: center;
-			transform: translate(0px, -0.45em);
-			z-index: 1;
-		}
-		.rating {
-			grid-area: rating;
-			width: 400px;
-			margin: 0 auto;
-			margin-top: 3em;
-			background-color: whitesmoke;
-			padding: 4px;
-			margin-bottom: 3em;
-			.inner {
-				padding: 1em;
-				background-color: white;
-				overflow: hidden;
-				position: relative;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
-				border-radius: 4px;
+				padding: 0 25px;
+				height: auto;
+				font-size: 16px;
+				width: max-content;
+				line-height: auto;
+				border-radius: 25px;
+				background-color: #efbe24;
 			}
 
-			.rating {
-				float: left;
-				width: 45%;
-				margin-right: 5%;
-				text-align: center;
-			}
-
-			.rating-num {
-				color: #333333;
-				font-size: 72px;
-				font-weight: 100;
-				line-height: 1em;
-			}
-
-			.rating-stars {
+			.closebtn {
+				padding-left: 10px;
+				color: #888;
+				font-weight: bold;
+				float: right;
 				font-size: 20px;
-				color: #e3e3e3;
-				margin-bottom: 0.5em;
-			}
-			.rating-stars .active {
-				color: #737373;
+				cursor: pointer;
 			}
 
-			.rating-users {
-				font-size: 14px;
-			}
-
-			.histo {
-				float: left;
-				width: 50%;
-				font-size: 13px;
-				transform: translate(0px, 50px);
-			}
-
-			.histo-star {
-				float: left;
-				padding: 3px;
-			}
-
-			.histo-rate {
-				width: 100%;
-				display: block;
-				clear: both;
-			}
-
-			.bar-block {
-				margin-left: 5px;
-				color: black;
-				display: block;
-				float: left;
-				width: 75%;
-				position: relative;
-			}
-
-			.bar {
-				padding: 4px;
-				display: block;
-			}
-
-			#bar-five {
-				width: 0;
-				background-color: #9fc05a;
-			}
-
-			#bar-four {
-				width: 0;
-				background-color: #add633;
-			}
-
-			#bar-three {
-				width: 0;
-				background-color: #ffd834;
-			}
-
-			#bar-two {
-				width: 0;
-				background-color: #ffb234;
-			}
-
-			#bar-one {
-				width: 0;
-				background-color: #ff8b5a;
-				// margin-left: 2px;
+			.closebtn:hover {
+				color: #000;
 			}
 		}
-
-		.review {
-			// margin: 0% 5% 0% 5%;
-			margin-top: 50px;
-			margin-bottom: 50px;
-			grid-area: revData;
-			display: grid;
-			grid-template-columns: 10% 10% 20% 50%;
-			border-top: 3px lightgray solid;
-			grid-template-rows: 5% 95%;
-			grid-template-areas: ". revProfIcon revName revData ";
-			.revProfIcon {
-				grid-area: revProfIcon;
-				.revProfImg {
-					height: 100px;
-					width: 100px;
-				}
-			}
-			.revName {
-				margin-top: 1%;
-				grid-area: revName;
-				.rName {
-					grid-area: rName;
-				}
-				.rAgo {
-					grid-area: rAgo;
-				}
-			}
-			.revData {
-				margin-top: 1%;
-	
-				grid-area: revData;
-				grid-template-columns: auto;
-				grid-template-rows: repeat(4, auto);
-				grid-template-areas:
-					"rTitile"
-					"rDesc"
-					"rstarLikes"
-					"revIcon";
-				.rTitle {
-					grid-area: rTitle;
-				}
-				.rDesc {
-					grid-area: rDesc;
-				}
-				.starLikes {
-					display: grid;
-					grid-template-columns: 3rem 3rem 3rem 3rem 5rem auto;
-					grid-template-rows: auto auto;
-					grid-template-areas: "icLike likeCount icDislike dislikeCount btnReport ";
-					grid-area: starLikes;
-					.icLike {
-						grid-area: icLike;
-						width: 30px;
-						height: 30px;
-						transform: translate(0px, 0px);
-					}
-					.likeCount {
-						grid-area: likeCount;
-						transform: translate(0px, 0px);
-					}
-					.icDislike {
-						grid-area: icDislike;
-						width: 30px;
-						height: 30px;
-						transform: translate(0px, 0px);
-					}
-					.dislikeCount {
-						grid-area: dislikeCount;
-						transform: translate(0px, 0px);
-					}
-					.btnReport {
-						grid-area: btnReport;
-					}
-				}
-				.revIcon {
-					grid-area: revIcon;
-					width: 100px;
-					height: 100px;
-					float: left;
-				}
-			}
-		}
+	}
+	.btnRfq {
+		grid-area: btnRfq;
 	}
 }

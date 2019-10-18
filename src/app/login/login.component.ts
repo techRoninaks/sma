@@ -32,12 +32,19 @@ export class LoginComponent implements OnInit {
   fp_mobile: any ="" ;
   fp_new_password: any ="" ;
   username: any ="";
+  location: any ="";
+  cookie_uname: String;
+  cookie_user_id: String;
+  city: String;
+  pin: String;
+  seller_name: String;
+  cookie_seller_id: String;
+  dynamicDataLocation :any ="";
 
     constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
       this.loginForm = this.formBuilderLogin.group({
         login_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
         login_password: ['',Validators.required],
-        login_checkbox:['',Validators.required],
       })
       this.fpFormMobile = this.formBuilderMobile.group({
         fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
@@ -76,6 +83,7 @@ export class LoginComponent implements OnInit {
       console.log('Name: ' + profile.getName());
       console.log('Image URL: ' + profile.getImageUrl());
       console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      this.router.navigate(['/plandetails']);
     }
 
     googleSignIn(){
@@ -107,17 +115,44 @@ export class LoginComponent implements OnInit {
       }
       else
       {  
-        // console.log(this.loginForm.value);
         this.data.attemptLogin(this.loginForm.value).subscribe(
           data=>{
-                  // this.username=this.loginForm.controls['login_email'].value;
+                  
                   console.log(data);
-                  if(data =="Success")
+                  if(data['status'] =="Success1")
                   {
                     alert('Login Successfully');
-                    this.setCookie("userName",data['username']);
-                    console.log(this.getCookie('userName'));
-                    this.router.navigate(['/Plandetails']);
+                    this.cookie_uname = data['username'];
+                    this.cookie_user_id = data['userid'];
+                    this.city =data['city'];
+                    this.pin =data['pincode'];
+                    this.setCookie("isLoggedIn",1);
+                    this.setCookie("userCity",this.city);
+                    this.setCookie("userPin",this.pin);
+                    this.setCookie("userName",this.cookie_uname);
+                    this.setCookie("userId",this.cookie_user_id);
+                    document.getElementById("headerLogin").innerText = this.cookie_uname as string;
+                    document.getElementById("loginButton").innerText ="Log Out";
+                    document.getElementById("locationlabel").innerText = this.city as string;
+                    document.getElementById("pinlabel").innerText = this.pin as string;
+                    this.router.navigate(['/']);
+                  }
+                  else if(data['status'] =="Success2")
+                  {
+                    this.cookie_seller_id = data['sellerId'];
+                    this.seller_name =data['seller_name'];
+                    this.city =data['city'];
+                    this.pin =data['pincode'];
+                    this.setCookie("isLoggedIn",1);
+                    this.setCookie("sellerCity",this.city);
+                    this.setCookie("sellerPin",this.pin);
+                    this.setCookie("sellerId",this.cookie_seller_id);
+                    this.setCookie("sellerName",this.seller_name);
+                    document.getElementById("headerLogin").innerText = this.seller_name as string;
+                    document.getElementById("loginButton").innerText ="Log Out";
+                    document.getElementById("locationlabel").innerText = this.city as string;
+                    document.getElementById("pinlabel").innerText = this.pin as string;
+                    this.router.navigate(['/dashboard']);
                   }
                   else
                   {
@@ -140,13 +175,13 @@ export class LoginComponent implements OnInit {
           data => {
             // this.fpFormMobile.controls['fp_mobile_no'].setValue('');
             if (data == "Found") {
-              alert('Mobile No Found');
+              alert('OTP Sent Successfully');
               this.gotp = this.generateOTP();
               this.requestOtp(this.gotp, this.fpmobile);
 
             }
             else {
-              alert('Mobile No not Found');
+              alert('Mobile Number is not Registered');
             }
           },
           error => console.error(error)
@@ -213,13 +248,13 @@ export class LoginComponent implements OnInit {
           {
             alert('Password Changed Successfully');
             $("#myModal").modal('hide');
-            this.router.navigate(['/Login']);
+            this.router.navigate(['/login']);
           }
           else
           {
             alert('Error Try Again');
             $("#myModal").modal('hide');
-            this.router.navigate(['/Login']);
+            this.router.navigate(['/login']);
           }
         },
       error => console.error(error)

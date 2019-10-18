@@ -32,63 +32,64 @@
                     <div class="card-body" id="filterbody">
                         <div class="filterSet1">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Category</a>
+                                <li class="liFilterHeads">Category
                                     <ul id="ulCategory">
-
+                                        <li *ngFor="let sub of Object.keys(subCategory)" [routerLink]="['/category']"
+                                            [queryParams]="{cat_id:subCategory[sub].categoryId}">
+                                            {{subCategory[sub].category}}</li>
                                     </ul>
                                 </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Price</a>
-                                    <ul id="ulPrice">
-
-                                    </ul>
+                                <li class="liFilterHeads">Price<br>
+                                    <select id="tminPrice" (change)="changeMaxPrice()">
+                                        <option *ngFor="let price of Object.keys(priceRange)">{{priceRange[price]}}
+                                        </option>
+                                    </select>&emsp;to&emsp;<select id="tmaxPrice">
+                                        <option *ngFor="let price of Object.keys(maxPriceRange)">
+                                            {{maxPriceRange[price]}}</option>
+                                    </select>
                                 </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Rating</a>
-                                    <ul id="ulRating">
-
-                                    </ul>
-                                </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Free Shipping</a>
-                                    <ul class="ulShipping">
-
-                                    </ul>
+                                <li class="liFilterHeads">Rating<br>
+                                    <input type="range" min="0" max="5" value="0" class="slider" id="tRating"
+                                        (input)="selectRating()">
+                                    <span id="tRatDisp"></span>
                                 </li>
                             </ul>
                         </div>
                         <div class="filterSet2">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Customisible</a>
-                                    <ul id="ulCustom">
-
-                                    </ul>
-                                </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Variants</a>
+                                <li class="liFilterHeads">Variants
                                     <ul id="ulVariants">
-
+                                        <li *ngFor="let names of Object.keys(variants)">
+                                            <input type="checkbox" name="variantBtn" id="{{variants[names]}}">
+                                            {{variants[names]}}
+                                        </li>
                                     </ul>
                                 </li>
-                                <li class="liFilterHeads"><a href="#nowhere">RFQ Enabled</a>
-                                    <ul id="ulRfq">
-
-                                    </ul>
+                                <li class="liFilterHeads"><input type="checkbox" id="orderCon"> Order Confirmation
                                 </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Order Status</a>
-                                    <ul id="ulOrder">
-
+                                <li class="liFilterHeads">Delivery Methods
+                                    <ul id="ulDelivery">
+                                        <li *ngFor="let names of Object.keys(shipMethods)">
+                                            <input type="checkbox" name="shipBtn" id="{{shipMethods[names]}}">
+                                            {{shipMethods[names]}}
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                         <div class="filterSet3">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Instant Buy</a>
-                                    <ul id="ulInstBuy">
+                                <li class="liFilterHeads">
+                                    <input type="checkbox" id="tFShip"> Free Shipping
 
-                                    </ul>
                                 </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Delivery Methods</a>
-                                    <ul id="ulDelivery">
+                                <li class="liFilterHeads">
+                                    <input type="checkbox" id="tRfq"> RFQ Enabled
 
-                                    </ul>
+                                </li>
+                                <li class="liFilterHeads">
+                                    <input type="checkbox" id="tInstant"> Instant Buy
+
                                 </li>
                             </ul>
                         </div>
@@ -132,12 +133,11 @@
                         </div>
                     </div>
                     <div class="dvFilterSummary">
-                        <div class="dvFilterChips" *ngIf="filterArray.length > 0">
-                            <div *ngFor="let chip of filterArray">
+                        <div class="dvFilterChips">
+                            <div *ngFor="let chip of Object.keys(filterArray)">
                                 <div class="chip" id={{chip}}>
                                     <div class="dvChipText">{{chip}}</div>
-                                    <span class="closebtn"
-                                        (click)="deleteFilter(chip)">&times;</span>
+                                    <span class="closebtn" (click)="deleteFilter(chip)">&times;</span>
                                 </div>
                             </div>
 
@@ -151,44 +151,44 @@
                     <div class="card-body" id="sortbody">
                         <div class="sortSet1">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Price</a>
-
-                                <li class="liFilterHeads"><a href="#nowhere">Latest</a>
+                                <li class="liFilterHeads">Price
                                     <ul>
-
+                                        <li><input type="radio" name="sortBtn" id="tpriceLow"> Low to High</li>
+                                        <li><input type="radio" name="sortBtn" id="tpriceHigh"> High to Low</li>
                                     </ul>
                                 </li>
-
+                                <li class="liFilterHeads">
+                                    <input type="radio" name="sortBtn" id="tlatest"> Latest
+                                </li>
                             </ul>
                         </div>
                         <div class="sortSet2">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Popularity</a>
-                                    <ul>
-
-                                    </ul>
-                                </li>
                                 <li class="liFilterHeads">
-                                    <a href="#nowhere">Processing Time</a>
-                                    <ul class="">
-
+                                    <input type="radio" name="sortBtn" id="tpopularity"> Popularity
+                                </li>
+                                <li class="liFilterHeads">Processing Time
+                                    <ul>
+                                        <li><input type="radio" name="sortBtn" id="tproLH"> Low to High</li>
+                                        <li><input type="radio" name="sortBtn" id="tproHL"> High to Low</li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                         <div class="sortSet3">
                             <ul class="ulFilterHeads">
-                                <li class="liFilterHeads"><a href="#nowhere">Rating</a>
+                                <li class="liFilterHeads">Shipping Price
                                     <ul>
-
-                                    </ul>
-                                </li>
-                                <li class="liFilterHeads"><a href="#nowhere">Shipping Price</a>
-                                    <ul>
-
+                                        <li><input type="radio" name="sortBtn" id="tShipLH"> Low to High</li>
+                                        <li><input type="radio" name="sortBtn" id="tShipHL"> High to Low</li>
                                     </ul>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div class="dvSortSummary">
+                        <div class="dvBtnSApply">
+                            <button class="btnSApply" (click)="applySort()">APPLY</button>
                         </div>
                     </div>
                 </div>
@@ -205,12 +205,12 @@
     </div>
 
     <!-- Main -->
-    <div class="dvCatMain">
+    <div class="dvCatMain" id="productListing">
         <div class="dvCard" *ngFor="let item of Object.keys(array12)">
             <div class="dvCardLogo">
                 <div class="dvLogo">
-                    <img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png"
-                        [routerLink]="['/shop']" [queryParams]="{shop_id:item}">
+                    <img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png" [routerLink]="['/shop']"
+                        [queryParams]="{shop_id:array12[item].shopId}">
                 </div>
                 <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
                     <div class="dvShopName">
@@ -221,7 +221,8 @@
                     </div>
                 </div>
             </div>
-            <div class="dvCardBanner" [routerLink]="['/listing']" [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
+            <div class="dvCardBanner" [routerLink]="['/listing']"
+                [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
                 <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
                 <div class="dvUndeliver">
                     <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
@@ -237,7 +238,7 @@
                             <i class="fa fa-star" *ngFor="let item of filledStar"></i>
                             <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
                         </div>
- 
+
                     </div>
                 </div>
                 <div class="dvDetails">
@@ -245,22 +246,94 @@
                 </div>
             </div>
             <div class="dvCardPrice">
-                <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
-                <p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
-                <p class="pOffer">({{array12[item].offerPercent}}%)</p>
-                <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+                <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice - (array12[item].basePrice*array12[item].offerPercent/100)}}&emsp;</p>
+                <p class="pActualPrice" *ngIf="array12[item].offerPercent > 0"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
+                <p class="pOffer" *ngIf="array12[item].offerPercent > 0">({{array12[item].offerPercent}}%)</p>
+                <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1" disabled>RFQ</button>
             </div>
         </div>
     </div>
+    <!-- Shop by store -->
+    <div class="dvShopMain" id="shopByStore" style="display: none;">
+        <div class="dvCard" *ngFor="let item of Object.keys(array12)">
+            <div class="dvCardLogo">
+                <div class="dvLogo">
+                    <img class="imgLogo" src=" assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopId}}_logo.jpg" [routerLink]="['/shop']"
+                        [queryParams]="{shop_id:array12[item].shopId}">
+                </div>
+                <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
+                    <div class="dvShopName">
+                        <p>{{array12[item].shopName}}</p>
+                    </div>
+                    <div class="dvSellerName">
+                        <p>{{array12[item].sellerName}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvCardBanner" (click)="shopById(array12[item].shopId)">
+                <img class="imgBanner" src=" assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopId}}_cover.jpg">
+            </div>
+            <div class="dvCardName">
+                <div class="dvProduct">
+                    <div class="dvProdName">
+                        <p>{{array12[item].prodName}}</p>
+                    </div>
+                    <div class="dvRating">
+                        <div>
+                            <i class="fa fa-star" *ngFor="let item of filledStar"></i>
+                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        </div>
 
+                    </div>
+                </div>
+                <div class="dvDetails">
+                    <p>{{array12[item].desc}}</p>
+                </div>
+            </div>
+            <div class="dvCardPrice">
+                <img class="pPrice" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <img class="pActualPrice" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <img class="pOffer" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopImg1}}.jpg">
+                <!-- <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button> -->
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <div class="dvCatFooter">
         <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" href="#" *ngIf="totPages.length>1">Previous</a></li>
+            <li class="page-item" *ngFor="let page of totPages"><a class="page-link" href="#">{{page}}</a></li>
+            <li class="page-item"><a class="page-link" href="#" *ngIf="totPages.length>1">Next</a></li>
         </ul>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader" id="load"></div>
+
+    <!-- Popup here -->
+    <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="display: block !important;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title popHeadText" [innerHTML]="popHeader"></h4>
+                    </div>
+                    <div class="dvImgPop">
+                        <img src="{{popImgSrc}}" class="imgPop">
+                    </div>
+                    <div class="modal-body popText">
+                        <p [innerHTML]="popContent"></p>
+                        <button class="btn" (click)='goHome()'>HOME</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>

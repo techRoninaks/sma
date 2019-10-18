@@ -10,8 +10,8 @@
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
           <a class="nav-link">
             <div class="dropdown">
-                <button class="dropbtn"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%"> Deliver to</button>
-                  <div class="dropdown-content">
+                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;<label id="locationlabel">{{location}}</label>&nbsp;<label id="pinlabel">{{pin}}</label></button>
+                  <div class="dropdown-content" id="location_drop_down">
                   <li>
                     <div>
                       <input type="text" size= "16" class="input_style" placeholder="Enter pincode">
@@ -22,6 +22,9 @@
                           <button type="submit" class="btn_style">Apply</button>
                       </div>
                   </li>
+                  <li>
+                      <button style="border: none; background: inherit; margin-left: 155px;" (click)="closeLocation()">x</button>
+                  </li>
                   </div>
             </div>
           </a>
@@ -30,26 +33,29 @@
         <!-- </div> -->
       </li>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control-custom" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-custom btn-outline-success my-2 my-sm-0" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button>
+        <input class="form-control-custom" type="search"(enter)="searchKeyLog()" id="searchField" placeholder="Search" aria-label="Search">
+        <button class="btn btn-custom btn-outline-success my-2 my-sm-0"(click)="searchKeyLog()" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button>
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
-          <a class="nav-link header-sell-with-us" routerLink="/SignupSeller">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding">Sell with Us <span class="sr-only">(current)</span></a>
         </li>
         <!-- <li class="nav-item active ml-auto">
           <a class="nav-link header-sell-with-us" routerLink="/category">Shop by Store <span class="sr-only">(current)</span></a>
         </li> -->
         <li class="nav-item ml-auto">
-          <div class="dropdown">
-
-              <button class="dropbtn-login" routerLink="/Login"><img src="assets/images/icons/ic_user.png" height="25px" width="25px">  Login</button>
-                <div class="dropdown-content2">
-                <li><a href="#myorders">My orders</a></li>
-                <li><a href="#mymessages">My messages</a></li>
-                <li><a href="#notifications">My notifications</a></li>
-                <li><a href="#favshops">My fav shops</a></li>
-                <li><a href="#myaccounts">My accounts</a></li>
+          <div class="dropdown-profile">
+              <button class="dropbtn-login" (click)="open()"><img src="assets/images/icons/ic_user.png" height="25px" width="25px">
+                <label id="headerLogin">{{temp}}</label>
+              </button>
+                <div class="dropdown-content2" id="profilemenu">
+                  <li><a href=#>My orders</a></li>
+                  <li><a href=#>My messages</a></li>
+                  <li><a href=#>My notifications</a></li>
+                  <li><a href=#>My fav shops</a></li>
+                  <li><a href=#>My accounts</a></li>
+                  <li><button style="border: none; background: inherit;"(click)="logOut()" id="loginButton">{{temp1}}</button></li>
+                  <li><button style="border: none; background: inherit;"(click)="close()" id="closeButton">close</button></li>
                 </div>
           </div>
         </li>
@@ -59,32 +65,108 @@
       </ul>
     </div>
   </nav>
-  <div class="header-category-bar">
+  <div class="header-category-bar" id="sellerHeader">
     <div class="hamburger-div">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <li><a href="#aboutus">About Us</a></li>
-            <li><a href="#contactus">Contact Us</a></li>
-            <li><a href="#blogs">Blogs</a></li>
-            <li><a href="#lookbook">Lookbook</a></li>
-            <li><a href="#career">Career</a></li>
-            <li><a routerLink="/terms&conditions">Terms & conditions</a></li>
+            <li><a routerLink="" onclick="closeNav()">About Us</a></li>
+            <li><a routerLink="/contact" onclick="closeNav()">Contact Us</a></li>
+            <li><a routerLink="" onclick="closeNav()">Blogs</a></li>
+            <li><a routerLink="" onclick="closeNav()">Lookbook</a></li>
+            <li><a routerLink="" onclick="closeNav()">Career</a></li>
+            <li><a routerLink="/terms&conditions" onclick="closeNav()">Terms & conditions</a></li>
         </div>
           
     </div>
       <div class="scrollmenu">
           <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
         <div class="dropdown">
-          <button class="dropbtn-cat"><a href="#mom_kids">Mom & Kids</a></button>
-          <button class="dropbtn-cat"><a href="#mens">Mens</a></button>
-          <button class="dropbtn-cat"><a href="#womens">Womens</a></button>
-          <button class="dropbtn-cat"><a href="#paintings">Painting & Arts</a></button>
-          <button class="dropbtn-cat"><a href="#handcrafts">Hand Craft</a></button>
-          <button class="dropbtn-cat"><a href="#accessories">Accessories</a></button>
-          <button class="dropbtn-cat"><a href="#apparels">Apperels</a></button>
-          <button class="dropbtn-cat"><a href="#cakes">Cakes</a></button>
-          <!-- <button class="dropbtn-cat"><a href="#woodworks">Woodworks</a></button>
-          <button class="dropbtn-cat"><a href="#glassworks">Glassworks</a></button> -->
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:13}">Painting & Arts</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:14}">Hand Craft</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button>
+              
+            <!-- <div class="header-navbar">
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                      <button class="header-subnavbtn">Mom & Kids</button>
+                      <div class="header-subnav-content">
+                        <a href="">Clothes</a>
+                        <a href="">Footwears</a>
+                      </div>
+                    </div>
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                    <button class="header-subnavbtn">Mens</button>
+                    <div class="header-subnav-content">
+                      <a href="">Shirts</a>
+                      <a href="">Jeans</a>
+                      <a href="">T-shirts</a>
+                    </div>
+                  </div> 
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                    <button class="header-subnavbtn">Womens</button>
+                    <div class="header-subnav-content">
+                      <a href="">Clothes</a>
+                      <a href="">Accessories</a>
+                      <a href="">Bags</a>
+                      <a href="">Footwears</a>
+                    </div>
+                  </div> 
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                    <button class="header-subnavbtn">Painting & Arts</button>
+                    <div class="header-subnav-content">
+                      <a href="">Illustraions</a>
+                      <a href="">Portrait</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                      <button class="header-subnavbtn">Hand Craft</button>
+                      <div class="header-subnav-content">
+                        <a href="">Illustraions</a>
+                        <a href="">Portrait</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                      <button class="header-subnavbtn">Accessories</button>
+                      <div class="header-subnav-content">
+                        <a href="">Bags</a>
+                        <a href="">Pouches</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                      <button class="header-subnavbtn">Apperels</button>
+                      <div class="header-subnav-content">
+                        <a href="">Bags</a>
+                        <a href="">Pouches</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="dropbtn-cat">
+                  <div class="header-subnav">
+                      <button class="header-subnavbtn">Cakes</button>
+                      <div class="header-subnav-content">
+                        <a href="">Blackforest</a>
+                        <a href="">Whiteforest</a>
+                      </div>
+                  </div>
+                </div>
+          </div> -->
         </div>
       </div> 
   </div>
@@ -98,18 +180,26 @@
             <div class="modal-dialog">
               <div class="modal-content ">
                 <div class="modal-header ">
+                  <label style="color: white; margin-left:138px;"><h4>LOGIN / SIGNUP</h4></label>
                   <button type="button" class="close" data-dismiss="modal" (click)="dispNone();">&times;</button>
                 </div>
                   <div class="modal-body">
-                      <button type="button" routerLink="/Login">
+                      <!-- <button type="button" routerLink="/login" style="margin-left: 126px;">
                           LOGIN TO SCOOPMYART
                       </button>
                       <br>
-                      <label>or</label>
+                      <label style="margin-left: 224px;">or</label>
                       <br>
-                      <button type="button" routerLink="/SignUp">
+                      <button type="button" routerLink="/signup" style="margin-left: 184px;">
                           SIGN UP
-                      </button>
+                      </button> -->
+                      <input type="email" placeholder="Email:" style="border: none; margin-left: 135px;">
+                      <br>
+                      <input type="password" placeholder="Password:" style="border: none; margin-left: 135px;">
+                      <br>
+                      <label style="margin-left: 135px;">forget password</label>
+                      <br>
+                      <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;<label>I agree to the terms</label> &nbsp;&nbsp; <button style="background: #EFBE24; border: none;" routerLink="/login" (click)=closePop()><label style="color: white">SIGNIN</label></button>
                   </div>
               </div>
             </div>

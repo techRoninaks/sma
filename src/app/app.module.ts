@@ -32,6 +32,15 @@ import * as bootstrap from 'bootstrap';
 import * as $ from "jquery";
 import { MatInputModule, MatFormFieldModule} from '@angular/material';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { ManageshopComponent } from './manageshop/manageshop.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ContactComponent } from './contact/contact.component';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { MatAutocompleteModule} from '@angular/material';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -50,8 +59,16 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
     CartComponent,
     RegistrationSellerComponent,
     TransactionComponent,
+    ManageshopComponent,
+    OrdersComponent,
+    ManageOrdersComponent,
+    DashboardComponent,
+    ContactComponent,
+    AddProductComponent,
     SellerlandingComponent,
+    MessagesComponent,
     TermsConditionsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +78,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
     MatInputModule,
     // ActivatedRoute,
     MatFormFieldModule,
+    ChartsModule ,
     MatExpansionModule,
     AppRoutingModule,
     FormsModule,
@@ -68,13 +86,15 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
     MatGridListModule,
     MatCardModule, 
     MatButtonModule, 
+    MatAutocompleteModule,
+    
     RouterModule.forRoot([
       {
-        path: 'Plandetails',
+        path: 'plandetails',
         component: PlandetailsComponent,
       },
       {
-        path: 'Login',
+        path: 'login',
         component: LoginComponent
       },
     ])

@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header></app-header>
 <!-- <app-test></app-test> -->
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-<router-outlet></router-outlet>
+<div class="g-signin2" data-onsuccess="onSignIn" style="display: none;"></div>
+<router-outlet (activate)="onActivate($event)"></router-outlet>
 <app-footer></app-footer>
 
 

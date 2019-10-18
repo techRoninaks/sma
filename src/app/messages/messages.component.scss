@@ -1,0 +1,134 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+
+
+.dvMsgCat{
+    display: grid;
+    grid-template-columns: repeat(5,20%);
+    margin: 5% 10%;
+    width: auto;
+    box-shadow: 1px 1px 10px 1px lightGray;
+    .dvMsgBtn{
+        display: grid;
+        justify-self: center;
+        .btnMsg{
+            cursor: pointer;
+            font-family: BitterBold;
+            color: black;
+            background: $smaLightGray;
+            border: 1px solid lightgray;
+            padding: 5px;
+            &:hover{
+                background: $smaYellow;
+            }
+        }
+    }
+}
+
+.dvMsgBody{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-areas: "dv-sidebar dv-content";
+    margin: 5% 10%;
+    width: auto;
+    height: 400px;
+    padding: 10px;
+    background: $smaLightGray;
+
+    .dvMsgSidebar{
+        grid-area: dv-sidebar;
+        grid-template-rows: 10% 10% auto auto;
+        grid-template-areas: "srch-bar" "sort-bar" "dv-drp-1" "dv-drp-2";
+        background: white;
+        padding: 10px;
+        
+        .dvSrchBar{
+            grid-area: srch-bar;
+            text-align: center;
+            
+            input[type=text] {
+                padding: 6px;
+                border: none;
+                background: $smaLightGray;
+                font-family: Bitter;
+                font-size: small;
+            }
+            .srchBtn{
+                vertical-align: middle;
+                background: $smaLightGray;
+            }
+        }
+        .dvSortBar{
+            grid-area: sort-bar;
+            padding: 10px;
+        }
+        .dvDrp1{
+            grid-area: dv-drp-1;
+        }
+        .dvDrp2{
+            grid-area: dv-drp-2;
+        }
+    }
+    .dvMsgContent{
+        grid-area: dv-content;
+        grid-template-rows: 80% 20%;
+        grid-template-areas: "dv-ui" "dv-input";
+        display: grid;
+
+        .dvMsgUi{
+            grid-area: dv-ui;
+        }
+        .dvMsgInput{
+            grid-area: dv-input;
+        }
+    }
+}

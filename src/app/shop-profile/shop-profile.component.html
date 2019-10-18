@@ -8,281 +8,309 @@
   </div>
 </div> -->
 <div class="gridT">
-	<!-- shop background image -->
-	<div class=shopBg>
-		<img src="assets/images/1920x640.jpg">
-	</div>
-	<!-- shop description -->
-	<div class=shopDescBio>
-		<div id="shopDesc">
-			<div id="shopLogo">
-				<img src="assets/images/photo3.jpg">
-			</div>
-			<div id=shopInfo>
-				<div id=shopStarFoll>
+    <!-- shop background image -->
+    <div class=shopBg>
+        <img src="assets/images/shop/{{token}}/{{token}}_cover.jpg">
+    </div>
+    <!-- shop description -->
+    <div class="shopDescBio">
+        <div class="shopDesc">
+            <div class="shopLogo">
+                <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
+            </div>
+            <div class="shopInfo">
+                <div class="shopStarFoll">
+                    <div class="shopStar">
+                        <div ng>
+                            <i class="fa fa-star" *ngFor="let item of filledStar" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        </div>
+                    </div>
+                    <div class="shopFollowers">
+                        <p>{{followC.folCount}} FOLLOWERS</p>
+                    </div>
+                </div>
+                <div class="shopDetails">
+                    <h4>{{shopData.shopName}}</h4>
+                    <h5>{{selName}}</h5>
+                    <!-- <a>{{mostSelling[0].name}}</a> -->
+                </div>
+                <div class="shopBtnInfo">
+                    <div class="dvFromRfq">
+                        From:<a>{{shopData.shopLocation}}</a><br>
+                        <button type="button" class="btRfq" data-target="#rfqPopup" data-toggle="modal">RFQ</button>
+                    </div>
+                    <div class="dvShipsFollow">
+                        Ships to:<a>All over India</a><br>
+                        <ng-container *ngIf="folResult; else notFollowing">
+                            <button type="button" class="btnFollowShop" (click)="unfollowShop();"><img
+                                    class="followIcon" src="assets/icons/resources (IL)-04.png">Unfollow</button>
+                        </ng-container>
+                        <ng-template #notFollowing>
+                            <button type="button" class="btnFollowShop" (click)="followShop();"><img class="followIcon"
+                                    src="assets/icons/resources (IL)-04.png">Follow</button>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shopBio">
+            <h3>Bio</h3>
+            <p>{{shopData.descriptionShop}}</p>
+        </div>
+    </div>
+    <!-- shop products -->
+    <div class="shopProducts">
+        <div class="dvCatMain">
+            <div class="dvCard" *ngFor="let item of Object.keys(array12)">
+                <div class="dvCardLogo">
+                    <div class="dvLogo">
+                        <img class="imgLogo" src="assets/images/shop/{{token}}/{{token}}_logo.jpg" [routerLink]="['/shop']"
+                            [queryParams]="{shop_id:array12[item].shopId}">
+                    </div>
+                    <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
+                        <div class="dvShopName">
+                            <p>{{array12[item].sellerName}}</p>
+                        </div>
+                        <div class="dvSellerName">
+                            <p>{{array12[item].sellerName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dvCardBanner" [routerLink]="['/listing']"
+                    [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
+                    <img class="imgBanner" src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
+                    <div class="dvUndeliver">
+                        <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
+                    </div>
+                </div>
+                <div class="dvCardName">
+                    <div class="dvProduct">
+                        <div class="dvProdName">
+                            <p>{{array12[item].prodName}}</p>
+                        </div>
+                        <div class="dvRating">
+                            <div>
+                                <i class="fa fa-star" *ngFor="let item of filledStar"></i>
+                                <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dvDetails">
+                        <p>{{array12[item].desc}}</p>
+                    </div>
+                </div>
+                <div class="dvCardPrice">
+                    <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
+                    <p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
+                    <!-- <p class="pOffer">({{array12[item].offerPercent}}%)</p> -->
+                    <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+                </div>
+            </div>
+        </div>
+        <button class="dvMore" id="prodMore" (click)="showMoreProducts();">Show All</button>
+    </div>
+    <!-- shop shipment info -->
+    <div class="shopShipment">
+        <img src="assets/icons/resources (IL)-18.png">
+        <h2>SHIPMENT INFO</h2>
+        <div class="dvForm">
+            <form>
+                SHIPPING<input type="radio" value="oneDay" class="shipDelivery" name="delivery" disabled="true"
+                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery" name="delivery"
+                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery"
+                    name="delivery" disabled="true" id="pck">
+                <br>
+                <br> Average Processing Time : <a>5days</a><br> Average Shipping Time : <a> 5days</a><br> Average
+                Response Time : <a> 5days</a><br>
+            </form>
+        </div>
 
-				</div>
-				<div id=shopDetails>
-					<h4>{{shopData.shopName}}</h4>
-					<h5>By {{sellerDataShop.sellerName}}</h5>
-					<a>Main Selling Items</a>
-				</div>
-				<div id=shopBtnInfo>
-					<div id="dvFromRFQ">
-						From:<a>kochi</a><br>
-						<button id="btnRfq">RFQ</button>
-					</div>
-					<div id="dvShipsFollow">
-						Ships to:<a>All over India</a><br>
-						<ng-container *ngIf="folResult; else notFollowing">
-							<button type="button" class="btnFollowShop" (click)="unfollowShop();"><img
-									class="followIcon" src="assets/icons/resources (IL)-04.png">Unfollow</button>
-						</ng-container>
-						<ng-template #notFollowing>
-							<button type="button" class="btnFollowShop" (click)="followShop();"><img class="followIcon"
-									src="assets/icons/resources (IL)-04.png">Follow</button>
-						</ng-template>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="shopBio">
-			<h3>Bio</h3>
-			<p>{{shopData.descriptionShop}}</p>
-		</div>
-	</div>
-	<!-- shop products -->
-	<div class=shopProducts>
-		<div class="dvCatMain">
+    </div>
+    <!-- shop policies -->
+    <div class="shopPolicies">
+        <div class="prodPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>PRODUCT POLICIES</h2>
+            <p>{{dynamicData.prodPolicy}}</p>
+        </div>
+        <div class="shopPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>SHOP POLICIES</h2>
+            <p>{{shopData.shopPolicy}}</p>
+        </div>
+        <div class="shipPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>SHIP POLICIES</h2>
+            <p>{{dynamicData.shipPolicy}}</p>
+        </div>
+        <div class="retPolicy">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>RETURN POLICIES</h2>
+            <p>{{dynamicData.returnPolicy}}</p>
+        </div>
+    </div>
 
-			<div class="dvCard" *ngFor="let item of Object.keys(array12)">
+    <!-- shop ratings and reviews -->
+    <div class="shopRatingReview">
+        <img src="assets/icons/resources (IL)-18.png">
+        <h2>RATING & REVIEWS</h2>
+        <div class="rating">
+            <div class="inner">
+                <div class="rating">
+                    <span class="rating-num">{{shopData.ratingShop}}</span>
+                    <div class="rating-stars">
+                        <div>
+                            <i class="fa fa-star active" *ngFor="let item of filledStar"  style="color: #efbe24"></i>
+                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        </div>
+                    </div>
+                    <div class="rating-users">
+                        <i class="icon-user"></i> {{shopData.ratingCountShop}}
+                    </div>
+                </div>
 
-				<div class="dvCardLogo">
+                <div class="histo">
+                    <div class="five histo-rate">
+                        <span class="histo-star">
+                            <i class="active icon-star"></i> 5 </span>
+                        <span class="bar-block">
+                            <span id="bar-five" class="bar" [style.width.%]="bar5">
+                                <span>{{ratingData.rat5}}</span>&nbsp;
+                            </span>
+                        </span>
+                    </div>
 
-					<div class="dvLogo">
+                    <div class="four histo-rate">
+                        <span class="histo-star">
+                            <i class="active icon-star"></i> 4 </span>
+                        <span class="bar-block">
+                            <span id="bar-four" class="bar" [style.width.%]="bar4">
+                                <span>{{ratingData.rat4}}</span>&nbsp;
+                            </span>
+                        </span>
+                    </div>
 
-						<img class="imgLogo" src=" assets/images/logo/resources (CL)-21.png" [routerLink]="['/shop']"
-							[queryParams]="{shop_id:item}">
+                    <div class="three histo-rate">
+                        <span class="histo-star">
+                            <i class="active icon-star"></i> 3 </span>
+                        <span class="bar-block">
+                            <span id="bar-three" class="bar" [style.width.%]="bar3">
+                                <span>{{ratingData.rat3}}</span>&nbsp;
+                            </span>
+                        </span>
+                    </div>
 
-					</div>
+                    <div class="two histo-rate">
+                        <span class="histo-star">
+                            <i class="active icon-star"></i> 2 </span>
+                        <span class="bar-block">
+                            <span id="bar-two" class="bar"[style.width.%]="bar2">
+                                <span>{{ratingData.rat2}}</span>&nbsp;
+                            </span>
+                        </span>
+                    </div>
 
-					<div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
-
-						<div class="dvShopName">
-
-							<p>{{array12[item].sellerName}}</p>
-
-						</div>
-
-						<div class="dvSellerName">
-
-							<p>{{array12[item].sellerName}}</p>
-
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="dvCardBanner" [routerLink]="['/listing']"
-					[queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-
-					<img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
-
-					<div class="dvUndeliver">
-
-						<div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
-
-					</div>
-
-				</div>
-
-				<div class="dvCardName">
-
-					<div class="dvProduct">
-
-						<div class="dvProdName">
-
-							<p>{{array12[item].prodName}}</p>
-
-						</div>
-
-						<div class="dvRating">
-
-							<div>
-
-								<i class="fa fa-star" *ngFor="let item of filledStar"></i>
-
-								<i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
-
-							</div>
-
-
-
-						</div>
-
-					</div>
-
-					<div class="dvDetails">
-
-						<p>{{array12[item].desc}}</p>
-
-					</div>
-
-				</div>
-
-				<div class="dvCardPrice">
-
-					<p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
-
-					<p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
-
-					<!-- <p class="pOffer">({{array12[item].offerPercent}}%)</p> -->
-
-					<button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-	<!-- shop shipment info -->
-	<div class=shopShipment>
-		<img src="assets/icons/resources (IL)-18.png">
-		<h2>SHIPMENT INFO</h2>
-		<div id="dvForm">
-			<form>
-				ONE DAY DELIVERY<input type="radio" value="oneDay" id="odDelivery" name="delivery" checked>
-				CASH ON DELIVERY<input type="radio" value="cashOn" id="coDelivery" name="delivery">
-				DOOR TO DOOR DELIVERY<input type="radio" value="doorTD" id="dtdDelivery" name="delivery">
-				<br>
-				<br>
-				Average Processing Time : <a>5days</a><br>
-				Average Shipping Time : <a> 5days</a><br>
-				Average Response Time : <a> 5days</a><br>
-			</form>
-		</div>
-
-	</div>
-	<!-- shop policies -->
-	<div class=shopPolicies>
-		<div class="prodPolicy">
-			<img src="assets/icons/resources (IL)-18.png">
-			<h2>PRODUCT POLICIES</h2>
-			<p>{{dynamicData.prodPolicy}}</p>
-		</div>
-		<div class="shopPolicy">
-			<img src="assets/icons/resources (IL)-18.png">
-			<h2>SHOP POLICIES</h2>
-			<p>{{shopData.shopPolicy}}</p>
-		</div>
-		<div class="shipPolicy">
-			<img src="assets/icons/resources (IL)-18.png">
-			<h2>SHIP POLICIES</h2>
-			<p>{{dynamicData.shipPolicy}}</p>
-		</div>
-	</div>
-
-	<!-- shop ratings and reviews -->
-	<div class=shopRatingReview>
-		<img src="assets/icons/resources (IL)-18.png">
-		<h2>RATING & REVIEWS</h2>
-		<div class="rating">
-			<div class="inner">
-				<div class="rating">
-					<span class="rating-num">{{shopData.ratingShop}}</span>
-					<div class="rating-stars">
-						<div>
-							<i class="fa fa-star active" *ngFor="let item of filledStarRat"></i>
-							<i class="fa fa-star-o" *ngFor="let item of unFilledStarRat"></i>
-						</div>
-					</div>
-					<div class="rating-users">
-						<i class="icon-user"></i> {{shopData.ratingCountShop}}
-					</div>
-				</div>
-
-				<div class="histo">
-					<div class="five histo-rate">
-						<span class="histo-star">
-							<i class="active icon-star"></i> 5 </span>
-						<span class="bar-block">
-							<span id="bar-five" class="bar">
-								<span>566,784</span>&nbsp;
-							</span>
-						</span>
-					</div>
-
-					<div class="four histo-rate">
-						<span class="histo-star">
-							<i class="active icon-star"></i> 4 </span>
-						<span class="bar-block">
-							<span id="bar-four" class="bar">
-								<span>171,298</span>&nbsp;
-							</span>
-						</span>
-					</div>
-
-					<div class="three histo-rate">
-						<span class="histo-star">
-							<i class="active icon-star"></i> 3 </span>
-						<span class="bar-block">
-							<span id="bar-three" class="bar">
-								<span>94,940</span>&nbsp;
-							</span>
-						</span>
-					</div>
-
-					<div class="two histo-rate">
-						<span class="histo-star">
-							<i class="active icon-star"></i> 2 </span>
-						<span class="bar-block">
-							<span id="bar-two" class="bar">
-								<span>44,525</span>&nbsp;
-							</span>
-						</span>
-					</div>
-
-					<div class="one histo-rate">
-						<span class="histo-star">
-							<i class="active icon-star"></i> 1 </span>
-						<span class="bar-block">
-							<span id="bar-one" class="bar">
-								<span>136,457</span>&nbsp;
-							</span>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="review" *ngFor="let item of Object.keys(ratingReviewShop)" id="{{item}}">
-			<div class="revProfIcon">
-				<img class="revProfImg" src="assets/icons/resources (IL)-21.png">
-			</div>
-			<div class="revName">
-				<p class=rName>Lorem</p>
-				<p class="rAgo">{{reviewDateDiff[item]}}</p>
-			</div>
-			<div class="revData">
-				<p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
-				<p class="rDesc">{{ratingReviewShop[item].review}}</p>
-				<div class="starLikes">
-					<img class="icLike" id="likeImg" (click)="likeCount(ratingReviewShop[item].reviewId);"
-						src="assets/icons/resources (IL)-10.png">
-					<p class="likeCount">{{ratingReviewShop[item].likes}}</p>
-					<img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
-						src="assets/icons/resources (IL)-11.png">
-					<p class="dislikeCount">{{ratingReviewShop[item].dislikes}}</p>
-					<button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
-					<div>
-						<i class="fa fa-star active" *ngFor="let item of filledStarRat"></i>
-						<i class="fa fa-star-o" *ngFor="let item of unFilledStarRat"></i>
-					</div>
-				</div>
-				<img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
-			</div>
-		</div>
-	</div>
+                    <div class="one histo-rate">
+                        <span class="histo-star">
+                            <i class="active icon-star"></i> 1 </span>
+                        <span class="bar-block">
+                            <span id="bar-one" class="bar" [style.width.%]="bar1">
+                                <span>{{ratingData.rat1}}</span>&nbsp;
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="review" *ngFor="let item of Object.keys(ratingReviewShop)" id="{{item}}">
+            <div class="revProfIcon">
+                <img class="revProfImg" src="assets/icons/resources (IL)-21.png">
+            </div>
+            <div class="revName">
+                <p class=rName>Lorem</p>
+                <p class="rAgo">{{reviewDateDiffShop[item]}}</p>
+            </div>
+            <div class="revData">
+                <p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
+                <p class="rDesc">{{ratingReviewShop[item].review}}</p>
+                <div class="starLikes">
+                    <img class="icLike" id="likeImg" (click)="likeCount(ratingReviewShop[item].reviewId);"
+                        src="assets/icons/resources (IL)-10.png">
+                    <p class="likeCount">{{ratingReviewShop[item].likes}}</p>
+                    <img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
+                        src="assets/icons/resources (IL)-11.png">
+                    <p class="dislikeCount">{{ratingReviewShop[item].dislikes}}</p>
+                    <button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
+                    <div (load)="reviewRatings(item);">
+                        <i class="fa fa-star active" *ngFor="let x of filledStarRat"></i>
+                        <i class="fa fa-star-o" *ngFor="let x of unFilledStarRat"></i>
+                    </div>
+                </div>
+                <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+            </div>
+        </div>
+    </div>
 </div>
+<!-- rfqPopup -->
+<div class="container" id="rfqPopupContainer " style="z-index: 10001; ">
+        <!-- <button type="button " class="btn btn-warning " data-toggle="modal " data-target="#rfqPopUP ">undeliverable</button> -->
+        <!-- Modal -->
+        <div class="modal fade" id="rfqPopup" role="dialog ">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content dvModalContent">
+                    <div class="modal-header dvModalHeader">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-bod" style="padding:0 10% 0 10%;">
+                        <div class="rfqForm">
+                            <div class="rfqSN">
+                                <p class="rfqShopName">Shop Name:</p>
+                                <input class="rfqShopNameInput" type="text" id="rfqShop"
+                                    value="{{shopData.shopName}}"><br>
+                            </div>
+                            <div class="rfqSL">
+                                <p class="rfqLocation">Location:</p>
+                                <select style="width: 16rem;">
+                                    <option class="rfqLocationInput" id="rfqLocations"
+                                        *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
+                                </select>
+                            </div>
+                            <div class="rfqN">
+                                <p class="rfqNote">Note:</p>
+                                <textarea class="rfqNoteInput" type="text" id="rfqNote"></textarea>
+                            </div>
+                            <div class="rfqTag">
+                                <p (click)="rfqDropdown()" class="dropBtnRfq">Tag Products</p>
+                                <div class="dropdownRfq">
+                                    <div id="rfqDropdown" class="dropdown-contentRfq ">
+                                        <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()">
+                                        <ul id="myUL" class="rfqUL" style="display: none;">
+                                            <li *ngFor="let inp of Object.keys(rfqInput)">
+                                                <a (click)="addTagProduct(rfqInput[inp].name);">
+                                                    {{rfqInput[inp].name}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chips">
+                                <div class="chipsOuter" *ngFor="let chi of Object.keys(prod)" id="{{prod[chi]}}">
+                                    <div class="chip">
+                                        {{prod[chi]}}
+                                        <!-- <span class="closebtn"
+                                            onclick="this.parentElement.style.display='none'">&times;</span> -->
+                                        <span class="closebtn" (click)="delProduct(prod[chi]+'!'+chi);">&times;</span>
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

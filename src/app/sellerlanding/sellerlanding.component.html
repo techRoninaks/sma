@@ -1,70 +1,214 @@
 <div class="mGrid">
     <div class="banner">
-        <div class="slideshow-container">
-
-            <div class="slideDots">
+        <div class="slideshow-container" id="slides">
+            <div class="slideDots" id="slides">
                 <span class="dot" (click)="currentSlide(1)"></span><br>
                 <span class="dot" (click)="currentSlide(2)"></span><br>
                 <span class="dot" (click)="currentSlide(3)"></span>
             </div>
-            <div class="mySlides fade">
-                <img class="slideImg" src="{{pageData['ad_banner_1']}}">
+            <div class="mySlides fade" id="slides">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_1']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_1.jpg">
+                
             </div>
 
-            <div class="mySlides fade">
-                <img class="slideImg" src="{{pageData['ad_banner_2']}}">
+            <div class="mySlides fade" id="slides">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_2']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_2.jpg">
             </div>
 
-            <div class="mySlides fade">
-                <img class="slideImg" src="{{pageData['ad_banner_3']}}">
-            </div>
-
-            <div class="">
-                <div class="dvPrev" id="prev">
-                    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
-                </div>
-                <div class="dvNext" if="next">
-                    <a class="next" (click)="plusSlides(1)">&#10095;</a>
-                </div>
+            <div class="mySlides fade" id="slides">
+                <!-- <img class="slideImg" src="{{pageData['ad_banner_3']}}"> -->
+                <img class="slideImg" src="assets/images/site/image/ad_banner_3.jpg">
             </div>
         </div>
-        <div class="slideVideo">
-            <video width="320" height="240" controls>
-                <source src="assets/videos/vid001.mp4" type="video/mp4">
-            </video>
+        <div class="nextPrev" id="slides">
+            <div class="dvPrev" id="prev">
+                <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+            </div>
+            <div class="dvNext" if="next">
+                <a class="next" (click)="plusSlides(1)">&#10095;</a>
+            </div>
         </div>
+        <img class="imgPlay" id="imgP" (click)="expandVid();" src="assets/icons/resources (SL)-42.png">
+        <img class="imgClose" id="imgC" (click)="shrinkVid();" src="assets/icons/resources (SL)-43.png">
+        <ng-container *ngIf="vidPlay; else fullVideo">
+            <ng-container *ngIf="first; else elseTemplate">
+                <div class="slideVideoSmall" style="width: 55rem;" id="vidTag">
+                    <video id="smallVideo" loop muted autoplay oncanplay="this.play()"
+                        onloadedmetadata="this.muted = true">
+                        <source src="assets/videos/site/video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <div class="slideVideoSmall" style="width: 55rem;top:-36rem;" id="vidTag">
+                    <video id="smallVideo" loop muted autoplay oncanplay="this.play()"
+                        onloadedmetadata="this.muted = true">
+                        <source src="assets/videos/site/video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </ng-template>
+
+
+        </ng-container>
+        <ng-template #fullVideo>
+            <div class="slideVideoLarge" style="top: -5rem;">
+                <video width="1980" height="640" controls>
+                    <source src="assets/videos/site/video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </ng-template>
+
     </div>
     <div class="about">
         <div class="aboutHeader">
             <img src="assets/icons/resources (IL)-18.png">
             <h2>ABOUT US</h2>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum
+            dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+            qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. </p>
     </div>
     <div class="spec">
+        <div class="spec1" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-28.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec2" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-29.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec3" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-30.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec4" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-31.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec5" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-32.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec6" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-33.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec7" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-34.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
+        <div class="spec8" id="specId">
+            <span class="circle"><img src="assets/icons/resources (SL)-35.png"></span>
+            <div class="headSpec" style="border-bottom: 2px solid lightgrey;">YOU ARE THE BOSS!</div>
+            <div class="bodySpec">{{dummyText}}</div>
+        </div>
     </div>
     <div class="banSmall">
-        <div class="banLeft">
+        <!-- <div class="banLeft">
             <p class="p1" id="leftWhite">3 Million</p>
             <p class="p2" id="leftBlack">Satisfied Customers</p>
             <p class="p3" id="leftWhite">70,000</p>
             <p class="p4" id="leftBlack">Trusted sellers</p>
-        </div>
-        <div class="banRight">
+        </div> -->
+        <div class="banRight" [routerLink]="['/contact']">
             <p>Setup Your shop <label style="color: #efbe24">NOW</label>!</p>
         </div>
     </div>
     <div class="howWork">
+        <div class="workHeader">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>HOW WE WORK</h2>
+        </div>
+        <div class="how1" style="border-right: 2px solid lightgrey;">
+            <img src="assets/icons/resources (SL)-20.png">
+            <div class="headHow">YOU ARE THE BOSS!</div>
+            <div class="bodyHow">
+                <p id="lDesc1">{{dummyText}}</p>
+            </div>
+            <button id="seeMore1" (click)="readMore('lDesc1');">SEE MORE</button>
+        </div>
+        <div class="how2" style="border-right: 2px solid lightgrey;">
+            <img src="assets/icons/resources (SL)-21.png">
+            <div class="headHow">YOU ARE THE BOSS!</div>
+            <div class="bodyHow">
+                <p id="lDesc2">{{dummyText}}</p>
+            </div>
+            <button id="seeMore2" (click)="readMore('lDesc2');">SEE MORE</button>
+        </div>
+        <div class="how3">
+            <img src="assets/icons/resources (SL)-22.png">
+            <div class="headHow">YOU ARE THE BOSS!</div>
+            <div class="bodyHow">
+                <p id="lDesc3">{{dummyText}}</p>
+            </div>
+            <button id="seeMore3" (click)="readMore('lDesc3');">SEE MORE</button>
+        </div>
     </div>
     <div class="quote">
+        <img class="quote" src="assets/icons/resources (SL)-41.png">
+        <img class="leftArrow" id="leftA" (click)="prev()" src="assets/icons/resources (SL)-40.png">
+        <img class="rightArrow" id="rightA" (click)="next()" src="assets/icons/resources (SL)-39.png">
+
+        <div class="post1" id="posts">
+            <div class="imgP"><img src="{{imgPost[testimonal1]}}" id="imageP"></div>
+            <div class="descP">
+                <p id="descriptionP">{{descPost[testimonal1]}}</p>
+            </div>
+            <div class="authP">
+                <p id="authorP">{{authorPost[testimonal1]}}</p>
+            </div>
+        </div>
+        <div class="post2" id="posts">
+            <div class="imgP"><img src="{{imgPost[testimonal2]}}" id="imageP"></div>
+            <div class="descP">
+                <p id="descriptionP">{{descPost[testimonal2]}}</p>
+            </div>
+            <div class="authP">
+                <p id="authorP">{{authorPost[testimonal2]}}</p>
+            </div>
+        </div>
     </div>
     <div class="blogPosts">
+        <div class="blogHeader">
+            <img src="assets/icons/resources (IL)-18.png">
+            <h2>BLOG POSTS</h2>
+        </div>
+        <img class="leftArrow" id="leftAB" (click)="prevB()" src="assets/icons/resources (SL)-40.png">
+        <img class="rightArrow" id="rightAB" (click)="nextB()" src="assets/icons/resources (SL)-39.png">
+
+        <div class="blogPost" id="blogs">
+            <div class="grBlog" *ngFor="let testimonal of Object.keys(repeatPost)">
+                <div class="imgP"><img src="{{imgPost[testimonal]}}" id="imageP"></div>
+                <div class="descP">
+                    <p id="descriptionP">{{descPost[testimonal]}}</p>
+                </div>
+                <div class="authP">
+                    <p id="authorP">{{authorPost[testimonal]}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="plans">
+    <!-- style="display: none;" -->
+    <div class="plans" >
         <div class="main-title">
             Which Plan Is Right For You?
             <br>
@@ -84,7 +228,8 @@
                             {{dynamicDataFree.planDescription}}
                         </p>
                         <div>
-                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataFree.planPrice}}/month</p>
+                            <p class="p-style"><i class="fa fa-rupee"
+                                    style="font-size:24px"></i>{{dynamicDataFree.planPrice}}/month</p>
                         </div>
                         <div>
                             <p>DISCOUNT: ₹{{dynamicDataFree.planDiscount}}</p>
@@ -111,7 +256,8 @@
                             {{dynamicDataBasic.planDescription}}
                         </p>
                         <div>
-                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataBasic.planPrice}}/month</p>
+                            <p class="p-style"><i class="fa fa-rupee"
+                                    style="font-size:24px"></i>{{dynamicDataBasic.planPrice}}/month</p>
                         </div>
                         <div>
                             <p>DISCOUNT: ₹{{dynamicDataBasic.planDiscount}}</p>
@@ -138,7 +284,8 @@
                             {{dynamicDataPremium.planDescription}}
                         </p>
                         <div>
-                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPremium.planPrice}}/month</p>
+                            <p class="p-style"><i class="fa fa-rupee"
+                                    style="font-size:24px"></i>{{dynamicDataPremium.planPrice}}/month</p>
                         </div>
                         <div>
                             <p>DISCOUNT: ₹{{dynamicDataPremium.planDiscount}}</p>
@@ -165,7 +312,8 @@
                             {{dynamicDataPlus.planDescription}}
                         </p>
                         <div>
-                            <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPlus.planPrice}}/month</p>
+                            <p class="p-style"><i class="fa fa-rupee"
+                                    style="font-size:24px"></i>{{dynamicDataPlus.planPrice}}/month</p>
                         </div>
                         <div>
                             <p>DISCOUNT: ₹{{dynamicDataPlus.planDiscount}}</p>
@@ -188,20 +336,31 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq" (keyup)="filterFaq();">
+                    <!-- <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()"> -->
+                    <!-- <ul id="myUL" class="rfqUL" style="display: none;">
+                        <li *ngFor="let inp of Object.keys(fa)">
+                            <a (click)="addTagProduct(rfqInput[inp].name);">
+                                {{rfqInput[inp].name}}
+                            </a>
+                        </li>
+                    </ul> -->
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search">
-                    <button type="submit">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
+                    <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>
-            <div class="divQA">
-                <form class="qA">
-                    Q:<span class="question">Question</span>?<br> A:
-                    <span class="answer">Answer</span>
-                </form>
+            <div class="questionAnswer">
+                <div class="divQA" *ngFor="let faq of Object.keys(faqSite)">
+                    <form class="qA">
+                        Q:<span class="question">{{faqSite[faq].question}}</span>?<br> A:
+                        <span class="answer">{{faqSite[faq].answer}}</span>
+                    </form>
+                </div>
             </div>
+            <div class="dvMore" id="moreFaq" (click)="faqMore();"><img src="assets/icons/resources (IL)-22.png"></div>
         </div>
     </div>
 </div>
