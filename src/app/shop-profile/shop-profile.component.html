@@ -19,6 +19,9 @@
                 <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
             </div>
             <div class="shopInfo">
+                <div id="sellerBtn" style="transform: translate(0px,-50px);float:right;display:none;">
+                    <button [routerLink]="['/managepage']" [queryParams]="{shop_id:token}" style="background-color:#efbe24;color:white;">go to manage page</button>
+                </div>
                 <div class="shopStarFoll">
                     <div class="shopStar">
                         <div ng>
@@ -27,7 +30,10 @@
                         </div>
                     </div>
                     <div class="shopFollowers">
+                        <!-- <p>{{followC.folCount}} FOLLOWERS</p> -->
                         <p>{{followC.folCount}} FOLLOWERS</p>
+                        <!-- <p>{{folCounter}} FOLLOWERS</p> -->
+
                     </div>
                 </div>
                 <div class="shopDetails">
@@ -65,8 +71,8 @@
             <div class="dvCard" *ngFor="let item of Object.keys(array12)">
                 <div class="dvCardLogo">
                     <div class="dvLogo">
-                        <img class="imgLogo" src="assets/images/shop/{{token}}/{{token}}_logo.jpg" [routerLink]="['/shop']"
-                            [queryParams]="{shop_id:array12[item].shopId}">
+                        <img class="imgLogo" src="assets/images/shop/{{token}}/{{token}}_logo.jpg"
+                            [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
                     </div>
                     <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
                         <div class="dvShopName">
@@ -79,7 +85,8 @@
                 </div>
                 <div class="dvCardBanner" [routerLink]="['/listing']"
                     [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-                    <img class="imgBanner" src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
+                    <img class="imgBanner"
+                        src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
                     <div class="dvUndeliver">
                         <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
                     </div>
@@ -108,7 +115,9 @@
                 </div>
             </div>
         </div>
-        <button class="dvMore" id="prodMore" (click)="showMoreProducts();">Show All</button>
+        <button class="dvMore" id="prodMore" [routerLink]="['/category']" [queryParams]="{shop_id:token}">Show
+            All</button>
+        <!-- (click)="showMoreProducts();" -->
     </div>
     <!-- shop shipment info -->
     <div class="shopShipment">
@@ -132,7 +141,7 @@
         <div class="prodPolicy">
             <img src="assets/icons/resources (IL)-18.png">
             <h2>PRODUCT POLICIES</h2>
-            <p>{{dynamicData.prodPolicy}}</p>
+            <p>{{shopData.productPolicy}}</p>
         </div>
         <div class="shopPolicy">
             <img src="assets/icons/resources (IL)-18.png">
@@ -142,12 +151,12 @@
         <div class="shipPolicy">
             <img src="assets/icons/resources (IL)-18.png">
             <h2>SHIP POLICIES</h2>
-            <p>{{dynamicData.shipPolicy}}</p>
+            <p>{{shopData.shipPolicy}}</p>
         </div>
         <div class="retPolicy">
             <img src="assets/icons/resources (IL)-18.png">
             <h2>RETURN POLICIES</h2>
-            <p>{{dynamicData.returnPolicy}}</p>
+            <p>{{shopData.returnPolicy}}</p>
         </div>
     </div>
 
@@ -161,7 +170,7 @@
                     <span class="rating-num">{{shopData.ratingShop}}</span>
                     <div class="rating-stars">
                         <div>
-                            <i class="fa fa-star active" *ngFor="let item of filledStar"  style="color: #efbe24"></i>
+                            <i class="fa fa-star active" *ngFor="let item of filledStar" style="color: #efbe24"></i>
                             <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
                         </div>
                     </div>
@@ -205,7 +214,7 @@
                         <span class="histo-star">
                             <i class="active icon-star"></i> 2 </span>
                         <span class="bar-block">
-                            <span id="bar-two" class="bar"[style.width.%]="bar2">
+                            <span id="bar-two" class="bar" [style.width.%]="bar2">
                                 <span>{{ratingData.rat2}}</span>&nbsp;
                             </span>
                         </span>
@@ -229,7 +238,7 @@
             </div>
             <div class="revName">
                 <p class=rName>Lorem</p>
-                <p class="rAgo">{{reviewDateDiffShop[item]}}</p>
+                <p class="rAgo">{{reviewDateDiffShop[item]}} days ago</p>
             </div>
             <div class="revData">
                 <p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
@@ -254,63 +263,68 @@
 </div>
 <!-- rfqPopup -->
 <div class="container" id="rfqPopupContainer " style="z-index: 10001; ">
-        <!-- <button type="button " class="btn btn-warning " data-toggle="modal " data-target="#rfqPopUP ">undeliverable</button> -->
-        <!-- Modal -->
-        <div class="modal fade" id="rfqPopup" role="dialog ">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content dvModalContent">
-                    <div class="modal-header dvModalHeader">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-bod" style="padding:0 10% 0 10%;">
-                        <div class="rfqForm">
-                            <div class="rfqSN">
-                                <p class="rfqShopName">Shop Name:</p>
-                                <input class="rfqShopNameInput" type="text" id="rfqShop"
-                                    value="{{shopData.shopName}}"><br>
-                            </div>
-                            <div class="rfqSL">
-                                <p class="rfqLocation">Location:</p>
-                                <select style="width: 16rem;">
-                                    <option class="rfqLocationInput" id="rfqLocations"
-                                        *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
-                                </select>
-                            </div>
-                            <div class="rfqN">
-                                <p class="rfqNote">Note:</p>
-                                <textarea class="rfqNoteInput" type="text" id="rfqNote"></textarea>
-                            </div>
-                            <div class="rfqTag">
-                                <p (click)="rfqDropdown()" class="dropBtnRfq">Tag Products</p>
-                                <div class="dropdownRfq">
-                                    <div id="rfqDropdown" class="dropdown-contentRfq ">
-                                        <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()">
-                                        <ul id="myUL" class="rfqUL" style="display: none;">
-                                            <li *ngFor="let inp of Object.keys(rfqInput)">
-                                                <a (click)="addTagProduct(rfqInput[inp].name);">
-                                                    {{rfqInput[inp].name}}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chips">
-                                <div class="chipsOuter" *ngFor="let chi of Object.keys(prod)" id="{{prod[chi]}}">
-                                    <div class="chip">
-                                        {{prod[chi]}}
-                                        <!-- <span class="closebtn"
-                                            onclick="this.parentElement.style.display='none'">&times;</span> -->
-                                        <span class="closebtn" (click)="delProduct(prod[chi]+'!'+chi);">&times;</span>
-    
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
+    <!-- <button type="button " class="btn btn-warning " data-toggle="modal " data-target="#rfqPopUP ">undeliverable</button> -->
+    <!-- Modal -->
+    <div class="modal fade" id="rfqPopup" role="dialog ">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-bod" style="padding:0 10% 0 10%;">
+                    <div class="rfqForm">
+                        <div class="rfqSN">
+                            <p class="rfqShopName">Shop Name:</p>
+                            <input class="rfqShopNameInput" type="text" id="rfqShop" value="{{shopData.shopName}}"><br>
                         </div>
+                        <div class="rfqSL">
+                            <p class="rfqLocation">Location:</p>
+                            <select style="width: 16rem;">
+                                <option class="rfqLocationInput" id="rfqLocations"
+                                    *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
+                            </select>
+                        </div>
+                        <div class="rfqN">
+                            <p class="rfqNote">Note:</p>
+                            <textarea class="rfqNoteInput" type="text" id="rfqNote"></textarea>
+                        </div>
+                        <div class="rfqTag">
+                            <p (click)="rfqDropdown()" class="dropBtnRfq">Tag Products</p>
+                            <div class="dropdownRfq">
+                                <div id="rfqDropdown" class="dropdown-contentRfq ">
+                                    <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()">
+                                    <ul id="myUL" class="rfqUL" style="display: none;">
+                                        <li *ngFor="let inp of Object.keys(rfqInput)">
+                                            <a (click)="addTagProduct(rfqInput[inp].name);">
+                                                {{rfqInput[inp].name}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chips">
+                            <div class="chipsOuter" *ngFor="let chi of Object.keys(prod)" id="{{prod[chi]}}">
+                                <div class="chip">
+                                    {{prod[chi]}}
+                                    <!-- <span class="closebtn"
+                                            onclick="this.parentElement.style.display='none'">&times;</span> -->
+                                    <span class="closebtn" (click)="delProduct(prod[chi]+'!'+chi);">&times;</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uploadRfq">
+                            <input style="display: none" type="file" name="pic" id="shopRfq" accept="image/*"
+                                #fileInputRfq >
+                            <button type="button" class="btnCover" (click)="fileInputRfq.click()"
+                                style="background-color: #efbe24;color: white;">Upload image</button>
+                        </div>
+                        <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

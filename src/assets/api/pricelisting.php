@@ -117,6 +117,7 @@
     $price=$basePrice-$amountDisc;
     $basePriceTotal=$price*$productQuantity;
     $totalAmount=$basePriceTotal+$varPrice;
+    $totalAmount=round($totalAmount);
     //is image uploaded
 //     if($imageUploaded==null){
 //         $imageUploaded=0;

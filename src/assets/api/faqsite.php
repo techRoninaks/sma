@@ -6,6 +6,8 @@
     $data = array();
     if($faqNum==0){
         $sql_query = "SELECT f.text,f.type_id from faq_site f join faq_site q on abs(f.type_id)=q.type_id limit 4";
+        // echo $sql_query;
+
         $result = mysqli_query($con2, $sql_query);
         $count=0;
         while($row=mysqli_fetch_assoc($result)){
@@ -18,6 +20,7 @@
         }
     }else if($faqNum==1){
         $sql_query = "SELECT f.text,f.type_id from faq_site f join faq_site q on abs(f.type_id)=q.type_id";
+        // echo $sql_query;
         $result = mysqli_query($con2, $sql_query);
         $count=0;
         while($row=mysqli_fetch_assoc($result)){
