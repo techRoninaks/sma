@@ -11,35 +11,115 @@
     <!-- shop background image -->
     <div class=shopBg>
         <img src="assets/images/shop/{{token}}/{{token}}_cover.jpg">
-        <div class="upload-btn-wrapper">
+        <!-- <div class="upload-btn-wrapper">
             <button class="btn">Upload a file</button>
             <input type="file" name="myfile" />
-        </div>
+        </div> -->
+        <!-- (change)="submitCover();" -->
+        <input style="display: none" type="file" name="pic" id="shopCover" accept="image/*" #fileInputCover
+            (change)="submitCover();">
+        <button type="button" class="btnCover" (click)="fileInputCover.click()"
+            style="background-color: #efbe24;color: white;">Upload
+            Cover Pic</button>
+        <button type="submit" class="btnCover" (click)="submitCover();"><img style="width: 20px;height: 20px;"
+                src="assets/icons/upload.png"></button>
     </div>
     <!-- shop description -->
     <div class="shopDescBio">
         <div class="shopDesc">
             <div class="shopLogo">
-                <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
-                <div class="upload-btn-wrapper">
+                <img (click)="fileInputLogo.click()" src="assets/images/shop/{{token}}/{{token}}_logo.jpg"
+                    style="cursor: pointer;" alt="click to change shop logo">
+                <!-- <p class="img__description">This image looks super neat.</p> -->
+                <!-- <div class="upload-btn-wrapper">
                     <button class="btn">Upload a file</button>
                     <input type="file" name="myfile" />
-                </div>
+                </div> -->
+                <input style="display: none" type="file" name="pic" id="shopLogo" accept="image/*" #fileInputLogo
+                    (change)="submitLogo();">
+                <button type="button" (click)="submitLogo();" class="btnLogo" style="background-color: #efbe24;color: white;margin-left: 1.1rem;
+                width: 10rem; transform: translate(0px,-1.7rem);">Upload
+                    Logo</button>
+                <!-- <button type="submit" class="btnLogo" (click)="submitLogo();" style="transform: translate(0px,-1.7rem);background-color: #efbe24;color: white;margin-left: 1.1rem;
+                width: 10rem;"><img style="width: 20px;height: 20px;"
+                        src="assets/icons/upload.png"></button> -->
+
             </div>
             <div class="shopInfo">
-                <div class="shopBtns">
-                    <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}"><button
-                            type="button">View as Customer</button></div>
-                    <div class="btnDescEdit"><button type="button">Edit</button></div>
-                </div>
-                <div class="shopDetails">
-                    <p class="sName">NAME:</p>
-                    <h4 class="sH4">{{shopData.shopName}}</h4>
-                    <p class="sAddress">ADDRESS:</p>
-                    <h5 class="sH5">{{selName}}</h5>
-                    <p class="sCategory">CATEGORY:</p>
-                    <!-- <a class="sCat">{{mostSelling[0].name}}</a> -->
-                </div>
+                <ng-container *ngIf="editShop==0; else shopEdit">
+                    <div class="shopBtns">
+                        <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}">
+                            <button type="button">View as Customer</button></div>
+                        <div class="btnDescEdit">
+                            <button type="button" (click)="edit('shop');">Edit</button>
+                        </div>
+                    </div>
+                    <div class="shopDetails">
+                        <p class="sName">NAME:</p>
+                        <h4 class="sH4">{{addressData.addr1}}</h4>
+                        <p class="sAddress">ADDRESS:</p>
+                        <h5 class="sH5">
+                            {{addressData.addr2}}<br>{{addressData.city}}<br>{{addressData.district}}<br>{{addressData.state}}<br>{{addressData.country}}<br>{{addressData.pincode}}
+                        </h5>
+                        <p class="sCategory">CATEGORY:</p>
+                        <div class="sA">
+                            <div *ngFor="let item of Object.keys(prod)">
+                                <p style="float: left">{{prod[item]}},&nbsp;</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #shopEdit>
+                    <div class="shopBtns">
+                        <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}">
+                            <button type="button">View as Customer</button></div>
+                        <div class="btnDescEdit">
+                            <button type="button" (click)="sub('shop');">Submit</button>
+                        </div>
+                    </div>
+                    <div class="shopDetails">
+                        <p class="sName">NAME:</p>
+                        <textarea class="addr1Shop" style="height: 30px" placeholder="shop name"
+                            id="shopNameId">{{addressData.addr1}}</textarea>
+                        <p class="sAddress">ADDRESS:</p>
+                        <div class="sH5">
+                            <textarea class="addr2Shop" id="addr2ShopId" style="height: 30px"
+                                placeholder="street address">{{addressData.addr2}}</textarea>
+                            <textarea class="cityShop" id="cityShopId" style="height: 30px"
+                                placeholder="city">{{addressData.city}}</textarea>
+                            <textarea class="districtShop" id="districtShopId" style="height: 30px"
+                                placeholder="district">{{addressData.district}}</textarea>
+                            <textarea class="stateShop" id="stateShopId" style="height: 30px"
+                                placeholder="state">{{addressData.state}}</textarea>
+                            <textarea class="countryShop" id="countryShopId" style="height: 30px"
+                                placeholder="country">{{addressData.country}}</textarea>
+                            <textarea class="pincodeShop" id="pincodeShopId" style="height: 30px"
+                                placeholder="pincode">{{addressData.pincode}}</textarea>
+
+                        </div>
+
+
+                        <p class="sCategory">CATEGORY:</p>
+                        <div class="sA">
+                            <input type="text" placeholder="Search.. " id="myInput" (keyup)="filterFunction()">
+                            <ul id="myUL" class="rfqUL" style="display: none;">
+                                <li *ngFor="let inp of Object.keys(rfqInput)">
+                                    <a (click)="addTagCategory(rfqInput[inp].name);">
+                                        {{rfqInput[inp].name}}
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="chipsOuter" *ngFor="let chi of Object.keys(prod)" id="{{prod[chi]}}">
+                                <div class="chip">
+                                    {{prod[chi]}}
+                                    <span class="closebtn" (click)="delCategory(prod[chi]+'!'+chi);">&times;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
                 <div class="shopPriv">
                     <div class="privDesc">
                         <p>ENABLE PRIVACY:</p>
@@ -67,7 +147,8 @@
                 <div class="dropVacation" id="vacationToggle" style="display: none">
                     <div class="dvRadio">
                         <input type="radio" name="vacation" (click)="vacationSave('until');" value="until"
-                            id="untilRadio"> Until Cancelled<br>
+                            id="untilRadio">
+                        Until Cancelled<br>
                         <input type="radio" name="vacation" value="setDate" (click)="vacationSave('dateSet');"
                             class="rDate" id="dateSetRadio"> Set Duration<br>
 
@@ -82,7 +163,7 @@
             <div class="bio">
                 <h3>Bio</h3>
                 <ng-container *ngIf="editBio==0; else bioEdit">
-                    <p class="bioTxt">{{shopData.descriptionShop}}</p>
+                    <p class="bioTxt" id="bioId">{{shopData.descriptionShop}}</p>
                     <div class="btnBioEdit">
                         <button type="button" style="margin-left:70%; width:100px;" (click)="edit('bio');">EDIT</button>
                     </div>
@@ -108,14 +189,17 @@
             <div class="dvCard" *ngFor="let item of Object.keys(array12)" id="product{{array12[item].prodId}}">
                 <div class="dvCardBanner" [routerLink]="['/listing']"
                     [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-                    <img class="imgBanner" src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
+                    <img class="imgBanner"
+                        src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
                     <div class="dvUndeliver">
                         <div class="overlay" *ngIf="array12[item].status == 'inactive'"
-                            style="background-color: #FF1D25">INACTIVE</div>
+                            style="background-color: #FF1D25">
+                            INACTIVE</div>
                         <div class="overlay" *ngIf="array12[item].status == 'active'" style="background-color: #009145">
                             ACTIVE</div>
                         <div class="overlay" *ngIf="array12[item].status == 'pending'"
-                            style="background-color: #333333">PENDING
+                            style="background-color: #333333">
+                            PENDING
                         </div>
                     </div>
                 </div>
@@ -151,11 +235,11 @@
             <img src="assets/icons/resources (IL)-18.png">
             <h2>PRODUCT POLICIES</h2>
             <ng-container *ngIf="editProdPolicy==0; else prodPol">
-                <p class="policyTxt">{{dynamicData.prodPolicy}}</p>
+                <p class="policyTxt" id="prodPolicyId">{{shopData.productPolicy}}</p>
                 <button id="editPolicy" (click)="edit('prod');">EDIT</button>
             </ng-container>
             <ng-template #prodPol>
-                <textarea class="policyTxtArea" id="prodTxtAr">{{dynamicData.prodPolicy}}</textarea>
+                <textarea class="policyTxtArea" id="prodTxtAr">{{shopData.productPolicy}}</textarea>
                 <button id="editPolicy" (click)="sub('prod');">SUBMIT</button>
             </ng-template>
         </div>
@@ -163,7 +247,7 @@
             <img src="assets/icons/resources (IL)-18.png">
             <h2>SHOP POLICIES</h2>
             <ng-container *ngIf="editShopPolicy==0; else shopPol">
-                <p class="policyTxt">{{shopData.shopPolicy}}</p>
+                <p class="policyTxt" id="shopPolicyId">{{shopData.shopPolicy}}</p>
                 <button id="editPolicy" (click)="edit('shop');">EDIT</button>
             </ng-container>
             <ng-template #shopPol>
@@ -175,11 +259,11 @@
             <img src="assets/icons/resources (IL)-18.png">
             <h2>SHIP POLICIES</h2>
             <ng-container *ngIf="editShipPolicy==0; else shipPol">
-                <p class="policyTxt">{{dynamicData.shipPolicy}}</p>
+                <p class="policyTxt" id="shipPolicyId">{{shopData.shipPolicy}}</p>
                 <button id="editPolicy" (click)="edit('ship');">EDIT</button>
             </ng-container>
             <ng-template #shipPol>
-                <textarea class="policyTxtArea" id="shipTxtAr">{{dynamicData.shipPolicy}}</textarea>
+                <textarea class="policyTxtArea" id="shipTxtAr">{{shopData.shipPolicy}}</textarea>
                 <button id="editPolicy" (click)="sub('ship');">SUBMIT</button>
             </ng-template>
         </div>
@@ -187,11 +271,11 @@
             <img src="assets/icons/resources (IL)-18.png">
             <h2>RETURN POLICIES</h2>
             <ng-container *ngIf="editReturnPolicy==0; else retPol">
-                <p class="policyTxt">{{dynamicData.returnPolicy}}</p>
+                <p class="policyTxt" id="returnPolicyId">{{shopData.returnPolicy}}</p>
                 <button id="editPolicy" (click)="edit('return');">EDIT</button>
             </ng-container>
             <ng-template #retPol>
-                <textarea class="policyTxtArea" id="retTxtAr">{{dynamicData.returnPolicy}}</textarea>
+                <textarea class="policyTxtArea" id="retTxtAr">{{shopData.returnPolicy}}</textarea>
                 <button id="editPolicy" (click)="sub('return');">SUBMIT</button>
             </ng-template>
         </div>
@@ -202,19 +286,20 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox"id="searchFaq" (keyup)="filterFaq();">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq"
+                        (keyup)="filterFaq();">
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search"id="submitFaq">
-                    <button type="submit"(click)="submitFaq()">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
+                    <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
                 <div class="divQA" *ngFor=" let faq of Object.keys(faqShop)">
                     <form class="qA">
                         Q:<span class=" question ">{{faqShop[faq].question}}</span>?<br> A:
-                        <span class="answer " >{{faqShop[faq].answer}}</span>
+                        <span class="answer ">{{faqShop[faq].answer}}</span>
                     </form>
                 </div>
             </div>

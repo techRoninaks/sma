@@ -4,6 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 
+var imageRfqValue: any = "";
+
 @Component({
 	selector: 'app-shop-profile',
 	templateUrl: './shop-profile.component.html',
@@ -37,7 +39,7 @@ export class ShopProfileComponent implements OnInit {
 	shopRating: any;
 	priv: number;
 	selName: any = "";
-	followC: any = "";
+	followC: any=[] ;
 	mostSelling: any = [];
 	shipOption: number;
 	ratingData: any = [];
@@ -55,12 +57,19 @@ export class ShopProfileComponent implements OnInit {
 	prod: any=[];
 	idP: any;
 	tokenProd:object;
+	imageUploaded:any=0;
+	sellerId:any;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
 
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
+
+		// this.setCookie("sellerId", 1);
+		this.sellerId = this.getCookie("sellerId");
+
+
 
 		this.route.queryParams.subscribe(params => {
 			this.token = params['shop_id'];
@@ -70,6 +79,15 @@ export class ShopProfileComponent implements OnInit {
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
+
+
+        if(this.sellerId != null || this.sellerId !=0){
+			// this.router.navigate(['/managepage'], { queryParams: { shop_id: this.token } });
+			(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="block;";
+        }
+
+
+
 		this.data.getRatingReviewShop(this.token).subscribe(
 			data => {
 				this.ratingReviewShop = data;
@@ -122,6 +140,10 @@ export class ShopProfileComponent implements OnInit {
 				this.bar5 = (rat5 * 100) / totalRatings;
 			}
 		);
+
+		imageRfqValue = document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
+
+
 		this.data.getShopData(this.token).subscribe(
 			data => {
 				this.shopData = data;
@@ -256,7 +278,7 @@ export class ShopProfileComponent implements OnInit {
 		// console.log(chiIndex);
 
 
-		document.getElementById(this.idP).style.display = "none";
+		// document.getElementById(this.idP).style.display = "none";
 		var removed = this.prod.splice(chiIndex, 1);
 		// this.prod[chiIndex] = x;
 		// if (chiIndex < n) 
@@ -286,7 +308,11 @@ export class ShopProfileComponent implements OnInit {
 	followShop() {
 		this.folResult = true;
 		this.data.getFollowShopPage(this.tokenObj).subscribe();
-		this.followC.folCount = this.followC.folCount + 1;
+		// this.followC.folCount = this.followC.folCount + 1;
+		var y:number= parseInt(this.followC.folCount)  ;
+		y=y+1;
+		this.followC.folCount=y;
+	
 	}
 
 	rfqSubmit() {
@@ -295,17 +321,31 @@ export class ShopProfileComponent implements OnInit {
 		var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;
 		var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
 		var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
-		var productRef = this.prod[0];
+		var productRef = this.prod;
+		var image =imageRfqValue;
+		this.tokenPrice = {seller_id:this.shopData.sellerId , image:image,shop_id: this.token, user_id: this.userId, imageUploaded:this.imageUploaded, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
 
-		this.tokenPrice = { prod_id: this.token, user_id: this.userId, imageUploaded: 0, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
-
-		this.data.sendRfq(this.tokenPrice).subscribe();
+		this.data.sendRfqShop(this.tokenPrice).subscribe();
 
 	}
+
+	onRfqClick(event) {
+		this.imageUploaded=1;
+		// 		console.log(event.target.files[0]);
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		// reader.onLoad = onLoadCallback;
+		reader.onload = (event) => {
+			var text: any = reader.result;
+			imageRfqValue = text;
+			console.log(imageRfqValue);
+		};
+	}
+
 	unfollowShop() {
 		this.folResult = false;
 		this.data.getUnfollowShopPage(this.tokenObj).subscribe();
-		this.followC.folCount = this.followC.folCount - 1;
+		this.followC.folCount = parseInt(this.followC.folCount) - parseInt('1');
 	}
 	report(revId: any) {
 		console.log(revId);

@@ -869,14 +869,15 @@
 	padding-bottom: 25%;
 	grid-template-columns: auto;
 	grid-row-gap: 5%;
-	grid-template-rows: repeat(6, auto);
+	grid-template-rows: repeat(7, auto);
 
 	grid-template-areas:
 		"rfqSN"
 		"rfqSL"
 		"rfqN"
 		"rfqTag"
-		"chips"
+        "chips"
+        "upload"
 		"btnRfq";
 	.rfqSN {
 		grid-area: rfqSN;
@@ -961,7 +962,10 @@
 				color: #000;
 			}
 		}
-	}
+    }
+    .uploadRfq{
+        grid-area:upload;
+    }
 	.btnRfq {
 		grid-area: btnRfq;
 	}
