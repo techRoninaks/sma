@@ -1007,6 +1007,63 @@ getOrderDetailsCheckout(userid: any) {
       .append("userid", userid);
      return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
    }
+   sendRfqShop(data :any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("hasImage", data['imageUploaded'])
+      .append("userId", data['user_id'])
+      .append("shopLocation", data['shop_location'])
+      .append("note", data['note'])
+      .append("productRef", data['product_ref'])
+      .append("image", data['image'])
+      .append("sellerId", data['seller_id'])
+
+    return this.http.post(this.baseUrl + 'assets/api/rfqshop.php', httpParams);
+  }
+
+  categoryShop(data: any) {
+    let httpParams = new HttpParams()
+    return this.http.post(this.baseUrl + 'assets/api/categshoplist.php', httpParams);
+  }
+
+  categoryListShop(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/categorylistshop.php', httpParams);
+  }
+
+  getAddressShop(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/getaddressshop.php', httpParams);
+  }
+shopAddressUpload(data :any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("sellerId", data['seller_id'])
+      .append("shopNameId", data['shopNameId'])
+      .append("addr2ShopId", data['addr2ShopId'])
+      .append("cityShopId", data['cityShopId'])
+      .append("districtShopId", data['districtShopId'])
+      .append("stateShopId", data['stateShopId'])
+      .append("countryShopId", data['countryShopId'])
+      .append("pincodeShopId", data['pincodeShopId'])
+      .append("categ", data['categ'])
+
+    return this.http.post(this.baseUrl + 'assets/api/shopaddressupload.php', httpParams);
+  }
+  uploadShopCover(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("image", data['image'])
+    return this.http.post(this.baseUrl + 'assets/api/uploadshopcover.php', httpParams);
+  }
+  uploadShopLogo(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("image", data['image'])
+    return this.http.post(this.baseUrl + 'assets/api/uploadshoplogo.php', httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
