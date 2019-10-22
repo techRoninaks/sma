@@ -3,6 +3,10 @@ import {Router, RouterLink} from '@angular/router';
 import { DataService } from '../data.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+
+var imageFront: any ="";
+var imageBack: any ="";
+declare var Razorpay: any;
 @Component({
   selector: 'app-registration-seller',
   templateUrl: './registration-seller.component.html',
@@ -14,17 +18,18 @@ export class RegistrationSellerComponent implements OnInit {
   registrationFormStage1: FormGroup;
   fpFormMobile: FormGroup;
   fpFormOtp: FormGroup;
+  termsForm: FormGroup;
   submitted: boolean;
   fpmobile : string=""; 
   fpOTP : string="";
-
+  g_seller_id: any="";
   gotp: any ="" ;
   mobileNo: any= "";
   fp_mobile: any ="" ;
 
   otpVerified: boolean = false;
 
-  constructor(private data: DataService,private formBuilder: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private router: Router,private cookieService: CookieService) { 
+  constructor(private data: DataService,private formBuilder: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderTerms: FormBuilder,private router: Router,private cookieService: CookieService) { 
     this.registrationForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       reg_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
@@ -52,13 +57,25 @@ export class RegistrationSellerComponent implements OnInit {
     this.fpFormOtp = this.formBuilderOtp.group({
       fp_otp:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?([0-9]\d*)?$/)]]
     })
+    this.termsForm=formBuilderTerms.group({
+      t_checkbox:['',Validators.required]
+    })
   }
   dynamicDataSeller: any = "";
   dynamicDataCat: any = "";
   dynamicDataId:any ="";
   dynamicDataLoc: any ="";
+  dynamicDataFree: any = "";
+  dynamicDataBasic: any = "";
+  dynamicDataPremium: any = "";
+  dynamicDataPlus: any = "";
+  gst_no: any ="";
+  price: any ="";
+  discount: any ="";
+  TotalPrice: any ="";
   pwd: any = "";
   cpwd: any ="";
+  choosedPlan: boolean = false;
   prelim_stage: boolean = true;
   stage_1: boolean = false;
   stage_2: boolean = false;
@@ -89,9 +106,79 @@ export class RegistrationSellerComponent implements OnInit {
   Object = Object;
   sellerData3 : object;
   sellerData4 : object;
-
+  imageDataFront : object;
+  imageDataBack : object;
+  seller_stage : any="";
+  urlFront = "assets/image/";
+  urlBack = "assets/image/";
   ngOnInit() {
-    
+    this.seller_stage = this.getCookie('sellerStage');
+    this.seller_id = this.getCookie('sellerId');
+    if(this.seller_stage == 1)
+    {
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.sellerDataStage1(this.seller_id);
+      this.categorylist();
+      this.stage_1 = true;
+      this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 2)
+    {
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.sellerDataStage1(this.seller_id);
+      this.idCardlist();
+      this.stage_2 = true;
+      this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 3)
+    {
+      this.pincode = this.getCookie('sellerPin');
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.getLocationList();
+      this.stage_3 = true;
+      this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 4)
+    {
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.stage_4 = true;
+      this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 5)
+    {
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.stage_5= true;
+      this.prelim_stage = false;
+    }
+    this.data.getPlanDetailsFree(this.data).subscribe(
+      data=>{
+              this.dynamicDataFree=data;
+            },
+        error=> console.error(error)
+      );
+    this.data.getPlanDetailsBasic(this.data).subscribe(
+      data=>{
+              this.dynamicDataBasic=data;
+            },
+        error=> console.error(error)
+      );
+    this.data.getPlanDetailsPremium(this.data).subscribe(
+      data=>{
+              this.dynamicDataPremium=data;
+            },
+        error=> console.error(error)
+      );
+    this.data.getPlanDetailsPlus(this.data).subscribe(
+      data=>{
+              this.dynamicDataPlus=data;
+            },
+        error=> console.error(error)
+      );
   }
   setCookie(cname, value) {
     this.cookieService.set(cname, value);
@@ -105,6 +192,31 @@ export class RegistrationSellerComponent implements OnInit {
   mobileFetch(){
     this.seller_mobile = this.registrationForm.controls['reg_mobile_no'].value;
     (<HTMLInputElement><any>document.getElementById("fp_mobile_no")).value=this.seller_mobile;
+  }
+  nextStage(){
+    this.g_seller_id = this.getCookie("sellerId");
+    this.data.updateStage4(this.g_seller_id).subscribe();
+    this.stage_4 = false;
+    this.stage_5 = true; 
+  }
+  welcome(){
+    if(this.choosedPlan == true)
+    {
+      this.g_seller_id = this.getCookie("sellerId");
+      this.data.updateStage5(this.g_seller_id).subscribe();
+      this.stage_5 = false;
+      this.stage_6 = true;
+    }
+    else{
+      alert("Please Choose a plan..!");
+    }
+  }
+  sellerSignIn(){
+    this.data.updateStage6(this.g_seller_id).subscribe();
+    this.setCookie("sellerId",this.seller_id);
+    this.seller_name = this.getCookie('sellerName');
+    document.getElementById("headerLogin").innerText= this.seller_name;
+    this.router.navigate(['/dashboard']);
   }
   onSubmit(){
     this.submitted =true;
@@ -137,6 +249,7 @@ export class RegistrationSellerComponent implements OnInit {
                   this.stage_1=true;
                   this.prelim_stage=false;
                   this.seller_id = data['seller_id'];
+                  this.g_seller_id = this.seller_id;
                   this.sellerDataStage1(this.seller_id);
                   this.categorylist();
                 }
@@ -173,7 +286,8 @@ export class RegistrationSellerComponent implements OnInit {
     }
     else
     {
-      this.data.addSellerDataStage2(this.registrationFormStage1.value,this.seller_id).subscribe(
+      this.gst_no = (<HTMLInputElement>document.getElementById("gst-no")).value;
+      this.data.addSellerDataStage2(this.registrationFormStage1.value,this.seller_id,this.gst_no).subscribe(
         data=>{
                 if(data['status'] == "Success")
                 {
@@ -196,6 +310,7 @@ export class RegistrationSellerComponent implements OnInit {
     this.id_no = (<HTMLInputElement>document.getElementById("id-no")).value;
     this.seller_dob = (<HTMLInputElement>document.getElementById("seller-dob")).value;
     this.id_type = (<HTMLSelectElement>document.getElementById("id-type")).value;
+    
     this.sellerData3 = { id_no: this.id_no, seller_dob: this.seller_dob, id_type: this.id_type,seller_id:this.seller_id};
     this.data.addSellerDataStage3(this.sellerData3).subscribe(
       data=>{
@@ -213,14 +328,28 @@ export class RegistrationSellerComponent implements OnInit {
             },
         error=> console.error(error)
       );
+     
+    this.imageDataFront = { seller_id:this.g_seller_id ,image:imageFront}
+    this.data.uploadFront(this.imageDataFront).subscribe(
+    );
+    this.imageDataBack = { seller_id:this.g_seller_id ,image:imageBack}
+    this.data.uploadBack(this.imageDataBack).subscribe(
+    );
+  }
+  frontUpload(){
+    imageFront=document.getElementById('frontUpload').addEventListener('change', onFrontClick.bind(this));
+    
+  }
+  backUpload(){
+    imageBack=document.getElementById('backUpload').addEventListener('change', onBackClick.bind(this));
   }
   onSubmitStage4(){
     this.ship_city = (<HTMLInputElement>document.getElementById("ship-city")).value;
     var checkedValue = (<HTMLInputElement>document.querySelector('.shipping-mode:checked')).value;
     var checkedValue2 = (<HTMLInputElement>document.querySelector('.shipping-place:checked')).value;
-    this.country = (<HTMLSelectElement>document.getElementById("country")).value;
-    this.state = (<HTMLSelectElement>document.getElementById("state")).value;
-    this.district = (<HTMLSelectElement>document.getElementById("district")).value;
+    // this.country = (<HTMLSelectElement>document.getElementById("country")).value;
+    // this.state = (<HTMLSelectElement>document.getElementById("state")).value;
+    // this.district = (<HTMLSelectElement>document.getElementById("district")).value;
     this.city = (<HTMLSelectElement>document.getElementById("city")).value;
     this.accnt_holder_name = (<HTMLSelectElement>document.getElementById("accnt-holder-name")).value;
     this.bank_name = (<HTMLSelectElement>document.getElementById("bank-name")).value;
@@ -230,7 +359,7 @@ export class RegistrationSellerComponent implements OnInit {
     this.ifsc = (<HTMLSelectElement>document.getElementById("ifsc")).value;
     this.conf_accnt_no = (<HTMLSelectElement>document.getElementById("conf-accnt-no")).value;
     
-    this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,country:this.country,state:this.state,district:this.district,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id};
+    this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id};
     this.data.addSellerDataStage4(this.sellerData4).subscribe(
       data=>{
               if(data['status'] == "Success")
@@ -265,12 +394,6 @@ export class RegistrationSellerComponent implements OnInit {
       error=> console.error(error)
     );
   }
-  sellerSignIn(){
-    this.setCookie("sellerId",this.seller_id);
-    this.seller_name = this.getCookie('sellerName');
-    document.getElementById("headerLogin").innerText= this.seller_name;
-    this.router.navigate(['/dashboard']);
-  }
   onSubmitSendOtp(){
     this.submitted = true;
     var response;
@@ -297,7 +420,6 @@ export class RegistrationSellerComponent implements OnInit {
     }
     return OTP;
   }
-  
   requestOtp(gotp, mobileNo) {
   var msg :any = "Your verification code is: "+gotp;
 
@@ -312,26 +434,201 @@ export class RegistrationSellerComponent implements OnInit {
     error => console.error(error)
   );
   }
-
-verifyOTP(){
-  this.fpOTP = this.fpFormOtp.controls['fp_otp'].value;
-  
-  if(this.fpOTP == "")
-  {
-    alert('OTP cannot be null');
+  verifyOTP(){
+    this.fpOTP = this.fpFormOtp.controls['fp_otp'].value;
+    
+    if(this.fpOTP == "")
+    {
+      alert('OTP cannot be null');
+    }
+    else
+    {
+          if(this.fpOTP == this.gotp)
+          {
+            alert('OTP verified');
+            this.otpVerified = true;
+          }
+          else
+          {
+            alert('Incorrect OTP');
+            this.fpFormOtp.controls['fp_otp'].setValue('');
+          }
+    }
   }
-  else
-  {
-        if(this.fpOTP == this.gotp)
-        {
-          alert('OTP verified');
-          this.otpVerified = true;
-        }
-        else
-        {
-          alert('Incorrect OTP');
-          this.fpFormOtp.controls['fp_otp'].setValue('');
-        }
+  checkoutFree(){
+    this.seller_id = this.g_seller_id;
+    this.data.updateSellerPlanFree(this.seller_id).subscribe(
+      data=>{
+              if(data == "Success")
+              {
+                alert('Successfully updated plan details');
+                this.choosedPlan = true;
+              }
+              else
+              {
+                alert('Error, try again');
+              }
+            },
+        error=> console.error(error)
+      );
+  }
+  checkoutBasic(){
+    this.price = this.dynamicDataBasic.planPrice;
+    this.discount = this.dynamicDataBasic.planDiscount;
+    this.TotalPrice = this.price - this.discount;
+    this.seller_name = this.dynamicDataSeller.owner_name;
+    this.seller_mobile = this.dynamicDataSeller.contact;
+    this.seller_mail = this.dynamicDataSeller.email;
+    this.seller_id = this.g_seller_id;
+    var options = {
+      "key": "rzp_test_dveDexCQKoGszl",
+      "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
+      "currency": "INR",
+      "name": "ScoopMyArt",
+      "description": this.dynamicDataBasic.planDescription,
+      "image": "favicon.ico", "handler": response => {
+        alert("Booking successful. Thank you!");
+        this.data.updateSellerPlanBasic(this.seller_id).subscribe(
+          data=>{
+                  if(data == "Success")
+                  {
+                    alert('Successfully updated plan details');
+                    this.choosedPlan = true;
+                  }
+                  else
+                  {
+                    alert('Error, try again');
+                  }
+                },
+            error=> console.error(error)
+          );
+      },
+      "prefill": {
+        "name": this.seller_name,
+        "email": this.seller_mail,
+        "contact": this.seller_mobile,
+      },
+      "notes": {},
+      "theme": {
+        "color": "#133E4B"
+      },
+      "modal": {
+        "ondismiss": function () { }
+      }
+    };
+    var rzp1 = new Razorpay(options); rzp1.open();
+  }
+  checkoutPremium(){
+    this.price = this.dynamicDataPremium.planPrice;
+    this.discount = this.dynamicDataPremium.planDiscount;
+    this.TotalPrice = this.price - this.discount;
+    this.seller_name = this.dynamicDataSeller.owner_name;
+    this.seller_mobile = this.dynamicDataSeller.contact;
+    this.seller_mail = this.dynamicDataSeller.email;
+    this.seller_id = this.g_seller_id;
+    var options = {
+      "key": "rzp_test_dveDexCQKoGszl",
+      "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
+      "currency": "INR",
+      "name": "ScoopMyArt",
+      "description": this.dynamicDataPremium.planDescription,
+      "image": "favicon.ico", "handler": response => {
+        alert("Booking successful. Thank you!");
+        this.data.updateSellerPlanPremium(this.seller_id).subscribe(
+          data=>{
+                  if(data == "Success")
+                  {
+                    alert('Successfully updated plan details');
+                    this.choosedPlan = true;
+                  }
+                  else
+                  {
+                    alert('Error, try again');
+                  }
+                },
+            error=> console.error(error)
+          );
+      },
+      "prefill": {
+        "name": this.seller_name,
+        "email": this.seller_mail,
+        "contact": this.seller_mobile,
+      },
+      "notes": {},
+      "theme": {
+        "color": "#133E4B"
+      },
+      "modal": {
+        "ondismiss": function () { }
+      }
+    };
+    var rzp1 = new Razorpay(options); rzp1.open();
+  }
+  checkoutPlus(){
+    this.price = this.dynamicDataPlus.planPrice;
+    this.discount = this.dynamicDataPlus.planDiscount;
+    this.TotalPrice = this.price - this.discount;
+    this.seller_name = this.dynamicDataSeller.owner_name;
+    this.seller_mobile = this.dynamicDataSeller.contact;
+    this.seller_mail = this.dynamicDataSeller.email;
+    this.seller_id = this.g_seller_id;
+    var options = {
+      "key": "rzp_test_dveDexCQKoGszl",
+      "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
+      "currency": "INR",
+      "name": "ScoopMyArt",
+      "description": this.dynamicDataPlus.planDescription,
+      "image": "favicon.ico", "handler": response => {
+        alert("Booking successful. Thank you!");
+        this.data.updateSellerPlanPlus(this.seller_id).subscribe(
+          data=>{
+                  if(data == "Success")
+                  {
+                    alert('Successfully updated plan details');
+                    this.choosedPlan = true;
+                  }
+                  else
+                  {
+                    alert('Error, try again');
+                  }
+                },
+            error=> console.error(error)
+          );
+      },
+      "prefill": {
+        "name": this.seller_name,
+        "email": this.seller_mail,
+        "contact": this.seller_mobile,
+      },
+      "notes": {},
+      "theme": {
+        "color": "#133E4B"
+      },
+      "modal": {
+        "ondismiss": function () { }
+      }
+    };
+    var rzp1 = new Razorpay(options); rzp1.open();
   }
 }
+ function onFrontClick(event) {
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = (event)=>{
+      var text :any = reader.result;
+      imageFront = text;
+      // console.log(imageFront);
+      (<HTMLInputElement>document.getElementById("frontPreviewId")).style.display = "block";
+      this.urlFront = imageFront;
+  };
+}
+function onBackClick(event) {
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event)=>{
+        var text :any = reader.result;
+        imageBack = text;
+        (<HTMLInputElement>document.getElementById("backPreviewId")).style.display = "block";
+        this.urlBack = imageBack;
+    };
 }
