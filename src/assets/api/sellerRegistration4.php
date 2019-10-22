@@ -3,9 +3,7 @@
     $ship_city = $_POST['ship_city'];
     $checkedValue = $_POST['checkedValue'];
     $checkedValue2 = $_POST['checkedValue2'];
-    $country = $_POST['country'];
-    $state = $_POST['state'];
-    $district = $_POST['district'];
+    // $district = $_POST['district'];
     $city = $_POST['city'];
     $accnt_holder_name = $_POST['accnt_holder_name'];
     $bank_name = $_POST['bank_name'];
@@ -15,11 +13,20 @@
     $ifsc = $_POST['ifsc'];
     $seller_id = $_POST['seller_id'];
     $addr_type = "shipping address";
-    
-    $sql_query ="UPDATE `seller` SET account_no='$accnt_no',account_holder='$accnt_holder_name',account_type='$accnt_type',bankname='$bank_name',ifsc='$ifsc' WHERE id='$seller_id'";
+    $country ="";
+    $state ="";
+    $stage_number = 4;
+
+    if($checkedValue2== 'India'){
+        $country = $checkedValue2;
+    }
+    if($checkedValue2== 'Kerala'){
+        $state = $checkedValue2;
+    }
+    $sql_query ="UPDATE `seller` SET account_no='$accnt_no',account_holder='$accnt_holder_name',account_type='$accnt_type',bankname='$bank_name',ifsc='$ifsc',`stage_number`=$stage_number WHERE id='$seller_id'";
     $result = mysqli_query($con2, $sql_query);
 
-    $sql_query1 ="INSERT INTO `address` (city,district,state,country,addr_type) VALUES ('$ship_city','$district','$state','$country','$seller_id','$addr_type')";
+    $sql_query1 ="INSERT INTO `address` (mapping_id,city,country,`state`,addr_type) VALUES ('$seller_id','$city','$country','$state','$addr_type')";
     $result1 = mysqli_query($con2, $sql_query1);
 
     $sql_query2 ="SELECT `seller_name` FROM `seller` WHERE id='$seller_id'";

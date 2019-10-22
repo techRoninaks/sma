@@ -363,11 +363,12 @@
         .img-style-2{
           height: 73px;
           margin-top: -56px;
+          margin-left: -38px;
           }
         .img-style-3{
           height: 73px;
           margin-top: -56px;
-          margin-left: -34px;
+          margin-left: -9px;
           }
         .img-style-4{
           height: 73px;
@@ -375,6 +376,7 @@
           }
         .img-style-5{
           height: 73px;
+          margin-left: -30px;
           margin-top: -56px;
           }
         .img-style-line{
@@ -384,8 +386,9 @@
         }
         .img-style-line-2{
           height: 13px;
-          margin-left: -57px;
+          margin-left: -119px;
           margin-top: -51px;
+          width: 113px;
         }
       }
       .shop-det{
@@ -395,12 +398,14 @@
       }
       .owner-info{
         grid-area: owner-info;
+        margin-left: -17px;
       }
       .payment{
         grid-area: payment;
       }
       .terms{
         grid-area: terms;
+        margin-left: -38px;
       }
       .launch{
         grid-area: launch;
@@ -415,7 +420,7 @@
       }
       .div-payment{
         grid-area: div-payment;
-        margin-left: 43px;
+        margin-left: 35px;
       }
       .div-terms{
         grid-area: div-terms;
@@ -423,6 +428,7 @@
       }
       .div-launch{
         grid-area: div-launch;
+        margin-left: -5px;
       }
   }
   .grid-form{
@@ -445,74 +451,152 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: 665px;
+    height: 810px;
+    font-family: BitterBold;
+  }
+  .div-body-stage-1{
+    grid-area: body;
+    background: inherit;
+    background: rgb(235, 232, 232);
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 600px;
+    font-family: BitterBold;
+  }
+  .div-body-stage-2{
+    grid-area: body;
+    background: inherit;
+    background: rgb(235, 232, 232);
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 600px;
+    font-family: BitterBold;
+  }
+  .div-body-stage-3{
+    grid-area: body;
+    background: inherit;
+    background: rgb(235, 232, 232);
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 1000px;
+    font-family: BitterBold;
+  }
+  .div-body-stage-5{
+    grid-area: body;
+    background: inherit;
+    background: rgb(235, 232, 232);
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 1000px;
+    font-family: BitterBold;
+  }
+  .div-body-1{
+    grid-area: body;
+    background: inherit;
+    background: #f7f4f4;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 985px;
+    margin-top: 65px;
+    border-radius: 12px;
   }
   .main-cat-drop-down-1{
+    margin-top: 20px;
     grid-area: main-cat-drop-down-1;
   }
   .main-cat-drop-down-2{
+    margin-top: 20px;
     grid-area: main-cat-drop-down-2;
   }
   .gst-no-label{
+    margin-left: 83px;
+    margin-top: 20px;
     grid-area: gst-no-label;
   }
   .gst-no{
+    margin-top: 20px;
     grid-area: gst-no;
   }
   .btn-next{
     grid-area: btn-next;
   }
   .shop-name-label{
+    margin-left: 60px;
+    margin-top: 60px;
     grid-area: shop-name-label; 
   }
   .shop-name{
+    margin-top: 60px;
     grid-area: shop-name;
   }
   .owner-name-label{
+    margin-left: 83px;
+    margin-top: 60px;
     grid-area: owner-name-label;
   }
   .owner-name{
+    margin-top: 60px;
     grid-area: owner-name;
   }
   .shop-addr-label{
+    margin-left: 60px;
     grid-area: shop-addr-label;
+    margin-top: 20px;
   }
   .shop-addr{
     grid-area: shop-addr;
+    margin-top: 20px;
   }
   .city{
     grid-area: city;
+    margin-top: 20px;
   }
   .state{
     grid-area: state;
+    margin-top: 20px;
   }
   .pin{
     grid-area: pin;
+    margin-top: 20px;
   }
   .main-cat-label{
+    margin-left: 60px;
     grid-area: main-cat-label;
+    margin-top: 20px;
   }
   .main-cat-drop-down{
     grid-area: main-cat-drop-down;
+    margin-top: 20px;
   }
   .contact-label{
+    margin-left: 83px;
     grid-area: contact-label;
+    margin-top: 20px;
   }
   .contact{
     grid-area: contact;
+    margin-top: 20px;
   }
   .email-id-label{
+    margin-left: 60px;
     grid-area: email-id-label;
+    margin-top: 20px;
   }
   .email-id{
     grid-area: email-id;
+    margin-top: 20px;
   }
   .grid-stage-2{
     display: grid;
     grid-template-columns: 15% auto 15% 15% 15%;
     grid-template-rows: auto auto auto auto auto auto;
-    grid-template-areas: "owner-name-label owner-name . . ."
-                         "email-label email contact-label contact contact"
+    grid-template-areas: "label-owner-name name-owner . . ."
+                         "email-label-2 email-2 contact-label-2 contact-2 contact-2"
                          "dob-label dob id-no-label id-no id-no"
                          "id-type-label id-drop-down . upload-label ."
                          ". . . front back"
@@ -524,50 +608,514 @@
   .back{
     grid-area: back;
   }
-  .owner-name-label{
-    grid-area: owner-name-label;
+  .label-owner-name{
+    margin-left: 25px;
+    margin-top: 45px;
+    grid-area: label-owner-name;
   }
-  .owner-name{
-    grid-area: owner-name;
+  .name-owner{
+    margin-top: 45px;
+    grid-area: name-owner;
   }
-  .email-label{
-    grid-area: email-label;
+  .email-label-2{
+    margin-left: 25px;
+    margin-top: 20px;
+    grid-area: email-label-2;
   }
-  .email{
-    grid-area: email;
+  .email-2{
+    margin-top: 20px;
+    grid-area: email-2;
   }
-  .contact-label{
-    grid-area: contact-label;
+  .contact-label-2{
+    margin-top: 20px;
+    grid-area: contact-label-2;
   }
-  .contact{
-    grid-area: contact;
+  .contact-2{
+    margin-top: 20px;
+    grid-area: contact-2;
   }
   .dob-label{
+    margin-left: 25px;
+    margin-top: 20px;
     grid-area: dob-label;
   }
   .dob{
+    margin-top: 20px;
     grid-area: dob;
   }
   .id-no-label{
+    margin-top: 20px;
     grid-area: id-no-label;
   }
   .id-no{
+    margin-top: 20px;
     grid-area: id-no;
   }
   .id-type-label{
+    margin-left: 25px;
+    margin-top: 20px;
     grid-area: id-type-label;
   }
   .id-drop-down{
+    margin-top: 20px;
     grid-area: id-drop-down;
   }
   .upload-label{
+    margin-top: 20px;
     grid-area: upload-label;
   }
   .btn-next{
+    margin-top: 40px;
     grid-area: btn-next;
   }
   .front-body{
     height: 100px;
     width: 100px;
     background: white;
+    border-radius: 6px;
   }
+  .main-grid-terms{
+    display: grid;
+    grid-template-columns: auto 33% auto;
+    grid-template-rows: 7% 10% 15% auto;
+    grid-template-areas: "heading heading heading"
+                         "mod-date mod-date ."
+                         "sub-heading-1 . ."
+                         "description description description";
+    width: 65%;
+    background: rgb(212, 206, 206);
+    margin-left: 18%;
+    border-radius: 18px;
+}
+.heading{
+    grid-area: heading;
+    background: #EFBE24;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    font-family: BitterBold;
+    text-align: center;
+}
+.head-style{
+    color: white;
+    margin-top: 1%;
+}
+.mod-date{
+    grid-area: mod-date;
+    padding: 5% 0% 0% 5%;
+    font-family: BitterBold;
+}
+.sub-heading-1{
+    grid-area: sub-heading-1;
+    padding: 5% 0% 0% 23%;
+    font-family: BitterBold;
+    margin-left: -183px;
+}
+.description{
+    grid-area: description;
+    padding: 1% 7% 3% 3%;
+    font-family: BitterRegular;
+    height: auto;
+}
+.doc-style{
+    width: 105%;
+    height: 500px;
+}
+.grid-welcome{
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: "welcome-msg"
+                        "checklist"
+                        "checklist-desc"
+                        "callus"
+                        "btn-dashboard";
+  margin-top: 50px;
+}
+.welcome-msg{
+  grid-area: welcome-msg;
+}
+.checklist{
+  grid-area: checklist;
+  border-radius: 12px;
+  height: 300px;
+  width: 895px;
+  background: #ece5e5;
+  margin-left: 55px;
+  margin-top: 94px;
+}
+.checklist-desc{
+  grid-area: checklist-desc;
+}
+.callus{
+  grid-area:callus;
+}
+.btn-dashboard{
+  grid-area: btn-dashboard;
+}
+.grid-checklist{
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-areas: "c-heading c-heading c-heading"
+                        "c-desc c-desc c-desc"
+                        "b1 b2 b3"
+                        "b4 b5 b6";
+}
+.c-heading{
+  grid-area: c-heading;
+}
+.c-desc{
+  grid-area: c-desc;
+}
+.b1{
+  grid-area: b1;
+}
+.b2{
+  grid-area: b2;
+}
+.b3{
+  grid-area: b3;
+}
+.b4{
+  grid-area: b4;
+  margin-top: 30px;
+}
+.b5{
+  grid-area: b5;
+  margin-top: 30px;
+}
+.b6{
+  grid-area: b6;
+  margin-top: 30px;
+}
+.grid-menu{
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-areas: "menu-1 menu-2 menu-3";
+}
+.grid-submenu-1{
+  display: grid;
+  grid-template-areas: "m-head-1"
+                        "m-desc-1";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+}
+.grid-submenu-2{
+  display: grid;
+  grid-template-areas: "m-head-2"
+                        "m-desc-2";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+}
+.grid-submenu-3{
+  display: grid;
+  grid-template-areas: "m-head-3"
+                        "m-desc-3";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+}
+.m-head-1{
+  grid-area: m-head-1;
+}
+.m-head-2{
+  grid-area: m-head-2;
+  margin-top: 24px;
+}
+.m-head-3{
+  grid-area: m-head-3;
+  margin-top: 24px;
+}
+.m-desc-1{
+  grid-area: m-desc-1;
+}
+.m-desc-2{
+  grid-area: m-desc-2;
+}
+.m-desc-3{
+  grid-area: m-desc-3;
+}
+.menu-1{
+  grid-area: menu-1;
+  height: 241px;
+  width: 279px;
+  background: #ece5e5;
+  border-radius: 12px;
+  margin-left: 53px;
+  margin-top: 16px;
+}
+.menu-2{
+  grid-area: menu-2;
+  height: 241px;
+  width: 279px;
+  background: #ece5e5;
+  border-radius: 12px;
+  margin-left: 32px;
+  margin-top: 16px;
+}
+.menu-3{
+  grid-area: menu-3;
+  height: 241px;
+  width: 279px;
+  background: #ece5e5;
+  border-radius: 12px;
+  margin-left: 12px;
+  margin-top: 16px;
+}
+.grid-promotion{
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: "header-promo"
+                        "h-desc"
+                        "h-plan"
+                        "btn-launch";
+}
+.btn-launch{
+  grid-area: btn-launch;
+}
+.header-promo{
+  grid-area: header-promo;
+  height: 36px;
+  width: 900px;
+  background: #009145;
+  border-radius: 4px;
+  margin-left: 45px;
+  margin-top: 67px;
+}
+.h-desc{
+  grid-area: h-desc;
+}
+.h-plan{
+  grid-area: h-plan;
+  .main-title{
+    margin-top: 8%;
+    font-family: BitterBold;
+    font-size: 200%;
+    text-align: center;
+    color: black;
+}
+
+.card-title{
+  font-family: BitterBold;
+  text-align: center;
+}
+.text-style{
+  text-align: center;
+}
+.btn-style{
+  width: -moz-available;
+  background: #EFBE24;
+  font-family: BitterBold;
+}
+.btn-compare{
+  background: #009145;
+  border-radius: 4px;
+  margin-left: 43%;
+  width: 15%;
+  font-family: BitterBold;
+  color: white;
+}
+//hoverzoom
+* {
+    box-sizing: content-box;
+  }
+  
+
+//card-style
+.card-style{
+    background: #DBDBDB;
+    background-size: cover;
+    width: 200px;
+    height: 350px;
+    font-family: BitterBold;
+}
+.p-style{
+  font-size: 24px;
+  text-align: center;
+}
+.image-style{
+  width: min-content;
+  margin: auto;
+}
+//grid
+.main-grid{
+  font-family: "BitterRegular";
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto ;
+  grid-template-areas: "card-1 card-2 card-3 card-4";
+  margin-left: 9px;
+}
+.card-1{
+  grid-area: card-1;
+}
+.card-2{
+  grid-area: card-2;
+}
+.card-3{
+  grid-area: card-3;
+}
+.card-4{
+  grid-area: card-4;
+}
+}
+.grid-shipping-main{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: "ship-details"
+                       "location"
+                       "payment";
+}
+.ship-details{
+  grid-area: ship-details;
+}
+.location{
+  grid-area: location;
+  background: #dfdfdf;
+  height: 239px;
+  width: 500px;
+  border-radius: 7px;
+  margin-left: 68px;
+  margin-top: 30px;
+}
+.payment{
+  grid-area: payment;
+}
+.grid-shipping{
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-areas: "label-ship . ."
+                       "label-ship-from ship-from ."
+                       "label-ship-mode . ."
+                       "shipping home pickup"
+                       "label-shipping-to . ."
+                       "world india kerala"
+                       "custom . .";
+}
+.label-ship{
+  margin-top: 40px;
+  grid-area: label-ship;
+}
+.label-ship-from{
+  margin-top: 20px;
+  margin-left: 64px;
+  grid-area: label-ship-from;
+}
+.ship-from{
+  margin-top: 20px;
+  grid-area: ship-from;
+}
+.label-ship-mode{
+  margin-top: 20px;
+  margin-left: 64px;
+  grid-area: label-ship-mode;
+}
+.shipping{
+  margin-top: 20px;
+  margin-left: 123px;
+  grid-area: shipping;
+}
+.home{
+  margin-top: 20px;
+  grid-area: home;
+  margin-left: 70px;
+}
+.pickup{
+  margin-top: 20px;
+  grid-area: pickup;
+  margin-left: 20px;
+}
+.label-shipping-to{
+  margin-top: 20px;
+  margin-left: 64px;
+  grid-area: label-shipping-to;
+}
+.world{
+  margin-top: 20px;
+  margin-left: 123px;
+  grid-area: world;
+}
+.india{
+  margin-top: 20px;
+  grid-area: india;
+  margin-left: 70px;
+}
+.kerala{
+  margin-top: 20px;
+  grid-area: kerala;
+  margin-left: 20px;
+}
+.custom{
+  margin-top: 20px;
+  grid-area: custom;
+  margin-left: 123px;
+}
+.grid-location{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 70% 15% 15%;
+  grid-template-areas: "location-input addbtn"
+                       "location-list edit delete";
+}
+.location-input{
+  grid-area: location-input;
+}
+.addbtn{
+  grid-area: addbtn;
+}
+.location-list{
+  grid-area: location-list;
+}
+.edit{
+  grid-area: edit;
+}
+.delete{
+  grid-area: delete;
+}
+.grid-payment{
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "pay-header ."
+                      "holder-name bank-name"
+                       "accnt-type branch"
+                       "accnt-no ifsc"
+                       "conf-accnt-no btn-next";
+  margin-top: 57px;
+  margin-left: 155px;
+}
+.holder-name{
+  grid-area: holder-name;
+}
+.bank-name{
+  margin-left: -92px;
+  grid-area: bank-name;
+}
+.accnt-type{
+  grid-area: accnt-type;
+}
+.branch{
+  margin-left: -92px;
+  grid-area: branch;
+}
+.accnt-no{
+  grid-area: accnt-no;
+}
+.ifsc{
+  margin-left: -92px;
+  grid-area: ifsc;
+}
+.conf-accnt-no{
+  grid-area: conf-accnt-no;
+}
+.btn-next{
+  grid-area: btn-next;
+}
+.payment-style{
+  border: none;
+  border-radius: 4px;
+  width: 300px;
+}
