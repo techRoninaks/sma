@@ -5,21 +5,18 @@ require "init.php";
 
 
 $position = $_POST['id'];
-$sql = "SELECT label_text,priority  FROM `label` where id='$id'";
+$sql1 = "SELECT count(*)  FROM `label`";
+$result = mysqli_query($conn,$sql1);
+$row =  mysqli_fetch_array($result);
+$count = $row[0];
+echo $count;
 
-    $result1 = mysqli_query($conn,$sql);
+    for($i=0;$i<$count;$i++){
+    $pos = $position[$i];
+    $sql = "Update label SET position_order='$i' WHERE id='$pos'";
 
-    $row = mysqli_fetch_array($result1);
-    $success = "";
-    $result = false;
-    $i=1;
-    for($row){
-
-    $sql = "Update label SET priority=".$i." WHERE id=".$id;
     $result= mysqli_query($conn,$sql);
-    echo $result;
-    $i++;
-
+    
     }
 
     
