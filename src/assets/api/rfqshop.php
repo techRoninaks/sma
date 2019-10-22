@@ -72,15 +72,15 @@ $y=$rev;
     if($image != 1){
         // $dir='../assets/images/shop/'.$shopId.'/';
         // mkdir($dir);
-        if (!file_exists('../images/shop/'.$shopId.'/')) {
-            mkdir('../images/shop/'.$shopId.'/', 0777, true);
-            $dir='../images/shop/'.$shopId.'/';
+        if (!file_exists('../images/order/'.$orderId.'/')) {
+            mkdir('../images/order/'.$orderId.'/', 0777, true);
+            $dir='../images/order/'.$orderId.'/';
         }
         // if (!file_exists('../'.$shopId.'/')) {
         //     mkdir('../'.$shopId.'/', 0777, true);
         //     $dir='../assets/images/shop/'.$shopId.'/';
         // }
-        define('UPLOAD_DIR', '../images/shop/'.$shopId.'/');
+        define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
         //  echo $image;
         $file = UPLOAD_DIR.'rfq'.$orderId.'.jpg';
         if($mob == 0){
