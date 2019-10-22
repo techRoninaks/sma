@@ -1,7 +1,7 @@
 <?php
     require "init.php";
     $success = "unsuccessful";
-    $sql_query = "select * from label;";
+    $sql_query = "select id,label_text,priority from label order by position_order;";
     $result = mysqli_query($conn, $sql_query);
     $response = array();
     $count = 0;
