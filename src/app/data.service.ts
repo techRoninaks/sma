@@ -447,10 +447,12 @@ getDateDiffShop(data: any) {
     return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
-  deleteCartProductfn(id: any, userId: any){
+  deleteCartProductfn(id: any, userId: any, prodid:any , quantity){
     let httpParams = new HttpParams()
     .append("id",id)
-    .append("userId",userId);
+    .append("user_id",userId)
+    .append("prodid",prodid)
+    .append("quantity",quantity);
     return this.http.post(this.baseUrl+'assets/api/deleteCartProduct.php',httpParams);
   }
   
@@ -1111,6 +1113,34 @@ updateSellerPlanFree(data: any){
   .append("seller_id", data)
   return this.http.post(this.baseUrl+'assets/api/updatePlanPlus.php',httpParams);
  }
+  
+    insertCartProCus(data: any) {
+    let httpParams = new HttpParams()
+      .append("userId", data['userId'])
+      .append("prodid", data['prodid'])
+      .append("quantity", data['quantity'])
+      .append("variants_chosen", data['variants_chosen'])
+      .append("gift_address", data['gift_address'])
+      .append("gift_note", data['gift_note'])
+      .append("total_price", data['total_price'])
+      .append("discount", data['discount'])
+      .append("variant_price", data['variant_price'])
+      .append("has_image", data['has_image'])
+      .append("delivery_date", data['delivery_date'])
+      .append("require_delivery_date", data['require_delivery_date'])
+      .append("is_ordered", data['is_ordered'])
+      .append("varients_choosen", data['varients_choosen'])
+      .append("gift_title", data['gift_title'])
+      .append("gift_option", data['gift_option'])
+      .append("varient_price", data['varient_price']);
+    return this.http.post(this.baseUrl + 'assets/api/insertCartProCus.php', httpParams);
+  }
+  
+    deliverAddrCart(userId: any) {
+    let httpParams = new HttpParams()
+      .append("userId", userId);
+    return this.http.post(this.baseUrl + 'assets/api/deliverAddrCart.php', httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
