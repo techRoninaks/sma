@@ -866,9 +866,10 @@ getdynamicPriceAddProduct(prodid: any) {
     .append("reg_password", data['reg_password']);
     return this.http.post(this.baseUrl+'assets/api/sellerRegistration.php',httpParams);
   }
- addSellerDataStage2(data: Object,seller_id:any){
+ addSellerDataStage2(data: Object,seller_id:any,gst_no:any){
   let httpParams= new HttpParams()
   .append("seller_id",seller_id )
+  .append("gst_no",gst_no )
   .append("shop_name", data['shop_name'])
   .append("shop_address", data['shop_address'])
   .append("city", data['city'])
@@ -890,9 +891,6 @@ getdynamicPriceAddProduct(prodid: any) {
   .append("ship_city", data['ship_city'])
   .append("checkedValue", data['checkedValue'])
   .append("checkedValue2",data['checkedValue2'])
-  .append("country", data['country'])
-  .append("state",data['state'])
-  .append("district",data['district'])
   .append("city",data['city'])
   .append("accnt_holder_name",data['accnt_holder_name'])
   .append("bank_name",data['bank_name'])
@@ -1064,6 +1062,55 @@ shopAddressUpload(data :any) {
       .append("image", data['image'])
     return this.http.post(this.baseUrl + 'assets/api/uploadshoplogo.php', httpParams);
   }
+  
+  uploadFront(data: Object){
+    let httpParams = new HttpParams()
+    .append("sellerId", data['seller_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/idFrontUpload.php', httpParams);
+  }
+  uploadBack(data: Object){
+    let httpParams = new HttpParams()
+    .append("sellerId", data['seller_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/idBackUpload.php', httpParams);
+	 }
+  updateStage4(data: any){
+    let httpParams = new HttpParams()
+    .append("sellerId", data)
+    return this.http.post(this.baseUrl+'assets/api/updateStage4.php', httpParams);
+  }
+  updateStage5(data: any){
+    let httpParams = new HttpParams()
+    .append("sellerId", data)
+    return this.http.post(this.baseUrl+'assets/api/updateStage5.php', httpParams);
+  }
+  updateStage6(data: any){
+    let httpParams = new HttpParams()
+    .append("sellerId", data)
+    return this.http.post(this.baseUrl+'assets/api/updateStage6.php', httpParams);
+  }
+
+updateSellerPlanFree(data: any){
+  let httpParams= new HttpParams()
+  .append("seller_id", data)
+  return this.http.post(this.baseUrl+'assets/api/updatePlanFree.php',httpParams);
+ }
+ updateSellerPlanBasic(data: any){
+  let httpParams= new HttpParams()
+  .append("seller_id", data)
+  return this.http.post(this.baseUrl+'assets/api/updatePlanBasic.php',httpParams);
+ }
+ updateSellerPlanPremium(data: any){
+  let httpParams= new HttpParams()
+  .append("seller_id", data)
+  return this.http.post(this.baseUrl+'assets/api/updatePlanPremium.php',httpParams);
+ }
+ updateSellerPlanPlus(data: any){
+  let httpParams= new HttpParams()
+  .append("seller_id", data)
+  return this.http.post(this.baseUrl+'assets/api/updatePlanPlus.php',httpParams);
+ }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
