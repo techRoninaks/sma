@@ -6,7 +6,7 @@ require "init.php";
 
 $position = $_POST['id'];
 $sql1 = "SELECT count(*)  FROM `label`";
-$result = mysqli_query($conn,$sql1);
+$result = mysqli_query($con1,$sql1);
 $row =  mysqli_fetch_array($result);
 $count = $row[0];
 echo $count;

@@ -8,7 +8,7 @@ header("Content-Type: application/json; charset=UTF-8");
 $response = array();
 $data = array();
 $sql_query1 =  "SELECT parentid FROM category WHERE category_id = $id";
-$result1 = mysqli_query($conn,$sql_query1);
+$result1 = mysqli_query($con1,$sql_query1);
 $pid = mysqli_fetch_assoc($result1);
 $pid_val = $pid["parentid"];
 $sql_query2 = "UPDATE category SET parentid = $pid_val WHERE parentid = $id";

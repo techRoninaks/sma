@@ -98,7 +98,7 @@ $y=$rev;
         $success = file_put_contents($file, $data);
         // echo "<br>";        
         // echo "<br>";
-        // echo $success;
+        echo $success;
         // echo "<br>";
         // echo $dir.$file;
     }
