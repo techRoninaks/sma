@@ -9,7 +9,7 @@
 	
     $sql = "SELECT label_text,priority  FROM `label` where id='$data->labId'";
 
-    $result1 = mysqli_query($conn,$sql);
+    $result1 = mysqli_query($con1,$sql);
     $row = mysqli_fetch_array($result1);
     $success = "";
     $result = false;
@@ -17,7 +17,7 @@
     
     if($row !== NULL){
             $sql = "UPDATE `label` SET `label_text`='$data->labelName',`priority`='$data->priority' where id = '$data->labId'";
-            $result = mysqli_query($conn,$sql);
+            $result = mysqli_query($con1,$sql);
         }
     // echo "-2-".$sql;
     // } else {

@@ -83,7 +83,7 @@ export class ShopProfileComponent implements OnInit {
 
         if(this.sellerId != null || this.sellerId !=0){
 			// this.router.navigate(['/managepage'], { queryParams: { shop_id: this.token } });
-			(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="block;";
+			(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="block";
         }
 
 

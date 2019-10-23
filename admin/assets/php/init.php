@@ -2,9 +2,9 @@
 <?php
 
 // header("Access-Control-Allow-Origin: *");    
-$db_name = "smapr";
-$username = "root";
-$password = "";
+$db_name = "roninaks_smapr";
+$username = "roninaks";
+$password = "complexP@ssw0rd";
 $servername = "localhost";
 
 $con1 = new mysqli($servername, $username, $password, $db_name);
@@ -12,9 +12,9 @@ $con1 = new mysqli($servername, $username, $password, $db_name);
 
 
 // header("Access-Control-Allow-Origin: *");    
-$db_name = "smausr";
-$username = "root";
-$password = "";
+$db_name = "roninaks_smausr";
+$username = "roninaks";
+$password = "complexP@ssw0rd";
 $servername = "localhost";
 
 $con2 = new mysqli($servername, $username, $password, $db_name);

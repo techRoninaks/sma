@@ -4,7 +4,7 @@
 	
 	$id = $_POST["id"];
     $sql = "SELECT * FROM `category` WHERE `category_id`=$id";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($con1,$sql);
     $row = mysqli_fetch_array($result);
     if($row){
         $userData = array("catName"=>$row["category"],"parentid"=>$row["parentid"],"catId"=>$row["category_id"]);
