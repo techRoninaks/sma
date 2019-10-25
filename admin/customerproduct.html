@@ -81,12 +81,9 @@
                             <p>Product Orders</p>
                         </a>
                     </li>
-                   
                 </ul>
             </div>
-
         </div>
-
         <div class="main-panel">
             <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
@@ -113,7 +110,6 @@
                     </div>
                 </div>
             </nav>
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="card">
@@ -137,8 +133,7 @@
                                         <button class="btn btn-fill" onclick="toggleTabs('notrated')"
                                             id="btnNotrated">Not Rated</button>
 
-                                    </div>
-                                    
+                                    </div>   
                                 </div>
                             </div>
                             <div class="content table-responsive table-full-width" id="allTable">
@@ -165,13 +160,11 @@
                         </div>
                     </div>
                 </div>
-
                 <footer class="footer" w3-include-html="footer.html">
                 </footer>
-
-
             </div>
         </div>
+    </div>
 </body>
 
 <!--   Core JS Files   -->
@@ -440,12 +433,10 @@
     }
 
     function buildHtml(template, data) {
-        console.log(template);
         var htmlString = "";
         var pageName = "user";
         switch (template) {
             case "allTable":
-
                 htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td></tr>";
                 break;
             case "readyforshippingTable":
@@ -458,7 +449,7 @@
                 htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "');";
                 break;
             case "returnTable":
-            htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick="+"sendPopUpData('"+data.id+"','"+data.prodid+"')"+" data-toggle='modal' data-target='#myModal'>Reject Order</button>";
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick="+"sendPopUpData('"+data.id+"','"+data.prodid+"')"+" data-toggle='modal' data-target='#myModal'>Reject Order</button>";
                 break;
             case "complinedTable":
                 htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.uname + "</td><td>" + data.email + "</td><td>" + data.phone1 + "</td><td>" + data.order_status + "</td><td>" + data.prodid + "</td><td>" + data.name + "</td><td>" + data.short_desc + "</td><td><img src='assets/img/delete-button.png' onclick=" + "toggleTabs('deletecustomer');fetchData('" + data.id + "','" + pageName + "');";
