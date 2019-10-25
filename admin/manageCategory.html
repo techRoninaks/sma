@@ -121,32 +121,56 @@
                         </div>
                 </ul>
             </div>
-         
-    
 
     <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed" w3-include-html="header.html">
-        </nav>
-        
+            <nav class="navbar navbar-default navbar-fixed">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navigation-example-2">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Manage category and label</a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <!-- <a href="#">
+                                    <div style="padding-top: 8px;width: 1500%;" align="right">
+                                        <p>Log out</p>
+                                    </div>
+                                </a> -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+     
+		
 
         <div class="content">
             <div class="container-fluid">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Manage category and label</h4>
-                        <p class="category">Add/Delete/Edit getCategories</p>
+                        <!-- <p class="category">Add/Delete/Edit Categories  and Labels</p> -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div style="padding-top: 8px;">
 
                                     <button class="btn btn-info btn-fill" onclick="toggleTabs('category')"id="btnCategory">category</button>
                                     <button class="btn btn-fill" onclick="toggleTabs('label')" id="btnLabel">label</button>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div style="padding-top: 8px;width: 100%;" align="right">
+                                <div style="padding-top: 8px;  margin-bottom: 20px;
+                                width: 100%;" align="right">
 
-                                    <button class="btn btn-info btn-fill" onclick="toggleTabs('addCategory')" id="btnAddCategory">Add New category</button>
+                                    <button class="btn btn-fill" onclick="toggleTabs('addCategory')" id="btnAddCategory">Add New category</button>
                                 </div>
                             </div>
                             
@@ -161,13 +185,10 @@
                         <form enctype="multipart/form-data" action="javascript:dataUpdate('category')" method="post">
                             <label>Category Name</label><p style="display:inline;color:red;">*</p>
                             <input type="text" class="form-control formStyle" placeholder="Category Name" id="catName" required><br>
-                            <label>parentid</label><p style="display:inline;color:red;"></p><br>
-                            
-                            <select name="parentid" id="parentid"></select><br><br>
-                            <label>unique id</label><p style="display:inline;color:red;"></p>
+                            <label>select parentid</label><p style="display:inline;color:red;">*</p><br>
+                             <select name="parentid" id="parentid"></select><br></br>
+                            <label></label><p style="display:inline;color:red;"></p>
                             <input type="hidden" class="form-control formStyle" placeholder="unique id" id="catId"><br>
-                            
-                            
                             <button type="submit" style="display:inline" class="btn btn-secondary-outline" value="Submit" id="submitbutton">UPLOAD</button>
                             <button type="button" class="btn btn-secondary-outline" value="Cancel" onclick="cancelFunc()">CANCEL</button>
                             </form>
@@ -180,15 +201,15 @@
                         <form enctype="multipart/form-data" action="javascript:dataUpdate('label')" method="post">
                             <label>Label Name</label><p style="display:inline;color:red;">*</p>
                             <input type="text" class="form-control formStyle" placeholder="Label Name" id="labelName" required><br>
-                            <label>Label id</label><p style="display:inline;color:red;">*</p>
-                            <input type="text" class="form-control formStyle" placeholder="Label id" id="labId" required><br>
-                            <label>priority</label><p style="display:inline;color:red;">*</p><br>
+                            <label></label><p style="display:inline;color:red;"></p>
+                            <input type="hidden" class="form-control formStyle" placeholder="Label id" id="labId" required><br>
+                            <label>select priority</label><p style="display:inline;color:red;">*</p><br>
                             <select name="priority" id="priority"></select><br><br>
                             <button type="submit" style="display:inline" class="btn btn-secondary-outline" value="Submit" id="submitbutton">UPLOAD</button>
                             <button type="button" class="btn btn-secondary-outline" value="Cancel" onclick="cancelFunc()">CANCEL</button>
                             </form>
-                    </div>
-                </div>
+                     </div>
+            </div>
                     </div>
                 </div>
             </div>
@@ -231,6 +252,7 @@
                loadProfile();
            }, 100);
         }; -->
+        
 
     <script type="text/javascript">
             window.onload = function(){
@@ -247,9 +269,10 @@
            updateOrder(selectedRow);
 
         }
-    }, 1000);
 
     });
+}, 1000);
+
     
 
             }
@@ -270,8 +293,8 @@
                     
                 break;
                 case "label":
-                    $('#btnLabel').removeClass().addClass('btn btn-info btn-fill');
                     $('#btnCategory').removeClass().addClass('btn btn-fill');
+                    $('#btnLabel').removeClass().addClass('btn btn-info btn-fill');
                     $('#btnAddCategory').removeClass().addClass('btn btn-fill');
                     $('#categoryTable').hide();
                     $('#labelTable').show();
@@ -279,9 +302,9 @@
                     $('#addLabel').hide();
                 break;
                 case "addCategory":
+                    $('#btnCategory').removeClass().addClass('btn btn-fill');
+                    $('#btnLabel').removeClass().addClass('btn btn-fill');
                     $('#btnAddCategory').removeClass().addClass('btn btn-info btn-fill');
-                    $('#btnAdmin').removeClass().addClass('btn btn-fill');
-                    $('#btnEmployee').removeClass().addClass('btn btn-fill');
                     $('#categoryTable').hide();
                     $('#labelTable').hide();
                     $('#addCategory').show();
@@ -367,15 +390,13 @@
                 dataType:'json',
                 url: 'assets/php/getParentid.php',
                 success:function(responseData) {
-                        var optionParentid = "<option>Select<option>";
+                        var optionParentid = "<option>0</option>";
                             if(responseData.data.success == "successful"){
                                 var response = responseData.data.result;
                                 response.forEach(element => {
-                                    
                                 optionParentid = optionParentid + buildHtml("parentid", element);
 
                             });
-
                             document.getElementById("parentid").innerHTML = optionParentid;
                             } else {
                                 demo.showNotification('top','center', 'Something went wrong', 4);
@@ -393,7 +414,7 @@
                 dataType:'json',
                 url: 'assets/php/getPriority.php',
                 success:function(responseData) {
-                        var optionPriority = "<option>Select<option>";
+                        var optionPriority = "<option>Select</option>";
                             if(responseData.data.success == "successful"){
                                 var response = responseData.data.result;
                                 response.forEach(element => {
@@ -428,7 +449,7 @@
                 var pageName = "'category'";
                     // display category table body
 
-                    htmlString = "<tr><td>" + data.id + "</td><td>" + data.name +  "</td><td>"+data.parentid+ "</td><td><img src='assets/image/edit-button.png' onclick="+"toggleTabs('addCategory');fetchData("+data.id+','+pageName+")><img src='assets/image/delete-button.png' onclick="+"deleteData("+data.id+','+pageName+")"+"></td></tr>";
+                    htmlString = "<tr><td>" + data.id + "</td><td>" + data.name +  "</td><td>"+data.parentid+ "</td><td><img src='assets/image/edit-button.png' onclick="+"toggleTabs('addCategory');fetchData("+data.id+','+pageName+")><img src='assets/image/delete-button.png' onclick="+"deleteData1("+data.id+','+pageName+")"+"></td></tr>";
              
                 break;
                 case "labelTable":
@@ -436,13 +457,13 @@
                 console.log("vjv");
                 var pageName = "'label'";
 
-                    htmlString = "<tr id="+data.id+"><td>" + data.id + "</td><td>" + data.name +  "</td><td>"+data.priority+ "</td><td><img src='assets/image/edit-button.png' onclick="+"toggleTabs('addLabel');fetchData("+data.id+','+pageName+")"+">&emsp;<img src='assets/image/delete-button.png' onclick="+"deleteData("+data.id+','+pageName+")"+"></td></tr>";
+                    htmlString = "<tr id="+data.id+"><td>" + data.id + "</td><td>" + data.name +  "</td><td>"+data.priority+ "</td><td><img src='assets/image/edit-button.png' onclick="+"toggleTabs('addLabel');fetchData("+data.id+','+pageName+")"+">&emsp;<img src='assets/image/delete-button.png' onclick="+"deleteData1("+data.id+','+pageName+")"+"></td></tr>";
                         break;
                 case "parentid":
-                    htmlString = "<option>" + data.parentid + "</option>";
+                    htmlString = "<option>"+data.parentid+"</option>";
                 break;
                 
-                break;
+                
                 case "priority":
                     htmlString = "<option>" + data.priority + "</option>";
                 break;
