@@ -15,7 +15,7 @@
     $location =explode(" ", $shopLocation);
     $locId=$location[0];
 
-    $sqlOrderAddress="SELECT `id` FROM `address`  where `addr1` LIKE '%$locId%' and `addr_type`='shipping' ORDER BY id DESC LIMIT 1";
+    $sqlOrderAddress="SELECT `id` FROM `address`  where `addr1` LIKE '%$locId%' and `addr_type`='shipping' AND `mapping_id` = $userId ORDER BY id DESC LIMIT 1";
     $resOrderAddress=mysqli_query($con2,$sqlOrderAddress);
     $rowOrderAddress=mysqli_fetch_assoc($resOrderAddress);
     // echo $sqlOrderAddress;

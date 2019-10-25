@@ -267,7 +267,7 @@ export class ShopProfileComponent implements OnInit {
 		var y = this.defRfqTag;
 		this.prod[y++] = x;
 		this.defRfqTag = y;
-		console.log(this.prod);
+		// console.log(this.prod);
 	}
 	delProduct(id: any) {
 		var n = this.Object.keys(this.prod).length;
