@@ -116,9 +116,8 @@ export class LoginComponent implements OnInit {
       else
       {  
         this.data.attemptLogin(this.loginForm.value).subscribe(
-          data=>{
-                  
-                  console.log(data);
+          data=>{ 
+                  // console.log(data);
                   if(data['status'] =="Success1")
                   {
                     alert('Login Successfully');
@@ -190,6 +189,7 @@ export class LoginComponent implements OnInit {
                     }
                     else
                     {
+                      alert('Login Successfully');
                       this.cookie_seller_id = data['sellerId'];
                       this.seller_name =data['seller_name'];
                       this.city =data['city'];

@@ -5,7 +5,7 @@
                                 <div class="grid-profile-card">
                                         <div class="left-sect">
                                                 <div class="text-style">
-                                                        <div class="grid-user-info-1" style="visibility: visible">
+                                                        <div class="grid-user-info-1" *ngIf = "viewMode">
                                                                 <div class="l-name">
                                                                         Name
                                                                 </div>
@@ -17,7 +17,7 @@
                                                                 </div>
                                                                 <div class="r-address">
                                                                         <label>
-                                                                                {{dynamicDataUsercard.address}}
+                                                                                {{dynamicDataUsercard.address}},
                                                                                 {{dynamicDataUsercard.city}},
                                                                                 {{dynamicDataUsercard.district}},
                                                                                 <br>
@@ -53,44 +53,114 @@
                                                                         <label>:</label>
                                                                 </div>
                                                         </div>
-                                                        <!-- <div class="grid-user-info-2" style="visibility: visible">
-                                                                        <div class="l-name">
-                                                                                        Name
+                                                        <div class="grid-user-info-2"  *ngIf = "editMode">
+                                                           <form [formGroup]="registrationForm">
+                                                                <div class="left-name">
+                                                                        Name
+                                                                </div>
+                                                                <div class="right-name">
+                                                                        <input type="text" style="width: 208px;" value="{{dynamicDataUsercard.name}}" placeholder="Name" formControlName="fullname">
+                                                                        <div *ngIf="submitted && registrationForm.controls.fullname.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.fullname.errors.required">
+                                                                                        Name is required !
                                                                                 </div>
-                                                                                <div class="r-name">
-                                                                                        <input type="text">
+                                                                        </div>
+                                                                </div>
+                                                                <div class="left-address">
+                                                                        Address
+                                                                </div>
+                                                                <div class="right-address">
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.address}}" placeholder="Address" formControlName="reg_address1">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_address1.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_address1.errors.required">
+                                                                                        Address is required !
                                                                                 </div>
-                                                                                <div class="l-address">
-                                                                                        Address
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.city}}" placeholder="City" formControlName="reg_city">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_city.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_city.errors.required">
+                                                                                        City is required !
                                                                                 </div>
-                                                                                <div class="r-address">
-                                                                                       <input type="text">
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.district}}" placeholder="District" formControlName="reg_dist">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_dist.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_dist.errors.required">
+                                                                                        District is required !
                                                                                 </div>
-                                                                                <div class="l-phone">
-                                                                                        Phone
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.state}}" placeholder="State" formControlName="reg_state">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_state.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_state.errors.required">
+                                                                                        State is required !
                                                                                 </div>
-                                                                                <div class="r-phone">
-                                                                                        <input type="tel">
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.country}}" placeholder="Country" formControlName="reg_country">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_country.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_country.errors.required">
+                                                                                        Country is required !
                                                                                 </div>
-                                                                                <div class="l-email">
-                                                                                        Email
+                                                                        </div>
+                                                                        <br>
+                                                                        <input type="text"  style="width: 208px;" value="{{dynamicDataUsercard.pincode}}" placeholder="Pincode" formControlName="reg_pin">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_pin.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_pin.errors.required">
+                                                                                        Pincode is required !
                                                                                 </div>
-                                                                                <div class="r-email">
-                                                                                        <input type="email">
+                                                                        </div>
+                                                                        <br>
+                                                                </div>
+                                                                <div class="left-phone">
+                                                                        Phone
+                                                                </div>
+                                                                <div class="right-phone">
+                                                                        <input type="tel"  style="width: 208px;" value="{{dynamicDataUsercard.phoneNo}}" placeholder="Phone no" formControlName="reg_mobile_no">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
+                                                                                        Mobile no is required !
                                                                                 </div>
-                                                                                <div class="col-1">
-                                                                                        <label>:</label>
+                                                                                <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('minlength')">
+                                                                                        Enter valid Mobile Number !
                                                                                 </div>
-                                                                                <div class="col-2">
-                                                                                        <label>:</label>
+                                                                                <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('maxlength')">
+                                                                                        Enter valid Mobile Number !
                                                                                 </div>
-                                                                                <div class="col-3">
-                                                                                        <label>:</label>
+                                                                                <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('pattern')">
+                                                                                        Enter Only digits !
                                                                                 </div>
-                                                                                <div class="col-4">
-                                                                                        <label>:</label>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="left-email">
+                                                                        Email
+                                                                </div>
+                                                                <div class="right-email">
+                                                                        <input type="email"  style="width: 208px;" value="{{dynamicDataUsercard.email}}" placeholder="Email" formControlName="reg_email">
+                                                                        <div *ngIf="submitted && registrationForm.controls.reg_email.errors" class="error validator-style">
+                                                                                <div *ngIf="registrationForm.controls.reg_email.errors.required">
+                                                                                        Email is required !
                                                                                 </div>
-                                                        </div> -->
+                                                                                <div *ngIf="registrationForm.controls.reg_email.hasError('pattern')">
+                                                                                        Enter valid Email !
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <!-- <div class="c-col-5">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="c-col-6">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="c-col-7">
+                                                                        <label>:</label>
+                                                                </div>
+                                                                <div class="c-col-8">
+                                                                        <label>:</label>
+                                                                </div> -->
+                                                            </form>
+                                                        </div>
                                                 </div>
                                         </div>
                                         <div class="right-sect-1">
@@ -98,7 +168,8 @@
                                                         {{dynamicDataShopCount.count}}</button>
                                         </div>
                                         <div class="right-sect-2">
-                                                <button class="btn-style-2">EDIT</button>
+                                                <button class="btn-style-2" (click)="edit();" *ngIf="viewMode">EDIT</button>
+                                                <button class="btn-style-2" type="submit" (click)="save();" *ngIf="editMode">SAVE</button>
                                         </div>
                                 </div>
                         </div>
@@ -156,32 +227,19 @@
                                                                         {{dynamicDataShopName[item].prodCount}} products
                                                                 </div>
                                                                 <div class="shop-follow">
-                                                                        <!-- <button class="button-style-follow">Follow</button> -->
-                                                                        <ng-container
-                                                                                *ngIf="folResult; else notFollowing">
-                                                                                <button type="button"
-                                                                                        class="button-style-follow"
-                                                                                        (click)="unfollowShop(dynamicDataShopName[item].shopid);">
-                                                                                        Unfollow
-                                                                                </button>
-                                                                        </ng-container>
-                                                                        <ng-template #notFollowing>
-                                                                                <button type="button"
-                                                                                        class="button-style-follow"
-                                                                                        (click)="followShop(dynamicDataShopName[item].shopid);">
-                                                                                        Follow
-                                                                                </button>
-                                                                        </ng-template>
+                                                                        <button class="button-style-follow" (click)="clickfollowShop(dynamicDataShopName[item].shopid);" id="unFollowButton{{dynamicDataShopName[item].shopid}}" value="{{followlabel}}">
+                                                                                Unfollow
+                                                                        </button>
                                                                 </div>
                                                                 <div class="shop-rating">
                                                                         Rate
                                                                 </div>
                                                                 <div class="shop-rating-icon">
                                                                         <div>
-                                                                                <i class="fa fa-star"
-                                                                                        *ngFor="let item of filledStar"></i>
-                                                                                <i class="fa fa-star-o"
-                                                                                        *ngFor="let item of unFilledStar"></i>
+                                                                                <i class="fa fa-star" *ngFor="let item of arrayfilledStar[item]">
+                                                                                </i>
+                                                                                <i class="fa fa-star-o" *ngFor="let item of arrayunFilledStar[item]">
+                                                                                </i>
                                                                         </div>
                                                                 </div>
                                                         </div>

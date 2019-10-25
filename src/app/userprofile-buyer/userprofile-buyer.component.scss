@@ -89,7 +89,7 @@ a.notif {
     margin-top: 5%;
     background: white;
     margin-left: 8%;
-    height: 60%;
+    height: 67%;
     width: 95%;
     grid-template-areas: "leftarea  rightarea-1"
                          "leftarea  rightarea-2";
@@ -114,104 +114,109 @@ a.notif {
                          "l-address col-2 r-address"
                          "l-phone col-3 r-phone"
                          "l-email col-4 r-email";
+        .col-1{
+        grid-area: col-1;
+        // margin-left: -83%;
+    }
+    .col-2{
+        grid-area: col-2;
+        // margin-left: -83%;
+    }
+    .col-3{
+        grid-area: col-3;
+        // margin-left: -83%;
+    }
+    .col-4{
+        grid-area: col-4;
+        // margin-left: -83%;
+    }
+    .l-name{
+        grid-area: l-name;
+    }
+    .r-name{
+        grid-area: r-name;
+        // margin-left: -330px;
+    }
+    .l-address{
+        grid-area: l-address;
+    }
+    .r-address{
+        grid-area: r-address;
+        // margin-left: -330px;
+    }
+    .l-phone{
+        grid-area: l-phone;
+    }
+    .r-phone{
+        grid-area: r-phone;
+        // margin-left: -330px;
+    }
+    .l-email{
+        grid-area: l-email;
+    }
+    .r-email{
+        grid-area: r-email;
+        // margin-left: -330px;
+    }
 }
-.col-1{
-    grid-area: col-1;
-    margin-left: -83%;
+.grid-user-info-2{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "left-name c-col-5 right-name"
+                         "left-address c-col-6 right-address"
+                         "left-phone c-col-7 right-phone"
+                         "left-email c-col-8 right-email";
+    .c-col-5{
+    grid-area: c-col-5;
+    // margin-left: -83%;
+    }
+    .c-col-6{
+        grid-area: c-col-6;
+        // margin-left: -83%;
+    }
+    .c-col-7{
+        grid-area: c-col-7;
+        // margin-left: -83%;
+    }
+    .c-col-8{
+        grid-area: c-col-8;
+        // margin-left: -83%;
+    }
+    .left-name{
+        grid-area: left-name;
+    }
+    .right-name{
+        grid-area: right-name;
+        // margin-left: -75%;
+    }
+    .left-address{
+        grid-area: left-address;
+    }
+    .right-address{
+        grid-area: right-address;
+        // margin-left: -75%;
+    }
+    .left-phone{
+        grid-area: left-phone;
+    }
+    .right-phone{
+        grid-area: right-phone;
+        // margin-left: -75%;
+    }
+    .left-email{
+        grid-area: left-email;
+    }
+    .right-email{
+        grid-area: right-email;
+        // margin-left: -j75%;
+    }
+    .validator-style{
+        margin-left: 0px;
+        color: #e75c4a;
+        font-family: BitterRegular;
+    }
 }
-.col-2{
-    grid-area: col-2;
-    margin-left: -83%;
-}
-.col-3{
-    grid-area: col-3;
-    margin-left: -83%;
-}
-.col-4{
-    grid-area: col-4;
-    margin-left: -83%;
-}
-.l-name{
-    grid-area: l-name;
-}
-.r-name{
-    grid-area: r-name;
-    margin-left: -75%;
-}
-.l-address{
-    grid-area: l-address;
-}
-.r-address{
-    grid-area: r-address;
-    margin-left: -75%;
-}
-.l-phone{
-    grid-area: l-phone;
-}
-.r-phone{
-    grid-area: r-phone;
-    margin-left: -75%;
-}
-.l-email{
-    grid-area: l-email;
-}
-.r-email{
-    grid-area: r-email;
-    margin-left: -75%;
-}
-// .grid-user-info-2{
-//     display: grid;
-//     grid-template-columns: auto auto auto;
-//     grid-template-rows: auto auto auto auto;
-//     grid-template-areas: "l-name col-1 r-name"
-//                          "l-address col-2 r-address"
-//                          "l-phone col-3 r-phone"
-//                          "l-email col-4 r-email";
-// }
-// .col-1{
-//     grid-area: col-1;
-//     margin-left: -83%;
-// }
-// .col-2{
-//     grid-area: col-2;
-//     margin-left: -83%;
-// }
-// .col-3{
-//     grid-area: col-3;
-//     margin-left: -83%;
-// }
-// .col-4{
-//     grid-area: col-4;
-//     margin-left: -83%;
-// }
-// .l-name{
-//     grid-area: l-name;
-// }
-// .r-name{
-//     grid-area: r-name;
-//     margin-left: -75%;
-// }
-// .l-address{
-//     grid-area: l-address;
-// }
-// .r-address{
-//     grid-area: r-address;
-//     margin-left: -75%;
-// }
-// .l-phone{
-//     grid-area: l-phone;
-// }
-// .r-phone{
-//     grid-area: r-phone;
-//     margin-left: -75%;
-// }
-// .l-email{
-//     grid-area: l-email;
-// }
-// .r-email{
-//     grid-area: r-email;
-//     margin-left: -75%;
-// }
 .btn-style-1{
     border-radius: 6px;
     background: #EFBE24;
