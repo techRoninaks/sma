@@ -1158,6 +1158,18 @@ updateSellerPlanFree(data: any){
       .append("prodId",data['prod_id'])
       return this.http.post(this.baseUrl + 'assets/api/undeliverable.php', httpParams);
   }
+  
+  getMainCategoryAddProduct(parentid: any) {
+    let httpParams = new HttpParams()
+      .append("parentid", parentid);
+    return this.http.post(this.baseUrl + 'assets/api/getMainCategoryAddProduct.php', httpParams);
+  }
+  
+  getCategoryAddProduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getCategoryAddProduct.php', httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
