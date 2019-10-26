@@ -1170,6 +1170,28 @@ updateSellerPlanFree(data: any){
       .append("id", id);
     return this.http.post(this.baseUrl + 'assets/api/getCategoryAddProduct.php', httpParams);
   }
+  
+  popUpLogin(email: any,password :any){
+    let httpParams= new HttpParams()
+    .append("login_email", email)
+    .append("login_password", password);
+    return this.http.post(this.baseUrl+'assets/api/popUplogin.php',httpParams);
+  }
+
+  updateUserData(data: any,userId: any){
+    let httpParams= new HttpParams()
+    .append("userId",userId)
+    .append("fullname", data['fullname'])
+    .append("reg_address1", data['reg_address1'])
+    .append("reg_city", data['reg_city'])
+    .append("reg_dist", data['reg_dist'])
+    .append("reg_state", data['reg_state'])
+    .append("reg_country", data['reg_country'])
+    .append("reg_pin", data['reg_pin'])
+    .append("reg_email", data['reg_email'])
+    .append("reg_mobile_no", data['reg_mobile_no']);
+    return this.http.post(this.baseUrl+'assets/api/updateUserData.php',httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
