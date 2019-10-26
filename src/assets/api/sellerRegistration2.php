@@ -6,8 +6,10 @@
     $city = $_POST['city'];
     $state = $_POST['state'];
     $pin = $_POST['pin'];
+    $gst = $_POST['gst_no'];
     $main_category = $_POST['main_category'];
     $response = array();
+    $stage_number = 2;
     
     $sql_query3 ="SELECT `category_id` FROM `category` WHERE `category`= '$main_category'";
     $result3 = mysqli_query($con1, $sql_query3);
@@ -28,7 +30,10 @@
     $sql_query5 ="UPDATE `shop_details` SET `addr_id`= '$addr_id' ";
     $result5 = mysqli_query($con2, $sql_query5);
 
-    if(! $result1 && ! $result2 && ! $result5)
+    $sql_query6 ="UPDATE `seller` SET `gst`= '$gst',`stage_number`='$stage_number' WHERE id ='$seller_id'";
+    $result6 = mysqli_query($con2, $sql_query6);
+
+    if(! $result1 && ! $result2 && ! $result5 && ! $result6)
     {
         $status="Error";
         echo json_encode($status);

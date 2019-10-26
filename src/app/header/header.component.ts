@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     {
         setTimeout(function(){ 
           document.getElementById('myModal-1').style.display="contents";
-        }, 2000);
+        }, 120000);
     }
     else if(this.getCookie("isLoggedIn") == "1" ){
       // exit(0);
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
       this.setCookie("isLoggedIn",null);
       setTimeout(function(){ 
         document.getElementById('myModal-1').style.display="contents";
-      }, 2000);
+      }, 120000);
     }
 
     if(this.flag!= null)
@@ -97,6 +97,7 @@ export class HeaderComponent implements OnInit {
     this.cookieService.delete('userPin');
     this.cookieService.delete('sellerPin');
     this.cookieService.delete('sellerCity');
+    this.cookieService.delete('sellerStage');
     this.setCookie("isLoggedIn",0);
     document.getElementById("headerLogin").innerText ="Login";
     document.getElementById("loginButton").innerText ="";

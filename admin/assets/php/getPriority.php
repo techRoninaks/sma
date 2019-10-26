@@ -2,7 +2,7 @@
     require "init.php";
     $success = "unsuccessful";
     $sql_query = "select distinct(priority) from label;";
-    $result = mysqli_query($conn, $sql_query);
+    $result = mysqli_query($con1, $sql_query);
     $response = array();
     $count = 0;
     while($row = mysqli_fetch_array($result)){

@@ -139,20 +139,72 @@ export class LoginComponent implements OnInit {
                   }
                   else if(data['status'] =="Success2")
                   {
-                    this.cookie_seller_id = data['sellerId'];
-                    this.seller_name =data['seller_name'];
-                    this.city =data['city'];
-                    this.pin =data['pincode'];
-                    this.setCookie("isLoggedIn",1);
-                    this.setCookie("sellerCity",this.city);
-                    this.setCookie("sellerPin",this.pin);
-                    this.setCookie("sellerId",this.cookie_seller_id);
-                    this.setCookie("sellerName",this.seller_name);
-                    document.getElementById("headerLogin").innerText = this.seller_name as string;
-                    document.getElementById("loginButton").innerText ="Log Out";
-                    document.getElementById("locationlabel").innerText = this.city as string;
-                    document.getElementById("pinlabel").innerText = this.pin as string;
-                    this.router.navigate(['/dashboard']);
+                    if(data['stage'] =="1")
+                    {
+                      this.cookie_seller_id = data['sellerId'];
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.setCookie("sellerStage",1);
+                      this.seller_name = data['seller_name'];
+                      this.setCookie("sellerName",this.seller_name);
+                      this.router.navigate(['/signupseller']);
+                    }
+                    else if(data['stage'] =="2")
+                    {
+                      this.pin =data['pincode'];
+                      this.setCookie("sellerPin",this.pin);
+                      this.cookie_seller_id = data['sellerId'];
+                      this.seller_name = data['seller_name'];
+                      this.setCookie("sellerName",this.seller_name);
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.setCookie("sellerStage",2);
+                      this.router.navigate(['/signupseller']);
+                    }
+                    else if(data['stage'] =="3")
+                    {
+                      this.cookie_seller_id = data['sellerId'];
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.seller_name = data['seller_name'];
+                      this.setCookie("sellerName",this.seller_name);
+                      this.pin = data['pincode'];
+                      this.setCookie("sellerPin",this.pin);
+                      this.setCookie("sellerStage",3);
+                      this.router.navigate(['/signupseller']);
+                    }
+                    else if(data['stage'] =="4")
+                    {
+                      this.cookie_seller_id = data['sellerId'];
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.seller_name = data['seller_name'];
+                      this.setCookie("sellerName",this.seller_name);
+                      this.setCookie("sellerStage",4);
+                      this.router.navigate(['/signupseller']);
+                    }
+                    else if(data['stage'] =="5")
+                    {
+                      this.cookie_seller_id = data['sellerId'];
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.seller_name = data['seller_name'];
+                      this.setCookie("sellerName",this.seller_name);
+                      this.setCookie("sellerStage",5);
+                      this.router.navigate(['/signupseller']);
+                    }
+                    else
+                    {
+                      this.cookie_seller_id = data['sellerId'];
+                      this.seller_name =data['seller_name'];
+                      this.city =data['city'];
+                      this.pin =data['pincode'];
+                      this.setCookie("isLoggedIn",1);
+                      this.setCookie("sellerCity",this.city);
+                      this.setCookie("sellerPin",this.pin);
+                      this.setCookie("sellerId",this.cookie_seller_id);
+                      this.setCookie("sellerName",this.seller_name);
+                      document.getElementById("headerLogin").innerText = this.seller_name as string;
+                      document.getElementById("loginButton").innerText ="Log Out";
+                      document.getElementById("locationlabel").innerText = this.city as string;
+                      document.getElementById("pinlabel").innerText = this.pin as string;
+                      this.router.navigate(['/dashboard']);
+                    }
                   }
                   else
                   {

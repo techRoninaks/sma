@@ -4,7 +4,7 @@
 	
 	$id = $_POST["id"];
     $sql = "SELECT * FROM `label` WHERE `id`=$id";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($con1,$sql);
     $row = mysqli_fetch_array($result);
     if($row){
         $userData = array("labelName"=>$row["label_text"],"priority"=>$row["priority"],"labId"=>$row["id"]);
