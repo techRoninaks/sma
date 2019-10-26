@@ -543,7 +543,7 @@ input:focus {
 
 .btn {
     border-width: 2px;
-    background-color: transparent;
+    background-color: #f5f5f5;
     font-weight: 400;
     opacity: 0.8;
     filter: alpha(opacity=80);
@@ -3909,3 +3909,4 @@ fieldset[disabled] .btn-neutral.active {
         -webkit-overflow-scrolling: touch;
     }
 }
+
