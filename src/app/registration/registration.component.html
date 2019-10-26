@@ -117,9 +117,36 @@
           <div>
             <input type="tel" placeholder="Mobile No  :" class="text-input-style" id="reg_mobile_no"
               formControlName="reg_mobile_no">
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">
+              <div *ngIf="sentOTP">
+                <form [formGroup]="fpFormOtp">
+                  <input type="text" placeholder="Enter OTP:" class="text-input-style" formControlName="fp_otp" style="margin-top: 21px;">
+                  <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                    <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                      Enter OTP !
+                    </div>
+                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                      Enter valid OTP !
+                    </div>
+                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                      Enter valid OTP !
+                    </div>
+                    <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                      Enter Only digits !
+                    </div>
+                  </div>
+                </form>
+                <div *ngIf="sentOTP">
+                    <button class="button-fp" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid" style="margin-left: 207px;
+                    margin-top: 15px;">Verify OTP</button>
+                </div>
+              </div>
+              <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">
                   Verify
+              </button> -->
+              <button type="button" class="btn btn-warning" (click)="newVerify();" *ngIf="Otp">
+                Verify
               </button>
+              <img src="assets/icons/userProfile/ic_ver_gif.png" *ngIf="otpVerified" style="margin-left: -30px;  height: 28px; margin-top: -3px;">
             <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
               <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
                 Mobile no is required !
@@ -228,8 +255,7 @@
       </form>
     </div>
     <!-- verify pop-up -->
-    <!-- <ul> -->
-    <div class="container" id="modalContainer" style="z-index: 10001;">
+    <!-- <div class="container" id="modalContainer" style="z-index: 10001;">
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
@@ -298,8 +324,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- </ul> -->
+    </div> -->
   </div>
 
 

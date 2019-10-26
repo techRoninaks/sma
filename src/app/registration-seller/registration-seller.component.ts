@@ -447,6 +447,7 @@ export class RegistrationSellerComponent implements OnInit {
           {
             alert('OTP verified');
             this.otpVerified = true;
+            $("#myModal").modal('hide');
           }
           else
           {
