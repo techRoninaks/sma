@@ -36,6 +36,7 @@ export class DataService {
       .append("giftEnabled", data['gift_enabled'])      
       .append("msgCount", data['msgCount'])
       .append("image", data['image'])
+      .append("pin", data['pin'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
@@ -81,17 +82,25 @@ export class DataService {
   }
   getPriceDate(data: any) {
     let httpParams = new HttpParams()
-      .append("prodId", data)
+      .append("prodId", data['prod_id'])
+      .append("pin",data['pin'])
+      .append("productQuantity",data['prod_quantity'])
+      .append("deliveryOption",data['del_option'])
     return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
   }
   sendRfq(data :any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
-      .append("hasImage", data['imageUploaded'])
+      .append("hasImage", data['imageUploadedRfq'])
       .append("userId", data['user_id'])
       .append("shopLocation", data['shop_location'])
       .append("note", data['note'])
       .append("productRef", data['product_ref'])
+      .append("image", data['image'])
+      .append("sellerId", data['seller_identity'])
+      .append("shopId", data['shop_id'])
+      .append("shopName", data['shop_name'])
+
     return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
   }
   // shop Component
@@ -1140,6 +1149,14 @@ updateSellerPlanFree(data: any){
     let httpParams = new HttpParams()
       .append("userId", userId);
     return this.http.post(this.baseUrl + 'assets/api/deliverAddrCart.php', httpParams);
+  }
+  
+    checkUndeliverable(data: any){
+    let httpParams = new HttpParams()
+      .append("pin",data['pin'])
+      .append("shipId",data['ship_id'])
+      .append("prodId",data['prod_id'])
+      return this.http.post(this.baseUrl + 'assets/api/undeliverable.php', httpParams);
   }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
