@@ -1,6 +1,10 @@
 <?php
     require "init.php";
     $prodId = $_POST["prodId"];
+    $pin = $_POST["pin"];
+    $productQuantity = $_POST["productQuantity"];
+    $deliveryOption = $_POST["deliveryOption"];
+
     $data = array();
 
     //get current date
@@ -8,6 +12,44 @@
     $res=mysqli_query($con1,$sql);
     $row=mysqli_fetch_assoc($res);
     $tDateValue=array('tDate'=>$row["CURRENT_DATE"]);
+
+
+    $sqlPrice="SELECT `quantity_price`, `price` FROM `prod_shipping_price` WHERE `prodid` = $prodId AND `shipping_location` = $pin ";
+    $resPrice=mysqli_query($con1,$sqlPrice);
+    $rowPrice=mysqli_fetch_assoc($resPrice);
+    $shipQtyPrice=$rowPrice["quantity_price"];
+    $shipBasePrice=$rowPrice["price"];
+
+    if($deliveryOption=="shipping")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=1;
+    }
+    else if($deliveryOption=="cod")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=2;
+    }
+    else if($deliveryOption=="pickup")
+    {
+        $qtPrice=0;
+        $shipBasePrice=0;
+        $shipOption=3;
+    }
 
     //get from prod
     $sql_query1 = "SELECT `avg_confrmn_time`, `avg_response_time`, `avg_prcessing_time`, `avg_shpping_time`, `base_price` FROM `product` WHERE `prodid` = $prodId";
@@ -39,8 +81,11 @@
     // $amount = $basePrice * ($disc / 100);
     $amountDisc=$basePrice*($disc/100);
     $price=$basePrice-$amountDisc;
-    $price=round($price);
+    $basePriceTotal=$price*$productQuantity;
+    $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
+    $totalAmount=round($totalAmountQt);
+    // $price=round($price);
     // $basePriceTotal=$price*$productQuantity;
     // $totalAmount=$basePriceTotal+$varPrice;
-    echo json_encode($data = array('tPrice' => $price, 'dDate' => $deliveryDate));
+    echo json_encode($data = array('tPrice' => $totalAmount, 'dDate' => $deliveryDate));
 ?>

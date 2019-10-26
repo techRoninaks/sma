@@ -84,7 +84,7 @@ export class ManageshopComponent implements OnInit {
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
-		this.setCookie("sellerId", 1);
+		// this.setCookie("sellerId", 1);
 		this.sellerId = this.getCookie("sellerId");
 
 		this.route.queryParams.subscribe(params => {

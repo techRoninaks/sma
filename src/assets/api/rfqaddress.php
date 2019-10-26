@@ -2,7 +2,7 @@
     require "init.php";
     $userId = $_POST["userId"];
     $data = array();
-    $sql_query = "SELECT * FROM `address` where mapping_id =  $userId ";
+    $sql_query = "SELECT * FROM `address` where mapping_id =  $userId and `addr_type` = 'shipping' ";
     $result = mysqli_query($con2, $sql_query);
     $count = 0;
     while ($row = mysqli_fetch_assoc($result)) {

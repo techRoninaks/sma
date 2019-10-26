@@ -14,24 +14,14 @@
     $reqDDate =$_POST["desiredDate"];
     $msgCount =$_POST["msgCount"];
     $image = $_POST["image"];
+    $pin = $_POST["pin"];
+
     $mob = 0;
 
     $data = array();
 
 
-    //shipping id
-    if($deliveryOption=="shipping")
-    {
-        $shipOption=1;
-    }
-    else if($deliveryOption=="cod")
-    {
-        $shipOption=2;
-    }
-    else if($deliveryOption=="pickup")
-    {
-        $shipOption=3;
-    }
+
     //get current date
     $sql="SELECT CURRENT_DATE";
     $res=mysqli_query($con1,$sql);
@@ -83,7 +73,12 @@
 // $z= date_format($date,"Y-m-d");
 // echo $z;
 
-
+    //get price
+    $sqlPrice="SELECT `quantity_price`, `price` FROM `prod_shipping_price` WHERE `prodid` = $prodId AND `shipping_location` = $pin ";
+    $resPrice=mysqli_query($con1,$sqlPrice);
+    $rowPrice=mysqli_fetch_assoc($resPrice);
+    $shipQtyPrice=$rowPrice["quantity_price"];
+    $shipBasePrice=$rowPrice["price"];
 
     $basePrice=$row1["base_price"];
     //get variant info
@@ -109,15 +104,50 @@
 
     $disc=$discountInfo["percentage"];
 
+    //shipping id
+    if($deliveryOption=="shipping")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=1;
+    }
+    else if($deliveryOption=="cod")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=2;
+    }
+    else if($deliveryOption=="pickup")
+    {
+        $qtPrice=0;
+        $shipBasePrice=0;
+        $shipOption=3;
+    }
+
+    
     //total price calc
     // $basePriceTotal=$basePrice*$productQuantity;
     // $amount=$basePriceTotal*($disc/100);
     // $totalAmount=$amount+$varPrice;
     $amountDisc=$basePrice*($disc/100);
-    $price=$basePrice-$amountDisc;
+    $price=$basePrice-$amountDisc+$varPrice;
+    // $basePriceTotal=$price*$productQuantity;
+    // $totalAmount=$basePriceTotal+$varPrice;
     $basePriceTotal=$price*$productQuantity;
-    $totalAmount=$basePriceTotal+$varPrice;
-    $totalAmount=round($totalAmount);
+    $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
+    $totalAmount=round($totalAmountQt);
     //is image uploaded
 //     if($imageUploaded==null){
 //         $imageUploaded=0;
@@ -151,96 +181,53 @@
     // echo $image;
     // upload image
            if($imageUploaded==0){
-
             $imageUploaded=0;
-
         }
-
         else if($imageUploaded==1){
-
             $imageUploaded=1;
-
             if($image != 1){
-
                 // $dir='../assets/images/order/'.$orderId.'/';
-
                 // mkdir($dir);
-
                 if (!file_exists('../images/order/'.$orderId.'/')) {
-
                     mkdir('../images/order/'.$orderId.'/', 0777, true);
-
                     $dir='../images/order/'.$orderId.'/';
-
         
-
                 }
-
                 // if (!file_exists('../'.$orderId.'/')) {
-
                 //     mkdir('../'.$orderId.'/', 0777, true);
-
                 //     $dir='../assets/images/order/'.$orderId.'/';
-
         
-
                 // }
-
                 define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
-
                 //  echo $image;
-
                 $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
-
                 if($mob == 0){
-
                     $img =explode(",", $image);
-
                     // echo $img;
-
                     $img[1] = str_replace(' ', '+', $img[1]);
-
                     // echo $img[1];
-
                     $data = base64_decode($img[1]);
-
                     // echo $data;
-
         
-
                 }else{
-
                     $data = base64_decode($image);
-
                 }
-
                 $success = file_put_contents($file, $data);
-
                 // echo "<br>";        
-
                 // echo "<br>";
-
                 // echo $success;
-
                 // echo "<br>";
-
                 // echo $dir.$file;
-
             }
-
         }
-
     // echo $image;
-
     // upload image
-
-
 
     //insertion in customer order
     $sql_query3 = "INSERT INTO `customer_order`(`prodid`, `quantity`, `variants_chosen`, `gift_option`, `gift_note`, `gift_title`, `gift_address`, `is_rfq`,
     `base_price`, `qty_price`, `total_price`, `discount`, `shippingprice`, `tax`, `variantprice`, `has_image`, `orderid`, `promo_disc`, `invoice_number`, 
-    `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,0,
-    $totalAmount,$disc,0,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
+    `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,$qtPrice,
+    $totalAmount,$disc,$shipBasePrice,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
     // echo $sql_query3;
     //customer order id

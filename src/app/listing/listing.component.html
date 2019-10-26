@@ -21,14 +21,15 @@
                             <img class="undeliverableIcon" src="assets/icons/img_549368.png">
                             <ul>
                                 <ul>
-                                    UNDELIVERABLE TO <span>{{dynamicData.pincode}}</span>
+                                    <span id="undel">{{undel}}</span> <span>{{pincodeValue}}</span>
                                 </ul>
                                 <form>
-                                    <input type="text" placeholder="Enter Pincode" id="undPincode">
+                                    <input type="text" placeholder="Enter Pincode" id="undPincode" value="{{pincodeValue}}" (change)="pincodeChange();" (click)="priceChangeGetter();">
                                     <br>
                                     <label for="changePincode"> Change Pincode</label><br>
                                     <input type="radio" class="aP" name="drone" value="availableProducts"
-                                        id="undCategory">
+                                        id="undCategory" >
+                                        <!-- [routerLink]="['/category']" [queryParams]="{cat_id:this.dynamicData.categoryId}" -->
                                     <label for="availableProducts"> Available Products</label><br>
                                     <input type="radio" class="cP" name="drone" id="undContinue" value="continue">
                                     <label for="continue"> Continue on this page</label><br>
@@ -107,7 +108,7 @@
                 </div>
             </div>
             <div class="btnsSel">
-                <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal">RFQ</button>
+                <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal" id="rfqButtonId">RFQ</button>
                 <button class="btnAtcart" (click)="submitCart();">ADD TO CART</button>
             </div>
 
@@ -149,7 +150,7 @@
         <div class="pDiscount">
             <p style="color: #009145;">{{discountLabel.discountText}}</p>
             <p><i class="fa fa-rupee" style="font-size:16px"></i>{{priceDate.tPrice}}&nbsp;&nbsp;
-                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicData.basePrice}}</del>
+                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{bPrice}}</del>
             </p>
         </div>
         <div class="pSize">
@@ -161,11 +162,11 @@
         </div>
         <div class="pQuantity" style="margin-top:10px;">
             <p>Quantity</p>
-            <button type="button" id='1' (click)="count_dec()" class="minus">-</button>
-            <input type="text" id="count" id="productQuantity" value="{{counter}}">
-            <button type="button" id='2' (click)="count_inc()" class="plus">+</button>
+            <button type="button" id='1' (click)="count_dec()" (click)="priceChangeGetter();"class="minus">-</button>
+            <input type="text" id="count" id="productQuantity" value="{{counter}}"  >
+            <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();"class="plus">+</button>
         </div>
-        <div class="pAvailable" style="color: red">
+        <div class="pAvailable" style="color: red" id="showAvailable">
             Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Cake:
             <span>{{dynamicData.qtyAvailable}}</span>
         </div>
@@ -182,21 +183,21 @@
                 Image</button>
             <!-- <input type="submit"> -->
         </div>
-        <div class="pdatePicker">
+        <div class="pdatePicker" id="datePickClass">
             <span>Pick desired date for delivery:</span>
             <input type="date" id="datePickerId" (change)="reqDate();">
         </div>
         <div class="pButton">
             <div class="dvBuyBtn">
                 <div class="container" id="buyModalContainer" style="z-index: 10001;">
-                    <!-- <ng-container *ngIf="datePickerDefault; else reqOrder"> -->
-                    <button type="submit" id="buyNowId" class="btn btn-warning" data-toggle="modal"
-                        data-target="#buyNowPopup" (click)="submitPrice('buyNow');">BUY NOW</button>
-                    <!-- </ng-container> -->
-                    <!-- <ng-template #reqOrder> -->
-                    <button type="submit" class="btn btn-warning" data-toggle="modal" id="reqNowId"
-                        data-target="#buyModal" (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
-                    <!-- </ng-template> -->
+                    <!-- data-toggle="modal" -->
+                    <button type="submit" id="buyNowId" class="btn btn-warning" 
+                         (click)="submitPrice('buyNow');">BUY NOW</button>
+                         <!-- data-target="#buyNowPopup" -->
+                    <button type="submit" class="btn btn-warning" id="reqNowId"
+                        (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
+                        <!-- data-target="#buyModal" -->
+                        <!-- data-toggle="modal" -->
                     <div class="modal fade" id="buyModal" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content dvModalContent">
@@ -215,7 +216,6 @@
                     <!-- Modal -->
                     <div class="modal fade" id="giftModal" role="dialog">
                         <div class="modal-dialog">
-                            <!-- Modal content-->
                             <div class="modal-content dvModalContent">
                                 <div class="modal-header dvModalHeader">
                                     <button type="button" class="close" id="giftClose"
@@ -248,17 +248,17 @@
         </div>
         <div class="pCourier">
             <div class="dvShip">
-                <input type="radio" id="sh" name="shippingOption" value="shipping">
+                <input type="radio" id="sh" name="shippingOption" value="shipping" (change)="priceChangeGetter();">
                 <label for="normalCourier">Shipping</label>
             </div>
 
 
             <div class="dvCod">
-                <input type="radio" id="cOD" name="shippingOption" value="cashOnDelivery">
+                <input type="radio" id="cOD" name="shippingOption" value="cashOnDelivery" (change)="priceChangeGetter();">
                 <label for="cashOnDelivery">Cash on Delivery</label>
             </div>
             <div class="dvPickup">
-                <input type="radio" id="pU" name="shippingOption" value="pickUp">
+                <input type="radio" id="pU" name="shippingOption" value="pickUp" (change)="priceChangeGetter();">
                 <label for="pickUp">PickUp</label>
             </div>
         </div>
@@ -412,12 +412,13 @@
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq" (keyup)="filterFaq();">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq"
+                        (keyup)="filterFaq();">
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
                     <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
-                    <button type="submit"  (click)="submitFaq()">Submit</button>
+                    <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
@@ -516,8 +517,8 @@
                         </div>
                         <div class="rfqSL">
                             <p class="rfqLocation">Location:</p>
-                            <select style="width: 16rem;">
-                                <option class="rfqLocationInput" id="rfqLocations"
+                            <select style="width: 16rem;" id="rfqLocations">
+                                <option class="rfqLocationInput" 
                                     *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
                             </select>
                         </div>
@@ -551,8 +552,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="uploadRfq">
+                            <input style="display: none" type="file" name="pic" id="shopRfq" accept="image/*"
+                                #fileInputRfq >
+                            <button type="button" class="btnCover" (click)="fileInputRfq.click()"
+                                style="background-color: #efbe24;color: white;">Upload image</button>
+                        </div>
                         <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- loginpopup -->
+<div class="container" id="loginModalContainer" style="z-index: 10001;">
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                </div>
+                <div class="modal-body" style="padding:0 10% 0 10%;">
+                    <br>
+                    <p style="text-align: center;justify-self:center">Please Login to continue...</p>
+                    <br>
+                    <button (click)="redirect('login');" [routerLink]="['/login']" [queryParams]="{shop_id:dynamicData.shopId}" style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
+                    <p style="text-align: center;justify-self:center">OR</p>
+                    <button (click)="redirect('signup');" [routerLink]="['/signup']" [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}" style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
+                    <br>
+                    <br>
+
                 </div>
             </div>
         </div>
@@ -755,7 +786,8 @@
                         <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
                     </div>
                     <div class="dvApply">
-                        <button type="apply" class="btnApply btn-warning" id="btnApply" (click)= "applyRequest()">Apply</button>
+                        <button type="apply" class="btnApply btn-warning" id="btnApply"
+                            (click)="applyRequest()">Apply</button>
                     </div>
                 </div>
                 <!-- GIFT NOTE -->
@@ -821,8 +853,8 @@
                         <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
                             data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
 
-                        <button type="btnCheckOut" style="display: none;" class="btn btn-warning" data-toggle="modal" id="reqId"
-                            data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
+                        <button type="btnCheckOut" style="display: none;" class="btn btn-warning" data-toggle="modal"
+                            id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
                     </div>
                 </div>
 
