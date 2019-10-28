@@ -102,13 +102,19 @@
 
             </body>
             <div class="col-md-3" id="fullSellers_card" style="display: inline-block; width: 100%;">
-                <div class="search-container">
+                
+                <div class="search-container" style="
+                margin-bottom: 40px; margin-left: -10px;">
                     <input type="text" placeholder="Search.." name="search" id="search_name" style="
-                    margin-left: 850px;">
-                    <button type="submit"><i class="fa fa-search" onclick="searchseller()"></i></button>
+                    margin-block-end: auto;">
+                    <button type="submit"><i class="fa fa-search" onclick="searchseller()"></i></button></div>
+                    <div style="padding-bottom: -20px; margin-bottom: 10px; width:100%" align="right">
+                            <a class="btn btn-info btn-fill" onclick="toggleTabs('userForm')" id="btnAddSeller" href="roninaks.com/sma/signupseller" >Add New Seller +</a>
+                    </div>
+                    
                   </div>
                 <div style="padding-top: 8px;">
-                    <button class="btn  btn-fill" onclick="toggleTabs('All')" id="btnAll">ALL</button>
+                    <button class="btn  btn-fill" onclick="toggleTabs('All')" id="btnAll" style="margin-left: 5px;">ALL</button>
                     <select class="" id="location" onchange="location_filter()">
                         <option value="" disabled selected>LOCATION</option>
                     </select>
@@ -119,15 +125,10 @@
                         EXPIRED</button>
                     <button class="btn btn-fill" onclick="toggleTabs('Planexpiringsoon')" id="btnPlanexpiringsoon">PLAN
                         EXPIRING SOON</button>
-                    <button class="btn btn-fill" onclick="toggleTabs('Pendingapproval')" id="btnPendingapproval">PENDING
-                        APPROVAL</button>
+                    <button class="btn btn-fill" onclick="toggleTabs('Pendingapproval')" id="btnPendingapproval" style="
+                    margin-left: 5px;  margin-top: 10px;" >PENDING APPROVAL</button>
                 </div>
-                <div class="col-md-3">
-                    <div style="padding-top: 8px;width: 430%;" align="right">
-                        <a class="btn btn-info btn-fill" onclick="toggleTabs('userForm')" id="btnAddSeller" href="roninaks.com/sma/signupseller" >Add New
-                            Seller +</a>
-                    </div>
-                </div>
+                
 
 
                 <br>
