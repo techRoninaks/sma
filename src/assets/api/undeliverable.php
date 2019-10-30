@@ -5,7 +5,8 @@
     $shipId = $_POST["shipId"];
 
     $data = array();
-    $sql_query = "SELECT count(*) AS `value` FROM `shipping_location_product` where `prodid` =  $prodId AND `id` = $shipId AND `pincode` LIKE '%$pin%' ";
+    // `prodid` =  $prodId AND 
+    $sql_query = "SELECT count(*) AS `value` FROM `shipping_location_product` where `id` = $shipId AND `pincode` LIKE '%$pin%' ";
     // echo $sql_query;
     $result = mysqli_query($con1, $sql_query);
     $row = mysqli_fetch_assoc($result); 

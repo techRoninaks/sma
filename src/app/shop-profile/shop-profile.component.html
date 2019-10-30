@@ -244,19 +244,57 @@
                 <p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
                 <p class="rDesc">{{ratingReviewShop[item].review}}</p>
                 <div class="starLikes">
-                    <img class="icLike" id="likeImg" (click)="likeCount(ratingReviewShop[item].reviewId);"
+                    <img class="icLike" id="likeImg_{{ratingReviewShop[item].reviewId}}" (click)="likeCount(ratingReviewShop[item].reviewId);"
                         src="assets/icons/resources (IL)-10.png">
-                    <p class="likeCount">{{ratingReviewShop[item].likes}}</p>
-                    <img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
+                    <p class="likeCount" id="likeCount_{{ratingReviewShop[item].reviewId}}">{{ratingReviewShop[item].likes}}</p>
+                    <img class="icDislike" id="dislikeImg_{{ratingReviewShop[item].reviewId}}" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
                         src="assets/icons/resources (IL)-11.png">
-                    <p class="dislikeCount">{{ratingReviewShop[item].dislikes}}</p>
+                    <p class="dislikeCount" id="dislikeCount_{{ratingReviewShop[item].reviewId}}">{{ratingReviewShop[item].dislikes}}</p>
                     <button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
-                    <div (load)="reviewRatings(item);">
+                    <div *ngIf="ratingReviewShop[item].rating == 1"> 
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 2"> 
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 3"> 
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 4"> 
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 5"> 
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i>
+                        <i class="fa fa-star active"></i> 
+                    </div>
+                </div>
+                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview.jpg'">
+                  
+                    <!-- <div (load)="reviewRatings(item);">
                         <i class="fa fa-star active" *ngFor="let x of filledStarRat"></i>
                         <i class="fa fa-star-o" *ngFor="let x of unFilledStarRat"></i>
                     </div>
                 </div>
-                <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+                <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg"> -->
             </div>
         </div>
     </div>
@@ -320,6 +358,9 @@
                                 #fileInputRfq >
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
+                                <div *ngIf="imageUploaded == 1">
+                                    <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                                </div>
                         </div>
                         <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
                     </div>

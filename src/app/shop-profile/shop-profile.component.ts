@@ -24,7 +24,7 @@ export class ShopProfileComponent implements OnInit {
 	folResult: boolean;
 	followInfo: any = "";
 	tokenObj: object;
-
+	revIdValue:any =[];
 	revId: number;
 	ratingReviewShop: any = [];
 	filledStarRat: any = [];
@@ -35,6 +35,8 @@ export class ShopProfileComponent implements OnInit {
 	ir: number = 0;
 	filledStar: any = [];
 	unFilledStar: any = [];
+	imageVALRFQ:any="";
+	likeDislikes: any = [];
 	jr: number = 0;
 	shopRating: any;
 	priv: number;
@@ -59,6 +61,7 @@ export class ShopProfileComponent implements OnInit {
 	tokenProd:object;
 	imageUploaded:any=0;
 	sellerId:any;
+	ratingShopCount:number;
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
@@ -68,12 +71,13 @@ export class ShopProfileComponent implements OnInit {
 
 		// this.setCookie("sellerId", 1);
 		this.sellerId = this.getCookie("sellerId");
-
+		// console.log(this.sellerId);
 
 
 		this.route.queryParams.subscribe(params => {
 			this.token = params['shop_id'];
 			// console.log(this.token);
+			
 			this.tokenObj = { shop_id: this.token, user_id: this.userId };
 			this.tokenProd = { shop_id: this.token, prod_number: 0};
 			// console.log(this.tokenObj);
@@ -93,9 +97,12 @@ export class ShopProfileComponent implements OnInit {
 				this.ratingReviewShop = data;
 				// console.log(this.ratingReviewShop);
 
-				// var x = Object.keys(this.ratingReviewShop).length;
+				this.ratingShopCount = Object.keys(this.ratingReviewShop).length;
+				
 				// console.log(x);
-				// for (var y = 0; y < x; y++) {
+				for (var y = 0; y < this.ratingShopCount; y++) {
+					this.revIdValue[y]=this.ratingReviewShop[y].reviewId;
+				}
 				this.reviewStar = this.ratingReviewShop.rating;
 				this.j = 0;
 				for (this.i = 0; this.i < 5; this.i++) {
@@ -250,6 +257,50 @@ export class ShopProfileComponent implements OnInit {
 
 			}
 		);
+		this.data.getLikesDislikesShop(this.tokenObj).subscribe(
+			data => {
+				// console.log(data);
+				this.likeDislikes = data;
+				var likeDisCount: number = Object.keys(this.likeDislikes).length;
+				var x = 0;
+				var q = 0;
+				
+				// console.log(this.ratingShopCount);
+				while (q<this.ratingShopCount){
+					x=0;
+					while (x < likeDisCount) {
+						if(this.revIdValue[q]==this.likeDislikes[x]['reviewId']){
+							var y: number = this.likeDislikes[x]['reviewId'];
+							var z: number = this.likeDislikes[x]['likeDislike'];
+							// console.log("x="+x+",q="+q+",y="+y+",z="+z);
+							if (z == 1) {
+								var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
+								// console.log(ele.src);
+								// console.log("likeImg_" + y);
+								ele.src = "assets/icons/resources (IL)-23.png";
+								// console.log(ele.src);
+								// (<HTMLImageElement><any>document.getElementById("likeImg_"+y)).src="assets/icons/resources (IL)-23.png";
+		
+							}
+							else if (z == 0) {
+								var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
+								ele1.src = "assets/icons/resources (IL)-24.png";
+								// (<HTMLImageElement><any>document.getElementById("dislikeImg_"+y)).src="assets/icons/resources (IL)-24.png";
+							}
+						}
+						// console.log("x"+x);
+						// console.log("shop revId"+this.revIdValue[q]);
+						// console.log("user revId"+this.likeDislikes[x]['reviewId']);
+						x++;
+					}
+					// console.log("q"+q);
+					// console.log("shop revId outer"+this.revIdValue[q]);
+					q++;
+				}
+			},
+			error => console.error(error)
+		);
+
 	}
 	showMoreProducts(){
 		this.tokenProd = { shop_id: this.token, prod_number: 1};
@@ -338,7 +389,9 @@ export class ShopProfileComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			imageRfqValue = text;
-			console.log(imageRfqValue);
+			// console.log(imageRfqValue);
+			this.imageVALRFQ =text;
+
 		};
 	}
 
@@ -352,23 +405,124 @@ export class ShopProfileComponent implements OnInit {
 		console.log(typeof (revId));
 		this.data.sendReportShop(this.tokenObj, revId).subscribe();
 	}
+	// likeCount(revId: any) {
+	// 	console.log(revId);
+	// 	// console.log(typeof(revId));
+	// 	this.data.likeRevShop(this.tokenObj, revId).subscribe();
+	// 	var ele = document.getElementById("likeImg") as HTMLImageElement;
+	// 	ele.src = "assets/icons/resources (IL)-23.png";
+	// 	var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+	// 	ele1.src = "assets/icons/resources (IL)-11.png";
+	// }
+	// dislikeCount(revId: any) {
+	// 	console.log(revId);
+	// 	// console.log(typeof(revId));
+	// 	this.data.dislikeRevShop(this.tokenObj, revId).subscribe();
+	// 	var ele = document.getElementById("likeImg") as HTMLImageElement;
+	// 	ele.src = "assets/icons/resources (IL)-10.png";
+	// 	var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+	// 	ele1.src = "assets/icons/resources (IL)-24.png";
+	// }
 	likeCount(revId: any) {
-		console.log(revId);
+		// console.log(revId);
 		// console.log(typeof(revId));
+		var x = (<HTMLImageElement><any>document.getElementById("likeImg_" + revId)).src;
+		var y = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + revId)).src;
+
 		this.data.likeRevShop(this.tokenObj, revId).subscribe();
-		var ele = document.getElementById("likeImg") as HTMLImageElement;
+
+		var ele = document.getElementById("likeImg_" + revId) as HTMLImageElement;
 		ele.src = "assets/icons/resources (IL)-23.png";
-		var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+		var ele1 = document.getElementById("dislikeImg_" + revId) as HTMLImageElement;
 		ele1.src = "assets/icons/resources (IL)-11.png";
+
+
+
+		var resx = x.split("/");
+		var resXVal = resx[5];
+
+		var resy = y.split("/");
+		var resYVal = resy[5];
+
+		// console.log(resXVal + " asdsadgfa " + resYVal);
+		if (resXVal === "resources%20(IL)-23.png") {
+			// console.log(resXVal+"li1");
+
+		}
+		else if (resYVal === "resources%20(IL)-24.png") {
+			// console.log(resYVal+"li2");
+			var ele4 = document.getElementById("dislikeCount_" + revId);
+			var count4 = parseInt(ele4.innerText);
+			count4 -= 1;
+			ele4.innerText = count4.toString();
+
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		else if (resXVal === "resources%20(IL)-10.png") {
+			// console.log(resXVal+"li3");
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		// var ele3 = document.getElementById("likeCount_"+revId);
+		// var count = parseInt(ele3.innerText);
+		// count +=1;
+		// ele3.innerText = count.toString();
+		// alert(ele3.innerText);
 	}
 	dislikeCount(revId: any) {
-		console.log(revId);
+		// console.log(revId);
 		// console.log(typeof(revId));
+		var x = (<HTMLImageElement><any>document.getElementById("likeImg_" + revId)).src;
+		var y = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + revId)).src;
+
 		this.data.dislikeRevShop(this.tokenObj, revId).subscribe();
-		var ele = document.getElementById("likeImg") as HTMLImageElement;
+		var ele = document.getElementById("likeImg_" + revId) as HTMLImageElement;
 		ele.src = "assets/icons/resources (IL)-10.png";
-		var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+		var ele1 = document.getElementById("dislikeImg_" + revId) as HTMLImageElement;
 		ele1.src = "assets/icons/resources (IL)-24.png";
+
+
+		var resx = x.split("/");
+		var resXVal = resx[5];
+
+		var resy = y.split("/");
+		var resYVal = resy[5];
+
+		if (resXVal === "resources%20(IL)-23.png") {
+			// console.log(resXVal+"dis1");
+			var ele4 = document.getElementById("dislikeCount_" + revId);
+			var count4 = parseInt(ele4.innerText);
+			count4 += 1;
+			ele4.innerText = count4.toString();
+
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count -= 1;
+			ele3.innerText = count.toString();
+		}
+		else if (resYVal === "resources%20(IL)-24.png") {
+			// console.log(resYVal+"dis2");
+
+		}
+		else if (resYVal === "resources%20(IL)-11.png") {
+			// console.log(resYVal+"dis3");
+
+			var ele3 = document.getElementById("dislikeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		// var ele3 = document.getElementById("dislikeCount_"+revId);
+		// var count = parseInt(ele3.innerText);
+		// count +=1;
+		// ele3.innerText = count.toString();
+		// alert(ele3.innerText);		
+
 	}
 	reviewRatings(x: any) {
 		this.reviewStar = this.ratingReviewShop[x].rating;
