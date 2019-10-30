@@ -338,50 +338,53 @@ a.notif {
                         "new-card new-card new-card new-card new-card"
                         "cvv val-label val . ver-gif";
     font-family: BitterBold;
-}
-.card-no{
-    grid-area: card-no;
-}
-.expiry{
-    grid-area: expiry;
-}
-.expiry-label{
-    grid-area: expiry-label;
-    margin-left: -3%;
-}
-.select{
-    grid-area: select;
-    margin-top: 12%;
-}
-.delete{
-    grid-area: delete;
-    margin-left: -100%;
-}
-.new-card{
-    grid-area: new-card;
-    margin-top: 2%;
-}
-.new-card-box{
-    grid-area: new-card;
-    border-radius: 3px;
-    border: none;
-    width: inherit;
-}
-.cvv{
-    grid-area: cvv;
-    margin-top: 15%;
-}
-.val-label{
-    grid-area: val-label;
-    margin-top: 15%;
-}
-.val{
-    grid-area: val;
-    margin-top: 10%;
-}
-.ver-gif{
-    grid-area: ver-gif;
-    margin-top: 80%;
+    .card-no{
+        grid-area: card-no;
+    }
+    .expiry{
+        grid-area: expiry;
+    }
+    .expiry-label{
+        grid-area: expiry-label;
+        margin-left: -3%;
+    }
+    .select{
+        grid-area: select;
+        margin-top: 12%;
+    }
+    .delete{
+        grid-area: delete;
+        margin-left: -100%;
+    }
+    .new-card{
+        grid-area: new-card;
+        margin-top: 2%;
+    }
+    .new-card-box{
+        grid-area: new-card;
+        border-radius: 3px;
+        border: none;
+        width: inherit;
+    }
+    .cvv{
+        grid-area: cvv;
+        margin-top: 15px;
+    }
+    .val-label{
+        grid-area: val-label;
+        margin-top: 15px;
+        margin-left: 30px;
+    }
+    .val{
+        grid-area: val;
+        margin-top: 15px;
+        margin-left: 45px;
+    }
+    .ver-gif{
+        grid-area: ver-gif;
+        margin-top: 15px;
+        margin-left: 30px;
+    }
 }
 .card-input-style{
     border-radius: 3px;
@@ -792,7 +795,7 @@ a.notif {
     position: relative;
     transition: all 200ms ease-in ;
   }
-  .stats-1 span {
+  .stats-1{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -807,7 +810,10 @@ a.notif {
     top: -11px;
     left: -8%;
   }
-  .stats-2 span {
+  .stats-1.span.sp:before{
+    background: #EFBE24;
+  }
+  .stats-2{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -822,7 +828,7 @@ a.notif {
     top: -11px;
     left: 22%;
   }
-  .stats-3 span {
+  .stats-3{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -837,7 +843,7 @@ a.notif {
     top: -11px;
     left: 42%;
   }
-  .stats-4 span {
+  .stats-4{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -852,7 +858,7 @@ a.notif {
     top: -11px;
     left: 44%;
   }
-  .stats-5 span {
+  .stats-5{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -867,7 +873,7 @@ a.notif {
     top: -11px;
     left: 47%;
   }
-  .stats-6 span {
+  .stats-6{
     font-weight: 600;
     padding-top: 20px;
   }
@@ -993,3 +999,24 @@ a.notif {
     grid-area: btn-submit;
 }
 //popup2
+.full-circle{
+    height: 20px;
+    width: 20px;
+    background-color: #EFBE24;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-circle{
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid #EFBE24;
+    position: absolute;
+    top: -11px;
+    left: 47%;
+  }
+  .validator-style{
+    color: #e75c4a;
+    font-family: BitterRegular;
+  }

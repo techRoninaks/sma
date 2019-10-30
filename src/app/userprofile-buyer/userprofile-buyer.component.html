@@ -235,11 +235,44 @@
                                                                         Rate
                                                                 </div>
                                                                 <div class="shop-rating-icon">
-                                                                        <div>
-                                                                                <i class="fa fa-star" *ngFor="let item of arrayfilledStar[item]">
-                                                                                </i>
-                                                                                <i class="fa fa-star-o" *ngFor="let item of arrayunFilledStar[item]">
-                                                                                </i>
+                                                                        <div *ngIf="dynamicDataShopName[item].rating == 1"> 
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngIf="dynamicDataShopName[item].rating == 2"> 
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngIf="dynamicDataShopName[item].rating == 3"> 
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngIf="dynamicDataShopName[item].rating == 4"> 
+                                                                                <i class="fa fa-star active"></i>  
+                                                                                <i class="fa fa-star active"></i> 
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star-o"></i>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngIf="dynamicDataShopName[item].rating == 5">  
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i> 
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
+                                                                                <i class="fa fa-star active"></i>
                                                                         </div>
                                                                 </div>
                                                         </div>
@@ -263,7 +296,7 @@
                                                                 <label style="margin-left: 190px;">Expires on</label>
                                                         </div>
                                                 </div>
-                                                <div class="grid-saved-cards" *ngFor="let item of Object.keys(dynamicDataSavedCard)">
+                                                <div class="grid-saved-cards" *ngFor="let item of Object.keys(dynamicDataSavedCard)" id="debitCard{{dynamicDataSavedCard[item].cardnofull}}">
                                                         
                                                         <div class="card-no">
                                                                 XXXXXXXXXXXX{{dynamicDataSavedCard[item].cardno}}
@@ -272,8 +305,10 @@
                                                                 {{dynamicDataSavedCard[item].expmon}}/{{dynamicDataSavedCard[item].exp_year}}
                                                         </div>
                                                         <div class="delete">
-                                                                <img src="assets/icons/userProfile/ic_delete.png"
+                                                                <button style="border:none; background:inherit;" (click)="deleteCard(dynamicDataSavedCard[item].cardnofull);">
+                                                                        <img src="assets/icons/userProfile/ic_delete.png"
                                                                         height=20px; width=20px;>
+                                                                </button>
                                                         </div>
                                                         <div class="select">
                                                                 <input type="radio" id=select[item]>
@@ -290,30 +325,55 @@
                                                                                         Enter Card No !
                                                                                 </div>
                                                                                 <div *ngIf="cardForm.controls.cardno.hasError('minlength')">
-                                                                                        Enter valid Mobile Number !
+                                                                                        Enter valid Card Number !
                                                                                 </div>
                                                                                 <div *ngIf="cardForm.controls.cardno.hasError('maxlength')">
-                                                                                        Enter valid Mobile Number !
+                                                                                        Enter valid Card Number !
                                                                                 </div>
                                                                                 <div *ngIf="cardForm.controls.cardno.hasError('pattern')">
                                                                                         Enter Only digits !
                                                                                 </div>
                                                                         </div>
                                                                 </div>
-                                                                <div class="cvv">
-                                                                        <input type="text" size="8" class="card-input-style"
-                                                                                placeholder="CVV" formControlName="cardno">
-                                                                </div>
-                                                                <div class="val-label">
-                                                                        <label>VALID TILL</label>
-                                                                </div>
-                                                                <div class="val">
-                                                                        <input type="date" size="8" class="card-input-style">
-                                                                </div>
-                                                                <div class="ver-gif">
-                                                                        <button (click)="submitCardData()" style="background: inherit;border: none;" type="submit"><img src="assets/icons/userProfile/ic_ver_gif.png"
-                                                                                height=20px; width=20px;>
-                                                                        </button>
+                                                        </form>
+                                                </div>
+                                                <div class="grid-saved-cards">
+                                                        <form [formGroup]="cardFormCvv">
+                                                                <div class="grid-saved-cards">
+                                                                        <div class="cvv">
+                                                                                <input type="text" size="8" class="card-input-style"
+                                                                                        placeholder="CVV" formControlName="cvv">
+                                                                                <div *ngIf="submitted && cardFormCvv.controls.cvv.errors" class="error validator-style">
+                                                                                        <div *ngIf="cardFormCvv.controls.cvv.errors.required">
+                                                                                                Enter CVV !
+                                                                                        </div>
+                                                                                        <div *ngIf="cardFormCvv.controls.cvv.hasError('minlength')">
+                                                                                                Enter valid CVV !
+                                                                                        </div>
+                                                                                        <div *ngIf="cardFormCvv.controls.cvv.hasError('maxlength')">
+                                                                                                Enter valid CVV !
+                                                                                        </div>
+                                                                                        <div *ngIf="cardFormCvv.controls.cvv.hasError('pattern')">
+                                                                                                Enter Only digits !
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="val-label">
+                                                                                <label>VALID TILL</label>
+                                                                        </div>
+                                                                        <div class="val">
+                                                                                <input type="date" size="8" class="card-input-style" formControlName="date">
+                                                                                <div *ngIf="submitted && cardFormCvv.controls.date.errors" class="error validator-style">
+                                                                                        <div *ngIf="cardFormCvv.controls.date.errors.required">
+                                                                                                Enter date!
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="ver-gif">
+                                                                                <button (click)="submitCardData()" style="background: inherit;border: none;" type="submit"><img src="assets/icons/userProfile/ic_ver_gif.png"
+                                                                                        height=20px; width=20px;>
+                                                                                </button>
+                                                                        </div>
                                                                 </div>
                                                         </form>
                                                 </div>
@@ -361,61 +421,112 @@
                                                 </mat-expansion-panel-header>
 
                                                 <div class="mat-style">
-                                                        <div class="grid-saved-address">
+                                                        <div class="grid-saved-address" *ngFor="let item of Object.keys(dynamicUserAddressData)" id="address{{dynamicUserAddressData[item].addressId}}">
                                                                 <div class="address">
-                                                                        <label>ADDRESS 1</label>
+                                                                        <label>ADDRESS {{dynamicUserAddressData[item].addressId}}</label>
                                                                 </div>
-                                                                <div class="address-label">
-                                                                        <label>ADD ADDRESS</label>
-                                                                </div>
+                                                                
                                                                 <div class="delete">
-                                                                        <img src="assets/icons/userProfile/ic_delete.png"
+                                                                        <button style="border:none; background:inherit;" (click)="deleteAddress(dynamicUserAddressData[item].addressId);">
+                                                                                <img src="assets/icons/userProfile/ic_delete.png"
                                                                                 height=20px; width=20px;>
+                                                                        </button>
                                                                 </div>
                                                                 <div class="select">
                                                                         <input type="radio">
                                                                 </div>
                                                         </div>
-                                                        <div class="grid-add-address">
+                                                        <div class="grid-saved-address address-label">
+                                                                <label>ADD ADDRESS</label>
+                                                        </div>
+                                                        <div >
+                                                           <form [formGroup]="addAddress" class="grid-add-address">
                                                                 <div class="country">
                                                                         <label>Country</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="country">
+                                                                        <div *ngIf="submitted && addAddress.controls.country.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.country.errors.required">
+                                                                                        Enter Country!
+                                                                                </div>
+                                                                        </div>
+                                                                        
                                                                 </div>
                                                                 <div class="state">
                                                                         <label>State</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="state">
+                                                                        <div *ngIf="submitted && addAddress.controls.state.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.state.errors.required">
+                                                                                        Enter State!
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="city">
                                                                         <label>City</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="city">
+                                                                        <div *ngIf="submitted && addAddress.controls.city.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.city.errors.required">
+                                                                                        Enter City!
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="pin">
                                                                         <label>Pin</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="pin">
+                                                                        <div *ngIf="submitted && addAddress.controls.pin.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.pin.errors.required">
+                                                                                        Enter Pin!
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.pin.hasError('minlength')">
+                                                                                        Enter valid PIN !
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.pin.hasError('maxlength')">
+                                                                                        Enter valid PIN !
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.pin.hasError('pattern')">
+                                                                                        Enter Only digits !
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="email">
                                                                         <label>Email</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="email">
+                                                                        <div *ngIf="submitted && addAddress.controls.email.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.email.errors.required">
+                                                                                        Enter Email!
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.email.hasError('pattern')">
+                                                                                        Enter valid Email !
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="phone">
                                                                         <label>Phone</label>
                                                                         <br>
-                                                                        <input type="text" size="24"
-                                                                                class="card-input-style-address">
+                                                                        <input type="text" size="24" class="card-input-style-address" formControlName="mobile">
+                                                                        <div *ngIf="submitted && addAddress.controls.mobile.errors" class="error validator-style">
+                                                                                <div *ngIf="addAddress.controls.mobile.errors.required">
+                                                                                        Enter Mobile!
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.mobile.hasError('minlength')">
+                                                                                        Enter valid Mobile Number !
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.mobile.hasError('maxlength')">
+                                                                                        Enter valid Mobile Number !
+                                                                                </div>
+                                                                                <div *ngIf="addAddress.controls.mobile.hasError('pattern')">
+                                                                                        Enter Only digits !
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="button">
-                                                                        <button class="button-style-save">SAVE</button>
+                                                                        <button class="button-style-save" type="submit" (click)=addAddressData();>SAVE</button>
                                                                 </div>
+                                                          </form>
                                                         </div>
                                                 </div>
                                         </mat-expansion-panel>
@@ -437,15 +548,15 @@
                         </div>
                 </div>
 
-                <div class="grid-order-history">
+                <div class="grid-order-history" *ngFor="let item of Object.keys(dynamicDataOrderData)">
                         <div class="prod-name">
-                                <label>PAINTING</label>
+                                <label>{{dynamicDataOrderData[item].prodName}}</label>
                         </div>
                         <div class="desc">
-                                <p>fine crafted masterpiece</p>
+                                <p>{{dynamicDataOrderData[item].shortDesc}}</p>
                         </div>
                         <div class="order-no">
-                                <label>#00000000ABC</label>
+                                <label>SMACAT{{dynamicDataOrderData[item].orderId}}{{dynamicDataOrderData[item].createDate}}</label>
                         </div>
                         <div class="invoice">
                                 <button class="btn-invoice-style">VIEW INVOICE</button>
@@ -503,38 +614,53 @@
                                 </div>
                                 <div class="stat-bar-1">
                                         <div class="stats-1">
-                                                <span>
-                                                </span>
+                                            <div class="dot-circle" style="margin-left: -65px;" *ngIf="stage_1_dot">
+                                            </div>
+                                            <div class="full-circle" style="margin-left: -124px;
+                                            margin-top: -31px;" *ngIf="stage_1_full">
+                                            </div>
                                         </div>
                                 </div>
                                 <div class="stat-bar-2">
                                         <div class="stats-2">
-                                                <span>
-                                                </span>
+                                                <div class="dot-circle" style="margin-left: -32px;" *ngIf="stage_2_dot">
+                                                </div>
+                                                <div class="full-circle" style="margin-left: -47px; margin-top: -31px;" *ngIf="stage_2_full">
+                                                </div>
                                         </div>
                                 </div>
                                 <div class="stat-bar-3">
                                         <div class="stats-3">
-                                                <span>
-                                                </span>
+                                                <div class="dot-circle" style="margin-left: -7px;" *ngIf="stage_3_dot">
+                                                </div>
+                                                <div class="full-circle" style="margin-left: -20px;
+                                                margin-top: -31px;" *ngIf="stage_3_full">
+                                                </div>
                                         </div>
                                 </div>
                                 <div class="stat-bar-4">
                                         <div class="stats-4">
-                                                <span>
-                                                </span>
+                                                <div class="dot-circle" style="margin-left: -3px;" *ngIf="stage_4_dot">
+                                                </div>
+                                                <div class="full-circle" style="margin-left: -22px;
+                                                margin-top: -31px;" *ngIf="stage_4_full">
+                                                </div>
                                         </div>
                                 </div>
                                 <div class="stat-bar-5">
                                         <div class="stats-5">
-                                                <span>
-                                                </span>
+                                                <div class="dot-circle" style="margin-left:0px;" *ngIf="stage_5_dot">
+                                                </div>
+                                                <div class="full-circle" style="margin-left:-20px; margin-top: -31px;" *ngIf="stage_5_full">
+                                                </div>
                                         </div>
                                 </div>
                                 <div class="stat-bar-6">
                                         <div class="stats-6">
-                                                <span>
-                                                </span>
+                                                <div class="dot-circle" style="margin-left: 48px;" *ngIf="stage_6_dot">
+                                                </div>
+                                                <div class="full-circle" style="margin-left: -20px; margin-top: -31px;" *ngIf="stage_6_full">
+                                                </div>
                                         </div>
                                 </div>
                                 <div class="label-1">
@@ -550,19 +676,19 @@
                                         Thu,14th Dec | 7:35pm
                                 </div>
                                 <div class="label-5">
-                                        Fri,12th Dec | 7:35pm
+                                        Fri,15th Dec | 7:35pm
                                 </div>
                                 <div class="label-6">
-                                        Sat,12th Dec | 7:35pm
+                                        Sat,16th Dec | 7:35pm
                                 </div>
                         </div>
                         <div class="feedback-stat">
-                                <label>Delivery pending</label>
+                                <label>{{dynamicDataOrderData[item].orderStatus}}</label>
                         </div>
                         <div class="feedback-desc">
-                                <p>delivery before</p>
+                                <p style="font-family: Bitter;">delivery before</p>
                                 <br>
-                                <p style="margin-top: -16%;">00-00-0000</p>
+                                <p style="margin-top: -16%; font-family: Bitter;">{{dynamicDataOrderData[item].delivery}}</p>
                         </div>
                         <div class="btn-req-update">
                                 <button class="btn-req-update-style">REQUEST UPDATE</button>
@@ -591,43 +717,57 @@
                                                                                 data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                  <form [formGroup]="addComplaint">
                                                                         <div class="grid-complaint">
                                                                                 <div class="username">
                                                                                         <label>Username</label>
                                                                                         <br>
                                                                                         <input type="text"
-                                                                                                class="user-style">
+                                                                                                class="user-style" value="{{dynamicDataUsercard.username}}" formControlName="username">
+                                                                                        <!-- <div *ngIf="submitted && addComplaint.controls.username.errors" class="error validator-style">
+                                                                                                <div *ngIf="addComplaint.controls.username.errors.required">
+                                                                                                        Enter Username
+                                                                                                </div>
+                                                                                        </div> -->
                                                                                 </div>
                                                                                 <div class="write-complaint">
-                                                                                        <textarea
-                                                                                                placeholder="Write your complaint"
-                                                                                                class="text-area-style"></textarea>
+                                                                                        <textarea placeholder="Write your complaint"
+                                                                                                class="text-area-style" formControlName="complaint_desc">
+                                                                                        </textarea>
+                                                                                        <div *ngIf="submitted && addComplaint.controls.complaint_desc.errors" class="error validator-style">
+                                                                                                <div *ngIf="addComplaint.controls.complaint_desc.errors.required">
+                                                                                                        Required
+                                                                                                </div>
+                                                                                        </div>
                                                                                         <br>
-                                                                                        <button
-                                                                                                class="submit">Submit</button>
+                                                                                        <button class="submit" (click)="onSubmitComplaint();" type="submit">Submit</button>
                                                                                 </div>
                                                                                 <div class="add-image">
                                                                                         <label>Add image</label>
                                                                                         <br>
                                                                                         <div class="flex-container">
                                                                                                 <div>
-                                                                                                        <img src="assets/images/userProfile/ic_complaint.jpg"
-                                                                                                                height=90px;
-                                                                                                                width=90px;>
+                                                                                                        <input style="display: none;" type="file" id="frontUpload" (click)="frontUpload()" accept="image/*" #fileInput1>
+                                                                                                        <button (click)="fileInput1.click()" type="button" style="border: none; margin-left: -13px;
+                                                                                                        margin-top: 2px; background: inherit;">+</button>
+                                                                                                        <img id="frontPreviewId" style="display: none; margin-left: -9px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront1" height="200">
                                                                                                 </div>
                                                                                                 <div>
-                                                                                                        <img src="assets/images/userProfile/ic_complaint2.jpg"
-                                                                                                                height=90px;
-                                                                                                                width=90px;>
+                                                                                                        <input style="display: none;" type="file" id="frontUpload2" (click)="frontUpload2()" accept="image/*" #fileInput2>
+                                                                                                        <button (click)="fileInput2.click()" type="button" style="border: none; margin-left: 23px;
+                                                                                                        margin-top: 2px; background: inherit;">+</button>
+                                                                                                        <img id="frontPreviewId2" style="display: none; margin-left: 10px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront2" height="200">
                                                                                                 </div>
                                                                                                 <div>
-                                                                                                        <img src="assets/images/userProfile/ic_complaint3.jpg"
-                                                                                                                height=90px;
-                                                                                                                width=90px;>
+                                                                                                        <input style="display: none;" type="file" id="frontUpload3" (click)="frontUpload3()" accept="image/*" #fileInput3>
+                                                                                                        <button (click)="fileInput3.click()" type="button" style="border: none; margin-left: 23px;
+                                                                                                        margin-top: 2px; background: inherit;">+</button>
+                                                                                                        <img id="frontPreviewId3" style="display: none; margin-left: 20px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront3" height="200">
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
+                                                                   </form>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                         <button type="button" class="btn btn-default"
