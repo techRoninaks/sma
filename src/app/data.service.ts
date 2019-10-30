@@ -1193,6 +1193,12 @@ updateSellerPlanFree(data: any){
     return this.http.post(this.baseUrl + 'assets/api/getCategoryAddProduct.php', httpParams);
   }
   
+   getSubCategoryAddProduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getSubCategoryAddProduct.php', httpParams);
+  }
+  
   popUpLogin(email: any,password :any){
     let httpParams= new HttpParams()
     .append("login_email", email)
@@ -1234,6 +1240,88 @@ updateSellerPlanFree(data: any){
       .append("userId", data['user_id'])
     return this.http.post(this.baseUrl + 'assets/api/likedislikereviewproduct.php', httpParams);
   }
+  getdataPostAddProduct(data: any) {
+     let httpParams = new HttpParams()
+     // .append("image", data['image'])
+      .append("imageUCount", data['imageUCount'])
+      .append("image0", data['image0'])
+      .append("image1", data['image1'])
+      .append("image2", data['image2'])
+      .append("image3", data['image3'])
+      .append("image4", data['image4'])
+      .append("image5", data['image5'])
+      .append("image6", data['image6'])
+      .append("image7", data['image7'])
+      .append("image8", data['image8'])
+      .append("image9", data['image9'])
+      .append("imageU0", data['imageU0'])
+      .append("imageU1", data['imageU1'])
+      .append("imageU2", data['imageU2'])
+      .append("imageU3", data['imageU3'])
+      .append("imageU4", data['imageU4'])
+      .append("imageU5", data['imageU5'])
+      .append("imageU6", data['imageU6'])
+      .append("imageU7", data['imageU7'])
+      .append("imageU8", data['imageU8'])
+      .append("imageU9", data['imageU9'])
+       .append("name", data['name'])
+       .append("short_desc", data['short_desc'])
+
+      .append("Long_desc", data['Long_desc'])
+      .append("spec", data['spec'])
+      .append("shipping_option", data['shipping_option'])
+      .append("base_price", data['base_price'])
+       .append("bulk_discount_id", data['bulk_discount_id'])
+       .append("offer_id", data['offer_id'])
+
+      // .append("returning_customer_count", data['returning_customer_count'])
+      // .append("cmsn_dedtd", data['cmsn_dedtd'])
+      .append("sellerid", data['sellerid'])
+      // .append("category_id", data['category_id'])
+      // .append("sub_catgry_id", data['sub_catgry_id'])
+      .append("active_status", data['active_status'])
+      .append("qty_avble", data['qty_avble'])
+
+      // .append("safe_qty", data['safe_qty'])
+      // .append("is_returnable", data['is_returnable'])
+      // .append("label_id", data['label_id'])
+       .append("tags", data['tags'])
+
+      // .append("avg_confrmn_time", data['avg_confrmn_time'])
+      // .append("avg_response_time", data['avg_response_time'])
+      .append("avg_prcessing_time", data['avg_prcessing_time'])
+       .append("avg_shpping_time", data['avg_shpping_time'])
+       .append("auto_cancel_time", data['auto_cancel_time'])
+       .append("has_rfq", data['has_rfq'])
+       .append("has_gift", data['has_gift'])
+       .append("has_order_confmn", data['has_order_confmn'])
+      .append("can_upload_image", data['can_upload_image'])
+      .append("can_orderbydate", data['can_orderbydate'])
+       .append("has_instant_buy", data['has_instant_buy'])
+      .append("max_no_of_image", data['max_no_of_image'])
+       .append("min_order_quant", data['min_order_quant'])
+       .append("max_order_quant", data['max_order_quant'])
+       .append("shipping_policy", data['shipping_policy'])
+       .append("return_policy", data['return_policy'])
+
+      .append("add_custom_message_field", data['add_custom_message_field'])
+      .append("product_policy", data['product_policy']);
+    // .append("shipping_location_id", data['shipping_location_id'])
+
+    // .append("remarks", data['remarks'])
+    // .append("quant", data['quant'])
+    // .append("discount", data['discount'])
+    // .append("percentage", data['percentage']);
+
+    // .append("rating", data['rating'])
+    // .append("rating_count", data['rating_count'])
+    // .append("review_count", data['review_count'])
+    // .append("revenue_generated", data['revenue_generated'])
+    // .append("promo_id", data['promo_id'])
+    // .append("sold_count", data['sold_count'])
+   // .append("created_date", data['created_date']);
+     return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
+   }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
