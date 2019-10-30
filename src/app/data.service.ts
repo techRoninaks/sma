@@ -20,7 +20,7 @@ export class DataService {
       .append("prodId", data)
     return this.http.post(this.baseUrl + 'assets/api/prodrevratings.php', httpParams);
   }
-  sendOrderDetails(data: any) {
+sendOrderDetails(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
       .append("shopId", data['shop_id'])
@@ -33,10 +33,32 @@ export class DataService {
       .append("sellerId", data['seller_identity'])
       .append("rfqEnabled", data['rfq_enabled'])
       .append("desiredDate", data['desiredDate'])
-      .append("giftEnabled", data['gift_enabled'])      
+      .append("giftEnabled", data['gift_enabled'])
       .append("msgCount", data['msgCount'])
-      .append("image", data['image'])
+      .append("imageUCount", data['imageUCount'])
       .append("pin", data['pin'])
+
+      .append("image0", data['image0'])
+      .append("image1", data['image1'])
+      .append("image2", data['image2'])
+      .append("image3", data['image3'])
+      .append("image4", data['image4'])
+      .append("image5", data['image5'])
+      .append("image6", data['image6'])
+      .append("image7", data['image7'])
+      .append("image8", data['image8'])
+      .append("image9", data['image9'])
+
+      .append("imageU0", data['imageU0'])
+      .append("imageU1", data['imageU1'])
+      .append("imageU2", data['imageU2'])
+      .append("imageU3", data['imageU3'])
+      .append("imageU4", data['imageU4'])
+      .append("imageU5", data['imageU5'])
+      .append("imageU6", data['imageU6'])
+      .append("imageU7", data['imageU7'])
+      .append("imageU8", data['imageU8'])
+      .append("imageU9", data['imageU9'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
@@ -1191,6 +1213,26 @@ updateSellerPlanFree(data: any){
     .append("reg_email", data['reg_email'])
     .append("reg_mobile_no", data['reg_mobile_no']);
     return this.http.post(this.baseUrl+'assets/api/updateUserData.php',httpParams);
+  }
+  
+   getDirectPickupSellerDetails(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/directpickupseller.php', httpParams);
+  }
+  
+  getLikesDislikesShop(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("userId", data['user_id'])
+    return this.http.post(this.baseUrl + 'assets/api/likedislikereviewshop.php', httpParams);
+  }
+
+  getLikesDislikes(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+      .append("userId", data['user_id'])
+    return this.http.post(this.baseUrl + 'assets/api/likedislikereviewproduct.php', httpParams);
   }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
