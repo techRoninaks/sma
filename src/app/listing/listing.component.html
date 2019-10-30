@@ -182,6 +182,38 @@
             <button type="button" (click)="fileInput.click()" style="background-color: #efbe24;color: white;">Upload
                 Image</button>
             <!-- <input type="submit"> -->
+            <div *ngIf="imageU0 == 1">
+                <img [src]="imageVAL0" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU1 == 1">
+                <img [src]="imageVAL1" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU2 == 1">
+                <img [src]="imageVAL2" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU3 == 1">
+                <img [src]="imageVAL3" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU4 == 1">
+                <img [src]="imageVAL4" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU5 == 1">
+                <img [src]="imageVAL5" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU6 == 1">
+                <img [src]="imageVAL6" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU7 == 1">
+                <img [src]="imageVAL7" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU8 == 1">
+                <img [src]="imageVAL8" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU9 == 1">
+                <img [src]="imageVAL9" style="max-height: 100px;margin-top:5px;">
+            </div>
+
+
         </div>
         <div class="pdatePicker" id="datePickClass">
             <span>Pick desired date for delivery:</span>
@@ -258,7 +290,7 @@
                 <label for="cashOnDelivery">Cash on Delivery</label>
             </div>
             <div class="dvPickup">
-                <input type="radio" id="pU" name="shippingOption" value="pickUp" (change)="priceChangeGetter();">
+                <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp" (change)="priceChangeGetter();">
                 <label for="pickUp">PickUp</label>
             </div>
         </div>
@@ -382,25 +414,60 @@
                 </div>
                 <div class="revName">
                     <p class=rName>Lorem</p>
-                    <p class="rAgo">{{reviewDateDiff[item]}}</p>
+                    <p class="rAgo">{{reviewDateDiff[item]}} days ago</p>
                 </div>
                 <div class="revData">
                     <p class="rTitle">{{ratingReview[item].reviewTitle}}</p>
                     <p class="rDesc">{{ratingReview[item].review}}</p>
                     <div class="starLikes">
-                        <img class="icLike" id="likeImg" (click)="likeCount(ratingReview[item].reviewId);"
+                        <img class="icLike" id="likeImg_{{ratingReview[item].reviewId}}" (click)="likeCount(ratingReview[item].reviewId);"
                             src="assets/icons/resources (IL)-10.png">
-                        <p class="likeCount">{{ratingReview[item].likes}}</p>
-                        <img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReview[item].reviewId);"
+                        <p class="likeCount" id="likeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].likes}}</p>
+                        <img class="icDislike" id="dislikeImg_{{ratingReview[item].reviewId}}" (click)="dislikeCount(ratingReview[item].reviewId);"
                             src="assets/icons/resources (IL)-11.png">
-                        <p class="dislikeCount">{{ratingReview[item].dislikes}}</p>
+                        <p class="dislikeCount" id="dislikeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].dislikes}}</p>
                         <button class="btnReport" (click)="report(ratingReview[item].reviewId);">Report</button>
-                        <div>
-                            <i class="fa fa-star active" *ngFor="let item of filledStarRat"></i>
-                            <i class="fa fa-star-o" *ngFor="let item of unFilledStarRat"></i>
+                        <!-- <div>
+                            <i class="fa fa-star active" *ngFor="let itemx of filledStarRatArray[item]"></i>
+                            <i class="fa fa-star-o" *ngFor="let itemy of unFilledStarRatArray[item]"></i>
+                        </div> -->
+                        <div *ngIf="ratingReview[item].rating == 1"> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 2"> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 3"> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 4"> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 5"> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i> 
                         </div>
                     </div>
-                    <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+                    <img class="revIcon" src="assets/images/review/{{ratingReview[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview.jpg'">
                 </div>
             </div>
         </div>
@@ -410,7 +477,7 @@
         <img src="assets/icons/resources (IL)-18.png">
         <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
         <div class="divCustomerQA">
-            <div class="divSA">
+            <div class="divSA"> 
                 <form class="search">
                     <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq"
                         (keyup)="filterFaq();">
@@ -508,7 +575,7 @@
                 <div class="modal-header dvModalHeader">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-bod" style="padding:0 10% 0 10%;">
+                <div class="modal-bod" style="padding:0 10% 10% 10%;">
                     <div class="rfqForm">
                         <div class="rfqSN">
                             <p class="rfqShopName">Shop Name:</p>
@@ -557,6 +624,9 @@
                                 #fileInputRfq >
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
+                                <div *ngIf="imageUploadedRfq == 1">
+                                    <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                                </div>
                         </div>
                         <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
                     </div>
@@ -578,7 +648,7 @@
                     <br>
                     <p style="text-align: center;justify-self:center">Please Login to continue...</p>
                     <br>
-                    <button (click)="redirect('login');" [routerLink]="['/login']" [queryParams]="{shop_id:dynamicData.shopId}" style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
+                    <button (click)="redirect('login');" [routerLink]="['/login']" [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}" style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
                     <p style="text-align: center;justify-self:center">OR</p>
                     <button (click)="redirect('signup');" [routerLink]="['/signup']" [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}" style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
                     <br>
@@ -589,6 +659,27 @@
         </div>
     </div>
 </div>
+
+<!-- directPickup -->
+<div class="container" id="pickupModalContainer" style="z-index: 10001;">
+    <div class="modal fade" id="pickupModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                </div>
+                <div class="modal-body" style="padding:0 10% 20px 10%;">
+                    <br>
+                    <p style="text-align: center;justify-self:center">Seller Address : {{dPSeller}}</p>
+                    <br>
+                    <button id="pickupDetailsId" (click)="pickupchecker();" style="background-color: #efbe24;color:white;">ok</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- CHECKOUT POPUP (BUY NOW) -->
 <div class="container">

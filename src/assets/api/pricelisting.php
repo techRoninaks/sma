@@ -13,8 +13,29 @@
     $isGift =$_POST["giftEnabled"];
     $reqDDate =$_POST["desiredDate"];
     $msgCount =$_POST["msgCount"];
-    $image = $_POST["image"];
     $pin = $_POST["pin"];
+
+    $image0 = $_POST["image0"];
+    $image1 = $_POST["image1"];
+    $image2 = $_POST["image2"];
+    $image3 = $_POST["image3"];
+    $image4 = $_POST["image4"];
+    $image5 = $_POST["image5"];
+    $image6 = $_POST["image6"];
+    $image7 = $_POST["image7"];
+    $image8 = $_POST["image8"];
+    $image9 = $_POST["image9"];
+
+    $imageU0 = $_POST["imageU0"];
+    $imageU1 = $_POST["imageU1"];
+    $imageU2 = $_POST["imageU2"];
+    $imageU3 = $_POST["imageU3"];
+    $imageU4 = $_POST["imageU4"];
+    $imageU5 = $_POST["imageU5"];
+    $imageU6 = $_POST["imageU6"];
+    $imageU7 = $_POST["imageU7"];
+    $imageU8 = $_POST["imageU8"];
+    $imageU9 = $_POST["imageU9"];
 
     $mob = 0;
 
@@ -29,7 +50,7 @@
     $tDateValue=array('tDate'=>$row["CURRENT_DATE"]);
     
     //get shipping times
-    $sql_query1 = "SELECT `avg_confrmn_time`, `avg_response_time`, `avg_prcessing_time`, `avg_shpping_time`, `base_price` FROM `product` WHERE `prodid` = $prodId";    
+    $sql_query1 = "SELECT `avg_confrmn_time`, `avg_response_time`, `avg_prcessing_time`, `avg_shpping_time`, `base_price` , `bulk_discount_id` ,`offer_id` FROM `product` WHERE `prodid` = $prodId";    
     $result1= mysqli_query($con1, $sql_query1);
     $row1=mysqli_fetch_assoc($result1);
     if($reqDDate=="none"){
@@ -74,13 +95,24 @@
 // echo $z;
 
     //get price
+
+    $bulkDiscId=$row1["bulk_discount_id"];
+
+    $sqlBulkPrice="SELECT `quant`, `discount` FROM `bulk_discount` WHERE `prodid` = $prodId AND `id` = $bulkDiscId ";
+    $resBulkPrice=mysqli_query($con1,$sqlBulkPrice);
+    $rowBulkPrice=mysqli_fetch_assoc($resBulkPrice);
+    $quantBulk=$rowBulkPrice["quant"];
+    $discBulk=$rowBulkPrice["discount"];
+
     $sqlPrice="SELECT `quantity_price`, `price` FROM `prod_shipping_price` WHERE `prodid` = $prodId AND `shipping_location` = $pin ";
     $resPrice=mysqli_query($con1,$sqlPrice);
     $rowPrice=mysqli_fetch_assoc($resPrice);
     $shipQtyPrice=$rowPrice["quantity_price"];
     $shipBasePrice=$rowPrice["price"];
 
+    $offerIdProduct = $row1["offer_id"];
     $basePrice=$row1["base_price"];
+
     //get variant info
     $sqlVariant = "SELECT * FROM `variant_info` where `value` =  '$productVariant'";    
     // echo $sqlVariant;
@@ -95,7 +127,7 @@
     // echo $varId;
 
     //get discount info
-    $sqlDisc = "SELECT * FROM `offer` where prodid =  $prodId  ";    
+    $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";    
     $resDisc=mysqli_query($con1,$sqlDisc);
     // var_dump($resDisc);
     // echo $sqlDisc;
@@ -116,6 +148,9 @@
             $qtPrice=$qt*$shipQtyPrice;
         } 
         $shipOption=1;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
     }
     else if($deliveryOption=="cod")
     {
@@ -128,12 +163,18 @@
             $qtPrice=$qt*$shipQtyPrice;
         } 
         $shipOption=2;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
     }
     else if($deliveryOption=="pickup")
     {
         $qtPrice=0;
         $shipBasePrice=0;
         $shipOption=3;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
     }
 
     
@@ -180,27 +221,30 @@
 
     // echo $image;
     // upload image
-           if($imageUploaded==0){
+    if($imageUploaded==0){
             $imageUploaded=0;
         }
-        else if($imageUploaded==1){
-            $imageUploaded=1;
+    else if($imageUploaded==1){
+        $imageUploaded=1;
+
+        if($imageU0==1){
+            $image=$image0;
             if($image != 1){
                 // $dir='../assets/images/order/'.$orderId.'/';
                 // mkdir($dir);
                 if (!file_exists('../images/order/'.$orderId.'/')) {
                     mkdir('../images/order/'.$orderId.'/', 0777, true);
                     $dir='../images/order/'.$orderId.'/';
-        
+
                 }
                 // if (!file_exists('../'.$orderId.'/')) {
                 //     mkdir('../'.$orderId.'/', 0777, true);
                 //     $dir='../assets/images/order/'.$orderId.'/';
-        
+
                 // }
                 define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
                 //  echo $image;
-                $file = UPLOAD_DIR.'custom'.$orderId.'.jpg';
+                $file = UPLOAD_DIR.'custom'.$orderId.'_0.jpg';
                 if($mob == 0){
                     $img =explode(",", $image);
                     // echo $img;
@@ -208,7 +252,7 @@
                     // echo $img[1];
                     $data = base64_decode($img[1]);
                     // echo $data;
-        
+
                 }else{
                     $data = base64_decode($image);
                 }
@@ -220,6 +264,341 @@
                 // echo $dir.$file;
             }
         }
+        if($imageU1==1){
+            $image=$image1;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_1.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU2==1){
+            $image=$image2;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_2.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU3==1){
+            $image=$image3;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_3.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU4==1){
+            $image=$image4;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_4.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU5==1){
+            $image=$image5;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_5.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU6==1){
+            $image=$image6;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_6.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU7==1){
+            $image=$image7;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_7.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU8==1){
+            $image=$image8;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_8.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+        if($imageU9==1){
+            $image=$image9;
+            if($image != 1){
+                // $dir='../assets/images/order/'.$orderId.'/';
+                // mkdir($dir);
+                if (!file_exists('../images/order/'.$orderId.'/')) {
+                    mkdir('../images/order/'.$orderId.'/', 0777, true);
+                    $dir='../images/order/'.$orderId.'/';
+
+                }
+                // if (!file_exists('../'.$orderId.'/')) {
+                //     mkdir('../'.$orderId.'/', 0777, true);
+                //     $dir='../assets/images/order/'.$orderId.'/';
+
+                // }
+                define('UPLOAD_DIR', '../images/order/'.$orderId.'/');
+                //  echo $image;
+                $file = UPLOAD_DIR.'custom'.$orderId.'_9.jpg';
+                if($mob == 0){
+                    $img =explode(",", $image);
+                    // echo $img;
+                    $img[1] = str_replace(' ', '+', $img[1]);
+                    // echo $img[1];
+                    $data = base64_decode($img[1]);
+                    // echo $data;
+
+                }else{
+                    $data = base64_decode($image);
+                }
+                $success = file_put_contents($file, $data);
+                // echo "<br>";        
+                // echo "<br>";
+                // echo $success;
+                // echo "<br>";
+                // echo $dir.$file;
+            }
+        }
+            
+    }
     // echo $image;
     // upload image
 

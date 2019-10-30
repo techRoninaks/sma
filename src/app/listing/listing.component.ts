@@ -9,7 +9,27 @@ import { map, startWith } from 'rxjs/operators';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 var imageRfqValue: any = "";
-var imageValue: any = "";
+var imageValue0: any = "";
+var imageValue1: any = "";
+var imageValue2: any = "";
+var imageValue3: any = "";
+var imageValue4: any = "";
+var imageValue5: any = "";
+var imageValue6: any = "";
+var imageValue7: any = "";
+var imageValue8: any = "";
+var imageValue9: any = "";
+var imageUCount: number = 0;
+// var imageU0: any;
+// var imageU1: any;
+// var imageU2: any;
+// var imageU3: any;
+// var imageU4: any;
+// var imageU5: any;
+// var imageU6: any;
+// var imageU7: any;
+// var imageU9: any;
+// var imageU8: any;
 export interface User {
 	name: string;
 }
@@ -25,6 +45,8 @@ declare var Razorpay: any;
 export class ListingComponent implements OnInit {
 	shipping_id: any;
 	router: any;
+	flag: number;
+	ratingCount: number;
 	public token: any;
 	current: any;
 	variantData: any = [];
@@ -41,19 +63,24 @@ export class ListingComponent implements OnInit {
 	unFilledStar: any = [];
 	j: number = 0;
 	productRating: any;
-	reviewStar: any;
+	reviewStar: any = [];
 	maxOQuant: any;
 	minOQuant: any;
 	discountLabel: any = [];
 	ratingReview: any = [];
+	// filledStarRat: any [][] = new Array();
+	// unFilledStarRat: any [][] = new Array() ;
 	filledStarRat: any = [];
 	unFilledStarRat: any = [];
+	filledStarRatArray: any = [];
+	unFilledStarRatArray: any = [];
 	submitted = false;
 	success = false;
 	reviewDateDiff: any = "";
 	faqProduct: any = [];
 	ratingData: any = [];
 	activeStatusProd: any;
+	dPSeller: any = [];
 	priv: any;
 	selName: string;
 	giftOpn: any;
@@ -74,6 +101,17 @@ export class ListingComponent implements OnInit {
 	dynamicDataProName: any = "";
 	prodId: any;
 	filteredOptions: any;
+	imageVAL0:any="";
+	imageVAL1:any="";
+	imageVAL2:any="";
+	imageVAL3:any="";
+	imageVAL4:any="";
+	imageVAL5:any="";
+	imageVAL6:any="";
+	imageVAL7:any="";
+	imageVAL8:any="";
+	imageVAL9:any="";
+	imageVALRFQ:any="";
 	dynamicDataUser: any = "";
 	dynamicDataVariant: any = "";
 	dynamicDataVariants: any = "";
@@ -87,10 +125,31 @@ export class ListingComponent implements OnInit {
 	dynamicMsgTitle: any = "";
 	TotalPrice: any;
 	variantValue: any;
+	revIdValue: any = [];
 	Name: any;
 	email: any;
 	phone1: any;
+	imageU0: any;
+	imageU1: any;
+	imageU2: any;
+	imageU3: any;
+	imageU4: any;
+	imageU5: any;
+	imageU6: any;
+	imageU7: any;
+	imageU9: any;
+	imageU8: any;
 	imageUploaded: any;
+	imageUploaded0: any;
+	imageUploaded1: any;
+	imageUploaded2: any;
+	imageUploaded3: any;
+	imageUploaded4: any;
+	imageUploaded5: any;
+	imageUploaded6: any;
+	imageUploaded7: any;
+	imageUploaded8: any;
+	imageUploaded9: any;
 	imageUploadedRfq: number = 0;
 	variant: object;
 	tokenFaq: object;
@@ -117,6 +176,7 @@ export class ListingComponent implements OnInit {
 	imageSrc: string;
 	Object = Object;
 	tokenObj: object;
+	shopToken: object;
 	formAddress: object;
 	fgOrderDetails: FormGroup;
 	tokenPrice: object;
@@ -124,6 +184,7 @@ export class ListingComponent implements OnInit {
 	dynamicdata: any = "";
 	varient: any = "";
 	stage1: boolean = false;
+	ratingShopCount: number;
 	largeSrc: any;
 	// largeSrc: any = "assets/images/Screenshot_20190712-201603.png";
 	// largeSrc: any="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg";
@@ -153,6 +214,7 @@ export class ListingComponent implements OnInit {
 	shipLocId: number;
 	quant: any;
 	bPrice: number;
+	likeDislikes: any = [];
 
 	ngOnInit() {
 		// this.setCookie("userId", 2);
@@ -173,6 +235,7 @@ export class ListingComponent implements OnInit {
 
 
 			this.token = params['prod_id'];
+			this.shopToken = params['shop_id'];
 			this.tokenFaq = { prod_id: this.token, number_faq: 0 };
 
 			// console.log(this.token);
@@ -247,6 +310,8 @@ export class ListingComponent implements OnInit {
 						if (this.undelData.count == 1) {
 							// alert("count="+this.undelData.count);
 							$("#undeliverableModal").modal('hide');
+							this.undel = "DELIVERABLE TO ";
+							this.undelValue = 1;
 						}
 						else if (this.undelData.count == 0) {
 							// alert("count="+this.undelData.count);
@@ -284,8 +349,29 @@ export class ListingComponent implements OnInit {
 
 		//UPLOAD IMAGE
 		// for(var imageCU:any=0;imageCU<this.uploadImageCount;imageCU++){
+		this.imageUploaded0 = 0;
+		this.imageUploaded1 = 0;
+		this.imageUploaded2 = 0;
+		this.imageUploaded3 = 0;
+		this.imageUploaded4 = 0;
+		this.imageUploaded5 = 0;
+		this.imageUploaded6 = 0;
+		this.imageUploaded7 = 0;
+		this.imageUploaded8 = 0;
+		this.imageUploaded9 = 0;
+		this.imageU0 = 0;
+		this.imageU1 = 0;
+		this.imageU2 = 0;
+		this.imageU3 = 0;
+		this.imageU4 = 0;
+		this.imageU5 = 0;
+		this.imageU6 = 0;
+		this.imageU7 = 0;
+		this.imageU8 = 0;
+		this.imageU9 = 0;
 		this.imageUploaded = 0;
-		imageValue = document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
+
+		document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
 
 		this.imageUploadedRfq = 0;
 		imageRfqValue = document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
@@ -315,6 +401,7 @@ export class ListingComponent implements OnInit {
 			},
 			error => console.error(error)
 		);
+
 
 		//product image count
 		this.data.readFileProdImage(this.token).subscribe(
@@ -372,6 +459,8 @@ export class ListingComponent implements OnInit {
 			error => console.error(error)
 		);
 
+
+
 		this.data.getDiscountLabel(this.token).subscribe(
 			data => {
 				// console.log(this.token);
@@ -382,15 +471,36 @@ export class ListingComponent implements OnInit {
 		this.data.getRatingReview(this.token).subscribe(
 			data => {
 				this.ratingReview = data;
-				this.reviewStar = this.ratingReview.rating;
-				this.j = 0;
-				for (this.i = 0; this.i < 5; this.i++) {
-					if (this.i < this.reviewStar) {
-						this.filledStarRat[this.i] = this.i;
-					} else {
-						this.unFilledStarRat[this.j++] = this.i;
-					}
+
+				this.ratingCount = Object.keys(this.ratingReview).length;
+
+				// console.log(x);
+				for (var y = 0; y < this.ratingCount; y++) {
+					this.revIdValue[y] = this.ratingReview[y].reviewId;
 				}
+				// var y = Object.keys(this.ratingReview).length;
+				// console.log(y);
+
+				// for (var t = 0; t < y; t++) {
+				// 	console.log(this.ratingReview[t].rating);
+				// 	this.reviewStar[t] = this.ratingReview[t].rating;
+				// 	console.log(this.reviewStar[t]);
+				// 	console.log(t);
+				// 	this.j = 0;
+				// 	for (this.i = 0; this.i < 5; this.i++) {
+				// 		if (this.i < this.reviewStar[t]) {
+				// 			this.filledStarRat[this.i] = this.i;
+				// 		} else {
+				// 			this.unFilledStarRat[this.j++] = this.i;
+				// 		}
+				// 	}
+				// 	this.filledStarRatArray[t] = this.filledStarRat;
+				// 	this.unFilledStarRatArray[t] = this.unFilledStarRat;
+				// 	console.log(this.filledStarRatArray[t]);
+				// 	console.log(this.unFilledStarRatArray[t]);
+				// }
+
+
 			},
 			error => console.error(error)
 		);
@@ -407,12 +517,80 @@ export class ListingComponent implements OnInit {
 			}
 		);
 
+
+		this.data.getLikesDislikes(this.tokenObj).subscribe(
+			data => {
+				// console.log(data);
+				this.likeDislikes = data;
+				var likeDisCount: number = Object.keys(this.likeDislikes).length;
+				var x = 0;
+				var q = 0;
+
+				// console.log(this.ratingCount);
+				while (q < this.ratingCount) {
+					x = 0;
+					while (x < likeDisCount) {
+						if (this.revIdValue[q] == this.likeDislikes[x]['reviewId']) {
+							var y: number = this.likeDislikes[x]['reviewId'];
+							var z: number = this.likeDislikes[x]['likeDislike'];
+							// console.log("x="+x+",q="+q+",y="+y+",z="+z);
+
+							if (z == 1) {
+								var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
+								// console.log(ele.src);
+								// console.log("likeImg_" + y);
+								ele.src = "assets/icons/resources (IL)-23.png";
+								// console.log(ele.src);
+							}
+							else if (z == 0) {
+								var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
+								ele1.src = "assets/icons/resources (IL)-24.png";
+							}
+						}
+						// console.log("x"+x);
+						// console.log("shop revId"+this.revIdValue[q]);
+						// console.log("user revId"+this.likeDislikes[x]['reviewId']);
+						x++;
+					}
+					// console.log("q"+q);
+					// console.log("shop revId outer"+this.revIdValue[q]);
+					q++;
+				}
+				// var x = 0;
+				// while (x < likeDisCount) {
+				// 	var y: number = this.likeDislikes[x]['reviewId'];
+				// 	var z: number = this.likeDislikes[x]['likeDislike'];
+				// 	// console.log("y="+y+",z="+z);
+				// 	if (z == 1) {
+				// 		var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
+				// 		ele.src = "assets/icons/resources (IL)-23.png";
+				// 		// (<HTMLImageElement><any>document.getElementById("likeImg_"+y)).src="assets/icons/resources (IL)-23.png";
+
+				// 	}
+				// 	else if (z == 0) {
+				// 		var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
+				// 		ele1.src = "assets/icons/resources (IL)-24.png";
+				// 		// (<HTMLImageElement><any>document.getElementById("dislikeImg_"+y)).src="assets/icons/resources (IL)-24.png";
+				// 	}
+				// 	x++;
+				// }
+
+			},
+			error => console.error(error)
+		);
+
 		this.data.prodViewIncrement(this.token).subscribe();
 
 		this.data.getRfqInputs(this.token).subscribe(
 			data => {
 				this.rfqInput = data;
 
+			}
+		);
+
+		this.data.getDirectPickupSellerDetails(this.shopToken).subscribe(
+			data => {
+				this.dPSeller = data;
 			}
 		);
 
@@ -725,21 +903,103 @@ export class ListingComponent implements OnInit {
 	likeCount(revId: any) {
 		// console.log(revId);
 		// console.log(typeof(revId));
+		var x = (<HTMLImageElement><any>document.getElementById("likeImg_" + revId)).src;
+		var y = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + revId)).src;
+
 		this.data.likeRev(this.tokenObj, revId).subscribe();
-		var ele = document.getElementById("likeImg") as HTMLImageElement;
+
+		var ele = document.getElementById("likeImg_" + revId) as HTMLImageElement;
 		ele.src = "assets/icons/resources (IL)-23.png";
-		var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+		var ele1 = document.getElementById("dislikeImg_" + revId) as HTMLImageElement;
 		ele1.src = "assets/icons/resources (IL)-11.png";
 
+
+
+		var resx = x.split("/");
+		var resXVal = resx[5];
+
+		var resy = y.split("/");
+		var resYVal = resy[5];
+
+		console.log(resXVal + " asdsadgfa " + resYVal);
+		if (resXVal === "resources%20(IL)-23.png") {
+			// console.log(resXVal+"li1");
+
+		}
+		else if (resYVal === "resources%20(IL)-24.png") {
+			// console.log(resYVal+"li2");
+			var ele4 = document.getElementById("dislikeCount_" + revId);
+			var count4 = parseInt(ele4.innerText);
+			count4 -= 1;
+			ele4.innerText = count4.toString();
+
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		else if (resXVal === "resources%20(IL)-10.png") {
+			// console.log(resXVal+"li3");
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		// var ele3 = document.getElementById("likeCount_"+revId);
+		// var count = parseInt(ele3.innerText);
+		// count +=1;
+		// ele3.innerText = count.toString();
+		// alert(ele3.innerText);
 	}
 	dislikeCount(revId: any) {
 		// console.log(revId);
 		// console.log(typeof(revId));
+		var x = (<HTMLImageElement><any>document.getElementById("likeImg_" + revId)).src;
+		var y = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + revId)).src;
+
 		this.data.dislikeRev(this.tokenObj, revId).subscribe();
-		var ele = document.getElementById("likeImg") as HTMLImageElement;
+		var ele = document.getElementById("likeImg_" + revId) as HTMLImageElement;
 		ele.src = "assets/icons/resources (IL)-10.png";
-		var ele1 = document.getElementById("dislikeImg") as HTMLImageElement;
+		var ele1 = document.getElementById("dislikeImg_" + revId) as HTMLImageElement;
 		ele1.src = "assets/icons/resources (IL)-24.png";
+
+
+		var resx = x.split("/");
+		var resXVal = resx[5];
+
+		var resy = y.split("/");
+		var resYVal = resy[5];
+
+		if (resXVal === "resources%20(IL)-23.png") {
+			// console.log(resXVal+"dis1");
+			var ele4 = document.getElementById("dislikeCount_" + revId);
+			var count4 = parseInt(ele4.innerText);
+			count4 += 1;
+			ele4.innerText = count4.toString();
+
+			var ele3 = document.getElementById("likeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count -= 1;
+			ele3.innerText = count.toString();
+		}
+		else if (resYVal === "resources%20(IL)-24.png") {
+			// console.log(resYVal+"dis2");
+
+		}
+		else if (resYVal === "resources%20(IL)-11.png") {
+			// console.log(resYVal+"dis3");
+
+			var ele3 = document.getElementById("dislikeCount_" + revId);
+			var count = parseInt(ele3.innerText);
+			count += 1;
+			ele3.innerText = count.toString();
+		}
+		// var ele3 = document.getElementById("dislikeCount_"+revId);
+		// var count = parseInt(ele3.innerText);
+		// count +=1;
+		// ele3.innerText = count.toString();
+		// alert(ele3.innerText);		
+
 	}
 
 	reqDate() {
@@ -801,7 +1061,8 @@ export class ListingComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			imageRfqValue = text;
-			console.log(imageRfqValue);
+			// console.log(imageRfqValue);
+			this.imageVALRFQ = text;
 		};
 	}
 
@@ -876,15 +1137,162 @@ export class ListingComponent implements OnInit {
 
 
 	onClick(event) {
+		if (this.imageUploaded8 == 1) {
+			this.imageUploaded9 = 1;
+			this.imageUploaded8 = 0;
+			this.imageUploaded7 = 0;
+			this.imageUploaded6 = 0;
+			this.imageUploaded5 = 0;
+			this.imageUploaded4 = 0;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU9 = 1;
+		}
+		if (this.imageUploaded7 == 1) {
+			this.imageUploaded8 = 1;
+			this.imageUploaded7 = 0;
+			this.imageUploaded6 = 0;
+			this.imageUploaded5 = 0;
+			this.imageUploaded4 = 0;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU8 = 1;
+		}
+		if (this.imageUploaded6 == 1) {
+			this.imageUploaded7 = 1;
+			this.imageUploaded6 = 0;
+			this.imageUploaded5 = 0;
+			this.imageUploaded4 = 0;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU7 = 1;
+		}
+		if (this.imageUploaded5 == 1) {
+			this.imageUploaded6 = 1;
+			this.imageUploaded5 = 0;
+			this.imageUploaded4 = 0;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU6 = 1;
+		}
+		if (this.imageUploaded4 == 1) {
+			this.imageUploaded5 = 1;
+			this.imageUploaded4 = 0;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU5 = 1;
+		}
+		if (this.imageUploaded3 == 1) {
+			this.imageUploaded4 = 1;
+			this.imageUploaded3 = 0;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU4 = 1;
+		}
+		if (this.imageUploaded2 == 1) {
+			this.imageUploaded3 = 1;
+			this.imageUploaded2 = 0;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU3 = 1;
+		}
+		if (this.imageUploaded1 == 1) {
+			this.imageUploaded2 = 1;
+			this.imageUploaded1 = 0;
+			this.imageUploaded0 = 0;
+			this.imageU2 = 1;
+		}
+		if (this.imageUploaded0 == 1) {
+			this.imageUploaded1 = 1;
+			this.imageUploaded0 = 0;
+			this.imageU1 = 1;
+		}
+		this.imageUploaded0 = 1;
 		this.imageUploaded = 1;
+		this.imageU0=1;
+
 		// 		console.log(event.target.files[0]);
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
 		// reader.onLoad = onLoadCallback;
 		reader.onload = (event) => {
 			var text: any = reader.result;
-			imageValue = text;
-			// 			console.log(imageValue);
+			// imageValue = text;
+			// this.imageVAL0 =text;
+			// console.log(imageValue);
+			if (this.imageUploaded9 == 1) {
+				imageValue9 = text;
+				this.imageVAL9 = text;
+				imageUCount = 10;
+				// imageU9 = 1;
+			}
+			else if (this.imageUploaded8 == 1) {
+				imageValue8 = text;
+				this.imageVAL8 = text;
+				imageUCount = 9;
+				// imageU8 = 1;
+			}
+			else if (this.imageUploaded7 == 1) {
+				imageValue7 = text;
+				this.imageVAL7 = text;
+				imageUCount = 8;
+				// imageU7 = 1;
+			}
+			else if (this.imageUploaded6 == 1) {
+				imageValue6 = text;
+				this.imageVAL6 = text;
+				imageUCount = 7;
+				// imageU6 = 1;
+			}
+			else if (this.imageUploaded5 == 1) {
+				imageValue5 = text;
+				this.imageVAL5 = text;
+				imageUCount = 6;
+				// imageU5 = 1;
+			}
+			else if (this.imageUploaded4 == 1) {
+				imageValue4 = text;
+				this.imageVAL4 = text;
+				imageUCount = 5;
+				// imageU4 = 1;
+			}
+			else if (this.imageUploaded3 == 1) {
+				imageValue3 = text;
+				this.imageVAL3 = text;
+				imageUCount = 4;
+				// imageU3 = 1;
+			}
+			else if (this.imageUploaded2 == 1) {
+				imageValue2 = text;
+				this.imageVAL2 = text;
+				imageUCount = 3;
+				// imageU2 = 1;
+			}
+			else if (this.imageUploaded1 == 1) {
+				imageValue1 = text;
+				this.imageVAL1 = text;
+				imageUCount = 2;
+				// imageU1 = 1;
+			}
+			else if (this.imageUploaded0 == 1) {
+				imageValue0 = text;
+				this.imageVAL0 = text;
+				imageUCount = 1;
+				// imageU0 = 1;
+			}
+
+
 		};
 		// this.imageValue = reader.readAsDataURL(event.target.files[0]);
 		// 		setTimeout(function(){ 
@@ -893,13 +1301,32 @@ export class ListingComponent implements OnInit {
 
 
 	}
-
+	pickupchecker() {
+		$("#pickupModal").modal('hide');
+	}
+	pickupDetails() {
+		// this.flag=1;
+		$("#pickupModal").modal('show');
+	};
 	submitPrice(x: any) {
 		this.pincodeValue = parseInt(this.getCookie("userPin"));
+		// var pickupCheck = (<HTMLInputElement><any>document.getElementById('pU')).checked;
+		// this.flag=1;
+		// if (pickupCheck == true) {
+		// 	this.flag=0;
+		// 	$("#pickupModal").modal('show');
+		// 	// $("#buyNowPopup").modal('hide');
+		// 	setTimeout(function(){ 
+		// 		// this.flag=1;
+		// 		// alert(this.flag); 
+		// 	}, 3000);
+		// }
 
 		var userIdValue = parseInt(this.userId);
 		if (userIdValue >= 1 && this.undelValue == 1) {
+			// if (this.flag == 1 ){
 			$("#buyNowPopup").modal('show');
+			// }
 			if (x == 'buyNow') {
 				var msgCount: any = this.Object.keys(this.messageTitle).length;
 				// console.log(msgCount);
@@ -924,7 +1351,16 @@ export class ListingComponent implements OnInit {
 				// console.log("pin"+pin);
 				// console.log("pinV"+this.pincodeValue);
 				// var res = productVariant.split(" ");
-				var image = imageValue;
+				var image0 = imageValue0;
+				var image1 = imageValue1;
+				var image2 = imageValue2;
+				var image3 = imageValue3;
+				var image4 = imageValue4;
+				var image5 = imageValue5;
+				var image6 = imageValue6;
+				var image7 = imageValue7;
+				var image8 = imageValue8;
+				var image9 = imageValue9;
 
 				// console.log(image);
 				// alert("working");
@@ -942,7 +1378,7 @@ export class ListingComponent implements OnInit {
 					var deliveryOption = "pickup";
 				}
 				// shop_id: this.shopIdentity
-				this.tokenPrice = { pin: pin, image: image, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+				this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 				// image:image ,
 				this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
@@ -1028,7 +1464,16 @@ export class ListingComponent implements OnInit {
 				var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
 				var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
 				var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
-				var image = imageValue;
+				var image0 = imageValue0;
+				var image1 = imageValue1;
+				var image2 = imageValue2;
+				var image3 = imageValue3;
+				var image4 = imageValue4;
+				var image5 = imageValue5;
+				var image6 = imageValue6;
+				var image7 = imageValue7;
+				var image8 = imageValue8;
+				var image9 = imageValue9;
 				var pin = parseInt(this.getCookie("userPin"));
 				// console.log("pin"+pin);
 				// console.log("pinV"+this.pincodeValue);
@@ -1044,7 +1489,7 @@ export class ListingComponent implements OnInit {
 				else if (pickup == true) {
 					var deliveryOption = "pickup";
 				}
-				this.tokenPrice = { pin: pin, image: image, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+				this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
 
 				this.data.sendOrderDetails(this.tokenPrice).subscribe();
 

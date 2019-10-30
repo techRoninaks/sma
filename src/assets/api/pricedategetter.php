@@ -20,42 +20,23 @@
     $shipQtyPrice=$rowPrice["quantity_price"];
     $shipBasePrice=$rowPrice["price"];
 
-    if($deliveryOption=="shipping")
-    {
-        if($productQuantity==1)
-        {
-            $qtPrice=0;
-        }
-        else{
-            $qt=$productQuantity-1;
-            $qtPrice=$qt*$shipQtyPrice;
-        } 
-        $shipOption=1;
-    }
-    else if($deliveryOption=="cod")
-    {
-        if($productQuantity==1)
-        {
-            $qtPrice=0;
-        }
-        else{
-            $qt=$productQuantity-1;
-            $qtPrice=$qt*$shipQtyPrice;
-        } 
-        $shipOption=2;
-    }
-    else if($deliveryOption=="pickup")
-    {
-        $qtPrice=0;
-        $shipBasePrice=0;
-        $shipOption=3;
-    }
+  
 
     //get from prod
-    $sql_query1 = "SELECT `avg_confrmn_time`, `avg_response_time`, `avg_prcessing_time`, `avg_shpping_time`, `base_price` FROM `product` WHERE `prodid` = $prodId";
+    $sql_query1 = "SELECT `avg_confrmn_time`, `avg_response_time`, `avg_prcessing_time`, `avg_shpping_time`, `base_price` , `bulk_discount_id`, `offer_id` FROM `product` WHERE `prodid` = $prodId";
     $result1 = mysqli_query($con1, $sql_query1);
     $row1 = mysqli_fetch_assoc($result1);
     
+
+    $offerIdProduct = $row1["offer_id"];
+    $bulkDiscId=$row1["bulk_discount_id"];
+
+    $sqlBulkPrice="SELECT `quant`, `discount` FROM `bulk_discount` WHERE `prodid` = $prodId AND `id` = $bulkDiscId ";
+    $resBulkPrice=mysqli_query($con1,$sqlBulkPrice);
+    $rowBulkPrice=mysqli_fetch_assoc($resBulkPrice);
+    $quantBulk=$rowBulkPrice["quant"];
+    $discBulk=$rowBulkPrice["discount"];
+
     //calc date
     $totalTime = $row1["avg_confrmn_time"] + $row1["avg_response_time"] + $row1["avg_prcessing_time"] + $row1["avg_shpping_time"];
     $totalTime = ($totalTime / 24);
@@ -70,11 +51,52 @@
     $basePrice = $row1["base_price"];
 
     //get discount
-    $sqlDisc = "SELECT * FROM `offer` where prodid =  $prodId  ";
+    $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";
     $resDisc = mysqli_query($con1, $sqlDisc);
     $rowDisc = mysqli_fetch_array($resDisc);
     $discountInfo = array('percentage' => $rowDisc["percentage"]);
     $disc = $discountInfo["percentage"];
+
+
+    if($deliveryOption=="shipping")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=1;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
+    }
+    else if($deliveryOption=="cod")
+    {
+        if($productQuantity==1)
+        {
+            $qtPrice=0;
+        }
+        else{
+            $qt=$productQuantity-1;
+            $qtPrice=$qt*$shipQtyPrice;
+        } 
+        $shipOption=2;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
+    }
+    else if($deliveryOption=="pickup")
+    {
+        $qtPrice=0;
+        $shipBasePrice=0;
+        $shipOption=3;
+        if($quantBulk>=$productQuantity){
+            $disc = $disc +$discBulk;
+        }
+    }
 
     //total price calc
     // $basePriceTotal = $basePrice * $productQuantity;
