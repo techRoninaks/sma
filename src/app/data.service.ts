@@ -1322,6 +1322,82 @@ updateSellerPlanFree(data: any){
    // .append("created_date", data['created_date']);
      return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
    }
+  
+  addComplaintData(data: Object,userId:any){
+    let httpParams= new HttpParams()
+   .append("userId", userId)
+   .append("userName", data['username'])
+   .append("note", data['complaint_desc']);
+   return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
+  }
+
+getIndividualOrderData(data: any){
+    let httpParams= new HttpParams()
+   .append("id", data)
+   return this.http.post(this.baseUrl+'assets/api/.php',httpParams);
+  }
+
+addCardData(data1: Object,data2:Object,userId:any,userName:any){
+  let httpParams= new HttpParams()
+  .append("userName", userName)
+  .append("userId", userId)
+  .append("cardNo", data1['cardno'])
+  .append("validity", data2['date'])
+  .append("cvv", data2['cvv']);
+  return this.http.post(this.baseUrl+'assets/api/addCardData.php',httpParams);
+ }
+
+deleteCardData(userId: any,cardNo: any){
+  let httpParams= new HttpParams()
+  .append("cardNo", cardNo)
+  .append("userId", userId);
+  return this.http.post(this.baseUrl+'assets/api/deleteCardData.php',httpParams);
+ }
+ deleteUserAddress(addressId:any){
+  let httpParams= new HttpParams()
+    .append("addressId", addressId)
+    return this.http.post(this.baseUrl+'assets/api/deleteUserAddressData.php',httpParams);
+ }
+getOrderData(data: any){
+  let httpParams= new HttpParams()
+  .append("userId", data)
+  return this.http.post(this.baseUrl+'assets/api/orderData.php',httpParams);
+ }
+getUserAddressData(userId: any){
+  let httpParams= new HttpParams()
+  .append("userId", userId)
+  return this.http.post(this.baseUrl+'assets/api/userAddressData.php',httpParams);
+ }
+addUserAddressData(userId: any,userName:any,data: Object){
+  let httpParams= new HttpParams()
+  .append("userName", userName)
+  .append("city", data['city'])
+  .append("country", data['country'])
+  .append("pin", data['pin'])
+  .append("email", data['email'])
+  .append("mobile", data['mobile'])
+  .append("state", data['state'])
+  .append("userId", userId);
+  return this.http.post(this.baseUrl+'assets/api/addUserAddressData.php',httpParams);
+ }
+uploadImage1(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image1Upload.php', httpParams);
+  }
+  uploadImage2(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image2Upload.php', httpParams);
+  }
+  uploadImage3(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image3Upload.php', httpParams);
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
