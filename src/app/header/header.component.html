@@ -50,7 +50,7 @@
                 <label id="headerLogin">{{temp}}</label>
               </button>
                 <div class="dropdown-content2" id="profilemenu">
-                  <li><a href=#>My orders</a></li>
+                  <li *ngIf="user_signed"><a href=#>My orders</a></li>
                   <li><a href=#>My messages</a></li>
                   <li><a routerLink="/userprofile">My notifications</a></li>
                   <li><a routerLink="/userprofile">My fav shops</a></li>

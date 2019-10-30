@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
   seller_name: String;
   cookie_seller_id: String;
   dynamicDataLocation :any ="";
+  user_signed: boolean = false;
   sellerSignedIn: boolean =false;
   sellerSignedOut: boolean =true;
   ngOnInit() {
@@ -42,6 +43,11 @@ export class HeaderComponent implements OnInit {
     this.flag4=this.getCookie("userCity");
     this.flag5=this.getCookie("sellerPin");
     this.flag6=this.getCookie("userPin");
+    if(this.flag!= null)
+    {
+      this.temp = this.flag;
+      this.user_signed = true;
+    }
     if(this.getCookie("isLoggedIn") == "0" || this.getCookie("isLoggedIn")== null)
     {
         setTimeout(function(){ 
@@ -64,6 +70,7 @@ export class HeaderComponent implements OnInit {
     if(this.flag!= null)
     {
       this.temp = this.flag;
+      this.user_signed = true;
       if(this.temp == "")
       {
         document.getElementById("headerLogin").innerText = "Login";
@@ -134,7 +141,6 @@ export class HeaderComponent implements OnInit {
       document.getElementById("profilemenu").style.display="none";
       this.router.navigate(['/login']);
     }
-
   }
   closePop(){
     var email = (<HTMLInputElement><any>document.getElementById('login-email')).value;
