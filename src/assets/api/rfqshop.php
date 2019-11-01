@@ -68,6 +68,11 @@ $y=$rev;
     $result = mysqli_query($con2, $sql_query);
     // echo $sql_query;
     // echo "<br>";
+    $sqlRfq="SELECT `tagid` FROM `rfq` WHERE `user_id` = $userId AND `orderid` = $orderId ";
+    $resRfq=mysqli_query($con2,$sqlRfq);
+    $rowRfq=mysqli_fetch_assoc($resRfq);
+    $idRfq=$rowRfq["tagid"];
+
 
     if($image != 1){
         // $dir='../assets/images/shop/'.$shopId.'/';
@@ -98,7 +103,7 @@ $y=$rev;
         $success = file_put_contents($file, $data);
         // echo "<br>";        
         // echo "<br>";
-        echo $success;
+        // echo $success;
         // echo "<br>";
         // echo $dir.$file;
     }
@@ -106,11 +111,39 @@ $y=$rev;
     $sql_query3 = "INSERT INTO `customer_order`(`prodid`, `quantity`, `variants_chosen`, `gift_option`, `gift_note`, `gift_title`, `gift_address`, `is_rfq`,
     `base_price`, `qty_price`, `total_price`, `discount`, `shippingprice`, `tax`, `variantprice`, `has_image`, `orderid`, `promo_disc`, `invoice_number`, 
     `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES (0,1,0,0,null,null,null,1,0,0,
-    0,0,0,0,0,0,$orderId,null,0,'2020-02-02 12:56:15',null,null)";
+    0,0,0,0,0,0,$orderId,null,0,'2025-02-02 12:56:15',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
 
 
     // echo $sql_query3;
-    echo $result3;
+    // echo $result3;
 
+    $sqlThread="SELECT `id` FROM `thread` WHERE (`user1` = $userId AND `usertype1` = 'buyer' AND `user2` = $sellerId AND `usertype2` = 'seller') OR (`user2` = $userId AND `usertype2` = 'buyer' AND `user1` = $sellerId AND `usertype1` = 'seller')";
+    $resThread=mysqli_query($con2,$sqlThread);
+    $rowThread=mysqli_fetch_assoc($resThread);
+
+    if (mysqli_num_rows ($resThread)!= 0 )
+    {
+        $idThread=$rowThread["id"];
+    }
+    else if(mysqli_num_rows ($resThread) == 0 )
+    {
+        
+        $sqlT="INSERT INTO `thread` (`user1`,`user2`,`usertype1`,`usertype2`) VALUES ( $userId, $sellerId ,'buyer', 'seller')";
+        $resT=mysqli_query($con2,$sqlT);
+
+        $sqlThread2="SELECT `id` FROM `thread` WHERE (`user1` = $userId AND `usertype1` = 'buyer' AND `user2` = $sellerId AND `usertype2` = 'seller') OR (`user2` = $userId AND `usertype2` = 'buyer' AND `user1` = $sellerId AND `usertype1` = 'seller')";
+        $resThread2=mysqli_query($con2,$sqlThread2);
+        $rowThread2=mysqli_fetch_assoc($resThread2);
+        $idThread=$rowThread2["id"];
+    }
+
+    
+    $sqlMessage="INSERT INTO `message`(`threadid`, `message`, `senderid`, `sender_type`,`message_type`) VALUES ($idThread,'rfq_id!~!$idRfq',$userId,'buyer','rfq')";
+    $resMessage=mysqli_query($con2,$sqlMessage);
+
+    // echo $sqlThread;
+    // echo $sqlT;
+    // echo $sqlThread2;
+    // echo $sqlMessage;
 ?>

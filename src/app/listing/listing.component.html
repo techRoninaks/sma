@@ -24,12 +24,14 @@
                                     <span id="undel">{{undel}}</span> <span>{{pincodeValue}}</span>
                                 </ul>
                                 <form>
-                                    <input type="text" placeholder="Enter Pincode" id="undPincode" value="{{pincodeValue}}" (change)="pincodeChange();" (click)="priceChangeGetter();">
+                                    <input type="text" placeholder="Enter Pincode" id="undPincode"
+                                        value="{{pincodeValue}}" (change)="pincodeChange();"
+                                        (click)="priceChangeGetter();">
                                     <br>
                                     <label for="changePincode"> Change Pincode</label><br>
                                     <input type="radio" class="aP" name="drone" value="availableProducts"
-                                        id="undCategory" >
-                                        <!-- [routerLink]="['/category']" [queryParams]="{cat_id:this.dynamicData.categoryId}" -->
+                                        id="undCategory">
+                                    <!-- [routerLink]="['/category']" [queryParams]="{cat_id:this.dynamicData.categoryId}" -->
                                     <label for="availableProducts"> Available Products</label><br>
                                     <input type="radio" class="cP" name="drone" id="undContinue" value="continue">
                                     <label for="continue"> Continue on this page</label><br>
@@ -108,7 +110,8 @@
                 </div>
             </div>
             <div class="btnsSel">
-                <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal" id="rfqButtonId">RFQ</button>
+                <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal"
+                    id="rfqButtonId">RFQ</button>
                 <button class="btnAtcart" (click)="submitCart();">ADD TO CART</button>
             </div>
 
@@ -162,9 +165,9 @@
         </div>
         <div class="pQuantity" style="margin-top:10px;">
             <p>Quantity</p>
-            <button type="button" id='1' (click)="count_dec()" (click)="priceChangeGetter();"class="minus">-</button>
-            <input type="text" id="count" id="productQuantity" value="{{counter}}"  >
-            <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();"class="plus">+</button>
+            <button type="button" id='1' (click)="count_dec()" (click)="priceChangeGetter();" class="minus">-</button>
+            <input type="text" id="count" id="productQuantity" value="{{counter}}">
+            <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();" class="plus">+</button>
         </div>
         <div class="pAvailable" style="color: red" id="showAvailable">
             Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Cake:
@@ -223,13 +226,13 @@
             <div class="dvBuyBtn">
                 <div class="container" id="buyModalContainer" style="z-index: 10001;">
                     <!-- data-toggle="modal" -->
-                    <button type="submit" id="buyNowId" class="btn btn-warning" 
-                         (click)="submitPrice('buyNow');">BUY NOW</button>
-                         <!-- data-target="#buyNowPopup" -->
+                    <button type="submit" id="buyNowId" class="btn btn-warning" (click)="submitPrice('buyNow');">BUY
+                        NOW</button>
+                    <!-- data-target="#buyNowPopup" -->
                     <button type="submit" class="btn btn-warning" id="reqNowId"
                         (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
-                        <!-- data-target="#buyModal" -->
-                        <!-- data-toggle="modal" -->
+                    <!-- data-target="#buyModal" -->
+                    <!-- data-toggle="modal" -->
                     <div class="modal fade" id="buyModal" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content dvModalContent">
@@ -255,11 +258,30 @@
                                 </div>
                                 <div class="modal-body" style="padding:0 10% 0 10%;">
                                     <form>
-                                        Title : <input type="text" name="text" id="fText"><br> Note : <input type="text"
-                                            name="note" id="fNote"><br> Address: <input type="text" name="address"
-                                            id="fAddress"><br>
+                                        Title : <input type="text" name="text" id="fText"><br>
+                                        Note : <input type="text" name="note" id="fNote"><br>
+                                        Address:<br>
+                                        <div style="transform: translate(5rem,-1rem);">
+                                            <input class="addr1Shop" style="height: 30px" placeholder="house name"
+                                                id="shopNameId">
+                                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
+                                                placeholder="street address">
+                                            <input class="cityShop" id="cityShopId" style="height: 30px"
+                                                placeholder="city">
+                                            <input class="districtShop" id="districtShopId" style="height: 30px"
+                                                placeholder="district">
+                                            <input class="stateShop" id="stateShopId" style="height: 30px"
+                                                placeholder="state">
+                                            <input class="countryShop" id="countryShopId" style="height: 30px"
+                                                placeholder="country">
+                                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px"
+                                                placeholder="pincode">
+                                        </div>
+
+
                                         <div class="modal-footer dvModalFooter" style="justify-content: center;">
-                                            <input type="submit" class="btn btn-default btnText" (click)="gift();"
+                                            <input type="submit" class="btn btn-default btnText"
+                                                style="background-color: #efbe24;color:white;" (click)="gift();"
                                                 value="Apply" data-dismiss="modal">
                                         </div>
                                     </form>
@@ -286,11 +308,12 @@
 
 
             <div class="dvCod">
-                <input type="radio" id="cOD" name="shippingOption" value="cashOnDelivery" (change)="priceChangeGetter();">
-                <label for="cashOnDelivery">Cash on Delivery</label>
+                <input type="radio" id="hD" name="shippingOption" value="homeDelivery" (change)="priceChangeGetter();">
+                <label for="homeDelivery">Home Delivery</label>
             </div>
             <div class="dvPickup">
-                <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp" (change)="priceChangeGetter();">
+                <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp"
+                    (change)="priceChangeGetter();">
                 <label for="pickUp">PickUp</label>
             </div>
         </div>
@@ -420,54 +443,58 @@
                     <p class="rTitle">{{ratingReview[item].reviewTitle}}</p>
                     <p class="rDesc">{{ratingReview[item].review}}</p>
                     <div class="starLikes">
-                        <img class="icLike" id="likeImg_{{ratingReview[item].reviewId}}" (click)="likeCount(ratingReview[item].reviewId);"
-                            src="assets/icons/resources (IL)-10.png">
-                        <p class="likeCount" id="likeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].likes}}</p>
-                        <img class="icDislike" id="dislikeImg_{{ratingReview[item].reviewId}}" (click)="dislikeCount(ratingReview[item].reviewId);"
+                        <img class="icLike" id="likeImg_{{ratingReview[item].reviewId}}"
+                            (click)="likeCount(ratingReview[item].reviewId);" src="assets/icons/resources (IL)-10.png">
+                        <p class="likeCount" id="likeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].likes}}
+                        </p>
+                        <img class="icDislike" id="dislikeImg_{{ratingReview[item].reviewId}}"
+                            (click)="dislikeCount(ratingReview[item].reviewId);"
                             src="assets/icons/resources (IL)-11.png">
-                        <p class="dislikeCount" id="dislikeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].dislikes}}</p>
+                        <p class="dislikeCount" id="dislikeCount_{{ratingReview[item].reviewId}}">
+                            {{ratingReview[item].dislikes}}</p>
                         <button class="btnReport" (click)="report(ratingReview[item].reviewId);">Report</button>
                         <!-- <div>
                             <i class="fa fa-star active" *ngFor="let itemx of filledStarRatArray[item]"></i>
                             <i class="fa fa-star-o" *ngFor="let itemy of unFilledStarRatArray[item]"></i>
                         </div> -->
-                        <div *ngIf="ratingReview[item].rating == 1"> 
+                        <div *ngIf="ratingReview[item].rating == 1">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 2"> 
+                        <div *ngIf="ratingReview[item].rating == 2">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 3"> 
+                        <div *ngIf="ratingReview[item].rating == 3">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 4"> 
+                        <div *ngIf="ratingReview[item].rating == 4">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 5"> 
+                        <div *ngIf="ratingReview[item].rating == 5">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
-                            <i class="fa fa-star active" style="color: #efbe24"></i> 
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
                         </div>
                     </div>
-                    <img class="revIcon" src="assets/images/review/{{ratingReview[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview.jpg'">
+                    <img class="revIcon" src="assets/images/review/{{ratingReview[item].reviewId}}/1.jpg"
+                        onError="this.src = 'assets/images/defaultReview.jpg'">
                 </div>
             </div>
         </div>
@@ -477,7 +504,7 @@
         <img src="assets/icons/resources (IL)-18.png">
         <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
         <div class="divCustomerQA">
-            <div class="divSA"> 
+            <div class="divSA">
                 <form class="search">
                     <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq"
                         (keyup)="filterFaq();">
@@ -585,8 +612,8 @@
                         <div class="rfqSL">
                             <p class="rfqLocation">Location:</p>
                             <select style="width: 16rem;" id="rfqLocations">
-                                <option class="rfqLocationInput" 
-                                    *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
+                                <option class="rfqLocationInput" *ngFor="let add of Object.keys(rfqAddress)">
+                                    {{rfqAddress[add].address}}
                             </select>
                         </div>
                         <div class="rfqN">
@@ -621,14 +648,14 @@
                         </div>
                         <div class="uploadRfq">
                             <input style="display: none" type="file" name="pic" id="shopRfq" accept="image/*"
-                                #fileInputRfq >
+                                #fileInputRfq>
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
-                                <div *ngIf="imageUploadedRfq == 1">
-                                    <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
-                                </div>
+                            <div *ngIf="imageUploadedRfq == 1">
+                                <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                            </div>
                         </div>
-                        <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
+                        <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']">Apply</button>
                     </div>
                 </div>
             </div>
@@ -648,12 +675,19 @@
                     <br>
                     <p style="text-align: center;justify-self:center">Please Login to continue...</p>
                     <br>
-                    <button (click)="redirect('login');" [routerLink]="['/login']" [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}" style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
+                    <button (click)="redirect('login');" [routerLink]="['/login']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
                     <p style="text-align: center;justify-self:center">OR</p>
-                    <button (click)="redirect('signup');" [routerLink]="['/signup']" [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}" style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
+                    <button (click)="redirect('signup');" [routerLink]="['/signup']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
                     <br>
                     <br>
-
+                    <div id="instantBuyId">
+                        <button (click)="submitInstantBuy('instantBuy');" style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant Buy</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -672,7 +706,8 @@
                     <br>
                     <p style="text-align: center;justify-self:center">Seller Address : {{dPSeller}}</p>
                     <br>
-                    <button id="pickupDetailsId" (click)="pickupchecker();" style="background-color: #efbe24;color:white;">ok</button>
+                    <button id="pickupDetailsId" (click)="pickupchecker();"
+                        style="background-color: #efbe24;color:white;">ok</button>
 
                 </div>
             </div>

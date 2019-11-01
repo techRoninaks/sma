@@ -39,6 +39,8 @@
 
     $mob = 0;
 
+    $isRfq = 0;
+ 
     $data = array();
 
 
@@ -71,11 +73,18 @@
         $deliveryDate= date_format($date,"Y-m-d");
         // echo $deliveryDate;
         $reqDD=0;
-
+        $orderStatus = 'processing';
+    }
+    else if($reqDDate=='orderConf'){
+        $deliveryDate='2025-02-02 12:56:15';
+        $reqDD=1;
+        $orderStatus = 'pending_confirmation';
     }
     else{
         $deliveryDate=$reqDDate;
         $reqDD=1;
+        $orderStatus = 'pending_confirmation';
+
     }
 
 // $y="2013-03-15";
@@ -148,23 +157,57 @@
             $qtPrice=$qt*$shipQtyPrice;
         } 
         $shipOption=1;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
-        }
-    }
-    else if($deliveryOption=="cod")
-    {
-        if($productQuantity==1)
-        {
-            $qtPrice=0;
+        if($productQuantity>=$quantBulk){
+            // $disc = $disc +$discBulk;
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
         else{
-            $qt=$productQuantity-1;
-            $qtPrice=$qt*$shipQtyPrice;
-        } 
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+        }
+    }
+    else if($deliveryOption=="hd")
+    {
+        $qtPrice=0;
+        $shipBasePrice=0;
         $shipOption=2;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
+        if($productQuantity>=$quantBulk){
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+            // $disc = $disc +$discBulk;
+        }
+        else{
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
     }
     else if($deliveryOption=="pickup")
@@ -172,23 +215,45 @@
         $qtPrice=0;
         $shipBasePrice=0;
         $shipOption=3;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
+        if($productQuantity>=$quantBulk){
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+            // $disc = $disc +$discBulk;
+        }
+        else{
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
     }
 
     
-    //total price calc
-    // $basePriceTotal=$basePrice*$productQuantity;
-    // $amount=$basePriceTotal*($disc/100);
-    // $totalAmount=$amount+$varPrice;
-    $amountDisc=$basePrice*($disc/100);
-    $price=$basePrice-$amountDisc+$varPrice;
+    // //total price calc
+    // // $basePriceTotal=$basePrice*$productQuantity;
+    // // $amount=$basePriceTotal*($disc/100);
+    // // $totalAmount=$amount+$varPrice;
+    // $amountDisc=$basePrice*($disc/100);
+    // $price=$basePrice-$amountDisc+$varPrice;
+    // // $basePriceTotal=$price*$productQuantity;
+    // // $totalAmount=$basePriceTotal+$varPrice;
     // $basePriceTotal=$price*$productQuantity;
-    // $totalAmount=$basePriceTotal+$varPrice;
-    $basePriceTotal=$price*$productQuantity;
-    $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
-    $totalAmount=round($totalAmountQt);
+    // $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
+    // $totalAmount=round($totalAmountQt);
+
+
     //is image uploaded
 //     if($imageUploaded==null){
 //         $imageUploaded=0;
@@ -203,7 +268,7 @@
    //purchase order insertion
 
     $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,
-    `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'pending_confirmation',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
+    `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'$orderStatus',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
     0,0,$reqDD,$varId,0)";
     $result2 = mysqli_query($con2, $sql_query2);
     // echo $sql_query2;
