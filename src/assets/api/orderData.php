@@ -33,7 +33,7 @@
         $result4 = mysqli_query($con1, $sql_query4);
         $row4 = mysqli_fetch_array($result4);
 
-        $response[$arraycount]=array('delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+        $response[$arraycount]=array('stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         $arraycount++;
     }
     echo json_encode($response);

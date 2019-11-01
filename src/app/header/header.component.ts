@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit {
   dynamicDataLocation :any ="";
   user_signed: boolean = false;
   sellerSignedIn: boolean =false;
-  sellerSignedOut: boolean =true;
   ngOnInit() {
     this.flag=this.getCookie("userName");
     this.flag1=this.getCookie("sellerName");
@@ -43,31 +42,7 @@ export class HeaderComponent implements OnInit {
     this.flag4=this.getCookie("userCity");
     this.flag5=this.getCookie("sellerPin");
     this.flag6=this.getCookie("userPin");
-    if(this.flag!= null)
-    {
-      this.temp = this.flag;
-      this.user_signed = true;
-    }
-    if(this.getCookie("isLoggedIn") == "0" || this.getCookie("isLoggedIn")== null)
-    {
-        setTimeout(function(){ 
-          document.getElementById('myModal-1').style.display="contents";
-        }, 120000);
-    }
-    else if(this.getCookie("isLoggedIn") == "1" ){
-      // exit(0);
-    }
-    else{
-      this.setCookie("isLoggedIn",null);
-      setTimeout(function(){ 
-        document.getElementById('myModal-1').style.display="contents";
-      }, 120000);
-    }
-    if(this.flag1){
-      this.sellerSignedIn =true;
-      this.sellerSignedOut =false;
-    }
-    if(this.flag!= null)
+    if(this.flag)
     {
       this.temp = this.flag;
       this.user_signed = true;
@@ -85,8 +60,9 @@ export class HeaderComponent implements OnInit {
         document.getElementById("pinlabel").innerText = this.flag6 as string;
       }
     }
-    else if(this.flag1!=null){
+    else if(this.flag1){
       this.temp = this.flag1;
+      this.sellerSignedIn =true;
       if(this.temp == "")
       {
         document.getElementById("headerLogin").innerText = "Login";
@@ -99,9 +75,22 @@ export class HeaderComponent implements OnInit {
         document.getElementById("loginButton").innerText ="Log Out";
         document.getElementById("locationlabel").innerText = this.flag3 as string;
         document.getElementById("pinlabel").innerText = this.flag5 as string;
-        this.sellerSignedIn =true;
-        this.sellerSignedOut =false;
       }
+    }
+    if(this.getCookie("isLoggedIn") == "0" || this.getCookie("isLoggedIn")== null)
+    {
+        setTimeout(function(){ 
+          document.getElementById('myModal-1').style.display="contents";
+        }, 120000);
+    }
+    else if(this.getCookie("isLoggedIn") == "1" ){
+      // exit(0);
+    }
+    else{
+      this.setCookie("isLoggedIn",null);
+      setTimeout(function(){ 
+        document.getElementById('myModal-1').style.display="contents";
+      }, 120000);
     }
   }
   dispNone(){
@@ -123,8 +112,8 @@ export class HeaderComponent implements OnInit {
     document.getElementById("profilemenu").style.display="none";
     document.getElementById("locationlabel").innerText = "";
     document.getElementById("pinlabel").innerText = "";
-    this.sellerSignedIn =true;
-    this.sellerSignedOut =false;
+    this.user_signed = false;
+    this.sellerSignedIn = false;
     this.router.navigate(['/']);
   }
   searchKeyLog(){

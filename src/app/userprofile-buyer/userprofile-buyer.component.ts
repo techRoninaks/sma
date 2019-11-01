@@ -15,6 +15,8 @@ var imageFront3: any ="";
 export class UserprofileBuyerComponent implements OnInit {
   public token: any;
   shopCount: any;
+  fpmobile: any;
+  userMobile: any;
   editMode: boolean = false;
   viewMode: boolean = true;
   stage_1_dot: boolean = true;
@@ -29,21 +31,29 @@ export class UserprofileBuyerComponent implements OnInit {
   stage_5_full: boolean = false;
   stage_6_dot: boolean = true;
   stage_6_full: boolean = false;
+  otpVerified: boolean = false;
+  otpVerified2: boolean = false;
+  otpSent: boolean = false;
   i: number = 0;
   j: number = 0;
   k: number = 0;
+  fpOTP : string="";
   followInfo: any = "";
   Btnlabel: String="";
   Object = Object;
   dynamicDataShopName: any = [];
   shopId: any ="";
   status: any =[];
+  fpFormPassword: FormGroup;
+  fpFormOtp2: FormGroup;
+  fpFormMobile: FormGroup;
+  fpFormOtp: FormGroup;
   addAddress: FormGroup;
   addComplaint: FormGroup;
   cardForm: FormGroup;
   cardFormCvv: FormGroup;
   registrationForm: FormGroup;
-  constructor(private formBuilderComplaint:FormBuilder,private formBuilderAddress: FormBuilder,private formBuilderUser: FormBuilder,private formBuilderCvv: FormBuilder,private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder,private cookieService: CookieService) { 
+  constructor(private formBuilderPassword: FormBuilder,private formBuilderMobile: FormBuilder ,private formBuilderOtp2: FormBuilder, private formBuilderOtp: FormBuilder,private formBuilderComplaint:FormBuilder,private formBuilderAddress: FormBuilder,private formBuilderUser: FormBuilder,private formBuilderCvv: FormBuilder,private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder,private cookieService: CookieService) { 
     this.cardForm = this.formBuilderCard.group({
       cardno: ['', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     })
@@ -74,6 +84,14 @@ export class UserprofileBuyerComponent implements OnInit {
       username:['',Validators.required],
       complaint_desc:['',Validators.required],
     })
+    this.fpFormOtp = this.formBuilderOtp.group({
+      fp_otp:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?([0-9]\d*)?$/)]]
+    })
+    this.fpFormPassword = this.formBuilderPassword.group({
+      current_password:['',Validators.required],
+      new_password:['',Validators.required],
+      confirm_password:['',Validators.required],
+    })
   }
   imageDataFront : object;
   imageDataFront2 : object;
@@ -86,7 +104,12 @@ export class UserprofileBuyerComponent implements OnInit {
   dynamicUserAddressData: any="";
   dynamicData:any ="";
   dynamicDataFollow:any ="";
+  gotp:any;
   id: any;
+  fp_confirm_password: any;
+  fp_new_password: any;
+  fp_mobile:any;
+  current_password: any;
   userName: any;
   userId: any;
   orderCount: any;
@@ -99,6 +122,7 @@ export class UserprofileBuyerComponent implements OnInit {
     this.data.getUsercardData(this.id).subscribe(
       data=>{
               this.dynamicDataUsercard=data;
+              this.userMobile= data['phoneNo'];
             },
         error=> console.error(error)
       );
@@ -331,6 +355,9 @@ export class UserprofileBuyerComponent implements OnInit {
     if(this.registrationForm.invalid){
       alert("Enter Details");
     }
+    else if(this.otpVerified == false){
+      alert("Verify Mobile to continue..!");
+    }
     else{
       this.data.updateUserData(this.registrationForm.value,this.id).subscribe(
         data=>{
@@ -350,6 +377,88 @@ export class UserprofileBuyerComponent implements OnInit {
       
     }
   }
+  onSubmitSendOtp(){
+    this.submitted = true;
+    this.fpmobile = this.fpFormMobile.controls['fp_mobile_no'].value;
+    if(this.fpmobile==""){
+      alert("Enter Registered Mobile No:");
+    }
+    else{
+      this.data.checkMobile(this.fpmobile).subscribe(
+        data => { 
+          if (data == "Found") {
+            alert('OTP Sent Successfully');
+            this.gotp = this.generateOTP();
+            this.requestOtp(this.gotp, this.fpmobile);
+          }
+          else {
+            alert('Mobile Number is not Registered');
+          }
+        },
+        error => console.error(error)
+      );
+    }
+  }
+  newVerify(){
+    this.fpmobile = this.registrationForm.controls['reg_mobile_no'].value;
+    if(this.fpmobile==""){
+      alert("Enter Mobile No:");
+    }
+    else{
+      this.data.checkMobile(this.fpmobile).subscribe(
+        data => { 
+            alert('OTP Sent Successfully');
+            this.otpSent = true;
+            this.gotp = this.generateOTP();
+            this.requestOtp(this.gotp, this.fpmobile);
+        },
+        error => console.error(error)
+      );
+    }
+  }
+  generateOTP() {
+    var digits = '0123456789';
+    var OTP = '';
+    for (let i = 0; i < 6; i++ ) {
+        OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+  }
+  requestOtp(gotp, mobileNo) {
+    var msg :any = "Your verification code is: "+gotp;
+  
+    this.data.sendOtp(gotp, mobileNo, msg).subscribe(
+      data => {
+        console.log(data);
+        if (data == "0") {
+          alert('Something went wrong..')
+        }
+      },
+      error => console.error(error)
+    );
+    }
+    verifyOTP(){
+      this.fpOTP = this.fpFormOtp.controls['fp_otp'].value;
+      
+      if(this.fpOTP == "")
+      {
+        alert('OTP cannot be null');
+      }
+      else
+      {
+            if(this.fpOTP == this.gotp)
+            {
+              alert('OTP verified');
+              this.otpVerified = true;
+              this.otpSent = false;
+            }
+            else
+            {
+              alert('Incorrect OTP');
+              this.fpFormOtp.controls['fp_otp'].setValue('');
+            }
+      }
+    }
   onSubmitComplaint(){
     this.submitted = true;
     this.data.addComplaintData(this.addComplaint.value,this.id).subscribe(
@@ -372,6 +481,42 @@ export class UserprofileBuyerComponent implements OnInit {
     this.imageDataFront3 = { user_id:this.id ,image:imageFront3}
     this.data.uploadImage3(this.imageDataFront3).subscribe(
     );
+  }
+  changePassword(){
+    this.submitted = true;
+    this.current_password = this.fpFormPassword.controls['current_password'].value;
+    this.fp_new_password = this.fpFormPassword.controls['new_password'].value;
+    this.fp_confirm_password = this.fpFormPassword.controls['confirm_password'].value;
+    if(this.fpFormPassword.invalid)
+    {
+      alert("Enter Required data..!");
+    }
+    else if(this.fp_new_password != this.fp_confirm_password){
+      alert("New Passwords do not match,try again");
+      this.fpFormPassword.controls['new_password'].setValue('');
+      this.fpFormPassword.controls['confirm_password'].setValue('');
+    }
+    else{
+      this.data.checkCurrentPassword(this.userMobile,this.current_password,this.fp_new_password).subscribe(
+        data=>{
+                if(data =="Success")
+                {
+                  alert("Password changed successfully");
+                  $("#myModal1").modal('hide');
+                }
+                else if(data =="Error")
+                {
+                  alert("Error try again..!");
+                }
+                else if(data == "Not Found")
+                {
+                  alert("Current Password does not exist");
+                  this.fpFormPassword.controls['current_password'].setValue('');
+                }
+        },
+        error => console.error(error)
+      );
+    }
   }
 }
 function onFrontClick(event) {
