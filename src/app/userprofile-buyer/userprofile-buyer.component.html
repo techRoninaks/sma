@@ -133,6 +133,34 @@
                                                                                 </div>
                                                                         </div>
                                                                 </div>
+                                                                <br>
+                                                                <button type="button" class="button-fp" (click)="newVerify();" *ngIf="!otpVerified">
+                                                                        Verify
+                                                                </button>
+                                                                <br>
+                                                                <div *ngIf="otpSent">
+                                                                   <form [formGroup]="fpFormOtp">
+                                                                        <input type="text" placeholder="Enter OTP:" class="text-input-style" formControlName="fp_otp" style="margin-top: 21px;">
+                                                                        <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                                                                                <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                                                                                Enter OTP !
+                                                                                </div>
+                                                                                <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                                                                                Enter valid OTP !
+                                                                                </div>
+                                                                                <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                                                                                Enter valid OTP !
+                                                                                </div>
+                                                                                <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                                                                                Enter Only digits !
+                                                                                </div>
+                                                                        </div>
+                                                                    </form>
+                                                                    <br>
+                                                                        <div>
+                                                                                <button class="button-fp" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid">Verify OTP</button>
+                                                                        </div>
+                                                                </div>
                                                                 <div class="left-email">
                                                                         Email
                                                                 </div>
@@ -171,8 +199,70 @@
                                                 <button class="btn-style-2" (click)="edit();" *ngIf="viewMode">EDIT</button>
                                                 <button class="btn-style-2" type="submit" (click)="save();" *ngIf="editMode">SAVE</button>
                                         </div>
+                                        <div class="btn-password">
+                                                <button class="btn-style-2" *ngIf="viewMode" data-toggle="modal" data-target="#myModal1">Change Password</button>
+                                        </div>
                                 </div>
                         </div>
+
+                        <!-- password reset popup -->
+                        <div class="container" id="modalContainer">
+                                <div class="modal fade" id="myModal1" role="dialog">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content dvModalContent">
+                                        <div class="modal-header dvModalHeader">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                        
+                                        <div>
+                                        <form [formGroup]="fpFormPassword">
+                                                <div class="modal-body">
+                                                <div class="title-fp">
+                                                <h3 style="font-family: BitterBold;
+                                                margin-left: 126px;">Change Password</h3>
+                                                </div>
+                                                <div>
+                                                        <input type="password" size="20" class="text-input-style" placeholder="Enter Current Password:"  id="current_password" formControlName="current_password">
+                                                        <div *ngIf="submitted && fpFormPassword.controls.current_password.errors" class="error validator-style">
+                                                        <div *ngIf="fpFormPassword.controls.current_password.errors.required">
+                                                                Enter Current Password !
+                                                        </div>
+                                                        </div>
+                                                </div>
+                                                <div>
+                                                        <input type="password" size="20" class="text-input-style" placeholder="Enter New Password:"  id="new_password" formControlName="new_password" style="margin-top: 25px;">
+                                                        <div *ngIf="submitted && fpFormPassword.controls.new_password.errors" class="error validator-style">
+                                                        <div *ngIf="fpFormPassword.controls.new_password.errors.required">
+                                                                Enter New Password !
+                                                        </div>
+                                                        </div>
+                                                </div>
+                                                <br>
+                                                <div>
+                                                        <input type="password" size="20" class="text-input-style" placeholder="Confirm Password:"  id="confirm_password" formControlName="confirm_password">
+                                                        <div *ngIf="submitted && fpFormPassword.controls.confirm_password.errors" class="error validator-style">
+                                                        <div *ngIf="fpFormPassword.controls.confirm_password.errors.required">
+                                                                Confirm New Password !
+                                                        </div>
+                                                        </div>
+                                                </div>
+                                                <br>
+                                                <div>
+                                                <button style="margin-left: 164px; width: auto; border: none; background: #EFBE24; border-radius: 3px; 
+                                                height: 35px; color: white;" type="submit" (click)="changePassword()">
+                                                  Change Password
+                                                </button>
+                                                </div>
+                                                </div>
+                                        
+                                        </form>
+                                        </div>
+                                        </div>
+                        
+                                        </div>
+                                        </div>
+                        </div>
+                        <!-- password reset popup -->
 
                         <div class="sub-card-grid-1">
                                 <div class="sub-card-style-1">
@@ -212,7 +302,7 @@
                                                 <div>
                                                         <div class="grid-shop-following" *ngFor="let item of Object.keys(dynamicDataShopName)">
                                                                 <div class="shop-image">
-                                                                        <p><img src="assets/images/userProfile/shopFollowing.jpg"
+                                                                        <p><img src="assets/images/shop/{{dynamicDataShopName[item].shopid}}/{{dynamicDataShopName[item].shopid}}_logo.jpg"
                                                                                         height=50px; width=50px;>
                                                                         </p>
                                                                 </div>
@@ -562,7 +652,7 @@
                                 <button class="btn-invoice-style">VIEW INVOICE</button>
                         </div>
 
-                        <div class="grid-status">
+                        <div class="grid-status" *ngFor="let item of Object.keys(dynamicDataOrderData)">
                                 <div class="pending-conf">
                                         <label>Pending Confirmation</label>
                                 </div>
@@ -664,23 +754,23 @@
                                         </div>
                                 </div>
                                 <div class="label-1">
-                                        Mon,11th Dec | 7:35pm
+                                       <label *ngIf="stage_1_full">{{dynamicDataOrderData[item].stageDate}}</label>
                                 </div>
                                 <div class="label-2">
-                                        Tue,12th Dec | 7:35pm
-                                </div>
-                                <div class="label-3">
-                                        Wed,13th Dec | 7:35pm
-                                </div>
-                                <div class="label-4">
-                                        Thu,14th Dec | 7:35pm
-                                </div>
-                                <div class="label-5">
-                                        Fri,15th Dec | 7:35pm
-                                </div>
-                                <div class="label-6">
-                                        Sat,16th Dec | 7:35pm
-                                </div>
+                                        <label *ngIf="stage_2_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                 </div>
+                                 <div class="label-3">
+                                        <label *ngIf="stage_3_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                 </div>
+                                 <div class="label-4">
+                                        <label *ngIf="stage_4_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                 </div>
+                                 <div class="label-5">
+                                        <label *ngIf="stage_5_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                 </div>
+                                 <div class="label-6">
+                                        <label *ngIf="stage_6_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                 </div>
                         </div>
                         <div class="feedback-stat">
                                 <label>{{dynamicDataOrderData[item].orderStatus}}</label>

@@ -38,7 +38,7 @@
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
-          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding" *ngIf="sellerSignedOut">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding" *ngIf="!sellerSignedIn">Sell with Us <span class="sr-only">(current)</span></a>
           <a class="nav-link header-sell-with-us" routerLink="/dashboard" *ngIf="sellerSignedIn">Seller Dashboard<span class="sr-only">(current)</span></a>
         </li>
         <!-- <li class="nav-item active ml-auto">
@@ -50,7 +50,7 @@
                 <label id="headerLogin">{{temp}}</label>
               </button>
                 <div class="dropdown-content2" id="profilemenu">
-                  <li *ngIf="user_signed"><a href=#>My orders</a></li>
+                  <li *ngIf="user_signed"><a routerLink="/orders">My orders</a></li>
                   <li><a href=#>My messages</a></li>
                   <li><a routerLink="/userprofile">My notifications</a></li>
                   <li><a routerLink="/userprofile">My fav shops</a></li>
@@ -66,7 +66,7 @@
       </ul>
     </div>
   </nav>
-  <div class="header-category-bar" id="sellerHeader">
+  <div class="header-category-bar">
     <div class="hamburger-div">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -80,8 +80,8 @@
           
     </div>
       <div class="scrollmenu">
-          <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
-        <div class="dropdown">
+          <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()" id="breadcrumb">&nbsp;&nbsp;&#9776;</span>
+        <div class="dropdown" id="mainHeader">
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
@@ -89,85 +89,15 @@
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:14}">Hand Craft</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button>
-              
-            <!-- <div class="header-navbar">
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Mom & Kids</button>
-                      <div class="header-subnav-content">
-                        <a href="">Clothes</a>
-                        <a href="">Footwears</a>
-                      </div>
-                    </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Mens</button>
-                    <div class="header-subnav-content">
-                      <a href="">Shirts</a>
-                      <a href="">Jeans</a>
-                      <a href="">T-shirts</a>
-                    </div>
-                  </div> 
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Womens</button>
-                    <div class="header-subnav-content">
-                      <a href="">Clothes</a>
-                      <a href="">Accessories</a>
-                      <a href="">Bags</a>
-                      <a href="">Footwears</a>
-                    </div>
-                  </div> 
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Painting & Arts</button>
-                    <div class="header-subnav-content">
-                      <a href="">Illustraions</a>
-                      <a href="">Portrait</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Hand Craft</button>
-                      <div class="header-subnav-content">
-                        <a href="">Illustraions</a>
-                        <a href="">Portrait</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Accessories</button>
-                      <div class="header-subnav-content">
-                        <a href="">Bags</a>
-                        <a href="">Pouches</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Apperels</button>
-                      <div class="header-subnav-content">
-                        <a href="">Bags</a>
-                        <a href="">Pouches</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Cakes</button>
-                      <div class="header-subnav-content">
-                        <a href="">Blackforest</a>
-                        <a href="">Whiteforest</a>
-                      </div>
-                  </div>
-                </div>
-          </div> -->
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button> 
+        </div>
+        <div class="dropdown" style="display: none;" id="sellerHeader">
+          <button class="dropbtn-cat"><a routerLink="/dashboard">DASHBOARD</a></button>
+          <button class="dropbtn-cat"><a routerLink="/orders">MY ORDER</a></button>
+          <button class="dropbtn-cat"><a routerLink="/transaction">TRANSACTION</a></button>
+          <button class="dropbtn-cat"><a routerLink="/messages">MESSAGES</a></button>
+          <button class="dropbtn-cat"><a routerLink="">SHOP SETTINGS</a></button>
+          <button class="dropbtn-cat"><a routerLink="/managepage">MY PAGE</a></button>
         </div>
       </div> 
   </div>

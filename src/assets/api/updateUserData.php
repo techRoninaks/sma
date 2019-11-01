@@ -24,5 +24,12 @@
     {
         $status="Success";
         echo json_encode($status);
+        $to = $reg_email;
+        $subject = "Verify E-Mail ID-Scoop My Art";
+        $txt = "This is an auto generated email for email verification.
+                Please do not reply.
+
+                Team Scoop My Art";
+        mail($to,$subject,$txt);
     }
 ?>
