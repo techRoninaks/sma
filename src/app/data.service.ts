@@ -473,8 +473,6 @@ getDateDiffShop(data: any) {
     let httpParams= new HttpParams()
     .append("fp_mobile_no",fp_mobile_no)
     .append("new_password",new_password);
-    console.log(fp_mobile_no);
-    console.log(new_password);
     return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
@@ -1352,6 +1350,14 @@ uploadImage1(data: Object){
     .append("image",data['image']);
     return this.http.post(this.baseUrl+'assets/api/image3Upload.php', httpParams);
   }
+  
+  checkCurrentPassword(mobile: any,currentPassword:any,newPassword:any){
+  let httpParams= new HttpParams()
+  .append("mobile",mobile )
+  .append("newPassword",newPassword )
+  .append("currentPassword",currentPassword );
+  return this.http.post(this.baseUrl+'assets/api/checkCurrentPassword.php',httpParams);
+ }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
