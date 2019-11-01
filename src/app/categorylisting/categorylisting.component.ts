@@ -201,7 +201,7 @@ export class CategorylistingComponent implements OnInit {
 		var srchKey = this.getParams("key");
 		var catId = this.getParams("cat_id");
 		var shopId = this.getParams("shop_id");
-		this.setCookie("pin", 676552);
+
 		var location = this.getCookie("pin");
 
 		if (location !== "") {

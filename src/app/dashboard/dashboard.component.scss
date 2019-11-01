@@ -175,6 +175,24 @@ $SubText: 18px;
 			font-family: BitterBold;
 		}
 	}
+	@include sm-lesser {
+		.dvRating {
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas: "dv-rate" "dv-review";
+			grid-template-columns: none;
+			padding: 0;
+
+			.rating {
+				text-align: center;
+			}
+			.review {
+				text-align: center;
+			}
+			.dvStar {
+				display: none;
+			}
+		}
+	}
 }
 .dvNums {
 	display: grid;
@@ -314,7 +332,16 @@ $SubText: 18px;
 		}
 	}
 }
-
+@include sm-lesser {
+	.dvNums {
+		grid-template-rows: repeat(3, auto);
+		grid-template-areas:
+			"dv-follow-btn"
+			"dv-shop-btn"
+			"dv-prod-btn";
+		grid-template-columns: none;
+	}
+}
 .dvBtnSet {
 	display: grid;
 	grid-template-columns: repeat(2, auto);
@@ -334,7 +361,7 @@ $SubText: 18px;
 			grid-template-columns: 40% auto;
 			grid-template-areas: "dv-T-Ico dv-T-Text";
 			display: grid;
-			padding: 10px;
+			padding: 10px 30px;
 			background: $smaLightGray;
 
 			.dvTIco {
@@ -342,11 +369,15 @@ $SubText: 18px;
 				justify-self: center;
 				width: fit-content;
 				text-align: center;
-				// width: 
-				img{
-					position: relative;
+				margin: auto;
+				vertical-align: middle;
+				background: white;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
+				// width:
+				img {
 					width: 50%;
-					top: 7px;
 				}
 			}
 			.dvTText {
@@ -358,7 +389,7 @@ $SubText: 18px;
 				text-align: center;
 				border-radius: 15px;
 				box-shadow: 1px 1px 10px 1px lightgrey;
-				
+
 				.subText {
 					font-family: BitterBold;
 					color: $smaDarkGray;
@@ -371,7 +402,7 @@ $SubText: 18px;
 			grid-template-columns: 40% auto;
 			grid-template-areas: "dv-A-Ico dv-A-Text";
 			display: grid;
-			padding: 10px;
+			padding: 10px 30px;
 			background: $smaLightGray;
 
 			.dvAIco {
@@ -379,10 +410,14 @@ $SubText: 18px;
 				justify-self: center;
 				width: fit-content;
 				text-align: center;
+				margin: auto;
+				vertical-align: middle;
+				background: white;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
 				img {
 					width: 51%;
-					top: 7px;
-					position: relative;
 				}
 			}
 			.dvAText {
@@ -394,7 +429,7 @@ $SubText: 18px;
 				text-align: center;
 				border-radius: 15px;
 				box-shadow: 1px 1px 10px 1px lightgrey;
-				
+
 				.subText {
 					font-family: BitterBold;
 					color: $smaDarkGray;
@@ -408,7 +443,7 @@ $SubText: 18px;
 			grid-template-columns: 40% auto;
 			grid-template-areas: "dv-R-Ico dv-R-Text";
 			display: grid;
-			padding: 10px;
+			padding: 10px 30px;
 			background: $smaLightGray;
 
 			.dvRIco {
@@ -416,10 +451,14 @@ $SubText: 18px;
 				justify-self: center;
 				width: fit-content;
 				text-align: center;
+				margin: auto;
+				vertical-align: middle;
+				background: white;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
 				img {
 					width: 51%;
-					top: 7px;
-					position: relative;
 				}
 			}
 			.dvRText {
@@ -430,7 +469,7 @@ $SubText: 18px;
 				box-shadow: 1px 1px 10px 1px $smaLightGray;
 				text-align: center;
 				border-radius: 15px;
-				box-shadow: 1px 1px 10px 1px lightgrey;				
+				box-shadow: 1px 1px 10px 1px lightgrey;
 				.subText {
 					font-family: BitterBold;
 					color: $smaDarkGray;
@@ -498,7 +537,7 @@ $SubText: 18px;
 			grid-template-rows: 20% auto;
 			grid-template-areas: "n-head" "n-body";
 			display: grid;
-			box-shadow: 1px 1px 10px 1px lightgrey; 
+			box-shadow: 1px 1px 10px 1px lightgrey;
 			.notHead {
 				grid-area: n-head;
 				background: $smaGreen;
@@ -515,6 +554,7 @@ $SubText: 18px;
 					.notifyHead {
 						font-family: BitterBold;
 						float: left;
+						color: white;
 					}
 				}
 				.headSee {
@@ -524,6 +564,7 @@ $SubText: 18px;
 					.subText {
 						font-family: BitterBold;
 						float: right;
+						color: white;
 					}
 				}
 			}
@@ -539,7 +580,19 @@ $SubText: 18px;
 		}
 	}
 }
+@include sm-lesser {
+	.dvBtnSet {
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas:
+			"dv-btn-left"
+			"dv-btn-right";
+		grid-template-columns: none;
 
+		.dvBtnRight {
+			padding: 5%;
+		}
+	}
+}
 .dvOrderPlans {
 	display: grid;
 	grid-template-columns: repeat(2, auto);
@@ -552,13 +605,16 @@ $SubText: 18px;
 		grid-template-rows: repeat(2, auto);
 		grid-template-areas: "dv-ord" "dv-trans";
 		display: grid;
-		width: fit-content;
+		padding: 5%;
+		width: auto;
 
 		.dvOrder {
 			grid-area: dv-ord;
 			grid-template-rows: 40% auto;
 			grid-template-areas: "ord-head" "ord-details";
 			display: grid;
+			border-radius: 10px;
+			box-shadow: 1px 1px 10px 1px lightgray;
 
 			.orderHead {
 				grid-area: ord-head;
@@ -566,9 +622,12 @@ $SubText: 18px;
 				grid-template-columns: repeat(2, auto);
 				grid-template-areas: "headertxt seetxt";
 				display: grid;
+				padding: 10px;
+				border-radius: 10px 10px 0 0;
 
 				.headertxt {
 					grid-area: headertxt;
+					margin: auto;
 					h6 {
 						font-family: BitterBold;
 						color: white;
@@ -577,6 +636,9 @@ $SubText: 18px;
 
 				.seetxt {
 					grid-area: seetxt;
+					margin: auto 0;
+					justify-self: end;
+					width: fit-content;
 					.subText {
 						font-family: BitterBold;
 						color: white;
@@ -585,20 +647,28 @@ $SubText: 18px;
 			}
 			.orderDetails {
 				grid-area: ord-details;
+				padding: 20px;
+				background: #f1f1f1;
+				border-radius: 0 0 10px 10px;
+
 				.subText {
 					font-family: BitterBold;
-					color: $smaGray;
+					color: gray;
 				}
 			}
 		}
 		.dvTransaction {
 			grid-area: dv-trans;
+			padding-top: 40px;
 
 			.btnTrans {
 				color: white;
 				background: $smaYellow;
 				font-family: BitterBold;
 				border: none;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 1px 1px 10px 1px lightgrey;
 			}
 		}
 	}
@@ -607,42 +677,77 @@ $SubText: 18px;
 		grid-template-rows: 40% auto;
 		grid-template-areas: "dv-d-icon" "dv-d-count";
 		display: grid;
+		padding: 5%;
 
 		.dayIcon {
 			grid-area: dv-d-icon;
 			border-radius: 50%;
 			width: fit-content;
 			padding: 10px;
-
+			justify-self: center;
+			margin: auto;
+			background: white;
+			top: 45px;
+			position: relative;
+			box-shadow: 1px 1px 10px 1px lightgrey;
+			@include sm-lesser{
+				top: 35px;
+			}
 			.dayIco {
 				border-radius: 50%;
 				background: $smaYellow;
+				padding: 10px;
 				img {
 					position: relative;
+					width: 35px;
+					height: 35px;
 				}
 			}
 		}
 		.dayData {
 			grid-area: dv-d-count;
+			border-radius: 10px;
+			box-shadow: 1px 1px 10px 1px lightgray;
 			.data {
+				background: #f1f1f1;
+				text-align: center;
+				padding: 20px;
+				border-radius: 10px 10px 0 0;
 				h5 {
 					font-family: BitterBold;
 					color: $smaGreen;
 				}
 				.subText {
 					font-family: BitterBold;
-					color: $smaGray;
+					color: gray;
+					margin: 0;
 				}
 			}
 			.btnUpgrade {
+				background: #f1f1f1;
+				text-align: center;
+				padding-bottom: 20px;
+				border-radius: 0 0 10px 10px;
 				.btnUp {
 					color: white;
 					background: $smaGreen;
 					font-family: Bitter;
 					border: none;
+					border-radius: 25px;
+					padding: 10px;
+					width: 160px;
 					// border-radius:
 				}
 			}
 		}
+	}
+}
+@include sm-lesser {
+	.dvOrderPlans {
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas:
+			"dv-order"
+			"dv-days";
+		grid-template-columns: none;
 	}
 }

@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //Data service beg
-    this.setCookie("pin","676552");
+
     this.data.getPageData("home").subscribe(data => {
       this.pageData = data;
       var pincode = this.getCookie("pin");
