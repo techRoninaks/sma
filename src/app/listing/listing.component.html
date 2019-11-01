@@ -910,18 +910,39 @@
 
 
                 <!-- PRODUCT IMAGE -->
-                <div class="dvProdText" style="display: none;">
+                <div class="dvProdText" *ngIf="imageU0 == 1">
                     <p>PRODUCT IMAGES</p>
                 </div>
-                <div class="dvSub8" style="display: none;">
-                    <div class="dvCheckImg1">
-                        <img src="assets/images/wall.png" width="140" height="140" class="imgItem1">
+                <div class="dvSub8"  *ngIf="imageU0 == 1">
+                    <div *ngIf="imageU0 == 1">
+                        <img [src]="imageVAL0" style="max-height: 100px;margin-top:5px;">
                     </div>
-                    <div class="dvCheckImg2">
-                        <img src="assets/images/wall2.jpg" width="140" height="140" class="imgItem1">
+                    <div *ngIf="imageU1 == 1">
+                        <img [src]="imageVAL1" style="max-height: 100px;margin-top:5px;">
                     </div>
-                    <div class="dvCheckImg3">
-                        <img src="assets/images/wall3.jpg" width="140" height="140" class="imgItem1">
+                    <div *ngIf="imageU2 == 1">
+                        <img [src]="imageVAL2" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU3 == 1">
+                        <img [src]="imageVAL3" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU4 == 1">
+                        <img [src]="imageVAL4" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU5 == 1">
+                        <img [src]="imageVAL5" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU6 == 1">
+                        <img [src]="imageVAL6" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU7 == 1">
+                        <img [src]="imageVAL7" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU8 == 1">
+                        <img [src]="imageVAL8" style="max-height: 100px;margin-top:5px;">
+                    </div>
+                    <div *ngIf="imageU9 == 1">
+                        <img [src]="imageVAL9" style="max-height: 100px;margin-top:5px;">
                     </div>
                 </div>
                 <!-- PRICE VARIATION -->

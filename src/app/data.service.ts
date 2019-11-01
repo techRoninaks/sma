@@ -671,52 +671,6 @@ getcheckoutFinal(id: any, shippingType) {
   getoffer() {
     return this.http.get(this.baseUrl + 'assets/api/offercheckout.php');
   }
-  getdataPostAddProduct(data: any) {
-    let httpParams = new HttpParams()
-      .append("name", data['name'])
-      .append("short_desc", data['short_desc'])
-      .append("long_desc", data['long_desc'])
-      .append("spec", data['spec'])
-      .append("shipping_option", data['shipping_option'])
-      .append("base_price", data['base_price'])
-      .append("bulk_discount_id", data['bulk_discount_id'])
-      .append("offer_id", data['offer_id'])
-      .append("returning_customer_count", data['returning_customer_count'])
-      .append("cmsn_dedtd", data['cmsn_dedtd'])
-      .append("shop_id", data['shop_id'])
-      .append("category_id", data['category_id'])
-      .append("sub_catgry_id", data['sub_catgry_id'])
-      .append("active_status", data['active_status'])
-      .append("qty_avble", data['qty_avble'])
-      .append("safe_qty", data['safe_qty'])
-      .append("is_returnable", data['is_returnable'])
-      .append("label_id", data['label_id'])
-      .append("tags", data['tags'])
-      .append("avg_confrmn_time", data['avg_confrmn_time'])
-      .append("avg_response_time", data['avg_response_time'])
-      .append("avg_prcessing_time", data['avg_prcessing_time'])
-      .append("avg_shpping_time", data['avg_shpping_time'])
-      .append("auto_cancel_time", data['auto_cancel_time'])
-      .append("has_rfq", data['has_rfq'])
-      .append("has_gift", data['has_gift'])
-      .append("has_order_confmn", data['has_order_confmn'])
-      .append("can_orderbydate", data['can_orderbydate'])
-      .append("has_instant_buy", data['has_instant_buy'])
-      .append("min_order_quant", data['min_order_quant'])
-      .append("max_order_quant", data['max_order_quant'])
-      .append("shipping_policy", data['shipping_policy'])
-      .append("return_policy", data['return_policy'])
-      .append("product_policy", data['product_policy'])
-      .append("shipping_location_id", data['shipping_location_id'])
-      .append("rating", data['rating'])
-      .append("rating_count", data['rating_count'])
-      .append("review_count", data['review_count'])
-      .append("revenue_generated", data['revenue_generated'])
-      .append("promo_id", data['promo_id'])
-      .append("sold_count", data['sold_count'])
-      .append("created_date", data['created_date']);
-    return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
-  }
   getsellercart() {
     return this.http.get(this.baseUrl + 'assets/api/sellercart.php');
   }

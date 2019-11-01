@@ -123,9 +123,40 @@
                         <p>{{array12[item].prodName}}</p>
                     </div>
                     <div class="dvRating">
-                        <div>
-                            <i class="fa fa-star" *ngFor="let item of filledStar"></i>
-                            <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
+                        <div *ngIf="array12[item].rating == 1"> 
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="array12[item].rating == 2"> 
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="array12[item].rating == 3"> 
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="array12[item].rating == 4"> 
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="array12[item].rating == 5"> 
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
                         </div>
  
                     </div>
