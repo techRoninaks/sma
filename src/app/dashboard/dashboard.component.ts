@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   constructor(private cookieService: CookieService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.setCookie('sellerId','1');
+//     this.setCookie('sellerId','1');
     if (this.getCookie("sellerId")) {
       this.loadDashboard(this.getCookie("sellerId"));
     } else {
