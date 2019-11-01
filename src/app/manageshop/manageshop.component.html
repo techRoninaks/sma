@@ -51,7 +51,7 @@
                         <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}">
                             <button type="button">View as Customer</button></div>
                         <div class="btnDescEdit">
-                            <button type="button" (click)="edit('shop');">Edit</button>
+                            <button type="button" (click)="edit('desc');">Edit</button>
                         </div>
                     </div>
                     <div class="shopDetails">
@@ -75,27 +75,27 @@
                         <div class="btnCustomer" [routerLink]="['/shop']" [queryParams]="{shop_id:shopData.shopId}">
                             <button type="button">View as Customer</button></div>
                         <div class="btnDescEdit">
-                            <button type="button" (click)="sub('shop');">Submit</button>
+                            <button type="button" (click)="sub('desc');">Submit</button>
                         </div>
                     </div>
                     <div class="shopDetails">
                         <p class="sName">NAME:</p>
-                        <textarea class="addr1Shop" style="height: 30px" placeholder="shop name"
-                            id="shopNameId">{{addressData.addr1}}</textarea>
+                        <input class="addr1Shop" style="height: 30px" placeholder="shop name"
+                            id="shopNameId" value="{{addressData.addr1}}">
                         <p class="sAddress">ADDRESS:</p>
                         <div class="sH5">
-                            <textarea class="addr2Shop" id="addr2ShopId" style="height: 30px"
-                                placeholder="street address">{{addressData.addr2}}</textarea>
-                            <textarea class="cityShop" id="cityShopId" style="height: 30px"
-                                placeholder="city">{{addressData.city}}</textarea>
-                            <textarea class="districtShop" id="districtShopId" style="height: 30px"
-                                placeholder="district">{{addressData.district}}</textarea>
-                            <textarea class="stateShop" id="stateShopId" style="height: 30px"
-                                placeholder="state">{{addressData.state}}</textarea>
-                            <textarea class="countryShop" id="countryShopId" style="height: 30px"
-                                placeholder="country">{{addressData.country}}</textarea>
-                            <textarea class="pincodeShop" id="pincodeShopId" style="height: 30px"
-                                placeholder="pincode">{{addressData.pincode}}</textarea>
+                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
+                                placeholder="street address" value="{{addressData.addr2}}">
+                            <input class="cityShop" id="cityShopId" style="height: 30px"
+                                placeholder="city"value="{{addressData.city}}">
+                            <input class="districtShop" id="districtShopId" style="height: 30px"
+                                placeholder="district"value="{{addressData.district}}">
+                            <input class="stateShop" id="stateShopId" style="height: 30px"
+                                placeholder="state"value="{{addressData.state}}">
+                            <input class="countryShop" id="countryShopId" style="height: 30px"
+                                placeholder="country"value="{{addressData.country}}">
+                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px"
+                                placeholder="pincode"value="{{addressData.pincode}}">
 
                         </div>
 
@@ -146,10 +146,11 @@
                 </div>
                 <div class="dropVacation" id="vacationToggle" style="display: none">
                     <div class="dvRadio">
-                        <input type="radio" name="vacation" (click)="vacationSave('until');" value="until"
+                            <!-- (click)="vacationSave('until');" -->
+                        <input type="radio" name="vacation"  value="until"
                             id="untilRadio">
                         Until Cancelled<br>
-                        <input type="radio" name="vacation" value="setDate" (click)="vacationSave('dateSet');"
+                        <input type="radio" name="vacation" value="setDate" 
                             class="rDate" id="dateSetRadio"> Set Duration<br>
 
                     </div>
@@ -158,6 +159,8 @@
                         <input type="date" id="endDate" class="eDAte" value="{{shopData.vacEndDate}}">
                     </div>
                     <p style="font-size:14px;color:grey;">Select two dates then press checkbox</p>
+                    <!-- 'dateSet' -->
+                    <button (click)="vacationSave();" style="background-color: #efbe24; color: white;">Save</button>
                 </div>
             </div>
             <div class="bio">
@@ -169,7 +172,7 @@
                     </div>
                 </ng-container>
                 <ng-template #bioEdit>
-                    <textarea class="bioTxtArea" id="bioTxtAr">{{shopData.descriptionShop}}</textarea>
+                    <input class="bioTxtArea" id="bioTxtAr"value="{{shopData.descriptionShop}}">
                     <div class="btnBioEdit">
                         <button type="button" style="margin-left:70%; width:100px;"
                             (click)="sub('bio');">SUBMIT</button>
@@ -239,7 +242,7 @@
                 <button id="editPolicy" (click)="edit('prod');">EDIT</button>
             </ng-container>
             <ng-template #prodPol>
-                <textarea class="policyTxtArea" id="prodTxtAr">{{shopData.productPolicy}}</textarea>
+                <input class="policyTxtArea" id="prodTxtAr"value="{{shopData.productPolicy}}">
                 <button id="editPolicy" (click)="sub('prod');">SUBMIT</button>
             </ng-template>
         </div>
@@ -251,7 +254,7 @@
                 <button id="editPolicy" (click)="edit('shop');">EDIT</button>
             </ng-container>
             <ng-template #shopPol>
-                <textarea class="policyTxtArea" id="shopTxtAr">{{shopData.shopPolicy}}</textarea>
+                <input class="policyTxtArea" id="shopTxtAr"value="{{shopData.shopPolicy}}">
                 <button id="editPolicy" (click)="sub('shop');">SUBMIT</button>
             </ng-template>
         </div>
@@ -263,7 +266,7 @@
                 <button id="editPolicy" (click)="edit('ship');">EDIT</button>
             </ng-container>
             <ng-template #shipPol>
-                <textarea class="policyTxtArea" id="shipTxtAr">{{shopData.shipPolicy}}</textarea>
+                <input class="policyTxtArea" id="shipTxtAr" value="{{shopData.shipPolicy}}">
                 <button id="editPolicy" (click)="sub('ship');">SUBMIT</button>
             </ng-template>
         </div>
@@ -275,7 +278,7 @@
                 <button id="editPolicy" (click)="edit('return');">EDIT</button>
             </ng-container>
             <ng-template #retPol>
-                <textarea class="policyTxtArea" id="retTxtAr">{{shopData.returnPolicy}}</textarea>
+                <input class="policyTxtArea" id="retTxtAr" value="{{shopData.returnPolicy}}">
                 <button id="editPolicy" (click)="sub('return');">SUBMIT</button>
             </ng-template>
         </div>

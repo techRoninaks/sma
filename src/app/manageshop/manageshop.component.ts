@@ -331,7 +331,7 @@ export class ManageshopComponent implements OnInit {
 	}
 	edit(x: any) {
 		// this.editDefault=1;
-		if (x == 'shop') {
+		if (x == 'desc') {
 			this.editShop = 1;
 		}
 		if (x == 'prod') {
@@ -355,7 +355,7 @@ export class ManageshopComponent implements OnInit {
 	}
 	sub(x: any) {
 		// this.editDefault=0;
-		if (x == 'shop') {
+		if (x == 'desc') {
 			this.editShop = 0;
 			var shopNameId = (<HTMLInputElement><any>document.getElementById('shopNameId')).value;
 			var addr2ShopId = (<HTMLInputElement><any>document.getElementById('addr2ShopId')).value;
@@ -429,12 +429,16 @@ export class ManageshopComponent implements OnInit {
 		}
 	}
 	vacationSave(q: any) {
-		if (q == 'until') {
+		var until =  (<HTMLInputElement><any>document.getElementById("untilRadio")).checked;
+		var dateSet =  (<HTMLInputElement><any>document.getElementById("dateSetRadio")).checked;
+
+
+		if (until == true) {
 			var type = 'until';
 			this.z = { shop_id: this.token, type: type, start: 0, end: 0 };
 			this.data.vacationSave(this.z).subscribe();
 		}
-		if (q == 'dateSet') {
+		if (dateSet==true) {
 			var type = 'dateSet';
 			var s = (<HTMLInputElement><any>document.getElementById('startDate')).value;
 			console.log(s);

@@ -215,7 +215,8 @@ export class ListingComponent implements OnInit {
 	quant: any;
 	bPrice: number;
 	likeDislikes: any = [];
-
+	orderConfValue:number=0;
+	instantBuyValue:number=0;
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
@@ -267,7 +268,8 @@ export class ListingComponent implements OnInit {
 				this.hasGiftBit = parseInt(this.dynamicData.hasGift);
 				this.hasDatePickerBit = parseInt(this.dynamicData.canOrderByDate);
 				this.bPrice = this.dynamicData.basePrice;
-
+				this.orderConfValue=this.dynamicData.hasOrderConfirm;
+				this.instantBuyValue=this.dynamicData.hasInstantBuy;
 
 				//rfq 1st prod
 				this.prod[0] = this.dynamicData.name;
@@ -285,7 +287,15 @@ export class ListingComponent implements OnInit {
 				if (this.hasDatePickerBit == 0) {
 					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
 				}
-
+				//orderconf flag check
+				if(this.orderConfValue==1){
+					(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "none";
+					(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
+					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
+				}
+				if(this.instantBuyValue==0){
+					(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+				}
 				// console.log(res);
 				this.productRating = this.dynamicData.rating;
 				for (this.i = 0; this.i < 5; this.i++) {
@@ -343,6 +353,9 @@ export class ListingComponent implements OnInit {
 				else if (this.addImageOrNot == 1) {
 					(<HTMLInputElement><any>document.getElementById("imageShowOrNot")).style.display = "block";
 				}
+
+
+	
 			},
 			error => console.error(error)
 		);
@@ -581,7 +594,7 @@ export class ListingComponent implements OnInit {
 
 		this.data.prodViewIncrement(this.token).subscribe();
 
-		this.data.getRfqInputs(this.token).subscribe(
+		this.data.getRfqInputs(this.shopToken).subscribe(
 			data => {
 				this.rfqInput = data;
 
@@ -1035,7 +1048,15 @@ export class ListingComponent implements OnInit {
 	gift() {
 		var title = (<HTMLInputElement><any>document.getElementById("fText")).value;
 		var note = (<HTMLInputElement><any>document.getElementById("fNote")).value;
-		var address = (<HTMLInputElement><any>document.getElementById("fAddress")).value;
+		// var address = (<HTMLInputElement><any>document.getElementById("fAddress")).value;
+		var shopNameId = (<HTMLInputElement><any>document.getElementById('shopNameId')).value;
+		var addr2ShopId = (<HTMLInputElement><any>document.getElementById('addr2ShopId')).value;
+		var cityShopId = (<HTMLInputElement><any>document.getElementById('cityShopId')).value;
+		var districtShopId = (<HTMLInputElement><any>document.getElementById('districtShopId')).value;
+		var stateShopId = (<HTMLInputElement><any>document.getElementById('stateShopId')).value;
+		var countryShopId = (<HTMLInputElement><any>document.getElementById('countryShopId')).value;
+		var pincodeShopId = (<HTMLInputElement><any>document.getElementById('pincodeShopId')).value;
+		var address =shopNameId+"!~!"+addr2ShopId+"!~!"+cityShopId+"!~!"+districtShopId+"!~!"+stateShopId+"!~!"+countryShopId+"!~!"+pincodeShopId
 		this.giftEnable = 1;
 		this.titleGift = title;
 		this.addressGift = address;
@@ -1080,7 +1101,7 @@ export class ListingComponent implements OnInit {
 		this.tokenPrice = { seller_identity: this.sellerDetails.sellerId, shop_id: this.sellerDetails.shopId, image: image, prod_id: this.token, user_id: this.userId, imageUploadedRfq: this.imageUploadedRfq, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
 
 		this.data.sendRfq(this.tokenPrice).subscribe();
-
+		$("#rfqPopup").modal('hide');
 	}
 
 
@@ -1324,9 +1345,6 @@ export class ListingComponent implements OnInit {
 
 		var userIdValue = parseInt(this.userId);
 		if (userIdValue >= 1 && this.undelValue == 1) {
-			// if (this.flag == 1 ){
-			$("#buyNowPopup").modal('show');
-			// }
 			if (x == 'buyNow') {
 				var msgCount: any = this.Object.keys(this.messageTitle).length;
 				// console.log(msgCount);
@@ -1345,7 +1363,7 @@ export class ListingComponent implements OnInit {
 				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
 				var desiredDate = "none";
 				var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
-				var cod = (<HTMLInputElement><any>document.getElementById('cOD')).checked;
+				var cod = (<HTMLInputElement><any>document.getElementById('hD')).checked;
 				var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
 				var pin = parseInt(this.getCookie("userPin"));
 				// console.log("pin"+pin);
@@ -1372,7 +1390,7 @@ export class ListingComponent implements OnInit {
 					var deliveryOption = "shipping";
 				}
 				else if (cod == true) {
-					var deliveryOption = "cod";
+					var deliveryOption = "hd";
 				}
 				else if (pickup == true) {
 					var deliveryOption = "pickup";
@@ -1462,7 +1480,7 @@ export class ListingComponent implements OnInit {
 				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
 				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
 				var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-				var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+				var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
 				var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
 				var image0 = imageValue0;
 				var image1 = imageValue1;
@@ -1475,6 +1493,10 @@ export class ListingComponent implements OnInit {
 				var image8 = imageValue8;
 				var image9 = imageValue9;
 				var pin = parseInt(this.getCookie("userPin"));
+				//orderconf flag check
+				if(this.orderConfValue==1){
+					desiredDate = "orderConf";
+				}
 				// console.log("pin"+pin);
 				// console.log("pinV"+this.pincodeValue);
 				var res = productVariant.split(" ");
@@ -1484,7 +1506,7 @@ export class ListingComponent implements OnInit {
 					var deliveryOption = "shipping";
 				}
 				else if (cod == true) {
-					var deliveryOption = "cod";
+					var deliveryOption = "hd";
 				}
 				else if (pickup == true) {
 					var deliveryOption = "pickup";
@@ -1564,15 +1586,138 @@ export class ListingComponent implements OnInit {
 					);
 				});
 			}
+			$("#buyNowPopup").modal('show');
 		}
 		else if (this.undelValue == 0) {
 			$("#undeliverableModal").modal('show');
 		}
-		else {
+				else {
 			$("#loginModal").modal('show');
 		}
 	}
 
+	submitInstantBuy(x:any){
+		$("#loginModal").modal('hide');
+		if (x == 'instantBuy') {
+			alert("instantBuy");
+			var msgCount: any = this.Object.keys(this.messageTitle).length;
+			// console.log(msgCount);
+			var msg: any = [];
+			for (var i: any = 0; i < msgCount; i++) {
+				msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
+				// console.log(msg[i]);
+			}
+			var z: any = [];
+			z = msg;
+			// console.log(z);
+			// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+			var message = z;
+			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
+			// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
+			var desiredDate = "none";
+			var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
+			var cod = (<HTMLInputElement><any>document.getElementById('hD')).checked;
+			var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
+			var pin = parseInt(this.getCookie("userPin"));
+			// console.log("pin"+pin);
+			// console.log("pinV"+this.pincodeValue);
+			// var res = productVariant.split(" ");
+			var image0 = imageValue0;
+			var image1 = imageValue1;
+			var image2 = imageValue2;
+			var image3 = imageValue3;
+			var image4 = imageValue4;
+			var image5 = imageValue5;
+			var image6 = imageValue6;
+			var image7 = imageValue7;
+			var image8 = imageValue8;
+			var image9 = imageValue9;
+
+			// console.log(image);
+			// alert("working");
+
+			var res = productVariant.split(" ");
+			this.varName = res[0];
+
+			if (ship == true) {
+				var deliveryOption = "shipping";
+			}
+			else if (cod == true) {
+				var deliveryOption = "hd";
+			}
+			else if (pickup == true) {
+				var deliveryOption = "pickup";
+			}
+			// shop_id: this.shopIdentity
+			this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: -1, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+			// image:image ,
+			this.data.sendOrderDetails(this.tokenPrice).subscribe();
+
+			//sonu
+			this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
+				this.orderid = data["orderid"];
+				// console.log(this.orderid);
+				this.data.getaddress(this.userId).subscribe(
+					data => {
+						this.dynamicDataAddress = data;
+					},
+					error => console.error(error)
+				);
+				this.data.getprodCheckout(this.token).subscribe(
+					data => {
+						this.dynamicDataProName = data;
+					},
+					error => console.error(error)
+				);
+				this.data.getuserCheckout(this.userId).subscribe(
+					data => {
+						this.dynamicDataUser = data;
+						this.Name = this.dynamicDataUser.Name;
+						this.email = this.dynamicDataUser.email;
+						this.phone1 = this.dynamicDataUser.phone1;
+					},
+					error => console.error(error)
+				);
+				this.data.getCustomerOrderCheckout(this.orderid).subscribe(
+					data => {
+						this.dynamicDataCustomerOrder = data;
+						this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
+					},
+					error => console.error(error)
+				);
+				// console.log(this.variantValue);
+				this.variantValue = { prodid: this.token, userid: this.userId }
+				this.data.getvariantInfor(this.variantValue).subscribe(
+					data => {
+						this.dynamicDataVariant = data;
+						// this.dynamicDataVariants = data;
+					},
+					error => console.error(error)
+				);
+
+				this.data.getAddressChange(this.userId).subscribe(
+					data => {
+						this.dynamicDataSecondAddress = data;
+						// console.log(this.dynamicDataSecondAddress);
+					},
+					error => console.error(error)
+				);
+
+				this.data.getMsgTitleProCheckout(this.orderid).subscribe(
+					data => {
+						this.dynamicMsgTitle = data;
+						// console.log(this.dynamicMsgTitle);
+					},
+					error => console.error(error)
+				);
+			});
+
+
+		}
+		$("#buyNowPopup").modal('show');
+		
+	}
 
 	applyRequest() {
 		this.dateChoosen = (<HTMLInputElement><any>document.getElementById('reqDatePicker')).value;
@@ -1725,7 +1870,7 @@ export class ListingComponent implements OnInit {
 
 		var productQuantity = parseInt((<HTMLInputElement><any>document.getElementById("productQuantity")).value);
 		var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-		var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
+		var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
 		var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
 		var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
 		var res = productVariant.split(" ");
@@ -1737,7 +1882,7 @@ export class ListingComponent implements OnInit {
 			var deliveryOption = "shipping";
 		}
 		else if (cod == true) {
-			var deliveryOption = "cod";
+			var deliveryOption = "hd";
 		}
 		else if (pickup == true) {
 			var deliveryOption = "pickup";

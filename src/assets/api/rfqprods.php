@@ -1,9 +1,9 @@
 <?php
     require "init.php";
-    $prodId=$_POST["prodId"];
+    $shopId=$_POST["shopId"];
     $data = array();
    
-    $sql_query = "SELECT `name` FROM `product` GROUP by name ";
+    $sql_query = "SELECT `name` FROM `product` WHERE `shop_id` = $shopId GROUP by `name` ";
     $result = mysqli_query($con1, $sql_query);
     $count=0;
     while($row=mysqli_fetch_assoc($result)){

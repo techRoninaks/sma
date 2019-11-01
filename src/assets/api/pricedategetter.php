@@ -69,23 +69,57 @@
             $qtPrice=$qt*$shipQtyPrice;
         } 
         $shipOption=1;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
-        }
-    }
-    else if($deliveryOption=="cod")
-    {
-        if($productQuantity==1)
-        {
-            $qtPrice=0;
+        if($productQuantity>=$quantBulk){
+            // $disc = $disc +$discBulk;
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
         else{
-            $qt=$productQuantity-1;
-            $qtPrice=$qt*$shipQtyPrice;
-        } 
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+        }
+    }
+    else if($deliveryOption=="hd")
+    {
+        $qtPrice=0;
+        $shipBasePrice=0;
         $shipOption=2;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
+        if($productQuantity>=$quantBulk){
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+            // $disc = $disc +$discBulk;
+        }
+        else{
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
     }
     else if($deliveryOption=="pickup")
@@ -93,21 +127,75 @@
         $qtPrice=0;
         $shipBasePrice=0;
         $shipOption=3;
-        if($quantBulk>=$productQuantity){
-            $disc = $disc +$discBulk;
+        if($productQuantity>=$quantBulk){
+            $amountBulkDisc=$basePrice*($discBulk/100);
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
+            // $disc = $disc +$discBulk;
+        }
+        else{
+            $amountBulkDisc=0;
+            $priceBulc=$basePrice-$amountBulkDisc;
+            $bulkPriceTotal=$priceBulc*$productQuantity;
+
+            $amountDisc=$bulkPriceTotal*($disc/100);
+            $price=$bulkPriceTotal-$amountDisc;
+
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmount=round($totalAmountQt);
         }
     }
 
-    //total price calc
-    // $basePriceTotal = $basePrice * $productQuantity;
-    // $amount = $basePrice * ($disc / 100);
-    $amountDisc=$basePrice*($disc/100);
-    $price=$basePrice-$amountDisc;
-    $basePriceTotal=$price*$productQuantity;
-    $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
-    $totalAmount=round($totalAmountQt);
-    // $price=round($price);
+    // if($deliveryOption=="shipping")
+    // {
+    //     if($productQuantity==1)
+    //     {
+    //         $qtPrice=0;
+    //     }
+    //     else{
+    //         $qt=$productQuantity-1;
+    //         $qtPrice=$qt*$shipQtyPrice;
+    //     } 
+    //     $shipOption=1;
+    //     if($quantBulk>=$productQuantity){
+    //         $disc = $disc +$discBulk;
+    //     }
+    // }
+    // else if($deliveryOption=="hd")
+    // {
+    //     $qtPrice=0;
+    //     $shipBasePrice=0;
+    //     $shipOption=2;
+    //     if($quantBulk>=$productQuantity){
+    //         $disc = $disc +$discBulk;
+    //     }
+    // }
+    // else if($deliveryOption=="pickup")
+    // {
+    //     $qtPrice=0;
+    //     $shipBasePrice=0;
+    //     $shipOption=3;
+    //     if($quantBulk>=$productQuantity){
+    //         $disc = $disc +$discBulk;
+    //     }
+    // }
+
+    // //total price calc
+    // // $basePriceTotal = $basePrice * $productQuantity;
+    // // $amount = $basePrice * ($disc / 100);
+    // $amountDisc=$basePrice*($disc/100);
+    // $price=$basePrice-$amountDisc;
     // $basePriceTotal=$price*$productQuantity;
-    // $totalAmount=$basePriceTotal+$varPrice;
+    // $totalAmountQt=$basePriceTotal+$qtPrice+$shipBasePrice;
+    // $totalAmount=round($totalAmountQt);
+    // // $price=round($price);
+    // // $basePriceTotal=$price*$productQuantity;
+    // // $totalAmount=$basePriceTotal+$varPrice;
     echo json_encode($data = array('tPrice' => $totalAmount, 'dDate' => $deliveryDate));
 ?>
