@@ -94,7 +94,7 @@ sendOrderDetails(data: any) {
   }
   getRfqInputs(data: any) {
     let httpParams = new HttpParams()
-      .append("prodId", data)
+      .append("shopId", data)
     return this.http.post(this.baseUrl + 'assets/api/rfqprods.php', httpParams);
   }
   getRfqAddress(data: any) {
