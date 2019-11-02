@@ -1,1 +1,118 @@
-<p>shopsetting works!</p>
+<div class="divMargin">
+    <ul class="breadcrumb">
+        <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
+        <li><a [routerLink]="[ '/shopsetting' ]" routerLinkActive="active">Advanced Setting</a></li>
+    </ul>
+
+    <div class="shopTilte">
+        SHOP SETTING
+    </div>
+
+    <mat-expansion-panel class="expansionPanel">
+        <mat-expansion-panel-header class="expansionHeader">
+          <mat-panel-title class="expansionTitle">
+            SHOP DETAILS
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      
+        <p class="shopTilte">SHOP BY STORE</p>
+
+        <div>
+            <img src="assets/images/img_cake.png">
+
+        </div>
+
+        <table>
+            <tr>
+                <td class="padding15 font15">Shop Name</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.shopname}}<span>
+                    <img src="assets/icons/edit.png" (click)="edit('shopdetails')" style="position: relative; left: 79%;">
+                </span></td>
+                <td class="padding15" *ngIf = "editShopDetails"><input  id="name" value="{{shopDetails.shopname}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Shop Address</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.shop_address}}</td>
+                <td class="padding15" *ngIf = "editShopDetails"><input id="address" value="{{shopDetails.shop_address}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Main Category</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.category}}</td>
+                <td class="padding15" *ngIf = "editShopDetails"><input id="caetegory" placeholder="asdadsd" value="{{shopDetails.category}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Contact No</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.contact}}</td>
+                <td class="padding15" *ngIf = "editShopDetails"><input id="phone" value="{{shopDetails.contact}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Email ID</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.email}}</td>
+                <td class="padding15" *ngIf = "editShopDetails"><input id="email" value="{{shopDetails.email}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">GST No</td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.gst}}</td>
+                <td class="padding15" *ngIf = "editShopDetails"><input id="gst" value="{{shopDetails.gst}}"></td>
+            </tr>
+        </table>
+
+        <div class="editShopDetailsSave" *ngIf = "editShopDetails" style="cursor: pointer;" (click) = "saveShopDetails()">Save</div>
+
+      </mat-expansion-panel>
+
+
+    <mat-expansion-panel class="expansionPanel">
+    <mat-expansion-panel-header class="expansionHeader">
+        <mat-panel-title class="expansionTitle">
+        OWNER INFO
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <p class="shopTilte">SHOP BY STORE</p>
+
+    <table>
+        <tr>
+            <td class="padding15 font15">Owner's Name</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.name}}<span>
+                <img src="assets/icons/edit.png" (click)="edit('ownerdetails')" style="position: relative; left: 79%;">
+            </span></td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input  id="ownername" value="{{shopDetails.name}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">Email ID</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.email}}</td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneremail" value="{{shopDetails.email}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">Date of Birth</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.dob}}</td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="ownerdob" value="{{shopDetails.dob}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">ID No</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcardno}} <span style="position: relative;left: 63%;">View image</span></td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneridno" value="{{shopDetails.idcardno}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">ID Type</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcard_type}}</td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneridtype" value="{{shopDetails.idcard_type}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">Contact No</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.contact}}</td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="ownerphone" value="{{shopDetails.contact}}"></td>
+        </tr>
+        <tr>
+            <td class="padding15 font15">GST No</td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.gst}}</td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input id="ownergst" value="{{shopDetails.gst}}"></td>
+        </tr>
+    </table>
+
+    <div class="editShopDetailsSave" *ngIf = "editOwnerDetails" style="cursor: pointer;" (click) = "saveOwnerDetails()">Save</div>
+
+    </mat-expansion-panel>
+</div>
+

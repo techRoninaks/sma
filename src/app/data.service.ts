@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class DataService {
   baseUrl = "";
-  // baseUrl = "http://roninaks.com/sma/";
+  // baseUrl = "http://localhost/Angular/sma19/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -1348,6 +1348,28 @@ uploadImage1(data: Object){
   .append("currentPassword",currentPassword );
   return this.http.post(this.baseUrl+'assets/api/checkCurrentPassword.php',httpParams);
  }
+
+ getShopDetailsSettings(id : any){
+  let httpParams= new HttpParams()
+  .append("seller_id",id );
+  return this.http.post(this.baseUrl+'assets/api/getShopDetailsSetting.php',httpParams);
+ }
+
+ updateShopDetailsSettings(data : Object){
+   console.log(data);
+   
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("name",data['shopname'])
+  .append("email",data['email'])
+  .append("phone",data['phone'])
+  .append("gst",data['gst'])
+  .append("address",data['address'])
+  .append("category",data['category']);
+  return this.http.post(this.baseUrl+'assets/api/uploadShopDetailsSetting.php',httpParams);
+ }
+
+
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }

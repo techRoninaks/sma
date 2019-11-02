@@ -45,6 +45,9 @@ export class DashboardComponent implements OnInit {
   constructor(private cookieService: CookieService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
 //     this.setCookie('sellerId','1');
     if (this.getCookie("sellerId")) {
       this.loadDashboard(this.getCookie("sellerId"));
@@ -104,5 +107,10 @@ export class DashboardComponent implements OnInit {
       label: 'Sales'
     }];
     this.lineChartLabels = x;
+  }
+  ngOnDestroy() {
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
   }
 }  

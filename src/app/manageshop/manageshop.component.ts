@@ -82,6 +82,9 @@ export class ManageshopComponent implements OnInit {
 	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
 		// this.setCookie("sellerId", 1);
@@ -333,6 +336,13 @@ export class ManageshopComponent implements OnInit {
 		// this.editDefault=1;
 		if (x == 'desc') {
 			this.editShop = 1;
+			// (<HTMLInputElement><any>document.getElementById('shopNameId')).value = this.addressData.addr1;
+			// (<HTMLInputElement><any>document.getElementById('addr2ShopId')).value = this.addressData.addr2;
+			// (<HTMLInputElement><any>document.getElementById('cityShopId')).value = this.addressData.city;
+			// (<HTMLInputElement><any>document.getElementById('districtShopId')).value = this.addressData.district;
+			// (<HTMLInputElement><any>document.getElementById('stateShopId')).value = this.addressData.state;
+			// (<HTMLInputElement><any>document.getElementById('countryShopId')).value = this.addressData.country;
+			// (<HTMLInputElement><any>document.getElementById('pincodeShopId')).value = this.addressData.pincode;
 		}
 		if (x == 'prod') {
 			this.editProdPolicy = 1;
@@ -367,7 +377,9 @@ export class ManageshopComponent implements OnInit {
 			var categ = this.prod;
 
 			this.shopAddress = { categ: categ, seller_id: this.sellerId, shop_id: this.token, shopNameId: shopNameId, addr2ShopId: addr2ShopId, cityShopId: cityShopId, districtShopId: districtShopId, stateShopId: stateShopId, countryShopId: countryShopId, pincodeShopId: pincodeShopId };
-			this.data.shopAddressUpload(this.shopAddress).subscribe();
+			this.data.shopAddressUpload(this.shopAddress).subscribe(data=>{
+				window.location.reload();
+			});
 			this.addressData.addr1 = shopNameId;
 			this.addressData.addr2 = addr2ShopId;
 			this.addressData.city = cityShopId;
@@ -381,7 +393,9 @@ export class ManageshopComponent implements OnInit {
 			var type = 'prod';
 			var y = (<HTMLInputElement><any>document.getElementById('prodTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
-			this.data.editManage(this.z).subscribe();
+			this.data.editManage(this.z).subscribe(data=>{
+				window.location.reload();
+			});
 			// (<HTMLInputElement><any>document.getElementById('prodPolicyId')).innerText=y;
 			this.shopData.productPolicy = y;
 		}
@@ -390,7 +404,9 @@ export class ManageshopComponent implements OnInit {
 			var type = 'bio';
 			var y = (<HTMLInputElement><any>document.getElementById('bioTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
-			this.data.editManage(this.z).subscribe();
+			this.data.editManage(this.z).subscribe(data=>{
+				window.location.reload();
+			});
 			// (<HTMLInputElement><any>document.getElementById('bioId')).innerHTML=y;
 			this.shopData.descriptionShop = y;
 		}
@@ -400,7 +416,9 @@ export class ManageshopComponent implements OnInit {
 			var type = 'ship';
 			var y = (<HTMLInputElement><any>document.getElementById('shipTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
-			this.data.editManage(this.z).subscribe();
+			this.data.editManage(this.z).subscribe(data=>{
+				window.location.reload();
+			});
 			// (<HTMLInputElement><any>document.getElementById('shipPolicyId')).innerHTML=y;
 			this.shopData.shipPolicy = y;
 
@@ -411,7 +429,9 @@ export class ManageshopComponent implements OnInit {
 			var type = 'shop';
 			var y = (<HTMLInputElement><any>document.getElementById('shopTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
-			this.data.editManage(this.z).subscribe();
+			this.data.editManage(this.z).subscribe(data=>{
+				window.location.reload();
+			});
 			// (<HTMLInputElement><any>document.getElementById('shopPolicyId')).innerHTML=y;
 			this.shopData.shopPolicy = y;
 
@@ -422,13 +442,15 @@ export class ManageshopComponent implements OnInit {
 			var type = 'return';
 			var y = (<HTMLInputElement><any>document.getElementById('retTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
-			this.data.editManage(this.z).subscribe();
+			this.data.editManage(this.z).subscribe(data=>{
+				window.location.reload();
+			});
 			// (<HTMLInputElement><any>document.getElementById('returnPolicyId')).innerHTML=y;
 			this.shopData.returnPolicy = y;
 
 		}
 	}
-	vacationSave(q: any) {
+	vacationSave() {
 		var until =  (<HTMLInputElement><any>document.getElementById("untilRadio")).checked;
 		var dateSet =  (<HTMLInputElement><any>document.getElementById("dateSetRadio")).checked;
 
@@ -476,14 +498,18 @@ export class ManageshopComponent implements OnInit {
 		this.tokenUpload = { image: image, shop_id: this.token };
 
 		// setTimeout(function () {
-		this.data.uploadShopCover(this.tokenUpload).subscribe();
+		this.data.uploadShopCover(this.tokenUpload).subscribe(data=>{
+			window.location.reload();
+		});
 		// }, 3000);
 
 	}
 	submitLogo() {
 		var image = imageLogoValue;
 		this.tokenUpload = { image: image, shop_id: this.token };
-		this.data.uploadShopLogo(this.tokenUpload).subscribe();
+		this.data.uploadShopLogo(this.tokenUpload).subscribe(data=>{
+			window.location.reload();
+		});
 	}
 
 	filterFunction() {
@@ -527,4 +553,9 @@ export class ManageshopComponent implements OnInit {
 		console.log(this.prod);
 		this.defRfqTag = this.prod.length;
 	}
+	ngOnDestroy() {
+		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
+	  }
 }

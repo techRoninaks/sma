@@ -16,6 +16,9 @@ export class ManageOrdersComponent implements OnInit {
   sellerName: any;
   dynamicOrderData: any = "";
   ngOnInit() {
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
     this.id = this.getCookie("sellerId");
     this.sellerName = this.getCookie("sellerName");
     this.data.getIndividualOrderData(this.id).subscribe(
@@ -33,5 +36,10 @@ export class ManageOrdersComponent implements OnInit {
   }
   deleteCookie(cname) {
     this.cookieService.delete(cname);
+  }
+  ngOnDestroy() {
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
   }
 }

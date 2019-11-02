@@ -10,7 +10,7 @@
     $arraycount =0;
     while($row1 = mysqli_fetch_assoc($result1)){
         $addressId = $row1["id"];
-        $response[$arraycount]=array('addressId'=>$addressId);
+        $response[$arraycount]=array('addressId'=>$row1["addr1"].', '.$row1["addr2"].', '.$row1["city"].', '.$row1["district"].', '.$row1["state"].', '.$row1["country"].', '.$row1["pincode"]);
         $arraycount++;
     }
     echo json_encode($response);

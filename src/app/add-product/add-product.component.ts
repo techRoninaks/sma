@@ -107,6 +107,9 @@ export class AddProductComponent implements OnInit {
   // imageProduct3: object;
 
   ngOnInit() {
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
 
     this.sellerId = this.getCookie('sellerId');
 
@@ -468,6 +471,14 @@ export class AddProductComponent implements OnInit {
       console.log("Sent");
     })
 
+
+    
+
+  }
+  ngOnDestroy() {
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
   }
 
   // onClick(event) {
@@ -766,4 +777,6 @@ function onFrontClick10(event) {
     (<HTMLInputElement>document.getElementById("frontPreviewId10")).style.display = "block";
     this.urlFront10 = imageFront10;
   };
+
+  
 }
