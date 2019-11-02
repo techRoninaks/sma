@@ -1,8 +1,7 @@
 <?php
   require "init.php";
-//  ? $prodid = $_POST['prodid'];
-// $image = $_POST["image"];
-$image0 = $_POST["image0"];
+// $prodid = $_POST['prodid'];
+
 $image1 = $_POST["image1"];
 $image2 = $_POST["image2"];
 $image3 = $_POST["image3"];
@@ -12,16 +11,8 @@ $image6 = $_POST["image6"];
 $image7 = $_POST["image7"];
 $image8 = $_POST["image8"];
 $image9 = $_POST["image9"];
-$imageU0 = $_POST["imageU0"];
-$imageU1 = $_POST["imageU1"];
-$imageU2 = $_POST["imageU2"];
-$imageU3 = $_POST["imageU3"];
-$imageU4 = $_POST["imageU4"];
-$imageU5 = $_POST["imageU5"];
-$imageU6 = $_POST["imageU6"];
-$imageU7 = $_POST["imageU7"];
-$imageU8 = $_POST["imageU8"];
-$imageU9 = $_POST["imageU9"];
+$image10 = $_POST["image10"];
+
 $name = $_POST['name'];
 $short_desc = $_POST['short_desc'];
 $Long_desc = $_POST['Long_desc'];
@@ -70,8 +61,11 @@ $product_policy = $_POST['product_policy'];
 $can_upload_image = $_POST['can_upload_image'];
 $max_no_of_image = $_POST['max_no_of_image'];
 $add_custom_message_field = $_POST['add_custom_message_field'];
-$image;
-$mob = 0;
+
+$title = $_POST['title'];
+
+// $image;
+// $mob = 0;
 
   // $percentage = $_POST['percentage'];
 
@@ -136,7 +130,7 @@ $mob = 0;
    $result5 = mysqli_query($con2, $sql_query5);
    $row=mysqli_fetch_assoc($result5);
    $shop_id = $row['id'];
-   echo $shop_id;
+//    echo $sql_query5;
   
 
   
@@ -155,384 +149,204 @@ $mob = 0;
     $result = mysqli_query($con1, $sql_query);
     $rowprodid = mysqli_fetch_assoc($result);
     $prodid=$rowprodid["prodid"];
+    // echo $prodid;
     
 
     $sql_query2 = " UPDATE `product` SET `prodid`= `$prodid`,`name`=`$name`,`short_desc`=`$short_desc`,`Long_desc`=`$Long_desc`,`spec`=`$spec`,`base_price`=$base_price,`qty_avble`=$qty_avble,`tags`=`$tags`,`avg_prcessing_time`=$avg_prcessing_time,`avg_shpping_time`=$avg_shpping_time,`auto_cancel_time`=$auto_cancel_time,`min_order_quant`=$min_order_quant,`max_order_quant`=$max_order_quant,`max_no_of_image` = $max_no_of_image where `prodid` = `$prodid`";
 
 
-//     $mob = 0;    
-//     if($image != 1){
-//       if (!file_exists('../images/product/'.$prodid.'/')) {
-//           mkdir('../images/product/'.$prodid.'/', 0777, true);
-//           $dir='../images/product/'.$prodid.'/';
-//       }
-//           $dir='../images/product/'.$prodid.'/';
-//       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-//       $file = UPLOAD_DIR.$prodid.'front'.'.jpg';
-//       if($mob == 0){
-//           $img =explode(",", $image);
-//           $img[1] = str_replace(' ', '+', $img[1]);
-//           $data = base64_decode($img[1]);
-//       }else{
-//           $data = base64_decode($image);
-//       }
-//       $success = file_put_contents($file, $data);
-//   }
+    $mob = 0;
+        
+    if($image1 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
+          mkdir('../images/product/'.$prodid.'/', 0777, true);
+          $dir='../images/product/'.$prodid.'/';
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_1'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image1);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image1);
+      }
+      $success = file_put_contents($file, $data);
+  }
     
-
-  if($imageU0==1){
-    $image=$image0;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+    if($image2 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_0'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_2'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image2);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image2);
+      }
+      $success = file_put_contents($file, $data);
+  }
 
-if($imageU1==1){
-    $image=$image1;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+  
+    if($image3 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_1'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_3'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image3);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image3);
+      }
+      $success = file_put_contents($file, $data);
+  }
 
-if($imageU2==1){
-    $image=$image2;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+     
+    if($image4 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_2'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU3==1){
-    $image=$image3;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_4'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image4);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image4);
+      }
+      $success = file_put_contents($file, $data);
+  }
+  
+    if($image5 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_3'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU4==1){
-    $image=$image4;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_5'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image5);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image5);
+      }
+      $success = file_put_contents($file, $data);
+  }
+    
+    if($image6 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_4'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU5==1){
-    $image=$image5;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_6'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image6);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image6);
+      }
+      $success = file_put_contents($file, $data);
+  }
+   
+    if($image7 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_5'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU6==1){
-    $image=$image6;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_7'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image7);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image7);
+      }
+      $success = file_put_contents($file, $data);
+  }
+    
+    if($image8 != 1){
+      if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_6'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
+      }
+          $dir='../images/product/'.$prodid.'/';
+      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      $file = UPLOAD_DIR.$prodid.'_8'.'.jpg';
+      if($mob == 0){
+          $img =explode(",", $image8);
+          $img[1] = str_replace(' ', '+', $img[1]);
+          $data = base64_decode($img[1]);
+      }else{
+          $data = base64_decode($image8);
+      }
+      $success = file_put_contents($file, $data);
+  }
+    
+  if($image9 != 1){
+    if (!file_exists('../images/product/'.$prodid.'/')) {
+        mkdir('../images/product/'.$prodid.'/', 0777, true);
+        $dir='../images/product/'.$prodid.'/';
     }
+        $dir='../images/product/'.$prodid.'/';
+    define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+    $file = UPLOAD_DIR.$prodid.'_9'.'.jpg';
+    if($mob == 0){
+        $img =explode(",", $image9);
+        $img[1] = str_replace(' ', '+', $img[1]);
+        $data = base64_decode($img[1]);
+    }else{
+        $data = base64_decode($image9);
+    }
+    $success = file_put_contents($file, $data);
+}
+   
+if($image10 != 1){
+  if (!file_exists('../images/product/'.$prodid.'/')) {
+      mkdir('../images/product/'.$prodid.'/', 0777, true);
+      $dir='../images/product/'.$prodid.'/';
+  }
+      $dir='../images/product/'.$prodid.'/';
+  define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+  $file = UPLOAD_DIR.$prodid.'_10'.'.jpg';
+  if($mob == 0){
+      $img =explode(",", $image10);
+      $img[1] = str_replace(' ', '+', $img[1]);
+      $data = base64_decode($img[1]);
+  }else{
+      $data = base64_decode($image10);
+  }
+  $success = file_put_contents($file, $data);
 }
 
-if($imageU7==1){
-    $image=$image7;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
-          mkdir('../images/product/'.$prodid.'/', 0777, true);
-          $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_7'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU8==1){
-    $image=$image8;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
-          mkdir('../images/product/'.$prodid.'/', 0777, true);
-          $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_8'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
-
-if($imageU9==1){
-    $image=$image9;
-    if($image != 1){
-        // $dir='../assets/images/order/'.$orderId.'/';
-        // mkdir($dir);
-        if (!file_exists('../images/product/'.$prodid.'/')) {
-          mkdir('../images/product/'.$prodid.'/', 0777, true);
-          $dir='../images/product/'.$prodid.'/';
-        }
-        // if (!file_exists('../'.$orderId.'/')) {
-        //     mkdir('../'.$orderId.'/', 0777, true);
-        //     $dir='../assets/images/order/'.$orderId.'/';
-        // }
-        define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-        //  echo $image;
-        $file = UPLOAD_DIR.$prodid.'_9'.'.jpg';
-        if($mob == 0){
-            $img =explode(",", $image);
-            // echo $img;
-            $img[1] = str_replace(' ', '+', $img[1]);
-            // echo $img[1];
-            $data = base64_decode($img[1]);
-            // echo $data;
-        }else{
-            $data = base64_decode($image);
-        }
-        $success = file_put_contents($file, $data);
-        // echo "<br>";        
-        // echo "<br>";
-        // echo $success;
-        // echo "<br>";
-        // echo $dir.$file;
-    }
-}
 
        // $sql_query2 = " UPDATE `product` SET `prodid`= '$prodid',`name`='$name',`short_desc`='$short_desc',`Long_desc`='$Long_desc',`spec`='$spec',`shipping_option`='$shipping_option',`base_price`='$base_price',`bulk_discount_id`='$bulk_discount_id,`offer_id`='$offer_id',`returning_customers_count`='$returning_customers_count',`product_view_count`='$product_view_count',`cmsn_dedtd`='$cmsn_dedtd',`shop_id`='$shop_id',`category_id`='$category_id',`sub_catgry_id`='$sub_catgry_id',`active_status`='$active_status',`qty_avble`='$qty_avble',`safe_qty`='$safe_qty',`is_returnable`='$is_returnable',`label_id`='$label_id',`tags`='$tags',`avg_confrmn_time`='$avg_confrmn_time',`avg_response_time`='$avg_response_time',`avg_prcessing_time`='$avg_prcessing_time',`avg_shpping_time`='$avg_shpping_time',`auto_cancel_time`='$auto_cancel_time',`has_rfq`='$has_rfq',`has_gift`='$has_gift',`has_order_confmn`='$has_order_confmn',`can_orderbydate`='$can_orderbydate',`has_instant_buy`='$has_instant_buy',`min_order_quant`='$min_order_quant',`max_order_quant`='$max_order_quant',`shipping_policy`='$shipping_policy',`return_policy`='$return_policy',`product_policy`='$product_policy',`shipping_location_id`='$shipping_location_id',`rating`='$rating',`rating_count`='$rating_count',`review_count`='$review_count',`revenue_generated`='$revenue_generated',`promo_id`='$promo_id',`sold_count`='$sold_count',`created_date`='$created_date',`remarks`='$remarks',`can_upload_image`='$can_upload_image',`max_no_of_image`='$max_no_of_image',`add_custom_message_field`='$add_custom_message_field' where prodid ='$prodid'";
     // $result2 = mysqli_query($con1, $sql_query2);
     // echo $sql_query2;
+
+    $sql_query6 = "INSERT INTO `prod_message`(`prodid`,`title`) VALUES ('$prodid','$title')";
+    $result6 = mysqli_query($con1, $sql_query6);
+    // echo $sql_query6;
    
     $sql_query3 = "INSERT INTO `offer`( `prodid`, `percentage`, `from_time_stamp`, `to_tme_Stamp`) VALUES ($prodid,`6`,'2019-08-28 12:00:00','2019-09-20 12:00:00')";
     $result3 = mysqli_query($con1, $sql_query3);
