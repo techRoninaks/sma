@@ -18,11 +18,11 @@
         <!-- (change)="submitCover();" -->
         <input style="display: none" type="file" name="pic" id="shopCover" accept="image/*" #fileInputCover
             (change)="submitCover();">
-        <button type="button" class="btnCover" (click)="fileInputCover.click()"
-            style="background-color: #efbe24;color: white;">Upload
-            Cover Pic</button>
-        <button type="submit" class="btnCover" (click)="submitCover();"><img style="width: 20px;height: 20px;"
-                src="assets/icons/upload.png"></button>
+        <button type="submit" class="btnCover" (click)="submitCover();"><img style="width: 30px;height: 25px;"
+                src="assets/icons/resources (MP)-20.png"></button>
+        <button type="button" class="btnCover btnCoverUpload" (click)="fileInputCover.click()"
+            style="background-color: #efbe24;color: white;">Change Cover Photo</button>
+
     </div>
     <!-- shop description -->
     <div class="shopDescBio">
@@ -37,9 +37,7 @@
                 </div> -->
                 <input style="display: none" type="file" name="pic" id="shopLogo" accept="image/*" #fileInputLogo
                     (change)="submitLogo();">
-                <button type="button" (click)="submitLogo();" class="btnLogo" style="background-color: #efbe24;color: white;margin-left: 1.1rem;
-                width: 10rem; transform: translate(0px,-1.7rem);">Upload
-                    Logo</button>
+                <button type="button" (click)="submitLogo();" class="btnLogo">Change Photo</button>
                 <!-- <button type="submit" class="btnLogo" (click)="submitLogo();" style="transform: translate(0px,-1.7rem);background-color: #efbe24;color: white;margin-left: 1.1rem;
                 width: 10rem;"><img style="width: 20px;height: 20px;"
                         src="assets/icons/upload.png"></button> -->
@@ -55,14 +53,14 @@
                         </div>
                     </div>
                     <div class="shopDetails">
-                        <p class="sName">NAME:</p>
-                        <h4 class="sH4">{{addressData.addr1}}</h4>
-                        <p class="sAddress">ADDRESS:</p>
-                        <h5 class="sH5">
+                        <p class="sName desc">NAME:</p>
+                        <h4 class="sH4 policies">{{addressData.addr1}}</h4>
+                        <p class="sAddress desc">ADDRESS:</p>
+                        <h5 class="sH5 policies">
                             {{addressData.addr2}}<br>{{addressData.city}}<br>{{addressData.district}}<br>{{addressData.state}}<br>{{addressData.country}}<br>{{addressData.pincode}}
                         </h5>
-                        <p class="sCategory">CATEGORY:</p>
-                        <div class="sA">
+                        <p class="sCategory desc">CATEGORY:</p>
+                        <div class="sA policies">
                             <div *ngFor="let item of Object.keys(prod)">
                                 <p style="float: left">{{prod[item]}},&nbsp;</p>
                             </div>
@@ -80,22 +78,22 @@
                     </div>
                     <div class="shopDetails">
                         <p class="sName">NAME:</p>
-                        <input class="addr1Shop" style="height: 30px" placeholder="shop name"
-                            id="shopNameId" value="{{addressData.addr1}}">
+                        <input class="addr1Shop" style="height: 30px" placeholder="shop name" id="shopNameId"
+                            value="{{addressData.addr1}}">
                         <p class="sAddress">ADDRESS:</p>
                         <div class="sH5">
-                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
-                                placeholder="street address" value="{{addressData.addr2}}">
-                            <input class="cityShop" id="cityShopId" style="height: 30px"
-                                placeholder="city"value="{{addressData.city}}">
-                            <input class="districtShop" id="districtShopId" style="height: 30px"
-                                placeholder="district"value="{{addressData.district}}">
-                            <input class="stateShop" id="stateShopId" style="height: 30px"
-                                placeholder="state"value="{{addressData.state}}">
-                            <input class="countryShop" id="countryShopId" style="height: 30px"
-                                placeholder="country"value="{{addressData.country}}">
-                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px"
-                                placeholder="pincode"value="{{addressData.pincode}}">
+                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px" placeholder="street address"
+                                value="{{addressData.addr2}}">
+                            <input class="cityShop" id="cityShopId" style="height: 30px" placeholder="city"
+                                value="{{addressData.city}}">
+                            <input class="districtShop" id="districtShopId" style="height: 30px" placeholder="district"
+                                value="{{addressData.district}}">
+                            <input class="stateShop" id="stateShopId" style="height: 30px" placeholder="state"
+                                value="{{addressData.state}}">
+                            <input class="countryShop" id="countryShopId" style="height: 30px" placeholder="country"
+                                value="{{addressData.country}}">
+                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px" placeholder="pincode"
+                                value="{{addressData.pincode}}">
 
                         </div>
 
@@ -146,12 +144,11 @@
                 </div>
                 <div class="dropVacation" id="vacationToggle" style="display: none">
                     <div class="dvRadio">
-                            <!-- (click)="vacationSave('until');" -->
-                        <input type="radio" name="vacation"  value="until"
-                            id="untilRadio">
+                        <!-- (click)="vacationSave('until');" -->
+                        <input type="radio" name="vacation" value="until" id="untilRadio">
                         Until Cancelled<br>
-                        <input type="radio" name="vacation" value="setDate" 
-                            class="rDate" id="dateSetRadio"> Set Duration<br>
+                        <input type="radio" name="vacation" value="setDate" class="rDate" id="dateSetRadio"> Set
+                        Duration<br>
 
                     </div>
                     <div class="dvSetDate">
@@ -164,15 +161,15 @@
                 </div>
             </div>
             <div class="bio">
-                <h3>Bio</h3>
+                <p class="bioHeader">Bio</p>
                 <ng-container *ngIf="editBio==0; else bioEdit">
-                    <p class="bioTxt" id="bioId">{{shopData.descriptionShop}}</p>
+                    <p class="bioTxt policies" id="bioId">{{shopData.descriptionShop}}</p>
                     <div class="btnBioEdit">
                         <button type="button" style="margin-left:70%; width:100px;" (click)="edit('bio');">EDIT</button>
                     </div>
                 </ng-container>
                 <ng-template #bioEdit>
-                    <input class="bioTxtArea" id="bioTxtAr"value="{{shopData.descriptionShop}}">
+                    <input class="bioTxtArea" id="bioTxtAr" value="{{shopData.descriptionShop}}">
                     <div class="btnBioEdit">
                         <button type="button" style="margin-left:70%; width:100px;"
                             (click)="sub('bio');">SUBMIT</button>
@@ -228,41 +225,41 @@
             </div>
         </div>
         <div class="newProd" [routerLink]="['/addproduct']" [queryParams]="{shop_id:shopData.shopId}">
-            <p>Add Product </p>
+            <p >Add Product </p>
         </div>
-        <button id="showAll">SHOW ALL</button>
+        <button id="showAll" class="showAll">SHOW ALL</button>
     </div>
     <!-- shop policies -->
     <div class="shopPolicies">
         <div class="prodPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>PRODUCT POLICIES</h2>
+            <p class="headClass">PRODUCT POLICIES</p>
             <ng-container *ngIf="editProdPolicy==0; else prodPol">
-                <p class="policyTxt" id="prodPolicyId">{{shopData.productPolicy}}</p>
+                <p class="policyTxt policies" id="prodPolicyId">{{shopData.productPolicy}}</p>
                 <button id="editPolicy" (click)="edit('prod');">EDIT</button>
             </ng-container>
             <ng-template #prodPol>
-                <input class="policyTxtArea" id="prodTxtAr"value="{{shopData.productPolicy}}">
+                <input class="policyTxtArea" id="prodTxtAr" value="{{shopData.productPolicy}}">
                 <button id="editPolicy" (click)="sub('prod');">SUBMIT</button>
             </ng-template>
         </div>
         <div class="shopPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHOP POLICIES</h2>
+            <p class="headClass">SHOP POLICIES</p>
             <ng-container *ngIf="editShopPolicy==0; else shopPol">
-                <p class="policyTxt" id="shopPolicyId">{{shopData.shopPolicy}}</p>
+                <p class="policyTxt policies" id="shopPolicyId">{{shopData.shopPolicy}}</p>
                 <button id="editPolicy" (click)="edit('shop');">EDIT</button>
             </ng-container>
             <ng-template #shopPol>
-                <input class="policyTxtArea" id="shopTxtAr"value="{{shopData.shopPolicy}}">
+                <input class="policyTxtArea" id="shopTxtAr" value="{{shopData.shopPolicy}}">
                 <button id="editPolicy" (click)="sub('shop');">SUBMIT</button>
             </ng-template>
         </div>
         <div class="shipPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHIP POLICIES</h2>
+            <p class="headClass">SHIP POLICIES</p>
             <ng-container *ngIf="editShipPolicy==0; else shipPol">
-                <p class="policyTxt" id="shipPolicyId">{{shopData.shipPolicy}}</p>
+                <p class="policyTxt policies" id="shipPolicyId">{{shopData.shipPolicy}}</p>
                 <button id="editPolicy" (click)="edit('ship');">EDIT</button>
             </ng-container>
             <ng-template #shipPol>
@@ -272,9 +269,9 @@
         </div>
         <div class="retPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>RETURN POLICIES</h2>
+            <p class="headClass">RETURN POLICIES</p>
             <ng-container *ngIf="editReturnPolicy==0; else retPol">
-                <p class="policyTxt" id="returnPolicyId">{{shopData.returnPolicy}}</p>
+                <p class="policyTxt policies" id="returnPolicyId">{{shopData.returnPolicy}}</p>
                 <button id="editPolicy" (click)="edit('return');">EDIT</button>
             </ng-container>
             <ng-template #retPol>
@@ -285,7 +282,7 @@
     </div>
     <div class="divQuestion ">
         <img src="assets/icons/resources (IL)-18.png">
-        <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
+        <p class="headClass">CUSTOMER QUESTIONS & ANSWERS</p>
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
@@ -294,7 +291,7 @@
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq" class="submitFaq">
                     <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>

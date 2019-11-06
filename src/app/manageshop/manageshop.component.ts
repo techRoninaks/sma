@@ -181,20 +181,20 @@ export class ManageshopComponent implements OnInit {
 		this.data.categoryListShop(this.token).subscribe(
 			data => {
 				this.catName = data;
-				console.log(this.catName);
+				// console.log(this.catName);
 				// this.prod=this.catName.category;
 				var catCount: any;
 				catCount = Object.keys(this.catName).length;
-				console.log(catCount);
+				// console.log(catCount);
 				this.defRfqTag = catCount;
 				catCount -= 1;
-				console.log(catCount);
+				// console.log(catCount);
 
 				for (var x = catCount; x > -1; x--) {
-					console.log(x);
+					// console.log(x);
 					this.prod[x] = this.catName[x].category;
 				}
-				console.log(this.prod);
+				// console.log(this.prod);
 			}
 		);
 
@@ -206,19 +206,19 @@ export class ManageshopComponent implements OnInit {
 			error => console.error(error)
 		);
 
-		this.data.getFollowInfoShop(this.tokenObj).subscribe(
-			data => {
-				this.followInfo = data;
-				var x = this.followInfo.response;
-				if (this.followInfo.response == "successful") {
-					this.folResult = true;
-				}
-				else if (this.followInfo.response == "unsuccessful") {
-					this.folResult = false;
-				}
-			},
-			error => console.error(error)
-		);
+		// this.data.getFollowInfoShop(this.tokenObj).subscribe(
+		// 	data => {
+		// 		this.followInfo = data;
+		// 		var x = this.followInfo.response;
+		// 		if (this.followInfo.response == "successful") {
+		// 			this.folResult = true;
+		// 		}
+		// 		else if (this.followInfo.response == "unsuccessful") {
+		// 			this.folResult = false;
+		// 		}
+		// 	},
+		// 	error => console.error(error)
+		// );
 		this.data.getFolCount(this.token).subscribe(
 			data => {
 				this.followC = data;
