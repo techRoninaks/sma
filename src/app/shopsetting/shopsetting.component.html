@@ -17,9 +17,23 @@
       
         <p class="shopTilte">SHOP BY STORE</p>
 
-        <div>
-            <img src="assets/images/img_cake.png">
+        <div class="image-section">
 
+            <div class="mainImage">
+                <img (click)="fileInputCover.click()" id="mainImageSrc" src="{{shopDetails.mainImage}}" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'"  class="mainShopImage">
+                <img src="assets/images/52385041_2139637902824429_5023495445637234688_n.jpg" class="mainLogoImage">
+                <input style="display: none" type="file" name="pic" id="mainImageHolder" accept="image/*" #fileInputCover>
+                <p class="mainShopName">{{shopDetails.shopname}}</p>
+            </div>
+
+            <div class="productImage">
+                <img src="{{shopDetails.prod_one}}" id="productOneSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductOne.click()">
+                <input style="display: none" type="file" name="pic" id="productOneImageHolder" accept="image/*" #fileproductOne>
+                <img src="{{shopDetails.prod_two}}" id="productTwoSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductTwo.click()">
+                <input style="display: none" type="file" name="pic" id="productTwoImageHolder" accept="image/*" #fileproductTwo>
+                <img src="{{shopDetails.prod_three}}" id="productThreeSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductThree.click()">
+                <input style="display: none" type="file" name="pic" id="productThreeImageHolder" accept="image/*" #fileproductThree>
+            </div>
         </div>
 
         <table>
@@ -38,9 +52,18 @@
             <tr>
                 <td class="padding15 font15">Main Category</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.category}}</td>
-                <td class="padding15" *ngIf = "editShopDetails"><input id="caetegory" placeholder="asdadsd" value="{{shopDetails.category}}"></td>
+                <td class="padding15" *ngIf = "editShopDetails">
+                    <input id="caetegory" (keyup)="openDropdown()" value="{{shopDetails.category}}">
+                    <ul id="myUL" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                        <li *ngFor="let inp of shopCategory">
+                            <a (click)="replaceText(inp.category);">
+                                {{inp.category}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
             </tr>
-            <tr>
+            <tr> 
                 <td class="padding15 font15">Contact No</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.contact}}</td>
                 <td class="padding15" *ngIf = "editShopDetails"><input id="phone" value="{{shopDetails.contact}}"></td>
@@ -62,14 +85,12 @@
       </mat-expansion-panel>
 
 
-    <mat-expansion-panel class="expansionPanel">
+    <mat-expansion-panel class="expansionPanel"> 
     <mat-expansion-panel-header class="expansionHeader">
         <mat-panel-title class="expansionTitle">
         OWNER INFO
         </mat-panel-title>
     </mat-expansion-panel-header>
-    
-    <p class="shopTilte">SHOP BY STORE</p>
 
     <table>
         <tr>
@@ -114,5 +135,253 @@
     <div class="editShopDetailsSave" *ngIf = "editOwnerDetails" style="cursor: pointer;" (click) = "saveOwnerDetails()">Save</div>
 
     </mat-expansion-panel>
+
+
+    <mat-expansion-panel class="expansionPanel"> 
+        <mat-expansion-panel-header class="expansionHeader">
+            <mat-panel-title class="expansionTitle">
+            PAYMENT & SHIPPING
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="labels">SHIPPING</div>
+        <table>
+            <tr>
+                <td class="padding15 font15">Shipping From</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.shop_location}}<span>
+                    <img src="assets/icons/edit.png" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
+                </span></td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input  id="shippingform" value="{{shopDetails.shop_location}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Shipping Mode</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.shippingmode}}</td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input id="shippingmode" value="{{shopDetails.shippingmode}}"></td>
+            </tr>
+        </table>
+        <div style="width:80%; margin:auto;margin-top: 35px;">
+            <div class="shippingHeader">
+                <p>LOCATION</p>
+                <!-- <p><img (click)="editLocations()"  *ngIf="newShipping"  src="assets/icons/plus.png"></p> -->
+            </div>
+
+            <div class="shippingBody"  id="inputForShippingPrimary"  *ngIf="!newShipping">
+                <div>
+                    <div class="gcountry">{{locationDetails.location_alias}}</div>
+                    <div class="state" id="inputForPincode"></div>
+                    <div class="action">
+                        <img style="border: 2px solid black;border-radius: 5px;margin-right: 5px;" (click) = "editExistingLocations()" src="assets/icons/plus.png">
+                        <img src="assets/icons/close.png" (click) = "deleteShippingLocation(locationDetails.id)">
+                    </div>
+                </div>
+            </div>
+            <div class="shippingBody" *ngIf="newShipping">
+                <div>
+                    <div class="gcountry">
+                        All over
+                        <input style="width: 100%;margin: auto;" id="shippingLocationPrimary" (keyup)="openDropdownShipping()" value="{{locationDetails.location_alias}}">
+                        <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                            <li>
+                                <a (click)="replaceTextLocation('All over India');">
+                                    All over India
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over State');">
+                                    All over State
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over District');">
+                                    All over District
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over City');">
+                                    All over City
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over Post Office');">
+                                    All over Post Office
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('Custom Locations');">
+                                    Custom Locations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="state">
+                        Add Extra pincode
+                        <input style="width: 100%;margin: auto;" (keyup)="openDropdownArea()" id="shippingLocationSecondary" placeholder="Custom Pincodes">
+                        <!-- <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                            <li *ngFor="let inp of valueDrop">
+                                <a (click)="replaceTextArea(inp);">
+                                    {{inp}}
+                                </a>
+                            </li>
+                        </ul> -->
+                    </div>
+                    <div class="action">
+                        <div class="editShopDetailsSave" style="cursor: pointer;" (click) = "saveLocationDetails()">Save</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="shippingBody" id="editShippingLocation" *ngIf="editLocation">
+                <div>
+                    <div class="gcountry">
+                        All over
+                        <input style="width: 100%;margin: auto;" id="shippingLocationPrimary" (keyup)="openDropdownShipping()" value="{{locationDetails.location_alias}}">
+                        <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                            <li>
+                                <a (click)="replaceTextLocation('All over India');">
+                                    All over India
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over State');">
+                                    All over State
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over District');">
+                                    All over District
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over City');">
+                                    All over City
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('All over Post Office');">
+                                    All over Post Office
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="replaceTextLocation('Custom Locations');">
+                                    Custom Locations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="state">
+                        Add Extra pincode
+                        <input style="width: 100%;margin: auto;" (keyup)="openDropdownArea()" id="shippingLocationSecondary" placeholder="Custom Pincodes">
+                        <!-- <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                            <li *ngFor="let inp of valueDrop">
+                                <a (click)="replaceTextArea(inp);">
+                                    {{inp}}
+                                </a>
+                            </li>
+                        </ul> -->
+                    </div>
+                    <div class="action">
+                        <div class="editShopDetailsSave" *ngIf = "editLocation" style="cursor: pointer;" (click) = "saveLocationDetails(locationDetails.id)">Save</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="labels">PAYMENT</div>
+        <table>
+            <tr>
+                <td class="padding15 font15">Account holder name</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.account_holder}}<span>
+                    <img src="assets/icons/edit.png" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
+                </span></td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input  id="accountholder" value="{{shopDetails.account_holder}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Account Type</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.account_type}}</td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input id="accounttype" value="{{shopDetails.account_type}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">Account No</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.account_no}}</td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input id="accountno" value="{{shopDetails.account_no}}"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td class="padding15 font15">Bank Name</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.bankname}}</td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input id="bankname" value="{{shopDetails.bankname}}"></td>
+            </tr>
+            <tr>
+                <td class="padding15 font15">IFSC Code</td>
+                <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.ifsc}}</td>
+                <td class="padding15" *ngIf = "editPaymentDetails"><input id="ifsc" value="{{shopDetails.ifsc}}"></td>
+            </tr>
+        </table>
+
+        <div class="editShopDetailsSave" *ngIf = "editPaymentDetails" style="cursor: pointer;" (click) = "savePaymentDetails()">Save</div>
+    
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel class="expansionPanel"> 
+            <mat-expansion-panel-header class="expansionHeader">
+                <mat-panel-title class="expansionTitle">
+                ADVANCED SETTINGS
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <div class="line1">
+                <div class="gift">
+                    Gift Options
+                    <label class="switch-wrap">
+                        <input type="checkbox" id="giftInput" value="{{shopDetails.gift_option}}" />
+                        <div class="switch"></div>
+                    </label>
+                </div>
+                <div class="del">
+                    Delivery date
+                    <label class="switch-wrap">
+                        <input type="checkbox" id="delInput" value="{{shopDetails.deliver_by_date}}"/>
+                        <div class="switch"></div>
+                    </label>
+                </div>
+                <div class="rfq">
+                       RFQ
+                    <label class="switch-wrap">
+                        <input type="checkbox" id="rfqInput" value="{{shopDetails.rfq}}"/>
+                        <div class="switch"></div>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="line2">
+                <div class="gift">
+                    Order Conformation
+                    <label class="switch-wrap">
+                        <input type="checkbox" id="orderInput" value="{{shopDetails.order_confirmation}}"/>
+                        <div class="switch"></div>
+                    </label>
+                </div>
+                <div class="del">
+                    Set cancellation Time
+                    <input style="width: 30%; margin-left: 15px;" id="cancellInput" value="{{shopDetails.auto_cancellation_time}}" placeholder="set time">
+                </div>
+            </div>
+
+            <div class="line2">
+                <div class="gift">
+                    Average Processing Time :
+                    <input style="margin-top: 15px;width: 96%;" id="processInput" value="{{shopDetails.avg_processing_time}}" placeholder="set time">
+                </div>
+                <div class="del">
+                    Average Rseponse Time :
+                    <input style="margin-top: 15px;width: 86%;" id="responseInput" value="{{shopDetails.avg_response_time}}" placeholder="set time">
+                </div>
+            </div>
+            <div class="editShopDetailsSave" style="cursor: pointer;" (click) = "saveAdvancedDetails()">Save</div>
+        
+            </mat-expansion-panel>
 </div>
 

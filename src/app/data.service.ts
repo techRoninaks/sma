@@ -1356,8 +1356,6 @@ uploadImage1(data: Object){
  }
 
  updateShopDetailsSettings(data : Object){
-   console.log(data);
-   
   let httpParams= new HttpParams()
   .append("seller_id",data['seller_id'])
   .append("name",data['shopname'])
@@ -1365,10 +1363,87 @@ uploadImage1(data: Object){
   .append("phone",data['phone'])
   .append("gst",data['gst'])
   .append("address",data['address'])
+  .append("imageMain",data['imageMain'])
+  .append("imageProductOne",data['imageProductOne'])
+  .append("imageProductTwo",data['imageProductTwo'])
+  .append("imageProductThree",data['imageProductThree'])
   .append("category",data['category']);
   return this.http.post(this.baseUrl+'assets/api/uploadShopDetailsSetting.php',httpParams);
  }
+ updateOwnerDetailsSettings(data : Object){
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("name",data['name'])
+  .append("email",data['email'])
+  .append("phone",data['phone'])
+  .append("gst",data['gst'])
+  .append("owneridtype",data['owneridtype'])
+  .append("owneridno",data['owneridno'])
+  .append("ownerdob",data['ownerdob']);
+  return this.http.post(this.baseUrl+'assets/api/uploadOwnerDetails.php',httpParams);
+ }
 
+ updatePaymentDetailsSettings(data : Object){
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("shippingform",data['shippingform'])
+  .append("shippingmode",data['shippingmode'])
+  .append("accountholder",data['accountholder'])
+  .append("accounttype",data['accounttype'])
+  .append("accountno",data['accountno'])
+  .append("ifsc",data['ifsc'])
+  .append("bankname",data['bankname']);
+  return this.http.post(this.baseUrl+'assets/api/uploadPaymentDetails.php',httpParams);
+ }
+
+ updateAdvancedDetailsSettings(data : Object){
+ let httpParams= new HttpParams()
+ .append("seller_id",data['seller_id'])
+ .append("responseInput",data['responseInput'])
+ .append("processInput",data['processInput'])
+ .append("cancellInput",data['cancellInput'])
+ .append("giftInput",data['giftInput'])
+ .append("deliver_by_date",data['deliver_by_date'])
+ .append("rfq",data['rfq'])
+ .append("order_confirmation",data['order_confirmation']);
+ return this.http.post(this.baseUrl+'assets/api/uploadAdvancedDetails.php',httpParams);
+}
+
+uploadShippingLocations(data : Object){
+ let httpParams= new HttpParams()
+ .append("sellerId",data['sellerId'])
+ .append("primaryArea",data['primaryArea'])
+ .append("SecondaryArea",data['SecondaryArea']);
+ return this.http.post(this.baseUrl+'assets/api/uploadShippingLocations.php',httpParams);
+}
+deleteLocation(id){
+ let httpParams= new HttpParams()
+ .append("SecondaryArea",id);
+ return this.http.post(this.baseUrl+'assets/api/deleteLocation.php',httpParams);
+}
+updateShippingLocation(data : Object){
+ let httpParams= new HttpParams()
+ .append("sellerId",data['sellerId'])
+ .append("primaryArea",data['primaryArea'])
+ .append("id",data['shop_id'])
+ .append("SecondaryArea",data['SecondaryArea']);
+ return this.http.post(this.baseUrl+'assets/api/updateShippingLocation.php',httpParams);
+}
+
+getShippingLocationSettings(id : any){
+ let httpParams= new HttpParams()
+ .append("seller_id",id);
+ return this.http.post(this.baseUrl+'assets/api/getShippingLocations.php',httpParams);
+}
+getDropdownForShipping(id : any){
+ let httpParams= new HttpParams()
+ .append("shipping_alias",id);
+ return this.http.post(this.baseUrl+'assets/api/getDropdownForShipping.php',httpParams);
+}
+
+getCategoryForSetting(){
+  return this.http.get(this.baseUrl+'assets/api/getCategoryForSetting.php');
+}
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
