@@ -26,8 +26,8 @@ $offer_id = $_POST['offer_id'];
 //   $product_view_count = $_POST['product_view_count'];
   //       $cmsn_dedtd = $_POST['cmsn_dedtd'];
 $sellerid = $_POST['sellerid'];
-  // $category_id = $_POST['category_id'];
-  // $sub_catgry_id = $_POST['sub_catgry_id'];                      
+// $category_id = $_POST['category_id'];
+// $sub_catgry_id = $_POST['sub_catgry_id'];                      
 $active_status = $_POST['active_status'];
 $qty_avble = $_POST['qty_avble'];
 //   $safe_qty = $_POST['safe_qty'];
@@ -49,7 +49,7 @@ $max_order_quant = $_POST['max_order_quant'];
 $shipping_policy = $_POST['shipping_policy'];
 $return_policy = $_POST['return_policy'];
 $product_policy = $_POST['product_policy'];
-  // $shipping_location_id = $_POST['shipping_location_id'];
+// $shipping_location_id = $_POST['shipping_location_id'];
 //   $rating = $_POST['rating'];
 //   rating_count = $_POST['rating_count'];
 //   $review_count = $_POST['review_count'];
@@ -64,8 +64,12 @@ $add_custom_message_field = $_POST['add_custom_message_field'];
 
 $title = $_POST['title'];
 
-// $image;
-// $mob = 0;
+// $shipping_location = $_POST['shipping_location'];
+$quantity_price = $_POST['quantity_price'];
+$price = $_POST['price'];
+
+// $location_alias = $_POST['location_alias'];
+// $pincode = $_POST['pincode'];
 
   // $percentage = $_POST['percentage'];
 
@@ -130,8 +134,14 @@ $title = $_POST['title'];
    $result5 = mysqli_query($con2, $sql_query5);
    $row=mysqli_fetch_assoc($result5);
    $shop_id = $row['id'];
-//    echo $sql_query5;
-  
+    //    echo $sql_query5;
+
+    $sql_query7 ="SELECT * FROM `shipping_location_shop` WHERE `id` = $shop_id";
+    $result7 = mysqli_query($con1, $sql_query7);
+    $row=mysqli_fetch_assoc($result7);
+    $shop_id = $row['id'];
+       echo $sql_query7;
+
 
   
 
@@ -344,10 +354,20 @@ if($image10 != 1){
     // $result2 = mysqli_query($con1, $sql_query2);
     // echo $sql_query2;
 
-    $sql_query6 = "INSERT INTO `prod_message`(`prodid`,`title`) VALUES ('$prodid','$title')";
+
+
+    $sql_query6 = "INSERT INTO `prod_message`(`prodid`,`title`) VALUES ($prodid,'$title')";
     $result6 = mysqli_query($con1, $sql_query6);
     // echo $sql_query6;
-   
+    
+    $sql_query8 = "INSERT INTO `prod_shipping_price` (`prodid`,`shipping_location`,`type`,`quantity_price`,`price`) VALUES ($prodid,'cjnjecnej','djbcdhis',$quantity_price,$price)";
+    $result8 = mysqli_query($con1, $sql_query8);
+    echo $sql_query8;
+
+    $sql_query9 = "INSERT INTO `shipping_location_product` (`prodid`,`location_alias`,`pincode`) VALUES ($prodid,'kochi',789721)";
+    $result9 = mysqli_query($con1, $sql_query9);
+    // echo $sql_query9;
+
     $sql_query3 = "INSERT INTO `offer`( `prodid`, `percentage`, `from_time_stamp`, `to_tme_Stamp`) VALUES ($prodid,`6`,'2019-08-28 12:00:00','2019-09-20 12:00:00')";
     $result3 = mysqli_query($con1, $sql_query3);
     // echo $sql_query3;

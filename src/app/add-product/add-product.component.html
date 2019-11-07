@@ -62,7 +62,8 @@
                 <!-- SUB CATEGORY -->
                 <div class="dropcat3">
                     <p style="text-align: center;">Sub Category</p>
-                    <select class="subCategory1" style="margin-top: -1px; cursor: pointer; width: 300px; margin-left: 0px;">
+                    <select class="subCategory1"
+                        style="margin-top: -1px; cursor: pointer; width: 300px; margin-left: 0px;">
                         <option *ngFor="let item of dynamicSubCategory" (click)="subCategoryLoaded2(item.id)">
                             {{ item.category }} </option>
                     </select>
@@ -86,8 +87,9 @@
         <div class="grid-ImagesPrimaryDetails" style="display: flex; margin: 10px;">
             <input style="display: none;" type="file" id="frontUpload" (click)="frontUpload()" accept="image/*"
                 #fileInput1>
-            <button (click)="fileInput1.click()" type="button" style="border-block-color: black; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput1.click()" type="button"
+                style="border-block-color: black; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
             <!-- <div
                 style="height: 15%;   width: 12%; background: #009145; margin-top: 25px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
                 <label style="color: white; text-align: center; font-family:BitterRegular; margin-left: 50px; ">Add
@@ -98,87 +100,95 @@
                 #fileInput2>
             <button (click)="fileInput2.click()" type="button"
                 style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; margin-left: 10px;">+</button>
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; margin-left: 10px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload3" (click)="frontUpload3()" accept="image/*"
                 #fileInput3>
-            <button (click)="fileInput3.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput3.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload4" (click)="frontUpload4()" accept="image/*"
                 #fileInput4>
-            <button (click)="fileInput4.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput4.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload5" (click)="frontUpload5()" accept="image/*"
                 #fileInput5>
-            <button (click)="fileInput5.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput5.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload6" (click)="frontUpload6()" accept="image/*"
                 #fileInput6>
-            <button (click)="fileInput6.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput6.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload7" (click)="frontUpload7()" accept="image/*"
                 #fileInput7>
-            <button (click)="fileInput7.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput7.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload8" (click)="frontUpload8()" accept="image/*"
                 #fileInput8>
-            <button (click)="fileInput8.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput8.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload9" (click)="frontUpload9()" accept="image/*"
                 #fileInput9>
-            <button (click)="fileInput9.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput9.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
 
             <input style="display: none;" type="file" id="frontUpload10" (click)="frontUpload10()" accept="image/*"
                 #fileInput10>
-            <button (click)="fileInput10.click()" type="button" style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px;">+</button>
+            <button (click)="fileInput10.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
         </div>
         <div class="grid-Image-View1" style="display: flex;">
             <img id="frontPreviewId" style="display: none; margin-left: -442px; width: 140px; height: 105px;
-                margin-top: -50px; background: chartreuse;" src="{{urlFront1}}" height="200">
+                margin-top: -50px; " src="{{urlFront1}}" height="200">
 
             <img id="frontPreviewId2" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: chocolate;" src="{{urlFront2}}" height="200">
+                margin-top: -50px; " src="{{urlFront2}}" height="200">
 
             <img id="frontPreviewId3" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: coral;" src="{{urlFront3}}" height="200">
+                margin-top: -50px; " src="{{urlFront3}}" height="200">
 
             <img id="frontPreviewId4" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: cornflowerblue;" src="{{urlFront4}}" height="200">
+                margin-top: -50px; " src="{{urlFront4}}" height="200">
 
             <img id="frontPreviewId5" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: crimson;" src="{{urlFront5}}" height="200">
+                margin-top: -50px;" src="{{urlFront5}}" height="200">
 
             <img id="frontPreviewId6" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: cyan;" src="{{urlFront6}}" height="200">
+                margin-top: -50px; " src="{{urlFront6}}" height="200">
 
             <img id="frontPreviewId7" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: darkblue;" src="{{urlFront7}}" height="200">
+                margin-top: -50px; " src="{{urlFront7}}" height="200">
 
             <img id="frontPreviewId8" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: darkcyan;" src="{{urlFront8}}" height="200">
+                margin-top: -50px; " src="{{urlFront8}}" height="200">
 
             <img id="frontPreviewId9" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: darkgoldenrod;" src="{{urlFront9}}" height="200">
+                margin-top: -50px; " src="{{urlFront9}}" height="200">
 
             <img id="frontPreviewId10" style="display: none; margin-left: 12px; width: 140px; height: 105px;
-                margin-top: -50px; background: darkgreen;" src="{{urlFront10}}" height="200">
+                margin-top: -50px; " src="{{urlFront10}}" height="200">
 
         </div>
 
@@ -384,7 +394,10 @@
                 <h6 class="labelText">LABEL</h6>
             </div>
             <div class="grid-AdvanceDropDownRight">
-
+                <select class="labelDropdown" style="margin-top: -1px; width: 200px; margin-left: 66px; background:
+                #EFBE24;border-radius: 5px;">
+                    <option> </option>
+                </select>
             </div>
         </div>
         <div class="grid-AdvanceSettings2">
@@ -526,20 +539,24 @@
                         <input type=text class="Msg-Title-Style" id="Msg-TitleId">
                     </div>
                     <div class="grid-Msg-Add">
-                        <img class="imgPlus" id="imgPlusId" (click)="MsgTitlePlus()"  src="assets/icons/plus.png">
+                        <img class="imgPlus" id="imgPlusId" (click)="MsgTitlePlus()" src="assets/icons/plus.png">
                     </div>
                 </div>
             </div>
+
             <div class="grid-MsgTitleFoot">
-                <div class="grid-MsgTitle-Foot">
-                    <div class="grid-MsgTitle-Label"  >
-                        <label  id="MsgTitleLabel" class="MsgTitle-Label">{{msgTitle}}</label>
+                <ng-container *ngFor="let item of title;">
+                    <div class="grid-MsgTitle-Foot">
+                        <div class="grid-MsgTitle-Label">
+                            <label class="MsgTitle-Label" id="MsgTitleLabel">{{item.titles}}</label>
+                        </div>
+                        <div class="grid-MsgTitle-Edit-Close">
+                            <img id="imgEdit-MsgTitle" (click)="edit(  )" class="imgEdit" src="assets/icons/edit.png">
+                            <img id="imgClose-MsgTitle" (click)="close('id')" class="imgClose"
+                                src="assets/icons/close.png">
+                        </div>
                     </div>
-                    <div class="grid-MsgTitle-Edit-Close">
-                        <img id="imgEdit-MsgTitle" class="imgEdit" src="assets/icons/edit.png">
-                        <img id="imgClose-MsgTitle" class="imgClose" src="assets/icons/close.png">
-                    </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -597,13 +614,13 @@
             <div class="grid-DeliverableHead">
                 <div class="grid-DeliverableHeadSub">
                     <div class="grid-Location">
-                        <p class="Location-Text">LOCATION</p>
+                        <p class="Location-Text" style="margin-top: 10px;">LOCATION</p>
                     </div>
                     <div class="grid-Price">
-                        <p class="Price-Text">PRICE</p>
+                        <p class="Price-Text" style="margin-top: 10px;" id="Price-Id">PRICE</p>
                     </div>
                     <div class="grid-QtyPrice">
-                        <p class="Qty-Price-Text">QTY PRICE</p>
+                        <p class="Qty-Price-Text" style="margin-top: 10px;" id="Qty-Price-Id">QTY PRICE</p>
                     </div>
                 </div>
             </div>
@@ -615,13 +632,17 @@
                     <img class="imgEdit" src="assets/icons/edit.png">
                     <img class="imgClose" src="assets/icons/close.png">
                 </div>
+                <hr>
             </div>
             <div class="grid-DeliverableFoot">
                 <div class="grid-DeliverableFootSub">
                     <div class="deliverable-Add-Foot">
                         <img class="imgPlus" src="assets/icons/plus.png">
                     </div>
+                    <div class="location-Text-Style" style="margin-left: -172px; color: #009145; margin-top: -26px;">Add
+                        Another Location </div>
                 </div>
+                <hr>
             </div>
         </div>
     </div>
@@ -696,20 +717,22 @@
                                         <input type=text class="Actual-Price-Label-Style" id="Actual-Price">
                                     </div>
                                     <div class="grid-Add-Bundle">
-                                        <img class="imgPlus" src="assets/icons/plus.png" id="addBulkDisc">
+                                        <img class="imgPlus" src="assets/icons/plus.png" id="addBulkDiscId"
+                                            (click)=addBulkDisc()>
                                     </div>
                                 </div>
                             </div>
                             <div class="grid-Bundle-Foot">
+
                                 <div class="grid-Bundle-Body-1">
                                     <div class="grid-Qty-Label-1">
-                                        <input type=text class="Bundle-Qty-Label-Style" id="Qty-Label">
+                                        <label type=text class="Bundle-Qty-Label-Style" id="Qty-Label"> </label>
                                     </div>
                                     <div class="grid-Disc-Price-Label-1">
-                                        <input type=text class="Bundle-Qty-Label-Style" id="Price-Label">
+                                        <label type=text class="Bundle-Qty-Label-Style" id="Price-Label"> </label>
                                     </div>
                                     <div class="grid-Actual-Price-1">
-                                        <input type=text class="Bundle-Actual-Label-Style" id="Actual-Label">
+                                        <label type=text class="Bundle-Actual-Label-Style" id="Actual-Label"> </label>
                                     </div>
                                     <div class="grid-Edit-Close-Bundle-1">
                                         <img class="imgEdit" src="assets/icons/edit.png">
@@ -762,25 +785,30 @@
             <div class="grid-FaqHead">
                 <div class="grid-Faq-Head">
                     <div class="grid-Ques-Sect1">
-                        <p>Question :</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Question :</p>
                         <input type=text class="Ques-Sect1-Style" id="Ques-Sect1">
                     </div>
                     <div class="grid-Add">
-                        <img class="imgPlus" src="assets/icons/plus.png">
+                        <img class="imgPlus" src="assets/icons/plus.png" id="faq-Add-Id" (click)="faqAdd(  )">
                     </div>
                     <div class="grid-Ans-Sect2">
-                        <p>Answer :</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Answer :</p>
                         <input type=text class="Ans-Sect2-Style" id="Ans-Sect2">
                     </div>
                 </div>
             </div>
             <div class="grid-FaqFoot">
-                <div class="grid-Faq-Foot">
-                    <div class="grid-Faq-Edit-Close">
-                        <img class="imgEdit" src="assets/icons/edit.png">
-                        <img class="imgClose" src="assets/icons/close.png">
+                <ng-container *ngFor="let item of faq;">
+                    <div class="grid-Faq-Foot">
+                        <div class="grid-Faq-Label">
+                            <label class="faq-Label" id="faqLabel">{{item.faqs}}</label>
+                        </div>
+                        <div class="grid-Faq-Edit-Close">
+                            <img  id="faq-Edit-Id" class="imgEdit" src="assets/icons/edit.png">
+                            <img id="faq-Close-Id" class="imgClose" (click)="FaqClose( )" src="assets/icons/close.png">
+                        </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>
