@@ -1,3 +1,20 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+// font-family: BitterBold;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
 @mixin sm {
 	@media (max-width: 1050px) {
 		@content;
@@ -63,6 +80,21 @@
 	width: 100%;
 	grid-template-rows: repeat(6, auto);
 	grid-template-areas: "shopBg" "shopDescBio" "shopProducts" "shopShipment" "shopPolicies" "shopQuestion";
+	.headClass {
+		font-family: BitterBold;
+		font-size: $Header;
+		text-align: center;
+	}
+	.policies {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+	}
+	.desc {
+		font-family: BitterBold;
+		font-size: $SubText;
+		color: #333333;
+	}
 	.shopBg {
 		grid-area: shopBg;
 		// background-color: whitesmoke;
@@ -73,26 +105,42 @@
 		}
 
 		.btnCover {
-			border: 2px solid gray;
+			// border: 2px solid gray;
 			color: gray;
 			width: auto;
 			cursor: pointer;
-			background-color: white;
+			background-color: transparent;
 			position: relative;
 			overflow: hidden;
+			border: none;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			// padding:6px 25px 6px 25px;
+			// &:hover{
+			// 	cursor: pointer;
+			// 	background-color: #ddb01d;
+			// }
 			display: inline-block;
 			top: -90%;
-			right: -88%;
+			right: -86%;
 			width: auto;
 			// padding: 8px 20px;
 			// border-radius: 8px;
 			font-size: 16px;
 			font-weight: bold;
+			font-family: Bitter;
+			border: none;
 			&:hover {
 				background-color: whitesmoke;
 			}
 		}
 
+		.btnCoverUpload {
+			// border: none;
+			border: none;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+		}
 		.upload-btn-wrapper input[type="file"] {
 			font-size: 50px;
 			position: absolute;
@@ -125,41 +173,23 @@
 			grid-template-columns: 25% 25% 50%;
 			grid-template-rows: auto;
 			grid-template-areas: ". shopLogo shopInfo";
-			
+
 			.shopLogo {
 				margin-block-start: 43%;
 				grid-area: shopLogo;
-				// /* relevant styles */
-				// .img__wrap {
-				// 	position: relative;
-				// 	height: 200px;
-				// 	width: 257px;
-				// }
-				
-				// .img__description {
-				// 	position: absolute;
-				// 	top: 0;
-				// 	bottom: 0;
-				// 	left: 0;
-				// 	right: 0;
-				// 	background: rgba(29, 106, 154, 0.72);
-				// 	color: #fff;
-				// 	visibility: hidden;
-				// 	opacity: 0;
-				
-				// 	/* transition effect. not necessary */
-				// 	transition: opacity .2s, visibility .2s;
-				// }
-				
-				// .img__wrap:hover .img__description {
-				// 	visibility: visible;
-				// 	opacity: 1;
-				// }
 
 				img {
-					width: 100%;
+					// width: 100%;
+					// height: 10rem;
+					// object-fit: contain;
+					width: 82%;
 					height: 10rem;
+					-o-object-fit: contain;
 					object-fit: contain;
+					border-bottom-left-radius: 10px;
+					border-bottom-right-radius: 10px;
+					border-radius: 10px;
+					margin-left: 18px;
 				}
 				.upload-btn-wrapper {
 					position: relative;
@@ -168,17 +198,23 @@
 				}
 
 				.btnLogo {
-					border: 2px solid gray;
-					color: gray;
 					width: 100%;
 					cursor: pointer;
-					background-color: white;
+					border-bottom-left-radius: 10px;
+					border-bottom-right-radius: 10px;
 					// padding: 8px 20px;
 					// border-radius: 8px;
 					font-size: 16px;
-					font-weight: bold;
+					font-family: BitterBold;
+					background-color: #dbdbdb;
+					color: #646464;
+					margin-left: 1.1rem;
+					width: 10rem;
+					transform: translate(0px, -1.7rem);
+					// font-weight: bold;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 					&:hover {
-						background-color: whitesmoke;
+						background-color: rgb(151, 151, 151);
 					}
 				}
 
@@ -203,15 +239,35 @@
 
 					.btnCustomer {
 						grid-area: btnCustomer;
+						font-family: BitterBold;
+						font-size: $SubText;
 						margin-left: 100px;
 						button {
+							border: none;
+							box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+							border-radius: 5px;
+							// padding:6px 25px 6px 25px;
+							&:hover{
+								cursor: pointer;
+								background-color: #ddb01d;
+							}
 							background-color: #efbe24;
 							color: white;
 						}
 					}
 					.btnDescEdit {
 						grid-area: btnDescEdit;
+						font-family: BitterBold;
+						font-size: $SubText;
 						button {
+							border: none;
+							box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+							border-radius: 5px;
+							// padding:6px 25px 6px 25px;
+							&:hover{
+								cursor: pointer;
+								background-color: #ddb01d;
+							}
 							background-color: #efbe24;
 							color: white;
 						}
@@ -233,43 +289,36 @@
 					}
 					.sCategory {
 						grid-area: sCategory;
-
 					}
 					.sH5 {
 						grid-area: sH5;
 						display: grid;
 						grid-template-rows: repeat(6, auto);
 						grid-template-areas:
-						"addr2Shop"
-						"cityShop"
-						"districtShop"
-						"stateShop"
-						"countryShop"
-						"pincodeShop";
+							"addr2Shop"
+							"cityShop"
+							"districtShop"
+							"stateShop"
+							"countryShop"
+							"pincodeShop";
 
-						.addr2Shop{
-							grid-area:addr2Shop;
-
+						.addr2Shop {
+							grid-area: addr2Shop;
 						}
-						.cityShop{
-							grid-area:cityShop;
-
+						.cityShop {
+							grid-area: cityShop;
 						}
-						.districtShop{
-							grid-area:districtShop;
-
+						.districtShop {
+							grid-area: districtShop;
 						}
-						.stateShop{
-							grid-area:stateShop;
-
+						.stateShop {
+							grid-area: stateShop;
 						}
-						.countryShop{
-							grid-area:countryShop;
-
+						.countryShop {
+							grid-area: countryShop;
 						}
-						.pincodeShop{
-							grid-area:pincodeShop;
-
+						.pincodeShop {
+							grid-area: pincodeShop;
 						}
 					}
 					.sH6 {
@@ -287,13 +336,13 @@
 							border: 1px solid #ddd;
 							margin-bottom: 12px;
 						}
-					
+
 						#myUL {
 							list-style-type: none;
 							padding: 0;
 							margin: 0;
 						}
-					
+
 						#myUL li a {
 							border: 1px solid #ddd;
 							margin-top: -1px; /* Prevent double borders */
@@ -304,7 +353,7 @@
 							color: black;
 							display: block;
 						}
-					
+
 						#myUL li a:hover:not(.header) {
 							background-color: #eee;
 						}
@@ -323,7 +372,7 @@
 								border-radius: 25px;
 								background-color: #efbe24;
 							}
-				
+
 							.closebtn {
 								padding-left: 10px;
 								color: #888;
@@ -332,7 +381,7 @@
 								font-size: 20px;
 								cursor: pointer;
 							}
-				
+
 							.closebtn:hover {
 								color: #000;
 							}
@@ -532,9 +581,11 @@
 				margin-left: 5%;
 				margin-right: 5%;
 				width: auto;
-				h3 {
+				.bioHeader {
 					margin-block-start: 5%;
 					margin-inline-start: 5%;
+					font-family: BitterBold;
+					font-size: $Header;
 				}
 				.bioTxt {
 					margin-inline-end: 10%;
@@ -542,7 +593,17 @@
 				}
 				button {
 					background-color: #efbe24;
+					border: none;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					border-radius: 5px;
+					// padding:6px 25px 6px 25px;
+					&:hover{
+						cursor: pointer;
+						background-color: #ddb01d;
+					}
 					color: white;
+					font-family: BitterBold;
+					font-size: $SubText;
 				}
 				.bioTxtArea {
 					margin-inline-end: 10%;
@@ -552,9 +613,21 @@
 				}
 			}
 			.btnAdvSetting {
+				font-family: BitterBold;
+				font-size: $SubText;
 				button {
 					background-color: #efbe24;
 					color: white;
+					margin-left: 50px;
+					margin-top: 25px;
+					border: none;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					border-radius: 5px;
+					padding:6px 25px 6px 25px;
+					&:hover{
+						cursor: pointer;
+						background-color: #ddb01d;
+					}
 				}
 			}
 		}
@@ -574,6 +647,15 @@
 			margin-right: auto;
 			background-color: #efbe24;
 			color: white;
+			font-family: BitterBold;
+			font-size: $SubText;
+			border: none;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			&:hover{
+				cursor: pointer;
+				background-color: #ddb01d;
+			}
 		}
 		.dvCatMain {
 			grid-template-columns: repeat(3, 1fr);
@@ -709,12 +791,16 @@
 							height: 30px;
 							color: white;
 							background-color: #009145;
+							font-family: BitterBold;
+							font-size: $SubText;
 						}
 						.btnDelete {
 							grid-area: btnDelete;
 							width: 50px;
 							height: 30px;
 							background-color: #ff1d25;
+							font-family: BitterBold;
+							font-size: $SubText;
 						}
 					}
 				}
@@ -732,7 +818,7 @@
 			border-bottom: #009145 50px solid;
 			grid-template-columns: auto;
 			grid-template-rows: 103% auto;
-			grid-template-areas: ".""textP";
+			grid-template-areas: "." "textP";
 
 			p {
 				grid-area: textP;
@@ -754,7 +840,16 @@
 			margin-left: auto;
 			margin-right: auto;
 			background-color: #efbe24;
+			border: none;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
 			color: white;
+			font-family: BitterBold;
+			font-size: $SubText;
+			&:hover{
+				cursor: pointer;
+				background-color: #ddb01d;
+			}
 		}
 		.prodPolicy {
 			// margin: 0rem 1rem 5rem 1rem;
@@ -766,7 +861,7 @@
 				z-index: 0;
 				transform: translate(0rem, 2rem);
 			}
-			h2 {
+			p {
 				text-align: center;
 				//   position: absolute;
 				transform: translate(0px, -0.45em);
@@ -796,7 +891,7 @@
 				z-index: 0;
 				// position: absolute;
 			}
-			h2 {
+			p {
 				text-align: center;
 				//   position: absolute;
 				transform: translate(0px, -0.45em);
@@ -826,7 +921,7 @@
 				z-index: 0;
 				// position: absolute;
 			}
-			h2 {
+			p {
 				text-align: center;
 				//   position: absolute;
 				transform: translate(0px, -0.45em);
@@ -856,7 +951,7 @@
 				z-index: 0;
 				// position: absolute;
 			}
-			h2 {
+			p {
 				text-align: center;
 				//   position: absolute;
 				transform: translate(0px, -0.45em);
@@ -892,7 +987,7 @@
 			z-index: 0;
 			transform: translate(0rem, 2rem);
 		}
-		h2 {
+		p {
 			text-align: center;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
@@ -902,6 +997,9 @@
 			grid-template-columns: auto;
 			grid-template-rows: auto;
 			grid-template-areas: "divSA ";
+			font-size: 16px;
+			font-family: Bitter;
+			color: #333333;
 			// "divQA "
 			.divSA {
 				grid-area: divSA;
@@ -912,9 +1010,30 @@
 				.search {
 					grid-area: search;
 					.searchBox {
-						transform: translate(0rem, -0.3rem);
+						// transform: translate(0rem, -0.3rem);
+						transform: translate(0rem, -7px);
+						width: 30rem;
+						background-color: #dbdbdb;
+						border: none;
+						height: 40px;
+						padding-left: 20px;
 					}
 					button {
+						background-color: #dbdbdb;
+						border: none;
+						height: 40px;
+						border: none;
+						// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+						// border-radius: 5px;
+						// // padding:6px 25px 6px 25px;
+						// &:hover{
+						// 	cursor: pointer;
+						// 	background-color: #ddb01d;
+						// }
+						&:hover {
+							cursor: pointer;
+							background-color: #cfcfcf;
+						}
 						img {
 							height: 25px;
 							width: 20px;
@@ -924,7 +1043,32 @@
 				}
 				.askQ {
 					grid-area: askQ;
-					margin-left: 20%;
+					margin-left: 2rem;
+					.submitFaq {
+						width: 30rem;
+						background-color: #dbdbdb;
+						border: none;
+						height: 40px;
+						padding-left: 20px;
+					}
+					button {
+						background-color: #efbe24;
+						color: white;
+						border: none;
+						// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+						// border-radius: 5px;
+						// // padding:6px 25px 6px 25px;
+						&:hover{
+							cursor: pointer;
+							background-color: #ddb01d;
+						}
+						// border: none;
+						height: 40px;
+						// &:hover {
+						// 	cursor: pointer;
+						// 	background-color: #dba716;
+						// }
+					}
 				}
 			}
 			.questionAnswer {
@@ -935,16 +1079,21 @@
 				.divQA {
 					// grid-area: divQA;
 					// height: auto;
+					margin-top: 20px;
+					padding-bottom: 5%;
 					width: 50%;
 					// display: grid;
 					// grid-template-columns: repeat(2, auto);
 					// float: left;
 					.qA {
 						margin-left: 10%;
-						// .question {
-						// }
-						// .answer {
-						// }
+						.question {
+							color: #333333;
+						}
+						.answer {
+							margin-top: 10px;
+							color: #949494;
+						}
 					}
 				}
 			}
@@ -954,8 +1103,8 @@
 				height: 50px;
 				width: 50px;
 			}
-			&:hover{
-				cursor:pointer;
+			&:hover {
+				cursor: pointer;
 			}
 		}
 	}

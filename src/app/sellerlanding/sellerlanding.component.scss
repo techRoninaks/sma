@@ -1,9 +1,30 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+// font-family: BitterBold;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
 .mGrid {
 	display: grid;
 	grid-template-rows: repeat(9, auto);
 	grid-auto-columns: auto;
 	grid-template-areas: "banner" "about" "spec" "banSmall" "howWork" "quote" "blogPosts" "plans" "customerQA";
 	width: auto;
+	.headClass {
+		font-family: BitterBold;
+		font-size: $Header;
+		text-align: center;
+	}
 	.banner {
 		grid-area: banner;
 		margin-bottom: 50px;
@@ -205,7 +226,7 @@
 			background-color: white;
 		}
 		/* Fading animation */
-		.nextPrev{
+		.nextPrev {
 			z-index: 17;
 		}
 		.fade {
@@ -242,7 +263,8 @@
 	}
 	.about {
 		grid-area: about;
-		margin-bottom: 50px;
+		margin: 25px 100px 50px 100px;
+		width: auto;
 		.aboutHeader {
 			img {
 				display: block;
@@ -250,18 +272,20 @@
 				margin-right: auto;
 				width: 300px;
 				z-index: 0;
-				transform: translate(0rem, 2rem);
+				transform: translate(0rem, 3rem);
 			}
-			h2 {
+			.headClass {
+				font-family: BitterBold;
+				font-size: $Header;
 				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
 			}
 		}
-		p {
+		.pAbout {
 			text-align: justify;
 			text-align: center;
+			font-size: $SubText;
+			font-family: Bitter;
+			color: #646464;
 		}
 	}
 	.spec {
@@ -280,14 +304,21 @@
 			justify-self: center;
 			text-align: center;
 			width: auto;
+			font-size: $Text;
+			font-family: BitterBold;
+			color: #646464;
 		}
 		.bodySpec {
 			justify-self: center;
 			text-align: center;
 			width: auto;
+			font-size: $SubText;
+			font-family: Bitter;
+			color: #949494;
+			height: auto;
 		}
 		#specId {
-			height: 17rem;
+			height: 22rem;
 		}
 		.spec1 {
 			padding-top: 15%;
@@ -473,8 +504,10 @@
 				text-align: center;
 				font-size: 3rem;
 				padding: 100px;
+				font-family: BitterBold;
+				font-size: $Header;
 			}
-			&:hover{
+			&:hover {
 				cursor: pointer;
 			}
 			grid-area: banRight;
@@ -500,14 +533,14 @@
 				margin-right: auto;
 				width: 300px;
 				z-index: 0;
-				transform: translate(0rem, 2rem);
+				transform: translate(0rem, 3rem);
 			}
-			h2 {
-				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
-			}
+			// h2 {
+			// 	text-align: center;
+			// 	//   position: absolute;
+			// 	transform: translate(0px, -0.45em);
+			// 	z-index: 1;
+			// }
 		}
 		.how1 {
 			grid-area: how1;
@@ -545,16 +578,22 @@
 			justify-self: center;
 			text-align: center;
 			width: auto;
+			font-size: $Text;
+			font-family: BitterBold;
+			color: #646464;
 		}
 		.bodyHow {
 			justify-self: center;
 			text-align: center;
 			width: auto;
 			p {
-				height: 4rem;
+				height: 5rem;
 				display: -webkit-box;
 				-webkit-line-clamp: initial;
 				overflow: hidden;
+				font-size: $SubText;
+				font-family: Bitter;
+				color: #949494;
 			}
 		}
 		img {
@@ -576,7 +615,13 @@
 			grid-area: leftArrow;
 			height: 100px;
 			width: 80px;
-			margin-top: 10rem;
+			// margin-top: 10rem;
+			margin-top: 7rem;
+			margin-left: 5rem;
+			font-size: 100px;
+			color: gray;
+			opacity: 0.5;
+			font-family: Bitte;
 			&:hover {
 				cursor: pointer;
 			}
@@ -585,7 +630,13 @@
 			grid-area: rightArrow;
 			height: 100px;
 			width: 80px;
-			margin-top: 10rem;
+			// margin-top: 10rem;
+			margin-top: 7rem;
+			margin-right: 5rem;
+			font-size: 100px;
+			color: gray;
+			opacity: 0.5;
+			font-family: Bitte;
 			&:hover {
 				cursor: pointer;
 			}
@@ -599,7 +650,7 @@
 			margin-right: auto;
 		}
 		#posts {
-			margin: 10%;
+			margin: 10% 10% 0 10%;
 			width: auto;
 		}
 		.post1 {
@@ -612,8 +663,8 @@
 				#imageP {
 					grid-area: imageP;
 					clip-path: circle(50% at 50% 50%);
-					height: 100px;
-					width: 100px;
+					height: 140px;
+					width: 140px;
 					justify-self: center;
 					object-fit: cover;
 				}
@@ -623,6 +674,10 @@
 					justify-self: center;
 					text-align: center;
 					width: auto;
+					font-size: 16px;
+					font-family: Bitter;
+					color: #333333;
+					margin-top: 20px;
 				}
 			}
 			.authP {
@@ -631,6 +686,9 @@
 					text-align: center;
 					width: auto;
 					font-weight: bold;
+					font-size: $SubText;
+					font-family: BitterBold;
+					color: #111111;
 				}
 			}
 		}
@@ -644,8 +702,8 @@
 				#imageP {
 					grid-area: imageP;
 					clip-path: circle(50% at 50% 50%);
-					height: 100px;
-					width: 100px;
+					height: 140px;
+					width: 140px;
 					justify-self: center;
 					object-fit: cover;
 				}
@@ -655,6 +713,10 @@
 					justify-self: center;
 					text-align: center;
 					width: auto;
+					font-size: 16px;
+					font-family: Bitter;
+					color: #333333;
+					margin-top: 20px;
 				}
 			}
 			.authP {
@@ -663,6 +725,9 @@
 					text-align: center;
 					width: auto;
 					font-weight: bold;
+					font-size: $SubText;
+					font-family: BitterBold;
+					color: #111111;
 				}
 			}
 		}
@@ -713,14 +778,14 @@
 				margin-right: auto;
 				width: 300px;
 				z-index: 0;
-				transform: translate(0rem, 2rem);
+				transform: translate(0rem, 3rem);
 			}
-			h2 {
-				text-align: center;
-				//   position: absolute;
-				transform: translate(0px, -0.45em);
-				z-index: 1;
-			}
+			// h2 {
+			// 	text-align: center;
+			// 	//   position: absolute;
+			// 	transform: translate(0px, -0.45em);
+			// 	z-index: 1;
+			// }
 		}
 		#blogs {
 			// margin: 10%;
@@ -730,7 +795,7 @@
 			grid-area: post;
 			display: grid;
 			grid-column-gap: 5%;
-			grid-template-columns: repeat(3,auto);
+			grid-template-columns: repeat(3, auto);
 			grid-template-rows: auto;
 			// overflow-x: scroll;
 			// overflow: auto;
@@ -856,9 +921,9 @@
 	.customerQA {
 		grid-area: customerQA;
 		margin: 5% 5% auto 5%;
-		width: Auto;
-		height: 300px;
-		margin-block-end: 2%;
+		width: auto;
+		height:auto;
+		margin-block-end: 5%;
 		box-sizing: border-box;
 		img {
 			display: block;
@@ -867,18 +932,21 @@
 			width: 550px;
 			height: 50px;
 			z-index: 0;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 		}
-		h2 {
-			text-align: center;
-			transform: translate(0px, -0.45em);
-			z-index: 1;
-		}
+		// h2 {
+		// 	text-align: center;
+		// 	transform: translate(0px, -0.45em);
+		// 	z-index: 1;
+		// }
 		.divCustomerQA {
 			display: grid;
 			grid-template-columns: auto;
 			grid-template-rows: auto;
 			grid-template-areas: "divSA ";
+			font-size: 16px;
+			font-family: Bitter;
+			color: #333333;
 			// "divQA "
 			.divSA {
 				grid-area: divSA;
@@ -889,39 +957,73 @@
 				.search {
 					grid-area: search;
 					.searchBox {
-						transform: translate(0rem, -0.3rem);
+						transform: translate(0rem, -7px);
+						width: 30rem;
+						background-color: #dbdbdb;
+						border:none;
+						height: 40px;
+						padding-left: 20px;
 					}
 					button {
+						background-color: #dbdbdb;
+						border:none;
+						height:40px;
+						&:hover{
+							cursor: pointer;
+							background-color: #cfcfcf;
+						}
 						img {
 							height: 25px;
-							width: 20px;
+							width: 24px;
 							transform: translate(0rem, 0rem);
 						}
 					}
 				}
 				.askQ {
 					grid-area: askQ;
-					margin-left: 20%;
+					margin-left: 2rem;
+					.submitFaq{
+						width: 30rem;
+						background-color: #dbdbdb;
+						border:none;
+						height: 40px;
+						padding-left: 20px;					}
+					button{
+						background-color: #efbe24;
+						color: white;
+						border:none;
+						height:40px;
+						&:hover{
+							cursor: pointer;
+							background-color: #dba716;
+						}
+					}
 				}
 			}
 			.questionAnswer {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
-				margin: 0px 40px 0px 40px;
+				margin: 15px 40px 0px 40px;
 				width: auto;
 				.divQA {
 					// grid-area: divQA;
 					// height: auto;
+					margin-top: 20px;
+					padding-bottom: 5%;
+					// padding: 50px;
 					width: 50%;
 					// display: grid;
 					// grid-template-columns: repeat(2, auto);
 					// float: left;
 					.qA {
 						margin-left: 10%;
-						// .question {
-						// }
-						// .answer {
-						// }
+						.question {
+							color: #333333;
+						}
+						.answer {
+							margin-top: 10px;
+							color: #949494;
+						}
 					}
 				}
 			}
@@ -931,8 +1033,8 @@
 				height: 50px;
 				width: 50px;
 			}
-			&:hover{
-				cursor:pointer;
+			&:hover {
+				cursor: pointer;
 			}
 		}
 	}

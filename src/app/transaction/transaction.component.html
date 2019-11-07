@@ -7,7 +7,7 @@
 </div> -->
 <div class="transHeader">
     <img src="assets/icons/resources (IL)-18.png">
-    <h2>TRANSACTIONS</h2>
+    <p class="headerT">TRANSACTIONS</p>
 </div>
 <!-- <table align="center">
     <tr>
@@ -33,8 +33,7 @@
             <p><img class="icon" src="assets/icons/resources (TP)-17.png">ORDER No.</p>
         </div>
         <div id="transHeader" class="statusHeader">
-            <div class="dropdown">
-                <!-- dropdown-toggle -->
+            <!-- <div class="dropdown">
                 <button type="button" class="btn btn-warning" style="color: white;display: contents;"
                     data-toggle="dropdown"><img class="icon" src="assets/icons/resources (TP)-18.png">Status </button>
                 <div class="dropdown-menu">
@@ -43,8 +42,19 @@
                         <div class="dropdown-item" (click)="stat(transactionStatus[sta].status);" style="height: 40px;">
                             {{transactionStatus[sta].status}}</div>
                     </div>
-                    <!-- <div class="dropdown-item" (click)="refund();" style="height: 40px;">Refund</div>
-                    <div class="dropdown-item" (click)="processing();" style="height: 40px;">Processing</div> -->
+                </div>
+            </div> -->
+            <!-- dropdown-toggle btn btn-secondary  -->
+            <div class="dropdown">
+                <button class="dpBtn" type="button" id="dropdownMenu" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><img class="icon"
+                        src="assets/icons/resources (TP)-18.png">Status </button>
+                <div class="dropdown-menu dpMenu" aria-labelledby="dropdownMenu">
+                    <div class="dropdown-item dpItem" (click)="allStatus();" style="height: 40px;">All</div>
+                    <div *ngFor="let sta of Object.keys(this.transactionStatus)">
+                        <div class="dropdown-item dpItem" (click)="stat(transactionStatus[sta].status);" style="height: 40px;">
+                            {{transactionStatus[sta].status}}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,18 +63,18 @@
     <div class="transTbData">
         <div class="tbData" *ngFor="let item of Object.keys(this.transactionData)">
             <div id="transData" class="transNoData">
-                <p>{{this.transactionData[item].transactionId}}</p>
-                <p><span>MODE:</span>{{this.transactionData[item].paymentMode}}</p>
+                <p style="color: #646464;">{{this.transactionData[item].transactionId}}</p>
+                <p style="color: #949494;" ><span>mode:</span>{{this.transactionData[item].paymentMode}}</p>
 
             </div>
             <div id="transData" class="prodNameData">
-                <p>{{this.transactionData[item].productName}}</p>
+                <p style="color: #646464;">{{this.transactionData[item].productName}}</p>
             </div>
             <div id="transData" class="orderNoData">
-                <p>{{this.transactionData[item].orderId}}</p>
+                <p style="color: #646464;">{{this.transactionData[item].orderId}}</p>
             </div>
             <div id="transData" class="statusData">
-                <p>{{this.transactionData[item].status}}</p>
+                <p style="color: #646464;">{{this.transactionData[item].status}}</p>
             </div>
         </div>
     </div>
