@@ -762,8 +762,17 @@ getUser() {
   //  }
 
 getdynamicPriceAddProduct(prodid: any) {
-    let httpParams = new HttpParams()
-      .append("prodid", prodid);
+let httpParams = new HttpParams(){
+.append("return_policy", data['return_policy'])
+.append("add_custom_message_field", data['add_custom_message_field’])
+.append("product_policy", data['product_policy'])
+// .append("shipping_location", data['shipping_location'])
+.append("quantity_price", data['quantity_price'])
+.append("price", data['price']);
+// .append("location_alias", data['location_alias'])
+// .append("pincode", data['pincode'])
+// .append("shipping_location_id", data['shipping_location_id'])
+// .append("remarks", data['remarks'])
     return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceAddProduct.php', httpParams);
   }
 
