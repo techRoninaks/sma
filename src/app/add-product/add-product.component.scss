@@ -1194,6 +1194,7 @@ $SubText: 18px;
 						background: #dbdbdb;
 						border: none;
 						border-radius: 5px;
+						text-align: center;
 					}
 				}
 			}
@@ -1474,7 +1475,9 @@ $SubText: 18px;
 		grid-area: grid-MsgTitleHead;
 		background: #f1f1f1;
 		width: 600px;
-		margin-left: 450px;
+		margin-left: 430px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 		.grid-MsgTitle-Head {
 			display: grid;
 			grid-template-columns: 80% 20%;
@@ -1485,11 +1488,13 @@ $SubText: 18px;
 				.Msg-title-text {
 					margin-left: -555px;
 					font-family: "BitterBold";
+					margin-top: 10px;
 				}
 				.Msg-Title-Style {
 					margin-left: -556px;
 					width: 460px;
 					border: none;
+					border-radius: 5px;
 				}
 				.MsgTitle-Sect1-Style {
 					background: white;
@@ -1504,6 +1509,9 @@ $SubText: 18px;
 				.imgPlus {
 					cursor: pointer;
 					margin-left: -66px;
+					margin-bottom: 22px;
+					height: 20px;
+					margin-top: 13px;
 				}
 			}
 		}
@@ -1513,7 +1521,9 @@ $SubText: 18px;
 		grid-area: grid-MsgTitleFoot;
 		background: #dbdbdb;
 		width: 600px;
-		margin-left: 450px;
+		margin-left: 430px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
 		.grid-MsgTitle-Foot {
 			display: grid;
 			grid-template-columns: 80% 20%;
@@ -1522,7 +1532,7 @@ $SubText: 18px;
 			.grid-MsgTitle-Label {
 				grid-area: grid-MsgTitle-Label;
 				.MsgTitle-Label {
-				margin-left: 42px;
+				margin-left: 45px;
 				margin-top: 10px;
 				}
 			}
@@ -1530,11 +1540,15 @@ $SubText: 18px;
 				grid-area: grid-Faq-Edit-Close;
 				.imgEdit {
 					cursor: pointer;
-					margin-left: -110px;
+					margin-left: -93px;
+					height: 20px;
+					margin-top: -28px;
 				}
 				.imgClose {
 					cursor: pointer;
-					margin-left: 7px;
+					margin-left: 5px;
+					height: 20px;
+					margin-top: -28px;
 				}
 			}
 		}
@@ -1691,6 +1705,7 @@ $SubText: 18px;
 				color: white;
 				font-family: "BitterBold";
 				text-align: center;
+				border-top-left-radius: 5px;
 			}
 			.grid-Price {
 				grid-area: grid-Price;
@@ -1705,12 +1720,13 @@ $SubText: 18px;
 				color: white;
 				font-family: "BitterBold";
 				text-align: center;
+				border-top-right-radius: 5px;
 			}
 		}
 	}
 	.grid-DeliverableBody {
 		grid-area: grid-DeliverableBody;
-		background: lightcyan;
+		background: white;
 		width: 1050px;
 		margin-left: 230px;
 		.grid-DeliverableBodySub {
@@ -1722,42 +1738,53 @@ $SubText: 18px;
 			grid-template-areas: "deliverable-Location deliverable-Price deliverable-Qty-Price";
 			.deliverable-Location {
 				grid-area: deliverable-Location;
-				background: grey;
+				background: white;
 				font-family: "BitterBold";
 				text-align: center;
 				width: 250px;
 				margin-left: -42%;
 				margin-top: 10%;
+				border-radius: 5px;
 			}
 			.deliverable-Price {
 				grid-area: deliverable-Price;
-				background: grey;
+				background: white;
 				font-family: "BitterBold";
 				text-align: center;
 				width: 160px;
 				margin-left: -60%;
-				margin-top: 10%;
+				border-radius: 5px;
+				height: 30px;
+				margin-top: 42px;
 			}
 			.deliverable-Qty-Price {
 				grid-area: deliverable-Qty-Price;
-				background: grey;
+				background: white;
 				font-family: "BitterBold";
 				text-align: center;
 				width: 160px;
 				margin-left: -52%;
-				margin-top: 10%;
+				border-radius: 5px;
+				height: 30px;
+				margin-top: 42px;
 			}
 			.imgEdit {
-				margin-left: 178%;
+				margin-left: 180%;
+				height: 24px;
+				margin-top: -28px;
+				cursor: pointer;
 			}
 			.imgClose {
-				margin-left: 115%;
+				margin-left: 116%;
+				height: 24px;
+				margin-top: -28px;
+				cursor: pointer;
 			}
 		}
 	}
 	.grid-DeliverableFoot {
-		grid-area: grid-DeliverableBodyFoot;
-		background: lightcyan;
+		grid-area: grid-DeliverableFoot;
+		background: white;
 		width: 1050px;
 		margin-left: 230px;
 		.grid-DeliverableFootSub {
@@ -1769,8 +1796,21 @@ $SubText: 18px;
 			grid-template-areas: "deliverable-Add-Foot";
 			.deliverable-Add-Foot {
 				grid-area: deliverable-Add-Foot;
-				background: lightseagreen;
+				background: white;
+				margin-left: -230px;
+				width: 1050px;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
 				.imgPlus {
+					margin-left: 20px;
+					height: 24px;
+					margin-top: -10px;
+					cursor: pointer;
+				}
+				.location-Text-Style {
+					margin-left: -172px;
+					color:#009145;
+					margin-top: -26px;
 				}
 			}
 		}
@@ -1821,6 +1861,7 @@ $SubText: 18px;
 				text-align: center;
 				.proDiscText {
 					font-family: "BitterBold";
+					margin-left: 65px;
 				}
 			}
 			.grid-Pro-Disc-Container {
@@ -1918,6 +1959,7 @@ $SubText: 18px;
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
+				margin-left: -58px;
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
@@ -1931,6 +1973,10 @@ $SubText: 18px;
 					.grid-Bundle-Head {
 						grid-area: grid-Bundle-Head;
 						background: #f1f1f1;
+						border-top-left-radius: 5px;
+						border-top-right-radius: 5px;
+						margin-left: -36px;
+						height: 80px;
 						.grid-Bundle-Body {
 							display: grid;
 							grid-template-columns: auto auto auto auto;
@@ -1943,6 +1989,7 @@ $SubText: 18px;
 								text-align: center;
 								.qtyText {
 									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Disc-Price {
@@ -1950,6 +1997,7 @@ $SubText: 18px;
 								text-align: center;
 								.discPriceText {
 									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Actual-Price {
@@ -1957,6 +2005,7 @@ $SubText: 18px;
 								text-align: center;
 								.actualPriceText {
 									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Qty-Label {
@@ -1994,6 +2043,7 @@ $SubText: 18px;
 								grid-area: grid-Add-Bundle;
 								.imgPlus {
 									cursor: pointer;
+									height: 24px;
 								}
 							}
 						}
@@ -2001,6 +2051,10 @@ $SubText: 18px;
 					.grid-Bundle-Foot {
 						grid-area: grid-Bundle-Foot;
 						background: #dbdbdb;
+						height: 38px;
+						border-bottom-left-radius: 5px;
+						border-bottom-right-radius: 5px;
+						margin-left: -36px;
 						.grid-Bundle-Body-1 {
 							display: grid;
 							grid-template-columns: auto auto auto auto;
@@ -2037,9 +2091,13 @@ $SubText: 18px;
 								grid-area: grid-Add-Bundle-1;
 								.imgEdit {
 									cursor: pointer;
+									height: 24px;
+									margin-left: 550px;
 								}
 								.imgClose {
 									cursor: pointer;
+									margin-left: 5px;
+									height: 24px;
 								}
 							}
 						}
@@ -2096,6 +2154,7 @@ $SubText: 18px;
 	font-family: Bitter;
 	width: 800px;
 	margin-left: 345px;
+	border-radius: 5px;
 }
 .btnpolicySubmit {
 	.button {
@@ -2173,6 +2232,9 @@ $SubText: 18px;
 		background: #f1f1f1;
 		width: 600px;
 		margin-left: 450px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		height: 170px;
 		.grid-Faq-Head {
 			display: grid;
 			grid-template-columns: 80% 20%;
@@ -2187,6 +2249,7 @@ $SubText: 18px;
 					width: 450px;
 					border: none;
 					margin-left: 20px;
+					border-radius: 5px;
 				}
 			}
 			.grid-Add {
@@ -2195,6 +2258,8 @@ $SubText: 18px;
 				.imgPlus {
 					cursor: pointer;
 					margin-left: 50px;
+					height: 22px;
+					margin-top: 12px;
 				}
 			}
 			.grid-Ans-Sect2 {
@@ -2204,6 +2269,7 @@ $SubText: 18px;
 					width: 450px;
 					border: none;
 					margin-left: 20px;
+					border-radius: 5px;
 				}
 			}
 		}
@@ -2213,19 +2279,34 @@ $SubText: 18px;
 		background: #dbdbdb;
 		width: 600px;
 		margin-left: 450px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		height: 42px;
 		.grid-Faq-Foot {
 			display: grid;
 			grid-template-columns: 80% 20%;
 			grid-template-rows: auto;
-			grid-template-areas: ". grid-Faq-Edit-Close";
+			grid-template-areas: "grid-Faq-Label grid-Faq-Edit-Close";
+			.grid-Faq-Label {
+				grid-area: grid-Faq-Label;
+				.faq-Label {
+				margin-left: 22px;
+				margin-top: 10px;
+				}
+			}
 			.grid-Faq-Edit-Close {
 				grid-area: grid-Faq-Edit-Close;
 				.imgEdit {
 					cursor: pointer;
+					height: 24px;
+					margin-left: 10px;
+					margin-top: 10px;
 				}
 				.imgClose {
 					cursor: pointer;
 					margin-left: 14px;
+					height: 24px;
+					margin-top: 10px;
 				}
 			}
 		}

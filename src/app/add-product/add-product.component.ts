@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { type } from 'os';
+import { log } from 'util';
 // import { data } from 'jquery';
 
 var imageFront1: any = 1;
@@ -58,10 +60,10 @@ export class AddProductComponent implements OnInit {
   dynamicSubCategory: any = [];
   dynamicDataPriceDiscTotal: any = [];
   // urlFront = "assets/image/";
-  
+
   sellerId: any = "";
   flagAdd: boolean = false;
-
+  Object = Object;
   // imageU0: any;
   // imageU1: any;
   // imageU2: any;
@@ -97,6 +99,13 @@ export class AddProductComponent implements OnInit {
   commDec: any;
   totalPrice: any;
   msgTitle: any;
+  faqQ: any;
+  faqA: any;
+  arrayText: { text1: string; }[];
+  addText: (text: any) => void;
+
+  title = [];
+  faq = [];
 
 
 
@@ -107,9 +116,9 @@ export class AddProductComponent implements OnInit {
   // imageProduct3: object;
 
   ngOnInit() {
-    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
-    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
-    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display = "none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display = "none";
 
     this.sellerId = this.getCookie('sellerId');
 
@@ -138,7 +147,7 @@ export class AddProductComponent implements OnInit {
       },
     );
 
-    
+
 
     // this.imageUploaded0 = 0;
     // this.imageUploaded1 = 0;
@@ -243,7 +252,7 @@ export class AddProductComponent implements OnInit {
   frontUpload10() {
     imageFront10 = document.getElementById('frontUpload10').addEventListener('change', onFrontClick10.bind(this));
   }
-  
+
 
 
 
@@ -326,6 +335,8 @@ export class AddProductComponent implements OnInit {
       var pickup = (<HTMLInputElement><any>document.getElementById('pickupRadio')).checked;
 
 
+      var quantity_price = (<HTMLInputElement><any>document.getElementById("Qty-Price-Id")).value;
+      var price = (<HTMLInputElement><any>document.getElementById("Price-Id")).value;
       // var image0 = imageValue0;
       // var image1 = imageValue1;
       // var image2 = imageValue2;
@@ -347,7 +358,7 @@ export class AddProductComponent implements OnInit {
       else if (pickup == true) {
         var shipping_option = "pickup";
       }
-      this.addProduct = { name: name, base_price: base_price, short_desc: short_desc, Long_desc: Long_desc, spec: spec, qty_avble: qty_avble, max_order_quant: max_order_quant, min_order_quant: min_order_quant, avg_prcessing_time: avg_prcessing_time, avg_shpping_time: avg_shpping_time, tags: tags, auto_cancel_time: auto_cancel_time, max_no_of_image: max_no_of_image, has_gift: has_gift, shipping_option: shipping_option, has_order_confmn: has_order_confmn, can_orderbydate: can_orderbydate, can_upload_image: can_upload_image, add_custom_message_field: add_custom_message_field, has_rfq: has_rfq, has_instant_buy: has_instant_buy, shipping_policy: shipping_policy, return_policy: return_policy, product_policy: product_policy, active_status: active_status, bulk_discount_id: bulk_discount_id, offer_id: offer_id, cmsn_dedtd: cmsn_dedtd, image1: imageFront1, image2: imageFront2, image3: imageFront3, image4: imageFront4, image5: imageFront5, image6: imageFront6, image7: imageFront7, image8: imageFront8, image9: imageFront9, image10: imageFront10, sellerid :this.sellerId};
+      this.addProduct = { name: name, base_price: base_price, short_desc: short_desc, Long_desc: Long_desc, spec: spec, qty_avble: qty_avble, max_order_quant: max_order_quant, min_order_quant: min_order_quant, avg_prcessing_time: avg_prcessing_time, avg_shpping_time: avg_shpping_time, tags: tags, auto_cancel_time: auto_cancel_time, max_no_of_image: max_no_of_image, has_gift: has_gift, shipping_option: shipping_option, has_order_confmn: has_order_confmn, can_orderbydate: can_orderbydate, can_upload_image: can_upload_image, add_custom_message_field: add_custom_message_field, has_rfq: has_rfq, has_instant_buy: has_instant_buy, shipping_policy: shipping_policy, return_policy: return_policy, product_policy: product_policy, active_status: active_status, bulk_discount_id: bulk_discount_id, offer_id: offer_id, cmsn_dedtd: cmsn_dedtd, image1: imageFront1, image2: imageFront2, image3: imageFront3, image4: imageFront4, image5: imageFront5, image6: imageFront6, image7: imageFront7, image8: imageFront8, image9: imageFront9, image10: imageFront10, sellerid: this.sellerId, quantity_price: quantity_price, price: price };
 
       this.addProductMsgTitle = { title: this.msgTitle };
 
@@ -358,7 +369,7 @@ export class AddProductComponent implements OnInit {
       this.data.getdataPostAddProduct(this.addProduct).subscribe(data => {
         // this.location.replaceState('./dashboard');
 
-        window.location.href = './dashboard';
+        // window.location.href = './dashboard';
       });
 
       // this.imageProduct2 = {prodid: this.prodid, image: imageFront2 }
@@ -395,9 +406,9 @@ export class AddProductComponent implements OnInit {
       // this.data.frontUploadImageAddProd3(this.imageProduct3).subscribe(data => {
 
       // });
-      
+
     }
-    
+
 
     // if (x == 'prod') {
     // 	this.editPolicy = 0;
@@ -431,20 +442,42 @@ export class AddProductComponent implements OnInit {
 
 
   }
-  sub1()
-  {
+  sub1() {
     var shipping_policy = (<HTMLInputElement><any>document.getElementById("policyTxtAr")).value;
     var return_policy = (<HTMLInputElement><any>document.getElementById("policyTxtAr")).value;
     var product_policy = (<HTMLInputElement><any>document.getElementById("policyTxtAr")).value;
-    this.addProductPolicy = {shipping_policy: shipping_policy,return_policy:return_policy,product_policy:product_policy};
+    this.addProductPolicy = { shipping_policy: shipping_policy, return_policy: return_policy, product_policy: product_policy };
     this.data.getdataPostAddProduct(this.addProductPolicy).subscribe(data => {
     });
   }
 
   MsgTitlePlus() {
+    var i = 0;
     this.msgTitle = (<HTMLInputElement><any>document.getElementById("Msg-TitleId")).value;
+    this.title.push({ "id": i++, "titles": this.msgTitle });
+    console.log(this.title);
+  }
 
-    // this.addProductMsgTitle = { title: this.msgTitle };
+  close(id: any) {
+    document.getElementById("MsgTitleLabel").style.display = "none";
+    document.getElementById("imgEdit-MsgTitle").style.display = "none";
+    document.getElementById("faq-Close-Id").style.display = "none";
+  }
+
+
+  faqAdd() {
+    var i = 0;
+    this.faqQ = (<HTMLInputElement><any>document.getElementById("Ques-Sect1")).value;
+    this.faq.push({ "id": i++, "faqs": this.faqQ });
+    this.faqA = (<HTMLInputElement><any>document.getElementById("Ans-Sect2")).value;
+    this.faq.push({ "id": i++, "faqs": this.faqA });
+    console.log(this.faq);
+  }
+
+  FaqClose( ){
+    document.getElementById("faqLabel").style.display = "none";
+    document.getElementById("faq-Edit-Id").style.display = "none";
+    document.getElementById("imgClose-MsgTitle").style.display = "none";
   }
 
   prodDiscSubmit() {
@@ -461,6 +494,8 @@ export class AddProductComponent implements OnInit {
   }
 
   addBulkDisc() {
+
+
     var from_time_stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-1")).value;
     var to_tme_Stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-2")).value;
     var percentage = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
@@ -472,13 +507,13 @@ export class AddProductComponent implements OnInit {
     })
 
 
-    
+
 
   }
   ngOnDestroy() {
-    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
-    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
-    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display = "block";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display = "block";
   }
 
   // onClick(event) {
@@ -668,7 +703,7 @@ export class AddProductComponent implements OnInit {
   // }
 }
 
-  function onFrontClick(event) {
+function onFrontClick(event) {
   var reader = new FileReader();
   reader.readAsDataURL(event.target.files[0]);
   reader.onload = (event) => {
@@ -778,5 +813,5 @@ function onFrontClick10(event) {
     this.urlFront10 = imageFront10;
   };
 
-  
+
 }
