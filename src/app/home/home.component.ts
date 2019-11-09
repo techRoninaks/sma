@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
       }
     }
     this.showSlides(slideIndex);
-    this.setCookie("filterSet",JSON.stringify({"filterCount": "", "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"","minPrice":"","maxPrice":"","shipMethod":""}));
+    this.setCookie("filterSet",JSON.stringify({"filterCount": "", "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"","minPrice":"","maxPrice":"","shipMethod":"","deliverable":""}));
     this.setCookie("SortSet", JSON.stringify({"priceLH": "", "priceHL": "", "latest": "", "popular": "", "processLH": "", "processHL": "", "shipLH": "", "shipHL": ""}));
   }
   // Carousel

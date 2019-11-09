@@ -45,6 +45,7 @@ export class CategorylistingComponent implements OnInit {
 	popHeader: any = "";
 	popContent: any = "";
 	popImgSrc: any = "";
+	filterChipset: any = [];
 
 	constructor(private route: ActivatedRoute, private cookieService: CookieService, private data: DataService, private router: Router) { }
 
@@ -56,15 +57,8 @@ export class CategorylistingComponent implements OnInit {
 			this.loadData();
 		})
 
-		this.filterArray = JSON.parse(this.getCookie("filterSet"));
-
-		for (this.i = 0, this.j = 0; this.i < 5; this.i++) {
-			if (this.i < 3) {
-				this.filledStar[this.i] = this.i;
-			} else {
-				this.unFilledStar[this.j++] = this.i;
-			}
-		}
+		this.filterChips();
+		this.setCookie("pin","682020");
 
 	}
 
@@ -111,10 +105,53 @@ export class CategorylistingComponent implements OnInit {
 		this.setCookie(parentCookie, JSON.stringify(jsonParsed));
 	}
 	//filter cookies to be deleted
-	deleteFilter(id) {
-		document.getElementById(id).style.display = "none";
-		this.deleteCookieArray[this.deleteCookieCount++] = id;
+	deleteFilter(filterChip) {
+		document.getElementById(filterChip).style.display = "none";
+		// this.deleteCookieArray[this.deleteCookieCount++] = id;
+		console.log(filterChip);
+		var deliverable;
+		var freeShip;
+		var instantBuy;
+		var maxPrice;
+		var rfq;
+		var orderConfirm;
+		var rating;
+		var minPrice;
+
+		if(filterChip == "Undeliverable items"){
+			deliverable = false;
+		}
+		if(filterChip == "Free shipping"){
+			freeShip = false;
+			this.addToFilterArray("filterSet", "freeShipping", freeShip);
+		}
+		if(filterChip == "Instant buy"){
+			instantBuy = false;
+			this.addToFilterArray("filterSet", "instantBuy", instantBuy);
+		}
+		if(filterChip == "Max. Price"){
+			maxPrice = false;
+			this.addToFilterArray("filterSet", "maxPrice", maxPrice);
+		}
+		if(filterChip == "Order confirmation"){
+			orderConfirm = false;
+			this.addToFilterArray("filterSet", "orderConfirm", orderConfirm);
+		}
+		if(filterChip == "Rating"){
+			rating = false;
+			this.addToFilterArray("filterSet", "rating", rating);
+		}
+		if(filterChip == "RFQ Enabled"){
+			rfq = false;
+			this.addToFilterArray("filterSet", "rfq", rfq);
+		}
+		if(filterChip == "Min. Price"){
+			minPrice = false;
+			this.addToFilterArray("filterSet", "minPrice", minPrice);
+		}
+			
 	}
+
 	selectRating() {
 		var rating = (<HTMLInputElement><any>document.getElementById("tRating")).value;
 		document.getElementById("tRatDisp").innerHTML = rating;
@@ -222,6 +259,7 @@ export class CategorylistingComponent implements OnInit {
 		} else {
 			this.popUpBoxTemplate("Looks like you're lost!","Please enter a valid location!","assets/images/lostImage.jpg");
 		}
+		this.filterChips();
 
 	}
 
@@ -450,5 +488,64 @@ export class CategorylistingComponent implements OnInit {
 	shopById(shopId){
 		this.router.navigate(['/category'] ,{queryParams:{shop_id:shopId}});
 	}
+
+	deliverable(){
+		var deliFlag = (<HTMLInputElement><any>document.getElementById("inpDeliver")).checked;
+		this.addToFilterArray("filterSet", "deliverable", deliFlag);
+
+		document.getElementById('load').style.display = "grid";
+		this.loadData();
+	}
+
+	filterChips(){
+		this.filterArray = JSON.parse(this.getCookie("filterSet"));
+		var count = 0;
+
+		console.log(this.filterArray);
+		if(this.filterArray["deliverable"] == true){
+			this.filterChipset[count++] = "Undeliverable items"; 
+			(<HTMLInputElement><any>document.getElementById("inpDeliver")).checked = true;
+		}
+		if(this.filterArray["freeShipping"] == true){
+			this.filterChipset[count++] = "Free shipping"; 
+			(<HTMLInputElement><any>document.getElementById("tFShip")).checked = true;
+		}
+		if(this.filterArray["instantBuy"] == true){
+			this.filterChipset[count++] = "Instant buy";
+			(<HTMLInputElement><any>document.getElementById("tFShip")).checked = true;
+		}
+		if(this.filterArray["maxPrice"] !== ""){
+			this.filterChipset[count++] = "Max. Price"; 
+			(<HTMLInputElement><any>document.getElementById("tmaxPrice")).value = this.filterArray["maxPrice"];
+		}
+		if(this.filterArray["minPrice"] !== ""){
+			this.filterChipset[count++] = "Min. Price"; 
+			(<HTMLInputElement><any>document.getElementById("tminPrice")).value = this.filterArray["minPrice"];
+		}
+		if(this.filterArray["orderConfirm"] == true){
+			this.filterChipset[count++] = "Order confirmation"; 
+			(<HTMLInputElement><any>document.getElementById("orderCon")).checked = true;
+		}
+		if(this.filterArray["rating"] !== ""){
+			this.filterChipset[count++] = "Rating"; 
+		}
+		if(this.filterArray["rfq"] == true){
+			this.filterChipset[count++] = "RFQ Enabled"; 
+			(<HTMLInputElement><any>document.getElementById("tRfq")).checked = true;
+		}
+		if(this.filterArray["shipMethod"].length > 0){
+			var shipMethods = this.filterArray["shipMethod"];
+			for(var i =0;i<shipMethods.length; i++){
+				this.filterChipset[count++] = shipMethods[i];
+			}
+		}
+		if(this.filterArray["variants"]){
+			var variant = this.filterArray["variants"];
+			for(var i = 0;i<variant.length;i++){
+				this.filterChipset[count++] = variant[i];
+			}
+		}
+		console.log(this.filterChipset)
+	}	
 }
 
