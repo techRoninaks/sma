@@ -1,3 +1,19 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+// font-family: BitterBold;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
 @mixin sm {
     @media (max-width: 1050px) {
         @content;
@@ -66,6 +82,21 @@
     width: 100%;
     grid-template-rows: repeat(6, auto);
     grid-template-areas: "shopBg" "shopDescBio" "shopProducts" "shopShipment" "shopPolicies" "shopRatingReview";
+    .headClass {
+		font-family: BitterBold;
+		font-size: $Header;
+		text-align: center;
+	}
+	.policies {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+	}
+	.desc {
+		font-family: BitterBold;
+		font-size: $SubText;
+		color: #333333;
+	}
     .shopBg {
         grid-area: shopBg;
         background-color: whitesmoke;
@@ -93,7 +124,9 @@
         .shopDesc {
             grid-area: shopDesc;
             background-color: whitesmoke;
-            padding-bottom: 15%;
+            padding-bottom: 10%;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
             margin-bottom: 5%;
             display: grid;
             grid-template-columns: 25% 25% 50%;
@@ -106,16 +139,20 @@
                     width: 100%;
                     height: 10rem;
                     object-fit: contain;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    width:auto;
+                    border-radius:5px;
                 }
             }
             .shopInfo {
                 grid-area: shopInfo;
-                margin-block-start: 25%;
+                margin-block-start: 13%;
                 .shopStarFoll {
                     display: grid;
                     grid-template-rows: auto;
                     grid-template-columns: 50% 50%;
                     grid-template-areas: "shopStar shopFollowers";
+                    height: 25px;
                     .shopStar {
                         grid-area: shopStar;
                     }
@@ -123,15 +160,18 @@
                         grid-area: shopFollowers;
                         // color: white;
                         p {
-                            border: 2px solid black;
-                            background-color: whitesmoke;
-                            font-size: 16px;
+                            border: 2px solid #dbdbdb;
+                            // background-color: rgb(54, 49, 49);
+                            font-size: 15px;
+                            border-radius:5px;
                             justify-self: center;
                             text-align: center;
+                            width: max-content;
+                            padding: 0px 15px;
                         }
                     }
                 }
-                .shopDetails {}
+                // .shopDetails {}
                 .shopBtnInfo {
                     display: grid;
                     grid-template-columns: 50% 50%;
@@ -141,9 +181,13 @@
                         grid-area: dvFromRfq;
                         .btRfq {
                             // grid-area: btnRfq;
-                            width: 125px;
+                            width: 70px;
                             margin: auto;
+                            border-radius:5px;
                             background-color: #efbe24;
+                            color:white;
+                            border:none;
+                            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                         }
                     }
                     .dvShipsFollow {
@@ -151,15 +195,20 @@
                         .btnFollowShop {
                             width: 135px;
                             margin: auto;
+                            border-radius:5px;
+                            background-color: #efbe24;
                             z-index: 0;
-                            background-color: #ff1d25;
+                            color:white;
+                            border:none;
+                            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                            // background-color: #ff1d25;
                         }
-                        img {
-                            z-index: 1;
-                            transform: translate(-2rem, 2px);
-                            position: absolute;
-                            height: 20px;
-                        }
+                        // img {
+                        //     z-index: 1;
+                        //     transform: translate(-2rem, 2px);
+                        //     position: absolute;
+                        //     height: 20px;
+                        // }
                     }
                 }
             }
@@ -167,12 +216,18 @@
         .shopBio {
             grid-area: shopBio;
             background-color: whitesmoke;
-            height: 22.5rem;
-            h3 {
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            width: auto;
+            border-radius: 10px;
+            height: max-content;
+            // padding-bottom: 25px;
+            .bioHeader {
                 margin-block-start: 5%;
                 margin-inline-start: 5%;
+                font-family: BitterBold;
+                font-size: $Header;
             }
-            p {
+            .bioTxt {
                 margin-inline-end: 10%;
                 margin-inline-start: 5%;
             }
@@ -411,18 +466,19 @@
                 // 		justify-self: end;
                 // 	}
                 // }
-                // .btnRfq{
-                //     cursor: pointer;
-                //     grid-area: btn-rfq;
-                //     font-family: BitterBold;
-                //     font-size: 20px;
-                //     border: none;
-                //     border-radius: 5px;
-                //     background: red;
-                //     padding: 5px;
-                //     color: white;
-                //     float: right;
-                // }
+                .btnRfq{
+                    cursor: pointer;
+                    grid-area: btn-rfq;
+                    font-family: BitterBold;
+                    font-size: 20px;
+                    border: none;
+                    border-radius: 5px;
+                    background: red;
+                    padding: 5px;
+                    color: white;
+                    float: right;
+                    transform: translate(0px,-50px);
+                }
                 // @include sm-lesser{
                 //     .btnRfq{
                 //         font-size: inherit;
@@ -459,8 +515,12 @@
             margin-left: 50%;
             width: fit-content;
             padding: 5px;
+            border:none;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
             &:hover{
                 cursor:pointer;
+                background-color: #ddb01d;
             }
         }
     }
@@ -475,7 +535,7 @@
             margin-left: auto;
             margin-right: auto;
             width: 300px;
-            transform: translate(0rem, 2rem);
+            transform: translate(0rem, 3rem);
             z-index: 0;
         }
         h2 {
@@ -524,7 +584,7 @@
                 margin-right: auto;
                 width: 300px;
                 z-index: 0;
-                transform: translate(0rem, 2rem);
+                transform: translate(0rem, 3rem);
             }
             h2 {
                 text-align: center;
@@ -545,7 +605,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 300px;
-                transform: translate(0rem, 2rem);
+                transform: translate(0rem, 3rem);
                 z-index: 0;
                 // position: absolute;
             }
@@ -567,7 +627,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 300px;
-                transform: translate(0rem, 2rem);
+                transform: translate(0rem, 3rem);
                 z-index: 0;
                 // position: absolute;
             }
@@ -589,7 +649,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 300px;
-                transform: translate(0rem, 2rem);
+                transform: translate(0rem, 3rem);
                 z-index: 0;
                 // position: absolute;
             }
@@ -618,7 +678,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 300px;
-                transform: translate(0rem, 2rem);
+                transform: translate(0rem, 3rem);
                 z-index: 0;
             }
             h2 {
@@ -815,20 +875,7 @@
 
 }
 .rfqForm {
-	/* Dropdown Button */
-	// .dropBtnRfq {
-	// 	background-color: #4caf50;
-	// 	color: white;
-	// 	padding: 16px;
-	// 	font-size: 16px;
-	// 	border: none;
-	// 	cursor: pointer;
-	// }
-	/* Dropdown button on hover & focus */
-	// .dropBtnRfq:hover,
-	// .dropBtnRfq:focus {
-	// 	background-color: #3e8e41;
-	// }
+	
 	#myInput {
 		background-image: url("/css/searchicon.png");
 		background-position: 10px 12px;

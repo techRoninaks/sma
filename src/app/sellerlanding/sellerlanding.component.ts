@@ -293,6 +293,7 @@ export class SellerlandingComponent implements OnInit {
 	filterFaq() {
 		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("searchFaq")).value;
 		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("searchFaq")).value.length;
+		
 		if (faqSearchInputLength >= 3) {
 			this.tokenFaq = { number_faq:1, filterFaq: faqSearchInput};
 			this.data.getFaqSiteFiltered(this.tokenFaq).subscribe(
@@ -301,6 +302,14 @@ export class SellerlandingComponent implements OnInit {
 				}
 			);
 			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+		else if(faqSearchInputLength <3){
+			this.tokenFaq = 1;
+			this.data.getFaqSite(this.tokenFaq).subscribe(
+				data => {
+					this.faqSite = data;
+				}
+			);
 		}
 	}
 	submitFaq() {
