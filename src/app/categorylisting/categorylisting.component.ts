@@ -58,7 +58,7 @@ export class CategorylistingComponent implements OnInit {
 		})
 
 		this.filterChips();
-		this.setCookie("pin","682020");
+		// this.setCookie("pin","682020");
 
 	}
 
@@ -149,7 +149,7 @@ export class CategorylistingComponent implements OnInit {
 			minPrice = false;
 			this.addToFilterArray("filterSet", "minPrice", minPrice);
 		}
-			
+
 	}
 
 	selectRating() {
