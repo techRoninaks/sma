@@ -21,7 +21,9 @@
 
     $locationQuery = " AND p.shipping_location_id = sls.id and sls.pincode LIKE '%$pincode%'";
 
-    $trendCondition = " ORDER BY p.product_view_count DESC, p.sold_count DESC ";
+    $status = "deliverable";
+
+    $trendCondition = " GROUP BY p.prodid ORDER BY p.product_view_count DESC, p.sold_count DESC ";
 
     $paginationQuery = " limit $tagNum offset $offset ";
 
@@ -34,12 +36,21 @@
     $instantBuy = "";
     $delivery = "";
     $sortCondition = "";
+        
+        if($filterSet->deliverable){
+            $locationQuery = " AND p.shipping_location_id != sls.id and sls.pincode NOT LIKE '%$pincode%'";
+            
+            $status = "undeliverable";
 
+            $productQuery = "SELECT p.category_id,p.active_status, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+            FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
+            WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";
+        }
         if($filterSet->maxPrice){
-            $price = " and p.base_price >= $filterSet->minPrice and p.base_price <=$filterSet->maxPrice ";
+            $price = " and p.base_price >= '$filterSet->minPrice' and p.base_price <= '$filterSet->maxPrice' ";
         }
         if($filterSet->rating != 0){
-            $rating = " and p.rating = $filterSet->rating ";
+            $rating = " and p.rating >= $filterSet->rating ";
         }
         if($filterSet->freeShipping){
             $freeShip = " ";
@@ -108,7 +119,7 @@
                 "basePrice"=>$row["base_price"],
                 "offerPercent"=>$row["percentage"],
                 "hasRfq"=>$row["has_rfq"],
-                "activeStatus"=>$row["active_status"],
+                "activeStatus"=>$status,
                 "rating"=>$row["rating"],
                 "parentId"=>$row["parentid"],
                 "orderConfirm"=>$row["has_order_confmn"],
@@ -160,7 +171,7 @@
             $shipMethods[$shipCount++] = $row["shipping_option"];
 
         }
-
+        
         echo json_encode(
             array(
                 "request"=>$request,

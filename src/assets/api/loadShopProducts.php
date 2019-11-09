@@ -25,7 +25,7 @@
     $sortCondition = "";
 
     if($filterSet->maxPrice){
-        $price = " and p.base_price >= $filterSet->minPrice and p.base_price <=$filterSet->maxPrice ";
+        $price = " and p.base_price >= $filterSet->minPrice and p.base_price <= $filterSet->maxPrice ";
     }
     if($filterSet->rating != 0){
         $rating = " and p.rating = $filterSet->rating ";

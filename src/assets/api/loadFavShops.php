@@ -15,6 +15,8 @@
 
         $data = array();
         $count = 0;
+
+        $request = "failed";
         
         if(mysqli_num_rows($result) > 0){
             while( $row = mysqli_fetch_array($result) ){
