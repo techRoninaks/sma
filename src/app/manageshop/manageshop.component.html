@@ -136,7 +136,7 @@
         </div>
         <div class="shopBio">
             <div class="btnVacation">
-                <div class="vac">Enable Vacation Mode
+                <div class="vac" style="font-family: Bitter;font-size:16px;">Enable Vacation Mode
                     <label class="switch">
                         <input id="vacTog" type="checkbox" (click)="vacation();">
                         <span class="slider round"></span>
@@ -145,19 +145,20 @@
                 <div class="dropVacation" id="vacationToggle" style="display: none">
                     <div class="dvRadio">
                         <!-- (click)="vacationSave('until');" -->
-                        <input type="radio" name="vacation" value="until" id="untilRadio">
-                        Until Cancelled<br>
-                        <input type="radio" name="vacation" value="setDate" class="rDate" id="dateSetRadio"> Set
+                        <input type="radio" name="vacation" value="until" class="aDate" id="untilRadio">&nbsp; Until Cancelled<br>
+                        <input type="radio" name="vacation" value="setDate" class="bDate" id="dateSetRadio">&nbsp; Set
                         Duration<br>
 
                     </div>
                     <div class="dvSetDate">
+                        <p class="psDate">Start Date</p>
                         <input type="date" id="startDate" class="sDate" value="{{shopData.vacStartDate}}">
-                        <input type="date" id="endDate" class="eDAte" value="{{shopData.vacEndDate}}">
+                        <p class="peDate">End Date</p>
+                        <input type="date" id="endDate" class="eDate" value="{{shopData.vacEndDate}}">
                     </div>
-                    <p style="font-size:14px;color:grey;">Select two dates then press checkbox</p>
+                    <!-- <p style="font-size:14px;color:grey;">Select two dates then press checkbox</p> -->
                     <!-- 'dateSet' -->
-                    <button (click)="vacationSave();" style="background-color: #efbe24; color: white;">Save</button>
+                    <button (click)="vacationSave();"class="vacSave">Save</button>
                 </div>
             </div>
             <div class="bio">
@@ -165,7 +166,7 @@
                 <ng-container *ngIf="editBio==0; else bioEdit">
                     <p class="bioTxt policies" id="bioId">{{shopData.descriptionShop}}</p>
                     <div class="btnBioEdit">
-                        <button type="button" style="margin-left:70%; width:100px;" (click)="edit('bio');">EDIT</button>
+                        <button type="button" style="margin-left:70%; width:70px;" (click)="edit('bio');">EDIT</button>
                     </div>
                 </ng-container>
                 <ng-template #bioEdit>
@@ -225,9 +226,15 @@
             </div>
         </div>
         <div class="newProd" [routerLink]="['/addproduct']" [queryParams]="{shop_id:shopData.shopId}">
-            <p >Add Product </p>
+            <div class="plusDiv">
+                <p>+</p>
+            </div>
+            <div class="textDiv">
+                <p>Add Product </p>
+            </div>
         </div>
-        <button id="showAll" class="showAll">SHOW ALL</button>
+        <button id="showAll" class="showAll" [routerLink]="['/category']" [queryParams]="{shop_id:shopData.shopId}">SHOW
+            ALL</button>
     </div>
     <!-- shop policies -->
     <div class="shopPolicies">

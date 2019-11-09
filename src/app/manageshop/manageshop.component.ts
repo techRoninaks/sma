@@ -263,6 +263,14 @@ export class ManageshopComponent implements OnInit {
 			);
 			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
 		}
+		else if(faqSearchInputLength < 3){
+			this.tokenFaq = { shop_id: this.token, number_faq: 1 };
+			this.data.getFaqShop(this.tokenFaq).subscribe(
+				data => {
+					this.faqShop = data;
+				}
+			);
+		}
 	}
 	submitFaq() {
 		alert("Question submitted");
@@ -297,13 +305,13 @@ export class ManageshopComponent implements OnInit {
 		this.followC.folCount = parseFloat(this.followC.folCount) - parseFloat('1');
 	}
 	report(revId: any) {
-		console.log(revId);
-		console.log(typeof (revId));
+		// console.log(revId);
+		// console.log(typeof (revId));
 		this.data.sendReportShop(this.tokenObj, revId).subscribe();
 	}
 	vacation() {
 		var x = (<HTMLInputElement><any>document.getElementById("vacTog")).checked;
-		console.log(x);
+		// console.log(x);
 		if (x == false) {
 			document.getElementById("vacationToggle").style.display = "none";
 			this.x = { shop_id: this.token, val: "0" };
@@ -317,7 +325,7 @@ export class ManageshopComponent implements OnInit {
 	}
 	privacy() {
 		var x = (<HTMLInputElement><any>document.getElementById("privacyTog")).checked;
-		console.log(x);
+		// console.log(x);
 		if (x == false) {
 			this.x = { shop_id: this.token, val: "0" };
 			this.data.privacyManage(this.x).subscribe();
@@ -463,9 +471,9 @@ export class ManageshopComponent implements OnInit {
 		if (dateSet==true) {
 			var type = 'dateSet';
 			var s = (<HTMLInputElement><any>document.getElementById('startDate')).value;
-			console.log(s);
+			// console.log(s);
 			var e = (<HTMLInputElement><any>document.getElementById('endDate')).value;
-			console.log(e);
+			// console.log(e);
 			this.z = { shop_id: this.token, type: type, start: s, end: e };
 			this.data.vacationSave(this.z).subscribe();
 		}
@@ -478,7 +486,7 @@ export class ManageshopComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			imageCoverValue = text;
-			console.log(imageCoverValue);
+			// console.log(imageCoverValue);
 		};
 	}
 	onLogoClick(event) {
@@ -494,7 +502,7 @@ export class ManageshopComponent implements OnInit {
 	}
 	submitCover() {
 		var image = imageCoverValue;
-		console.log(image);
+		// console.log(image);
 		this.tokenUpload = { image: image, shop_id: this.token };
 
 		// setTimeout(function () {
@@ -541,7 +549,7 @@ export class ManageshopComponent implements OnInit {
 		var y = this.defRfqTag;
 		this.prod[y++] = x;
 		this.defRfqTag = y;
-		console.log(this.prod);
+		// console.log(this.prod);
 	}
 	delCategory(id: any) {
 		var n = this.Object.keys(this.prod).length;
@@ -549,8 +557,8 @@ export class ManageshopComponent implements OnInit {
 		this.idP = chiP[0];
 		var chiIndex = chiP[1];
 		var removed = this.prod.splice(chiIndex, 1);
-		console.log(removed);
-		console.log(this.prod);
+		// console.log(removed);
+		// console.log(this.prod);
 		this.defRfqTag = this.prod.length;
 	}
 	ngOnDestroy() {
