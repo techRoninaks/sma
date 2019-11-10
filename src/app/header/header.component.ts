@@ -103,6 +103,7 @@ export class HeaderComponent implements OnInit {
     this.cookieService.delete('sellerName');
     this.cookieService.delete('userCity');
     this.cookieService.delete('userPin');
+    this.cookieService.delete('pin');
     this.cookieService.delete('sellerPin');
     this.cookieService.delete('sellerCity');
     this.cookieService.delete('sellerStage');
@@ -153,6 +154,7 @@ export class HeaderComponent implements OnInit {
                   this.setCookie("isLoggedIn",1);
                   this.setCookie("userCity",this.city);
                   this.setCookie("userPin",this.pin);
+                  this.setCookie("pin",this.pin);
                   this.setCookie("userName",this.cookie_uname);
                   this.setCookie("userId",this.cookie_user_id);
                   document.getElementById("headerLogin").innerText = this.cookie_uname as string;
@@ -177,6 +179,7 @@ export class HeaderComponent implements OnInit {
                   {
                     this.pin =data['pincode'];
                     this.setCookie("sellerPin",this.pin);
+                    this.setCookie("pin",this.pin);
                     this.cookie_seller_id = data['sellerId'];
                     this.seller_name = data['seller_name'];
                     this.setCookie("sellerName",this.seller_name);
@@ -192,6 +195,7 @@ export class HeaderComponent implements OnInit {
                     this.setCookie("sellerName",this.seller_name);
                     this.pin = data['pincode'];
                     this.setCookie("sellerPin",this.pin);
+                    this.setCookie("pin",this.pin);
                     this.setCookie("sellerStage",3);
                     this.router.navigate(['/signupseller']);
                   }
@@ -223,6 +227,8 @@ export class HeaderComponent implements OnInit {
                     this.setCookie("isLoggedIn",1);
                     this.setCookie("sellerCity",this.city);
                     this.setCookie("sellerPin",this.pin);
+                    this.setCookie("userPin",this.pin);
+                    this.setCookie("pin",this.pin);
                     this.setCookie("sellerId",this.cookie_seller_id);
                     this.setCookie("sellerName",this.seller_name);
                     document.getElementById("headerLogin").innerText = this.seller_name as string;
