@@ -224,7 +224,7 @@
         </div>
         <div class="pButton">
             <div class="dvBuyBtn">
-                <div class="container" id="buyModalContainer" style="z-index: 10001;">
+                <div class="dvMain-Container-Grid" id="buyModalContainer" style="z-index: 10001;">
                     <!-- data-toggle="modal" -->
                     <button type="submit" id="buyNowId" class="btn btn-warning" (click)="submitPrice('buyNow');">BUY
                         NOW</button>
@@ -685,9 +685,11 @@
                     <br>
                     <br>
                     <div id="instantBuyId">
-                        <button (click)="submitInstantBuy('instantBuy');" style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant Buy</button>
+                        <button (click)="submitInstantBuy('instantBuy');"
+                            style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant
+                            Buy</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -717,7 +719,7 @@
 
 
 <!-- CHECKOUT POPUP (BUY NOW) -->
-<div class="container">
+<div class="dvMain-Container-Grid">
     <!-- Trigger the modal with a button -->
     <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#buyNowPopup">BUY
         NOW</button> -->
@@ -728,93 +730,97 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <div align="center">
+                    <div align="center" style="margin-left: 34px;">
                         <h5>ORDER SUMMARY:</h5>
                     </div>
                 </div>
-                <!-- PRODUCT -->
+                <!-- PRODUCT NAME -->
                 <div class="dvProductName">
-                    <!-- <h5>Sehaz Artworks 'shiva' Wall Photo Painting</h5> -->
                     {{dynamicDataProName.name}}
                 </div>
-                <div class="dvSub1">
-                    <div class="dvProductSpec">
-                        <div class="dvProdSpec1">
-                            <p>{{ dynamicDataVariant.name }} {{ dynamicDataVariant.value }}</p>
-                        </div>
-                        <div class="dvProdSpec2">
-                            <!-- <p>Size : </p> -->
-                        </div>
+                <!-- VARIANT INFO -->
+                <div class="dvProdVariInfo">
+                    <div class="dvProductSpec" style="margin-left: 76px;">
+                        <p class="SpecProduct">{{ dynamicDataVariant.name }} {{ dynamicDataVariant.value }} </p>
                     </div>
-
-                    <div class="dvCustomerName">
-                        <p>Customer Name : {{dynamicDataUser.Name}}</p>
-                    </div>
-
-                    <div class="dvQty">
-                        <p>Qty :</p>
-                        <button class="btnQtyCount">{{ dynamicDataCustomerOrder.quantity }}</button>
+                </div>
+                <!-- NAME & QTY -->
+                <div class="dvCustNameQty">
+                    <div class="grid-CustomerNameQty">
+                        <div class="custName">
+                            <div class="dvCustomerName">
+                                <p>Customer Name : {{dynamicDataUser.Name}}</p>
+                            </div>
+                        </div>
+                        <div class="Qty">
+                            <div class="dvQty">
+                                <p>Qty :</p>
+                            </div>
+                        </div>
+                        <div class="qtyLabel">
+                            <label class="btnQtyCount">{{ dynamicDataCustomerOrder.quantity }}</label>
+                        </div>
                     </div>
                 </div>
                 <!-- ADDRESS -->
-                <div class="dvAddress">
-                    <p>ADDRESS</p>
+                <div class="dvAddressText">
+                    <h6>ADDRESS</h6>
                 </div>
-                <div class="dvSub2">
-                    <div class="dvAddrText" style="display: 1" id="Main-Address">
-                        <!-- {{dynamicDataAddress.contact_name}}, -->
-                        {{dynamicDataAddress.addr1}},
-                        {{dynamicDataAddress.addr2}},
-                        {{dynamicDataAddress.city}},
-                        {{dynamicDataAddress.district}},
-                        {{dynamicDataAddress.state}},
-                        {{dynamicDataAddress.country}},
-                        {{dynamicDataAddress.pincode}}
-                        <!-- {{dynamicDataSecondAddress.contact_number}} -->
-                        <!-- {{dynamicDataSecondAddress.contact_email}} -->
-                    </div>
-                    <div class="btnAddrChange">
-                        <button type="change" class="btnChange btn-warning" id="btnChange"
-                            (click)=showSavedAddr()>Change</button>
+                <div class="dvMainAddress">
+                    <div class="grid-MainAddress1">
+                        <div class="Address" style="display: 1" id="Main-Address">
+                            <!-- {{dynamicDataAddress.contact_name}}, -->
+                            {{dynamicDataAddress.addr1}},
+                            {{dynamicDataAddress.addr2}},
+                            {{dynamicDataAddress.city}},
+                            {{dynamicDataAddress.district}},
+                            {{dynamicDataAddress.state}},
+                            {{dynamicDataAddress.country}},
+                            {{dynamicDataAddress.pincode}}
+                            <div class="btnAddr">
+                                <button type="change" class="btnChange btn-warning" id="btnChange"
+                                    (click)=showSavedAddr()>Change</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- SAVED ADDRESS -->
-
-                <div class="dvSub3" id="savedAddr" style="display: none">
-                    <div class="dvSavedAddr">
-                        <p>SAVED ADDRESS</p>
-                        <div class="dvCardAddrLeft" id="Deliver-Addr1">
+                <div class="dvSavedAddress" id="savedAddr" style="display: none">
+                    <p>SAVED ADDRESS</p>
+                    <div class="grid-SavedAddress1">
+                        <div class="labelAddress1" id="Deliver-Addr1">
                             {{ dynamicDataSecondAddress }}
                         </div>
-                        <div class="btnCardAddrLeft">
+                        <div class="btnAddress1">
                             <button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft"
                                 (click)="btnDeliverAddress1()">DELIVER TO THIS ADDRESS</button>
                         </div>
-                        <div class="dvCardAddrRight" id="Deliver-Addr2">
+                        <div class="labelAddress2" id="Deliver-Addr2">
                             {{ dynamicNewAddr }}
                         </div>
-                        <div class="btnCardAddrRight">
+                        <div class="btnAddress2">
                             <button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight"
                                 (click)="btnDeliverAddress2()">DELIVER TO THIS ADDRESS</button>
                         </div>
                     </div>
                 </div>
                 <!-- ADD ADDR BTN -->
-                <div class="btnNewAddr">
-                    <button type="newAddr" class="btnNewAddr btn-success" id="btnNewAddr" (click)="showFormGrp()">ADD A
+                <div class="dvAddNewAddrBtn">
+                    <button type="newAddr" class="btnNewAddr btn-success" id="btnNewAddr" (click)="showFormGrp()"> + ADD
                         NEW
                         DELIVERY
                         ADDRESS</button>
                 </div>
                 <!-- FORM GROUP -->
-                <div class="dvSub4" id="formGroup" style="display :none">
+                <div class="dvFormGroup" id="formGroup" style="display :none">
                     <form class="formGroup">
-                        <div class="grid-dvSub4">
-                            <div class="grid-FormLeft">
+                        <div class="grid-Addr-Form">
+                            <div class="grid-left-Form">
                                 <div class="dvContactName">
                                     <label>Contact Name</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address" id="contactName-Form">
+
                                 </div>
                                 <div class="dvAddr2">
                                     <label>Address 2</label>
@@ -845,7 +851,7 @@
                                         id="contact-Email-Form">
                                 </div>
                             </div>
-                            <div class="grid-FormRight">
+                            <div class="grid-Right-Form">
                                 <div class="dvAddr1">
                                     <label>Address 1</label>
                                     <br>
@@ -874,7 +880,7 @@
                                 </div>
                             </div>
                             <div class="btnSaveForm">
-                                <button type="save" class="btnSave btn-warning" id="btnSave"
+                                <button type="save" class="btnSave1 btn-warning" id="btnSave"
                                     (click)=formSave()>Save</button>
                             </div>
                         </div>
@@ -884,129 +890,168 @@
                 <div class="dvDeliveryText">
                     <p>DELIVERY OPTIONS:</p>
                 </div>
-                <div class="dvSub5">
-                    <div class="btnRadio1">
-                        <input type="radio" id="shipping" name="DeliveryOption" value="1">Shipping
+                <div class="dvDeliveryOption">
+                    <div class="grid-Deli-Option">
+                        <div class="grid-left-DeliOption">
+                            <input type="radio" id="shipping" name="DeliveryOption" value="1"> Shipping
+                        </div>
+                        <div class="grid-Med-DeliOption">
+                            <input type="radio" id="homedelivery" name="DeliveryOption" value="2"> Home Delivery
+                        </div>
+                        <div class="grid-Right-DeliOption">
+                            <input type="radio" id="pickup" name="DeliveryOption" value="3"> Pickup
+                        </div>
                     </div>
-                    <div class="btnRadio2">
-                        <input type="radio" id="homedelivery" name="DeliveryOption" value="2"> Home Delivery
-                    </div>
-                    <div class="btnRadio3">
-                        <input type="radio" id="pickup" name="DeliveryOption" value="3"> Pickup
-                    </div>
-
                 </div>
                 <!-- PRODUCT DELIVERED -->
-                <div class="dvProdDeliText">
+                <div class="dvProdDeliveredDate">
                     <p>THE PRODUCT WILL BE DELIVERED BEFORE</p>
-                </div>
-                <div class="dvSub6">
-                    <div class="dvDisplayDate">
-                        <!-- <p>00-SEPT-2019</p> -->
-                        <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
-                    </div>
-                    <div class="dvDisplayPrice">
-                        <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
-                    </div>
-                    <div class="dvDate">
-                        <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
-                    </div>
-                    <div class="dvApply">
-                        <button type="apply" class="btnApply btn-warning" id="btnApply"
-                            (click)="applyRequest()">Apply</button>
+                    <div class="grid-Prod-Deli-Date">
+                        <div class="grid-Deli-Date">
+                            <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
+                        </div>
+                        <div class="grid-Price">
+                            <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
+                        </div>
+                        <div class="grid-Deli-Date1">
+                            <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
+                        </div>
+                        <div class="grid-ApplyBtn">
+                            <button type="apply" class="btnApply btn-warning" id="btnApply"
+                                (click)="applyRequest()">Apply</button>
+                        </div>
                     </div>
                 </div>
                 <!-- GIFT NOTE -->
-                <div class="dvSub7">
-                    <div class="dvGiftOptionText">
-                        <p>Gift Option :</p>
+                <div class="dvGiftOption">
+                    <div class="grid-GiftOption1">
+                        <div class="grid-Text-GiftOption">
+                            <p>Gift Option :</p>
+                        </div>
+                        <div class="grid-GiftOptionToggle">
+                            <div class="btnGiftOption" id="btn-Gift-Option">
+                                <label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="btnGiftOption" id="btn-Gift-Option">
-                        <label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <p>Note</p>
+                </div>
+                <!-- NOTE -->
+                <div class="dvGiftNote">
+                    <div class="grid-GiftOptionNote">
+                        <div class="grid-dvGiftNoteText">
+                            <p style="margin-left: 30px;">Note :</p>
+                        </div>
+                        <div class="grid-dvGiftNoteCard" id="showGiftCard" style="display: none;">
+                            <textarea type=text class="Gift-Note-Style"
+                                style="border-radius: 5px; margin-left: 20px; width:460px; border: none; height: 130px;"
+                                id="Gift-Note-Sect1"></textarea>
+                        </div>
                     </div>
-                    <div class="dvNote" id="showGiftCard" style="display: none;">
-                        <textarea type=text class="Gift-Note-Style" id="Gift-Note-Sect1"></textarea>
-                    </div>
-                    <div class="dvNoteText">
-
-                    </div>
-                    <!-- <div class="dvMessageTitle">
-
-                    </div> -->
                 </div>
                 <!-- MESSAGE TITLE -->
-                <div class="dvMsgTitle">
-                    <p>Message Title : {{ dynamicMsgTitle.title }}</p>
+                <div class="dvMessageTitle">
+                    <p class="MsgTitleText">Message Title : {{ dynamicMsgTitle.title }}</p>
                 </div>
 
 
                 <!-- PRODUCT IMAGE -->
-                <div class="dvProdText" *ngIf="imageU0 == 1">
-                    <p>PRODUCT IMAGES</p>
+                <div class="dvproductImages">
+                    <p class="prodTextImg">PRODUCT IMAGES</p>
                 </div>
-                <div class="dvSub8"  *ngIf="imageU0 == 1">
-                    <div *ngIf="imageU0 == 1">
-                        <img [src]="imageVAL0" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU1 == 1">
-                        <img [src]="imageVAL1" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU2 == 1">
-                        <img [src]="imageVAL2" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU3 == 1">
-                        <img [src]="imageVAL3" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU4 == 1">
-                        <img [src]="imageVAL4" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU5 == 1">
-                        <img [src]="imageVAL5" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU6 == 1">
-                        <img [src]="imageVAL6" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU7 == 1">
-                        <img [src]="imageVAL7" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU8 == 1">
-                        <img [src]="imageVAL8" style="max-height: 100px;margin-top:5px;">
-                    </div>
-                    <div *ngIf="imageU9 == 1">
-                        <img [src]="imageVAL9" style="max-height: 100px;margin-top:5px;">
-                    </div>
+                <div class="dvprodImages" style="display: flex; width: 400px;">
+                    <!-- <img src="/src/assets/images/{{prodId}}/{{prodId}}_).jpg"> -->
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg">
                 </div>
                 <!-- PRICE VARIATION -->
-                <div class="dvPriceVariText">
+                <div class="dvPriceListing">
                     <h6>PRICE FOR VARIATIONS & QUALITY</h6>
-                </div>
-                <div class="dvSub9">
-                    <div class="dvPriceList">
-                        <p><br>
-                            <!-- Product Price : {{dynamicDataCustomerOrder.basePrice}}<br> -->
-                            Base Price : {{dynamicDataCustomerOrder.basePrice}}<br>
-                            Shipping Price : {{dynamicDataCustomerOrder.shippingPrice}}<br>
-                            Discount : {{dynamicDataCustomerOrder.discount}}%<br>
-                            Variant Price : {{dynamicDataCustomerOrder.variantPrice}}<br>
-                            Qty : {{ dynamicDataCustomerOrder.quantity }}<br>
-                            Tax :{{ dynamicDataCustomerOrder.tax }}</p>
-                        <h4>Total : {{dynamicDataCustomerOrder.totalPrice}}</h4>
+                    <div class="dvPriceDetails">
+                        <div class="dvBasePrice">
+                            <p class="BasePriceText">Base Price</p>
+                        </div>
+                        <div class="dvShippingPrice">
+                            <p class="ShippingText">Shipping Price</p>
+                        </div>
+                        <div class="dvDiscPrice">
+                            <p class="DiscText">Discount</p>
+                        </div>
+                        <div class="dvVariancePrice">
+                            <p class="VarianceText">Variance Price</p>
+                        </div>
+                        <div class="dvQty">
+                            <p class="QtyText">Qty</p>
+                        </div>
+                        <div class="dvTax">
+                            <p class="TaxText">Tax</p>
+                        </div>
+                        <div class="dvTotal">
+                            <h6 class="TotalText">Total </h6>
+                        </div>
+                        <div class="dvMed">
+                            <p class="dot">:</p>
+                        </div>
+                        <div class="dvMed1">
+                            <p class="dot1">:</p>
+                        </div>
+                        <div class="dvMed2">
+                            <p class="dot2">:</p>
+                        </div>
+                        <div class="dvMed3">
+                            <p class="dot3">:</p>
+                        </div>
+                        <div class="dvMed4">
+                            <p class="dot4">:</p>
+                        </div>
+                        <div class="dvMed5">
+                            <p class="dot5">:</p>
+                        </div>
+                        <div class="dvMed6">
+                            <p class="dot6">:</p>
+                        </div>
+                        <div class="dvRight-BasePrice">
+                            {{dynamicDataCustomerOrder.basePrice}}
+                        </div>
+                        <div class="dvRight-ShippingPrice">
+                            {{dynamicDataCustomerOrder.shippingPrice}}
+                        </div>
+                        <div class="dvRight-DiscPrice">
+                            {{dynamicDataCustomerOrder.discount}}%
+                        </div>
+                        <div class="dvRight-VariancePrice">
+                            {{dynamicDataCustomerOrder.variantPrice}}
+                        </div>
+                        <div class="dvRight-Qty">
+                            {{ dynamicDataCustomerOrder.quantity }}
+                        </div>
+                        <div class="dvRight-Tax">
+                            {{ dynamicDataCustomerOrder.tax }}
+                        </div>
+                        <div class="dvRight-Total">
+                            {{dynamicDataCustomerOrder.totalPrice}}
+                        </div>
                     </div>
-                    <div class="btnCheckOut">
-                        <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
-                            data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
-
-                        <button type="btnCheckOut" style="display: none;" class="btn btn-warning" data-toggle="modal"
-                            id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
-                    </div>
                 </div>
+                <div class="dvBtnCheckout-Rfq">
+                    <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
+                        data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
 
+                    <button type="btnCheckOut" style="display: none;" class="btnRfq btn-warning" data-toggle="modal"
+                        id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>

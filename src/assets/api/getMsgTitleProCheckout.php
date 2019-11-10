@@ -2,6 +2,7 @@
     require "init.php";
     // header("Access-Control-Allow-Origin: *");
     $prodid = $_POST['prodid'] ;
+    $title = $_POST['title'];
     $data = array();
     // $count = 0;
     $sql_query = "SELECT * FROM `prod_message` where prodid = prodid";
