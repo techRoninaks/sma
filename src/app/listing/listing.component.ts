@@ -220,6 +220,7 @@ export class ListingComponent implements OnInit {
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
+		// console.log(this.userId);
 		// this.setCookie("userPin",682501);
 		this.pincodeValue = parseInt(this.getCookie("userPin"));
 
@@ -639,7 +640,7 @@ export class ListingComponent implements OnInit {
 		);
 
 
-		this.showSlides(slideIndex);
+		// this.showSlides(slideIndex);
 
 
 
@@ -697,7 +698,7 @@ export class ListingComponent implements OnInit {
 	//checkout giftoption
 	giftoption() {
 		document.getElementById('showGiftCard').style.display = "block";
-		// this.cookieService.set("amal","mandan");
+		// this.cookieService.set("amal","mann");
 		// var aml = this.cookieService.get("amal");
 		// console.log(aml);
 
@@ -891,7 +892,7 @@ export class ListingComponent implements OnInit {
 		for (i = 0; i < dots.length; i++) {
 			dots[i].className = dots[i].className.replace(" active", "");
 		}
-		slides[slideIndex - 1].style.display = "block";
+		// slides[slideIndex - 1].style.display = "block";
 		dots[slideIndex - 1].className += " active";
 	}
 	readMore() {
@@ -1401,6 +1402,7 @@ export class ListingComponent implements OnInit {
 				this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
 				//sonu
+			
 				this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
 					this.orderid = data["orderid"];
 					// console.log(this.orderid);
@@ -1516,23 +1518,22 @@ export class ListingComponent implements OnInit {
 				this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
 				//sonu
-				this.data.getOrderDetailsCheckout(this.data).subscribe(data => {
+				this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
 					this.orderid = data["orderid"];
-					this.orderid = data;
 					// console.log(this.orderid);
-					this.data.getaddress(this.orderid).subscribe(
+					this.data.getaddress(this.userId).subscribe(
 						data => {
 							this.dynamicDataAddress = data;
 						},
 						error => console.error(error)
 					);
-					this.data.getprodCheckout(this.orderid).subscribe(
+					this.data.getprodCheckout(this.token).subscribe(
 						data => {
 							this.dynamicDataProName = data;
 						},
 						error => console.error(error)
 					);
-					this.data.getuserCheckout(this.orderid).subscribe(
+					this.data.getuserCheckout(this.userId).subscribe(
 						data => {
 							this.dynamicDataUser = data;
 							this.Name = this.dynamicDataUser.Name;
@@ -1541,35 +1542,31 @@ export class ListingComponent implements OnInit {
 						},
 						error => console.error(error)
 					);
-					this.data.getvariantInfor(this.orderid).subscribe(
-						data => {
-							this.dynamicDataVariant = data;
-							this.dynamicDataVariants = data;
-						},
-						error => console.error(error)
-					);
 					this.data.getCustomerOrderCheckout(this.orderid).subscribe(
 						data => {
 							this.dynamicDataCustomerOrder = data;
 							this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
-
 						},
 						error => console.error(error)
 					);
-					this.data.getAddressChange(this.orderid).subscribe(
+					// console.log(this.variantValue);
+					this.variantValue = { prodid: this.token, userid: this.userId }
+					this.data.getvariantInfor(this.variantValue).subscribe(
+						data => {
+							this.dynamicDataVariant = data;
+							// this.dynamicDataVariants = data;
+						},
+						error => console.error(error)
+					);
+
+					this.data.getAddressChange(this.userId).subscribe(
 						data => {
 							this.dynamicDataSecondAddress = data;
 							// console.log(this.dynamicDataSecondAddress);
 						},
 						error => console.error(error)
 					);
-					this.data.getNewAddr(this.orderid).subscribe(
-						data => {
-							this.dynamicNewAddr = data;
-							// console.log(this.dynamicNewAddr);
-						},
-						error => console.error(error)
-					);
+
 					this.data.getMsgTitleProCheckout(this.orderid).subscribe(
 						data => {
 							this.dynamicMsgTitle = data;
@@ -1577,14 +1574,10 @@ export class ListingComponent implements OnInit {
 						},
 						error => console.error(error)
 					);
-					this.data.getPurchaseOrderDateReqOrderCheckout(this.orderid).subscribe(
-						data => {
-							this.dynamicDataPurchaseReqCheckout = data;
-							// console.log(this.dynamicDataPurchaseReqCheckout);
-						},
-						error => console.error(error)
-					);
 				});
+
+				//sonu 
+
 			}
 			$("#buyNowPopup").modal('show');
 		}
@@ -1655,6 +1648,7 @@ export class ListingComponent implements OnInit {
 			this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
 			//sonu
+			console
 			this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
 				this.orderid = data["orderid"];
 				// console.log(this.orderid);

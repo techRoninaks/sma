@@ -136,7 +136,7 @@
     // echo $varId;
 
     //get discount info
-    $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";    
+    $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";   
     $resDisc=mysqli_query($con1,$sqlDisc);
     // var_dump($resDisc);
     // echo $sqlDisc;
@@ -673,7 +673,6 @@
     `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,$qtPrice,
     $totalAmount,$disc,$shipBasePrice,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
-    // echo $sql_query3;
     //customer order id
     $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);

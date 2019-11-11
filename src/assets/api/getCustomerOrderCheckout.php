@@ -25,6 +25,6 @@
         'deliveryDate'=>$row["delivey_date"]);
     }
     echo json_encode($data);
-        //echo "hello";
+    //echo "hello";
     
 ?>

@@ -13,8 +13,7 @@
         'created_date'=>$row["created_date"],
         'customerid'=>$row["customerid"],
         'delivery_date'=>$row["delivery_date"],
-        'total_amnt'=>$row["total_amnt"],
-        'require_delivery_date'=>$row["require_delivery_date"];
+        'total_amnt'=>$row["total_amnt"]);
     }
     echo json_encode($data);
         //echo "hello";
