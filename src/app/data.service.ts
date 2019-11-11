@@ -994,11 +994,11 @@ getCustomerOrderCheckout(orderid: any) {
     return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
    }
 
-getOrderDetailsCheckout(userid: any) {
-     let httpParams = new HttpParams()
-      .append("userid", userid);
-     return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
-   }
+getOrderDetailsCheckout(userId: any) {
+  let httpParams = new HttpParams()
+  .append("userId", userId)
+  return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
+}
    sendRfqShop(data :any) {
     let httpParams = new HttpParams()
       .append("shopId", data['shop_id'])
@@ -1282,11 +1282,6 @@ updateSellerPlanFree(data: any){
    return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
   }
 
-getIndividualOrderData(data: any){
-    let httpParams= new HttpParams()
-   .append("id", data)
-   return this.http.post(this.baseUrl+'assets/api/.php',httpParams);
-  }
 
 addCardData(data1: Object,data2:Object,userId:any,userName:any){
   let httpParams= new HttpParams()
@@ -1452,6 +1447,76 @@ getDropdownForShipping(id : any){
 
 getCategoryForSetting(){
   return this.http.get(this.baseUrl+'assets/api/getCategoryForSetting.php');
+}
+  
+  getIndividualOrderDataPrev(orderid: any){
+let httpParams= new HttpParams()
+.append("orderid", orderid)
+return this.http.post(this.baseUrl+'assets/api/sellerOrderDataPrev.php',httpParams);
+}
+getIndividualOrderData(data: any){
+let httpParams= new HttpParams()
+.append("id", data)
+return this.http.post(this.baseUrl+'assets/api/sellerOrderData.php',httpParams);
+}
+getOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/orderDataSeller.php',httpParams);
+}
+getAllOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/allOrderDataSeller.php',httpParams);
+}
+getAllOrderUser(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/allOrderDataUser.php',httpParams);
+}
+getOrderDataSellerPrev(orderid: any){
+let httpParams= new HttpParams()
+.append("orderid", orderid)
+return this.http.post(this.baseUrl+'assets/api/orderDataSellerPrev.php',httpParams);
+}
+updateStatus(stageDate: any,stageName: any,orderIdShort: any){
+let httpParams = new HttpParams()
+.append("stageDate", stageDate)
+.append("stageName",stageName)
+.append("orderIdShort",orderIdShort);
+return this.http.post(this.baseUrl+'assets/api/updateStatus.php', httpParams);
+}
+updateCancelStatus(stageDate: any,stageName: any,orderIdShort: any,cancelReason: any){
+let httpParams = new HttpParams()
+.append("cancelReason", cancelReason)
+.append("stageDate", stageDate)
+.append("stageName",stageName)
+.append("orderIdShort",orderIdShort);
+return this.http.post(this.baseUrl+'assets/api/updateCancelStatus.php', httpParams);
+}
+updateLink(track_link: any,orderIdShort:any){
+let httpParams = new HttpParams()
+.append("orderIdShort", orderIdShort)
+.append("track_link", track_link);
+return this.http.post(this.baseUrl+'assets/api/updateLink.php', httpParams);
+}
+uploadImageShipped(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageShippedUpload.php', httpParams);
+}
+uploadImageDelivered(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageDeliveredUpload.php', httpParams);
+}
+uploadImageClosed(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageClosedUpload.php', httpParams);
 }
 
   // deleteCart(id: number) {
