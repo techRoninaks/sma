@@ -128,6 +128,7 @@ export class LoginComponent implements OnInit {
                     this.setCookie("isLoggedIn",1);
                     this.setCookie("userCity",this.city);
                     this.setCookie("userPin",this.pin);
+                    this.setCookie("pin",this.pin);
                     this.setCookie("userName",this.cookie_uname);
                     this.setCookie("userId",this.cookie_user_id);
                     document.getElementById("headerLogin").innerText = this.cookie_uname as string;
@@ -135,6 +136,7 @@ export class LoginComponent implements OnInit {
                     document.getElementById("locationlabel").innerText = this.city as string;
                     document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/']);
+                    window.location.reload();
                   }
                   else if(data['status'] =="Success2")
                   {
@@ -151,6 +153,7 @@ export class LoginComponent implements OnInit {
                     {
                       this.pin =data['pincode'];
                       this.setCookie("sellerPin",this.pin);
+                      this.setCookie("pin",this.pin);
                       this.cookie_seller_id = data['sellerId'];
                       this.seller_name = data['seller_name'];
                       this.setCookie("sellerName",this.seller_name);
@@ -166,6 +169,7 @@ export class LoginComponent implements OnInit {
                       this.setCookie("sellerName",this.seller_name);
                       this.pin = data['pincode'];
                       this.setCookie("sellerPin",this.pin);
+                      this.setCookie("pin",this.pin);
                       this.setCookie("sellerStage",3);
                       this.router.navigate(['/signupseller']);
                     }
@@ -197,6 +201,7 @@ export class LoginComponent implements OnInit {
                       this.setCookie("isLoggedIn",1);
                       this.setCookie("sellerCity",this.city);
                       this.setCookie("sellerPin",this.pin);
+                      this.setCookie("pin",this.pin);
                       this.setCookie("sellerId",this.cookie_seller_id);
                       this.setCookie("sellerName",this.seller_name);
                       document.getElementById("headerLogin").innerText = this.seller_name as string;

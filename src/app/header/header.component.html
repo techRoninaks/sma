@@ -50,8 +50,9 @@
                 <label id="headerLogin">{{temp}}</label>
               </button>
                 <div class="dropdown-content2" id="profilemenu">
-                  <li *ngIf="user_signed"><a routerLink="/orders">My orders</a></li>
-                  <li><a href=#>My messages</a></li>
+                  <li *ngIf="user_signed"><a routerLink="/userprofile">My orders</a></li>
+                  <li *ngIf="sellerSignedIn"><a routerLink="/manageorders">My orders</a></li>
+                  <li><a>My messages</a></li>
                   <li><a routerLink="/userprofile">My notifications</a></li>
                   <li><a routerLink="/userprofile">My fav shops</a></li>
                   <li><a routerLink="/userprofile">My accounts</a></li>
@@ -93,7 +94,7 @@
         </div>
         <div class="dropdown" style="display: none;" id="sellerHeader">
           <button class="dropbtn-cat"><a routerLink="/dashboard">DASHBOARD</a></button>
-          <button class="dropbtn-cat"><a routerLink="/orders">MY ORDER</a></button>
+          <button class="dropbtn-cat"><a routerLink="/manageorders">MY ORDER</a></button>
           <button class="dropbtn-cat"><a routerLink="/transaction">TRANSACTION</a></button>
           <button class="dropbtn-cat"><a routerLink="/messages">MESSAGES</a></button>
           <button class="dropbtn-cat"><a routerLink="/shopsetting">SHOP SETTINGS</a></button>
