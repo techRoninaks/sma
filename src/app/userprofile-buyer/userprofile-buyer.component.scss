@@ -640,6 +640,7 @@ a.notif {
     font-size: 8px;
     align-content: center;
     text-align: center;
+    height: 150px;
 }
 .pending-conf{
     grid-area: pending-conf;
@@ -680,32 +681,32 @@ a.notif {
 .label-1{
     grid-area: label-1;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -23%;
+    margin-bottom: -42px;
 }
 .label-2{
     grid-area: label-2;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -23%;
+    margin-bottom: -42px;
 }
 .label-3{
     grid-area: label-3;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -23%;
+    margin-bottom: -42px;
 }
 .label-4{
     grid-area: label-4;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -23%;
+    margin-bottom: -42px;
 }
 .label-5{
     grid-area: label-5;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -23%;
+    margin-bottom: -42px;
 }
 .label-6{
     grid-area: label-6;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -26%;
+    margin-bottom: -42px;
 }
 .dot {
     height: 65px;
@@ -716,43 +717,43 @@ a.notif {
   }
 .stat-bar-1{
     grid-area: stat-bar-1;
-    margin-top: 15%;
+    margin-top: 20px;
     width: 82%;
-    margin-left: 50%;
+    margin-left: 52px;
 }
 .stat-bar-2{
     grid-area: stat-bar-2;
-    margin-top: 15%;
+    margin-top: 20px;
     width: 82%;
-    margin-left: 20%;
+    margin-left: 30px;
 }
 .stat-bar-3{
     grid-area: stat-bar-3;
-    margin-top: 15%;
+    margin-top: 20px;
     width: 82%;
-    margin-left:2%;
+    margin-left:-14px;
 }
 .stat-bar-4{
     grid-area: stat-bar-4;
-    margin-top: 15%;
+    margin-top: 20px;
     width: 82%;
-    margin-left: -1%;
+    margin-left: -39px;
 }
 .stat-bar-5{
     grid-area: stat-bar-5;
-    margin-top: 15%;
+    margin-top: 20px;
     width: 82%;
-    margin-left: -4%;
+    margin-left: -50px;
 }
 .stat-bar-6{
     grid-area: stat-bar-6;
-    margin-top: 17%;
+    margin-top: 20px;
     width: 82%;
-    margin-left: -50%;
+    margin-left: -65px;
 }
 // timeline
 .stats-1 {
-    padding: 0px 60px;
+    padding: 0px 0px;
     display: flex;
     justify-content: center;
     border-top: 2px solid #EFBE24;
@@ -1018,7 +1019,7 @@ a.notif {
     border: 2px solid #EFBE24;
     position: absolute;
     top: -11px;
-    left: 47%;
+    left: 60%;
   }
   .validator-style{
     color: #e75c4a;

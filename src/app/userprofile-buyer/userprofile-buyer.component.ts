@@ -101,6 +101,7 @@ export class UserprofileBuyerComponent implements OnInit {
   dynamicDataPendingPayCount: any = "";
   dynamicDataSavedCard:any ="";
   dynamicDataOrderData: any="";
+  dynamicNotification: any="";
   dynamicUserAddressData: any="";
   dynamicData:any ="";
   dynamicDataFollow:any ="";
@@ -150,7 +151,7 @@ export class UserprofileBuyerComponent implements OnInit {
           this.i =0;
           this.dynamicDataOrderData=data;
           this.orderCount= data[this.i]['orderCount'];
-          this.status = this.dynamicDataOrderData[0]['orderStatus'];
+          this.status = this.dynamicDataOrderData['orderStatus'];
           for(this.i; this.i < this.orderCount; this.i++)
           {
             if(this.status == "pending confirmation")
@@ -230,7 +231,12 @@ export class UserprofileBuyerComponent implements OnInit {
             },
         error=> console.error(error)
       );
-      
+      this.data.getNotifications(this.id).subscribe(
+        data=>{
+                this.dynamicNotification=data;
+              },
+          error=> console.error(error)
+        );
   }
   addAddressData(){
     this.submitted = true;
