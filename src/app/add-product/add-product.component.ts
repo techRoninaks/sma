@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { type } from 'os';
 import { log } from 'util';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { FormControl } from'@angular/forms';
 // import { data } from 'jquery';
 
 var imageFront1: any = 1;
@@ -64,6 +67,13 @@ export class AddProductComponent implements OnInit {
   sellerId: any = "";
   flagAdd: boolean = false;
   Object = Object;
+  tagsArray: any = [];
+  discountArray: any = [];
+  categoryArray: any = [];
+  editMsg : boolean = false;
+  calcQtnPrice : any = "";
+  calcu : any ="";
+  shippingLocation : any ="";
   // imageU0: any;
   // imageU1: any;
   // imageU2: any;
@@ -99,13 +109,34 @@ export class AddProductComponent implements OnInit {
   commDec: any;
   totalPrice: any;
   msgTitle: any;
-  faqQ: any;
-  faqA: any;
   arrayText: { text1: string; }[];
   addText: (text: any) => void;
+  allCat :any ="";
+  subCategoryArray :any =[];
+  subCategoryArrayJustVal :any =[];
 
   title = [];
-  faq = [];
+  faq : any = [];
+  varients : any = [];
+  shippingLocs : any = [];
+  labels : any = "";
+  keyword = 'name';
+  keyword1 = 'category';
+  catOne = 'name';
+  mainCatId = "";
+  catId = "";
+  datas : any = [
+     {
+       id: 1,
+       name: 'Usa'
+     },
+     {
+       id: 2,
+       name: 'England'
+     }
+  ];
+  shippinglocationArray: any = [];
+
 
 
 
@@ -121,6 +152,21 @@ export class AddProductComponent implements OnInit {
     (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display = "none";
 
     this.sellerId = this.getCookie('sellerId');
+
+  
+    this.data.getLabelForProduct().subscribe(data=>{
+      this.labels = data;
+    });
+    this.data.getTagsForProduct().subscribe(data=>{
+      this.datas = data;
+    });
+    this.data.getAllCategoriesProduct().subscribe(data=>{
+      this.allCat = data;
+    });
+    var seller_id = this.getCookie("sellerId");
+    this.data.getShippingLocationAddProduct(seller_id).subscribe(data=>{
+      this.shippingLocation = data;
+    });
 
 
 
@@ -173,6 +219,138 @@ export class AddProductComponent implements OnInit {
 
   }
 
+  getSearchSubCategory(){
+    var search = (<HTMLInputElement><any>document.getElementById('subsubcategory')).value;
+    (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "block";
+    var id = this.catId;
+    this.data.getSubCategorySearch(id, search).subscribe(
+      data => {
+        this.dynamicSubCategory = data;
+        // console.log(this.dynamicSubCategory);
+      },
+    );
+  }
+
+  newSubCategory(){
+    var search = (<HTMLInputElement><any>document.getElementById('subsubcategory')).value;
+    (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "none";
+    this.data.createNewSubCategory(this.catId, search).subscribe(
+      data => {
+        console.log(data);
+        // console.log(this.dynamicSubCategory);
+      },
+    );
+  }
+
+  shippingLocationGetter(pos){
+    var search = (<HTMLInputElement><any>document.getElementById(pos+"_pincode")).value;
+    (<HTMLInputElement><any>document.getElementById("myUL")).style.display = "block";
+    this.data.getAutoShippingLocation(search).subscribe(data=>{
+      this.shippinglocationArray = data;
+    })
+  }
+
+  decreseCount(){
+    var search = parseInt((<HTMLInputElement><any>document.getElementById("Counter-Label")).value);
+    search--;
+    if(search>0){
+      (<HTMLInputElement><any>document.getElementById("Counter-Label")).value = search.toString();
+    }
+  }
+
+  increseCount(){
+    var search = parseInt((<HTMLInputElement><any>document.getElementById("Counter-Label")).value);
+    search++;
+    (<HTMLInputElement><any>document.getElementById("Counter-Label")).value = search.toString();
+  }
+
+  replaceText(pin, loc){
+    (<HTMLInputElement><any>document.getElementById("item_pincode")).value = loc+", "+pin;
+    (<HTMLInputElement><any>document.getElementById("myUL")).style.display = "none";
+
+  }
+
+  addShippingLocation(item){
+    var pincode = (<HTMLInputElement><any>document.getElementById("item_pincode")).value;
+    var price = (<HTMLInputElement><any>document.getElementById("item_price")).value;
+    var qtn = (<HTMLInputElement><any>document.getElementById("item_qtn")).value;
+    var cell = {pincode:pincode,price:price,qtn:qtn}
+    this.shippingLocs.push(cell);
+    (<HTMLInputElement><any>document.getElementById("item_pincode")).value = "";
+    (<HTMLInputElement><any>document.getElementById("item_price")).value= "";
+    (<HTMLInputElement><any>document.getElementById("item_qtn")).value = "";
+  }
+
+  deleteShiipingLocation(pos){
+    this.shippingLocs.splice( this.shippingLocs.indexOf(pos), 1 );
+  }
+
+  selectEvent(item) {
+    // do something with selected item
+    if(this.tagsArray.length<5){
+      this.tagsArray.push(item.name);
+    }
+    else{
+      alert("Only 5 tags are allowed");
+    }
+    
+  }
+  displayVarientType(item, pos, last) {
+    // do something with selected item
+    (<HTMLInputElement><any>document.getElementById(item+"_"+pos)).style.display = "block";
+    if(pos<6){
+      (<HTMLInputElement><any>document.getElementById(item+"_btn_"+pos)).style.display = "block";
+    }
+    (<HTMLInputElement><any>document.getElementById(item+"_btn_"+last)).style.display = "none";
+    
+  }
+  
+  addVarients(){
+    if(this.varients.length<6){
+      this.varients.push(this.varients.length);
+    }
+    else{
+      alert("only 6 varients can be added.")
+    }
+  }
+
+  saveAddVariant(pos){
+    var varientName = (<HTMLInputElement><any>document.getElementById(pos+"_name")).value;
+    var varientOne = (<HTMLInputElement><any>document.getElementById(pos+"_varient_1")).value;
+    var varientTwo = (<HTMLInputElement><any>document.getElementById(pos+"_varient_2")).value;
+    var varientThree = (<HTMLInputElement><any>document.getElementById(pos+"_varient_3")).value;
+    var varientFour = (<HTMLInputElement><any>document.getElementById(pos+"_varient_4")).value;
+    var varientFive = (<HTMLInputElement><any>document.getElementById(pos+"_varient_5")).value;
+    var varientSix = (<HTMLInputElement><any>document.getElementById(pos+"_varient_6")).value;
+    var priceOne = (<HTMLInputElement><any>document.getElementById(pos+"_price_1")).value;
+    var priceTwo = (<HTMLInputElement><any>document.getElementById(pos+"_price_2")).value;
+    var priceThree = (<HTMLInputElement><any>document.getElementById(pos+"_price_3")).value;
+    var priceFour = (<HTMLInputElement><any>document.getElementById(pos+"_price_4")).value;
+    var priceFive = (<HTMLInputElement><any>document.getElementById(pos+"_price_5")).value;
+    var priceSix = (<HTMLInputElement><any>document.getElementById(pos+"_price_6")).value;
+
+    var varientUpload = { varientName:varientName, varientOne: varientOne,varientTwo :varientTwo , varientThree: varientThree , varientFour:varientFour , varientFive: varientFive ,varientSix:varientSix, priceOne: priceOne, priceTwo: priceTwo, priceThree:priceThree, priceFour:priceFour, priceFive:priceFive, priceSix:priceSix};
+
+    console.log(varientUpload);
+    this.data.addProductVarients(varientUpload).subscribe(data=>{
+
+    })
+
+  }
+
+  deletetags(del){
+    this.tagsArray.splice( this.tagsArray.indexOf(del), 1 );
+  }
+ 
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+  
+  onFocused(e){
+    // do something when input is focused
+  }
+
   setupPrice() {
     var base_price = (<HTMLInputElement><any>document.getElementById("product-BasePrice")).value;
     this.basePrice = base_price;
@@ -193,6 +371,7 @@ export class AddProductComponent implements OnInit {
 
 
   subCategoryLoaded(id) {
+    this.mainCatId = id;
     this.data.getCategoryAddProduct(id).subscribe(
       data => {
         this.dynamicCategory = data;
@@ -201,11 +380,24 @@ export class AddProductComponent implements OnInit {
     );
   }
 
+  replaceCategory(id, val){
+    (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "none";
+    var cell ={ id:id, val: val}
+    this.subCategoryArray.push(cell);
+    this.subCategoryArrayJustVal.push(id);
+    console.log(this.subCategoryArrayJustVal);
+  }
+  deleteCategory(val){
+    this.subCategoryArray.splice( this.subCategoryArray.indexOf(val), 1 );
+    this.subCategoryArrayJustVal.splice( this.subCategoryArrayJustVal.indexOf(val.id), 1 );
+    console.log(this.subCategoryArrayJustVal);
+  }
+
   subCategoryLoaded1(id) {
+    this.catId = id;
     this.data.getSubCategoryAddProduct(id).subscribe(
       data => {
         this.dynamicSubCategory = data;
-        // console.log(this.dynamicSubCategory);
       },
     );
 
@@ -288,13 +480,29 @@ export class AddProductComponent implements OnInit {
 
   publishBtn(x: any) {
 
+    var caller = "";
     if (x == 'publish') {
+      caller = "publish";
+    }
+    else if (x == 'duplicate') {
+      caller = "duplicate";
+    }
+    else{
+      caller = "save";
+    }
+
+    var pincode = (<HTMLInputElement><any>document.getElementById("initialAlias")).value;
+    var price = (<HTMLInputElement><any>document.getElementById("initialprice")).value;
+    var qtn = (<HTMLInputElement><any>document.getElementById("initialQtn")).value;
+    var cell = {pincode:pincode,price:price,qtn:qtn}
+    this.shippingLocs.push(cell);
+
       var active_status = (<HTMLInputElement><any>document.getElementById("active")).checked;
       var name = (<HTMLInputElement><any>document.getElementById("product-Name")).value;
       var base_price = (<HTMLInputElement><any>document.getElementById("product-BasePrice")).value;
       this.basePrice = base_price;
       this.commDec = 3;
-      this.totalPrice = this.basePrice - (this.basePrice * (this.commDec / 100));
+      this.totalPrice = this.basePrice;
       var short_desc = (<HTMLInputElement><any>document.getElementById("product-ShortDesc")).value;
       var Long_desc = (<HTMLInputElement><any>document.getElementById("product-Desc")).value;
       var spec = (<HTMLInputElement><any>document.getElementById("product-Spec")).value;
@@ -315,7 +523,7 @@ export class AddProductComponent implements OnInit {
 
       var avg_prcessing_time = (<HTMLInputElement><any>document.getElementById("Avg-ProTime")).value;
       var avg_shpping_time = (<HTMLInputElement><any>document.getElementById("Avg-ShipTime")).value;
-      var tags = (<HTMLInputElement><any>document.getElementById("Tag-Card")).value;
+      var tags = this.tagsArray;
       var auto_cancel_time = (<HTMLInputElement><any>document.getElementById("Auto-Cancel")).value;
       var max_no_of_image = (<HTMLInputElement><any>document.getElementById("Max-Count-Label")).value;
       var has_gift = (<HTMLInputElement><any>document.getElementById("giftOption")).checked;
@@ -337,28 +545,32 @@ export class AddProductComponent implements OnInit {
 
       var quantity_price = (<HTMLInputElement><any>document.getElementById("Qty-Price-Id")).value;
       var price = (<HTMLInputElement><any>document.getElementById("Price-Id")).value;
-      // var image0 = imageValue0;
-      // var image1 = imageValue1;
-      // var image2 = imageValue2;
-      // var image3 = imageValue3;
-      // var image4 = imageValue4;
-      // var image5 = imageValue5;
-      // var image6 = imageValue6;
-      // var image7 = imageValue7;
-      // var image8 = imageValue8;
-      // var image9 = imageValue9;
+      var labels = (<HTMLInputElement><any>document.getElementById("labelSelect")).value;
+      var shippingArray = JSON.stringify(this.shippingLocs);
+      var varinetSelect = this.varients;
+      var titleSelect = this.title;
+      var discountArraySelect = JSON.stringify(this.discountArray);
+      var faqArray = JSON.stringify(this.faq);
 
+      var policyArray = shipping_policy.split("~");
+      shipping_policy = policyArray[0];
+      return_policy = policyArray[1];
+      product_policy = policyArray[2];
+      
+      var shipping_option = "";
+      if (ship) {
+        shipping_option = shipping_option+ "shipping,";
+      }
+      if (cod) {
+        shipping_option = shipping_option+  "cod,";
+      }
+      if (pickup) {
+        shipping_option =  shipping_option+ "pickup";
+      }
 
-      if (ship == true) {
-        var shipping_option = "shipping";
-      }
-      else if (cod == true) {
-        var shipping_option = "cod";
-      }
-      else if (pickup == true) {
-        var shipping_option = "pickup";
-      }
-      this.addProduct = { name: name, base_price: base_price, short_desc: short_desc, Long_desc: Long_desc, spec: spec, qty_avble: qty_avble, max_order_quant: max_order_quant, min_order_quant: min_order_quant, avg_prcessing_time: avg_prcessing_time, avg_shpping_time: avg_shpping_time, tags: tags, auto_cancel_time: auto_cancel_time, max_no_of_image: max_no_of_image, has_gift: has_gift, shipping_option: shipping_option, has_order_confmn: has_order_confmn, can_orderbydate: can_orderbydate, can_upload_image: can_upload_image, add_custom_message_field: add_custom_message_field, has_rfq: has_rfq, has_instant_buy: has_instant_buy, shipping_policy: shipping_policy, return_policy: return_policy, product_policy: product_policy, active_status: active_status, bulk_discount_id: bulk_discount_id, offer_id: offer_id, cmsn_dedtd: cmsn_dedtd, image1: imageFront1, image2: imageFront2, image3: imageFront3, image4: imageFront4, image5: imageFront5, image6: imageFront6, image7: imageFront7, image8: imageFront8, image9: imageFront9, image10: imageFront10, sellerid: this.sellerId, quantity_price: quantity_price, price: price };
+      // console.log(titleSelect);
+      
+      this.addProduct = { name: name, base_price: base_price, short_desc: short_desc, Long_desc: Long_desc, spec: spec, qty_avble: qty_avble, max_order_quant: max_order_quant, min_order_quant: min_order_quant, avg_prcessing_time: avg_prcessing_time, avg_shpping_time: avg_shpping_time, tags: tags, auto_cancel_time: auto_cancel_time, max_no_of_image: max_no_of_image, has_gift: has_gift, shipping_option: shipping_option, has_order_confmn: has_order_confmn, can_orderbydate: can_orderbydate, can_upload_image: can_upload_image, add_custom_message_field: add_custom_message_field, has_rfq: has_rfq, has_instant_buy: has_instant_buy, shipping_policy: shipping_policy, return_policy: return_policy, product_policy: product_policy, active_status: active_status, bulk_discount_id: bulk_discount_id, offer_id: offer_id, cmsn_dedtd: cmsn_dedtd, image1: imageFront1, image2: imageFront2, image3: imageFront3, image4: imageFront4, image5: imageFront5, image6: imageFront6, image7: imageFront7, image8: imageFront8, image9: imageFront9, image10: imageFront10, sellerid: this.sellerId, quantity_price: quantity_price, price: price,labels:labels,shippingArray:shippingArray,varinetSelect:varinetSelect,titleSelect:titleSelect,discountArraySelect:discountArraySelect, caller: caller, faqArray:faqArray, mainCat: this.mainCatId, subCat:this.subCategoryArrayJustVal };
 
       this.addProductMsgTitle = { title: this.msgTitle };
 
@@ -370,6 +582,9 @@ export class AddProductComponent implements OnInit {
         // this.location.replaceState('./dashboard');
 
         // window.location.href = './dashboard';
+        if(caller == "duplicate"){
+          alert('Product have been saved and dupicate have been made.')
+        }
       });
 
       // this.imageProduct2 = {prodid: this.prodid, image: imageFront2 }
@@ -407,7 +622,7 @@ export class AddProductComponent implements OnInit {
 
       // });
 
-    }
+    
 
 
     // if (x == 'prod') {
@@ -452,32 +667,57 @@ export class AddProductComponent implements OnInit {
   }
 
   MsgTitlePlus() {
-    var i = 0;
+    var i = this.title.length;
     this.msgTitle = (<HTMLInputElement><any>document.getElementById("Msg-TitleId")).value;
-    this.title.push({ "id": i++, "titles": this.msgTitle });
+    this.title.push(this.msgTitle);
+    (<HTMLInputElement><any>document.getElementById("Msg-TitleId")).value = "";
     console.log(this.title);
   }
 
   close(id: any) {
-    document.getElementById("MsgTitleLabel").style.display = "none";
-    document.getElementById("imgEdit-MsgTitle").style.display = "none";
-    document.getElementById("faq-Close-Id").style.display = "none";
+    this.title.splice( this.title.indexOf(id), 1 );
+    console.log(this.title);
   }
+
+  // editTitle(edit, id){
+
+  //   // this.editMsg = true;
+  //   var editText = (<HTMLInputElement><any>document.getElementById("MsgEdit_"+id)).value;
+  //   var index = this.title.indexOf(id);
+  //   alert(edit);
+  //   console.log(editText, edit, index)
+
+  //   if (index !== -1) {
+  //     this.title[index] = editText;
+  //   }
+  // console.log(edit);
+  // (<HTMLInputElement><any>document.getElementById("MsgEdit_"+id)).style.display = "none";
+  // (<HTMLInputElement><any>document.getElementById("MsgTitleLabel_"+id)).style.display = "block";
+  // (<HTMLInputElement><any>document.getElementById("save_"+id)).style.display = "none";
+  // (<HTMLInputElement><any>document.getElementById("editNow_"+id)).style.display = "block";
+  // }
+
+  // editCell(id){
+  //   alert("editNow_"+id);
+  //   (<HTMLInputElement><any>document.getElementById("MsgEdit_"+id)).style.display = "block";
+  //   (<HTMLInputElement><any>document.getElementById("MsgTitleLabel_"+id)).style.display = "none";
+  //   (<HTMLInputElement><any>document.getElementById("editNow_"+id)).style.display = "none";
+  //   (<HTMLInputElement><any>document.getElementById("save_"+id)).style.display = "block";
+  // }
 
 
   faqAdd() {
     var i = 0;
-    this.faqQ = (<HTMLInputElement><any>document.getElementById("Ques-Sect1")).value;
-    this.faq.push({ "id": i++, "faqs": this.faqQ });
-    this.faqA = (<HTMLInputElement><any>document.getElementById("Ans-Sect2")).value;
-    this.faq.push({ "id": i++, "faqs": this.faqA });
-    console.log(this.faq);
+    var faqQ = (<HTMLInputElement><any>document.getElementById("Ques-Sect1")).value;
+    var faqA = (<HTMLInputElement><any>document.getElementById("Ans-Sect2")).value;
+    var cell = {faqQ:faqQ,faqA:faqA}
+    this.faq.push(cell);
+    (<HTMLInputElement><any>document.getElementById("Ques-Sect1")).value ="";
+    (<HTMLInputElement><any>document.getElementById("Ans-Sect2")).value ="";
   }
 
-  FaqClose( ){
-    document.getElementById("faqLabel").style.display = "none";
-    document.getElementById("faq-Edit-Id").style.display = "none";
-    document.getElementById("imgClose-MsgTitle").style.display = "none";
+  FaqClose(pos){
+    this.faq.splice(this.faq.indexOf(pos), 1);
   }
 
   prodDiscSubmit() {
@@ -494,26 +734,65 @@ export class AddProductComponent implements OnInit {
   }
 
   addBulkDisc() {
-
-
     var from_time_stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-1")).value;
     var to_tme_Stamp = (<HTMLInputElement><any>document.getElementById("Pro-Date-2")).value;
     var percentage = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
 
     this.addProductDisc = { from_time_stamp: from_time_stamp, to_tme_Stamp: to_tme_Stamp, percentage: percentage };
 
-    this.data.getdataPostAddProduct(this.addProductDisc).subscribe(data => {
+    this.data.postOffersAddProduct(this.addProductDisc).subscribe(data => {
       console.log("Sent");
     })
+  }
+  addBulkDiscTwo() {
+    var bulkDiscount = (<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value;
+    var discount = (<HTMLInputElement><any>document.getElementById("Disc-Pres")).value;
+    var bulk  = parseInt((<HTMLInputElement><any>document.getElementById("Disc-Pres")).value);
+    var actualPrice = (<HTMLInputElement><any>document.getElementById("Actual-Price")).value;
 
+    var addProductDisc = { bulkDiscount: bulkDiscount,bulk:bulk, discount: discount, actualPrice: actualPrice };
+    this.discountArray.push(addProductDisc);
+    (<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value = "";
+    (<HTMLInputElement><any>document.getElementById("Disc-Pres")).value = "";
+    (<HTMLInputElement><any>document.getElementById("Disc-Price")).value = "";
+    (<HTMLInputElement><any>document.getElementById("Actual-Price")).value = "";
+    // this.data.postOffersAddProduct(this.addProductDisc).subscribe(data => {
+    //   console.log("Sent");
+    // })
+  }
 
-
+  qtnchanger(){
+    var bulkDiscount  = parseInt((<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value);
+    this.calcQtnPrice = bulkDiscount*this.basePrice;
 
   }
+
+  deleteDiscount(pos){
+    console.log(this.discountArray.indexOf(pos));
+    this.discountArray.splice( this.discountArray.indexOf(pos), 1 );
+    console.log(this.discountArray);
+  }
+
+  disCount(){
+    var bulk  = parseInt((<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value);
+    var bulkDiscount  = parseInt((<HTMLInputElement><any>document.getElementById("Disc-Pres")).value);
+    this.calcu = (this.basePrice*bulk)-((bulk*this.basePrice)*(bulkDiscount/100));
+  }
+
   ngOnDestroy() {
     (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display = "block";
     (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "none";
     (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display = "block";
+  }
+
+  addsubcatogory(){
+    (<HTMLInputElement><any>document.getElementById('addSubCat')).style.display = "block";
+  }
+
+  submitSubCatogory(){
+    var catname = (<HTMLInputElement><any>document.getElementById('addSubCatInput')).value;
+    var parentidName = (<HTMLInputElement><any>document.getElementById('subCatAddition')).value
+    this.categoryArray.push(catname)
   }
 
   // onClick(event) {
