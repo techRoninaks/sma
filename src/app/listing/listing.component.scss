@@ -1,5 +1,20 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+// Color Palette
 
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+// font-family: BitterBold;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
 /* Small devices (portrait tablets and large phones, 600px and up) */
 
 @mixin sm {
@@ -81,6 +96,55 @@
 		grid-template-rows: repeat(5, auto);
 		grid-template-areas: "selDesc " "quanDel" "policy" "review" "question";
 	}
+	.headClass {
+		font-family: BitterBold;
+		font-size: $Header;
+		text-align: center;
+	}
+	.shipmentDetails {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+		border: 2px solid #949494;
+		padding: 3px 100px;
+		background-color: white;
+	}
+	.policies {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+	}
+	.descD {
+		font-family: BitterBold;
+		font-size: $SubText;
+		color: #333333;
+	}
+	.btnStyle{
+		background-color: #efbe24;
+		border: none;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+		height:30px;
+		// padding:6px 25px 6px 25px;
+		&:hover {
+			cursor: pointer;
+			background-color: #ddb01d;
+		}
+		color: white;
+		font-family: BitterBold;
+		font-size: 16px;
+	}
+	.timeStyle{
+		box-shadow: 0px 6px 10px -4px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
+		padding: 10px 60px 0px 45px;
+		width: 28rem;
+		background-color:whitesmoke;
+		margin-top: 15px;
+		color: #333333;
+		font-family: Bitter;
+		font-size: 18px;
+	}
 }
 
 .divSelDesc {
@@ -142,14 +206,27 @@
 				grid-area: follow;
 				margin: 0.5rem 0rem 0rem 2rem;
 				.btnFollow {
-					width: 125px;
-					margin: auto;
+					width: 95px;
 					z-index: 0;
-					background-color: #ff1d25;
+					background-color:#ff1d25;
+					padding: 5px 0px 5px 30px;
+					font-size: 14px;
+					color:white;
+					font-family: BitterBold;
+					margin-left: 19px;
+					border: none;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					border-radius: 2px;
+					height:30px;
+					// padding:6px 25px 6px 25px;
+					&:hover {
+						cursor: pointer;
+						background-color: #ec0e15;
+					}
 				}
 				img {
 					z-index: 1;
-					transform: translate(-2rem, 2px);
+					transform: translate(-25px, 2px);
 					position: absolute;
 					height: 20px;
 				}
@@ -177,13 +254,14 @@
 				.bannerProduct {
 					z-index: 1;
 					// transform: translate(auto, -265%);
-					transform: translate(19rem, -20rem);
+					// transform: translate(19rem, -20rem);
 					// transform: translate(-7.5rem, -1rem);
 					position: absolute;
 					// grid-column-end: 3;
 					display: block;
-					margin-left: auto;
-					margin-right: auto;
+					// margin-left: auto;
+					// margin-right: auto;
+					margin: -20rem 0rem 0rem 19.25rem;
 					// margin-top: 10%;
 				}
 			}
@@ -203,8 +281,9 @@
 				scrollbar-width: thin;
 				display: grid;
 				grid-template-rows: auto;
+				margin-left: 5px;
 				.smallImage {
-					height: 5rem;
+					height: 6rem;
 					// width: 5rem;
 					padding-bottom: 0.5rem;
 				}
@@ -217,15 +296,17 @@
 			grid-template-areas: "btnRfq . btnAtcart ";
 			.btnRfq {
 				grid-area: btnRfq;
-				width: 125px;
-				margin: auto;
-				background-color: #efbe24;
+				width: 110px;
+				// margin: auto;
+				// background-color: #efbe24;
+				margin: 10px 50px;
+				height: 30px;
 			}
 			.btnAtcart {
 				grid-area: btnAtcart;
-				width: 125px;
-				margin: auto;
-				background-color: #efbe24;
+				width: 130px;
+				margin: 10px 15px;
+				// background-color: #efbe24;
 			}
 		}
 	}
@@ -243,10 +324,27 @@
 		box-sizing: border-box;
 		align-self: center;
 		margin: 5% 10% 5% 10%;
+		scrollbar-width: thin;
 		width: auto;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
 		.desc {
 			margin: 1rem auto auto 2rem;
 			width: 28rem;
+			ul {
+				list-style: disc;
+				margin-left: -35px;
+				color: lightgray;
+			}
+
+			// ul li::before {
+			// 	content: "\f111";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+			// 	color: #646464; /* Change the color */
+			// 	font-weight: bold; /* If you want it to be bold */
+			// 	display: inline-block; /* Needed to add space between the bullet and the text */
+			// 	width: 1em; /* Also needed for space (tweak if needed) */
+			// 	margin-left: -1em; /* Also needed for space (tweak if needed) */
+			// }
 			.longD {
 				#lDesc {
 					height: 6rem;
@@ -357,16 +455,39 @@
 	}
 	.pConfirmation {
 		grid-area: pConfirmation;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
+		padding: 10px 60px 0px 45px;
+		width: 28rem;
+		.orderConf{
+			display:inline;
+		}
+		.confTime{
+			background-color:
+			white;
+			height: 25px;
+			width: 50px;
+			display: inline-block;
+			text-align: center;
+			font-family:BitterBold;
+		}
 	}
 	.pDelivery {
 		grid-area: pDelivery;
 		img {
+			// display: block;
+			// margin-left: auto;
+			// margin-right: auto;
+			// width: 300px;
+			// z-index: 0;
+			// transform: translate(-10rem, 2.75rem);
 			display: block;
-			margin-left: auto;
+			margin-left: 10rem;
 			margin-right: auto;
-			width: 300px;
+			width: 310px;
 			z-index: 0;
-			transform: translate(-10rem, 2.75rem);
+			-webkit-transform: translate(-10rem, 2.75rem);
+			transform: translate(-9.75rem, 3rem);
 		}
 	}
 	.pCourier {
@@ -413,7 +534,7 @@
 			margin-right: auto;
 			width: 300px;
 			z-index: 0;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 		}
 		h2 {
 			text-align: center;
@@ -433,7 +554,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -455,7 +576,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -478,7 +599,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -494,27 +615,20 @@
 		}
 	}
 }
-
 .divReview {
-	// margin: 5% 5% auto 5%;
-	width: 100%;
 	grid-area: review;
-	background-color: white;
-	// margin-left: 10%;
-	// margin-right: 10%;
-	// overflow: auto;
-	// margin-top: 2%;
-	// background-color: rgb(241, 241, 241);
+	// background-color: whitesmoke;
+	width: 100%;
 	height: auto;
-	box-sizing: border-box;
-	color: #737373;
-	font-weight: 300;
+	font-weight: 300px;
+	// margin-top: 5%;
+	// margin-bottom: 5%
 	img {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
 		width: 300px;
-		transform: translate(0rem, 2rem);
+		transform: translate(0rem, 3rem);
 		z-index: 0;
 	}
 	h2 {
@@ -522,133 +636,193 @@
 		transform: translate(0px, -0.45em);
 		z-index: 1;
 	}
+	.reviewTop {
+		// background-image: linear-gradient(white, whitesmoke);
+	}
 	.rating {
 		grid-area: rating;
-		width: 400px;
+		width: 30rem;
 		margin: 0 auto;
-		margin-top: 3em;
-		background-color: #efefef;
+		margin-top: 2em;
+		// background-color: white;
 		padding: 4px;
-		margin-bottom: 3em;
+		margin-bottom: 2em;
 		.inner {
+			// padding: 1em;
+			// background-color: white;
+			// overflow: hidden;
+			// position: relative;
+			// -webkit-border-radius: 4px;
+			// -moz-border-radius: 4px;
+			// border-radius: 4px;
 			padding: 1em;
-			background-color: white;
+			background-color: whitesmoke;
 			overflow: hidden;
-			position: relative;
-			-webkit-border-radius: 4px;
-			-moz-border-radius: 4px;
-			border-radius: 4px;
+			width: 30rem;
+			height: 15rem;
+			border-radius: 15px;
 		}
 		.rating {
 			float: left;
-			width: 45%;
-			margin-right: 5%;
+			width: 50%;
+			// margin-right: 5%;
 			text-align: center;
+			background-color: transparent;
+			border-right: 2px solid #dbdbdb;
 		}
+
 		.rating-num {
 			color: #333333;
-			font-size: 72px;
-			font-weight: 100;
+			font-size: 60px;
+			// font-weight: 100;
 			line-height: 1em;
+			font-family: Bitter;
 		}
+
 		.rating-stars {
 			font-size: 20px;
 			color: #e3e3e3;
 			margin-bottom: 0.5em;
 		}
 		.rating-stars .active {
-			color: #ffd000;
+			color: #737373;
 		}
+
 		.rating-users {
-			font-size: 14px;
+			font-size: 16px;
+			.icon-user {
+			}
 		}
+
 		.histo {
 			float: left;
-			width: 50%;
+			width: 45%;
 			font-size: 13px;
-			transform: translate(0px, 50px);
+			transform: translate(0px, 34px);
+			margin-left: 20px;
 		}
+
 		.histo-star {
 			float: left;
 			padding: 3px;
 		}
+
 		.histo-rate {
 			width: 100%;
 			display: block;
 			clear: both;
 		}
+
 		.bar-block {
 			margin-left: 5px;
 			color: black;
 			display: block;
 			float: left;
-			width: 75%;
+			width: 80%;
 			position: relative;
 		}
+
 		.bar {
 			padding: 4px;
 			display: block;
 		}
+
 		#bar-five {
 			width: 0;
 			background-color: #9fc05a;
 		}
+
 		#bar-four {
 			width: 0;
 			background-color: #add633;
 		}
+
 		#bar-three {
 			width: 0;
 			background-color: #ffd834;
 		}
+
 		#bar-two {
 			width: 0;
 			background-color: #ffb234;
 		}
+
 		#bar-one {
 			width: 0;
 			background-color: #ff8b5a;
-			margin-left: 2px;
+			// margin-left: 2px;
 		}
 	}
 	.review {
 		// margin: 0% 5% 0% 5%;
-		margin-top: 50px;
-		margin-bottom: 50px;
+		// margin-top: 50px;
+		// margin-bottom: 50px;
+		background-color: white;
 		grid-area: revData;
 		display: grid;
-		grid-template-columns: 10% 10% 20% 50%;
-		border-top: 3px lightgray solid;
+		padding-bottom: 20px;
+		grid-template-columns: 10% 12% 12% 55%;
+		// border-bottom: 2px lightgray solid;
 		grid-template-rows: 5% 95%;
+		// padding-bottom: 3.5rem;
+		padding-top: 50px;
 		grid-template-areas: ". revProfIcon revName revData ";
 		.revProfIcon {
 			grid-area: revProfIcon;
+			// border-bottom: 2px lightgray solid;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			.revProfImg {
-				height: 100px;
-				width: 100px;
+				height: 90px;
+				width: 90px;
+				transform: translate(0px, 10px);
 			}
 		}
 		.revName {
-			margin-top: 1%;
+			// margin-top: 1%;
 			grid-area: revName;
+			// border-bottom: 2px lightgray solid;
+			// padding-bottom: 12.5rem;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			.rName {
 				grid-area: rName;
+				font-family: BitterBold;
+				font-size: 16px;
 			}
 			.rAgo {
 				grid-area: rAgo;
+				font-family: Bitter;
+				font-size: 13px;
+				color: #949494;
 			}
 		}
 		.revData {
-			margin-top: 1%;
+			// margin-top: 1%;
+			// border-bottom: 2px lightgray solid;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			grid-area: revData;
 			grid-template-columns: auto;
 			grid-template-rows: repeat(4, auto);
-			grid-template-areas: "rTitile" "rDesc" "rstarLikes" "revIcon";
+			grid-template-areas:
+				"rTitile"
+				"rDesc"
+				"rstarLikes"
+				"revIcon";
 			.rTitle {
 				grid-area: rTitle;
+				font-family: BitterBold;
+				font-size: 16px;
 			}
 			.rDesc {
 				grid-area: rDesc;
+				font-family: Bitter;
+				font-size: 14px;
+				color: #949494;
 			}
 			.starLikes {
 				display: grid;
@@ -661,6 +835,9 @@
 					width: 30px;
 					height: 30px;
 					transform: translate(0px, 0px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 				.likeCount {
 					grid-area: likeCount;
@@ -671,6 +848,9 @@
 					width: 30px;
 					height: 30px;
 					transform: translate(0px, 0px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 				.dislikeCount {
 					grid-area: dislikeCount;
@@ -678,6 +858,12 @@
 				}
 				.btnReport {
 					grid-area: btnReport;
+					border: none;
+					background-color: white;
+					transform: translate(-15px, -10px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 			}
 			.revIcon {
@@ -695,7 +881,7 @@
 	width: Auto;
 	grid-area: question;
 	height: 300px;
-	margin-block-end: 2%;
+	margin-block-end: 5%;
 	box-sizing: border-box;
 	img {
 		display: block;
@@ -706,7 +892,7 @@
 		z-index: 0;
 		transform: translate(0rem, 2rem);
 	}
-	h2 {
+	p {
 		text-align: center;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -716,6 +902,9 @@
 		grid-template-columns: auto;
 		grid-template-rows: auto;
 		grid-template-areas: "divSA ";
+		font-size: 16px;
+		font-family: Bitter;
+		color: #333333;
 		// "divQA "
 		.divSA {
 			grid-area: divSA;
@@ -726,9 +915,30 @@
 			.search {
 				grid-area: search;
 				.searchBox {
-					transform: translate(0rem, -0.3rem);
+					// transform: translate(0rem, -0.3rem);
+					transform: translate(0rem, -7px);
+					width: 30rem;
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					padding-left: 20px;
 				}
 				button {
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					border: none;
+					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					// border-radius: 5px;
+					// // padding:6px 25px 6px 25px;
+					// &:hover{
+					// 	cursor: pointer;
+					// 	background-color: #ddb01d;
+					// }
+					&:hover {
+						cursor: pointer;
+						background-color: #cfcfcf;
+					}
 					img {
 						height: 25px;
 						width: 20px;
@@ -738,33 +948,61 @@
 			}
 			.askQ {
 				grid-area: askQ;
-				margin-left: 20%;
+				margin-left: 2rem;
+				.submitFaq {
+					width: 30rem;
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					padding-left: 20px;
+				}
+				button {
+					background-color: #efbe24;
+					color: white;
+					border: none;
+					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					// border-radius: 5px;
+					// // padding:6px 25px 6px 25px;
+					&:hover {
+						cursor: pointer;
+						background-color: #ddb01d;
+					}
+					// border: none;
+					height: 40px;
+					// &:hover {
+					// 	cursor: pointer;
+					// 	background-color: #dba716;
+					// }
+				}
 			}
 		}
 		.questionAnswer {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			margin: 10px 40px 0px 40px;
+			margin: 0px 40px 0px 40px;
 			width: auto;
-			grid-row-gap: 25px;
 			.divQA {
 				// grid-area: divQA;
 				// height: auto;
+				margin-top: 20px;
+				padding-bottom: 5%;
 				width: 50%;
 				// display: grid;
 				// grid-template-columns: repeat(2, auto);
 				// float: left;
 				.qA {
 					margin-left: 10%;
-					// .question {
-					// }
-					// .answer {
-					// }
+					.question {
+						color: #333333;
+					}
+					.answer {
+						margin-top: 10px;
+						color: #949494;
+					}
 				}
 			}
 		}
 	}
-
 	.dvMore {
 		img {
 			height: 50px;
@@ -775,7 +1013,6 @@
 		}
 	}
 }
-
 .imgPopup {
 	display: none;
 	position: fixed;
@@ -1045,9 +1282,9 @@
 			}
 		}
 	}
-	.uploadRfq{
-        grid-area:upload;
-    }
+	.uploadRfq {
+		grid-area: upload;
+	}
 	.btnRfq {
 		grid-area: btnRfq;
 	}
@@ -1074,7 +1311,7 @@
 		"grid-MessageTitle"
 		"grid-ProductImages"
 		"grid-PriceListing"
-		"grid-BtnCheckout-Rfq"
+		"grid-BtnCheckout-Rfq";
 }
 
 .btn {
@@ -1096,8 +1333,6 @@
 	border-top-right-radius: 15px;
 	background: #f1f1f1;
 }
-
-
 
 // PRODUCT
 .dvProductName {
@@ -1170,27 +1405,28 @@
 	display: grid;
 	grid-template-columns: auto;
 	grid-template-rows: auto auto;
-	grid-template-areas: "Addr"
-						"btnAddr";
-		.Address { 
-			grid-area: Addr;
-			background:#DBDBDB;
-			text-align: center;
-			width: 400px;
+	grid-template-areas:
+		"Addr"
+		"btnAddr";
+	.Address {
+		grid-area: Addr;
+		background: #dbdbdb;
+		text-align: center;
+		width: 400px;
+		border-radius: 5px;
+		margin-left: 48px;
+		height: 120px;
+		padding: 18px;
+	}
+	.btnAddr {
+		grid-area: btnAddr;
+		.btnChange {
+			margin-top: 18px;
 			border-radius: 5px;
-			margin-left: 48px;
-			height: 120px;
-			padding: 18px;
+			color: white;
+			border: none;
 		}
-		.btnAddr {
-			grid-area: btnAddr;
-			.btnChange {
-				margin-top: 18px;
-				border-radius: 5px;
-				color: white;
-				border: none;
-			}
-		}
+	}
 }
 
 // SAVED ADDRESS
@@ -1204,51 +1440,51 @@
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto auto;
-	grid-template-areas: "labelAddr1 labelAddr2"
-						"btnAddr1 btnAddr2";
-						.labelAddress1 {
-							grid-area:labelAddr1 ;
-							background:white;
-							font-family: "Bitter";
-							border-radius: 5px;
-							margin-left: 15px;
-							width: 220px;
-							height: 58px;
-						}
-						.labelAddress2 {
-							grid-area: labelAddr2;
-							background:white;
-							font-family: "Bitter";
-							border-radius: 5px;
-							margin-left: 15px;
-							width: 220px;
-							height: 58px;
-						}
-						.btnAddress1 {
-							grid-area: btnAddr1;
-							.btnDeliverLeft {
-								margin-top: 10px;
-								color:white;
-								border-radius: 5px;
-								font-family: "Bitter";
-								width: 232px;
-								padding: 5px;
-								border: none;
-							}
-							
-						}
-						.btnAddress2 {
-							grid-area: btnAddr2;
-							.btnDeliverRight {
-								margin-top: 10px;
-								color:white;
-								border-radius: 5px;
-								font-family: "Bitter";
-								width: 232px;
-								padding: 5px;
-								border: none;
-							}
-						}
+	grid-template-areas:
+		"labelAddr1 labelAddr2"
+		"btnAddr1 btnAddr2";
+	.labelAddress1 {
+		grid-area: labelAddr1;
+		background: white;
+		font-family: "Bitter";
+		border-radius: 5px;
+		margin-left: 15px;
+		width: 220px;
+		height: 58px;
+	}
+	.labelAddress2 {
+		grid-area: labelAddr2;
+		background: white;
+		font-family: "Bitter";
+		border-radius: 5px;
+		margin-left: 15px;
+		width: 220px;
+		height: 58px;
+	}
+	.btnAddress1 {
+		grid-area: btnAddr1;
+		.btnDeliverLeft {
+			margin-top: 10px;
+			color: white;
+			border-radius: 5px;
+			font-family: "Bitter";
+			width: 232px;
+			padding: 5px;
+			border: none;
+		}
+	}
+	.btnAddress2 {
+		grid-area: btnAddr2;
+		.btnDeliverRight {
+			margin-top: 10px;
+			color: white;
+			border-radius: 5px;
+			font-family: "Bitter";
+			width: 232px;
+			padding: 5px;
+			border: none;
+		}
+	}
 }
 
 // ADD NEW ADDR BTN
@@ -1266,7 +1502,7 @@
 // FORM GROUP ADDR
 .dvFormGroup {
 	grid-area: grid-FormGroupAddr;
-	background: #DBDBDB;
+	background: #dbdbdb;
 	margin-left: 10px;
 	width: 480px;
 	border-radius: 5px;
@@ -1275,8 +1511,9 @@
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto auto;
-	grid-template-areas: "left-Addr-Form Right-Addr-Form"
-						"btnSave btnSave";
+	grid-template-areas:
+		"left-Addr-Form Right-Addr-Form"
+		"btnSave btnSave";
 	.grid-left-Form {
 		grid-area: left-Addr-Form;
 		.dvContactName {
@@ -1376,35 +1613,36 @@
 	display: grid;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto auto;
-	grid-template-areas: "dvDeliveryDate dvPrice"
-						"dvDeliveryDate1 dvApplyBtn";
-						.grid-Deli-Date {
-							grid-area: dvDeliveryDate;
-							color: #009145;
-							margin-left: -40px;
-						}
-						.grid-Price {
-							grid-area: dvPrice;
-							color: #009145;
-							margin-left: -80px;
-						}
-						.grid-Deli-Date1 {
-							grid-area: dvDeliveryDate1;
-							margin-left: -35px;
-							.dateText {
-								border-color: #EFBE24;
-							}
-						}
-						.grid-ApplyBtn {
-							grid-area: dvApplyBtn;
-							.btnApply {
-								border-radius: 5px;
-								color:white;
-								font-family: "Bitter";
-								margin-left: -198px;
-								border: none;
-							}
-						}
+	grid-template-areas:
+		"dvDeliveryDate dvPrice"
+		"dvDeliveryDate1 dvApplyBtn";
+	.grid-Deli-Date {
+		grid-area: dvDeliveryDate;
+		color: #009145;
+		margin-left: -40px;
+	}
+	.grid-Price {
+		grid-area: dvPrice;
+		color: #009145;
+		margin-left: -80px;
+	}
+	.grid-Deli-Date1 {
+		grid-area: dvDeliveryDate1;
+		margin-left: -35px;
+		.dateText {
+			border-color: #efbe24;
+		}
+	}
+	.grid-ApplyBtn {
+		grid-area: dvApplyBtn;
+		.btnApply {
+			border-radius: 5px;
+			color: white;
+			font-family: "Bitter";
+			margin-left: -198px;
+			border: none;
+		}
+	}
 }
 
 // GIFT OPTION
@@ -1423,9 +1661,9 @@
 	}
 	.grid-GiftOptionToggle {
 		grid-area: dvGiftOptionToggle;
-			.btnGiftOption {
-				margin-left: -144px;
-				margin-top: 54px;
+		.btnGiftOption {
+			margin-left: -144px;
+			margin-top: 54px;
 			// 	.switchActive {
 			// 		position: relative;
 			// 		display: inline-block;
@@ -1435,13 +1673,13 @@
 			// 		margin-bottom: 10px;
 			// 		margin-top: 20px;
 			// 	}
-		
+
 			// 	.switch input {
 			// 		opacity: 0;
 			// 		width: 0;
 			// 		height: 0;
 			// 	}
-		
+
 			// 	.slider {
 			// 		position: absolute;
 			// 		cursor: pointer;
@@ -1453,7 +1691,7 @@
 			// 		-webkit-transition: 0.4s;
 			// 		transition: 0.4s;
 			// 	}
-		
+
 			// 	.slider:before {
 			// 		position: absolute;
 			// 		content: "";
@@ -1465,32 +1703,32 @@
 			// 		-webkit-transition: 0.4s;
 			// 		transition: 0.4s;
 			// 	}
-		
+
 			// 	input:checked + .slider {
 			// 		background-color: #dbdbdb;
 			// 	}
-		
+
 			// 	input:focus + .slider {
 			// 		box-shadow: 0 0 1px #2196f3;
 			// 	}
-		
+
 			// 	input:checked + .slider:before {
 			// 		-webkit-transform: translateX(26px);
 			// 		-ms-transform: translateX(26px);
 			// 		transform: translateX(26px);
 			// 	}
-		
+
 			// 	/* Rounded sliders */
 			// 	.slider.round {
 			// 		border-radius: 34px;
 			// 	}
-		
+
 			// 	.slider.round:before {
 			// 		border-radius: 50%;
 			// 	}
-			}
 		}
 	}
+}
 // GIFT NOTE
 .dvGiftNote {
 	grid-area: grid-GiftOptionNote;
@@ -1499,31 +1737,31 @@
 	display: grid;
 	grid-template-columns: auto;
 	grid-template-rows: auto auto;
-	grid-template-areas: "dvGiftNoteText"
-						"dvGiftNoteCard";
-						.grid-dvGiftNoteText {
-							grid-area: dvGiftNoteText;
-						}
-						.grid-dvGiftNoteCard {
-							grid-area: dvGiftNoteCard;
-							.Gift-Note-Style {
-							}
-						}
+	grid-template-areas:
+		"dvGiftNoteText"
+		"dvGiftNoteCard";
+	.grid-dvGiftNoteText {
+		grid-area: dvGiftNoteText;
+	}
+	.grid-dvGiftNoteCard {
+		grid-area: dvGiftNoteCard;
+		.Gift-Note-Style {
+		}
+	}
 }
 
-// MESSAGE TITLE 
+// MESSAGE TITLE
 .dvMessageTitle {
 	grid-area: grid-MessageTitle;
 	.MsgTitleText {
-	text-align: center;
-	margin-top: 40px;
-	border: 2px solid#efbe24;
-	width: 330px;
-	border-radius: 5px;
-	padding: 15px;
-	margin-left: 80px;
+		text-align: center;
+		margin-top: 40px;
+		border: 2px solid#efbe24;
+		width: 330px;
+		border-radius: 5px;
+		padding: 15px;
+		margin-left: 80px;
 	}
-	
 }
 
 // PRODUCT IMAGES
@@ -1535,7 +1773,6 @@
 		margin-top: 16px;
 	}
 }
-
 
 // PRICELISTING
 .dvPriceListing {
@@ -1556,165 +1793,164 @@
 		"Left-Qty	grid-Med4	Right-Qty"
 		"Left-Tax	grid-Med5	Right-Tax"
 		"Left-Total	grid-Med6	Right-Total";
-		.dvBasePrice {
-			grid-area: Left-BasePrice;
-			.BasePriceText {
-				color:#807b7b;
-				margin-left: 52px;
-				font-family: "Bitter";
-			}
+	.dvBasePrice {
+		grid-area: Left-BasePrice;
+		.BasePriceText {
+			color: #807b7b;
+			margin-left: 52px;
+			font-family: "Bitter";
 		}
-		.dvShippingPrice {
-			grid-area: Left-ShipppingPrice;
-			.ShippingText {
-				color:#807b7b;
-				margin-left: 86px;
-				font-family: "Bitter";
-				margin-top: -10px;
-			}
+	}
+	.dvShippingPrice {
+		grid-area: Left-ShipppingPrice;
+		.ShippingText {
+			color: #807b7b;
+			margin-left: 86px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvDiscPrice {
-			grid-area: Left-DiscPrice;
-			.DiscText {
-				color:#807b7b;
-				margin-left: 40px;
-				font-family: "Bitter";
-				margin-top: -10px;
-			}
+	}
+	.dvDiscPrice {
+		grid-area: Left-DiscPrice;
+		.DiscText {
+			color: #807b7b;
+			margin-left: 40px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvVariancePrice {
-			grid-area: Left-VariancePrice;
-			.VarianceText {
-				color:#807b7b;
-				margin-left: 87px;
-				font-family: "Bitter";
-				margin-top: -10px;
-			}
+	}
+	.dvVariancePrice {
+		grid-area: Left-VariancePrice;
+		.VarianceText {
+			color: #807b7b;
+			margin-left: 87px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvQty {
-			grid-area: Left-Qty;
-			.QtyText {
-				color:#807b7b;
-				margin-left: 1px;
-				font-family: "Bitter";
-				margin-top: -10px;
-			}
+	}
+	.dvQty {
+		grid-area: Left-Qty;
+		.QtyText {
+			color: #807b7b;
+			margin-left: 1px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvTax {
-			grid-area: Left-Tax;
-			.TaxText {
-				color:#807b7b;
-				margin-left: 2px;
-				font-family: "Bitter";
-				margin-top: -10px;
-			}
+	}
+	.dvTax {
+		grid-area: Left-Tax;
+		.TaxText {
+			color: #807b7b;
+			margin-left: 2px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvTotal {
-			grid-area: Left-Total;
-			.TotalText {
-				margin-left: 16px;
-			}
+	}
+	.dvTotal {
+		grid-area: Left-Total;
+		.TotalText {
+			margin-left: 16px;
 		}
+	}
 
-		.dvMed {
-			grid-area: grid-Med;
-			.dot {
-				color:#807b7b;
-				margin-left: -172px;
-			}
+	.dvMed {
+		grid-area: grid-Med;
+		.dot {
+			color: #807b7b;
+			margin-left: -172px;
 		}
-		.dvMed1 {
-			grid-area: grid-Med1;
-			.dot1 {
-				color:#807b7b;
-				margin-left: -172px;
-				margin-top: -10px;
-			}
-		}
-		.dvMed2 {
-			grid-area: grid-Med2;
-			.dot2 {
-				color:#807b7b;
-				margin-left: -172px;
-				margin-top: -10px;
-			}
-		}
-		.dvMed3 {
-			grid-area: grid-Med3;
-			.dot3 {
-				color:#807b7b;
-				margin-left: -172px;
-				margin-top: -10px;
-			}
-		}
-		.dvMed4 {
-			grid-area: grid-Med4;
-			.dot4 {
-				color:#807b7b;
-				margin-left: -172px;
-				margin-top: -10px;
-			}
-		}
-		.dvMed5 {
-			grid-area: grid-Med5;
-			.dot5 {
-				color:#807b7b;
-				margin-left: -172px;
-				margin-top: -10px;
-			}
-		}
-		.dvMed6 {
-			grid-area: grid-Med6;
-			.dot6 {
-				margin-left: -172px;
-
-			}
-		}
-		.dvRight-BasePrice {
-			grid-area: Right-BasePrice;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
-		}
-		.dvRight-ShippingPrice {
-			grid-area: Right-ShippingPrice;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
+	}
+	.dvMed1 {
+		grid-area: grid-Med1;
+		.dot1 {
+			color: #807b7b;
+			margin-left: -172px;
 			margin-top: -10px;
 		}
-		.dvRight-DiscPrice { 
-			grid-area: Right-DiscPrice;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
+	}
+	.dvMed2 {
+		grid-area: grid-Med2;
+		.dot2 {
+			color: #807b7b;
+			margin-left: -172px;
 			margin-top: -10px;
 		}
-		.dvRight-VariancePrice {
-			grid-area: Right-VariancePrice;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
+	}
+	.dvMed3 {
+		grid-area: grid-Med3;
+		.dot3 {
+			color: #807b7b;
+			margin-left: -172px;
 			margin-top: -10px;
 		}
-		.dvRight-Qty {
-			grid-area: Right-Qty;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
+	}
+	.dvMed4 {
+		grid-area: grid-Med4;
+		.dot4 {
+			color: #807b7b;
+			margin-left: -172px;
 			margin-top: -10px;
 		}
-		.dvRight-Tax {
-			grid-area: Right-Tax;
-			color:#807b7b;
-			margin-left: -150px;
-			font-family: "Bitter";
+	}
+	.dvMed5 {
+		grid-area: grid-Med5;
+		.dot5 {
+			color: #807b7b;
+			margin-left: -172px;
 			margin-top: -10px;
 		}
-		.dvRight-Total {
-			grid-area: Right-Total;
-			margin-left: -150px;
+	}
+	.dvMed6 {
+		grid-area: grid-Med6;
+		.dot6 {
+			margin-left: -172px;
 		}
+	}
+	.dvRight-BasePrice {
+		grid-area: Right-BasePrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+	}
+	.dvRight-ShippingPrice {
+		grid-area: Right-ShippingPrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-DiscPrice {
+		grid-area: Right-DiscPrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-VariancePrice {
+		grid-area: Right-VariancePrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Qty {
+		grid-area: Right-Qty;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Tax {
+		grid-area: Right-Tax;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Total {
+		grid-area: Right-Total;
+		margin-left: -150px;
+	}
 }
 
 // BTN CHECKOUT / RFQ
@@ -1723,7 +1959,7 @@
 	.btnPayment {
 		margin-left: 210px;
 		border-radius: 5px;
-		color:white;
+		color: white;
 		font-family: "Bitter";
 		padding: 5px;
 		border: none;
@@ -1733,7 +1969,7 @@
 	.btnRfq {
 		margin-left: 188px;
 		border-radius: 5px;
-		color:white;
+		color: white;
 		font-family: "Bitter";
 		padding: 5px;
 		border: none;
@@ -1741,8 +1977,6 @@
 		width: 156px;
 	}
 }
-
-
 
 // ----------
 // .container {
@@ -2108,7 +2342,6 @@
 // 			}
 // 		}
 // 	}
-	
 
 // 	.dvProdText {
 // 		text-align: center;
