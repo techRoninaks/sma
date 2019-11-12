@@ -482,18 +482,19 @@
                                                         <mat-panel-description>
                                                         </mat-panel-description>
                                                 </mat-expansion-panel-header>
-                                                <div class="grid-update-card">
+                                                <div class="grid-update-card" *ngFor="let item of Object.keys(dynamicNotification)">
                                                         <div class="update-message">
-                                                                <p>SELLER HAS APPROVED PURCHASE</p>
+                                                                <p>{{dynamicNotification[item].message}}</p>
+
                                                         </div>
                                                         <div class="update-date">
-                                                                <p>00/00/0000 | 00:00</p>
+                                                                <!-- <p>{{dynamicNotification[item].date}}</p> -->
                                                         </div>
                                                         <div class="update-expiry">
-                                                                <p>Expires In : 2Hrs</p>
+                                                                <label>ORDER ID: SMACAT{{dynamicNotification[item].orderId}}{{dynamicNotification[item].createDate}}</label>
                                                         </div>
                                                         <div class="update-button">
-                                                                <button class="button-style-update">BUY NOW</button>
+                                                                <!-- <button class="button-style-update">BUY NOW</button> -->
                                                         </div>
                                                 </div>
                                         </mat-expansion-panel>
@@ -640,19 +641,19 @@
 
                 <div class="grid-order-history" *ngFor="let item of Object.keys(dynamicDataOrderData)">
                         <div class="prod-name">
-                                <label>{{dynamicDataOrderData[item].prodName}}</label>
+                                <label style="font-size: 19px; font-variant-caps: all-petite-caps;">{{dynamicDataOrderData[item].prodName}}</label>
                         </div>
                         <div class="desc">
                                 <p>{{dynamicDataOrderData[item].shortDesc}}</p>
                         </div>
                         <div class="order-no">
-                                <label>SMACAT{{dynamicDataOrderData[item].orderId}}{{dynamicDataOrderData[item].createDate}}</label>
+                                <label>#SMACAT{{dynamicDataOrderData[item].orderId}}{{dynamicDataOrderData[item].createDate}}</label>
                         </div>
                         <div class="invoice">
                                 <button class="btn-invoice-style">VIEW INVOICE</button>
                         </div>
 
-                        <div class="grid-status" *ngFor="let item of Object.keys(dynamicDataOrderData)">
+                        <div class="grid-status">
                                 <div class="pending-conf">
                                         <label>Pending Confirmation</label>
                                 </div>
@@ -704,7 +705,7 @@
                                 </div>
                                 <div class="stat-bar-1">
                                         <div class="stats-1">
-                                            <div class="dot-circle" style="margin-left: -65px;" *ngIf="stage_1_dot">
+                                            <div class="dot-circle" style="margin-left: -64px;" *ngIf="stage_1_dot">
                                             </div>
                                             <div class="full-circle" style="margin-left: -124px;
                                             margin-top: -31px;" *ngIf="stage_1_full">
@@ -713,7 +714,7 @@
                                 </div>
                                 <div class="stat-bar-2">
                                         <div class="stats-2">
-                                                <div class="dot-circle" style="margin-left: -32px;" *ngIf="stage_2_dot">
+                                                <div class="dot-circle" style="margin-left: -40px;" *ngIf="stage_2_dot">
                                                 </div>
                                                 <div class="full-circle" style="margin-left: -47px; margin-top: -31px;" *ngIf="stage_2_full">
                                                 </div>
@@ -721,7 +722,7 @@
                                 </div>
                                 <div class="stat-bar-3">
                                         <div class="stats-3">
-                                                <div class="dot-circle" style="margin-left: -7px;" *ngIf="stage_3_dot">
+                                                <div class="dot-circle" style="margin-left: 4px;" *ngIf="stage_3_dot">
                                                 </div>
                                                 <div class="full-circle" style="margin-left: -20px;
                                                 margin-top: -31px;" *ngIf="stage_3_full">
@@ -730,7 +731,7 @@
                                 </div>
                                 <div class="stat-bar-4">
                                         <div class="stats-4">
-                                                <div class="dot-circle" style="margin-left: -3px;" *ngIf="stage_4_dot">
+                                                <div class="dot-circle" style="margin-left: 14px;" *ngIf="stage_4_dot">
                                                 </div>
                                                 <div class="full-circle" style="margin-left: -22px;
                                                 margin-top: -31px;" *ngIf="stage_4_full">
@@ -739,7 +740,7 @@
                                 </div>
                                 <div class="stat-bar-5">
                                         <div class="stats-5">
-                                                <div class="dot-circle" style="margin-left:0px;" *ngIf="stage_5_dot">
+                                                <div class="dot-circle" style="margin-left:22px; z-index: 1;" *ngIf="stage_5_dot">
                                                 </div>
                                                 <div class="full-circle" style="margin-left:-20px; margin-top: -31px;" *ngIf="stage_5_full">
                                                 </div>
@@ -747,29 +748,33 @@
                                 </div>
                                 <div class="stat-bar-6">
                                         <div class="stats-6">
-                                                <div class="dot-circle" style="margin-left: 48px;" *ngIf="stage_6_dot">
+                                                <div class="dot-circle" style="margin-left: 41px;" *ngIf="stage_6_dot">
                                                 </div>
                                                 <div class="full-circle" style="margin-left: -20px; margin-top: -31px;" *ngIf="stage_6_full">
                                                 </div>
                                         </div>
                                 </div>
                                 <div class="label-1">
-                                       <label *ngIf="stage_1_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                       <label>{{dynamicDataOrderData[item].stage_1_date}}</label>
                                 </div>
                                 <div class="label-2">
-                                        <label *ngIf="stage_2_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                        <label>{{dynamicDataOrderData[item].stage_2_date}}</label>
                                  </div>
                                  <div class="label-3">
-                                        <label *ngIf="stage_3_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                        <label>{{dynamicDataOrderData[item].stage_3_date}}</label>
                                  </div>
                                  <div class="label-4">
-                                        <label *ngIf="stage_4_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                        <label>{{dynamicDataOrderData[item].stage_4_date}}</label>
+                                        <br>
+                                        <a><label>{{dynamicDataOrderData[item].tracking_hyperlink}}</label></a>
+                                        <br>
+                                        <label>Tracking No:{{dynamicDataOrderData[item].tracking_number}}</label>
                                  </div>
                                  <div class="label-5">
-                                        <label *ngIf="stage_5_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                        <label>{{dynamicDataOrderData[item].stage_5_date}}</label>
                                  </div>
                                  <div class="label-6">
-                                        <label *ngIf="stage_6_full">{{dynamicDataOrderData[item].stageDate}}</label>
+                                        <label>{{dynamicDataOrderData[item].stage_6_date}}</label>
                                  </div>
                         </div>
                         <div class="feedback-stat">

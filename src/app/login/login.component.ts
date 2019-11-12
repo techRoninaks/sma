@@ -136,7 +136,7 @@ export class LoginComponent implements OnInit {
                     document.getElementById("locationlabel").innerText = this.city as string;
                     document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/']);
-                    window.location.reload();
+                    // window.location.reload();
                   }
                   else if(data['status'] =="Success2")
                   {
