@@ -77,6 +77,80 @@ $SubText: 18px;
 	}
 }
 
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+#myUL1 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL1 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL1 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+.tags{
+	padding: 8px;
+	background: #efbe24;
+	color: black;
+	border-radius: 10px;
+	margin: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.submitBTN{
+	background: #efbe24;
+	color: white;
+	font-family: BitterBold;
+	border-radius: 5px;
+	cursor: pointer;
+	width: max-content;	
+	padding: 7px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.varitentsAdd{
+	width: 80%;
+	margin: auto;
+	background: #ddd;
+	border-radius: 6px;
+}
+
 .dvMain-Grid {
 	display: grid;
 	grid-template-columns: auto;
@@ -313,11 +387,32 @@ $SubText: 18px;
 			margin-right: 50px;
 			margin-left: -200px;
 			cursor: pointer;
+
+
 		}
 	}
 	.subCategory {
 		margin-left: 160px;
 		width: 200px;
+	}
+}
+
+.subCategoryDiv{
+	background: #EFBE24;
+	width: max-content;
+	padding: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 5px;
+
+	p{
+		padding: 5px;
+	}
+
+	span{
+		margin-left: 5px;
 	}
 }
 .grid-AddSubCatBtn {
@@ -1944,6 +2039,8 @@ $SubText: 18px;
 			}
 		}
 	}
+
+
 	.grid-Bundle-Discount-Right {
 		grid-area: grid-Bundle-Discount-Right;
 		.addBundleText {
@@ -1982,8 +2079,8 @@ $SubText: 18px;
 							grid-template-columns: auto auto auto auto;
 							grid-template-rows: repeat(2, auto);
 							grid-template-areas:
-								"grid-Qty-Text grid-Disc-Price grid-Actual-Price ."
-								"grid-Qty-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
+								"grid-Qty-Text grid-Disc-Per grid-Disc-Price grid-Actual-Price ."
+								"grid-Qty-Label grid-Disc-Per-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
 							.grid-Qty-Text {
 								grid-area: grid-Qty-Text;
 								text-align: center;
@@ -1994,6 +2091,14 @@ $SubText: 18px;
 							}
 							.grid-Disc-Price {
 								grid-area: grid-Disc-Price;
+								text-align: center;
+								.discPriceText {
+									font-family: "BitterBold";
+									margin-top: 10px;
+								}
+							}
+							.grid-Disc-Per {
+								grid-area: grid-Disc-Per;
 								text-align: center;
 								.discPriceText {
 									font-family: "BitterBold";
@@ -2021,6 +2126,16 @@ $SubText: 18px;
 							}
 							.grid-Disc-Price-Label {
 								grid-area: grid-Disc-Price-Label;
+								.Disc-Price-Label-Style {
+									background: white;
+									border: none;
+									text-align: center;
+									border-radius: 5px;
+									margin-left: 40px;
+								}
+							}
+							.grid-Disc-Per-Label {
+								grid-area: grid-Disc-Per-Label;
 								.Disc-Price-Label-Style {
 									background: white;
 									border: none;
@@ -2281,7 +2396,7 @@ $SubText: 18px;
 		margin-left: 450px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
-		height: 42px;
+
 		.grid-Faq-Foot {
 			display: grid;
 			grid-template-columns: 80% 20%;

@@ -13,12 +13,18 @@
     $row=mysqli_fetch_assoc($res);
     $tDateValue=array('tDate'=>$row["CURRENT_DATE"]);
 
+    if($pin>0 && $pin != null){
+        $sqlPrice="SELECT `quantity_price`, `price` FROM `prod_shipping_price` WHERE `prodid` = $prodId AND `shipping_location` = $pin ";
+        $resPrice=mysqli_query($con1,$sqlPrice);
+        $rowPrice=mysqli_fetch_assoc($resPrice);
+        $shipQtyPrice=$rowPrice["quantity_price"];
+        $shipBasePrice=$rowPrice["price"];
+    }
+    else{
+        $shipQtyPrice=0;
+        $shipBasePrice=0;
+    }
 
-    $sqlPrice="SELECT `quantity_price`, `price` FROM `prod_shipping_price` WHERE `prodid` = $prodId AND `shipping_location` = $pin ";
-    $resPrice=mysqli_query($con1,$sqlPrice);
-    $rowPrice=mysqli_fetch_assoc($resPrice);
-    $shipQtyPrice=$rowPrice["quantity_price"];
-    $shipBasePrice=$rowPrice["price"];
 
   
 
