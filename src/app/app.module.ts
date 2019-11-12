@@ -42,6 +42,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ChartsModule } from 'ng2-charts';
 import { ShopsettingComponent } from './shopsetting/shopsetting.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 @NgModule({
   declarations: [
@@ -78,6 +80,7 @@ import { ShopsettingComponent } from './shopsetting/shopsetting.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatInputModule,
+    AutocompleteLibModule,
     // ActivatedRoute,
     MatFormFieldModule,
     ChartsModule ,
@@ -87,6 +90,7 @@ import { ShopsettingComponent } from './shopsetting/shopsetting.component';
     BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule, 
+    MatTabsModule,
     MatButtonModule, 
     MatAutocompleteModule,
     
