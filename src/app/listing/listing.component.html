@@ -97,7 +97,7 @@
             <div class="prodImage">
                 <div class="pImage">
                     <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
-                        (click)="openModal();currentSlide(1)">
+                        (click)="openModal();currentSlide(1)" onError="this.src = 'assets/images/defaultReview2.png'">
                     <img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
                 </div>
                 <div class="imageSlider">

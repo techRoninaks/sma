@@ -125,13 +125,13 @@
         <p class="headClass">SHIPMENT INFO</p>
         <div class="dvForm">
             <form>
-                SHIPPING<input type="radio" value="oneDay" class="shipDelivery" name="delivery" disabled="true"
-                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery" name="delivery"
-                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery"
+                SHIPPING<input type="radio" value="oneDay" class="shipDelivery radio-custom" name="delivery" disabled="true"
+                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery radio-custom" name="delivery"
+                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery radio-custom"
                     name="delivery" disabled="true" id="pck">
                 <br>
-                <br> Average Processing Time : <a>5days</a><br> Average Shipping Time : <a> 5days</a><br> Average
-                Response Time : <a> 5days</a><br>
+                <br> Average Processing Time : <span class="shipmentDetails">5days</span><br><br> Average Shipping Time &nbsp;&nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br><br> Average
+                Response Time &nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br>
             </form>
         </div>
 
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                     <div class="rating-users">
-                        <i class="icon-user"></i> {{shopData.ratingCountShop}}
+                        <i class="icon-user"></i> {{shopData.ratingCountShop}}<span> Ratings</span>
                     </div>
                 </div>
 
@@ -287,7 +287,7 @@
                         <i class="fa fa-star active" style="color: #efbe24"></i> 
                     </div>
                 </div>
-                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview.jpg'">
+                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview2.png'">
                   
                     <!-- <div (load)="reviewRatings(item);">
                         <i class="fa fa-star active" *ngFor="let x of filledStarRat"></i>
