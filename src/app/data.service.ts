@@ -1550,6 +1550,13 @@ getAutoShippingLocation(id){
  .append("searchTerm",id);
   return this.http.post(this.baseUrl+'assets/api/getAutoShippingLocation.php' , httpParams);
 }
+  
+getNotifications(data: any){
+
+  let httpParams= new HttpParams()
+  .append("userId", data)
+  return this.http.post(this.baseUrl+'assets/api/getNotifications.php',httpParams);
+}
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
