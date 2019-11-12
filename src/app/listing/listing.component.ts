@@ -101,17 +101,17 @@ export class ListingComponent implements OnInit {
 	dynamicDataProName: any = "";
 	prodId: any;
 	filteredOptions: any;
-	imageVAL0:any="";
-	imageVAL1:any="";
-	imageVAL2:any="";
-	imageVAL3:any="";
-	imageVAL4:any="";
-	imageVAL5:any="";
-	imageVAL6:any="";
-	imageVAL7:any="";
-	imageVAL8:any="";
-	imageVAL9:any="";
-	imageVALRFQ:any="";
+	imageVAL0: any = "";
+	imageVAL1: any = "";
+	imageVAL2: any = "";
+	imageVAL3: any = "";
+	imageVAL4: any = "";
+	imageVAL5: any = "";
+	imageVAL6: any = "";
+	imageVAL7: any = "";
+	imageVAL8: any = "";
+	imageVAL9: any = "";
+	imageVALRFQ: any = "";
 	dynamicDataUser: any = "";
 	dynamicDataVariant: any = "";
 	dynamicDataVariants: any = "";
@@ -215,8 +215,9 @@ export class ListingComponent implements OnInit {
 	quant: any;
 	bPrice: number;
 	likeDislikes: any = [];
-	orderConfValue:number=0;
-	instantBuyValue:number=0;
+	orderConfValue: number = 0;
+	instantBuyValue: number = 0;
+	
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
@@ -269,8 +270,8 @@ export class ListingComponent implements OnInit {
 				this.hasGiftBit = parseInt(this.dynamicData.hasGift);
 				this.hasDatePickerBit = parseInt(this.dynamicData.canOrderByDate);
 				this.bPrice = this.dynamicData.basePrice;
-				this.orderConfValue=this.dynamicData.hasOrderConfirm;
-				this.instantBuyValue=this.dynamicData.hasInstantBuy;
+				this.orderConfValue = this.dynamicData.hasOrderConfirm;
+				this.instantBuyValue = this.dynamicData.hasInstantBuy;
 
 				//rfq 1st prod
 				this.prod[0] = this.dynamicData.name;
@@ -289,12 +290,12 @@ export class ListingComponent implements OnInit {
 					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
 				}
 				//orderconf flag check
-				if(this.orderConfValue==1){
+				if (this.orderConfValue == 1) {
 					(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "none";
 					(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
 					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
 				}
-				if(this.instantBuyValue==0){
+				if (this.instantBuyValue == 0) {
 					(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
 				}
 				// console.log(res);
@@ -356,7 +357,7 @@ export class ListingComponent implements OnInit {
 				}
 
 
-	
+
 			},
 			error => console.error(error)
 		);
@@ -708,14 +709,28 @@ export class ListingComponent implements OnInit {
 
 
 		//get data from cookies
+		// var i = 0;
 		var giftTitle = this.getCookie("giftTitle");
 		var giftNote = this.getCookie("giftNote");
 		var giftAdd = this.getCookie("giftAddress");
 
+		var addr1 = giftAdd.split("!~!")
+		var addr2 = giftAdd.split("!~!")
+		var addr3 = giftAdd.split("!~!")
+		var addr4 = giftAdd.split("!~!")
+		var addr5 = giftAdd.split("!~!")
+		var addr6 = giftAdd.split("!~!")
+		var addr7 = giftAdd.split("!~!")
 
-		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + giftNote + giftAdd);
+		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
 
-
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[0]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[1]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[2]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[3]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[4]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[5]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[6]);
 
 	}
 
@@ -1057,7 +1072,7 @@ export class ListingComponent implements OnInit {
 		var stateShopId = (<HTMLInputElement><any>document.getElementById('stateShopId')).value;
 		var countryShopId = (<HTMLInputElement><any>document.getElementById('countryShopId')).value;
 		var pincodeShopId = (<HTMLInputElement><any>document.getElementById('pincodeShopId')).value;
-		var address =shopNameId+"!~!"+addr2ShopId+"!~!"+cityShopId+"!~!"+districtShopId+"!~!"+stateShopId+"!~!"+countryShopId+"!~!"+pincodeShopId
+		var address = shopNameId + "!~!" + addr2ShopId + "!~!" + cityShopId + "!~!" + districtShopId + "!~!" + stateShopId + "!~!" + countryShopId + "!~!" + pincodeShopId
 		this.giftEnable = 1;
 		this.titleGift = title;
 		this.addressGift = address;
@@ -1242,7 +1257,7 @@ export class ListingComponent implements OnInit {
 		}
 		this.imageUploaded0 = 1;
 		this.imageUploaded = 1;
-		this.imageU0=1;
+		this.imageU0 = 1;
 
 		// 		console.log(event.target.files[0]);
 		var reader = new FileReader();
@@ -1402,7 +1417,7 @@ export class ListingComponent implements OnInit {
 				this.data.sendOrderDetails(this.tokenPrice).subscribe();
 
 				//sonu
-			
+
 				this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
 					this.orderid = data["orderid"];
 					// console.log(this.orderid);
@@ -1496,7 +1511,7 @@ export class ListingComponent implements OnInit {
 				var image9 = imageValue9;
 				var pin = parseInt(this.getCookie("userPin"));
 				//orderconf flag check
-				if(this.orderConfValue==1){
+				if (this.orderConfValue == 1) {
 					desiredDate = "orderConf";
 				}
 				// console.log("pin"+pin);
@@ -1584,12 +1599,12 @@ export class ListingComponent implements OnInit {
 		else if (this.undelValue == 0) {
 			$("#undeliverableModal").modal('show');
 		}
-				else {
+		else {
 			$("#loginModal").modal('show');
 		}
 	}
 
-	submitInstantBuy(x:any){
+	submitInstantBuy(x: any) {
 		$("#loginModal").modal('hide');
 		if (x == 'instantBuy') {
 			alert("instantBuy");
@@ -1710,7 +1725,7 @@ export class ListingComponent implements OnInit {
 
 		}
 		$("#buyNowPopup").modal('show');
-		
+
 	}
 
 	applyRequest() {

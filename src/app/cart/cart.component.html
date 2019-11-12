@@ -12,22 +12,11 @@
             <p>DELIVER TO</p>
         </div>
         <div class="dvDropdown">
-            <!-- <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                <span class="caret"></span></button> -->
-            <!-- <ul class="dropdown-menu"> -->
-                <select class="AddrDropdown" style="margin-top: -1px; width: 300px; background: white;">
-                    <option *ngFor="let item of Objects.keys(dynamicDataDeliverAddr)">
-                        {{ dynamicDataDeliverAddr[item] }} </option>
-                </select>
-                <!-- <li *ngFor="let item of Objects.keys(dynamicDataDeliverAddr)"> {{ dynamicDataDeliverAddr[item] }} </li> -->
-            <!-- </ul> -->
+            <select class="AddrDropdown" style="margin-top: 8px; width: 300px; background: white;">
+                <option *ngFor="let item of Objects.keys(dynamicDataDeliverAddr)">
+                    {{ dynamicDataDeliverAddr[item] }} </option>
+            </select>
         </div>
-        <!-- <div class="dvDropdown">
-			<select id="delivery-Drop">
-				<option>Delivery</option>
-				<option *ngFor="let item of Object.keys(dynamicData)">{{dynamicData[item].address}}</option>
-			</select>
-		</div> -->
     </div>
 
     <!-- BODY	 -->
@@ -36,13 +25,10 @@
         <div class="gridLeft">
             <div class="gridImg">
                 <img src="assets/images/tshirt.png" width="140" height="140" class="imgItem1">
+                <!-- <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg"> -->
             </div>
             <div class="gridCounter">
                 <div class="qtyCounter">
-                    <!-- <button type="button" id='1' (click)="count_dec(dynamicData[item].productId)" class="minus">-</button>
-                    <input type="text" id="count" id="productQuantity" value="{{counter}}">
-                    <button type="button" id='2' (click)="count_inc(dynamicData[item].productId)" class="plus">+</button> -->
-
                     <button (click)="count_dec(dynamicData[item].productId,dynamicData[item].minOrderQuant)"
                         class="minus">-</button>
                     <input class="counter" id={{dynamicData[item].productId}}
@@ -52,7 +38,6 @@
                         class="plus">+</button>
                 </div>
             </div>
-
         </div>
         <!-- GRID MID -->
         <div class="gridMid">
@@ -63,10 +48,18 @@
                 <div class="detailItemSeller">
                     <p>Seller:</p>
                 </div>
-                <!-- <p class="detailItemPrice"><i class="fa fa-rupee"></i>{{ dynamicData[item].basePrice }}</p> -->
-                <p><i class="fa fa-rupee" style="font-size:16px">{{dynamicData[item].basePrice}}</i>&nbsp;&nbsp;
-                    <del><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicDataPrice[item].totalPrice}}</del>
-                </p>
+                <div class="detailItemPrice">
+                    <div class="basePriceStyle">
+                        <p><i class="fa fa-rupee" style="font-size:16px">{{dynamicData[item].basePrice}}</i>&nbsp;&nbsp;
+                            <del><i class="fa fa-rupee"
+                                    style="font-size:16px "></i>{{dynamicDataPrice[item].totalPrice}}</del>&nbsp;&nbsp;
+                            <del><i class="offer"></i></del>
+                            <i class="discountText"
+                                    style="font-size:16px; font-family: Bitter; color:  #009145;"> (-{{dynamicDataPrice[item].discount}} % off )</i>
+                                    <!-- (-{{dynamicDataPrice[item].totalPrice}}% off ) -->
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="gridBodyButton">
                 <button class="btnBodyRemove" (click)="remove(dynamicData[item].productId)">REMOVE</button>
@@ -78,7 +71,7 @@
                 <p>Delivery By,{{ dynamicDataDate[item].deliveryDate }}</p>
             </div>
             <div class="gridRightButton">
-                <button class="btnRightDelivery">Free</button>
+                <label class="btnRightDelivery">{{dynamicDataCustomerOrder.shippingPrice}}</label>
                 <button type="button" class="btnPlaceOrder" data-toggle="modal" data-target="#buyNowPopup"
                     (click)="placeOrder()">PLACE
                     ORDER</button>
@@ -122,7 +115,7 @@
     </div>
     <!-- FOOT 2	 -->
     <div class="dvFoot2">
-        <p>You will save ₹ 00.00 on this order</p>
+        <p>You will save ₹ {{dynamicOffPrice}} on this order</p>
     </div>
 </div>
 
@@ -338,8 +331,8 @@
                         </div>
                         <div class="grid-GiftOptionToggle">
                             <div class="btnGiftOption" id="btn-Gift-Option">
-                                <label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
-                                    <input type="checkbox">
+                                <label class="switchActive" name="answer" value="Show giftCard" (click)=giftoption()>
+                                    <input type="checkbox" style="margin-left: 10px;">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -366,7 +359,7 @@
 
 
                 <!-- PRODUCT IMAGE -->
-                <div class="dvproductImages">
+                <div class="dvproductImages" style="display: none;">
                     <p class="prodTextImg">PRODUCT IMAGES</p>
                 </div>
                 <div class="dvprodImages" style="display: flex; width: 400px;">
