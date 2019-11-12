@@ -1,28 +1,72 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
 /* MAIN*/
 .dvMain {
-	// margin-left: 20%;
-	// margin-right: 20%;
-	// margin-bottom: 20px;
-	// width: auto;
-	// display: grid;
 	grid-template-columns: auto;
 	grid-template-rows: repeat(3, auto);
-	// grid-template-areas:
-	// 	"dvHead"
-	// 	"dvBody"
-	// 	"dvFoot";
+
 	.dvHead {
+		grid-area: dvHead;
+		
 		margin-left: 20%;
 		margin-right: 20%;
-		// margin-bottom: 20px;
 		width: auto;
 		display: grid;
-		grid-area: dvHead;
 		background-color: #dbdbdb;
-		height: 80px;
+		height: 70px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		grid-auto-columns: auto auto auto;
+		grid-template-columns: auto auto auto;
+		grid-template-rows: auto;
 		grid-template-areas: "dvTitle	dvDeliverTitle	dvDropdown";
 		.dvTitle {
 			grid-area: dvTitle;
@@ -31,10 +75,7 @@
 			padding-inline: 20px;
 			padding: 20px;
 			float: left;
-			grid-template-areas: auto;
-			grid-template-areas: btnCartCount;
 			.btnCartCount {
-				grid-area: btnCartCount;
 				font-family: BitterBold;
 				display: grid;
 				border: none;
@@ -78,12 +119,12 @@
 		grid-area: dvBody;
 		background-color: #f1f1f1;
 		height: 300px;
-		grid-auto-columns: 20% auto 20%;
+		grid-template-columns: 20% auto 20%;
 		grid-template-areas: "gridLeft  gridMid gridRight";
 		.gridLeft {
 			grid-area: gridLeft;
 			display: grid;
-			grid-auto-columns: 20%;
+			grid-template-columns: 20%;
 			grid-template-areas:
 				"gridImg"
 				"gridCounter";
@@ -188,16 +229,14 @@
 				}
 				.detailItemPrice {
 					grid-area: detailItemPrice;
+					.basePriceStyle{
 					display: grid;
-					font-family: BitterBold;
+					// font-family: BitterBold;
 					padding-inline: 20px;
 					float: left;
+					}
 				}
-				// .detailItemPriceDel{
-				// 	grid-area: detailItemPriceDel;
-				// 	display: grid;
-
-				// }
+				
 			}
 			.gridBodyButton {
 				grid-area: gridBodyButton;
@@ -247,13 +286,14 @@
 					color: white;
 					font-family: BitterBold;
 					border: none;
+					text-align: center;
 					height: 30px;
-					width: 80px;
-					margin-left: 60px;
-					margin-top: 20px;
+					width: 56px;
+					margin-left: 84px;
+					margin-top: 44px;
 					margin-right: 200px;
 					display: grid;
-					padding: 1px;
+					padding: 0px;
 					float: left;
 					border-radius: 5px;
 				}
@@ -305,187 +345,6 @@
 		// 	border-radius: 5px;
 		// }
 	}
-
-	/*CHECKOUT POPUP*/
-	.dvFoot {
-		.btn {
-			font-family: "BitterBold";
-			color: white;
-		}
-	}
-	.modal-header {
-		background: #efbe24;
-		color: white;
-		font-family: "BitterBold";
-		display: table-cell;
-
-		border-top-right-radius: 15px;
-		border-top-left-radius: 15px;
-	}
-
-	.modal-content {
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-		background: #f1f1f1;
-	}
-	// .modal-title
-	// {
-	//     text-align: "center"
-	// }
-
-	.modal-body {
-		h5 {
-			text-align: center;
-			font-family: "BitterBold";
-		}
-	}
-
-	.dvModelSpec {
-		input {
-			width: 50px;
-			margin-left: 10px;
-			border: none;
-		}
-		p {
-			border: 2px solid #efbe24;
-			font-family: "Bitter";
-			border-top-right-radius: 5px;
-			border-top-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			padding: 10px;
-		}
-	}
-
-	.dvDeliveryText {
-		text-align: center;
-		font-family: "BitterBold";
-		margin-top: 0px;
-		padding: 12px;
-	}
-
-	.dvProductDate {
-		text-align: center;
-		font-family: "BitterBold";
-		margin-top: 10px;
-		padding: 10px;
-	}
-
-	.dvDate {
-		padding: 15px;
-		display: inline;
-		// border: 2px solid #EFBE24;
-		padding-top: 10px;
-		margin-right: 10px;
-	}
-
-	.dvDate {
-		.inpText {
-			border: 2px solid #efbe24;
-		}
-	}
-	.btn btn-warning {
-		font-family: "BitterBold";
-	}
-
-	.dvGiftNote {
-		background-color: #dbdbdb;
-		font-family: "BitterBold";
-		border-radius: 5px;
-		margin-top: 10px;
-	}
-
-	.dvPriceInfo {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-		justify-content: center;
-	}
-
-	.dvPriceInfo {
-		p {
-			color: #333333;
-		}
-	}
-
-	.btnRadio {
-		font-family: "BitterBold";
-		text-align: center;
-	}
-
-	input[type="text"],
-	select,
-	textarea {
-		width: 100%;
-		padding: 5px;
-		border: 25px;
-		margin-left: 2px;
-		border-radius: 2px;
-		resize: vertical;
-		background: #dbdbdb;
-		border-bottom: 1px solid #333333;
-	}
-
-	label {
-		padding: 12px 12px 12px 0;
-		display: inline-block;
-	}
-
-	input[type="submit"] {
-		background-color: #009145;
-		color: white;
-		padding: 12px 20px;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		float: right;
-	}
-
-	input[type="submit"]:hover {
-		background-color: #009145;
-	}
-
-	.row {
-		border-radius: 2px;
-		background-color: #dbdbdb;
-		padding: 1px;
-		margin: 0px;
-	}
-
-	.col-25 {
-		float: left;
-		width: 40%;
-		margin-top: 6px;
-		padding: 0 0 0 10px;
-	}
-
-	.col-75 {
-		float: left;
-		width: 50%;
-		margin-top: 6px;
-	}
-
-	/* Clear floats after the columns */
-	.row:after {
-		content: "";
-		display: table;
-		clear: length($list: 10);
-	}
-
-	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-
-	@media screen and (max-width: 600px) {
-		.col-25,
-		.col-75,
-		input[type="submit"] {
-			width: 100%;
-			margin-top: 0;
-		}
-	}
-
-	.modal-footer {
-		font-family: "BitterBold";
-	}
 }
 
 /* MAIN 2*/
@@ -532,44 +391,53 @@
 		.dvPriceText {
 			grid-area: dvPriceText;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			margin-left: 15px;
+			margin-top: 15px;
+			font-family: "BitterBold";
 		}
 		.dvPrice {
 			grid-area: dvPrice;
 			display: grid;
-			padding: 20px;
+			// padding: 20px;
 			font-family: Bitter;
 			float: right;
 			margin-left: 90px;
+			margin-top: 15px;
 		}
 		.dvDeliveryText {
 			grid-area: dvDeliveryText;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
+			margin-left: -30px;
+			margin-top: -20px;
 		}
 		.dvFree {
 			grid-area: dvFree;
 			display: grid;
-			padding: 20px;
+			// padding: 20px;
 			font-family: Bitter;
 			float: right;
 			margin-left: 90px;
+			margin-top: -20px;
 		}
 		.dvTotalPayable {
 			grid-area: dvTotalPayable;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
+			margin-left: 15px;
+			margin-top: -24px;
 		}
 		.dvTotalPrice {
 			grid-area: dvTotalPrice;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
 			float: right;
 			margin-left: 90px;
+			margin-top: -20px;
 		}
 	}
 	.dvFoot2 {
@@ -957,68 +825,69 @@
 			.btnGiftOption {
 				margin-left: -144px;
 				margin-top: 54px;
-			// 	.switchActive {
-			// 		position: relative;
-			// 		display: inline-block;
-			// 		width: 60px;
-			// 		height: 40px;
-			// 		margin-left: 50%;
-			// 		margin-bottom: 10px;
-			// 		margin-top: 20px;
-			// 	}
+				.switchActive {
+					position: relative;
+					display: inline-block;
+					width: 68px;
+					height: 38px;
+					margin-left: -6%;
+					margin-bottom: -2px;
+					margin-top: -8px;
+				}
 		
-			// 	.switch input {
-			// 		opacity: 0;
-			// 		width: 0;
-			// 		height: 0;
-			// 	}
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
 		
-			// 	.slider {
-			// 		position: absolute;
-			// 		cursor: pointer;
-			// 		top: 0;
-			// 		left: 0;
-			// 		right: 0;
-			// 		bottom: 0;
-			// 		background-color: #f1f1f1;
-			// 		-webkit-transition: 0.4s;
-			// 		transition: 0.4s;
-			// 	}
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+					background:white;
+				}
 		
-			// 	.slider:before {
-			// 		position: absolute;
-			// 		content: "";
-			// 		height: 30px;
-			// 		width: 30px;
-			// 		left: 4px;
-			// 		bottom: 4px;
-			// 		background-color: #efbe24;
-			// 		-webkit-transition: 0.4s;
-			// 		transition: 0.4s;
-			// 	}
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
 		
-			// 	input:checked + .slider {
-			// 		background-color: #dbdbdb;
-			// 	}
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
 		
-			// 	input:focus + .slider {
-			// 		box-shadow: 0 0 1px #2196f3;
-			// 	}
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
 		
-			// 	input:checked + .slider:before {
-			// 		-webkit-transform: translateX(26px);
-			// 		-ms-transform: translateX(26px);
-			// 		transform: translateX(26px);
-			// 	}
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
 		
-			// 	/* Rounded sliders */
-			// 	.slider.round {
-			// 		border-radius: 34px;
-			// 	}
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
 		
-			// 	.slider.round:before {
-			// 		border-radius: 50%;
-			// 	}
+				.slider.round:before {
+					border-radius: 50%;
+				}
 			}
 		}
 	}

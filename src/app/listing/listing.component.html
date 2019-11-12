@@ -170,7 +170,7 @@
             <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();" class="plus">+</button>
         </div>
         <div class="pAvailable" style="color: red" id="showAvailable">
-            Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Cake:
+            Sold Count:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Count:
             <span>{{dynamicData.qtyAvailable}}</span>
         </div>
         <div class="pMessage" id="msgShowOrNot">
@@ -930,8 +930,8 @@
                         </div>
                         <div class="grid-GiftOptionToggle">
                             <div class="btnGiftOption" id="btn-Gift-Option">
-                                <label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
-                                    <input type="checkbox">
+                                <label class="switchActive" name="answer" value="Show giftCard" (click)=giftoption()>
+                                    <input type="checkbox" style="margin-left: 10px;">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -961,18 +961,18 @@
                 <div class="dvproductImages">
                     <p class="prodTextImg">PRODUCT IMAGES</p>
                 </div>
-                <div class="dvprodImages" style="display: flex; width: 400px;">
+                <div class="dvprodImages" style="display: flex;">
                     <!-- <img src="/src/assets/images/{{prodId}}/{{prodId}}_).jpg"> -->
                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg">
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg" style="margin-left: 5px; display: none;">
                 </div>
                 <!-- PRICE VARIATION -->
                 <div class="dvPriceListing">
