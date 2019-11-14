@@ -99,6 +99,11 @@ export class ManageshopComponent implements OnInit {
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
+		if(this.sellerId != null){
+			if(this.token == null){
+				this.token = this.sellerId;
+			}		
+		}
 		this.data.getShopData(this.token).subscribe(
 			data => {
 				this.shopData = data;

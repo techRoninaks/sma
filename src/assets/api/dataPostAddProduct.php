@@ -274,7 +274,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_1'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_0'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image1);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -292,7 +292,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_2'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_1'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image2);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -311,7 +311,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_3'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_2'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image3);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -330,7 +330,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_4'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_3'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image4);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -348,7 +348,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_5'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_4'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image5);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -366,7 +366,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_6'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_5'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image6);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -384,7 +384,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_7'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_6'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image7);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -402,7 +402,7 @@ $quantity_price = $_POST['quantity_price'];
       }
           $dir='../images/product/'.$prodid.'/';
       define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-      $file = UPLOAD_DIR.$prodid.'_8'.'.jpg';
+      $file = UPLOAD_DIR.$prodid.'_7'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image8);
           $img[1] = str_replace(' ', '+', $img[1]);
@@ -420,7 +420,7 @@ $quantity_price = $_POST['quantity_price'];
     }
         $dir='../images/product/'.$prodid.'/';
     define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-    $file = UPLOAD_DIR.$prodid.'_9'.'.jpg';
+    $file = UPLOAD_DIR.$prodid.'_8'.'.jpg';
     if($mob == 0){
         $img =explode(",", $image9);
         $img[1] = str_replace(' ', '+', $img[1]);
@@ -438,7 +438,7 @@ if($image10 != 1){
   }
       $dir='../images/product/'.$prodid.'/';
   define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
-  $file = UPLOAD_DIR.$prodid.'_10'.'.jpg';
+  $file = UPLOAD_DIR.$prodid.'_9'.'.jpg';
   if($mob == 0){
       $img =explode(",", $image10);
       $img[1] = str_replace(' ', '+', $img[1]);
