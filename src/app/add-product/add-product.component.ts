@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute } from '@angular/router';
 import { type } from 'os';
 import { log } from 'util';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -115,7 +116,7 @@ export class AddProductComponent implements OnInit {
   subCategoryArray :any =[];
   subCategoryArrayJustVal :any =[];
 
-  title = [];
+  title : any = "";
   faq : any = [];
   varients : any = [];
   shippingLocs : any = [];
@@ -125,7 +126,7 @@ export class AddProductComponent implements OnInit {
   catOne = 'name';
   mainCatId = "";
   catId = "";
-  datas : any = [
+  test : any = [
      {
        id: 1,
        name: 'Usa'
@@ -133,14 +134,94 @@ export class AddProductComponent implements OnInit {
      {
        id: 2,
        name: 'England'
+     },
+     {
+       id: 3,
+       name: 'Baltimore'
+     },
+     {
+       id: 4,
+       name: 'Delhi'
      }
   ];
+
+  hueGroups = [{
+    name: "group 1",
+    lights: [{
+      name: "light 1"
+    },{
+      name: "light 2"
+    }]
+  },
+  {
+    name: "group 2",
+    lights: [{
+      name: "light 3"
+    },{
+      name: "light 4"
+    }]
+  }];
+
+  datas: any = "";
   shippinglocationArray: any = [];
+  editProdid : any  = "";
+  newArray : any  = "";
+  editMode : boolean = false;
+  allProductInfo : any = {
+    prodid:	2,
+    name:	"",
+    short_desc	:"",
+    Long_desc:	"",
+    spec	:"",
+    shipping_option:	"",
+    base_price	:"",
+    bulk_discount_id:	"",
+    offer_id:	"",
+    returning_customers_count:	"",
+    product_view_count:	"",
+    cmsn_dedtd:	"",
+    shop_id:	"",
+    category_id:	"",
+    sub_catgry_id:	"",
+    active_status:	"",
+    qty_avble:	"",
+    safe_qty:	"",
+    is_returnable	:"",
+    label_id:	"",
+    tags:	"",
+    avg_confrmn_time:	"",
+    avg_response_time:	"",
+    avg_prcessing_time:	"",
+    avg_shpping_time:	"",
+    auto_cancel_time:	"",
+    has_rfq:	"",
+    has_gift:	"",
+    has_order_confmn:	"",
+    can_orderbydate:	"",
+    has_instant_buy:	"",
+    min_order_quant:	"",
+    max_order_quant	:"",
+    shipping_policy:	"",
+    return_policy:	"",
+    product_policy:	"",
+    shipping_location_id:	"",
+    rating:	"",
+    rating_count:	'',
+    review_count:	'',
+    revenue_generated	:"",
+    promo_id:	"",
+    sold_count:	'',
+    created_date:	"",
+    remarks:	"",
+    can_upload_image:	'',
+    max_no_of_image:	"",
+    add_custom_message_field :	"",
+  };
 
 
 
 
-  constructor(private data: DataService, private cookieService: CookieService, private location: Location) { }
+  constructor(private data: DataService, private cookieService: CookieService,private route: ActivatedRoute, private location: Location) { }
 
 
   // imageProduct2: object;
@@ -153,13 +234,44 @@ export class AddProductComponent implements OnInit {
 
     this.sellerId = this.getCookie('sellerId');
 
+    this.route.queryParams.subscribe(params => {
+      this.editProdid = params['prod_id'];
+      if(this.editProdid != null){
+        this.editMode = true;
+        this.data.getProductInfor(this.editProdid).subscribe(data=>{
+          this.allProductInfo = data;
+          this.basePrice = this.allProductInfo['base_price'];
+        })
+
+        this.data.getTagsForProduct(0, this.editProdid).subscribe(data=>{
+          this.tagsArray = data;
+        });
+        this.data.getTitleForAddproduct(this.editProdid).subscribe(data=>{
+          this.title = data;
+        });
+        this.data.getDiscountDay(this.editProdid).subscribe(data=>{
+          this.discountArray = data;
+        });
+        this.data.getShippingLocationProductEdit(this.editProdid).subscribe(data=>{
+          this.shippingLocs = data;
+        });
+        this.data.getFaqForProductEdit(this.editProdid).subscribe(data=>{
+          this.faq = data;
+        });
+        this.data.getVaritentInfo(this.editProdid).subscribe(data=>{
+          this.varients = data;
+        });
+      }
+
+
+
+		});
+
   
     this.data.getLabelForProduct().subscribe(data=>{
       this.labels = data;
     });
-    this.data.getTagsForProduct().subscribe(data=>{
-      this.datas = data;
-    });
+
     this.data.getAllCategoriesProduct().subscribe(data=>{
       this.allCat = data;
     });
@@ -241,6 +353,43 @@ export class AddProductComponent implements OnInit {
       },
     );
   }
+  getSearchCategory(){
+    var search = (<HTMLInputElement><any>document.getElementById('subcategory')).value;
+    (<HTMLInputElement><any>document.getElementById("myUL2")).style.display = "block";
+    var id = this.mainCatId;
+    this.data.getSubCategorySearch(id, search).subscribe(
+      data => {
+        this.dynamicCategory = data;
+        // console.log(this.dynamicSubCategory);
+      },
+    );
+  }
+
+  replaceMedCategory(id, val){
+    (<HTMLInputElement><any>document.getElementById("myUL2")).style.display = "none";
+    (<HTMLInputElement><any>document.getElementById('subcategory')).value = val;
+    var cell ={ id:id, val: val}
+    this.subCategoryArray.push(cell);
+    this.subCategoryArrayJustVal.push(id);
+    this.data.getSubCategoryAddProduct(id).subscribe(
+      data => {
+        this.dynamicSubCategory = data;
+        // console.log(this.dynamicSubCategory);
+      },
+    );
+  }
+
+
+  newCategory(){
+    var search = (<HTMLInputElement><any>document.getElementById('subcategory')).value;
+    (<HTMLInputElement><any>document.getElementById("myUL2")).style.display = "none";
+    this.data.createNewSubCategory(this.mainCatId, search).subscribe(
+      data => {
+        console.log(data);
+        // console.log(this.dynamicSubCategory);
+      },
+    );
+  }
 
   shippingLocationGetter(pos){
     var search = (<HTMLInputElement><any>document.getElementById(pos+"_pincode")).value;
@@ -295,47 +444,50 @@ export class AddProductComponent implements OnInit {
     }
     
   }
-  displayVarientType(item, pos, last) {
-    // do something with selected item
-    (<HTMLInputElement><any>document.getElementById(item+"_"+pos)).style.display = "block";
-    if(pos<6){
-      (<HTMLInputElement><any>document.getElementById(item+"_btn_"+pos)).style.display = "block";
-    }
-    (<HTMLInputElement><any>document.getElementById(item+"_btn_"+last)).style.display = "none";
-    
+  displayVarientType(item) {
+    var cell = {type:"",price:""}
+    item.push(cell);
+  }
+  deleteCell(cell,item) {
+    item.splice( item.indexOf(cell), 1 );
   }
   
   addVarients(){
-    if(this.varients.length<6){
-      this.varients.push(this.varients.length);
-    }
-    else{
-      alert("only 6 varients can be added.")
-    }
+    var cell = {name:"new variant",value:[{type:"",price:""},]};
+      this.varients.push(cell);
   }
 
-  saveAddVariant(pos){
-    var varientName = (<HTMLInputElement><any>document.getElementById(pos+"_name")).value;
-    var varientOne = (<HTMLInputElement><any>document.getElementById(pos+"_varient_1")).value;
-    var varientTwo = (<HTMLInputElement><any>document.getElementById(pos+"_varient_2")).value;
-    var varientThree = (<HTMLInputElement><any>document.getElementById(pos+"_varient_3")).value;
-    var varientFour = (<HTMLInputElement><any>document.getElementById(pos+"_varient_4")).value;
-    var varientFive = (<HTMLInputElement><any>document.getElementById(pos+"_varient_5")).value;
-    var varientSix = (<HTMLInputElement><any>document.getElementById(pos+"_varient_6")).value;
-    var priceOne = (<HTMLInputElement><any>document.getElementById(pos+"_price_1")).value;
-    var priceTwo = (<HTMLInputElement><any>document.getElementById(pos+"_price_2")).value;
-    var priceThree = (<HTMLInputElement><any>document.getElementById(pos+"_price_3")).value;
-    var priceFour = (<HTMLInputElement><any>document.getElementById(pos+"_price_4")).value;
-    var priceFive = (<HTMLInputElement><any>document.getElementById(pos+"_price_5")).value;
-    var priceSix = (<HTMLInputElement><any>document.getElementById(pos+"_price_6")).value;
+  saveAddVariant(variantArray){
+    console.log(this.editProdid);
 
-    var varientUpload = { varientName:varientName, varientOne: varientOne,varientTwo :varientTwo , varientThree: varientThree , varientFour:varientFour , varientFive: varientFive ,varientSix:varientSix, priceOne: priceOne, priceTwo: priceTwo, priceThree:priceThree, priceFour:priceFour, priceFive:priceFive, priceSix:priceSix};
+    if(this.editMode){
+      this.data.addProductVarients(JSON.stringify(variantArray), this.editProdid).subscribe(data=>{
 
-    console.log(varientUpload);
-    this.data.addProductVarients(varientUpload).subscribe(data=>{
+      })
+    }
+    else{
+      // this.data.addProductVarients(variantArray).subscribe(data=>{
+        alert('Add new Mode');
+      // })
+    }
 
-    })
 
+  }
+
+  enterValue(i, j,caller, arr){
+    var val = "";
+    if(caller == "type"){
+      val =  (<HTMLInputElement><any>document.getElementById(i+"_"+j+"varient_1")).value;
+      arr['type'] = val;
+    }
+    if(caller == "price"){
+      val =  (<HTMLInputElement><any>document.getElementById(i+"_"+j+"price_1")).value;
+      arr['price'] = val;
+    }
+    if(caller == "name"){
+      val =  (<HTMLInputElement><any>document.getElementById(i+"_name")).value;
+      arr['name'] = val;
+    }
   }
 
   deletetags(del){
@@ -372,6 +524,9 @@ export class AddProductComponent implements OnInit {
 
   subCategoryLoaded(id) {
     this.mainCatId = id;
+    this.data.getTagsForProduct(this.mainCatId).subscribe(data=>{
+      this.datas = data;
+    });
     this.data.getCategoryAddProduct(id).subscribe(
       data => {
         this.dynamicCategory = data;
@@ -385,12 +540,31 @@ export class AddProductComponent implements OnInit {
     var cell ={ id:id, val: val}
     this.subCategoryArray.push(cell);
     this.subCategoryArrayJustVal.push(id);
-    console.log(this.subCategoryArrayJustVal);
   }
   deleteCategory(val){
     this.subCategoryArray.splice( this.subCategoryArray.indexOf(val), 1 );
     this.subCategoryArrayJustVal.splice( this.subCategoryArrayJustVal.indexOf(val.id), 1 );
-    console.log(this.subCategoryArrayJustVal);
+  }
+
+  priceUpdate(){
+    var price = (<HTMLInputElement><any>document.getElementById("Pro-Disc-2")).value;
+    var disc = (parseInt(price)/this.basePrice)*100;
+    if(price != ""){
+      (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value = disc.toString();
+    }
+    else{
+      (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value = "";
+    }
+  }
+  discountUpdate(){
+    var disc = (<HTMLInputElement><any>document.getElementById("Pro-Disc-1")).value;
+    var price = this.basePrice -((parseInt(disc)/100)*this.basePrice);
+    if(disc != ""){
+      (<HTMLInputElement><any>document.getElementById("Pro-Disc-2")).value = price.toString();
+    }
+    else{
+      (<HTMLInputElement><any>document.getElementById("Pro-Disc-2")).value = "";
+    }
   }
 
   subCategoryLoaded1(id) {
@@ -497,7 +671,12 @@ export class AddProductComponent implements OnInit {
     var cell = {pincode:pincode,price:price,qtn:qtn}
     this.shippingLocs.push(cell);
 
+    if(this.editMode){
       var active_status = (<HTMLInputElement><any>document.getElementById("active")).checked;
+    }
+    else{
+      var active_status = false;
+    }
       var name = (<HTMLInputElement><any>document.getElementById("product-Name")).value;
       var base_price = (<HTMLInputElement><any>document.getElementById("product-BasePrice")).value;
       this.basePrice = base_price;

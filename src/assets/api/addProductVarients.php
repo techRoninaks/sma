@@ -1,41 +1,23 @@
 <?php
     require "init.php";
-    $varientName = $_POST['varientName'];
-    $varientOne = $_POST['varientOne'];
-    $varientTwo = $_POST['varientTwo'];
-    $varientThree = $_POST['varientThree'];
-    $varientFour = $_POST['varientFour'];
-    $varientFive = $_POST['varientFive'];
-    $varientSix = $_POST['varientSix'];
-    $priceOne = $_POST['priceOne'];
-    $priceTwo = $_POST['priceTwo'];
-    $priceSix = $_POST['priceSix'];
-    $priceThree = $_POST['priceThree'];
-    $priceFour = $_POST['priceFour'];
-    $priceFive = $_POST['priceFive'];
-    $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientOne','$priceOne')";
-    $result = mysqli_query($con1, $sql_query);
-    if($varientTwo !==""){
-        $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientTwo','$priceTwo')";
+    $prodid = $_POST['prodid'];
+    $variantArray = json_decode($_POST['variantArray']);
+
+    $varinatType = $variantArray->name;
+    $variantValues = $variantArray->value;
+    $result = "";
+
+    foreach($variantValues as $val){
+        $type = $val->type;
+        $price = $val->price;
+        $sql_query = "INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES (-99,'$varinatType','$type','$price')";
         $result = mysqli_query($con1, $sql_query);
     }
-    if($varientThree !==""){
-        $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientThree','$priceThree')";
+    if($prodid != 'all'){
+        $sql_query = "DELETE FROM `variant_info` WHERE  prodid = $prodid and name like '%$varinatType%'";
         $result = mysqli_query($con1, $sql_query);
     }
-    if($varientFour !==""){
-        $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientFour','$priceFour')";
-        $result = mysqli_query($con1, $sql_query);
-    }
-    if($varientFive !==""){
-        $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientFive','$priceFive')";
-        $result = mysqli_query($con1, $sql_query);
-    }
-    if($varientSix !==""){
-        $sql_query = " INSERT INTO `variant_info`(`prodid`, `name`, `value`, `price`) VALUES ('-99','$varientName','$varientSix','$priceSix')";
-        $result = mysqli_query($con1, $sql_query);
-    }
-    
+
     if(! $result)
     {
         $status="Error";

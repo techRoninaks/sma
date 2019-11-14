@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class DataService {
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma20/src/";
+  // baseUrl = "http://localhost/Angular/sma23/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -1163,6 +1163,17 @@ updateSellerPlanFree(data: any){
       .append("newTerm", newTerm);
     return this.http.post(this.baseUrl + 'assets/api/createNewSubCategory.php', httpParams);
   }
+  createNewMidSubCategory(id: any, newTerm: any) {
+    let httpParams = new HttpParams()
+      .append("id", id)
+      .append("newTerm", newTerm);
+    return this.http.post(this.baseUrl + 'assets/api/addNewMidCategory.php', httpParams);
+  }
+  getProductInfor(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getProductInfor.php', httpParams);
+  }
   
   popUpLogin(email: any,password :any){
     let httpParams= new HttpParams()
@@ -1439,21 +1450,10 @@ getDropdownForShipping(id : any){
  .append("shipping_alias",id);
  return this.http.post(this.baseUrl+'assets/api/getDropdownForShipping.php',httpParams);
 }
-addProductVarients(data : any){
+addProductVarients(data : any, prodId = "all"){
  let httpParams= new HttpParams()
- .append("varientName",data['varientName'])
- .append("varientOne",data['varientOne'])
- .append("varientTwo",data['varientTwo'])
- .append("varientThree",data['varientThree'])
- .append("varientFour",data['varientFour'])
- .append("varientFive",data['varientFive'])
- .append("varientSix",data['varientSix'])
- .append("priceOne",data['priceOne'])
- .append("priceTwo",data['priceTwo'])
- .append("priceThree",data['priceThree'])
- .append("priceFour",data['priceFour'])
- .append("priceFive",data['priceFive'])
- .append("priceSix",data['priceSix']);
+ .append("prodid", prodId)
+ .append("variantArray",data);
  return this.http.post(this.baseUrl+'assets/api/addProductVarients.php',httpParams);
 }
 
@@ -1534,8 +1534,11 @@ return this.http.post(this.baseUrl+'assets/api/imageClosedUpload.php', httpParam
 getLabelForProduct(){
   return this.http.get(this.baseUrl+'assets/api/getLabelsForProducts.php');
 }
-getTagsForProduct(){
-  return this.http.get(this.baseUrl+'assets/api/getAllTags.php');
+getTagsForProduct(id, prodid: any = "none"){
+  let httpParams = new HttpParams()
+.append("id",id)
+.append("prodid",prodid);
+  return this.http.post(this.baseUrl+'assets/api/getAllTags.php', httpParams);
 }
 getAllCategoriesProduct(){
   return this.http.get(this.baseUrl+'assets/api/getAllCategoriesProduct.php');
@@ -1545,6 +1548,35 @@ getShippingLocationAddProduct(id){
  .append("seller_id",id);
   return this.http.post(this.baseUrl+'assets/api/getShippingLocationAddProduct.php' , httpParams);
 }
+
+getTitleForAddproduct(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getTitleForAddproduct.php' , httpParams);
+}
+
+getDiscountDay(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getDiscountDay.php' , httpParams);
+}
+
+getShippingLocationProductEdit(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getShippingLocationProductEdit.php' , httpParams);
+}
+getFaqForProductEdit(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getFaqForProductEdit.php' , httpParams);
+}
+getVaritentInfo(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getVaritentInfo.php' , httpParams);
+}
+
 getAutoShippingLocation(id){
   let httpParams= new HttpParams()
  .append("searchTerm",id);

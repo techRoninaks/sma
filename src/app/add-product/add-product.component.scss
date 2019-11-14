@@ -82,7 +82,8 @@ $SubText: 18px;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background: #EFBE24
+	background: #EFBE24;
+	z-index: 111;
 }
 
 #myUL li a {
@@ -118,6 +119,29 @@ $SubText: 18px;
 }
 
 #myUL1 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+#myUL2 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+	background: #EFBE24;
+	z-index: 111;
+}
+
+#myUL2 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL2 li a:hover:not(.header) {
     background-color: #eee;
     color: #EFBE24;
     cursor: pointer;
@@ -295,6 +319,10 @@ $SubText: 18px;
 	grid-template-columns: auto 10% auto 10% auto;
 	grid-template-rows: auto;
 	grid-template-areas: "main-cat timeline1 med-cat timeline2 sub-cat";
+
+	input{
+		width: 100%;
+	}
 	.main-cat {
 		grid-area: main-cat;
 		.dropcat1 {
@@ -361,6 +389,7 @@ $SubText: 18px;
 	}
 	.med-cat {
 		grid-area: med-cat;
+		z-index: 12;
 		.dropcat2 {
 			background: #009145;
 			color: white;
@@ -377,6 +406,7 @@ $SubText: 18px;
 	}
 	.sub-cat {
 		grid-area: sub-cat;
+		z-index: 12;
 		.dropcat3 {
 			background: #009145;
 			color: white;
