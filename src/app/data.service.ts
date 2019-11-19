@@ -5,8 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class DataService {
-  baseUrl = "";
-  // baseUrl = "http://roninaks.com/sma/";
+  // baseUrl = "";
+  baseUrl = "http://localhost/sma2/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -1141,6 +1141,105 @@ updateSellerPlanFree(data: any){
       .append("userId", userId);
     return this.http.post(this.baseUrl + 'assets/api/deliverAddrCart.php', httpParams);
   }
+
+  //********  MSG TS starts  *********
+  getAdmin() {
+    return this.http.get(this.baseUrl + 'assets/api/Admin.php');
+  }
+  getBuyer() {
+    return this.http.get(this.baseUrl + 'assets/api/Buyer.php');
+  }
+  getSeller() {
+    return this.http.get(this.baseUrl + 'assets/api/Seller.php');
+  }
+  makethread(Buyerid:any,Sellerid:any,buyer:any,seller:any){
+    console.log(Buyerid,Sellerid,buyer,seller);
+    let httpParams = new HttpParams()
+    .append("Buyerid", Buyerid)
+    .append("Sellerid", Sellerid)
+    .append("buyer", buyer)
+    .append("seller", seller);
+    return this.http.post(this.baseUrl+'assets/api/makethread.php', httpParams);
+  }
+  makethread1(myid:any,Sellerid:any,buyer:any,seller:any){
+    console.log(myid,Sellerid,buyer,seller);
+    let httpParams = new HttpParams()
+    .append("Buyerid",myid)
+    .append("Sellerid", Sellerid)
+    .append("buyer", buyer)
+    .append("seller", seller)
+    return this.http.post(this.baseUrl+'assets/api/makethread.php', httpParams);
+  }
+  makethread_msg(myid:any,receiverid:any,mytype:any,receivertype:any){
+    console.log(myid,receiverid,mytype,receivertype);
+    let httpParams = new HttpParams()
+    .append("Buyerid",myid)
+    .append("Sellerid",receiverid)
+    .append("buyer",mytype)
+    .append("seller",receivertype)
+    return this.http.post(this.baseUrl+'assets/api/makethread.php', httpParams);
+  }
+  disp_rfq(threadid: any){
+  let httpParams= new HttpParams()
+  .append("threadid", threadid)
+  return this.http.post(this.baseUrl+'assets/api/rfqmsg.php',httpParams);
+ }
+ msgsent(msg: any,threadid: any,Buyerid: any,sender_type: any){
+  let httpParams= new HttpParams()
+  .append("msg", msg)
+  .append("threadid", threadid)
+  .append("Buyerid", Buyerid)
+  .append("sender_type", sender_type)
+  console.log(msg,threadid,Buyerid,sender_type);
+  return this.http.post(this.baseUrl+'assets/api/chatin.php',httpParams);
+ }
+ msgsent1(msg: any,threadid: any,Buyerid: any,sender_type: any){
+  let httpParams= new HttpParams()
+  .append("msg", msg)
+  .append("threadid", threadid)
+  .append("Buyerid", Buyerid)
+  .append("sender_type", sender_type)
+  console.log(msg,threadid,Buyerid,sender_type);
+  return this.http.post(this.baseUrl+'assets/api/chatin.php',httpParams);
+ }
+ msgsent_msg(msg: any, threadid:any ,receiverid:any, receivertype:any){
+  let httpParams= new HttpParams()
+  .append("msg", msg)
+  .append("threadid", threadid)
+  .append("Senderid", receiverid)
+  .append("sender_type", receivertype)
+  console.log(msg,threadid,receiverid,receivertype);
+  return this.http.post(this.baseUrl+'assets/api/chat_msg.php',httpParams);
+ }
+ fetchrfqmsg(threadid: any){
+  let httpParams= new HttpParams()
+  .append("threadid", threadid)
+  return this.http.post(this.baseUrl+'assets/api/fetchrfqmsg.php',httpParams);
+ }
+ rfqsubmition(order_no: any,buyer_name:any,location:any,product_name:any,discription:any,shipping_price:any,product_price:any,delivery_by:any,processing_time:any,shipping_time:any,gift_name:any,phone_number:any,address:any,note:any){
+  let httpParams= new HttpParams()
+  .append("order_no",order_no)
+  .append("buyer_name",buyer_name)
+  .append("location",location)
+  .append("product_name",product_name)
+  .append("discription",discription)
+  .append("shipping_price",shipping_price)
+  .append("product_price",product_price)
+  .append("delivery_by",delivery_by)
+  .append("processing_time",processing_time)
+  .append("shipping_time",shipping_time)
+  .append("gift_name",gift_name)
+  .append("phone_number",phone_number)
+  .append("address",address)
+  .append("note",note)
+  console.log(order_no,buyer_name,delivery_by,gift_name);
+  return this.http.post(this.baseUrl+'assets/api/postrfqaccept.php',httpParams);
+ }
+ fetchmsg(threadid: any){
+  let httpParams= new HttpParams()
+  .append("threadid", threadid)
+  return this.http.post(this.baseUrl+'assets/api/fetchmsg.php',httpParams);
+ }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }

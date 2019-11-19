@@ -1,21 +1,33 @@
 <div class="dvMsgCat">
     <div class="dvMsgBtn">
-        <button class="btnMsg">ALL&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+        <button class="btnAll" (click)="filtertabs('All');" id="btnAll">ALL&emsp;<span
+                class="badge badge-danger">{{allMsgCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
-        <button class="btnMsg">RFQ&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+        <button class="btnRFQ" (click)="filtertabs('RFQ');" id="btnRFQ">RFQ&emsp;<span
+                class="badge badge-danger">{{allMsgCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
-        <button class="btnMsg">COMPLAINTS&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+        <button class="btnComplaints" (click)="filtertabs('Complaints');" id="btnComplaints">COMPLAINTS&emsp;<span
+                class="badge badge-danger">{{allMsgCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
-        <button class="btnMsg">MESSAGES&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+        <button class="btnMessages" (click)="filtertabs('Messages');" id="btnMessages">MESSAGES&emsp;<span
+                class="badge badge-danger">{{allMsgCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
-        <button class="btnMsg">NOTIFICATION&emsp;<span class="badge badge-danger" *ngIf="allMsgCount != 0">{{allMsgCount}}</span></button>
+        <button class="btnNotification" (click)="filtertabs('Notification');"
+            id="btnNotification">NOTIFICATION&emsp;<span class="badge badge-danger">{{allMsgCount}}</span></button>
     </div>
 </div>
-<div class="dvMsgBody">
+
+<div class="dvAllBody" id="Allbox">
+    <h2>All</h2>
+
+</div>
+
+
+<div class="dvRFQBody" id="RFQbox">
     <div class="dvMsgSidebar">
         <div class="dvSrchBar">
             <input type="text" placeholder="Search..."><i class="fa fa-search srchBtn" aria-hidden="true"></i>
@@ -23,18 +35,294 @@
         <div class="dvSortBar">
             <i class="fa fa-sort">&emsp;Sort by&emsp;</i>
             <select>
-                <option>--- Select ---</option>
+                <option>Select</option>
                 <option></option>
                 <option>Date</option>
                 <option>Name</option>
                 <option>Type</option>
             </select>
-            <button><i class="fa fa-arrow-up"></i></button>
-            <button><i class="fa fa-arrow-down"></i></button>
+            <!-- <button><i class="fa fa-arrow-up"></i></button>
+            <button><i class="fa fa-arrow-down"></i></button> -->
+        </div>
+        <div class="dvMsgSeller">
+            <div class="nmSeller">
+                <h6>SELLER</h6>
+            </div>
+            <div class="sellerbox">
+                <div class="getSeller" id="divSeller" *ngFor="let item of seller_name">
+                    <p (click)="chatheadSeller(item.id);" id="chatheadSeller{{item.id}}">{{item.seller_name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="dvMsgBuyer">
+            <div class="nmBuyer">
+                <h6>BUYER</h6>
+            </div>
+            <div class="buyerbox">
+                <div class="getBuyer" id="divBuyer" *ngFor="let item of Buyername">
+                    <p (click)="chatheadBuyer(item.id);" id="chatheadBuyer{{item.id}}">{{item.Name}} </p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="dvMsgContent">
-        <div class="dvMsgUi"></div>
-        <div class="dvMsgInput"></div>
+    <div class="dvMsgContent" id="msgbox"*ngIf = "msgview">
+        <div class="scrollmsg">
+            <div class="dvMsgUi" id="dvMsgUiDiv">
+                <div class="dvmsgheader">
+                    <div class="dvname">
+                        <h6 id="name"></h6>
+                    </div>
+                </div>
+                <div class="dvrecivemsgview" id="recivemsgview"*ngIf = "rfqbox">
+                    <div class="dvshopdetails">
+                        <h6 id="shopname" class="name"></h6>
+                        <h6 id="shoplocation" class="location"></h6>
+                    </div>
+                    <div class="note" id="note"></div>
+                    <div class="dvtmbtn">
+                        <h6 id="sendtime" class="sendtime"></h6>
+                        <button id="acceptbtn" class="btn" (click)="accept()">Accept</button>
+                    </div>
+                </div>
+                <div class="dvsentmsgview" id="sentmsgview"*ngIf = "post">
+                    <form class="form1" id="form1">
+                        <!-- <label id="order_no">Order Id :</label><br> -->
+                        Order No : <input type="text" name="FirstName" value="" id="order_no"><br>
+                        Buyer Name : <input type="text" name="LastName" value=""id="buyer_name"><br>
+                        Location : <input type="text" name="LastName" value=""id="location"><br>
+                        Product Name : <input type="text" name="LastName" value=""id="product_name"><br>
+                        Discription : <input type="text" name="LastName" value=""id="discription"><br>
+                        Shipping Price : <input type="text" name="LastName" value=""id="shipping_price"><br>
+                        Product Price : <input type="text" name="LastName" value=""id="product_price"><br>
+                        Delivery by : <input type="text" name="LastName" value=""id="delivery_by"><br>
+                        Processing Time : <input type="text" name="LastName" value=""id="Processing_time"><br>
+                        Shipping Time : <input type="text" name="LastName" value=""id="shipping_time"><br>
+                    </form>
+                    <button class="enablegiftingbtn" id="enablegifting" (click)="enablegiftingbtnshow()">Enable Gifting</button>
+                    <div class="enablegiftdv" id="enablegiftdv" *ngIf = "enablegifting">
+                        <form class="form2" id="form2">
+                            Name : <input type="text" name="FirstName" value=""id="gift_name"><br>
+                            phone Number : <input type="text" name="LastName" value=""id="phone_number"><br>
+                            Address : <input type="text" name="LastName" value=""id="address"><br>
+                            Note : <input type="text" name="LastName" value=""id="note"><br>
+                        </form>
+                    </div>
+                    <button id="submitbtn" class="submitbtn"(click)="submitrfq()">Submit</button>
+                </div>
+            </div>
+                <div class="dvMsgInput">
+                <div class="dvtextbox">
+                    <input type="text" placeholder="Type here..."id="msgsent">
+                    <button class="msgsent" id="msgsentbtn" (click)="msg()"*ngIf = "msg">Sent</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+</div>
+
+
+
+<div class="dvComplaintsBody" id="Complaintsbox">
+    <h2>Compliaints</h2>
+    <div class="dvMsgSidebar_com">
+            <div class="dvSrchBar_com">
+                <input type="text" placeholder="Search..."><i class="fa fa-search srchBtn" aria-hidden="true"></i>
+            </div>
+            <div class="dvSortBar_com">
+                <i class="fa fa-sort">&emsp;Sort by&emsp;</i>
+                <select>
+                    <option>Select</option>
+                    <option></option>
+                    <option>Date</option>
+                    <option>Name</option>
+                    <option>Type</option>
+                </select>
+                <!-- <button><i class="fa fa-arrow-up"></i></button>
+                <button><i class="fa fa-arrow-down"></i></button> -->
+            </div>
+            <div class="dvMsgAdmin_com">
+                <div class="nmAdmin_com">
+                    <h6>ADMIN</h6>
+                </div>
+                <div class="adminbox_com">
+                    <div class="getAdmin_com" id="divAdmin_com" *ngFor="let item of Adminname">
+                        <p (click)="chatheadAdmin_com(item.id);" id="chatheadAdmin_com{{item.id}}">{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgBuyer_com">
+                <div class="nmBuyer_com">
+                    <h6>BUYER</h6>
+                </div>
+                <div class="buyerbox_com">
+                    <div class="getBuyer_com" id="divBuyer_com" *ngFor="let item of Buyername">
+                        <p (click)="chatheadBuyer_com(item.id);" id="chatheadBuyer_com{{item.id}}">{{item.Name}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgSeller_com">
+                <div class="nmSeller_com">
+                    <h6>SELLER</h6>
+                </div>
+                <div class="sellerbox_com">
+                    <div class="getSeller_com" id="divSeller_com" *ngFor = "let item of Seller_name">
+                    <p (click)="chatheadSeller_com(item.id);" id="chatheadSeller_com{{item.id}}">{{item.Name}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dvMsgContent_com" id="msgbox_com">
+            <div class="scrollmsg_com">
+                <div class="dvMsgUi_com" id="dvMsgUiDiv_com">
+                    <div class="dvmsgheader_com">
+                        <div class="dvname_com">
+                            <h6 id="name_com"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dvMsgInput_com">
+            <div class="dvtextbox_com">
+                <input type="text" placeholder="Type here..."id="msgsent">
+                <button class="msgsent_com" id="msgsentbtn_com" (click)="msg_com()">Sent</button>
+            </div>
+        </div>
+</div>
+
+<!-- message html starts -->
+
+<div class="dvMessagesBody" id="Messagesbox">
+        <div class="dvMsgSidebar_msg">
+            <div class="dvSrchBar_msg">
+                <input type="text" placeholder="Search..."><i class="fa fa-search srchBtn" aria-hidden="true"></i>
+            </div>
+            <div class="dvSortBar_msg">
+                <i class="fa fa-sort">&emsp;Sort by&emsp;</i>
+                <select>
+                    <option>Select</option>
+                    <option></option>
+                    <option>Date</option>
+                    <option>Name</option>
+                    <option>Type</option>
+                </select>
+                <!-- <button><i class="fa fa-arrow-up"></i></button>
+                <button><i class="fa fa-arrow-down"></i></button> -->
+            </div>
+            <div class="dvMsgAdmin_msg">
+                <div class="nmAdmin_msg">
+                    <h6>ADMIN</h6>
+                </div>
+                <div class="adminbox_msg">
+                    <div class="getAdmin_msg" id="divAdmin_msg" *ngFor="let item of Adminname">
+                        <p (click)="chatheadAdmin_msg(item.id);" id="chatheadAdmin_msg{{item.id}}">{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgBuyer_msg">
+                <div class="nmBuyer_msg">
+                    <h6>BUYER</h6>
+                </div>
+                <div class="buyerbox_msg">
+                    <div class="getBuyer_msg" id="divBuyer_msg" *ngFor="let item of Buyername">
+                        <p (click)="chatheadBuyer_msg(item.id);" id="chatheadBuyer_msg{{item.id}}">{{item.Name}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgSeller_msg">
+                <div class="nmSeller_msg">
+                    <h6>SELLER</h6>
+                </div>
+                <div class="sellerbox_msg">
+                    <div class="getSeller_msg" id="divSeller_msg" *ngFor = "let item of seller_name">
+                    <p (click)="chatheadSeller_msg(item.id);" id="chatheadSeller_msg{{item.id}}">{{item.seller_name}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dvMsgContent_msg" id="msgbox_msg">
+            <div class="scrollmsg_msg">
+                <div class="dvMsgUi_msg" id="dvMsgUiDiv_msg">
+                    <div class="dvmsgheader_msg">
+                        <div class="dvname_msg">
+                            <h6 id="name_msg"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dvMsgInput_msg">
+            <div class="dvtextbox_msg">
+                <input type="text" placeholder="Type here..."id="msgsent_msg">
+                <button class="msgsent_msg" id="msgsentbtn_msg" (click)="msg_msg()">Sent</button>
+            </div>
+        </div>
+</div>
+
+<div class="dvNotificationBody" id="Notificationbox">
+        <div class="dvMsgSidebar_not">
+                <div class="dvSrchBar_not">
+                    <input type="text" placeholder="Search..."><i class="fa fa-search srchBtn" aria-hidden="true"></i>
+                </div>
+                <div class="dvSortBar_not">
+                    <i class="fa fa-sort">&emsp;Sort by&emsp;</i>
+                    <select>
+                        <option>Select</option>
+                        <option></option>
+                        <option>Date</option>
+                        <option>Name</option>
+                        <option>Type</option>
+                    </select>
+                    <!-- <button><i class="fa fa-arrow-up"></i></button>
+                    <button><i class="fa fa-arrow-down"></i></button> -->
+                </div>
+                <div class="dvMsgAdmin_not">
+                    <div class="nmAdmin_not">
+                        <h6>ADMIN</h6>
+                    </div>
+                    <div class="adminbox_not">
+                        <div class="getAdmin_not" id="divAdmin_not" *ngFor="let item of Adminname">
+                            <p (click)="chatheadAdmin(item.id);" id="chatheadAdmin{{item.id}}">{{item.name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dvMsgBuyer_not">
+                    <div class="nmBuyer_not">
+                        <h6>BUYER</h6>
+                    </div>
+                    <div class="buyerbox_not">
+                        <div class="getBuyer_not" id="divBuyer_not" *ngFor="let item of Buyername">
+                            <p (click)="chatheadBuyer(item.id);" id="chatheadBuyer_not{{item.id}}">{{item.Name}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dvMsgSeller_not">
+                    <div class="nmSeller_not">
+                        <h6>SELLER</h6>
+                    </div>
+                    <div class="sellerbox_not">
+                        <div class="getSeller_not" id="divSeller_not" *ngFor = "let item of Seller_name">
+                        <p (click)="chatheadSeller_not(item.id);" id="chatheadSeller_not{{item.id}}">{{item.Name}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgContent_not" id="msgbox_not">
+                <div class="scrollmsg_not">
+                    <div class="dvMsgUi_not" id="dvMsgUiDiv_not">
+                        <div class="dvmsgheader_not">
+                            <div class="dvname_not">
+                                <h6 id="name_not"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dvMsgInput_not">
+                <div class="dvtextbox_not">
+                    <input type="text" placeholder="Type here..."id="msgsent">
+                    <button class="msgsent_not" id="msgsentbtn_not" (click)="msg_not()">Sent</button>
+                </div>
+            </div>
 </div>

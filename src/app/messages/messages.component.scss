@@ -48,19 +48,18 @@ $SubText: 18px;
     @content;
   }
 }
-
-
-
 .dvMsgCat{
     display: grid;
     grid-template-columns: repeat(5,20%);
     margin: 5% 10%;
     width: auto;
+    height: 10px;
     box-shadow: 1px 1px 10px 1px lightGray;
+    //Fillter scss
     .dvMsgBtn{
         display: grid;
         justify-self: center;
-        .btnMsg{
+        .btnAll{
             cursor: pointer;
             font-family: BitterBold;
             color: black;
@@ -71,27 +70,84 @@ $SubText: 18px;
                 background: $smaYellow;
             }
         }
+        .btnRFQ{
+          cursor: pointer;
+          font-family: BitterBold;
+          color: black;
+          background: $smaLightGray;
+          border: 1px solid lightgray;
+          padding: 5px;
+          &:hover{
+              background: $smaYellow;
+          }
+        }
+      .btnComplaints{
+        cursor: pointer;
+        font-family: BitterBold;
+        color: black;
+        background: $smaLightGray;
+        border: 1px solid lightgray;
+        padding: 5px;
+        &:hover{
+            background: $smaYellow;
+        }
+      }
+    .btnMessages{
+      cursor: pointer;
+      font-family: BitterBold;
+      color: black;
+      background: $smaLightGray;
+      border: 1px solid lightgray;
+      padding: 5px;
+      &:hover{
+          background: $smaYellow;
+      }
+    }
+  .btnNotification{
+    cursor: pointer;
+    font-family: BitterBold;
+    color: black;
+    background: $smaLightGray;
+    border: 1px solid lightgray;
+    padding: 5px;
+    &:hover{
+        background: $smaYellow;
+    }
+  }
     }
 }
-
-.dvMsgBody{
+.dvAllBody{
+  // display: grid;
+  grid-template-columns: 25% 70%;
+  // grid-template-areas: "dv-sidebar dv-content";
+  margin: 5% 10%;
+  width: auto;
+  height: 800px;
+  padding: 05px;
+  border-radius: 8px;
+  background: $smaLightGray;
+}
+.dvRFQBody{
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 25% 70%;
     grid-template-areas: "dv-sidebar dv-content";
     margin: 5% 10%;
     width: auto;
-    height: 400px;
-    padding: 10px;
+    height: 800px;
+    padding: 05px;
+    border-radius: 8px;
     background: $smaLightGray;
 
     .dvMsgSidebar{
+        border-radius: 8px;
         grid-area: dv-sidebar;
         grid-template-rows: 10% 10% auto auto;
         grid-template-areas: "srch-bar" "sort-bar" "dv-drp-1" "dv-drp-2";
         background: white;
         padding: 10px;
         
-        .dvSrchBar{
+        .dvSrchBar
+        {
             grid-area: srch-bar;
             text-align: center;
             
@@ -104,8 +160,56 @@ $SubText: 18px;
             }
             .srchBtn{
                 vertical-align: middle;
+                padding: 8px;
                 background: $smaLightGray;
             }
+        }
+        .dvSortBar{
+          width: auto;
+
+          
+        }
+        .dvMsgSeller{
+          width: auto;
+          height: 300px;
+          .nmSeller{
+            border-radius: 8px;
+            background: $smaYellow;
+            padding: 10px;
+            font-family: BitterBold;
+          }
+          .sellerbox{
+            overflow: auto;
+            width: auto;
+            height: 250px;
+            .getSeller{
+              margin-left: 20px;
+              font-family: Bitter;
+              width: 200px;
+              height: 30px;
+            }
+          }
+          
+        }
+        .dvMsgBuyer{
+          width: auto;
+          height: 300px;
+          .nmBuyer{
+            border-radius: 8px;
+          background: $smaYellow;
+          padding: 10px;
+          font-family: BitterBold;
+          } 
+          .buyerbox{
+            height: 250px;
+            width: auto;
+            overflow: auto;
+            .getBuyer{
+            margin-left: 20px;
+            font-family: Bitter;
+            width: 200px;
+            }
+          }
         }
         .dvSortBar{
             grid-area: sort-bar;
@@ -119,16 +223,663 @@ $SubText: 18px;
         }
     }
     .dvMsgContent{
-        grid-area: dv-content;
-        grid-template-rows: 80% 20%;
-        grid-template-areas: "dv-ui" "dv-input";
-        display: grid;
-
+      grid-area: dv-content;
+      grid-template-rows: 90% 10%;
+      grid-template-areas: "dv-ui" "dv-input";
+      background:white;
+      margin-left: 10px;
+      border-radius: 8px;
+      height: 770px;
+      // display: grid;
+      .scrollmsg{
         .dvMsgUi{
-            grid-area: dv-ui;
+          display: grid;
+          grid-template-rows: auto;
+          grid-template-columns: auto;
+          margin-top: 10px;
+          overflow: auto;
+          width: 850px;
+          height: 780px;
+          grid-area: dv-ui;
+          margin-left: 20px;
+          .dvmsgheader{
+            background: $smaGray;
+            height: 50px;
+            width: 800px;
+            margin-top: 10px;
+            border-radius: 10px;
+            .dvname{
+              padding: 15px;
+              margin-left: 60px;
+            }
+          }
+          .dvrecivemsgview{
+            background:$smaLightGray;
+            margin-left: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            float: top;
+            width: 500px;
+            height: 240px;
+            .dvshopdetails{
+              padding: 10px;
+              .name{
+                display: inline-block;
+                margin-top: 20px;
+                margin-left: 10px;
+              }
+              .location{
+                display: inline-block;
+                margin-top: 20px;
+                float: right;
+                margin-right: 25px;
+              }
+            }
+            .note{
+              margin-left: 20px;
+            }
+            .dvtmbtn{
+              margin-top: 100px;
+              float:bottom;
+              margin-bottom: 10px;
+              .sendtime{
+                display: inline-block;
+                margin-left: 10px;
+              }
+              .btn{
+                display: inline-block;
+                margin-left: 10px;
+                float: right;
+                margin-right: 25px;
+              }
+            }
+          }
+          .dvsentmsgview{
+            margin-top: 30px;
+            width: 400px;
+            height: auto;
+            float: left;
+            background:rgb(168, 161, 161);
+            border-radius: 10px;
+            margin-right: 20px;
+            margin-top: 20px;
+            margin-left: 375px;
+            padding: 10px;
+            .form1{
+              margin-left: 20px;
+              margin-top: 10px;
+            }
+            .enablegiftingbtn{
+              margin-top: 20px;
+              margin-left: 30px;
+              border-radius: 10px;
+              background: #dbdbdb;
+              margin-bottom:20px ;
+            }
+            .enablegiftdv{
+              margin-left: 10px;
+              margin-right: 10px;
+              width: auto;
+              height: 150px;
+              border-radius: 10px;
+              background:$smaGray;
+              margin-bottom:20px ;
+              .form2{
+                margin-left: 05px;
+                margin-top: 05px;
+              }
+            }
+            .submitbtn{
+              margin-right: 20px;
+              border-radius: 10px;
+              float: right;
+              margin-right: 20px;
+              margin-top: 15px;
+            }
+          }
         }
-        .dvMsgInput{
-            grid-area: dv-input;
+      }
+      .dvMsgInput{
+        grid-area: dv-input;
+        margin-top: 10px;
+          .dvtextbox{
+            margin-left: 10px;
+            border-radius: 12px;
+            grid-area: msg-text-bar;
+            text-align: center;
+            width: 800px;    
+              input[type=text] {
+                height: 30px;
+                border-radius: 12px;
+                width: 740px;
+                margin-inline-start: 0px;
+                border-block-color: black;
+                font-family: Bitter;
+                font-size: small;
+              }
+          .msgsent{
+            margin-left: 10px;
+            border-radius: 10px;
+            background: $smaGray;
+
+            }
         }
     }
+  }
+}
+.dvComplaintsBody{
+  display: grid;
+  grid-template-columns: 25% 70%;
+  grid-template-areas: "dv-sidebar dv-content";
+  margin: 5% 10%;
+  width: auto;
+  height: auto;
+  padding: 05px;
+  border-radius: 8px;
+  background: $smaLightGray;
+  .dvMsgSidebar_com{
+    border-radius: 8px;
+    grid-area: dv-sidebar;
+    grid-template-rows: 10% 10% auto auto;
+    grid-template-areas: "srch-bar" "sort-bar" "dv-drp-1" "dv-drp-2";
+    background: white;
+    padding: 10px;  
+    .dvSrchBar_com{
+      grid-area: srch-bar;
+      text-align: center;
+      input[type=text]{
+      padding: 6px;
+      border: none;
+      background: $smaLightGray;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .srchBtn{
+        vertical-align: middle;
+        padding: 8px;
+        background: $smaLightGray;
+      }
+    }
+    .dvSortBar_com{
+      width: auto;      
+    }
+    .dvMsgAdmin_com{
+      width: auto;
+      height: 300px;
+      .nmAdmin_com{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      }
+      .adminbox_com{
+        overflow: auto;
+        width: auto;
+        height: 250px;
+        .getAdmin_com{
+          margin-left: 20px;
+          font-family: Bitter;
+          width: 200px;
+          height: 30px;
+        }
+      }
+    }
+    .dvMsgBuyer_com{
+      width: auto;
+      height: 300px;
+      .nmBuyer_com{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      } 
+      .buyerbox_com{
+        height: 250px;
+        width: auto;
+        overflow: auto;
+        .getBuyer_com{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvMsgSeller_com{
+      width: auto;
+      height: 300px;
+    .nmSeller_com{
+      border-radius: 8px;
+      background: $smaYellow;
+      padding: 10px;
+      font-family: BitterBold;
+    } 
+    .sellerbox_com{
+      height: 250px;
+      width: auto;
+      overflow: auto;
+      .getSeller_com{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvSortBar_com{
+        grid-area: sort-bar;
+        padding: 10px;
+    }
+    .dvDrp1{
+        grid-area: dv-drp-1;
+    }
+    .dvDrp2{
+        grid-area: dv-drp-2;
+    }
+  }
+  .dvMsgContent_com{
+    grid-area: dv-content;
+    grid-template-rows: 90% 10%;
+    grid-template-areas: "dv-ui" "dv-input";
+    background: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: auto;
+    // display: grid;
+    .scrollmsg_com{
+      height: auto;
+      width: auto;
+      .dvMsgUi_com{
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        margin-top: 10px;
+        overflow: auto;
+        width: 850px;
+        height: 780px;
+        grid-area: dv-ui;
+        margin-left: 20px;
+        .dvmsgheader_com{
+          background: $smaGray;
+          height: 50px;
+          width: 800px;
+          margin-top: 10px;
+          border-radius: 10px;
+          .dvname_com{
+            padding: 15px;
+            margin-left: 60px;
+          }
+        }
+      }
+    }
+  } 
+  .dvMsgInput_com{
+    grid-area: dv-input;
+    margin-top: 05px;
+    margin-left: -850px;
+    .dvtextbox_com{
+      margin-left: 10px;
+      border-radius: 12px;
+      grid-area: msg-text-bar;
+      text-align: center;
+      width: 800px;    
+      input[type=text] {
+      height: 30px;
+      border-radius: 12px;
+      width: 740px;
+      margin-inline-start: 0px;
+      border-block-color: black;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .msgsent_com{
+      margin-left: 10px;
+      border-radius: 10px;
+      background: $smaGray;
+      }
+    }
+  }
+}
+
+
+
+.dvMessagesBody{
+  display: grid;
+  grid-template-columns: 25% 70%;
+  grid-template-areas: "dv-sidebar dv-content";
+  margin: 5% 10%;
+  width: auto;
+  height: auto;
+  padding: 05px;
+  border-radius: 8px;
+  background: $smaLightGray;
+  .dvMsgSidebar_msg{
+    border-radius: 8px;
+    grid-area: dv-sidebar;
+    grid-template-rows: 10% 10% auto auto;
+    grid-template-areas: "srch-bar" "sort-bar" "dv-drp-1" "dv-drp-2";
+    background: white;
+    padding: 10px;  
+    .dvSrchBar_msg{
+      grid-area: srch-bar;
+      text-align: center;
+      input[type=text]{
+      padding: 6px;
+      border: none;
+      background: $smaLightGray;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .srchBtn{
+        vertical-align: middle;
+        padding: 8px;
+        background: $smaLightGray;
+      }
+    }
+    .dvSortBar_msg{
+      width: auto;      
+    }
+    .dvMsgAdmin_msg{
+      width: auto;
+      height: 300px;
+      .nmAdmin_msg{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      }
+      .adminbox_msg{
+        overflow: auto;
+        width: auto;
+        height: 250px;
+        .getAdmin_msg{
+          margin-left: 20px;
+          font-family: Bitter;
+          width: 200px;
+          height: 30px;
+        }
+      }
+    }
+    .dvMsgBuyer_msg{
+      width: auto;
+      height: 300px;
+      .nmBuyer_msg{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      } 
+      .buyerbox_msg{
+        height: 250px;
+        width: auto;
+        overflow: auto;
+        .getBuyer_msg{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvMsgSeller_msg{
+      width: auto;
+      height: 300px;
+    .nmSeller_msg{
+      border-radius: 8px;
+      background: $smaYellow;
+      padding: 10px;
+      font-family: BitterBold;
+    } 
+    .sellerbox_msg{
+      height: 250px;
+      width: auto;
+      overflow: auto;
+      .getSeller_msg{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvSortBar_msg{
+        grid-area: sort-bar;
+        padding: 10px;
+    }
+    .dvDrp1{
+        grid-area: dv-drp-1;
+    }
+    .dvDrp2{
+        grid-area: dv-drp-2;
+    }
+  }
+  .dvMsgContent_msg{
+    grid-area: dv-content;
+    grid-template-rows: 90% 10%;
+    grid-template-areas: "dv-ui" "dv-input";
+    background: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: auto;
+    // display: grid;
+    .scrollmsg_msg{
+      height: auto;
+      width: auto;
+      .dvMsgUi_msg{
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        margin-top: 10px;
+        overflow: auto;
+        width: 850px;
+        height: 780px;
+        grid-area: dv-ui;
+        margin-left: 20px;
+        .dvmsgheader_msg{
+          background: $smaGray;
+          height: 50px;
+          width: 800px;
+          margin-top: 10px;
+          border-radius: 10px;
+          .dvname_msg{
+            padding: 15px;
+            margin-left: 60px;
+          }
+        }
+      }
+    }
+  } 
+  .dvMsgInput_msg{
+    grid-area: dv-input;
+    margin-top: 05px;
+    margin-left: -850px;
+    .dvtextbox_msg{
+      margin-left: 10px;
+      border-radius: 12px;
+      grid-area: msg-text-bar;
+      text-align: center;
+      width: 800px;    
+      input[type=text] {
+      height: 30px;
+      border-radius: 12px;
+      width: 740px;
+      margin-inline-start: 0px;
+      border-block-color: black;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .msgsent_msg{
+      margin-left: 10px;
+      border-radius: 10px;
+      background: $smaGray;
+      }
+    }
+  }
+}
+.dvNotificationBody{
+  display: grid;
+  grid-template-columns: 25% 70%;
+  grid-template-areas: "dv-sidebar dv-content";
+  margin: 5% 10%;
+  width: auto;
+  height: auto;
+  padding: 05px;
+  border-radius: 8px;
+  background: $smaLightGray;
+  .dvMsgSidebar_not{
+    border-radius: 8px;
+    grid-area: dv-sidebar;
+    grid-template-rows: 10% 10% auto auto;
+    grid-template-areas: "srch-bar" "sort-bar" "dv-drp-1" "dv-drp-2";
+    background: white;
+    padding: 10px;  
+    .dvSrchBar_not{
+      grid-area: srch-bar;
+      text-align: center;
+      input[type=text]{
+      padding: 6px;
+      border: none;
+      background: $smaLightGray;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .srchBtn{
+        vertical-align: middle;
+        padding: 8px;
+        background: $smaLightGray;
+      }
+    }
+    .dvSortBar_not{
+      width: auto;      
+    }
+    .dvMsgAdmin_not{
+      width: auto;
+      height: 300px;
+      .nmAdmin_not{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      }
+      .adminbox_not{
+        overflow: auto;
+        width: auto;
+        height: 250px;
+        .getAdmin_not{
+          margin-left: 20px;
+          font-family: Bitter;
+          width: 200px;
+          height: 30px;
+        }
+      }
+    }
+    .dvMsgBuyer_not{
+      width: auto;
+      height: 300px;
+      .nmBuyer_not{
+        border-radius: 8px;
+        background: $smaYellow;
+        padding: 10px;
+        font-family: BitterBold;
+      } 
+      .buyerbox_not{
+        height: 250px;
+        width: auto;
+        overflow: auto;
+        .getBuyer_not{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvMsgSeller_not{
+      width: auto;
+      height: 300px;
+    .nmSeller_not{
+      border-radius: 8px;
+      background: $smaYellow;
+      padding: 10px;
+      font-family: BitterBold;
+    } 
+    .sellerbox_not{
+      height: 250px;
+      width: auto;
+      overflow: auto;
+      .getSeller_not{
+        margin-left: 20px;
+        font-family: Bitter;
+        width: 200px;
+        }
+      }
+    }
+    .dvSortBar_not{
+        grid-area: sort-bar;
+        padding: 10px;
+    }
+    .dvDrp1{
+        grid-area: dv-drp-1;
+    }
+    .dvDrp2{
+        grid-area: dv-drp-2;
+    }
+  }
+  .dvMsgContent_not{
+    grid-area: dv-content;
+    grid-template-rows: 90% 10%;
+    grid-template-areas: "dv-ui" "dv-input";
+    background: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: auto;
+    // display: grid;
+    .scrollmsg_not{
+      height: auto;
+      width: auto;
+      .dvMsgUi_not{
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        margin-top: 10px;
+        overflow: auto;
+        width: 850px;
+        height: 780px;
+        grid-area: dv-ui;
+        margin-left: 20px;
+        .dvmsgheader_not{
+          background: $smaGray;
+          height: 50px;
+          width: 800px;
+          margin-top: 10px;
+          border-radius: 10px;
+          .dvname_not{
+            padding: 15px;
+            margin-left: 60px;
+          }
+        }
+      }
+    }
+  } 
+  .dvMsgInput_not{
+    grid-area: dv-input;
+    margin-top: 05px;
+    margin-left: -850px;
+    .dvtextbox_not{
+      margin-left: 10px;
+      border-radius: 12px;
+      grid-area: msg-text-bar;
+      text-align: center;
+      width: 800px;    
+      input[type=text] {
+      height: 30px;
+      border-radius: 12px;
+      width: 740px;
+      margin-inline-start: 0px;
+      border-block-color: black;
+      font-family: Bitter;
+      font-size: small;
+      }
+      .msgsent_not{
+      margin-left: 10px;
+      border-radius: 10px;
+      background: $smaGray;
+      }
+    }
+  }
 }
