@@ -4,9 +4,9 @@
         <div class="dvBreadcrumbs">
             <a routerLink="">Home</a> > <a style="color: gray;">Category listing</a>
         </div>
-        <div class="dvFilterSet">
+        <div class="dvFilterSet"> 
             <div class="dvCheckbox">
-                <input class="checkBox" type="checkbox" style="cursor: pointer;"> SHOW UNDELIVERABLE
+                <input class="checkBox" type="checkbox" style="cursor: pointer;" (change)="deliverable()" id="inpDeliver"> SHOW UNDELIVERABLE
             </div>
             <div class="dvFilter">
                 <div class="dvBtnFilter">
@@ -134,7 +134,7 @@
                     </div>
                     <div class="dvFilterSummary">
                         <div class="dvFilterChips">
-                            <div *ngFor="let chip of Object.keys(filterArray)">
+                            <div *ngFor="let chip of filterChipset">
                                 <div class="chip" id={{chip}}>
                                     <div class="dvChipText">{{chip}}</div>
                                     <span class="closebtn" (click)="deleteFilter(chip)">&times;</span>
@@ -225,7 +225,7 @@
                 [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
                 <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
                 <div class="dvUndeliver">
-                    <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
+                    <div class="overlay" *ngIf="array12[item].activeStatus == 'undeliverable'">UNDELIVERABLE</div>
                 </div>
             </div>
             <div class="dvCardName">

@@ -399,9 +399,7 @@ export class RegistrationSellerComponent implements OnInit {
     var response;
     if (this.fpFormMobile.valid) 
     {
-      
       this.fpmobile = this.fpFormMobile.controls['fp_mobile_no'].value;
-      // alert(typeof(this.fpmobile));
       this.data.checkMobile(this.fpmobile).subscribe(
         data => { 
             alert('OTP Sent Successfully');
@@ -447,6 +445,7 @@ export class RegistrationSellerComponent implements OnInit {
           {
             alert('OTP verified');
             this.otpVerified = true;
+            $("#myModal").modal('hide');
           }
           else
           {

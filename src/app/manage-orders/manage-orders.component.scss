@@ -40,6 +40,7 @@ text-decoration: underline;
                          "section-4"
                          "section-5";
     font-family: BitterBold;
+    margin-top: 80px;
     .section-1{
         grid-area: section-1;
         .grid-1{
@@ -61,6 +62,11 @@ text-decoration: underline;
                 border-radius: 5px;
                 padding-left: 17px;
                 padding-top: 11px;
+                .text-style{
+                    margin-left: 28%;
+                    font-size: 18px;
+                    transform: translate(-66px, -112px);
+                }
             }
             .right-sect-1{
                 grid-area: right-sect-1;
@@ -71,7 +77,7 @@ text-decoration: underline;
                 .day{
                     height: 70px;
                     width: 60px;
-                    background: #eed12f;
+                    background: #EFBE24;
                     margin-top: -9%;
                     margin-left: 79%;
                     border-radius: 4px;
@@ -121,12 +127,12 @@ text-decoration: underline;
                         color: black;
                     }
                     .previous {
-                        background-color: #e4ca3b;
+                        background-color: #EFBE24;
                         color: white;
                         font-size: 17px;
                     }
                     .next {
-                        background-color: #e4ca3b;
+                        background-color: #EFBE24;
                         color: white;
                         font-size: 17px;
                     }
@@ -164,7 +170,7 @@ text-decoration: underline;
                     .status{
                         grid-area: status;
                         background: rgb(20, 98, 20);
-                        height: 40px;
+                        height: 55px;
                         width: 296px;
                         border-radius: 5px;
                     }
@@ -227,10 +233,14 @@ text-decoration: underline;
                                      "var-label pincode-label"
                                      "var-1 pincode"
                                      "var-2 place"
-                                     "cust-name-label ."
+                                     "cust-name-label cust-name"
                                      "attachment .";
                 margin-top: 8px;
                 margin-left: 15px;
+            }
+            .cust-name{
+                grid-area: cust-name;
+                font-family: Bitter;
             }
             .prod-name-label{
                 grid-area: prod-name-label;
@@ -266,6 +276,18 @@ text-decoration: underline;
             }
             .attachment{
                 grid-area: attachment;
+                .flex-container {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    margin-top: -35px;
+                }
+                .flex-container > div {
+                  width: 100px;
+                  margin: 5px;
+                  text-align: center;
+                  line-height: 75px;
+                  font-size: 30px;
+                }
             }
         }
         .card-total{
@@ -286,7 +308,7 @@ text-decoration: underline;
                 .dot {
                     height: 90px;
                     width: 90px;
-                    background-color: #eed12f;
+                    background-color: #EFBE24;
                     border-radius: 50%;
                     display: inline-block;
                     margin-left: 1px;
@@ -418,9 +440,583 @@ text-decoration: underline;
     }
     .section-4{
         grid-area: section-4;
+        margin-bottom: 480px;
+        .grid-order-history{
+            background: rgb(233, 232, 232);
+            width: 1296px;
+            height: 400px;
+            margin-left: 72px;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            .update-btn{
+                margin-top: 81px;
+                margin-left: 600px;
+                border: none;
+                background:green;
+                color:white;
+                border-radius: 6px;
+                height: 41px;
+            }
+        }
+        .cancel-btn{
+            margin-top: 0px;
+            margin-left: 500px;
+            border: none;
+            background:#EFBE24;
+            color:white;
+            border-radius: 6px;
+            height: 41px;
+            width: 183px;
+        }
+        .confirm-btn{
+            // margin-top: 81px;
+            margin-left: 65px;
+            border: none;
+            background:#EFBE24;
+            color:white;
+            border-radius: 6px;
+            height: 41px;
+        }
+        .grid-order-history-head{
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto;
+            grid-template-areas: "status";
+            margin-top: 4%;
+        }
+        .status{
+            background: rgb(212, 206, 206);
+            grid-area: status;
+            text-align: center;
+            padding: 5px;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+        }
+        .grid-status{
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
+                                 "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
+                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                                 "label-1 label-2 label-3 label-4 label-5 label-6";
+            font-size: 8px;
+            align-content: center;
+            text-align: center;
+        }
+        .pending-conf{
+            margin-top: 50px;
+            grid-area: pending-conf;
+        }
+        .pending-pay{
+            margin-top: 50px;
+            grid-area: pending-pay;
+        }
+        .processing{
+            margin-top: 50px;
+            grid-area: processing; 
+        }
+        .shipped{
+            margin-top: 50px;
+            grid-area: shipped;
+        }
+        .deliver{
+            margin-top: 50px;
+            grid-area: deliver;
+        }
+        .closed{
+            margin-top: 50px;
+            grid-area: closed;
+        }
+        .ic-pending-conf{
+            grid-area: ic-pending-conf;
+        }
+        .ic-pending-pay{
+            grid-area: ic-pending-pay;
+        }
+        .ic-processing{
+            grid-area: ic-processing;
+        }
+        .ic-shipped{
+            grid-area: ic-shipped;
+        }
+        .ic-deliver{
+            grid-area: ic-deliver;
+        }
+        .ic-closed{
+            grid-area: ic-closed;
+        }
+        .label-1{
+            grid-area: label-1;
+            margin-bottom: -32px;
+        }
+        .label-2{
+            grid-area: label-2;
+            margin-bottom: -32px;
+        }
+        .label-3{
+            grid-area: label-3;
+            margin-bottom: -32px;
+        }
+        .label-4{
+            grid-area: label-4;
+            margin-bottom: -32px;
+        }
+        .label-5{
+            grid-area: label-5;
+            margin-bottom: -32px;
+        }
+        .label-6{
+            grid-area: label-6;
+            margin-bottom: -32px;
+        }
+        .dot {
+            height: 65px;
+            width: 65px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+          }
+        .stat-bar-1{
+            grid-area: stat-bar-1;
+            margin-top: 20px;
+            width: 82%;
+            margin-left: 50%;
+        }
+        .stat-bar-2{
+            grid-area: stat-bar-2;
+            margin-top: 20px;
+            width: 82%;
+            margin-left: 20%;
+        }
+        .stat-bar-3{
+            grid-area: stat-bar-3;
+            margin-top: 20px;
+            width: 113%;
+            margin-left: 2%;
+        }
+        .stat-bar-4{
+            grid-area: stat-bar-4;
+            margin-top: 20px;
+            width: 123%;
+            margin-left: -5px;
+        }
+        .stat-bar-5{
+            grid-area: stat-bar-5;
+            margin-top: 20px;
+            width: 82%;
+            margin-left: -20px;
+        }
+        .stat-bar-6{
+            grid-area: stat-bar-6;
+            margin-top: 20px;
+            width: 87%;
+            margin-left: -37%;
+        }
+        // timeline
+        .stats-1 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .stats-2 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .stats-3 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .stats-4 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .stats-5 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .stats-6 {
+            padding: 0px 53px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+            font-weight: 600;
+            padding-top: 20px;
+          }
+          .full-circle{
+            height: 20px;
+            width: 20px;
+            background-color: #EFBE24;
+            border-radius: 50%;
+            // display: inline-block;
+          }
+          .dot-circle{
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 25px;
+            border: 2px solid #EFBE24;
+            position: absolute;
+            top: -11px;
+            left: 47%;
+          }
     }
     .section-5{
         grid-area: section-5;
     }
 }
-
+.grid-btn{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "cancel accept"
+                         "c-area .";
+}
+.cancel{
+    grid-area: cancel;
+}
+.accept{
+    grid-area: accept;
+}
+.c-area{
+    grid-area: c-area;
+}
+.cancel-area{
+    background: #d1d3d4;
+    width: 182px;
+    margin-left: 500px;
+}
+.order-list{
+    .grid-order-history-head{
+        display: grid;
+        grid-template-columns: 20% auto;
+        grid-template-rows: auto;
+        grid-template-areas: "orders status";
+        margin-top: 4%;
+    }
+    .orders{
+        background: rgb(212, 206, 206);
+        border-top-left-radius: 18px;
+        grid-area: orders;
+        text-align: center;
+        border-right: 1px solid rgb(114, 114, 114);
+        padding: 5px;
+    }
+    .status{
+        background: rgb(212, 206, 206);
+        grid-area: status;
+        text-align: center;
+        padding: 5px;
+        border-top-right-radius: 16px;
+    }
+    .grid-order-history{
+        display: grid;
+        grid-template-columns: 20% auto;
+        grid-template-rows: 30% auto auto auto auto auto auto auto;
+        grid-template-areas:    "prod-name g-status"
+                                "desc g-status"
+                                "order-no g-status"
+                                "invoice g-status"
+                                "c-info-label g-status"
+                                "c-name g-status"
+                                "c-location g-status"
+                                "order-btn g-status";
+        border-radius: 18px;
+        width: 90%;
+        background: rgb(241, 239, 239);
+        margin-left: 5%;
+        font-family: BitterBold;
+        font-size: 14px;
+        padding-bottom: 6%;
+        margin-bottom: 8%;
+        padding-top: 3%;
+        margin-top: -3%;
+    }
+    .g-status{
+        grid-area: g-status;
+        .grid-status{
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
+                                 "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
+                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                                 "label-1 label-2 label-3 label-4 label-5 label-6";
+            font-size: 8px;
+            align-content: center;
+            text-align: center;
+        }
+        .pending-conf{
+            grid-area: pending-conf;
+        }
+        .pending-pay{
+            grid-area: pending-pay;
+        }
+        .processing{
+            grid-area: processing; 
+        }
+        .shipped{
+            grid-area: shipped;
+        }
+        .deliver{
+            grid-area: deliver;
+        }
+        .closed{
+            grid-area: closed;
+        }
+        .ic-pending-conf{
+            grid-area: ic-pending-conf;
+        }
+        .ic-pending-pay{
+            grid-area: ic-pending-pay;
+        }
+        .ic-processing{
+            grid-area: ic-processing;
+        }
+        .ic-shipped{
+            grid-area: ic-shipped;
+        }
+        .ic-deliver{
+            grid-area: ic-deliver;
+        }
+        .ic-closed{
+            grid-area: ic-closed;
+        }
+        .label-1{
+            grid-area: label-1;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .label-2{
+            grid-area: label-2;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .label-3{
+            grid-area: label-3;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .label-4{
+            grid-area: label-4;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .label-5{
+            grid-area: label-5;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .label-6{
+            grid-area: label-6;
+            // border-bottom: 1px solid rgb(114, 114, 114);
+            margin-bottom: -40px;
+        }
+        .dot {
+            height: 65px;
+            width: 65px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .stat-bar-1{
+            grid-area: stat-bar-1;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: 50%;
+        }
+        .stat-bar-2{
+            grid-area: stat-bar-2;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: 50px;
+        }
+        .stat-bar-3{
+            grid-area: stat-bar-3;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: 9px;
+        }
+        .stat-bar-4{
+            grid-area: stat-bar-4;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: -24px;
+        }
+        .stat-bar-5{
+            grid-area: stat-bar-5;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: -52px;
+        }
+        .stat-bar-6{
+            grid-area: stat-bar-6;
+            margin-top: 25px;
+            width: 82%;
+            margin-left: -60px;
+        }
+        // timeline
+        .stats-1 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-2 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-3 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-4 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-5 {
+            padding: 0px 60px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-6 {
+            padding: 0px 53px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #EFBE24;
+            position: relative;
+            transition: all 200ms ease-in ;
+        }
+        .stats-1{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .stats-2{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .stats-3{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .stats-4{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .stats-5{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .stats-6{
+            font-weight: 600;
+            padding-top: 20px;
+        }
+        .full-circle{
+            height: 20px;
+            width: 20px;
+            background-color: #EFBE24;
+            border-radius: 50%;
+            // display: inline-block;
+          }
+          .dot-circle{
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 25px;
+            border: 2px solid #EFBE24;
+            position: absolute;
+            top: -11px;
+            left: 47%;
+          }
+    }
+    .prod-name{
+        grid-area: prod-name;
+    }
+    .desc{
+        grid-area: desc;
+    }
+    .order-no{
+        grid-area: order-no;
+    }
+    .invoice{
+        grid-area: invoice;
+    }
+    .c-info-label{
+        grid-area: c-info-label;
+    }
+    .c-name{
+        grid-area: c-name;
+    }
+    .c-location{
+        grid-area: c-location;
+    }
+    .order-btn{
+        grid-area: order-btn;
+    }
+    .btn-invoice-style{
+        background-color: rgb(12, 112, 12);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        width: 130px;
+        height: 35px;
+    }
+    .btn-order-style{
+        background-color: #EFBE24;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        width: 130px;
+        height: 35px;
+    }
+    
+// timeline
+}

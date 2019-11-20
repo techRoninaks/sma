@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //Data service beg
-    this.setCookie("pin","676552");
+
     this.data.getPageData("home").subscribe(data => {
       this.pageData = data;
       var pincode = this.getCookie("pin");
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
       }
     }
     this.showSlides(slideIndex);
-    this.setCookie("filterSet",JSON.stringify({"filterCount": "", "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"","minPrice":"","maxPrice":"","shipMethod":""}));
+    this.setCookie("filterSet",JSON.stringify({"filterCount": "", "rating": "", "freeShipping": "", "variants":[], "rfq": "", "orderConfirm": "",  "instantBuy": "", "delivery":"","minPrice":"","maxPrice":"","shipMethod":"","deliverable":""}));
     this.setCookie("SortSet", JSON.stringify({"priceLH": "", "priceHL": "", "latest": "", "popular": "", "processLH": "", "processHL": "", "shipLH": "", "shipHL": ""}));
   }
   // Carousel

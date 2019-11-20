@@ -21,7 +21,8 @@
         $data2=array('variantsChosen'=>$row2["variants_chosen"]);
     }
 
-    $variantid=$data2["variantsChosen"];
+    $variantid = $data2['variantsChosen'] ;
+
     $sql_query = "SELECT * FROM `variant_info` WHERE prodid = $prodid AND variantid = $variantid";
     // echo $sql_query;
 

@@ -21,6 +21,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ShopsettingComponent } from './shopsetting/shopsetting.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'sellerlanding', component: SellerlandingComponent},
+  { path: 'shopsetting', component: ShopsettingComponent},
 ];
 
 @NgModule({

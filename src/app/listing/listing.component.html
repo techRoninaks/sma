@@ -21,18 +21,22 @@
                             <img class="undeliverableIcon" src="assets/icons/img_549368.png">
                             <ul>
                                 <ul>
-                                    UNDELIVERABLE TO <span>{{dynamicData.pincode}}</span>
+                                    <span id="undel">{{undel}}</span> <span>{{pincodeValue}}</span>
                                 </ul>
                                 <form>
-                                    <input type="text" placeholder="Enter Pincode" id="undPincode">
+                                    <input type="text" placeholder="Enter Pincode" id="undPincode"
+                                        value="{{pincodeValue}}" (change)="pincodeChange();"
+                                        (click)="priceChangeGetter();">
                                     <br>
                                     <label for="changePincode"> Change Pincode</label><br>
                                     <input type="radio" class="aP" name="drone" value="availableProducts"
                                         id="undCategory">
+                                    <!-- [routerLink]="['/category']" [queryParams]="{cat_id:this.dynamicData.categoryId}" -->
                                     <label for="availableProducts"> Available Products</label><br>
                                     <input type="radio" class="cP" name="drone" id="undContinue" value="continue">
                                     <label for="continue"> Continue on this page</label><br>
-                                    <button class="btnRfq" type="submit" (click)="undeliverable();">Apply</button>
+                                    <button class="btnRfq btnStyle" type="submit"
+                                        (click)="undeliverable();">Apply</button>
                                 </form>
                             </ul>
                         </div>
@@ -94,7 +98,7 @@
             <div class="prodImage">
                 <div class="pImage">
                     <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
-                        (click)="openModal();currentSlide(1)">
+                        (click)="openModal();currentSlide(1)" onError="this.src = 'assets/images/defaultReview2.png'">
                     <img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
                 </div>
                 <div class="imageSlider">
@@ -107,26 +111,29 @@
                 </div>
             </div>
             <div class="btnsSel">
-                <button type="button" class="btnRfq" data-target="#rfqPopup" data-toggle="modal">RFQ</button>
-                <button class="btnAtcart" (click)="submitCart();">ADD TO CART</button>
+                <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" data-toggle="modal"
+                    id="rfqButtonId">SEND RFQ</button>
+                <button class="btnAtcart btnStyle" (click)="submitCart();">ADD TO CART</button>
             </div>
 
         </div>
         <!-- DESCRIPTION -->
         <div class="divDescription">
             <div class="desc">
-                <h3>Description</h3>
+                <p class="headClass" style="text-align: left;">Description</p>
                 <hr />
-                <h6>Specification:</h6>
-                <li *ngFor="let specifications of Object.keys(spec)">
-                    <p>{{spec[specifications]}}</p>
-                </li>
+                <p class="descD">Specification:</p>
+                <ul>
+                    <li *ngFor="let specifications of Object.keys(spec)">
+                        <span class="policies">{{spec[specifications]}}</span>
+                    </li>
+                </ul>
                 <br>
-                <h6>Product Details:</h6>
+                <p class="descD">Product Details:</p>
                 <div class="longD">
-                    <p id="lDesc">{{ dynamicData.longDesc }}</p>
+                    <span id="lDesc" class="policies">{{ dynamicData.longDesc }}</span>
                 </div>
-                <button id="seeMore" (click)="readMore();">SEE MORE</button>
+                <button id="seeMore" class="btnStyle" (click)="readMore();">SEE MORE</button>
             </div>
         </div>
     </div>
@@ -149,7 +156,7 @@
         <div class="pDiscount">
             <p style="color: #009145;">{{discountLabel.discountText}}</p>
             <p><i class="fa fa-rupee" style="font-size:16px"></i>{{priceDate.tPrice}}&nbsp;&nbsp;
-                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{dynamicData.basePrice}}</del>
+                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{bPrice}}</del>
             </p>
         </div>
         <div class="pSize">
@@ -161,12 +168,12 @@
         </div>
         <div class="pQuantity" style="margin-top:10px;">
             <p>Quantity</p>
-            <button type="button" id='1' (click)="count_dec()" class="minus">-</button>
+            <button type="button" id='1' (click)="count_dec()" (click)="priceChangeGetter();" class="minus">-</button>
             <input type="text" id="count" id="productQuantity" value="{{counter}}">
-            <button type="button" id='2' (click)="count_inc()" class="plus">+</button>
+            <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();" class="plus">+</button>
         </div>
-        <div class="pAvailable" style="color: red">
-            Cakes sold:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Cake:
+        <div class="pAvailable" style="color: red" id="showAvailable">
+            Sold Count:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Count:
             <span>{{dynamicData.qtyAvailable}}</span>
         </div>
         <div class="pMessage" id="msgShowOrNot">
@@ -178,25 +185,59 @@
         <div class="pImages" id="imageShowOrNot">
             <p>Product Image</p>
             <input style="display: none" type="file" name="pic" id="productImage" accept="image/*" #fileInput>
-            <button type="button" (click)="fileInput.click()" style="background-color: #efbe24;color: white;">Upload
+            <button type="button" class="btnStyle" (click)="fileInput.click()"
+                style="background-color: #efbe24;color: white;">Upload
                 Image</button>
             <!-- <input type="submit"> -->
+            <div *ngIf="imageU0 == 1">
+                <img [src]="imageVAL0" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU1 == 1">
+                <img [src]="imageVAL1" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU2 == 1">
+                <img [src]="imageVAL2" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU3 == 1">
+                <img [src]="imageVAL3" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU4 == 1">
+                <img [src]="imageVAL4" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU5 == 1">
+                <img [src]="imageVAL5" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU6 == 1">
+                <img [src]="imageVAL6" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU7 == 1">
+                <img [src]="imageVAL7" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU8 == 1">
+                <img [src]="imageVAL8" style="max-height: 100px;margin-top:5px;">
+            </div>
+            <div *ngIf="imageU9 == 1">
+                <img [src]="imageVAL9" style="max-height: 100px;margin-top:5px;">
+            </div>
+
+
         </div>
-        <div class="pdatePicker">
+        <div class="pdatePicker" id="datePickClass">
             <span>Pick desired date for delivery:</span>
             <input type="date" id="datePickerId" (change)="reqDate();">
         </div>
         <div class="pButton">
             <div class="dvBuyBtn">
-                <div class="container" id="buyModalContainer" style="z-index: 10001;">
-                    <!-- <ng-container *ngIf="datePickerDefault; else reqOrder"> -->
-                    <button type="submit" id="buyNowId" class="btn btn-warning" data-toggle="modal"
-                        data-target="#buyNowPopup" (click)="submitPrice('buyNow');">BUY NOW</button>
-                    <!-- </ng-container> -->
-                    <!-- <ng-template #reqOrder> -->
-                    <button type="submit" class="btn btn-warning" data-toggle="modal" id="reqNowId"
-                        data-target="#buyModal" (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
-                    <!-- </ng-template> -->
+                <div class="dvMain-Container-Grid" id="buyModalContainer" style="z-index: 10001;">
+                    <!-- data-toggle="modal" -->
+                    <button type="submit" id="buyNowId" class="btn btn-warning btnStyle"
+                        style="width: 120px; height: 35px;margin-left: -5px;" (click)="submitPrice('buyNow');">BUY
+                        NOW</button>
+                    <!-- data-target="#buyNowPopup" -->
+                    <button type="submit" class="btn btn-warning btnStyle" style="width: 160px; height: 35px;margin-left: -5px;"
+                        id="reqNowId" (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
+                    <!-- data-target="#buyModal" -->
+                    <!-- data-toggle="modal" -->
                     <div class="modal fade" id="buyModal" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content dvModalContent">
@@ -210,12 +251,11 @@
             <div class="dvGiftBtn">
                 <div class="container" id="giftModalContainer" style="z-index: 10001;">
 
-                    <button type="button" class="btn btn-warning" id="giftButton" data-toggle="modal"
-                        data-target="#giftModal">GIFT</button>
+                    <button type="button" class="btn btn-warning btnStyle" id="giftButton" style="height: 35px;"
+                        data-toggle="modal" data-target="#giftModal">GIFT</button>
                     <!-- Modal -->
                     <div class="modal fade" id="giftModal" role="dialog">
                         <div class="modal-dialog">
-                            <!-- Modal content-->
                             <div class="modal-content dvModalContent">
                                 <div class="modal-header dvModalHeader">
                                     <button type="button" class="close" id="giftClose"
@@ -223,11 +263,30 @@
                                 </div>
                                 <div class="modal-body" style="padding:0 10% 0 10%;">
                                     <form>
-                                        Title : <input type="text" name="text" id="fText"><br> Note : <input type="text"
-                                            name="note" id="fNote"><br> Address: <input type="text" name="address"
-                                            id="fAddress"><br>
+                                        Title : <input type="text" name="text" id="fText"><br>
+                                        Note : <input type="text" name="note" id="fNote"><br>
+                                        Address:<br>
+                                        <div style="transform: translate(5rem,-1rem);">
+                                            <input class="addr1Shop" style="height: 30px" placeholder="house name"
+                                                id="shopNameId">
+                                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
+                                                placeholder="street address">
+                                            <input class="cityShop" id="cityShopId" style="height: 30px"
+                                                placeholder="city">
+                                            <input class="districtShop" id="districtShopId" style="height: 30px"
+                                                placeholder="district">
+                                            <input class="stateShop" id="stateShopId" style="height: 30px"
+                                                placeholder="state">
+                                            <input class="countryShop" id="countryShopId" style="height: 30px"
+                                                placeholder="country">
+                                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px"
+                                                placeholder="pincode">
+                                        </div>
+
+
                                         <div class="modal-footer dvModalFooter" style="justify-content: center;">
-                                            <input type="submit" class="btn btn-default btnText" (click)="gift();"
+                                            <input type="submit" class="btn btn-default btnText"
+                                                style="background-color: #efbe24;color:white;" (click)="gift();"
                                                 value="Apply" data-dismiss="modal">
                                         </div>
                                     </form>
@@ -239,72 +298,74 @@
             </div>
         </div>
         <div class="pConfirmation" style="background-color: whitesmoke">
-            <p>ORDER CONFIRMATION PERIOD: </p>
-            <p style="background-color: white; height: 25px; width: 50px;">{{dynamicData.avgConfirmTime}}</p>
+            <p class="orderConf descD">ORDER CONFIRMATION PERIOD: </p>
+            <span class="confTime policies"
+                style="background-color: white; height: 25px; width: 50px;">{{dynamicData.avgConfirmTime}} hrs</span>
         </div>
         <div class="pDelivery">
             <img src="assets/icons/resources (IL)-18.png">
-            <h3>DELIVERY OPTIONS</h3>
+            <p class="headClass" style="margin: .3rem 0.75rem;display:inline;">DELIVERY OPTIONS</p>
         </div>
         <div class="pCourier">
             <div class="dvShip">
-                <input type="radio" id="sh" name="shippingOption" value="shipping">
+                <input type="radio" id="sh" name="shippingOption" value="shipping" (change)="priceChangeGetter();">
                 <label for="normalCourier">Shipping</label>
             </div>
 
 
             <div class="dvCod">
-                <input type="radio" id="cOD" name="shippingOption" value="cashOnDelivery">
-                <label for="cashOnDelivery">Cash on Delivery</label>
+                <input type="radio" id="hD" name="shippingOption" value="homeDelivery" (change)="priceChangeGetter();">
+                <label for="homeDelivery">Home Delivery</label>
             </div>
             <div class="dvPickup">
-                <input type="radio" id="pU" name="shippingOption" value="pickUp">
+                <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp"
+                    (change)="priceChangeGetter();">
                 <label for="pickUp">PickUp</label>
             </div>
         </div>
         <div class="pTime">
-            <div style="background-color: whitesmoke">
-                Processing Time :<span>{{dynamicData.avgProcessTime}}</span>
+            <div class="timeStyle">
+                Processing Time&nbsp;&nbsp;&nbsp;&nbsp;:<span>&nbsp;{{dynamicData.avgProcessTime}} hrs</span>
             </div>
-            <div style="background-color: whitesmoke">
-                Shipping Charge :<span>{{dynamicData.avgProcessTime}}</span>
-            </div>
-            <div style="background-color: whitesmoke">
-                Shipping Duration :<span>{{dynamicData.avgShipTime}}</span>
+            <!-- <div class="timeStyle">
+                Shipping Charge&nbsp;&nbsp;&nbsp;&nbsp;:<span>&nbsp;{{dynamicData.avgProcessTime}}</span>
+            </div> -->
+            <div class="timeStyle"> 
+                Shipping Duration &nbsp;:<span>&nbsp;{{dynamicData.avgShipTime}} hrs</span>
             </div>
         </div>
         <div class="pDate">
-            <p>THE PRODUCT WILL BE DELIVERED BEFORE :<span>{{priceDate.dDate}}</span></p>
+            <p style="font-family:Bitter;color:#949494;">THE PRODUCT WILL BE DELIVERED BEFORE :<span style="font-family:Bitter;color: #009145;">{{priceDate.dDate}}</span></p>
         </div>
     </div>
     <!-- POLICY -->
     <div class="divPolicy">
         <div class="prodPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>PRODUCT POLICIES</h2>
-            <p>{{dynamicData.prodPolicy}}</p>
+            <p class="headClass">PRODUCT POLICIES</p>
+            <p class="policies">{{dynamicData.prodPolicy}}</p>
         </div>
         <div class="shopPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHOP POLICIES</h2>
-            <p>{{dynamicData.prodPolicy}}</p>
+            <p class="headClass">SHOP POLICIES</p>
+            <p class="policies">{{dynamicData.prodPolicy}}</p>
         </div>
         <div class="shipPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHIP POLICIES</h2>
-            <p>{{dynamicData.shipPolicy}}</p>
+            <p class="headClass">SHIP POLICIES</p>
+            <p class="policies">{{dynamicData.shipPolicy}}</p>
         </div>
         <div class="retPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>RETURN POLICIES</h2>
-            <p>{{dynamicData.returnPolicy}}</p>
+            <p class="headClass">RETURN POLICIES</p>
+            <p class="policies">{{dynamicData.returnPolicy}}</p>
         </div>
     </div>
     <!-- REVIEW -->
     <div class="divReview ">
         <img src="assets/icons/resources (IL)-18.png">
-        <h2>RATING & REVIEWS</h2>
-        <div>
+        <p class="headClass">RATING & REVIEWS</p>
+        <div class="reviewTop">
             <div class="rating">
                 <div class="inner">
                     <div class="rating">
@@ -316,7 +377,7 @@
                             </div>
                         </div>
                         <div class="rating-users">
-                            <i class="icon-user"></i> {{dynamicData.ratingCount}}
+                            <i class="icon-user"></i> {{dynamicData.ratingCount}} Ratings
                         </div>
                     </div>
 
@@ -382,25 +443,64 @@
                 </div>
                 <div class="revName">
                     <p class=rName>Lorem</p>
-                    <p class="rAgo">{{reviewDateDiff[item]}}</p>
+                    <p class="rAgo">{{reviewDateDiff[item]}} days ago</p>
                 </div>
                 <div class="revData">
                     <p class="rTitle">{{ratingReview[item].reviewTitle}}</p>
                     <p class="rDesc">{{ratingReview[item].review}}</p>
                     <div class="starLikes">
-                        <img class="icLike" id="likeImg" (click)="likeCount(ratingReview[item].reviewId);"
-                            src="assets/icons/resources (IL)-10.png">
-                        <p class="likeCount">{{ratingReview[item].likes}}</p>
-                        <img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReview[item].reviewId);"
+                        <img class="icLike" id="likeImg_{{ratingReview[item].reviewId}}"
+                            (click)="likeCount(ratingReview[item].reviewId);" src="assets/icons/resources (IL)-10.png">
+                        <p class="likeCount" id="likeCount_{{ratingReview[item].reviewId}}">{{ratingReview[item].likes}}
+                        </p>
+                        <img class="icDislike" id="dislikeImg_{{ratingReview[item].reviewId}}"
+                            (click)="dislikeCount(ratingReview[item].reviewId);"
                             src="assets/icons/resources (IL)-11.png">
-                        <p class="dislikeCount">{{ratingReview[item].dislikes}}</p>
+                        <p class="dislikeCount" id="dislikeCount_{{ratingReview[item].reviewId}}">
+                            {{ratingReview[item].dislikes}}</p>
                         <button class="btnReport" (click)="report(ratingReview[item].reviewId);">Report</button>
-                        <div>
-                            <i class="fa fa-star active" *ngFor="let item of filledStarRat"></i>
-                            <i class="fa fa-star-o" *ngFor="let item of unFilledStarRat"></i>
+                        <!-- <div>
+                            <i class="fa fa-star active" *ngFor="let itemx of filledStarRatArray[item]"></i>
+                            <i class="fa fa-star-o" *ngFor="let itemy of unFilledStarRatArray[item]"></i>
+                        </div> -->
+                        <div *ngIf="ratingReview[item].rating == 1">
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 2">
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 3">
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 4">
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div *ngIf="ratingReview[item].rating == 5">
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
+                            <i class="fa fa-star active" style="color: #efbe24"></i>
                         </div>
                     </div>
-                    <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+                    <img class="revIcon" src="assets/images/review/{{ratingReview[item].reviewId}}/1.jpg"
+                        onError="this.src = 'assets/images/defaultReview2.png'">
                 </div>
             </div>
         </div>
@@ -408,16 +508,17 @@
     <!-- QUESTION -->
     <div class="divQuestion ">
         <img src="assets/icons/resources (IL)-18.png">
-        <h2>CUSTOMER QUESTIONS & ANSWERS</h2>
+        <p class="headClass">CUSTOMER QUESTIONS & ANSWERS</p>
         <div class="divCustomerQA">
             <div class="divSA">
                 <form class="search">
-                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq" (keyup)="filterFaq();">
+                    <input type="text" placeholder="Search.." name="search" class="searchBox" id="searchFaq"
+                        (keyup)="filterFaq();">
                     <button type="submit"><img src="assets/icons/resources (IL)-07.png"></button>
                 </form>
                 <form class="askQ">
-                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq">
-                    <button type="submit"  (click)="submitFaq()">Submit</button>
+                    <input type="text" placeholder="Ask a Question" name="search" id="submitFaq" class="submitFaq">
+                    <button type="submit" (click)="submitFaq()">Submit</button>
                 </form>
             </div>
             <div class="questionAnswer">
@@ -507,7 +608,7 @@
                 <div class="modal-header dvModalHeader">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-bod" style="padding:0 10% 0 10%;">
+                <div class="modal-bod" style="padding:0 10% 10% 10%;">
                     <div class="rfqForm">
                         <div class="rfqSN">
                             <p class="rfqShopName">Shop Name:</p>
@@ -516,9 +617,9 @@
                         </div>
                         <div class="rfqSL">
                             <p class="rfqLocation">Location:</p>
-                            <select style="width: 16rem;">
-                                <option class="rfqLocationInput" id="rfqLocations"
-                                    *ngFor="let add of Object.keys(rfqAddress)"> {{rfqAddress[add].address}}
+                            <select style="width: 16rem;" id="rfqLocations">
+                                <option class="rfqLocationInput" *ngFor="let add of Object.keys(rfqAddress)">
+                                    {{rfqAddress[add].address}}
                             </select>
                         </div>
                         <div class="rfqN">
@@ -551,7 +652,16 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
+                        <div class="uploadRfq">
+                            <input style="display: none" type="file" name="pic" id="shopRfq" accept="image/*"
+                                #fileInputRfq>
+                            <button type="button" class="btnCover" (click)="fileInputRfq.click()"
+                                style="background-color: #efbe24;color: white;">Upload image</button>
+                            <div *ngIf="imageUploadedRfq == 1">
+                                <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                            </div>
+                        </div>
+                        <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']">Apply</button>
                     </div>
                 </div>
             </div>
@@ -559,8 +669,63 @@
     </div>
 </div>
 
+<!-- loginpopup -->
+<div class="container" id="loginModalContainer" style="z-index: 10001;">
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                </div>
+                <div class="modal-body" style="padding:0 10% 0 10%;">
+                    <br>
+                    <p style="text-align: center;justify-self:center">Please Login to continue...</p>
+                    <br>
+                    <button (click)="redirect('login');" [routerLink]="['/login']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
+                    <p style="text-align: center;justify-self:center">OR</p>
+                    <button (click)="redirect('signup');" [routerLink]="['/signup']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
+                    <br>
+                    <br>
+                    <div id="instantBuyId">
+                        <button (click)="submitInstantBuy('instantBuy');"
+                            style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant
+                            Buy</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- directPickup -->
+<div class="container" id="pickupModalContainer" style="z-index: 10001;">
+    <div class="modal fade" id="pickupModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                </div>
+                <div class="modal-body" style="padding:0 10% 20px 10%;">
+                    <br>
+                    <p style="text-align: center;justify-self:center">Seller Address : {{dPSeller}}</p>
+                    <br>
+                    <button id="pickupDetailsId" (click)="pickupchecker();"
+                        style="background-color: #efbe24;color:white;">ok</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- CHECKOUT POPUP (BUY NOW) -->
-<div class="container">
+<div class="dvMain-Container-Grid">
     <!-- Trigger the modal with a button -->
     <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#buyNowPopup">BUY
         NOW</button> -->
@@ -571,93 +736,97 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <div align="center">
+                    <div align="center" style="margin-left: 34px;">
                         <h5>ORDER SUMMARY:</h5>
                     </div>
                 </div>
-                <!-- PRODUCT -->
+                <!-- PRODUCT NAME -->
                 <div class="dvProductName">
-                    <!-- <h5>Sehaz Artworks 'shiva' Wall Photo Painting</h5> -->
                     {{dynamicDataProName.name}}
                 </div>
-                <div class="dvSub1">
-                    <div class="dvProductSpec">
-                        <div class="dvProdSpec1">
-                            <p>{{ dynamicDataVariant.name }} {{ dynamicDataVariant.value }}</p>
-                        </div>
-                        <div class="dvProdSpec2">
-                            <!-- <p>Size : </p> -->
-                        </div>
+                <!-- VARIANT INFO -->
+                <div class="dvProdVariInfo">
+                    <div class="dvProductSpec" style="margin-left: 76px;">
+                        <p class="SpecProduct">{{ dynamicDataVariant.name }} {{ dynamicDataVariant.value }} </p>
                     </div>
-
-                    <div class="dvCustomerName">
-                        <p>Customer Name : {{dynamicDataUser.Name}}</p>
-                    </div>
-
-                    <div class="dvQty">
-                        <p>Qty :</p>
-                        <button class="btnQtyCount">{{ dynamicDataCustomerOrder.quantity }}</button>
+                </div>
+                <!-- NAME & QTY -->
+                <div class="dvCustNameQty">
+                    <div class="grid-CustomerNameQty">
+                        <div class="custName">
+                            <div class="dvCustomerName">
+                                <p>Customer Name : {{dynamicDataUser.Name}}</p>
+                            </div>
+                        </div>
+                        <div class="Qty">
+                            <div class="dvQty">
+                                <p>Qty :</p>
+                            </div>
+                        </div>
+                        <div class="qtyLabel">
+                            <label class="btnQtyCount">{{ dynamicDataCustomerOrder.quantity }}</label>
+                        </div>
                     </div>
                 </div>
                 <!-- ADDRESS -->
-                <div class="dvAddress">
-                    <p>ADDRESS</p>
+                <div class="dvAddressText">
+                    <h6>ADDRESS</h6>
                 </div>
-                <div class="dvSub2">
-                    <div class="dvAddrText" style="display: 1" id="Main-Address">
-                        <!-- {{dynamicDataAddress.contact_name}}, -->
-                        {{dynamicDataAddress.addr1}},
-                        {{dynamicDataAddress.addr2}},
-                        {{dynamicDataAddress.city}},
-                        {{dynamicDataAddress.district}},
-                        {{dynamicDataAddress.state}},
-                        {{dynamicDataAddress.country}},
-                        {{dynamicDataAddress.pincode}}
-                        <!-- {{dynamicDataSecondAddress.contact_number}} -->
-                        <!-- {{dynamicDataSecondAddress.contact_email}} -->
-                    </div>
-                    <div class="btnAddrChange">
-                        <button type="change" class="btnChange btn-warning" id="btnChange"
-                            (click)=showSavedAddr()>Change</button>
+                <div class="dvMainAddress">
+                    <div class="grid-MainAddress1">
+                        <div class="Address" style="display: 1" id="Main-Address">
+                            <!-- {{dynamicDataAddress.contact_name}}, -->
+                            {{dynamicDataAddress.addr1}},
+                            {{dynamicDataAddress.addr2}},
+                            {{dynamicDataAddress.city}},
+                            {{dynamicDataAddress.district}},
+                            {{dynamicDataAddress.state}},
+                            {{dynamicDataAddress.country}},
+                            {{dynamicDataAddress.pincode}}
+                            <div class="btnAddr">
+                                <button type="change" class="btnChange btn-warning" id="btnChange"
+                                    (click)=showSavedAddr()>Change</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- SAVED ADDRESS -->
-
-                <div class="dvSub3" id="savedAddr" style="display: none">
-                    <div class="dvSavedAddr">
-                        <p>SAVED ADDRESS</p>
-                        <div class="dvCardAddrLeft" id="Deliver-Addr1">
+                <div class="dvSavedAddress" id="savedAddr" style="display: none">
+                    <p>SAVED ADDRESS</p>
+                    <div class="grid-SavedAddress1">
+                        <div class="labelAddress1" id="Deliver-Addr1">
                             {{ dynamicDataSecondAddress }}
                         </div>
-                        <div class="btnCardAddrLeft">
+                        <div class="btnAddress1">
                             <button type="deliverLeft" class="btnDeliverLeft btn-warning" id="btnDeliverLeft"
                                 (click)="btnDeliverAddress1()">DELIVER TO THIS ADDRESS</button>
                         </div>
-                        <div class="dvCardAddrRight" id="Deliver-Addr2">
+                        <div class="labelAddress2" id="Deliver-Addr2">
                             {{ dynamicNewAddr }}
                         </div>
-                        <div class="btnCardAddrRight">
+                        <div class="btnAddress2">
                             <button type="deliverRight" class="btnDeliverRight btn-warning" id="btnDeliverRight"
                                 (click)="btnDeliverAddress2()">DELIVER TO THIS ADDRESS</button>
                         </div>
                     </div>
                 </div>
                 <!-- ADD ADDR BTN -->
-                <div class="btnNewAddr">
-                    <button type="newAddr" class="btnNewAddr btn-success" id="btnNewAddr" (click)="showFormGrp()">ADD A
+                <div class="dvAddNewAddrBtn">
+                    <button type="newAddr" class="btnNewAddr btn-success" id="btnNewAddr" (click)="showFormGrp()"> + ADD
                         NEW
                         DELIVERY
                         ADDRESS</button>
                 </div>
                 <!-- FORM GROUP -->
-                <div class="dvSub4" id="formGroup" style="display :none">
+                <div class="dvFormGroup" id="formGroup" style="display :none">
                     <form class="formGroup">
-                        <div class="grid-dvSub4">
-                            <div class="grid-FormLeft">
+                        <div class="grid-Addr-Form">
+                            <div class="grid-left-Form">
                                 <div class="dvContactName">
                                     <label>Contact Name</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address" id="contactName-Form">
+
                                 </div>
                                 <div class="dvAddr2">
                                     <label>Address 2</label>
@@ -688,7 +857,7 @@
                                         id="contact-Email-Form">
                                 </div>
                             </div>
-                            <div class="grid-FormRight">
+                            <div class="grid-Right-Form">
                                 <div class="dvAddr1">
                                     <label>Address 1</label>
                                     <br>
@@ -717,7 +886,7 @@
                                 </div>
                             </div>
                             <div class="btnSaveForm">
-                                <button type="save" class="btnSave btn-warning" id="btnSave"
+                                <button type="save" class="btnSave1 btn-warning" id="btnSave"
                                     (click)=formSave()>Save</button>
                             </div>
                         </div>
@@ -727,107 +896,168 @@
                 <div class="dvDeliveryText">
                     <p>DELIVERY OPTIONS:</p>
                 </div>
-                <div class="dvSub5">
-                    <div class="btnRadio1">
-                        <input type="radio" id="shipping" name="DeliveryOption" value="1">Shipping
+                <div class="dvDeliveryOption">
+                    <div class="grid-Deli-Option">
+                        <div class="grid-left-DeliOption">
+                            <input type="radio" id="shipping" name="DeliveryOption" value="1"> Shipping
+                        </div>
+                        <div class="grid-Med-DeliOption">
+                            <input type="radio" id="homedelivery" name="DeliveryOption" value="2"> Home Delivery
+                        </div>
+                        <div class="grid-Right-DeliOption">
+                            <input type="radio" id="pickup" name="DeliveryOption" value="3"> Pickup
+                        </div>
                     </div>
-                    <div class="btnRadio2">
-                        <input type="radio" id="homedelivery" name="DeliveryOption" value="2"> Home Delivery
-                    </div>
-                    <div class="btnRadio3">
-                        <input type="radio" id="pickup" name="DeliveryOption" value="3"> Pickup
-                    </div>
-
                 </div>
                 <!-- PRODUCT DELIVERED -->
-                <div class="dvProdDeliText">
+                <div class="dvProdDeliveredDate">
                     <p>THE PRODUCT WILL BE DELIVERED BEFORE</p>
-                </div>
-                <div class="dvSub6">
-                    <div class="dvDisplayDate">
-                        <!-- <p>00-SEPT-2019</p> -->
-                        <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
-                    </div>
-                    <div class="dvDisplayPrice">
-                        <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
-                    </div>
-                    <div class="dvDate">
-                        <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
-                    </div>
-                    <div class="dvApply">
-                        <button type="apply" class="btnApply btn-warning" id="btnApply" (click)= "applyRequest()">Apply</button>
+                    <div class="grid-Prod-Deli-Date">
+                        <div class="grid-Deli-Date">
+                            <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
+                        </div>
+                        <div class="grid-Price">
+                            <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
+                        </div>
+                        <div class="grid-Deli-Date1">
+                            <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
+                        </div>
+                        <div class="grid-ApplyBtn">
+                            <button type="apply" class="btnApply btn-warning" id="btnApply"
+                                (click)="applyRequest()">Apply</button>
+                        </div>
                     </div>
                 </div>
                 <!-- GIFT NOTE -->
-                <div class="dvSub7">
-                    <div class="dvGiftOptionText">
-                        <p>Gift Option :</p>
+                <div class="dvGiftOption">
+                    <div class="grid-GiftOption1">
+                        <div class="grid-Text-GiftOption">
+                            <p>Gift Option :</p>
+                        </div>
+                        <div class="grid-GiftOptionToggle">
+                            <div class="btnGiftOption" id="btn-Gift-Option">
+                                <label class="switchActive" name="answer" value="Show giftCard" (click)=giftoption()>
+                                    <input type="checkbox" style="margin-left: 10px;">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="btnGiftOption" id="btn-Gift-Option">
-                        <label class="switch" name="answer" value="Show giftCard" (click)=giftoption()>
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <p>Note</p>
+                </div>
+                <!-- NOTE -->
+                <div class="dvGiftNote">
+                    <div class="grid-GiftOptionNote">
+                        <div class="grid-dvGiftNoteText">
+                            <p style="margin-left: 30px;">Note :</p>
+                        </div>
+                        <div class="grid-dvGiftNoteCard" id="showGiftCard" style="display: none;">
+                            <textarea type=text class="Gift-Note-Style"
+                                style="border-radius: 5px; margin-left: 20px; width:460px; border: none; height: 130px;"
+                                id="Gift-Note-Sect1"></textarea>
+                        </div>
                     </div>
-                    <div class="dvNote" id="showGiftCard" style="display: none;">
-                        <textarea type=text class="Gift-Note-Style" id="Gift-Note-Sect1"></textarea>
-                    </div>
-                    <div class="dvNoteText">
-
-                    </div>
-                    <!-- <div class="dvMessageTitle">
-
-                    </div> -->
                 </div>
                 <!-- MESSAGE TITLE -->
-                <div class="dvMsgTitle">
-                    <p>Message Title : {{ dynamicMsgTitle.title }}</p>
+                <div class="dvMessageTitle">
+                    <p class="MsgTitleText">Message Title : {{ dynamicMsgTitle.title }}</p>
                 </div>
 
 
                 <!-- PRODUCT IMAGE -->
-                <div class="dvProdText" style="display: none;">
-                    <p>PRODUCT IMAGES</p>
+                <div class="dvproductImages">
+                    <p class="prodTextImg">PRODUCT IMAGES</p>
                 </div>
-                <div class="dvSub8" style="display: none;">
-                    <div class="dvCheckImg1">
-                        <img src="assets/images/wall.png" width="140" height="140" class="imgItem1">
-                    </div>
-                    <div class="dvCheckImg2">
-                        <img src="assets/images/wall2.jpg" width="140" height="140" class="imgItem1">
-                    </div>
-                    <div class="dvCheckImg3">
-                        <img src="assets/images/wall3.jpg" width="140" height="140" class="imgItem1">
-                    </div>
+                <div class="dvprodImages" style="display: flex;">
+                    <!-- <img src="/src/assets/images/{{prodId}}/{{prodId}}_).jpg"> -->
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg" style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg" style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg" style="margin-left: 5px; display: none;">
                 </div>
                 <!-- PRICE VARIATION -->
-                <div class="dvPriceVariText">
+                <div class="dvPriceListing">
                     <h6>PRICE FOR VARIATIONS & QUALITY</h6>
-                </div>
-                <div class="dvSub9">
-                    <div class="dvPriceList">
-                        <p><br>
-                            <!-- Product Price : {{dynamicDataCustomerOrder.basePrice}}<br> -->
-                            Base Price : {{dynamicDataCustomerOrder.basePrice}}<br>
-                            Shipping Price : {{dynamicDataCustomerOrder.shippingPrice}}<br>
-                            Discount : {{dynamicDataCustomerOrder.discount}}%<br>
-                            Variant Price : {{dynamicDataCustomerOrder.variantPrice}}<br>
-                            Qty : {{ dynamicDataCustomerOrder.quantity }}<br>
-                            Tax :{{ dynamicDataCustomerOrder.tax }}</p>
-                        <h4>Total : {{dynamicDataCustomerOrder.totalPrice}}</h4>
+                    <div class="dvPriceDetails">
+                        <div class="dvBasePrice">
+                            <p class="BasePriceText">Base Price</p>
+                        </div>
+                        <div class="dvShippingPrice">
+                            <p class="ShippingText">Shipping Price</p>
+                        </div>
+                        <div class="dvDiscPrice">
+                            <p class="DiscText">Discount</p>
+                        </div>
+                        <div class="dvVariancePrice">
+                            <p class="VarianceText">Variance Price</p>
+                        </div>
+                        <div class="dvQty">
+                            <p class="QtyText">Qty</p>
+                        </div>
+                        <div class="dvTax">
+                            <p class="TaxText">Tax</p>
+                        </div>
+                        <div class="dvTotal">
+                            <h6 class="TotalText">Total </h6>
+                        </div>
+                        <div class="dvMed">
+                            <p class="dot">:</p>
+                        </div>
+                        <div class="dvMed1">
+                            <p class="dot1">:</p>
+                        </div>
+                        <div class="dvMed2">
+                            <p class="dot2">:</p>
+                        </div>
+                        <div class="dvMed3">
+                            <p class="dot3">:</p>
+                        </div>
+                        <div class="dvMed4">
+                            <p class="dot4">:</p>
+                        </div>
+                        <div class="dvMed5">
+                            <p class="dot5">:</p>
+                        </div>
+                        <div class="dvMed6">
+                            <p class="dot6">:</p>
+                        </div>
+                        <div class="dvRight-BasePrice">
+                            {{dynamicDataCustomerOrder.basePrice}}
+                        </div>
+                        <div class="dvRight-ShippingPrice">
+                            {{dynamicDataCustomerOrder.shippingPrice}}
+                        </div>
+                        <div class="dvRight-DiscPrice">
+                            {{dynamicDataCustomerOrder.discount}}%
+                        </div>
+                        <div class="dvRight-VariancePrice">
+                            {{dynamicDataCustomerOrder.variantPrice}}
+                        </div>
+                        <div class="dvRight-Qty">
+                            {{ dynamicDataCustomerOrder.quantity }}
+                        </div>
+                        <div class="dvRight-Tax">
+                            {{ dynamicDataCustomerOrder.tax }}
+                        </div>
+                        <div class="dvRight-Total">
+                            {{dynamicDataCustomerOrder.totalPrice}}
+                        </div>
                     </div>
-                    <div class="btnCheckOut">
-                        <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
-                            data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
-
-                        <button type="btnCheckOut" style="display: none;" class="btn btn-warning" data-toggle="modal" id="reqId"
-                            data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
-                    </div>
                 </div>
+                <div class="dvBtnCheckout-Rfq">
+                    <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
+                        data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
 
+                    <button type="btnCheckOut" style="display: none;" class="btnRfq btn-warning" data-toggle="modal"
+                        id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>

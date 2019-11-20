@@ -5,8 +5,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class DataService {
-  // baseUrl = "";
-  baseUrl = "http://localhost/sma2/src/";
+
+  baseUrl = "";
+  // baseUrl = "http://localhost/Angular/sma23/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -20,7 +21,7 @@ export class DataService {
       .append("prodId", data)
     return this.http.post(this.baseUrl + 'assets/api/prodrevratings.php', httpParams);
   }
-  sendOrderDetails(data: any) {
+sendOrderDetails(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
       .append("shopId", data['shop_id'])
@@ -33,9 +34,32 @@ export class DataService {
       .append("sellerId", data['seller_identity'])
       .append("rfqEnabled", data['rfq_enabled'])
       .append("desiredDate", data['desiredDate'])
-      .append("giftEnabled", data['gift_enabled'])      
+      .append("giftEnabled", data['gift_enabled'])
       .append("msgCount", data['msgCount'])
-      .append("image", data['image'])
+      .append("imageUCount", data['imageUCount'])
+      .append("pin", data['pin'])
+
+      .append("image0", data['image0'])
+      .append("image1", data['image1'])
+      .append("image2", data['image2'])
+      .append("image3", data['image3'])
+      .append("image4", data['image4'])
+      .append("image5", data['image5'])
+      .append("image6", data['image6'])
+      .append("image7", data['image7'])
+      .append("image8", data['image8'])
+      .append("image9", data['image9'])
+
+      .append("imageU0", data['imageU0'])
+      .append("imageU1", data['imageU1'])
+      .append("imageU2", data['imageU2'])
+      .append("imageU3", data['imageU3'])
+      .append("imageU4", data['imageU4'])
+      .append("imageU5", data['imageU5'])
+      .append("imageU6", data['imageU6'])
+      .append("imageU7", data['imageU7'])
+      .append("imageU8", data['imageU8'])
+      .append("imageU9", data['imageU9'])
 
     return this.http.post(this.baseUrl + 'assets/api/pricelisting.php', httpParams);
   }
@@ -71,7 +95,7 @@ export class DataService {
   }
   getRfqInputs(data: any) {
     let httpParams = new HttpParams()
-      .append("prodId", data)
+      .append("shopId", data)
     return this.http.post(this.baseUrl + 'assets/api/rfqprods.php', httpParams);
   }
   getRfqAddress(data: any) {
@@ -81,17 +105,25 @@ export class DataService {
   }
   getPriceDate(data: any) {
     let httpParams = new HttpParams()
-      .append("prodId", data)
+      .append("prodId", data['prod_id'])
+      .append("pin",data['pin'])
+      .append("productQuantity",data['prod_quantity'])
+      .append("deliveryOption",data['del_option'])
     return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
   }
   sendRfq(data :any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
-      .append("hasImage", data['imageUploaded'])
+      .append("hasImage", data['imageUploadedRfq'])
       .append("userId", data['user_id'])
       .append("shopLocation", data['shop_location'])
       .append("note", data['note'])
       .append("productRef", data['product_ref'])
+      .append("image", data['image'])
+      .append("sellerId", data['seller_identity'])
+      .append("shopId", data['shop_id'])
+      .append("shopName", data['shop_name'])
+
     return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
   }
   // shop Component
@@ -442,8 +474,6 @@ getDateDiffShop(data: any) {
     let httpParams= new HttpParams()
     .append("fp_mobile_no",fp_mobile_no)
     .append("new_password",new_password);
-    console.log(fp_mobile_no);
-    console.log(new_password);
     return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
@@ -640,52 +670,6 @@ getcheckoutFinal(id: any, shippingType) {
   getoffer() {
     return this.http.get(this.baseUrl + 'assets/api/offercheckout.php');
   }
-  getdataPostAddProduct(data: any) {
-    let httpParams = new HttpParams()
-      .append("name", data['name'])
-      .append("short_desc", data['short_desc'])
-      .append("long_desc", data['long_desc'])
-      .append("spec", data['spec'])
-      .append("shipping_option", data['shipping_option'])
-      .append("base_price", data['base_price'])
-      .append("bulk_discount_id", data['bulk_discount_id'])
-      .append("offer_id", data['offer_id'])
-      .append("returning_customer_count", data['returning_customer_count'])
-      .append("cmsn_dedtd", data['cmsn_dedtd'])
-      .append("shop_id", data['shop_id'])
-      .append("category_id", data['category_id'])
-      .append("sub_catgry_id", data['sub_catgry_id'])
-      .append("active_status", data['active_status'])
-      .append("qty_avble", data['qty_avble'])
-      .append("safe_qty", data['safe_qty'])
-      .append("is_returnable", data['is_returnable'])
-      .append("label_id", data['label_id'])
-      .append("tags", data['tags'])
-      .append("avg_confrmn_time", data['avg_confrmn_time'])
-      .append("avg_response_time", data['avg_response_time'])
-      .append("avg_prcessing_time", data['avg_prcessing_time'])
-      .append("avg_shpping_time", data['avg_shpping_time'])
-      .append("auto_cancel_time", data['auto_cancel_time'])
-      .append("has_rfq", data['has_rfq'])
-      .append("has_gift", data['has_gift'])
-      .append("has_order_confmn", data['has_order_confmn'])
-      .append("can_orderbydate", data['can_orderbydate'])
-      .append("has_instant_buy", data['has_instant_buy'])
-      .append("min_order_quant", data['min_order_quant'])
-      .append("max_order_quant", data['max_order_quant'])
-      .append("shipping_policy", data['shipping_policy'])
-      .append("return_policy", data['return_policy'])
-      .append("product_policy", data['product_policy'])
-      .append("shipping_location_id", data['shipping_location_id'])
-      .append("rating", data['rating'])
-      .append("rating_count", data['rating_count'])
-      .append("review_count", data['review_count'])
-      .append("revenue_generated", data['revenue_generated'])
-      .append("promo_id", data['promo_id'])
-      .append("sold_count", data['sold_count'])
-      .append("created_date", data['created_date']);
-    return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
-  }
   getsellercart() {
     return this.http.get(this.baseUrl + 'assets/api/sellercart.php');
   }
@@ -779,9 +763,9 @@ getUser() {
   //  }
 
 getdynamicPriceAddProduct(prodid: any) {
-    let httpParams = new HttpParams()
-      .append("prodid", prodid);
-    return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceAddProduct.php', httpParams);
+  let httpParams = new HttpParams()
+  .append("prodid", prodid);
+  return this.http.post(this.baseUrl + 'assets/api/getdynamicPriceAddProduct.php', httpParams);
   }
 
    getdynamicPriceDiscTotalAddProd(prodid: any) {
@@ -1002,11 +986,11 @@ getCustomerOrderCheckout(orderid: any) {
     return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
    }
 
-getOrderDetailsCheckout(userid: any) {
-     let httpParams = new HttpParams()
-      .append("userid", userid);
-     return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
-   }
+getOrderDetailsCheckout(userId: any) {
+  let httpParams = new HttpParams()
+  .append("userId", userId)
+  return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
+}
    sendRfqShop(data :any) {
     let httpParams = new HttpParams()
       .append("shopId", data['shop_id'])
@@ -1141,6 +1125,471 @@ updateSellerPlanFree(data: any){
       .append("userId", userId);
     return this.http.post(this.baseUrl + 'assets/api/deliverAddrCart.php', httpParams);
   }
+  
+    checkUndeliverable(data: any){
+    let httpParams = new HttpParams()
+      .append("pin",data['pin'])
+      .append("shipId",data['ship_id'])
+      .append("prodId",data['prod_id'])
+      return this.http.post(this.baseUrl + 'assets/api/undeliverable.php', httpParams);
+  }
+  
+  getMainCategoryAddProduct(parentid: any) {
+    let httpParams = new HttpParams()
+      .append("parentid", parentid);
+    return this.http.post(this.baseUrl + 'assets/api/getMainCategoryAddProduct.php', httpParams);
+  }
+  
+  getCategoryAddProduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getCategoryAddProduct.php', httpParams);
+  }
+  
+   getSubCategoryAddProduct(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getSubCategoryAddProduct.php', httpParams);
+  }
+
+  getSubCategorySearch(id: any, searchTerm: any) {
+    let httpParams = new HttpParams()
+      .append("id", id)
+      .append("searchTerm", searchTerm);
+    return this.http.post(this.baseUrl + 'assets/api/getSubCategorySearch.php', httpParams);
+  }
+  createNewSubCategory(id: any, newTerm: any) {
+    let httpParams = new HttpParams()
+      .append("id", id)
+      .append("newTerm", newTerm);
+    return this.http.post(this.baseUrl + 'assets/api/createNewSubCategory.php', httpParams);
+  }
+  createNewMidSubCategory(id: any, newTerm: any) {
+    let httpParams = new HttpParams()
+      .append("id", id)
+      .append("newTerm", newTerm);
+    return this.http.post(this.baseUrl + 'assets/api/addNewMidCategory.php', httpParams);
+  }
+  getProductInfor(id: any) {
+    let httpParams = new HttpParams()
+      .append("id", id);
+    return this.http.post(this.baseUrl + 'assets/api/getProductInfor.php', httpParams);
+  }
+  
+  popUpLogin(email: any,password :any){
+    let httpParams= new HttpParams()
+    .append("login_email", email)
+    .append("login_password", password);
+    return this.http.post(this.baseUrl+'assets/api/popUplogin.php',httpParams);
+  }
+
+  updateUserData(data: any,userId: any){
+    let httpParams= new HttpParams()
+    .append("userId",userId)
+    .append("fullname", data['fullname'])
+    .append("reg_address1", data['reg_address1'])
+    .append("reg_city", data['reg_city'])
+    .append("reg_dist", data['reg_dist'])
+    .append("reg_state", data['reg_state'])
+    .append("reg_country", data['reg_country'])
+    .append("reg_pin", data['reg_pin'])
+    .append("reg_email", data['reg_email'])
+    .append("reg_mobile_no", data['reg_mobile_no']);
+    return this.http.post(this.baseUrl+'assets/api/updateUserData.php',httpParams);
+  }
+  
+   getDirectPickupSellerDetails(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data)
+    return this.http.post(this.baseUrl + 'assets/api/directpickupseller.php', httpParams);
+  }
+  
+  getLikesDislikesShop(data: any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      .append("userId", data['user_id'])
+    return this.http.post(this.baseUrl + 'assets/api/likedislikereviewshop.php', httpParams);
+  }
+
+  getLikesDislikes(data: any) {
+    let httpParams = new HttpParams()
+      .append("prodId", data['prod_id'])
+      .append("userId", data['user_id'])
+    return this.http.post(this.baseUrl + 'assets/api/likedislikereviewproduct.php', httpParams);
+  }
+  postOffersAddProduct(data: any) {
+    let httpParams = new HttpParams()
+      .append("dateDrom", data['from_time_stamp'])
+      .append("dateTo", data['to_tme_Stamp'])
+      .append("percentage", data['percentage'])
+    return this.http.post(this.baseUrl + 'assets/api/addOffersAddProduct.php', httpParams);
+  }
+  getdataPostAddProduct(data: any) {
+     let httpParams = new HttpParams()
+     // .append("image", data['image'])
+       .append("image1", data['image1'])
+       .append("image2", data['image2'])
+       .append("image3", data['image3'])
+       .append("image4", data['image4'])
+       .append("image5", data['image5'])
+       .append("image6", data['image6'])
+       .append("image7", data['image7'])
+       .append("image8", data['image8'])
+       .append("image9", data['image9'])
+       .append("image10", data['image10'])
+       .append("title", data['title'])
+       .append("name", data['name'])
+       .append("short_desc", data['short_desc'])
+       .append("Long_desc", data['Long_desc'])
+       .append("spec", data['spec'])
+       .append("shipping_option", data['shipping_option'])
+       .append("base_price", data['base_price'])
+       .append("bulk_discount_id", data['bulk_discount_id'])
+       .append("offer_id", data['offer_id'])
+       .append("sellerid", data['sellerid'])
+       .append("active_status", data['active_status'])
+       .append("qty_avble", data['qty_avble'])
+       .append("tags", data['tags'])
+       .append("avg_prcessing_time", data['avg_prcessing_time'])
+       .append("avg_shpping_time", data['avg_shpping_time'])
+       .append("auto_cancel_time", data['auto_cancel_time'])
+       .append("has_rfq", data['has_rfq'])
+       .append("has_gift", data['has_gift'])
+       .append("has_order_confmn", data['has_order_confmn'])
+       .append("can_upload_image", data['can_upload_image'])
+       .append("can_orderbydate", data['can_orderbydate'])
+       .append("has_instant_buy", data['has_instant_buy'])
+       .append("max_no_of_image", data['max_no_of_image'])
+       .append("min_order_quant", data['min_order_quant'])
+       .append("max_order_quant", data['max_order_quant'])
+       .append("shipping_policy", data['shipping_policy'])
+       .append("return_policy", data['return_policy'])
+       .append("return_policy", data['return_policy'])
+       .append("product_policy", data['product_policy'])
+       .append("quantity_price", data['quantity_price'])
+       .append("labels", data['labels'])
+       .append("shippingArray", data['shippingArray'])
+       .append("varinetSelect", data['varinetSelect'])
+       .append("titleSelect", data['titleSelect'])
+       .append("discountArraySelect", data['discountArraySelect'])
+       .append("add_custom_message_field", data['add_custom_message_field'])
+       .append("caller", data['caller'])
+       .append("faqArray", data['faqArray'])
+       .append("mainCat", data['mainCat'])
+       .append("subCat", data['subCat'])
+       .append("price", data['price']);
+     return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
+   }
+  
+  addComplaintData(data: Object,userId:any){
+    let httpParams= new HttpParams()
+   .append("userId", userId)
+   .append("userName", data['username'])
+   .append("note", data['complaint_desc']);
+   return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
+  }
+
+
+addCardData(data1: Object,data2:Object,userId:any,userName:any){
+  let httpParams= new HttpParams()
+  .append("userName", userName)
+  .append("userId", userId)
+  .append("cardNo", data1['cardno'])
+  .append("validity", data2['date'])
+  .append("cvv", data2['cvv']);
+  return this.http.post(this.baseUrl+'assets/api/addCardData.php',httpParams);
+ }
+
+deleteCardData(userId: any,cardNo: any){
+  let httpParams= new HttpParams()
+  .append("cardNo", cardNo)
+  .append("userId", userId);
+  return this.http.post(this.baseUrl+'assets/api/deleteCardData.php',httpParams);
+ }
+ deleteUserAddress(addressId:any){
+  let httpParams= new HttpParams()
+    .append("addressId", addressId)
+    return this.http.post(this.baseUrl+'assets/api/deleteUserAddressData.php',httpParams);
+ }
+getOrderData(data: any){
+  let httpParams= new HttpParams()
+  .append("userId", data)
+  return this.http.post(this.baseUrl+'assets/api/orderData.php',httpParams);
+ }
+getUserAddressData(userId: any){
+  let httpParams= new HttpParams()
+  .append("userId", userId)
+  return this.http.post(this.baseUrl+'assets/api/userAddressData.php',httpParams);
+ }
+addUserAddressData(userId: any,userName:any,data: Object){
+  let httpParams= new HttpParams()
+  .append("userName", userName)
+  .append("city", data['city'])
+  .append("country", data['country'])
+  .append("pin", data['pin'])
+  .append("email", data['email'])
+  .append("mobile", data['mobile'])
+  .append("state", data['state'])
+  .append("userId", userId);
+  return this.http.post(this.baseUrl+'assets/api/addUserAddressData.php',httpParams);
+ }
+uploadImage1(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image1Upload.php', httpParams);
+  }
+  uploadImage2(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image2Upload.php', httpParams);
+  }
+  uploadImage3(data: Object){
+    let httpParams = new HttpParams()
+    .append("userId", data['user_id'])
+    .append("image",data['image']);
+    return this.http.post(this.baseUrl+'assets/api/image3Upload.php', httpParams);
+  }
+  
+  checkCurrentPassword(mobile: any,currentPassword:any,newPassword:any){
+  let httpParams= new HttpParams()
+  .append("mobile",mobile )
+  .append("newPassword",newPassword )
+  .append("currentPassword",currentPassword );
+  return this.http.post(this.baseUrl+'assets/api/checkCurrentPassword.php',httpParams);
+ }
+
+ getShopDetailsSettings(id : any){
+  let httpParams= new HttpParams()
+  .append("seller_id",id );
+  return this.http.post(this.baseUrl+'assets/api/getShopDetailsSetting.php',httpParams);
+ }
+
+ updateShopDetailsSettings(data : Object){
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("name",data['shopname'])
+  .append("email",data['email'])
+  .append("phone",data['phone'])
+  .append("gst",data['gst'])
+  .append("address",data['address'])
+  .append("imageMain",data['imageMain'])
+  .append("imageProductOne",data['imageProductOne'])
+  .append("imageProductTwo",data['imageProductTwo'])
+  .append("imageProductThree",data['imageProductThree'])
+  .append("category",data['category']);
+  return this.http.post(this.baseUrl+'assets/api/uploadShopDetailsSetting.php',httpParams);
+ }
+ updateOwnerDetailsSettings(data : Object){
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("name",data['name'])
+  .append("email",data['email'])
+  .append("phone",data['phone'])
+  .append("gst",data['gst'])
+  .append("owneridtype",data['owneridtype'])
+  .append("owneridno",data['owneridno'])
+  .append("ownerdob",data['ownerdob']);
+  return this.http.post(this.baseUrl+'assets/api/uploadOwnerDetails.php',httpParams);
+ }
+
+ updatePaymentDetailsSettings(data : Object){
+  let httpParams= new HttpParams()
+  .append("seller_id",data['seller_id'])
+  .append("shippingform",data['shippingform'])
+  .append("shippingmode",data['shippingmode'])
+  .append("accountholder",data['accountholder'])
+  .append("accounttype",data['accounttype'])
+  .append("accountno",data['accountno'])
+  .append("ifsc",data['ifsc'])
+  .append("bankname",data['bankname']);
+  return this.http.post(this.baseUrl+'assets/api/uploadPaymentDetails.php',httpParams);
+ }
+
+ updateAdvancedDetailsSettings(data : Object){
+ let httpParams= new HttpParams()
+ .append("seller_id",data['seller_id'])
+ .append("responseInput",data['responseInput'])
+ .append("processInput",data['processInput'])
+ .append("cancellInput",data['cancellInput'])
+ .append("giftInput",data['giftInput'])
+ .append("deliver_by_date",data['deliver_by_date'])
+ .append("rfq",data['rfq'])
+ .append("order_confirmation",data['order_confirmation']);
+ return this.http.post(this.baseUrl+'assets/api/uploadAdvancedDetails.php',httpParams);
+}
+
+uploadShippingLocations(data : Object){
+ let httpParams= new HttpParams()
+ .append("sellerId",data['sellerId'])
+ .append("primaryArea",data['primaryArea'])
+ .append("SecondaryArea",data['SecondaryArea']);
+ return this.http.post(this.baseUrl+'assets/api/uploadShippingLocations.php',httpParams);
+}
+deleteLocation(id){
+ let httpParams= new HttpParams()
+ .append("SecondaryArea",id);
+ return this.http.post(this.baseUrl+'assets/api/deleteLocation.php',httpParams);
+}
+updateShippingLocation(data : Object){
+ let httpParams= new HttpParams()
+ .append("sellerId",data['sellerId'])
+ .append("primaryArea",data['primaryArea'])
+ .append("id",data['shop_id'])
+ .append("SecondaryArea",data['SecondaryArea']);
+ return this.http.post(this.baseUrl+'assets/api/updateShippingLocation.php',httpParams);
+}
+
+getShippingLocationSettings(id : any){
+ let httpParams= new HttpParams()
+ .append("seller_id",id);
+ return this.http.post(this.baseUrl+'assets/api/getShippingLocations.php',httpParams);
+}
+getDropdownForShipping(id : any){
+ let httpParams= new HttpParams()
+ .append("shipping_alias",id);
+ return this.http.post(this.baseUrl+'assets/api/getDropdownForShipping.php',httpParams);
+}
+addProductVarients(data : any, prodId = "all"){
+ let httpParams= new HttpParams()
+ .append("prodid", prodId)
+ .append("variantArray",data);
+ return this.http.post(this.baseUrl+'assets/api/addProductVarients.php',httpParams);
+}
+
+getCategoryForSetting(){
+  return this.http.get(this.baseUrl+'assets/api/getCategoryForSetting.php');
+}
+  
+  getIndividualOrderDataPrev(orderid: any){
+let httpParams= new HttpParams()
+.append("orderid", orderid)
+return this.http.post(this.baseUrl+'assets/api/sellerOrderDataPrev.php',httpParams);
+}
+getIndividualOrderData(data: any){
+let httpParams= new HttpParams()
+.append("id", data)
+return this.http.post(this.baseUrl+'assets/api/sellerOrderData.php',httpParams);
+}
+getOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/orderDataSeller.php',httpParams);
+}
+getAllOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/allOrderDataSeller.php',httpParams);
+}
+getAllOrderUser(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/allOrderDataUser.php',httpParams);
+}
+getOrderDataSellerPrev(orderid: any){
+let httpParams= new HttpParams()
+.append("orderid", orderid)
+return this.http.post(this.baseUrl+'assets/api/orderDataSellerPrev.php',httpParams);
+}
+updateStatus(stageDate: any,stageName: any,orderIdShort: any){
+let httpParams = new HttpParams()
+.append("stageDate", stageDate)
+.append("stageName",stageName)
+.append("orderIdShort",orderIdShort);
+return this.http.post(this.baseUrl+'assets/api/updateStatus.php', httpParams);
+}
+updateCancelStatus(stageDate: any,stageName: any,orderIdShort: any,cancelReason: any){
+let httpParams = new HttpParams()
+.append("cancelReason", cancelReason)
+.append("stageDate", stageDate)
+.append("stageName",stageName)
+.append("orderIdShort",orderIdShort);
+return this.http.post(this.baseUrl+'assets/api/updateCancelStatus.php', httpParams);
+}
+updateLink(track_link: any,orderIdShort:any){
+let httpParams = new HttpParams()
+.append("orderIdShort", orderIdShort)
+.append("track_link", track_link);
+return this.http.post(this.baseUrl+'assets/api/updateLink.php', httpParams);
+}
+uploadImageShipped(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageShippedUpload.php', httpParams);
+}
+uploadImageDelivered(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageDeliveredUpload.php', httpParams);
+}
+uploadImageClosed(data: Object){
+let httpParams = new HttpParams()
+.append("orderId", data['orderId'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/imageClosedUpload.php', httpParams);
+}
+
+getLabelForProduct(){
+  return this.http.get(this.baseUrl+'assets/api/getLabelsForProducts.php');
+}
+getTagsForProduct(id, prodid: any = "none"){
+  let httpParams = new HttpParams()
+.append("id",id)
+.append("prodid",prodid);
+  return this.http.post(this.baseUrl+'assets/api/getAllTags.php', httpParams);
+}
+getAllCategoriesProduct(){
+  return this.http.get(this.baseUrl+'assets/api/getAllCategoriesProduct.php');
+}
+getShippingLocationAddProduct(id){
+  let httpParams= new HttpParams()
+ .append("seller_id",id);
+  return this.http.post(this.baseUrl+'assets/api/getShippingLocationAddProduct.php' , httpParams);
+}
+
+getTitleForAddproduct(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getTitleForAddproduct.php' , httpParams);
+}
+
+getDiscountDay(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getDiscountDay.php' , httpParams);
+}
+
+getShippingLocationProductEdit(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getShippingLocationProductEdit.php' , httpParams);
+}
+getFaqForProductEdit(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getFaqForProductEdit.php' , httpParams);
+}
+getVaritentInfo(id){
+  let httpParams= new HttpParams()
+ .append("id",id);
+  return this.http.post(this.baseUrl+'assets/api/getVaritentInfo.php' , httpParams);
+}
+
+getAutoShippingLocation(id){
+  let httpParams= new HttpParams()
+ .append("searchTerm",id);
+  return this.http.post(this.baseUrl+'assets/api/getAutoShippingLocation.php' , httpParams);
+}
+  
+getNotifications(data: any){
+
+  let httpParams= new HttpParams()
+  .append("userId", data)
+  return this.http.post(this.baseUrl+'assets/api/getNotifications.php',httpParams);
+}
 
   //********  MSG TS starts  *********
   getAdmin() {
@@ -1240,6 +1689,7 @@ updateSellerPlanFree(data: any){
   .append("threadid", threadid)
   return this.http.post(this.baseUrl+'assets/api/fetchmsg.php',httpParams);
  }
+
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }

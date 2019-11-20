@@ -63,6 +63,7 @@ export class CartComponent implements OnInit {
   prodId: any;
   flagLog: boolean = false;
   calculatedPrice : any ;
+  dynamicOffPrice : any ="";
 
   constructor(private data: DataService, private cookieService: CookieService, private formBuilder: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({
@@ -111,7 +112,7 @@ export class CartComponent implements OnInit {
     );
     this.data.deliverAddrCart(this.cookieCart).subscribe(data => {
       this.dynamicDataDeliverAddr = data;
-      // console.log(this.dynamicDataAddress);
+      console.log(this.dynamicDataAddress);
     },
     );
 
@@ -124,6 +125,8 @@ export class CartComponent implements OnInit {
   
   placeOrder(){
     this.data.deleteCartProductfn("all",this.cookieCart, this.prodId , this.curVal ).subscribe( data=>{
+      this.dynamicOffPrice =data;
+      console.log(this.dynamicOffPrice)
       this.orderid = data;
 
       this.data.getaddress(this.cookieCart).subscribe(

@@ -77,13 +77,112 @@ $SubText: 18px;
 	}
 }
 
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+	background: #EFBE24;
+	z-index: 111;
+}
+
+#myUL li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+#myUL1 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL1 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL1 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+#myUL2 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+	background: #EFBE24;
+	z-index: 111;
+}
+
+#myUL2 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL2 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+.tags{
+	padding: 8px;
+	background: #efbe24;
+	color: black;
+	border-radius: 10px;
+	margin: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.submitBTN{
+	background: #efbe24;
+	color: white;
+	font-family: BitterBold;
+	border-radius: 5px;
+	cursor: pointer;
+	width: max-content;	
+	padding: 7px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.varitentsAdd{
+	width: 80%;
+	margin: auto;
+	background: #ddd;
+	border-radius: 6px;
+}
+
 .dvMain-Grid {
 	display: grid;
 	grid-template-columns: auto;
-	grid-template-rows: repeat(11, auto);
+	grid-template-rows: repeat(13, auto);
 	grid-template-areas:
 		"grid-AddProducts"
 		"grid-PrimaryDetails"
+		"grid-PrimaryDetails1"
 		"grid-AddVarients"
 		"grid-Price"
 		"grid-AdvanceSettings"
@@ -147,16 +246,18 @@ $SubText: 18px;
 			margin-top: 26px;
 			font-family: "BitterBold";
 		}
-		.btnToggleActive1 {
-			grid-area: btnToggleActive1;
-		}
+	}
+	.btnToggleActive1 {
+		grid-area: btnToggleActive1;
+
 		.switchActive {
 			position: relative;
 			display: inline-block;
 			width: 60px;
 			height: 40px;
-			margin-left: 145%;
+			margin-left: 50%;
 			margin-bottom: 10px;
+			margin-top: 20px;
 		}
 
 		.switch input {
@@ -218,6 +319,10 @@ $SubText: 18px;
 	grid-template-columns: auto 10% auto 10% auto;
 	grid-template-rows: auto;
 	grid-template-areas: "main-cat timeline1 med-cat timeline2 sub-cat";
+
+	input{
+		width: 100%;
+	}
 	.main-cat {
 		grid-area: main-cat;
 		.dropcat1 {
@@ -231,10 +336,60 @@ $SubText: 18px;
 			cursor: pointer;
 		}
 	}
+	.dropbtn {
+		background-color: #009145;
+		color: white;
+		padding: 16px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+	}
+
+	//   /* Dropdown button on hover & focus */
+	//   .dropbtn:hover, .dropbtn:focus {
+	// 	background-color: #3e8e41;
+	//   }
+
+	/* The search field */
+
+	/* The container <div> - needed to position the dropdown content */
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	/* Dropdown Content (Hidden by Default) */
+	.dropdown-content {
+		// display: none;
+		position: absolute;
+		background-color: #f6f6f6;
+		min-width: 230px;
+		border: 1px solid #ddd;
+		z-index: 1;
+	}
+
+	/* Links inside the dropdown */
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+
+	/* Change color of dropdown links on hover */
+	.dropdown-content a:hover {
+		background-color: #f1f1f1;
+	}
+
+	/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+	.show {
+		display: block;
+	}
 	.timeline1 {
 	}
 	.med-cat {
 		grid-area: med-cat;
+		z-index: 12;
 		.dropcat2 {
 			background: #009145;
 			color: white;
@@ -246,10 +401,12 @@ $SubText: 18px;
 			cursor: pointer;
 		}
 	}
+
 	.timeline2 {
 	}
 	.sub-cat {
 		grid-area: sub-cat;
+		z-index: 12;
 		.dropcat3 {
 			background: #009145;
 			color: white;
@@ -260,7 +417,32 @@ $SubText: 18px;
 			margin-right: 50px;
 			margin-left: -200px;
 			cursor: pointer;
+
+
 		}
+	}
+	.subCategory {
+		margin-left: 160px;
+		width: 200px;
+	}
+}
+
+.subCategoryDiv{
+	background: #EFBE24;
+	width: max-content;
+	padding: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 5px;
+
+	p{
+		padding: 5px;
+	}
+
+	span{
+		margin-left: 5px;
 	}
 }
 .grid-AddSubCatBtn {
@@ -306,10 +488,20 @@ $SubText: 18px;
 		text-align: center;
 	}
 }
-.dvPrimaryDetails {
+.dvImagesPrimaryDetails {
 	grid-area: grid-PrimaryDetails;
 }
 .grid-ImagesPrimaryDetails {
+	margin-left: 80px;
+}
+.grid-Image-View1 {
+	margin-left: 30%;
+	margin-bottom: 5%;
+	margin-top: 5%;
+}
+.dvPrimaryDetails1 {
+	grid-area: grid-PrimaryDetails1;
+	margin-left: 80px;
 }
 .grid-PrimaryDesc {
 	display: grid;
@@ -318,10 +510,10 @@ $SubText: 18px;
 	grid-template-areas: "grid-LeftProd grid-MedProd1 grid-MedProd2 grid-RightProd";
 	.grid-LeftProd {
 		grid-area: grid-LeftProd;
-		margin-left: 100px;
-		// .p {
-		// 	margin-left: 100px;
-		// }
+		.productName {
+			margin-left: 8px;
+			font-family: "BitterBold";
+		}
 	}
 	.grid-MedProd1 {
 		grid-area: grid-MedProd1;
@@ -330,7 +522,8 @@ $SubText: 18px;
 			height: 30px;
 			background: #dbdbdb;
 			border: none;
-			margin-right: -130px;
+			margin-right: -125px;
+			border-radius: 5px;
 		}
 	}
 	.grid-MedProd2 {
@@ -338,6 +531,7 @@ $SubText: 18px;
 		.productBasePriceText {
 			margin-right: 0px;
 			margin-left: 150px;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-RightProd {
@@ -345,7 +539,10 @@ $SubText: 18px;
 		.text-Product-BasePrice-Style {
 			background: #dbdbdb;
 			border: none;
-			margin-right: 100px;
+			width: 100px;
+			margin-right: 150px;
+			border-radius: 5px;
+			text-align: center;
 		}
 	}
 }
@@ -359,17 +556,20 @@ $SubText: 18px;
 		"grid-SpecLeft grid-SpecRight";
 	.grid-ShortDescLeft {
 		grid-area: grid-ShortDescLeft;
-		margin-left: 100px;
+		margin-left: 8px;
+		font-family: "BitterBold";
 	}
 	.grid-LongDescLeft {
 		grid-area: grid-LongDescLeft;
 		margin-top: 10px;
-		margin-left: 100px;
+		margin-left: 8px;
+		font-family: "BitterBold";
 	}
 	.grid-SpecLeft {
 		grid-area: grid-SpecLeft;
 		margin-top: 10px;
-		margin-left: 100px;
+		margin-left: 8px;
+		font-family: "BitterBold";
 	}
 	.grid-ShortDescRight {
 		grid-area: grid-ShortDescRight;
@@ -377,8 +577,9 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 1063px;
-			margin-left: -170px;
+			width: 1110px;
+			margin-left: -235px;
+			border-radius: 5px;
 		}
 	}
 	.grid-LongDescRight {
@@ -388,8 +589,9 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 1063px;
-			margin-left: -170px;
+			width: 1110px;
+			margin-left: -235px;
+			border-radius: 5px;
 		}
 	}
 	.grid-SpecRight {
@@ -400,8 +602,9 @@ $SubText: 18px;
 			background: #dbdbdb;
 			border: none;
 			height: 50px;
-			width: 1063px;
-			margin-left: -170px;
+			width: 1110px;
+			margin-left: -235px;
+			border-radius: 5px;
 		}
 	}
 }
@@ -415,35 +618,46 @@ $SubText: 18px;
 		"grid-MiniQtyOrderLeft grid-MiniQtyOrderRight";
 	.grid-NoOfPieceLeft {
 		grid-area: grid-NoOfPieceLeft;
-		margin-left: 550px;
+		margin-left: 400px;
+		font-family: "BitterBold";
 	}
 	.grid-MaxQtyOrderLeft {
 		grid-area: grid-MaxQtyOrderLeft;
-		margin-left: 550px;
+		margin-left: 400px;
+		font-family: "BitterBold";
 	}
 	.grid-MiniQtyOrderLeft {
 		grid-area: grid-MiniQtyOrderLeft;
-		margin-left: 550px;
+		margin-left: 400px;
+		font-family: "BitterBold";
 	}
 	.grid-QtyCountRight {
 		grid-area: grid-QtyCountRight;
-		margin-left: 80px;
+		margin-left: -30px;
 		.btnMinQtyCount {
 			background: #dbdbdb;
 			margin-left: 20px;
-			// border: none;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border: none;
+			height: 27px;
+			cursor: pointer;
 		}
 		.counterLabel {
 			background: #dbdbdb;
 			border: none;
 			text-align: center;
 			width: 30px;
-			margin-left: -4px;
+			margin-left: -10px;
 		}
 		.btnMaxQtyCount {
 			background: #dbdbdb;
-			// border: none;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			margin-right: 50px;
+			border: none;
 			height: 27px;
+			cursor: pointer;
 		}
 	}
 	.grid-MaxQtyOrderRight {
@@ -451,9 +665,10 @@ $SubText: 18px;
 		.Max-Qty-Style {
 			background: #dbdbdb;
 			border: none;
-			margin-left: 100px;
-			width: 80px;
+			margin-left: -10px;
+			width: 70px;
 			text-align: center;
+			border-radius: 5px;
 		}
 	}
 	.grid-MiniQtyOrderRight {
@@ -461,9 +676,10 @@ $SubText: 18px;
 		.Min-Qty-Style {
 			background: #dbdbdb;
 			border: none;
-			margin-left: 100px;
-			width: 80px;
+			margin-left: -10px;
+			width: 70px;
 			text-align: center;
+			border-radius: 5px;
 		}
 	}
 }
@@ -499,10 +715,10 @@ $SubText: 18px;
 		grid-area: nav;
 		margin-left: 300px;
 		color: white;
-		.active{
+		.active {
 			border-radius: 5px;
 			background: #009145;
-			width: 150px; 
+			width: 150px;
 			text-align: center;
 			color: white;
 			font-family: "BitterBold";
@@ -551,30 +767,35 @@ $SubText: 18px;
 		grid-area: grid-LeftPrice;
 		.priceBreakDownText {
 			margin-left: 77%;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-LeftPrice1 {
 		grid-area: grid-LeftPrice1;
 		.dicountText {
 			margin-left: 77%;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-LeftPrice2 {
 		grid-area: grid-LeftPrice2;
 		.actualPriceText {
 			margin-left: 77%;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-LeftPrice3 {
 		grid-area: grid-LeftPrice3;
 		.commissionDecuctionText {
 			margin-left: 77%;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-LeftPrice4 {
 		grid-area: grid-LeftPrice4;
 		.finalText {
 			margin-left: 77%;
+			font-family: "BitterBold";
 		}
 	}
 	.grid-Med {
@@ -713,12 +934,14 @@ $SubText: 18px;
 				grid-area: grid-AvgLeft;
 				.avgProcessingTimeText {
 					margin-left: 100px;
+					font-family: "BitterBold";
 				}
 			}
 			.grid-AvgLeft1 {
 				grid-area: grid-AvgLeft1;
 				.avgShippingTimeText {
 					margin-left: 100px;
+					font-family: "BitterBold";
 				}
 			}
 			.grid-LabelRight {
@@ -728,6 +951,7 @@ $SubText: 18px;
 						text-align: center;
 						background: #dbdbdb;
 						border: none;
+						border-radius: 5px;
 					}
 				}
 			}
@@ -738,6 +962,7 @@ $SubText: 18px;
 						text-align: center;
 						background: #dbdbdb;
 						border: none;
+						border-radius: 5px;
 					}
 				}
 			}
@@ -764,6 +989,7 @@ $SubText: 18px;
 						width: 300px;
 						height: 50px;
 						border: none;
+						border-radius: 5px;
 					}
 				}
 			}
@@ -789,18 +1015,21 @@ $SubText: 18px;
 				grid-area: grid-GiftOptionTextLeft1;
 				.giftOptionText {
 					margin-left: 100px;
+					font-family: "BitterBold";
 				}
 			}
 			.grid-OrderConfrmTextLeft1 {
 				grid-area: grid-OrderConfrmTextLeft1;
 				.orderConfirmationText {
 					margin-left: 100px;
+					font-family: "BitterBold";
 				}
 			}
 			.grid-UploadImgTextLeft1 {
 				grid-area: grid-UploadImgTextLeft1;
 				.uploadImgText {
 					margin-left: 100px;
+					font-family: "BitterBold";
 				}
 			}
 			.grid-GiftOptionToggleRight1 {
@@ -1010,6 +1239,7 @@ $SubText: 18px;
 			.grid-DeliveryDateTextLeft2 {
 				grid-area: grid-DeliveryDateTextLeft2;
 				.deliveryDateText {
+					font-family: "BitterBold";
 				}
 			}
 			.grid-DeliveryDateToggleRight2 {
@@ -1079,6 +1309,7 @@ $SubText: 18px;
 			.grid-AutoCancelTextLeft2 {
 				grid-area: grid-AutoCancelTextLeft2;
 				.setAutoCancelText {
+					font-family: "BitterBold";
 				}
 			}
 			.grid-AutoCancelLabelRight2 {
@@ -1087,12 +1318,15 @@ $SubText: 18px;
 					.AutoCancelLabel-Style {
 						background: #dbdbdb;
 						border: none;
+						border-radius: 5px;
+						text-align: center;
 					}
 				}
 			}
 			.grid-AddCustomTextLeft2 {
 				grid-area: grid-AddCustomTextLeft2;
 				.addCustomText {
+					font-family: "BitterBold";
 				}
 			}
 			.grid-AutoCustomToggleRight2 {
@@ -1170,11 +1404,12 @@ $SubText: 18px;
 		grid-template-rows: repeat(3, auto);
 		grid-template-areas:
 			"grid-RfqText grid-RfqToggle"
-			". ."
+			"grid-InstantBuyText grid-InstantBuyToggle"
 			"grid-MaxNoText grid-CountLabel";
 		.grid-RfqText {
 			grid-area: grid-RfqText;
 			.rfqText {
+				font-family: "BitterBold";
 			}
 		}
 		.grid-RfqToggle {
@@ -1241,9 +1476,80 @@ $SubText: 18px;
 				border-radius: 50%;
 			}
 		}
+		.grid-InstantBuyText {
+			grid-area: grid-InstantBuyText;
+			.instantBuyText {
+				font-family: "BitterBold";
+			}
+		}
+		.grid-InstantBuyToggle {
+			grid-area: grid-InstantBuyToggle;
+			.switchInstant {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 40px;
+				margin-left: 0px;
+				margin-bottom: 10px;
+			}
+
+			.switch input {
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #f1f1f1;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 30px;
+				width: 30px;
+				left: 4px;
+				bottom: 4px;
+				background-color: #efbe24;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			input:checked + .slider {
+				background-color: #dbdbdb;
+			}
+
+			input:focus + .slider {
+				box-shadow: 0 0 1px #2196f3;
+			}
+
+			input:checked + .slider:before {
+				-webkit-transform: translateX(26px);
+				-ms-transform: translateX(26px);
+				transform: translateX(26px);
+			}
+
+			/* Rounded sliders */
+			.slider.round {
+				border-radius: 34px;
+			}
+
+			.slider.round:before {
+				border-radius: 50%;
+			}
+		}
 		.grid-MaxNoText {
 			grid-area: grid-MaxNoText;
 			.maxNoText {
+				font-family: "BitterBold";
 			}
 		}
 		.grid-CountLabel {
@@ -1251,8 +1557,9 @@ $SubText: 18px;
 			.CountLabel-Style {
 				border: none;
 				background: #dbdbdb;
-				width: 40px;
+				width: 55px;
 				text-align: center;
+				border-radius: 5px;
 			}
 		}
 	}
@@ -1282,63 +1589,96 @@ $SubText: 18px;
 .dvMsgTitle {
 	grid-area: grid-MsgTitle;
 }
-// .grid-MsgTitleContainer {
-// 	display: grid;
-// 	grid-template-columns: auto;
-// 	grid-template-rows: repeat(2, auto);
-// 	grid-template-areas:
-// 		"grid-MsgTitleHead"
-// 		"grid-MsgTitleFoot";
-// 	.grid-MsgTitleHead {
-// 		grid-area: grid-MsgTitleHead;
-// 		background: #f1f1f1;
-// 		width: 600px;
-// 		margin-left: 450px;
-// 		.grid-MsgTitle-Head {
-// 			display: grid;
-// 			grid-template-columns: 80% 20%;
-// 			grid-template-rows: repeat(2, auto);
-// 			grid-template-areas: "grid-MsgTitle-Sect1 grid-Msg-Add";
-// 			.grid-MsgTitle-Sect1 {
-// 				grid-area: grid-Ques-Sect1;
-// 				.MsgTitle-Sect1-Style {
-// 					background: white;
-// 					width: 450px;
-// 					border: none;
-// 					margin-left: 20px;
-// 				}
-// 			}
-// 			.grid-Msg-Add {
-// 				grid-area: grid-Add;
-// 				margin-top: 40px;
-// 				.imgPlus {
-// 					cursor: pointer;
-// 				}
-// 			}
-// 		}
-// 	}
-// 	.grid-MsgTitleFoot {
-// 		grid-area: grid-MsgTitleFoot;
-// 		background: #dbdbdb;
-// 		width: 600px;
-// 		margin-left: 450px;
-// 		.grid-MsgTitle-Foot {
-// 			display: grid;
-// 			grid-template-columns: 80% 20%;
-// 			grid-template-rows: auto;
-// 			grid-template-areas: ". grid-MsgTitle-Edit-Close";
-// 			.grid-MsgTitle-Edit-Close {
-// 				grid-area: grid-Faq-Edit-Close;
-// 				.imgEdit {
-// 					cursor: pointer;
-// 				}
-// 				.imgClose {
-// 					cursor: pointer;
-// 				}
-// 			}
-// 		}
-// 	}
+.grid-MsgTitleContainer {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(2, auto);
+	grid-template-areas:
+		"grid-MsgTitleHead"
+		"grid-MsgTitleFoot";
+	.grid-MsgTitleHead {
+		grid-area: grid-MsgTitleHead;
+		background: #f1f1f1;
+		width: 600px;
+		margin-left: 430px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		.grid-MsgTitle-Head {
+			display: grid;
+			grid-template-columns: 80% 20%;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas: "grid-MsgTitle-Sect1 grid-Msg-Add";
+			.grid-MsgTitle-Sect1 {
+				grid-area: grid-Ques-Sect1;
+				.Msg-title-text {
+					margin-left: -555px;
+					font-family: "BitterBold";
+					margin-top: 10px;
+				}
+				.Msg-Title-Style {
+					margin-left: -556px;
+					width: 460px;
+					border: none;
+					border-radius: 5px;
+				}
+				.MsgTitle-Sect1-Style {
+					background: white;
+					width: 450px;
+					border: none;
+					margin-left: 20px;
+				}
+			}
+			.grid-Msg-Add {
+				grid-area: grid-Add;
+				margin-top: 40px;
+				.imgPlus {
+					cursor: pointer;
+					margin-left: -66px;
+					margin-bottom: 22px;
+					height: 20px;
+					margin-top: 13px;
+				}
+			}
+		}
+	}
 
+	.grid-MsgTitleFoot {
+		grid-area: grid-MsgTitleFoot;
+		background: #dbdbdb;
+		width: 600px;
+		margin-left: 430px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		.grid-MsgTitle-Foot {
+			display: grid;
+			grid-template-columns: 80% 20%;
+			grid-template-rows: auto;
+			grid-template-areas: "grid-MsgTitle-Label grid-MsgTitle-Edit-Close";
+			.grid-MsgTitle-Label {
+				grid-area: grid-MsgTitle-Label;
+				.MsgTitle-Label {
+				margin-left: 45px;
+				margin-top: 10px;
+				}
+			}
+			.grid-MsgTitle-Edit-Close {
+				grid-area: grid-Faq-Edit-Close;
+				.imgEdit {
+					cursor: pointer;
+					margin-left: -93px;
+					height: 20px;
+					margin-top: -28px;
+				}
+				.imgClose {
+					cursor: pointer;
+					margin-left: 5px;
+					height: 20px;
+					margin-top: -28px;
+				}
+			}
+		}
+	}
+}
 // SHIPPING OPTIONS
 .dvShippingOptionsText {
 	.imgBord {
@@ -1378,6 +1718,8 @@ $SubText: 18px;
 			grid-template-areas: "grid-ShippingText grid-ShippingRadioBtn";
 			.grid-ShippingText {
 				grid-area: grid-ShippingText;
+				font-family: "BitterBold";
+				margin-left: 180px;
 			}
 			.grid-ShippingRadioBtn {
 				grid-area: grid-ShippingRadioBtn;
@@ -1393,6 +1735,7 @@ $SubText: 18px;
 			grid-template-areas: "grid-HomeDeliveryText grid-HomeDeliveryRadioBtn";
 			.grid-HomeDeliveryText {
 				grid-area: grid-HomeDeliveryText;
+				font-family: "BitterBold";
 			}
 			.grid-HomeDeliveryRadioBtn {
 				grid-area: grid-HomeDeliveryRadioBtn;
@@ -1408,6 +1751,7 @@ $SubText: 18px;
 			grid-template-areas: "grid-PickupText grid-PickupRadioBtn";
 			.grid-PickupText {
 				grid-area: grid-PickupText;
+				font-family: "BitterBold";
 			}
 			.grid-PickupRadioBtn {
 				grid-area: grid-PickupRadioBtn;
@@ -1463,6 +1807,140 @@ $SubText: 18px;
 		text-align: center;
 	}
 }
+.grid-DeliverableContainer {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas:
+		"grid-DeliverableHead"
+		"grid-DeliverableBody"
+		"grid-DeliverableFoot";
+	.grid-DeliverableHead {
+		grid-area: grid-DeliverableHead;
+		width: 1050px;
+		margin-left: 230px;
+		.grid-DeliverableHeadSub {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "grid-Location grid-Price grid-QtyPrice";
+			.grid-Location {
+				grid-area: grid-Location;
+				background: #009145;
+				color: white;
+				font-family: "BitterBold";
+				text-align: center;
+				border-top-left-radius: 5px;
+			}
+			.grid-Price {
+				grid-area: grid-Price;
+				background: #009145;
+				color: white;
+				font-family: "BitterBold";
+				text-align: center;
+			}
+			.grid-QtyPrice {
+				grid-area: grid-QtyPrice;
+				background: #009145;
+				color: white;
+				font-family: "BitterBold";
+				text-align: center;
+				border-top-right-radius: 5px;
+			}
+		}
+	}
+	.grid-DeliverableBody {
+		grid-area: grid-DeliverableBody;
+		background: white;
+		width: 1050px;
+		margin-left: 230px;
+		.grid-DeliverableBodySub {
+			width: 1050px;
+			margin-left: 230px;
+			display: grid;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "deliverable-Location deliverable-Price deliverable-Qty-Price";
+			.deliverable-Location {
+				grid-area: deliverable-Location;
+				background: white;
+				font-family: "BitterBold";
+				text-align: center;
+				width: 250px;
+				margin-left: -42%;
+				margin-top: 10%;
+				border-radius: 5px;
+			}
+			.deliverable-Price {
+				grid-area: deliverable-Price;
+				background: white;
+				font-family: "BitterBold";
+				text-align: center;
+				width: 160px;
+				margin-left: -60%;
+				border-radius: 5px;
+				height: 30px;
+				margin-top: 42px;
+			}
+			.deliverable-Qty-Price {
+				grid-area: deliverable-Qty-Price;
+				background: white;
+				font-family: "BitterBold";
+				text-align: center;
+				width: 160px;
+				margin-left: -52%;
+				border-radius: 5px;
+				height: 30px;
+				margin-top: 42px;
+			}
+			.imgEdit {
+				margin-left: 180%;
+				height: 24px;
+				margin-top: -28px;
+				cursor: pointer;
+			}
+			.imgClose {
+				margin-left: 116%;
+				height: 24px;
+				margin-top: -28px;
+				cursor: pointer;
+			}
+		}
+	}
+	.grid-DeliverableFoot {
+		grid-area: grid-DeliverableFoot;
+		background: white;
+		width: 1050px;
+		margin-left: 230px;
+		.grid-DeliverableFootSub {
+			width: 1050px;
+			margin-left: 230px;
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto;
+			grid-template-areas: "deliverable-Add-Foot";
+			.deliverable-Add-Foot {
+				grid-area: deliverable-Add-Foot;
+				background: white;
+				margin-left: -230px;
+				width: 1050px;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+				.imgPlus {
+					margin-left: 20px;
+					height: 24px;
+					margin-top: -10px;
+					cursor: pointer;
+				}
+				.location-Text-Style {
+					margin-left: -172px;
+					color:#009145;
+					margin-top: -26px;
+				}
+			}
+		}
+	}
+}
 // DISCOUNT
 .dvDiscountText {
 	.imgBord {
@@ -1508,6 +1986,7 @@ $SubText: 18px;
 				text-align: center;
 				.proDiscText {
 					font-family: "BitterBold";
+					margin-left: 65px;
 				}
 			}
 			.grid-Pro-Disc-Container {
@@ -1590,6 +2069,8 @@ $SubText: 18px;
 			}
 		}
 	}
+
+
 	.grid-Bundle-Discount-Right {
 		grid-area: grid-Bundle-Discount-Right;
 		.addBundleText {
@@ -1605,6 +2086,7 @@ $SubText: 18px;
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
+				margin-left: -58px;
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
@@ -1618,29 +2100,47 @@ $SubText: 18px;
 					.grid-Bundle-Head {
 						grid-area: grid-Bundle-Head;
 						background: #f1f1f1;
+						border-top-left-radius: 5px;
+						border-top-right-radius: 5px;
+						margin-left: -36px;
+						height: 80px;
 						.grid-Bundle-Body {
 							display: grid;
 							grid-template-columns: auto auto auto auto;
 							grid-template-rows: repeat(2, auto);
 							grid-template-areas:
-								"grid-Qty-Text grid-Disc-Price grid-Actual-Price ."
-								"grid-Qty-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
+								"grid-Qty-Text grid-Disc-Per grid-Disc-Price grid-Actual-Price ."
+								"grid-Qty-Label grid-Disc-Per-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
 							.grid-Qty-Text {
 								grid-area: grid-Qty-Text;
 								text-align: center;
 								.qtyText {
+									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Disc-Price {
 								grid-area: grid-Disc-Price;
 								text-align: center;
 								.discPriceText {
+									font-family: "BitterBold";
+									margin-top: 10px;
+								}
+							}
+							.grid-Disc-Per {
+								grid-area: grid-Disc-Per;
+								text-align: center;
+								.discPriceText {
+									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Actual-Price {
 								grid-area: grid-Actual-Price;
 								text-align: center;
 								.actualPriceText {
+									font-family: "BitterBold";
+									margin-top: 10px;
 								}
 							}
 							.grid-Qty-Label {
@@ -1664,6 +2164,16 @@ $SubText: 18px;
 									margin-left: 40px;
 								}
 							}
+							.grid-Disc-Per-Label {
+								grid-area: grid-Disc-Per-Label;
+								.Disc-Price-Label-Style {
+									background: white;
+									border: none;
+									text-align: center;
+									border-radius: 5px;
+									margin-left: 40px;
+								}
+							}
 							.grid-Actual-Price-Label {
 								grid-area: grid-Actual-Price-Label;
 								.Actual-Price-Label-Style {
@@ -1678,6 +2188,7 @@ $SubText: 18px;
 								grid-area: grid-Add-Bundle;
 								.imgPlus {
 									cursor: pointer;
+									height: 24px;
 								}
 							}
 						}
@@ -1685,6 +2196,10 @@ $SubText: 18px;
 					.grid-Bundle-Foot {
 						grid-area: grid-Bundle-Foot;
 						background: #dbdbdb;
+						height: 38px;
+						border-bottom-left-radius: 5px;
+						border-bottom-right-radius: 5px;
+						margin-left: -36px;
 						.grid-Bundle-Body-1 {
 							display: grid;
 							grid-template-columns: auto auto auto auto;
@@ -1721,9 +2236,13 @@ $SubText: 18px;
 								grid-area: grid-Add-Bundle-1;
 								.imgEdit {
 									cursor: pointer;
+									height: 24px;
+									margin-left: 550px;
 								}
 								.imgClose {
 									cursor: pointer;
+									margin-left: 5px;
+									height: 24px;
 								}
 							}
 						}
@@ -1780,6 +2299,7 @@ $SubText: 18px;
 	font-family: Bitter;
 	width: 800px;
 	margin-left: 345px;
+	border-radius: 5px;
 }
 .btnpolicySubmit {
 	.button {
@@ -1857,6 +2377,9 @@ $SubText: 18px;
 		background: #f1f1f1;
 		width: 600px;
 		margin-left: 450px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		height: 170px;
 		.grid-Faq-Head {
 			display: grid;
 			grid-template-columns: 80% 20%;
@@ -1871,6 +2394,7 @@ $SubText: 18px;
 					width: 450px;
 					border: none;
 					margin-left: 20px;
+					border-radius: 5px;
 				}
 			}
 			.grid-Add {
@@ -1878,6 +2402,9 @@ $SubText: 18px;
 				margin-top: 40px;
 				.imgPlus {
 					cursor: pointer;
+					margin-left: 50px;
+					height: 22px;
+					margin-top: 12px;
 				}
 			}
 			.grid-Ans-Sect2 {
@@ -1887,6 +2414,7 @@ $SubText: 18px;
 					width: 450px;
 					border: none;
 					margin-left: 20px;
+					border-radius: 5px;
 				}
 			}
 		}
@@ -1896,18 +2424,34 @@ $SubText: 18px;
 		background: #dbdbdb;
 		width: 600px;
 		margin-left: 450px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+
 		.grid-Faq-Foot {
 			display: grid;
 			grid-template-columns: 80% 20%;
 			grid-template-rows: auto;
-			grid-template-areas: ". grid-Faq-Edit-Close";
+			grid-template-areas: "grid-Faq-Label grid-Faq-Edit-Close";
+			.grid-Faq-Label {
+				grid-area: grid-Faq-Label;
+				.faq-Label {
+				margin-left: 22px;
+				margin-top: 10px;
+				}
+			}
 			.grid-Faq-Edit-Close {
 				grid-area: grid-Faq-Edit-Close;
 				.imgEdit {
 					cursor: pointer;
+					height: 24px;
+					margin-left: 10px;
+					margin-top: 10px;
 				}
 				.imgClose {
 					cursor: pointer;
+					margin-left: 14px;
+					height: 24px;
+					margin-top: 10px;
 				}
 			}
 		}

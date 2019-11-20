@@ -1,28 +1,72 @@
+// Color Palette
+
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
+
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
 /* MAIN*/
 .dvMain {
-	// margin-left: 20%;
-	// margin-right: 20%;
-	// margin-bottom: 20px;
-	// width: auto;
-	// display: grid;
 	grid-template-columns: auto;
 	grid-template-rows: repeat(3, auto);
-	// grid-template-areas:
-	// 	"dvHead"
-	// 	"dvBody"
-	// 	"dvFoot";
+
 	.dvHead {
+		grid-area: dvHead;
+		
 		margin-left: 20%;
 		margin-right: 20%;
-		margin-bottom: 20px;
 		width: auto;
 		display: grid;
-		grid-area: dvHead;
 		background-color: #dbdbdb;
-		height: 80px;
+		height: 70px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		grid-auto-columns: auto auto auto;
+		grid-template-columns: auto auto auto;
+		grid-template-rows: auto;
 		grid-template-areas: "dvTitle	dvDeliverTitle	dvDropdown";
 		.dvTitle {
 			grid-area: dvTitle;
@@ -31,17 +75,14 @@
 			padding-inline: 20px;
 			padding: 20px;
 			float: left;
-			grid-template-areas: auto;
-			grid-template-areas: btnCartCount;
 			.btnCartCount {
-				grid-area: btnCartCount;
 				font-family: BitterBold;
 				display: grid;
 				border: none;
 				background-color: #efbe24;
 				color: white;
 				margin-top: -40px;
-				padding: 10px;
+				padding: 2px;
 				border-radius: 5px;
 				// padding-inline: 10px;
 				height: 30px;
@@ -56,7 +97,7 @@
 			display: grid;
 			padding-inline: 20px;
 			padding: 20px;
-			margin-left: 70%;
+			margin-left: 55%;
 		}
 		.dvDropdown {
 			grid-area: dvDropdown;
@@ -64,25 +105,26 @@
 			padding: 20px;
 			width: 30px;
 			margin-top: -10px;
-			margin-right: 40px;
+			margin-right: 177px;
 			border: none;
+			height: 80px;
 		}
 	}
 	.dvBody {
 		margin-left: 20%;
 		margin-right: 20%;
-		margin-bottom: 20px;
+		// margin-bottom: 20px;
 		width: auto;
 		display: grid;
 		grid-area: dvBody;
 		background-color: #f1f1f1;
 		height: 300px;
-		grid-auto-columns: 20% auto 20%;
+		grid-template-columns: 20% auto 20%;
 		grid-template-areas: "gridLeft  gridMid gridRight";
 		.gridLeft {
 			grid-area: gridLeft;
 			display: grid;
-			grid-auto-columns: 20%;
+			grid-template-columns: 20%;
 			grid-template-areas:
 				"gridImg"
 				"gridCounter";
@@ -187,16 +229,14 @@
 				}
 				.detailItemPrice {
 					grid-area: detailItemPrice;
+					.basePriceStyle{
 					display: grid;
-					font-family: BitterBold;
+					// font-family: BitterBold;
 					padding-inline: 20px;
 					float: left;
+					}
 				}
-				// .detailItemPriceDel{
-				// 	grid-area: detailItemPriceDel;
-				// 	display: grid;
-
-				// }
+				
 			}
 			.gridBodyButton {
 				grid-area: gridBodyButton;
@@ -246,13 +286,14 @@
 					color: white;
 					font-family: BitterBold;
 					border: none;
+					text-align: center;
 					height: 30px;
-					width: 80px;
-					margin-left: 60px;
-					margin-top: 20px;
+					width: 56px;
+					margin-left: 84px;
+					margin-top: 44px;
 					margin-right: 200px;
 					display: grid;
-					padding: 1px;
+					padding: 0px;
 					float: left;
 					border-radius: 5px;
 				}
@@ -304,187 +345,6 @@
 		// 	border-radius: 5px;
 		// }
 	}
-
-	/*CHECKOUT POPUP*/
-	.dvFoot {
-		.btn {
-			font-family: "BitterBold";
-			color: white;
-		}
-	}
-	.modal-header {
-		background: #efbe24;
-		color: white;
-		font-family: "BitterBold";
-		display: table-cell;
-
-		border-top-right-radius: 15px;
-		border-top-left-radius: 15px;
-	}
-
-	.modal-content {
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-		background: #f1f1f1;
-	}
-	// .modal-title
-	// {
-	//     text-align: "center"
-	// }
-
-	.modal-body {
-		h5 {
-			text-align: center;
-			font-family: "BitterBold";
-		}
-	}
-
-	.dvModelSpec {
-		input {
-			width: 50px;
-			margin-left: 10px;
-			border: none;
-		}
-		p {
-			border: 2px solid #efbe24;
-			font-family: "Bitter";
-			border-top-right-radius: 5px;
-			border-top-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			padding: 10px;
-		}
-	}
-
-	.dvDeliveryText {
-		text-align: center;
-		font-family: "BitterBold";
-		margin-top: 0px;
-		padding: 12px;
-	}
-
-	.dvProductDate {
-		text-align: center;
-		font-family: "BitterBold";
-		margin-top: 10px;
-		padding: 10px;
-	}
-
-	.dvDate {
-		padding: 15px;
-		display: inline;
-		// border: 2px solid #EFBE24;
-		padding-top: 10px;
-		margin-right: 10px;
-	}
-
-	.dvDate {
-		.inpText {
-			border: 2px solid #efbe24;
-		}
-	}
-	.btn btn-warning {
-		font-family: "BitterBold";
-	}
-
-	.dvGiftNote {
-		background-color: #dbdbdb;
-		font-family: "BitterBold";
-		border-radius: 5px;
-		margin-top: 10px;
-	}
-
-	.dvPriceInfo {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-		justify-content: center;
-	}
-
-	.dvPriceInfo {
-		p {
-			color: #333333;
-		}
-	}
-
-	.btnRadio {
-		font-family: "BitterBold";
-		text-align: center;
-	}
-
-	input[type="text"],
-	select,
-	textarea {
-		width: 100%;
-		padding: 5px;
-		border: 25px;
-		margin-left: 2px;
-		border-radius: 2px;
-		resize: vertical;
-		background: #dbdbdb;
-		border-bottom: 1px solid #333333;
-	}
-
-	label {
-		padding: 12px 12px 12px 0;
-		display: inline-block;
-	}
-
-	input[type="submit"] {
-		background-color: #009145;
-		color: white;
-		padding: 12px 20px;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		float: right;
-	}
-
-	input[type="submit"]:hover {
-		background-color: #009145;
-	}
-
-	.row {
-		border-radius: 2px;
-		background-color: #dbdbdb;
-		padding: 1px;
-		margin: 0px;
-	}
-
-	.col-25 {
-		float: left;
-		width: 40%;
-		margin-top: 6px;
-		padding: 0 0 0 10px;
-	}
-
-	.col-75 {
-		float: left;
-		width: 50%;
-		margin-top: 6px;
-	}
-
-	/* Clear floats after the columns */
-	.row:after {
-		content: "";
-		display: table;
-		clear: length($list: 10);
-	}
-
-	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-
-	@media screen and (max-width: 600px) {
-		.col-25,
-		.col-75,
-		input[type="submit"] {
-			width: 100%;
-			margin-top: 0;
-		}
-	}
-
-	.modal-footer {
-		font-family: "BitterBold";
-	}
 }
 
 /* MAIN 2*/
@@ -531,44 +391,53 @@
 		.dvPriceText {
 			grid-area: dvPriceText;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			margin-left: 15px;
+			margin-top: 15px;
+			font-family: "BitterBold";
 		}
 		.dvPrice {
 			grid-area: dvPrice;
 			display: grid;
-			padding: 20px;
+			// padding: 20px;
 			font-family: Bitter;
 			float: right;
 			margin-left: 90px;
+			margin-top: 15px;
 		}
 		.dvDeliveryText {
 			grid-area: dvDeliveryText;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
+			margin-left: -30px;
+			margin-top: -20px;
 		}
 		.dvFree {
 			grid-area: dvFree;
 			display: grid;
-			padding: 20px;
+			// padding: 20px;
 			font-family: Bitter;
 			float: right;
 			margin-left: 90px;
+			margin-top: -20px;
 		}
 		.dvTotalPayable {
 			grid-area: dvTotalPayable;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
+			margin-left: 15px;
+			margin-top: -24px;
 		}
 		.dvTotalPrice {
 			grid-area: dvTotalPrice;
 			display: grid;
-			padding: 20px;
-			font-family: BitterBold;
+			// padding: 20px;
+			font-family: "BitterBold";
 			float: right;
 			margin-left: 90px;
+			margin-top: -20px;
 		}
 	}
 	.dvFoot2 {
@@ -585,409 +454,690 @@
 }
 
 // CHECKOUT POPUP (BUY NOW)
-.container {
-	margin: 20px;
+.dvMain-Container-Grid {
+	display: grid;
 	grid-template-columns: auto;
-	grid-template-rows: repeat(9, auto);
+	grid-template-rows: repeat(15, auto);
 	grid-template-areas:
-		"dvSub1"
-		"dvSub2"
-		"dvSub3"
-		"dvSub4"
-		"dvSub5"
-		"dvSub6"
-		"dvSub7"
-		"dvSub8"
-		"dvSub9";
+		"grid-ProductName"
+		"grid-ProdVariInfo"
+		"grid-CustNameQty"
+		"grid-MainAddress"
+		"grid-SavedAddress"
+		"grid-AddNewDeliveryAddr"
+		"grid-FormGroupAddr"
+		"grid-DeliveryOption"
+		"grid-ProdDeliveredDate"
+		"grid-GiftOption"
+		"grid-GiftOptionNote"
+		"grid-MessageTitle"
+		"grid-ProductImages"
+		"grid-PriceListing"
+		"grid-BtnCheckout-Rfq"
+}
 
-	.btn {
-		font-family: "BitterBold";
-		color: white;
-	}
+.btn {
+	font-family: "BitterBold";
+	color: white;
+}
 
-	.modal-header {
-		background: #efbe24;
-		color: white;
-		font-family: "BitterBold";
-		display: table-cell;
-		border-top-right-radius: 15px;
-		border-top-left-radius: 15px;
-	}
+.modal-header {
+	background: #efbe24;
+	color: white;
+	font-family: "BitterBold";
+	display: table-cell;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
 
-	.modal-content {
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-		background: #f1f1f1;
-	}
-	.dvProductName {
-		display: grid;
-		grid-area: dvProductName;
+.modal-content {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	background: #f1f1f1;
+}
+
+
+
+// PRODUCT
+.dvProductName {
+	grid-area: grid-ProductName;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 30px;
+	font-family: "BitterBold";
+}
+
+// MATERIAL SIZE VARIANT INFO
+.dvProdVariInfo {
+	grid-area: grid-ProdVariInfo;
+	.SpecProduct {
+		border: 2px solid#efbe24;
+		width: 448px;
+		border-radius: 5px;
+		padding: 15px;
+		margin-left: -52px;
 		text-align: center;
-		font-family: "BitterBold";
-		padding: 20px;
 	}
-	.dvSub1 {
-		display: grid;
-		grid-area: dvSub1;
-		align-items: center;
-		grid-template-columns: auto;
-		grid-template-rows: auto;
-		grid-template-areas:
-			"dvProductSpec"
-			"dvCustomerName"
-			"dvQty";
-		.dvProductSpec {
+}
+
+// NAME & QTY
+.dvCustNameQty {
+	grid-area: grid-CustNameQty;
+}
+.grid-CustomerNameQty {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "custName Qty qtyLabel";
+	.custName {
+		grid-area: custName;
+		.dvCustomerName {
+			margin-left: 76px;
+		}
+	}
+	.Qty {
+		grid-area: Qty;
+	}
+	.qtyLabel {
+		grid-area: qtyLabel;
+		.btnQtyCount {
+			font-family: BitterBold;
 			display: grid;
-			grid-area: dvProductSpec;
-			border: 2px solid #efbe24;
-			font-family: "Bitter";
-			border-top-right-radius: 5px;
-			border-top-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			grid-template-columns: 50% 50%;
-			grid-template-rows: auto;
-			grid-template-areas: "dvProdSpec1   dvProdSpec2";
-			.dvProdSpec1 {
-				display: grid;
-				grid-area: dvProdSpec1;
-				margin: 20px;
-			}
-			.dvProdSpec2 {
-				display: grid;
-				grid-area: dvProdSpec2;
-				margin-left: 10px;
-				margin-top: 20px;
+			border: none;
+			margin-left: -70px;
+			background-color: #efbe24;
+			color: white;
+			border-radius: 5px;
+			height: 28px;
+			width: 28px;
+			text-align: center;
+		}
+	}
+}
+
+// ADDRESS
+.dvAddressText {
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 34px;
+	margin-bottom: 20px;
+}
+.dvMainAddress {
+	grid-area: grid-MainAddress;
+}
+.grid-MainAddress1 {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "Addr"
+						"btnAddr";
+		.Address { 
+			grid-area: Addr;
+			background:#DBDBDB;
+			text-align: center;
+			width: 400px;
+			border-radius: 5px;
+			margin-left: 48px;
+			height: 120px;
+			padding: 18px;
+		}
+		.btnAddr {
+			grid-area: btnAddr;
+			.btnChange {
+				margin-top: 18px;
+				border-radius: 5px;
+				color: white;
+				border: none;
 			}
 		}
-		.dvCustomerName {
-			display: grid;
-			grid-area: dvCustomerName;
-			font-family: "Bitter";
-			margin-left: 20px;
-			margin-top: 20px;
+}
+
+// SAVED ADDRESS
+.dvSavedAddress {
+	grid-area: grid-SavedAddress;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.grid-SavedAddress1 {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "labelAddr1 labelAddr2"
+						"btnAddr1 btnAddr2";
+						.labelAddress1 {
+							grid-area:labelAddr1 ;
+							background:white;
+							font-family: "Bitter";
+							border-radius: 5px;
+							margin-left: 15px;
+							width: 220px;
+							height: 58px;
+						}
+						.labelAddress2 {
+							grid-area: labelAddr2;
+							background:white;
+							font-family: "Bitter";
+							border-radius: 5px;
+							margin-left: 15px;
+							width: 220px;
+							height: 58px;
+						}
+						.btnAddress1 {
+							grid-area: btnAddr1;
+							.btnDeliverLeft {
+								margin-top: 10px;
+								color:white;
+								border-radius: 5px;
+								font-family: "Bitter";
+								width: 232px;
+								padding: 5px;
+								border: none;
+							}
+							
+						}
+						.btnAddress2 {
+							grid-area: btnAddr2;
+							.btnDeliverRight {
+								margin-top: 10px;
+								color:white;
+								border-radius: 5px;
+								font-family: "Bitter";
+								width: 232px;
+								padding: 5px;
+								border: none;
+							}
+						}
+}
+
+// ADD NEW ADDR BTN
+.dvAddNewAddrBtn {
+	grid-area: grid-AddNewDeliveryAddr;
+	.btnNewAddr {
+		margin-left: 10px;
+		border-radius: 5px;
+		margin-top: 20px;
+		width: 480px;
+		margin-bottom: 15px;
+		border: none;
+	}
+}
+// FORM GROUP ADDR
+.dvFormGroup {
+	grid-area: grid-FormGroupAddr;
+	background: #DBDBDB;
+	margin-left: 10px;
+	width: 480px;
+	border-radius: 5px;
+}
+.grid-Addr-Form {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "left-Addr-Form Right-Addr-Form"
+						"btnSave btnSave";
+	.grid-left-Form {
+		grid-area: left-Addr-Form;
+		.dvContactName {
+			padding: 10px;
+		}
+		.card-input-style-address {
+			border-radius: 5px;
+			border: none;
+			margin-left: 2px;
+			width: 215px;
+		}
+		.dvAddr2 {
+			padding: 10px;
+		}
+		.dvCountry {
+			padding: 10px;
+		}
+		.dvCity {
+			padding: 10px;
+		}
+		.dvEmail {
+			padding: 10px;
+		}
+	}
+	.grid-Right-Form {
+		grid-area: Right-Addr-Form;
+		.dvAddr1 {
+			padding: 10px;
+		}
+		.card-input-style-address {
+			border-radius: 5px;
+			border: none;
+			margin-left: 2px;
+			width: 215px;
+		}
+		.dvState {
+			padding: 10px;
+		}
+		.dvPincode {
+			padding: 10px;
+		}
+		.dvDistrict {
+			padding: 10px;
+		}
+		.dvPhone {
+			padding: 10px;
+		}
+	}
+	.btnSaveForm {
+		grid-area: btnSave;
+		.btnSave1 {
+			margin-left: 200px;
+			border-radius: 5px;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			width: 80px;
+			color: white;
+			border: none;
+		}
+	}
+}
+
+// DELIVER OPTION
+.dvDeliveryText {
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.dvDeliveryOption {
+	grid-area: grid-DeliveryOption;
+}
+.grid-Deli-Option {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "left-DeliOption Med-DeliOption Right-DeliOption";
+	.grid-left-DeliOption {
+		grid-area: left-DeliOption;
+		margin-left: 52px;
+	}
+	.grid-Med-DeliOption {
+		grid-area: Med-DeliOption;
+	}
+	.grid-Right-DeliOption {
+		grid-area: Right-DeliOption;
+	}
+}
+
+//PRODUCT DELIVERED DATE
+.dvProdDeliveredDate {
+	grid-area: grid-ProdDeliveredDate;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.grid-Prod-Deli-Date {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "dvDeliveryDate dvPrice"
+						"dvDeliveryDate1 dvApplyBtn";
+						.grid-Deli-Date {
+							grid-area: dvDeliveryDate;
+							color: #009145;
+							margin-left: -40px;
+						}
+						.grid-Price {
+							grid-area: dvPrice;
+							color: #009145;
+							margin-left: -80px;
+						}
+						.grid-Deli-Date1 {
+							grid-area: dvDeliveryDate1;
+							margin-left: -35px;
+							.dateText {
+								border-color: #EFBE24;
+							}
+						}
+						.grid-ApplyBtn {
+							grid-area: dvApplyBtn;
+							.btnApply {
+								border-radius: 5px;
+								color:white;
+								font-family: "Bitter";
+								margin-left: -198px;
+								border: none;
+							}
+						}
+}
+
+// GIFT OPTION
+.dvGiftOption {
+	grid-area: grid-GiftOption;
+}
+.grid-GiftOption1 {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "dvGiftOptionText dvGiftOptionToggle";
+	.grid-Text-GiftOption {
+		grid-area: dvGiftOptionText;
+		margin-top: 52px;
+		margin-left: 44px;
+	}
+	.grid-GiftOptionToggle {
+		grid-area: dvGiftOptionToggle;
+			.btnGiftOption {
+				margin-left: -144px;
+				margin-top: 54px;
+				.switchActive {
+					position: relative;
+					display: inline-block;
+					width: 68px;
+					height: 38px;
+					margin-left: -6%;
+					margin-bottom: -2px;
+					margin-top: -8px;
+				}
+		
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+		
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+					background:white;
+				}
+		
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+		
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+		
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+		
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+		
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+		
+				.slider.round:before {
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+// GIFT NOTE
+.dvGiftNote {
+	grid-area: grid-GiftOptionNote;
+}
+.grid-GiftOptionNote1 {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "dvGiftNoteText"
+						"dvGiftNoteCard";
+						.grid-dvGiftNoteText {
+							grid-area: dvGiftNoteText;
+						}
+						.grid-dvGiftNoteCard {
+							grid-area: dvGiftNoteCard;
+							.Gift-Note-Style {
+							}
+						}
+}
+
+// MESSAGE TITLE 
+.dvMessageTitle {
+	grid-area: grid-MessageTitle;
+	.MsgTitleText {
+	text-align: center;
+	margin-top: 40px;
+	border: 2px solid#efbe24;
+	width: 330px;
+	border-radius: 5px;
+	padding: 15px;
+	margin-left: 80px;
+	}
+	
+}
+
+// PRODUCT IMAGES
+.dvproductImages {
+	grid-area: grid-ProductImages;
+	.prodTextImg {
+		text-align: center;
+		font-family: "BitterBold";
+		margin-top: 16px;
+	}
+}
+
+
+// PRICELISTING
+.dvPriceListing {
+	grid-area: grid-PriceListing;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.dvPriceDetails {
+	display: grid;
+	grid-template-columns: auto 20% auto;
+	grid-template-rows: repeat(7, auto);
+	grid-template-areas:
+		"Left-BasePrice	grid-Med	Right-BasePrice"
+		"Left-ShipppingPrice	grid-Med1	Right-ShippingPrice"
+		"Left-DiscPrice	grid-Med2	Right-DiscPrice"
+		"Left-VariancePrice	grid-Med3	Right-VariancePrice"
+		"Left-Qty	grid-Med4	Right-Qty"
+		"Left-Tax	grid-Med5	Right-Tax"
+		"Left-Total	grid-Med6	Right-Total";
+		.dvBasePrice {
+			grid-area: Left-BasePrice;
+			.BasePriceText {
+				color:#807b7b;
+				margin-left: 52px;
+				font-family: "Bitter";
+			}
+		}
+		.dvShippingPrice {
+			grid-area: Left-ShipppingPrice;
+			.ShippingText {
+				color:#807b7b;
+				margin-left: 86px;
+				font-family: "Bitter";
+				margin-top: -10px;
+			}
+		}
+		.dvDiscPrice {
+			grid-area: Left-DiscPrice;
+			.DiscText {
+				color:#807b7b;
+				margin-left: 40px;
+				font-family: "Bitter";
+				margin-top: -10px;
+			}
+		}
+		.dvVariancePrice {
+			grid-area: Left-VariancePrice;
+			.VarianceText {
+				color:#807b7b;
+				margin-left: 87px;
+				font-family: "Bitter";
+				margin-top: -10px;
+			}
 		}
 		.dvQty {
-			display: grid;
-			grid-area: dvQty;
-			margin-left: 250px;
+			grid-area: Left-Qty;
+			.QtyText {
+				color:#807b7b;
+				margin-left: 1px;
+				font-family: "Bitter";
+				margin-top: -10px;
+			}
+		}
+		.dvTax {
+			grid-area: Left-Tax;
+			.TaxText {
+				color:#807b7b;
+				margin-left: 2px;
+				font-family: "Bitter";
+				margin-top: -10px;
+			}
+		}
+		.dvTotal {
+			grid-area: Left-Total;
+			.TotalText {
+				margin-left: 16px;
+			}
+		}
+
+		.dvMed {
+			grid-area: grid-Med;
+			.dot {
+				color:#807b7b;
+				margin-left: -172px;
+			}
+		}
+		.dvMed1 {
+			grid-area: grid-Med1;
+			.dot1 {
+				color:#807b7b;
+				margin-left: -172px;
+				margin-top: -10px;
+			}
+		}
+		.dvMed2 {
+			grid-area: grid-Med2;
+			.dot2 {
+				color:#807b7b;
+				margin-left: -172px;
+				margin-top: -10px;
+			}
+		}
+		.dvMed3 {
+			grid-area: grid-Med3;
+			.dot3 {
+				color:#807b7b;
+				margin-left: -172px;
+				margin-top: -10px;
+			}
+		}
+		.dvMed4 {
+			grid-area: grid-Med4;
+			.dot4 {
+				color:#807b7b;
+				margin-left: -172px;
+				margin-top: -10px;
+			}
+		}
+		.dvMed5 {
+			grid-area: grid-Med5;
+			.dot5 {
+				color:#807b7b;
+				margin-left: -172px;
+				margin-top: -10px;
+			}
+		}
+		.dvMed6 {
+			grid-area: grid-Med6;
+			.dot6 {
+				margin-left: -172px;
+
+			}
+		}
+		.dvRight-BasePrice {
+			grid-area: Right-BasePrice;
+			color:#807b7b;
+			margin-left: -150px;
 			font-family: "Bitter";
-			grid-auto-columns: auto;
-			grid-template-areas: "btnQtyCount";
-			.btnQtyCount {
-				grid-area: btnQtyCount;
-				font-family: BitterBold;
-				display: grid;
-				border: none;
-				margin-left: 50px;
-				background-color: #efbe24;
-				color: white;
-				border-radius: 5px;
-				height: 30px;
-				width: 30px;
-			}
 		}
-	}
-	.dvAddress {
-		text-align: center;
-		font-family: "BitterBold";
-	}
-	.dvSub2 {
-		display: grid;
-		grid-area: dvSub2;
-		background-color: #dbdbdb;
-		grid-template-rows: auto;
-		grid-template-columns: auto;
-		grid-template-areas:
-			"dvAddrText"
-			"btnAddrChange";
-		.dvAddrText {
-			display: grid;
-			grid-area: dvAddrText;
-			margin-top: 10px;
+		.dvRight-ShippingPrice {
+			grid-area: Right-ShippingPrice;
+			color:#807b7b;
+			margin-left: -150px;
 			font-family: "Bitter";
-			text-align: center;
+			margin-top: -10px;
 		}
-		.btnAddrChange {
-			display: grid;
-			grid-area: btnAddrChange;
-			margin-left: 43%;
-			margin-bottom: 10px;
-			width: 20px;
-			.btnChange {
-				color: white;
-				font-family: "BitterBold";
-			}
+		.dvRight-DiscPrice { 
+			grid-area: Right-DiscPrice;
+			color:#807b7b;
+			margin-left: -150px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-	}
-	.dvSavedAddr {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub3 {
-		display: grid;
-		grid-area: dvSub3;
-		grid-template-rows: repeat(2, auto);
-		grid-template-columns: 50% 50%;
-		grid-template-areas:
-			"dvCardAddrLeft dvCardAddrRight"
-			"btnCardAddrLeft btnCardAddrRight";
-		.dvCardAddrLeft {
-			display: grid;
-			grid-area: dvCardAddrLeft;
-			background-color: white;
-			text-align: center;
-			padding: 10px;
+		.dvRight-VariancePrice {
+			grid-area: Right-VariancePrice;
+			color:#807b7b;
+			margin-left: -150px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.btnCardAddrLeft {
-			display: grid;
-			grid-area: btnCardAddrLeft;
-			.btnDeliverLeft {
-				color: white;
-				font-family: "BitterBold";
-			}
+		.dvRight-Qty {
+			grid-area: Right-Qty;
+			color:#807b7b;
+			margin-left: -150px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.dvCardAddrRight {
-			display: grid;
-			grid-area: dvCardAddrRight;
-			background-color: white;
-			text-align: center;
-			padding: 10px;
+		.dvRight-Tax {
+			grid-area: Right-Tax;
+			color:#807b7b;
+			margin-left: -150px;
+			font-family: "Bitter";
+			margin-top: -10px;
 		}
-		.btnCardAddrRight {
-			.btnDeliverRight {
-				color: white;
-				font-family: "BitterBold";
-			}
+		.dvRight-Total {
+			grid-area: Right-Total;
+			margin-left: -150px;
 		}
-	}
-	.btnNewAddr {
-		color: white;
-		font-family: "BitterBold";
-		margin-top: 10px;
-		margin-bottom: 10px;
-		margin-left: 20px;
-		width: 90%;
-	}
-	.dvSub4 {
-		grid-area: dvSub4;
-	}
-	.grid-dvSub4 {
-		display: grid;
-		background-color: #dbdbdb;
-		grid-template-columns: 50% 50%;
-		grid-template-rows: repeat(3, auto);
-		grid-template-areas:
-			"grid-FormLeft grid-FormRight"
-			"btnSaveForm"
-			"..";
-		.grid-FormLeft {
-			// background: #4caf50;
-		}
-		.grid-FormRight {
-			// background: #add633;
-		}
+}
 
-		.btnSaveForm {
-			display: grid;
-			grid-area: btnSaveForm;
-			width: 60px;
-			margin-top: 10px;
-			margin-left: -300px;
-
-			.btnSave {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
+// BTN CHECKOUT / RFQ
+.dvBtnCheckout-Rfq {
+	grid-area: grid-BtnCheckout-Rfq;
+	.btnPayment {
+		margin-left: 210px;
+		border-radius: 5px;
+		color:white;
+		font-family: "Bitter";
+		padding: 5px;
+		border: none;
+		margin-bottom: 100px;
+		width: 120px;
 	}
-	.dvDeliveryText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub5 {
-		display: grid;
-		grid-area: dvSub5;
-		grid-template-columns: auto;
-		grid-template-rows: auto auto auto;
-		grid-template-areas: "btnRadio1 btnRadio2 btnRadio3";
-		.btnRadio1 {
-			display: grid;
-			grid-area: btnRadio1;
-		}
-		.btnRadio2 {
-			display: grid;
-			grid-area: btnRadio2;
-		}
-		.btnRadio3 {
-			display: grid;
-			grid-area: btnRadio3;
-			margin-left: 25px;
-		}
-	}
-	.dvProdDeliText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub6 {
-		display: grid;
-		grid-area: dvSub6;
-		grid-template-rows: auto;
-		grid-template-columns: auto;
-		grid-template-areas:
-			"dvDisplayDate dvDisplayPrice"
-			"dvDate btnApply";
-		.dvDisplayDate {
-			display: grid;
-			grid-area: dvDisplayDate;
-		}
-		.dvDisplayPrice {
-			display: grid;
-			grid-area: dvDisplayPrice;
-		}
-		.dvDate {
-			display: grid;
-			grid-area: dvDate;
-			margin-left: 20px;
-			.dateText {
-				border: 2px solid #efbe24;
-			}
-		}
-		.dvApply {
-			display: grid;
-			grid-area: dvApply;
-			.btnApply {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-	}
-	.dvSub7 {
-		.dvGiftOptionText {
-		}
-		.btnGiftOption {
-			.switch {
-				position: relative;
-				display: inline-block;
-				width: 60px;
-				height: 34px;
-			}
-
-			.switch input {
-				opacity: 0;
-				width: 0;
-				height: 0;
-			}
-
-			.slider {
-				position: absolute;
-				cursor: pointer;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background-color: #ccc;
-				-webkit-transition: 0.4s;
-				transition: 0.4s;
-			}
-
-			.slider:before {
-				position: absolute;
-				content: "";
-				height: 26px;
-				width: 26px;
-				left: 4px;
-				bottom: 4px;
-				background-color: white;
-				-webkit-transition: 0.4s;
-				transition: 0.4s;
-			}
-
-			input:checked + .slider {
-				background-color: #2196f3;
-			}
-
-			input:focus + .slider {
-				box-shadow: 0 0 1px #2196f3;
-			}
-
-			input:checked + .slider:before {
-				-webkit-transform: translateX(26px);
-				-ms-transform: translateX(26px);
-				transform: translateX(26px);
-			}
-
-			/* Rounded sliders */
-			.slider.round {
-				border-radius: 34px;
-			}
-
-			.slider.round:before {
-				border-radius: 50%;
-			}
-		}
-		.dvNote {
-			.Gift-Note-Style {
-				border: none;
-				background: #dbdbdb;
-				width: 450px;
-				margin-left: 20px;
-				height: 80px;
-			}
-		}
-		.dvNoteText {
-		}
-		.dvMessageTitle {
-		}
-	}
-	.dvProdText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub8 {
-		.dvCheckImg1 {
-			width: fit-content;
-			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-		.dvCheckImg2 {
-			width: fit-content;
-			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-		.dvCheckImg3 {
-			width: fit-content;
-			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-	}
-	.dvPriceVariText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub9 {
-		.dvPriceList {
-			text-align: center;
-		}
-		.btnCheckOut {
-			margin-top: 10px;
-			margin-left: 40%;
-			.btnPayment {
-				color: white;
-				font-family: "BitterBold";
-				border-radius: 5px;
-			}
-		}
+	.btnRfq {
+		margin-left: 188px;
+		border-radius: 5px;
+		color:white;
+		font-family: "Bitter";
+		padding: 5px;
+		border: none;
+		margin-bottom: 100px;
+		width: 156px;
 	}
 }

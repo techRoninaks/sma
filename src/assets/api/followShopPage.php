@@ -6,7 +6,14 @@
 
     $sql_query="INSERT INTO `follow`(shopid, userid) VALUES ('$shopId','$userId')";
     $result = mysqli_query($con2, $sql_query);
-
-    echo $result;
-
+    if(! $result)
+    {
+        $status="Error";
+        echo json_encode($status);
+    }
+    else
+    {
+        $status="Success";
+        echo json_encode($status);
+    }
 ?>

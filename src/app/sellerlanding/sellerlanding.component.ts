@@ -48,13 +48,15 @@ export class SellerlandingComponent implements OnInit {
 
 	constructor(private router: Router, private data: DataService) { }
 	ngOnInit() {
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
 		// console.log(Object.keys(this.repeatPost));
 		// this.testimonal = 0;
 		this.vidPlay = 1;
 		this.first = 1;
 		// { number_faq:0};
 		this.tokenFaq = 0;
-		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display = "none";
 
 		document.getElementById("imgC").style.display = "none";
 		this.testimonal1 = 0;
@@ -291,6 +293,7 @@ export class SellerlandingComponent implements OnInit {
 	filterFaq() {
 		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("searchFaq")).value;
 		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("searchFaq")).value.length;
+		
 		if (faqSearchInputLength >= 3) {
 			this.tokenFaq = { number_faq:1, filterFaq: faqSearchInput};
 			this.data.getFaqSiteFiltered(this.tokenFaq).subscribe(
@@ -299,6 +302,14 @@ export class SellerlandingComponent implements OnInit {
 				}
 			);
 			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+		else if(faqSearchInputLength <3){
+			this.tokenFaq = 1;
+			this.data.getFaqSite(this.tokenFaq).subscribe(
+				data => {
+					this.faqSite = data;
+				}
+			);
 		}
 	}
 	submitFaq() {
@@ -311,4 +322,9 @@ export class SellerlandingComponent implements OnInit {
 		}
 		(<HTMLInputElement><any>document.getElementById("submitFaq")).value="";
 	}
+	ngOnDestroy() {
+		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
+	}	
 }

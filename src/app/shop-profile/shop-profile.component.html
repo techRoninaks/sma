@@ -19,8 +19,8 @@
                 <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
             </div>
             <div class="shopInfo">
-                <div id="sellerBtn" style="transform: translate(0px,-50px);float:right;display:none;">
-                    <button [routerLink]="['/managepage']" [queryParams]="{shop_id:token}" style="background-color:#efbe24;color:white;">go to manage page</button>
+                <div id="sellerBtn" style="transform: translate(0px,-25px);float:right;display:none;">
+                    <button [routerLink]="['/managepage']" [queryParams]="{shop_id:token}" style="background-color:#efbe24;color:white;border-radius:5px; border:none;box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);">go to manage page</button>
                 </div>
                 <div class="shopStarFoll">
                     <div class="shopStar">
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <div class="shopDetails">
-                    <h4>{{shopData.shopName}}</h4>
-                    <h5>{{selName}}</h5>
+                    <p class="headClass" style="font-size: 20px;text-align: inherit;">{{shopData.shopName}}</p>
+                    <p>{{selName}}</p>
                     <!-- <a>{{mostSelling[0].name}}</a> -->
                 </div>
                 <div class="shopBtnInfo">
@@ -49,20 +49,20 @@
                     <div class="dvShipsFollow">
                         Ships to:<a>All over India</a><br>
                         <ng-container *ngIf="folResult; else notFollowing">
-                            <button type="button" class="btnFollowShop" (click)="unfollowShop();"><img
-                                    class="followIcon" src="assets/icons/resources (IL)-04.png">Unfollow</button>
+                            <button type="button" class="btnFollowShop" (click)="unfollowShop();">Unfollow Shop</button>
+                            <!-- <img class="followIcon" src="assets/icons/resources (IL)-04.png"> -->
                         </ng-container>
                         <ng-template #notFollowing>
-                            <button type="button" class="btnFollowShop" (click)="followShop();"><img class="followIcon"
-                                    src="assets/icons/resources (IL)-04.png">Follow</button>
+                            <button type="button" class="btnFollowShop" (click)="followShop();">Follow Shop</button>
+                            <!-- <img class="followIcon" src="assets/icons/resources (IL)-04.png"> -->
                         </ng-template>
                     </div>
                 </div>
             </div>
         </div>
         <div class="shopBio">
-            <h3>Bio</h3>
-            <p>{{shopData.descriptionShop}}</p>
+            <p class="bioHeader">Bio</p>
+            <p class="bioTxt policies">{{shopData.descriptionShop}}</p>
         </div>
     </div>
     <!-- shop products -->
@@ -98,7 +98,7 @@
                         </div>
                         <div class="dvRating">
                             <div>
-                                <i class="fa fa-star" *ngFor="let item of filledStar"></i>
+                                <i class="fa fa-star" *ngFor="let item of filledStar" style="color: #efbe24"></i>
                                 <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
                             </div>
                         </div>
@@ -122,16 +122,16 @@
     <!-- shop shipment info -->
     <div class="shopShipment">
         <img src="assets/icons/resources (IL)-18.png">
-        <h2>SHIPMENT INFO</h2>
+        <p class="headClass">SHIPMENT INFO</p>
         <div class="dvForm">
             <form>
-                SHIPPING<input type="radio" value="oneDay" class="shipDelivery" name="delivery" disabled="true"
-                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery" name="delivery"
-                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery"
+                SHIPPING<input type="radio" value="oneDay" class="shipDelivery radio-custom" name="delivery" disabled="true"
+                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery radio-custom" name="delivery"
+                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery radio-custom"
                     name="delivery" disabled="true" id="pck">
                 <br>
-                <br> Average Processing Time : <a>5days</a><br> Average Shipping Time : <a> 5days</a><br> Average
-                Response Time : <a> 5days</a><br>
+                <br> Average Processing Time : <span class="shipmentDetails">5days</span><br><br> Average Shipping Time &nbsp;&nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br><br> Average
+                Response Time &nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br>
             </form>
         </div>
 
@@ -140,30 +140,30 @@
     <div class="shopPolicies">
         <div class="prodPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>PRODUCT POLICIES</h2>
-            <p>{{shopData.productPolicy}}</p>
+            <p class="headClass">PRODUCT POLICIES</p>
+            <p class="policies">{{shopData.productPolicy}}</p>
         </div>
         <div class="shopPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHOP POLICIES</h2>
-            <p>{{shopData.shopPolicy}}</p>
+            <p class="headClass">SHOP POLICIES</p>
+            <p class="policies">{{shopData.shopPolicy}}</p>
         </div>
         <div class="shipPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>SHIP POLICIES</h2>
-            <p>{{shopData.shipPolicy}}</p>
+            <p class="headClass">SHIP POLICIES</p>
+            <p class="policies">{{shopData.shipPolicy}}</p>
         </div>
         <div class="retPolicy">
             <img src="assets/icons/resources (IL)-18.png">
-            <h2>RETURN POLICIES</h2>
-            <p>{{shopData.returnPolicy}}</p>
+            <p class="headClass">RETURN POLICIES</p>
+            <p class="policies">{{shopData.returnPolicy}}</p>
         </div>
     </div>
 
     <!-- shop ratings and reviews -->
     <div class="shopRatingReview">
         <img src="assets/icons/resources (IL)-18.png">
-        <h2>RATING & REVIEWS</h2>
+        <p class="headClass">RATING & REVIEWS</p>
         <div class="rating">
             <div class="inner">
                 <div class="rating">
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                     <div class="rating-users">
-                        <i class="icon-user"></i> {{shopData.ratingCountShop}}
+                        <i class="icon-user"></i> {{shopData.ratingCountShop}}<span> Ratings</span>
                     </div>
                 </div>
 
@@ -244,19 +244,57 @@
                 <p class="rTitle">{{ratingReviewShop[item].reviewTitle}}</p>
                 <p class="rDesc">{{ratingReviewShop[item].review}}</p>
                 <div class="starLikes">
-                    <img class="icLike" id="likeImg" (click)="likeCount(ratingReviewShop[item].reviewId);"
+                    <img class="icLike" id="likeImg_{{ratingReviewShop[item].reviewId}}" (click)="likeCount(ratingReviewShop[item].reviewId);"
                         src="assets/icons/resources (IL)-10.png">
-                    <p class="likeCount">{{ratingReviewShop[item].likes}}</p>
-                    <img class="icDislike" id="dislikeImg" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
+                    <p class="likeCount" id="likeCount_{{ratingReviewShop[item].reviewId}}">{{ratingReviewShop[item].likes}}</p>
+                    <img class="icDislike" id="dislikeImg_{{ratingReviewShop[item].reviewId}}" (click)="dislikeCount(ratingReviewShop[item].reviewId);"
                         src="assets/icons/resources (IL)-11.png">
-                    <p class="dislikeCount">{{ratingReviewShop[item].dislikes}}</p>
+                    <p class="dislikeCount" id="dislikeCount_{{ratingReviewShop[item].reviewId}}">{{ratingReviewShop[item].dislikes}}</p>
                     <button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
-                    <div (load)="reviewRatings(item);">
+                    <div *ngIf="ratingReviewShop[item].rating == 1"> 
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 2"> 
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 3"> 
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 4"> 
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <div *ngIf="ratingReviewShop[item].rating == 5"> 
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i>
+                        <i class="fa fa-star active" style="color: #efbe24"></i> 
+                    </div>
+                </div>
+                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview2.png'">
+                  
+                    <!-- <div (load)="reviewRatings(item);">
                         <i class="fa fa-star active" *ngFor="let x of filledStarRat"></i>
                         <i class="fa fa-star-o" *ngFor="let x of unFilledStarRat"></i>
                     </div>
                 </div>
-                <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg">
+                <img class="revIcon" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg"> -->
             </div>
         </div>
     </div>
@@ -320,8 +358,11 @@
                                 #fileInputRfq >
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
+                                <div *ngIf="imageUploaded == 1">
+                                    <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                                </div>
                         </div>
-                        <button class="btnRfq" (click)="rfqSubmit();">Apply</button>
+                        <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']" >Apply</button>
                     </div>
                 </div>
             </div>

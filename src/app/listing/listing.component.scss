@@ -1,5 +1,20 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+// Color Palette
 
+$smaYellow: #efbe24;
+$smaLightGray: #f1f1f1;
+$smaGray: #dbdbdb;
+$smaGreen: #009145;
+$smaRed: #ff1d25;
+$smaDarkGray: #333333;
+// font-family: BitterBold;
+
+// Font Sizes
+
+$Header: 30px;
+$SubHeader: 25px;
+$Text: 20px;
+$SubText: 18px;
 /* Small devices (portrait tablets and large phones, 600px and up) */
 
 @mixin sm {
@@ -81,6 +96,55 @@
 		grid-template-rows: repeat(5, auto);
 		grid-template-areas: "selDesc " "quanDel" "policy" "review" "question";
 	}
+	.headClass {
+		font-family: BitterBold;
+		font-size: $Header;
+		text-align: center;
+	}
+	.shipmentDetails {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+		border: 2px solid #949494;
+		padding: 3px 100px;
+		background-color: white;
+	}
+	.policies {
+		font-family: Bitter;
+		font-size: $SubText;
+		color: #646464;
+	}
+	.descD {
+		font-family: BitterBold;
+		font-size: $SubText;
+		color: #333333;
+	}
+	.btnStyle{
+		background-color: #efbe24;
+		border: none;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+		height:30px;
+		// padding:6px 25px 6px 25px;
+		&:hover {
+			cursor: pointer;
+			background-color: #ddb01d;
+		}
+		color: white;
+		font-family: BitterBold;
+		font-size: 16px;
+	}
+	.timeStyle{
+		box-shadow: 0px 6px 10px -4px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
+		padding: 10px 60px 0px 45px;
+		width: 28rem;
+		background-color:whitesmoke;
+		margin-top: 15px;
+		color: #333333;
+		font-family: Bitter;
+		font-size: 18px;
+	}
 }
 
 .divSelDesc {
@@ -142,14 +206,27 @@
 				grid-area: follow;
 				margin: 0.5rem 0rem 0rem 2rem;
 				.btnFollow {
-					width: 125px;
-					margin: auto;
+					width: 95px;
 					z-index: 0;
-					background-color: #ff1d25;
+					background-color:#ff1d25;
+					padding: 5px 0px 5px 30px;
+					font-size: 14px;
+					color:white;
+					font-family: BitterBold;
+					margin-left: 19px;
+					border: none;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					border-radius: 2px;
+					height:30px;
+					// padding:6px 25px 6px 25px;
+					&:hover {
+						cursor: pointer;
+						background-color: #ec0e15;
+					}
 				}
 				img {
 					z-index: 1;
-					transform: translate(-2rem, 2px);
+					transform: translate(-25px, 2px);
 					position: absolute;
 					height: 20px;
 				}
@@ -177,13 +254,14 @@
 				.bannerProduct {
 					z-index: 1;
 					// transform: translate(auto, -265%);
-					transform: translate(19rem, -20rem);
+					// transform: translate(19rem, -20rem);
 					// transform: translate(-7.5rem, -1rem);
 					position: absolute;
 					// grid-column-end: 3;
 					display: block;
-					margin-left: auto;
-					margin-right: auto;
+					// margin-left: auto;
+					// margin-right: auto;
+					margin: -20rem 0rem 0rem 19.25rem;
 					// margin-top: 10%;
 				}
 			}
@@ -203,8 +281,9 @@
 				scrollbar-width: thin;
 				display: grid;
 				grid-template-rows: auto;
+				margin-left: 5px;
 				.smallImage {
-					height: 5rem;
+					height: 6rem;
 					// width: 5rem;
 					padding-bottom: 0.5rem;
 				}
@@ -217,15 +296,17 @@
 			grid-template-areas: "btnRfq . btnAtcart ";
 			.btnRfq {
 				grid-area: btnRfq;
-				width: 125px;
-				margin: auto;
-				background-color: #efbe24;
+				width: 110px;
+				// margin: auto;
+				// background-color: #efbe24;
+				margin: 10px 50px;
+				height: 30px;
 			}
 			.btnAtcart {
 				grid-area: btnAtcart;
-				width: 125px;
-				margin: auto;
-				background-color: #efbe24;
+				width: 130px;
+				margin: 10px 15px;
+				// background-color: #efbe24;
 			}
 		}
 	}
@@ -243,10 +324,27 @@
 		box-sizing: border-box;
 		align-self: center;
 		margin: 5% 10% 5% 10%;
+		scrollbar-width: thin;
 		width: auto;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
 		.desc {
 			margin: 1rem auto auto 2rem;
 			width: 28rem;
+			ul {
+				list-style: disc;
+				margin-left: -35px;
+				color: lightgray;
+			}
+
+			// ul li::before {
+			// 	content: "\f111";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+			// 	color: #646464; /* Change the color */
+			// 	font-weight: bold; /* If you want it to be bold */
+			// 	display: inline-block; /* Needed to add space between the bullet and the text */
+			// 	width: 1em; /* Also needed for space (tweak if needed) */
+			// 	margin-left: -1em; /* Also needed for space (tweak if needed) */
+			// }
 			.longD {
 				#lDesc {
 					height: 6rem;
@@ -357,16 +455,39 @@
 	}
 	.pConfirmation {
 		grid-area: pConfirmation;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
+		padding: 10px 60px 0px 45px;
+		width: 28rem;
+		.orderConf{
+			display:inline;
+		}
+		.confTime{
+			background-color:
+			white;
+			height: 25px;
+			width: 50px;
+			display: inline-block;
+			text-align: center;
+			font-family:BitterBold;
+		}
 	}
 	.pDelivery {
 		grid-area: pDelivery;
 		img {
+			// display: block;
+			// margin-left: auto;
+			// margin-right: auto;
+			// width: 300px;
+			// z-index: 0;
+			// transform: translate(-10rem, 2.75rem);
 			display: block;
-			margin-left: auto;
+			margin-left: 10rem;
 			margin-right: auto;
-			width: 300px;
+			width: 310px;
 			z-index: 0;
-			transform: translate(-10rem, 2.75rem);
+			-webkit-transform: translate(-10rem, 2.75rem);
+			transform: translate(-9.75rem, 3rem);
 		}
 	}
 	.pCourier {
@@ -413,7 +534,7 @@
 			margin-right: auto;
 			width: 300px;
 			z-index: 0;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 		}
 		h2 {
 			text-align: center;
@@ -433,7 +554,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -455,7 +576,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -478,7 +599,7 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 300px;
-			transform: translate(0rem, 2rem);
+			transform: translate(0rem, 3rem);
 			z-index: 0;
 			// position: absolute;
 		}
@@ -494,27 +615,20 @@
 		}
 	}
 }
-
 .divReview {
-	// margin: 5% 5% auto 5%;
-	width: 100%;
 	grid-area: review;
-	background-color: white;
-	// margin-left: 10%;
-	// margin-right: 10%;
-	// overflow: auto;
-	// margin-top: 2%;
-	// background-color: rgb(241, 241, 241);
+	// background-color: whitesmoke;
+	width: 100%;
 	height: auto;
-	box-sizing: border-box;
-	color: #737373;
-	font-weight: 300;
+	font-weight: 300px;
+	// margin-top: 5%;
+	// margin-bottom: 5%
 	img {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
 		width: 300px;
-		transform: translate(0rem, 2rem);
+		transform: translate(0rem, 3rem);
 		z-index: 0;
 	}
 	h2 {
@@ -522,133 +636,193 @@
 		transform: translate(0px, -0.45em);
 		z-index: 1;
 	}
+	.reviewTop {
+		// background-image: linear-gradient(white, whitesmoke);
+	}
 	.rating {
 		grid-area: rating;
-		width: 400px;
+		width: 30rem;
 		margin: 0 auto;
-		margin-top: 3em;
-		background-color: #efefef;
+		margin-top: 2em;
+		// background-color: white;
 		padding: 4px;
-		margin-bottom: 3em;
+		margin-bottom: 2em;
 		.inner {
+			// padding: 1em;
+			// background-color: white;
+			// overflow: hidden;
+			// position: relative;
+			// -webkit-border-radius: 4px;
+			// -moz-border-radius: 4px;
+			// border-radius: 4px;
 			padding: 1em;
-			background-color: white;
+			background-color: whitesmoke;
 			overflow: hidden;
-			position: relative;
-			-webkit-border-radius: 4px;
-			-moz-border-radius: 4px;
-			border-radius: 4px;
+			width: 30rem;
+			height: 15rem;
+			border-radius: 15px;
 		}
 		.rating {
 			float: left;
-			width: 45%;
-			margin-right: 5%;
+			width: 50%;
+			// margin-right: 5%;
 			text-align: center;
+			background-color: transparent;
+			border-right: 2px solid #dbdbdb;
 		}
+
 		.rating-num {
 			color: #333333;
-			font-size: 72px;
-			font-weight: 100;
+			font-size: 60px;
+			// font-weight: 100;
 			line-height: 1em;
+			font-family: Bitter;
 		}
+
 		.rating-stars {
 			font-size: 20px;
 			color: #e3e3e3;
 			margin-bottom: 0.5em;
 		}
 		.rating-stars .active {
-			color: #ffd000;
+			color: #737373;
 		}
+
 		.rating-users {
-			font-size: 14px;
+			font-size: 16px;
+			.icon-user {
+			}
 		}
+
 		.histo {
 			float: left;
-			width: 50%;
+			width: 45%;
 			font-size: 13px;
-			transform: translate(0px, 50px);
+			transform: translate(0px, 34px);
+			margin-left: 20px;
 		}
+
 		.histo-star {
 			float: left;
 			padding: 3px;
 		}
+
 		.histo-rate {
 			width: 100%;
 			display: block;
 			clear: both;
 		}
+
 		.bar-block {
 			margin-left: 5px;
 			color: black;
 			display: block;
 			float: left;
-			width: 75%;
+			width: 80%;
 			position: relative;
 		}
+
 		.bar {
 			padding: 4px;
 			display: block;
 		}
+
 		#bar-five {
 			width: 0;
 			background-color: #9fc05a;
 		}
+
 		#bar-four {
 			width: 0;
 			background-color: #add633;
 		}
+
 		#bar-three {
 			width: 0;
 			background-color: #ffd834;
 		}
+
 		#bar-two {
 			width: 0;
 			background-color: #ffb234;
 		}
+
 		#bar-one {
 			width: 0;
 			background-color: #ff8b5a;
-			margin-left: 2px;
+			// margin-left: 2px;
 		}
 	}
 	.review {
 		// margin: 0% 5% 0% 5%;
-		margin-top: 50px;
-		margin-bottom: 50px;
+		// margin-top: 50px;
+		// margin-bottom: 50px;
+		background-color: white;
 		grid-area: revData;
 		display: grid;
-		grid-template-columns: 10% 10% 20% 50%;
-		border-top: 3px lightgray solid;
+		padding-bottom: 20px;
+		grid-template-columns: 10% 12% 12% 55%;
+		// border-bottom: 2px lightgray solid;
 		grid-template-rows: 5% 95%;
+		// padding-bottom: 3.5rem;
+		padding-top: 50px;
 		grid-template-areas: ". revProfIcon revName revData ";
 		.revProfIcon {
 			grid-area: revProfIcon;
+			// border-bottom: 2px lightgray solid;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			.revProfImg {
-				height: 100px;
-				width: 100px;
+				height: 90px;
+				width: 90px;
+				transform: translate(0px, 10px);
 			}
 		}
 		.revName {
-			margin-top: 1%;
+			// margin-top: 1%;
 			grid-area: revName;
+			// border-bottom: 2px lightgray solid;
+			// padding-bottom: 12.5rem;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			.rName {
 				grid-area: rName;
+				font-family: BitterBold;
+				font-size: 16px;
 			}
 			.rAgo {
 				grid-area: rAgo;
+				font-family: Bitter;
+				font-size: 13px;
+				color: #949494;
 			}
 		}
 		.revData {
-			margin-top: 1%;
+			// margin-top: 1%;
+			// border-bottom: 2px lightgray solid;
+			border-top: 2px lightgray solid;
+			// padding-bottom: 10rem;
+			padding-top: 30px;
 			grid-area: revData;
 			grid-template-columns: auto;
 			grid-template-rows: repeat(4, auto);
-			grid-template-areas: "rTitile" "rDesc" "rstarLikes" "revIcon";
+			grid-template-areas:
+				"rTitile"
+				"rDesc"
+				"rstarLikes"
+				"revIcon";
 			.rTitle {
 				grid-area: rTitle;
+				font-family: BitterBold;
+				font-size: 16px;
 			}
 			.rDesc {
 				grid-area: rDesc;
+				font-family: Bitter;
+				font-size: 14px;
+				color: #949494;
 			}
 			.starLikes {
 				display: grid;
@@ -661,6 +835,9 @@
 					width: 30px;
 					height: 30px;
 					transform: translate(0px, 0px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 				.likeCount {
 					grid-area: likeCount;
@@ -671,6 +848,9 @@
 					width: 30px;
 					height: 30px;
 					transform: translate(0px, 0px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 				.dislikeCount {
 					grid-area: dislikeCount;
@@ -678,6 +858,12 @@
 				}
 				.btnReport {
 					grid-area: btnReport;
+					border: none;
+					background-color: white;
+					transform: translate(-15px, -10px);
+					&:hover {
+						cursor: pointer;
+					}
 				}
 			}
 			.revIcon {
@@ -695,7 +881,7 @@
 	width: Auto;
 	grid-area: question;
 	height: 300px;
-	margin-block-end: 2%;
+	margin-block-end: 5%;
 	box-sizing: border-box;
 	img {
 		display: block;
@@ -706,7 +892,7 @@
 		z-index: 0;
 		transform: translate(0rem, 2rem);
 	}
-	h2 {
+	p {
 		text-align: center;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
@@ -716,6 +902,9 @@
 		grid-template-columns: auto;
 		grid-template-rows: auto;
 		grid-template-areas: "divSA ";
+		font-size: 16px;
+		font-family: Bitter;
+		color: #333333;
 		// "divQA "
 		.divSA {
 			grid-area: divSA;
@@ -726,9 +915,30 @@
 			.search {
 				grid-area: search;
 				.searchBox {
-					transform: translate(0rem, -0.3rem);
+					// transform: translate(0rem, -0.3rem);
+					transform: translate(0rem, -7px);
+					width: 30rem;
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					padding-left: 20px;
 				}
 				button {
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					border: none;
+					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					// border-radius: 5px;
+					// // padding:6px 25px 6px 25px;
+					// &:hover{
+					// 	cursor: pointer;
+					// 	background-color: #ddb01d;
+					// }
+					&:hover {
+						cursor: pointer;
+						background-color: #cfcfcf;
+					}
 					img {
 						height: 25px;
 						width: 20px;
@@ -738,33 +948,61 @@
 			}
 			.askQ {
 				grid-area: askQ;
-				margin-left: 20%;
+				margin-left: 2rem;
+				.submitFaq {
+					width: 30rem;
+					background-color: #dbdbdb;
+					border: none;
+					height: 40px;
+					padding-left: 20px;
+				}
+				button {
+					background-color: #efbe24;
+					color: white;
+					border: none;
+					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					// border-radius: 5px;
+					// // padding:6px 25px 6px 25px;
+					&:hover {
+						cursor: pointer;
+						background-color: #ddb01d;
+					}
+					// border: none;
+					height: 40px;
+					// &:hover {
+					// 	cursor: pointer;
+					// 	background-color: #dba716;
+					// }
+				}
 			}
 		}
 		.questionAnswer {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			margin: 10px 40px 0px 40px;
+			margin: 0px 40px 0px 40px;
 			width: auto;
-			grid-row-gap: 25px;
 			.divQA {
 				// grid-area: divQA;
 				// height: auto;
+				margin-top: 20px;
+				padding-bottom: 5%;
 				width: 50%;
 				// display: grid;
 				// grid-template-columns: repeat(2, auto);
 				// float: left;
 				.qA {
 					margin-left: 10%;
-					// .question {
-					// }
-					// .answer {
-					// }
+					.question {
+						color: #333333;
+					}
+					.answer {
+						margin-top: 10px;
+						color: #949494;
+					}
 				}
 			}
 		}
 	}
-
 	.dvMore {
 		img {
 			height: 50px;
@@ -775,7 +1013,6 @@
 		}
 	}
 }
-
 .imgPopup {
 	display: none;
 	position: fixed;
@@ -952,13 +1189,14 @@
 	padding-bottom: 25%;
 	grid-template-columns: auto;
 	grid-row-gap: 5%;
-	grid-template-rows: repeat(6, auto);
+	grid-template-rows: repeat(7, auto);
 	grid-template-areas:
 		"rfqSN"
 		"rfqSL"
 		"rfqN"
 		"rfqTag"
 		"chips"
+		"upload"
 		"btnRfq";
 	.rfqSN {
 		grid-area: rfqSN;
@@ -1044,422 +1282,705 @@
 			}
 		}
 	}
+	.uploadRfq {
+		grid-area: upload;
+	}
 	.btnRfq {
 		grid-area: btnRfq;
 	}
 }
 
 // CHECKOUT POPUP (BUY NOW)
-.container {
-	margin: 20px;
+
+.dvMain-Container-Grid {
+	display: grid;
 	grid-template-columns: auto;
-	grid-template-rows: repeat(9, auto);
+	grid-template-rows: repeat(15, auto);
 	grid-template-areas:
-		"dvSub1"
-		"dvSub2"
-		"dvSub3"
-		"dvSub4"
-		"dvSub5"
-		"dvSub6"
-		"dvSub7"
-		"dvSub8"
-		"dvSub9";
+		"grid-ProductName"
+		"grid-ProdVariInfo"
+		"grid-CustNameQty"
+		"grid-MainAddress"
+		"grid-SavedAddress"
+		"grid-AddNewDeliveryAddr"
+		"grid-FormGroupAddr"
+		"grid-DeliveryOption"
+		"grid-ProdDeliveredDate"
+		"grid-GiftOption"
+		"grid-GiftOptionNote"
+		"grid-MessageTitle"
+		"grid-ProductImages"
+		"grid-PriceListing"
+		"grid-BtnCheckout-Rfq";
+}
 
-	.btn {
-		font-family: "BitterBold";
-		color: white;
-	}
+.btn {
+	font-family: "BitterBold";
+	color: white;
+}
 
-	.modal-header {
-		background: #efbe24;
-		color: white;
-		font-family: "BitterBold";
-		display: table-cell;
-		border-top-right-radius: 15px;
-		border-top-left-radius: 15px;
-	}
+.modal-header {
+	background: #efbe24;
+	color: white;
+	font-family: "BitterBold";
+	display: table-cell;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
 
-	.modal-content {
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-		background: #f1f1f1;
-	}
-	.dvProductName {
-		display: grid;
-		grid-area: dvProductName;
+.modal-content {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	background: #f1f1f1;
+}
+
+// PRODUCT
+.dvProductName {
+	grid-area: grid-ProductName;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 30px;
+	font-family: "BitterBold";
+}
+
+// MATERIAL SIZE VARIANT INFO
+.dvProdVariInfo {
+	grid-area: grid-ProdVariInfo;
+	.SpecProduct {
+		border: 2px solid#efbe24;
+		width: 448px;
+		border-radius: 5px;
+		padding: 15px;
+		margin-left: -52px;
 		text-align: center;
-		font-family: "BitterBold";
-		padding: 20px;
 	}
-	.dvSub1 {
-		display: grid;
-		grid-area: dvSub1;
-		align-items: center;
-		grid-template-columns: auto;
-		grid-template-rows: auto;
-		grid-template-areas:
-			"dvProductSpec"
-			"dvCustomerName"
-			"dvQty";
-		.dvProductSpec {
-			display: grid;
-			grid-area: dvProductSpec;
-			border: 2px solid #efbe24;
-			font-family: "Bitter";
-			border-top-right-radius: 5px;
-			border-top-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-			grid-template-columns: 50% 50%;
-			grid-template-rows: auto;
-			grid-template-areas: "dvProdSpec1   dvProdSpec2";
-			.dvProdSpec1 {
-				display: grid;
-				grid-area: dvProdSpec1;
-				margin: 20px;
-			}
-			.dvProdSpec2 {
-				display: grid;
-				grid-area: dvProdSpec2;
-				margin-left: 10px;
-				margin-top: 20px;
-			}
-		}
+}
+
+// NAME & QTY
+.dvCustNameQty {
+	grid-area: grid-CustNameQty;
+}
+.grid-CustomerNameQty {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "custName Qty qtyLabel";
+	.custName {
+		grid-area: custName;
 		.dvCustomerName {
-			display: grid;
-			grid-area: dvCustomerName;
-			font-family: "Bitter";
-			margin-left: 20px;
-			margin-top: 20px;
-		}
-		.dvQty {
-			display: grid;
-			grid-area: dvQty;
-			margin-left: 250px;
-			font-family: "Bitter";
-			grid-auto-columns: auto;
-			grid-template-areas: "btnQtyCount";
-			.btnQtyCount {
-				grid-area: btnQtyCount;
-				font-family: BitterBold;
-				display: grid;
-				border: none;
-				margin-left: 50px;
-				background-color: #efbe24;
-				color: white;
-				border-radius: 5px;
-				height: 30px;
-				width: 30px;
-			}
+			margin-left: 76px;
 		}
 	}
-	.dvAddress {
-		text-align: center;
-		font-family: "BitterBold";
+	.Qty {
+		grid-area: Qty;
 	}
-	.dvSub2 {
-		display: grid;
-		grid-area: dvSub2;
-		background-color: #dbdbdb;
-		grid-template-rows: auto;
-		grid-template-columns: auto;
-		grid-template-areas:
-			"dvAddrText"
-			"btnAddrChange";
-		.dvAddrText {
+	.qtyLabel {
+		grid-area: qtyLabel;
+		.btnQtyCount {
+			font-family: BitterBold;
 			display: grid;
-			grid-area: dvAddrText;
-			margin-top: 10px;
-			font-family: "Bitter";
-			text-align: center;
-		}
-		.btnAddrChange {
-			display: grid;
-			grid-area: btnAddrChange;
-			margin-left: 43%;
-			margin-bottom: 10px;
-			width: 20px;
-			.btnChange {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-	}
-	.dvSavedAddr {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub3 {
-		display: grid;
-		grid-area: dvSub3;
-		grid-template-rows: repeat(2, auto);
-		grid-template-columns: 50% 50%;
-		grid-template-areas:
-			"dvCardAddrLeft dvCardAddrRight"
-			"btnCardAddrLeft btnCardAddrRight";
-		.dvCardAddrLeft {
-			display: grid;
-			grid-area: dvCardAddrLeft;
-			background-color: white;
-			text-align: center;
-			padding: 10px;
-		}
-		.btnCardAddrLeft {
-			display: grid;
-			grid-area: btnCardAddrLeft;
-			.btnDeliverLeft {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-		.dvCardAddrRight {
-			display: grid;
-			grid-area: dvCardAddrRight;
-			background-color: white;
-			text-align: center;
-			padding: 10px;
-		}
-		.btnCardAddrRight {
-			.btnDeliverRight {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-	}
-	.btnNewAddr {
-		color: white;
-		font-family: "BitterBold";
-		margin-top: 10px;
-		margin-bottom: 10px;
-		margin-left: 20px;
-		width: 90%;
-	}
-	.dvSub4 {
-		grid-area: dvSub4;
-	}
-	.grid-dvSub4 {
-		display: grid;
-		background-color: #dbdbdb;
-		grid-template-columns: 50% 50%;
-		grid-template-rows: repeat(5, auto);
-		grid-template-areas:
-			"grid-FormLeft grid-FormRight"
-			"btnSaveForm"
-			"..";
-		.grid-FormLeft {
-			// background: #4caf50;
-		}
-		.grid-FormRight {
-			// background: #add633;
-		}
-
-		.btnSaveForm {
-			display: grid;
-			grid-area: btnSaveForm;
-			width: 60px;
-			margin-top: 10px;
-			margin-left: -300px;
-
-			.btnSave {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-	}
-	.dvDeliveryText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub5 {
-		display: grid;
-		grid-area: dvSub5;
-		grid-template-columns: auto;
-		grid-template-rows: auto auto auto;
-		grid-template-areas: "btnRadio1 btnRadio2 btnRadio3";
-		.btnRadio1 {
-			display: grid;
-			grid-area: btnRadio1;
-		}
-		.btnRadio2 {
-			display: grid;
-			grid-area: btnRadio2;
-		}
-		.btnRadio3 {
-			display: grid;
-			grid-area: btnRadio3;
-			margin-left: 25px;
-		}
-	}
-	.dvProdDeliText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub6 {
-		display: grid;
-		grid-area: dvSub6;
-		grid-template-rows: auto;
-		grid-template-columns: auto;
-		grid-template-areas:
-			"dvDisplayDate dvDisplayPrice"
-			"dvDate btnApply";
-		.dvDisplayDate {
-			display: grid;
-			grid-area: dvDisplayDate;
-		}
-		.dvDisplayPrice {
-			display: grid;
-			grid-area: dvDisplayPrice;
-		}
-		.dvDate {
-			display: grid;
-			grid-area: dvDate;
-			margin-left: 20px;
-			.dateText {
-				border: 2px solid #efbe24;
-			}
-		}
-		.dvApply {
-			display: grid;
-			grid-area: dvApply;
-			.btnApply {
-				color: white;
-				font-family: "BitterBold";
-			}
-		}
-	}
-	.dvSub7 {
-		.dvGiftOptionText {
-		}
-		.btnGiftOption {
-			.switch {
-				position: relative;
-				display: inline-block;
-				width: 60px;
-				height: 34px;
-			}
-
-			.switch input {
-				opacity: 0;
-				width: 0;
-				height: 0;
-			}
-
-			.slider {
-				position: absolute;
-				cursor: pointer;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background-color: #ccc;
-				-webkit-transition: 0.4s;
-				transition: 0.4s;
-			}
-
-			.slider:before {
-				position: absolute;
-				content: "";
-				height: 26px;
-				width: 26px;
-				left: 4px;
-				bottom: 4px;
-				background-color: white;
-				-webkit-transition: 0.4s;
-				transition: 0.4s;
-			}
-
-			input:checked + .slider {
-				background-color: #2196f3;
-			}
-
-			input:focus + .slider {
-				box-shadow: 0 0 1px #2196f3;
-			}
-
-			input:checked + .slider:before {
-				-webkit-transform: translateX(26px);
-				-ms-transform: translateX(26px);
-				transform: translateX(26px);
-			}
-
-			/* Rounded sliders */
-			.slider.round {
-				border-radius: 34px;
-			}
-
-			.slider.round:before {
-				border-radius: 50%;
-			}
-		}
-		.dvNote {
-			.Gift-Note-Style {
-				border: none;
-				background: #dbdbdb;
-				width: 450px;
-				margin-left: 20px;
-				height: 80px;
-			}
-		}
-		.dvNoteText {
-		}
-		.dvMsgTitle {
-			.p {
-				font-family: "BitterBold";
-				text-align: center;
-				margin-top: 10px;
-			}
-		}
-	}
-	
-
-	.dvProdText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub8 {
-		.dvCheckImg1 {
-			width: fit-content;
+			border: none;
+			margin-left: -70px;
+			background-color: #efbe24;
+			color: white;
 			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-		.dvCheckImg2 {
-			width: fit-content;
-			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-		.dvCheckImg3 {
-			width: fit-content;
-			border-radius: 5px;
-			display: grid;
-			padding-inline: 20px;
-			padding: 20px;
-		}
-	}
-	.dvPriceVariText {
-		text-align: center;
-		margin-top: 10px;
-		font-family: "BitterBold";
-	}
-	.dvSub9 {
-		.dvPriceList {
+			height: 28px;
+			width: 28px;
 			text-align: center;
-		}
-		.btnCheckOut {
-			margin-top: 10px;
-			margin-left: 40%;
-			.btnPayment {
-				color: white;
-				font-family: "BitterBold";
-				border-radius: 5px;
-			}
 		}
 	}
 }
+
+// ADDRESS
+.dvAddressText {
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 34px;
+	margin-bottom: 20px;
+}
+.dvMainAddress {
+	grid-area: grid-MainAddress;
+}
+.grid-MainAddress1 {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"Addr"
+		"btnAddr";
+	.Address {
+		grid-area: Addr;
+		background: #dbdbdb;
+		text-align: center;
+		width: 400px;
+		border-radius: 5px;
+		margin-left: 48px;
+		height: 120px;
+		padding: 18px;
+	}
+	.btnAddr {
+		grid-area: btnAddr;
+		.btnChange {
+			margin-top: 18px;
+			border-radius: 5px;
+			color: white;
+			border: none;
+		}
+	}
+}
+
+// SAVED ADDRESS
+.dvSavedAddress {
+	grid-area: grid-SavedAddress;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.grid-SavedAddress1 {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"labelAddr1 labelAddr2"
+		"btnAddr1 btnAddr2";
+	.labelAddress1 {
+		grid-area: labelAddr1;
+		background: white;
+		font-family: "Bitter";
+		border-radius: 5px;
+		margin-left: 15px;
+		width: 220px;
+		height: 58px;
+	}
+	.labelAddress2 {
+		grid-area: labelAddr2;
+		background: white;
+		font-family: "Bitter";
+		border-radius: 5px;
+		margin-left: 15px;
+		width: 220px;
+		height: 58px;
+	}
+	.btnAddress1 {
+		grid-area: btnAddr1;
+		.btnDeliverLeft {
+			margin-top: 10px;
+			color: white;
+			border-radius: 5px;
+			font-family: "Bitter";
+			width: 232px;
+			padding: 5px;
+			border: none;
+		}
+	}
+	.btnAddress2 {
+		grid-area: btnAddr2;
+		.btnDeliverRight {
+			margin-top: 10px;
+			color: white;
+			border-radius: 5px;
+			font-family: "Bitter";
+			width: 232px;
+			padding: 5px;
+			border: none;
+		}
+	}
+}
+
+// ADD NEW ADDR BTN
+.dvAddNewAddrBtn {
+	grid-area: grid-AddNewDeliveryAddr;
+	.btnNewAddr {
+		margin-left: 10px;
+		border-radius: 5px;
+		margin-top: 20px;
+		width: 480px;
+		margin-bottom: 15px;
+		border: none;
+	}
+}
+// FORM GROUP ADDR
+.dvFormGroup {
+	grid-area: grid-FormGroupAddr;
+	background: #dbdbdb;
+	margin-left: 10px;
+	width: 480px;
+	border-radius: 5px;
+}
+.grid-Addr-Form {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"left-Addr-Form Right-Addr-Form"
+		"btnSave btnSave";
+	.grid-left-Form {
+		grid-area: left-Addr-Form;
+		.dvContactName {
+			padding: 10px;
+		}
+		.card-input-style-address {
+			border-radius: 5px;
+			border: none;
+			margin-left: 2px;
+			width: 215px;
+		}
+		.dvAddr2 {
+			padding: 10px;
+		}
+		.dvCountry {
+			padding: 10px;
+		}
+		.dvCity {
+			padding: 10px;
+		}
+		.dvEmail {
+			padding: 10px;
+		}
+	}
+	.grid-Right-Form {
+		grid-area: Right-Addr-Form;
+		.dvAddr1 {
+			padding: 10px;
+		}
+		.card-input-style-address {
+			border-radius: 5px;
+			border: none;
+			margin-left: 2px;
+			width: 215px;
+		}
+		.dvState {
+			padding: 10px;
+		}
+		.dvPincode {
+			padding: 10px;
+		}
+		.dvDistrict {
+			padding: 10px;
+		}
+		.dvPhone {
+			padding: 10px;
+		}
+	}
+	.btnSaveForm {
+		grid-area: btnSave;
+		.btnSave1 {
+			margin-left: 200px;
+			border-radius: 5px;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			width: 80px;
+			color: white;
+			border: none;
+		}
+	}
+}
+
+// DELIVER OPTION
+.dvDeliveryText {
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.dvDeliveryOption {
+	grid-area: grid-DeliveryOption;
+}
+.grid-Deli-Option {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "left-DeliOption Med-DeliOption Right-DeliOption";
+	.grid-left-DeliOption {
+		grid-area: left-DeliOption;
+		margin-left: 52px;
+	}
+	.grid-Med-DeliOption {
+		grid-area: Med-DeliOption;
+	}
+	.grid-Right-DeliOption {
+		grid-area: Right-DeliOption;
+	}
+}
+
+//PRODUCT DELIVERED DATE
+.dvProdDeliveredDate {
+	grid-area: grid-ProdDeliveredDate;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.grid-Prod-Deli-Date {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-template-areas: "dvDeliveryDate dvPrice"
+						"dvDeliveryDate1 dvApplyBtn";
+						.grid-Deli-Date {
+							grid-area: dvDeliveryDate;
+							color: #009145;
+							margin-left: -24px;
+						}
+						.grid-Price {
+							grid-area: dvPrice;
+							color: #009145;
+							margin-left: -80px;
+						}
+						.grid-Deli-Date1 {
+							grid-area: dvDeliveryDate1;
+							margin-left: -35px;
+							.dateText {
+								border-color: #EFBE24;
+							}
+						}
+						.grid-ApplyBtn {
+							grid-area: dvApplyBtn;
+							.btnApply {
+								border-radius: 5px;
+								color:white;
+								font-family: "Bitter";
+								margin-left: -198px;
+								border: none;
+							}
+						}
+
+}
+
+// GIFT OPTION
+.dvGiftOption {
+	grid-area: grid-GiftOption;
+}
+.grid-GiftOption1 {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "dvGiftOptionText dvGiftOptionToggle";
+	.grid-Text-GiftOption {
+		grid-area: dvGiftOptionText;
+		margin-top: 60px;
+		margin-left: 44px;
+	}
+	.grid-GiftOptionToggle {
+		grid-area: dvGiftOptionToggle;
+	}
+			.btnGiftOption {
+				margin-left: -144px;
+				margin-top: 54px;
+			}
+				.switchActive {
+					position: relative;
+					display: inline-block;
+					width: 68px;
+					height: 38px;
+					margin-left: -6%;
+					margin-bottom: -2px;
+					margin-top: -8px;
+				}
+		
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+		
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+					background:white;
+				}
+		
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+		
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+		
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+		
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+		
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+		
+				.slider.round:before {
+					border-radius: 50%;
+				}
+	}
+// GIFT NOTE
+.dvGiftNote {
+	grid-area: grid-GiftOptionNote;
+}
+.grid-GiftOptionNote1 {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"dvGiftNoteText"
+		"dvGiftNoteCard";
+	.grid-dvGiftNoteText {
+		grid-area: dvGiftNoteText;
+	}
+	.grid-dvGiftNoteCard {
+		grid-area: dvGiftNoteCard;
+		.Gift-Note-Style {
+		}
+	}
+}
+
+// MESSAGE TITLE
+.dvMessageTitle {
+	grid-area: grid-MessageTitle;
+	.MsgTitleText {
+		text-align: center;
+		margin-top: 40px;
+		border: 2px solid#efbe24;
+		width: 330px;
+		border-radius: 5px;
+		padding: 15px;
+		margin-left: 80px;
+	}
+}
+
+// PRODUCT IMAGES
+.dvproductImages {
+	grid-area: grid-ProductImages;
+}
+	.prodTextImg {
+		text-align: center;
+		font-family: "BitterBold";
+		margin-top: 16px;
+	}
+	.dvprodImages{
+		margin-left: 20px;
+		width: 300px;
+	}
+
+
+// PRICELISTING
+.dvPriceListing {
+	grid-area: grid-PriceListing;
+	text-align: center;
+	font-family: "BitterBold";
+	margin-top: 16px;
+}
+.dvPriceDetails {
+	display: grid;
+	grid-template-columns: auto 20% auto;
+	grid-template-rows: repeat(7, auto);
+	grid-template-areas:
+		"Left-BasePrice	grid-Med	Right-BasePrice"
+		"Left-ShipppingPrice	grid-Med1	Right-ShippingPrice"
+		"Left-DiscPrice	grid-Med2	Right-DiscPrice"
+		"Left-VariancePrice	grid-Med3	Right-VariancePrice"
+		"Left-Qty	grid-Med4	Right-Qty"
+		"Left-Tax	grid-Med5	Right-Tax"
+		"Left-Total	grid-Med6	Right-Total";
+	.dvBasePrice {
+		grid-area: Left-BasePrice;
+		.BasePriceText {
+			color: #807b7b;
+			margin-left: 52px;
+			font-family: "Bitter";
+		}
+	}
+	.dvShippingPrice {
+		grid-area: Left-ShipppingPrice;
+		.ShippingText {
+			color: #807b7b;
+			margin-left: 86px;
+			font-family: "Bitter";
+			margin-top: -10px;
+		}
+	}
+	.dvDiscPrice {
+		grid-area: Left-DiscPrice;
+		.DiscText {
+			color: #807b7b;
+			margin-left: 40px;
+			font-family: "Bitter";
+			margin-top: -10px;
+		}
+	}
+	.dvVariancePrice {
+		grid-area: Left-VariancePrice;
+		.VarianceText {
+			color: #807b7b;
+			margin-left: 87px;
+			font-family: "Bitter";
+			margin-top: -10px;
+		}
+	}
+	.dvQty {
+		grid-area: Left-Qty;
+		.QtyText {
+			color: #807b7b;
+			margin-left: 1px;
+			font-family: "Bitter";
+			margin-top: -10px;
+		}
+	}
+	.dvTax {
+		grid-area: Left-Tax;
+		.TaxText {
+			color: #807b7b;
+			margin-left: 2px;
+			font-family: "Bitter";
+			margin-top: -10px;
+		}
+	}
+	.dvTotal {
+		grid-area: Left-Total;
+		.TotalText {
+			margin-left: 16px;
+		}
+	}
+
+	.dvMed {
+		grid-area: grid-Med;
+		.dot {
+			color: #807b7b;
+			margin-left: -172px;
+		}
+	}
+	.dvMed1 {
+		grid-area: grid-Med1;
+		.dot1 {
+			color: #807b7b;
+			margin-left: -172px;
+			margin-top: -10px;
+		}
+	}
+	.dvMed2 {
+		grid-area: grid-Med2;
+		.dot2 {
+			color: #807b7b;
+			margin-left: -172px;
+			margin-top: -10px;
+		}
+	}
+	.dvMed3 {
+		grid-area: grid-Med3;
+		.dot3 {
+			color: #807b7b;
+			margin-left: -172px;
+			margin-top: -10px;
+		}
+	}
+	.dvMed4 {
+		grid-area: grid-Med4;
+		.dot4 {
+			color: #807b7b;
+			margin-left: -172px;
+			margin-top: -10px;
+		}
+	}
+	.dvMed5 {
+		grid-area: grid-Med5;
+		.dot5 {
+			color: #807b7b;
+			margin-left: -172px;
+			margin-top: -10px;
+		}
+	}
+	.dvMed6 {
+		grid-area: grid-Med6;
+		.dot6 {
+			margin-left: -172px;
+		}
+	}
+	.dvRight-BasePrice {
+		grid-area: Right-BasePrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+	}
+	.dvRight-ShippingPrice {
+		grid-area: Right-ShippingPrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-DiscPrice {
+		grid-area: Right-DiscPrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-VariancePrice {
+		grid-area: Right-VariancePrice;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Qty {
+		grid-area: Right-Qty;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Tax {
+		grid-area: Right-Tax;
+		color: #807b7b;
+		margin-left: -150px;
+		font-family: "Bitter";
+		margin-top: -10px;
+	}
+	.dvRight-Total {
+		grid-area: Right-Total;
+		margin-left: -150px;
+	}
+}
+
+// BTN CHECKOUT / RFQ
+.dvBtnCheckout-Rfq {
+	grid-area: grid-BtnCheckout-Rfq;
+	.btnPayment {
+		margin-left: 210px;
+		border-radius: 5px;
+		color: white;
+		font-family: "Bitter";
+		padding: 5px;
+		border: none;
+		margin-bottom: 100px;
+		width: 120px;
+	}
+	.btnRfq {
+		margin-left: 188px;
+		border-radius: 5px;
+		color: white;
+		font-family: "Bitter";
+		padding: 5px;
+		border: none;
+		margin-bottom: 100px;
+		width: 156px;
+	}
+}
+

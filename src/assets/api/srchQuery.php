@@ -20,11 +20,15 @@
     FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
     WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' ";
 
-    $locationQuery = " AND p.shipping_location_id = sls.id and sls.pincode LIKE '%$pincode%' ";
-    
-    $orderQuery = " ORDER by POSITION('$searchQ' IN p.name) ";
+    $locationQuery = " AND sls.pincode LIKE '%$pincode%' ";
+
+    $status = "deliverable";
+
+    $orderQuery = " GROUP BY p.prodid ORDER by POSITION('$searchQ' IN p.name) ";
 
     $paginationQuery = " limit $tagNum offset $offset ";
+
+    $srchQuery = " AND p.name LIKE '%$searchQ%' ";
 
     //Filter madness starts here
     $price = "";
@@ -36,11 +40,21 @@
     $delivery = "";
     $sortCondition = "";
 
-        if(count($filterSet->priceRange)>0){
-            // $price = " base_price => $filterSet->priceRange[0] and base_price <=$filterSet->priceRange[1] ";
+        if($filterSet->deliverable){
+            $locationQuery = " AND p.shipping_location_id != sls.id and sls.pincode NOT LIKE '%$pincode%' ";
+
+            $status = "undeliverable";
+
+            $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+            FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
+            WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";            
+            
+        }
+        if($filterSet->maxPrice){
+            $price = " and (p.base_price >= '$filterSet->minPrice' AND p.base_price <= '$filterSet->maxPrice')";
         }
         if($filterSet->rating != 0){
-            $rating = " and p.rating = $filterSet->rating ";
+            $rating = " and p.rating >= $filterSet->rating ";
         }
         if($filterSet->freeShipping){
             $freeShip = " ";
@@ -78,8 +92,8 @@
 //Filter madness ends here
 
     // $sql = $productQuery . $locationQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition . $paginationQuery;    
-    $sql = $productQuery . " AND p.name LIKE '%$searchQ%' " . $locationQuery . $orderQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition . $paginationQuery;
-    
+    $sql = $productQuery . $srchQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition . $locationQuery . $orderQuery . $paginationQuery;
+    // echo $sql;
     $result = mysqli_query($con1,$sql);
 
     if(mysqli_num_rows($result) == 0){
@@ -145,7 +159,7 @@
                     "basePrice"=>$row["base_price"],
                     "offerPercent"=>$row["percentage"],
                     "hasRfq"=>$row["has_rfq"],
-                    "activeStatus"=>$row["active_status"],
+                    "activeStatus"=>$status,
                     "rating"=>$row["rating"],
                     "parentId"=>$row["parentid"],
                     "orderConfirm"=>$row["has_order_confmn"],
@@ -195,7 +209,7 @@
             $shipMethods[$shipCount++] = $row["shipping_option"];
 
         }
-        // echo $sql;
+        
         echo json_encode(
             array(
                 "request"=>$request,

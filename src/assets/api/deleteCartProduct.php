@@ -30,6 +30,9 @@ if($id == "all"){
     $giftNote=$row["gift_note"];
     $totalPrice=$row["total_price"];
     $discount=$row["discount"];
+    $discPrice = $totalPrice * $discount;
+    $discPrice = $discPrice/100;
+    // echo $discPrice;
     $variantPrice=$row["variant_price"];
     $hasImage=$row["has_image"];
     $deliveryDate=$row["delivery_date"];
@@ -85,10 +88,16 @@ $disc=$discountInfo["percentage"];
 
 $amountDisc=$basePrice*($disc/100);
 $price=$basePrice-$amountDisc;
+$price=round($price);
+// $price=round($price);
+// echo $price;
 $basePriceTotal=$price*$quantity;
 $totalAmount=$basePriceTotal;
 $totalAmount=round($totalAmount);
 
+
+// $priceSave = $basePrice - $discPrice;
+// echo $priceSave;
 
 $sql_query1 ="SELECT * FROM `shop_details` WHERE `id` = $shopid";
 $result = mysqli_query($con2, $sql_query1);

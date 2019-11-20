@@ -1,0 +1,410 @@
+.divMargin {
+	// margin-left: 10%;
+	// margin-right: 10%;
+	margin: 5%;
+	width: auto;
+
+}
+
+.expansionPanel{
+    background: rgba(0,0,0,.1);
+    margin-bottom: 35px;
+}
+
+.breadcrumb {
+	padding: 10px 10px;
+	list-style: none;
+	background-color: transparent;
+	li + li:before {
+		padding: 8px;
+		color: gray;
+		content: ">";
+	}
+	li {
+		display: inline;
+		font-size: 1rem;
+		a {
+			color: gray;
+			text-decoration: none;
+			&:hover {
+				color: red;
+			}
+		}
+	}
+	text-decoration: none;
+}
+
+.shopTilte{
+    width: max-content;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+.padding15{
+    padding: 15px;
+}
+
+table, th, td {
+    border: 1px solid rgba(0,0,0,.1);
+  }
+
+table{
+    width: 100%;
+}
+.font15{
+    font-size: 15px;
+    font-family: "BitterBold";
+}
+.expansionHeader{
+    background: #EFBE24;
+    color: white;
+    font-family: "BitterBold";
+    font-size: 15px;
+
+    &:hover {
+        background: #EFBE24;
+    }
+
+    .expansionTitle{
+        color: white;
+        font-size: 15px;
+    }
+}
+
+.editShopDetailsSave{
+    padding: 15px; 
+    background: #EFBE24; 
+    color: white; 
+    width: max-content;
+    width: max-content;
+    position: relative;
+    left: 94.7%;
+    margin-top: 15px;
+    border-radius: 6px;
+}
+
+input{
+    border: 1px solid #EFBE24;
+    border-radius: 4px;
+    width: 100%;
+    padding: 9px;
+}
+
+.mainShopImage{
+    border: 5px solid whitesmoke;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 35%;
+    height: 75%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+#myUL1 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL1 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL1 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+
+#myUL2 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24
+}
+
+#myUL2 li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL2 li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
+
+.mainLogoImage{
+    position: relative;
+    left: -31%;
+    width: 65px;
+    top: -47%;
+    border-radius: 50%;
+    border: 5px solid whitesmoke;
+}
+
+.mainShopName{
+    font-size: 15px;
+    font-family: "BitterBold";
+    position: relative;
+    top: -95.7%;
+    left: 92px;
+}
+
+.labels{
+    font-size: 15px;
+    font-family: "BitterBold";
+    color:teal; 
+    margin-bottom: 15px;
+    margin-top: 45px;
+    margin-left: 15px;
+}
+
+.image-section{
+    display: grid;
+    grid-template-areas: "main product";
+    grid-template-columns: 50% 50%;
+    height: 230px;
+
+    .mainImage{
+        grid-area: main;
+    }
+
+    .productImage{
+        grid-area: product;
+
+        img{
+            height: 174px;
+            width: 174px;
+            border: 1px solid blanchedalmond;
+            border-radius: 5px;
+            margin: 10px;
+            margin-top: 27px;
+            cursor: pointer;
+        }
+    }
+}
+$width: 60px;
+$padding: 7px;
+$height: $width / 2 + $padding;
+.line1{
+    margin-top: 50px;
+    display: grid;
+    grid-template-areas: "gift del rfq";
+    grid-template-columns: auto auto auto;
+    font-size: 25px;
+    font-family: "BitterBold";
+
+    .gift{
+        grid-area: gift;
+        width: max-content;
+        margin: auto;
+    }
+    .del{
+        grid-area: del;
+        width: max-content;
+        margin: auto;
+    }
+    .rfq{
+        grid-area: rfq;
+        width: max-content;
+        margin: auto;
+    }
+
+    //toggle code begins!
+    .switch-wrap {
+    cursor: pointer;
+    background: #15273b;
+    padding: $padding;
+    width: $width;
+    height: $height;
+    border-radius: $height / 2;
+    &::after {
+        background: #52cf71;
+    }
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    }
+    .switch {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0fr 1fr 1fr;
+    transition: .2s;
+    //ICYMI, pseudo elements are treated as grid items
+    &::after {
+        content: '';
+        border-radius: 50%;
+        background: rgb(165, 38, 38);
+        grid-column: 2;
+        transition: background .2s;
+    }
+    }
+    input:checked {
+    + .switch {
+        grid-template-columns: 1fr 1fr 0fr; 
+        &::after {
+        background-color: #52cf71;
+        }
+    }
+    }
+}
+
+.line2{
+    margin-top: 50px;
+    display: grid;
+    grid-template-areas: "gift del";
+    grid-template-columns: auto auto;
+    font-size: 25px;
+    font-family: "BitterBold";
+
+    .gift{
+        grid-area: gift;
+        width: max-content;
+        margin: auto;
+    }
+    .del{
+        grid-area: del;
+        width: max-content;
+        margin: auto;
+    }
+
+    //toggle code begins!
+    .switch-wrap {
+    cursor: pointer;
+    background: #15273b;
+    padding: $padding;
+    width: $width;
+    height: $height;
+    border-radius: $height / 2;
+    &::after {
+        background: #52cf71;
+    }
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    }
+    .switch {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0fr 1fr 1fr;
+    transition: .2s;
+    //ICYMI, pseudo elements are treated as grid items
+    &::after {
+        content: '';
+        border-radius: 50%;
+        background: rgb(165, 38, 38);
+        grid-column: 2;
+        transition: background .2s;
+    }
+    }
+    input:checked {
+    + .switch {
+        grid-template-columns: 1fr 1fr 0fr; 
+        &::after {
+        background-color: #52cf71;
+        }
+    }
+    }
+}
+
+.shippingHeader{
+    background: #EFBE24;
+    color: white;
+    font-size: 15px;
+    font-family: "BitterBold";
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: inline-flex;
+
+    p{
+        margin: auto;
+        padding-top: 2px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.shippingBody{
+    background: rgba(0,0,0,.1);
+    font-size: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+
+    div{
+        display: grid;
+        grid-template-areas: "country state action";
+        grid-template-columns: 33.34% 33.34% 33.34%;
+
+        div {
+            margin: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: rgba(0,0,0,.6);
+            width: max-content;
+            display: block;
+        }
+
+        .country{
+            grid-area: country;
+        }
+        .state{
+            grid-area: state;
+        }
+        .district{
+            grid-area: district;
+        }
+        .city{
+            grid-area: city;
+        }
+        .office{
+            grid-area: office;
+        }
+        .action{
+            grid-area: action;
+        }
+    }
+
+
+}

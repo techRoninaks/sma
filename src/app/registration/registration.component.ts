@@ -14,6 +14,8 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
   submitted: boolean;
+  sentOTP: boolean = false;
+  Otp: boolean = true;
   fpFormMobile: FormGroup;
   fpFormOtp: FormGroup;
   fpmobile : string=""; 
@@ -121,6 +123,24 @@ export class RegistrationComponent implements OnInit {
       );
     }
   }
+  newVerify(){
+    this.fpmobile = this.registrationForm.controls['reg_mobile_no'].value;
+    if(this.fpmobile==""){
+      alert("Enter Mobile No:");
+    }
+    else{
+      this.data.checkMobile(this.fpmobile).subscribe(
+        data => { 
+            alert('OTP Sent Successfully');
+            this.gotp = this.generateOTP();
+            this.requestOtp(this.gotp, this.fpmobile);
+            this.sentOTP = true;
+            this.Otp = false;
+        },
+        error => console.error(error)
+      );
+    }
+  }
   requestOtp(gotp, mobileNo) {
     var msg :any = "Your verification code is: "+gotp;
   
@@ -156,6 +176,7 @@ export class RegistrationComponent implements OnInit {
           {
             alert('OTP verified');
             this.otpVerified = true;
+            this.sentOTP = false;
             $("#myModal").modal('hide');
           }
           else

@@ -57,11 +57,10 @@
                     <!-- <h5><strong>Prodid Id : </strong><p id="prodidPopup"></p></h5> -->
 
                     <h5><strong>Select Role</strong></h5>
-
-
                 </div>
+                
                 <div>
-                    <div class="content table-responsive table-half-width" id="roleTable">
+                    <div class="content table-responsive table-full-width" id="roleTable">
                     </div>
                 </div>
 
@@ -121,8 +120,17 @@
                     </div>
                 </div>
             </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="header">
+                                <h4 class="title">Manage Admins</h4>
 
-            <div class="content table-responsive table-full-width" id="adminTable">
+                        <div class="content table-responsive table-full-width" id="adminTable">
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -169,7 +177,7 @@
                 if (responseData.data.success == "successful") {
                     var response = responseData.data.result;
                     globCopy2 = response;
-                    var tabHeader = "<table class='table table-hover table-striped'><thead><th>ID</th><th>Name</th><th>User Name</th><th>Role</th>";
+                    var tabHeader = "<table class='table table-hover table-striped'style ='width:auto'><thead><th>ID</th><th>Name</th><th>User Name</th><th>Role</th>";
                     var tabCategories = tabHeader;
                     response.forEach(element => {
                         tabCategories = tabCategories + buildHtml("adminTable", element);
@@ -187,7 +195,6 @@
             }
         });
     }
-
     function buildHtml(template, data) {
         var htmlString = "";
         var pageName = "admin";
@@ -197,12 +204,11 @@
                 htmlString = "<tr><td>" + data.adminid + "</td><td>" + data.name + "</td><td>" + data.username + "</td><td>" + data.role_name + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.adminid + "','" + pageName + "');" + "></td><td><button type='button' class='btn btn-info btn-xs' onClick=" + "sendPopUpData('" + data.adminid + "','" + data.name + "','" + data.role + "')" + " data-toggle='modal' data-target='#myModal' >Change Roles</button></tr>";
                 break;
             case "roleTable":
-                htmlString = "<tr><td>     </td><td>" + data.id + "</td><td>" + data.role_name + "</td><td><img src='assets/img/tick-icon.png' onclick=" + "selectrole('" + data.id + "','" + pageName + "');" + "></td></tr>";
+                htmlString = "<tr><td>" + data.id + "</td><td>" + data.role_name + "</td><td></td><td><img src='assets/img/tick-icon.png' onclick=" + "selectrole('" + data.id + "','" + pageName + "');" + "></td></tr>";
                 break;
         }
         return htmlString;
     }
-
     function sendPopUpData(id, name) {
          var id = id;
         var name = name;
@@ -216,7 +222,7 @@
                 if (responseData.data.success == "successful") {
                     var response = responseData.data.result;
                     globCopy2 = response;
-                    var tabHeader = "<table class='table table-hover table-striped'><thead><td>  </td><th>ID</th><th>Role</th>";
+                    var tabHeader = "<table class='table table-hover table-striped'><thead><th>ID</th><th>Role</th>";
                     var tabCategories = tabHeader;
                     response.forEach(element => {
                         tabCategories = tabCategories + buildHtml("roleTable", element);

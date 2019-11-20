@@ -38,7 +38,8 @@
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
-          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/sellerlanding" *ngIf="!sellerSignedIn">Sell with Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link header-sell-with-us" routerLink="/dashboard" *ngIf="sellerSignedIn">Seller Dashboard<span class="sr-only">(current)</span></a>
         </li>
         <!-- <li class="nav-item active ml-auto">
           <a class="nav-link header-sell-with-us" routerLink="/category">Shop by Store <span class="sr-only">(current)</span></a>
@@ -49,11 +50,12 @@
                 <label id="headerLogin">{{temp}}</label>
               </button>
                 <div class="dropdown-content2" id="profilemenu">
-                  <li><a href=#>My orders</a></li>
-                  <li><a href=#>My messages</a></li>
-                  <li><a href=#>My notifications</a></li>
-                  <li><a href=#>My fav shops</a></li>
-                  <li><a href=#>My accounts</a></li>
+                  <li *ngIf="user_signed"><a routerLink="/orders">My orders</a></li>
+                  <li *ngIf="sellerSignedIn"><a routerLink="/manageorders">My orders</a></li>
+                  <li><a>My messages</a></li>
+                  <li><a routerLink="/userprofile">My notifications</a></li>
+                  <li><a routerLink="/userprofile">My fav shops</a></li>
+                  <li><a routerLink="/userprofile">My accounts</a></li>
                   <li><button style="border: none; background: inherit;"(click)="logOut()" id="loginButton">{{temp1}}</button></li>
                   <li><button style="border: none; background: inherit;"(click)="close()" id="closeButton">close</button></li>
                 </div>
@@ -65,7 +67,7 @@
       </ul>
     </div>
   </nav>
-  <div class="header-category-bar" id="sellerHeader">
+  <div class="header-category-bar">
     <div class="hamburger-div">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -79,8 +81,8 @@
           
     </div>
       <div class="scrollmenu">
-          <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
-        <div class="dropdown">
+          <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()" id="breadcrumb">&nbsp;&nbsp;&#9776;</span>
+        <div class="dropdown" id="mainHeader">
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
@@ -88,118 +90,36 @@
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:14}">Hand Craft</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button>
-              
-            <!-- <div class="header-navbar">
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Mom & Kids</button>
-                      <div class="header-subnav-content">
-                        <a href="">Clothes</a>
-                        <a href="">Footwears</a>
-                      </div>
-                    </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Mens</button>
-                    <div class="header-subnav-content">
-                      <a href="">Shirts</a>
-                      <a href="">Jeans</a>
-                      <a href="">T-shirts</a>
-                    </div>
-                  </div> 
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Womens</button>
-                    <div class="header-subnav-content">
-                      <a href="">Clothes</a>
-                      <a href="">Accessories</a>
-                      <a href="">Bags</a>
-                      <a href="">Footwears</a>
-                    </div>
-                  </div> 
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                    <button class="header-subnavbtn">Painting & Arts</button>
-                    <div class="header-subnav-content">
-                      <a href="">Illustraions</a>
-                      <a href="">Portrait</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Hand Craft</button>
-                      <div class="header-subnav-content">
-                        <a href="">Illustraions</a>
-                        <a href="">Portrait</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Accessories</button>
-                      <div class="header-subnav-content">
-                        <a href="">Bags</a>
-                        <a href="">Pouches</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Apperels</button>
-                      <div class="header-subnav-content">
-                        <a href="">Bags</a>
-                        <a href="">Pouches</a>
-                      </div>
-                  </div>
-                </div>
-                <div class="dropbtn-cat">
-                  <div class="header-subnav">
-                      <button class="header-subnavbtn">Cakes</button>
-                      <div class="header-subnav-content">
-                        <a href="">Blackforest</a>
-                        <a href="">Whiteforest</a>
-                      </div>
-                  </div>
-                </div>
-          </div> -->
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button> 
+        </div>
+        <div class="dropdown" style="display: none;" id="sellerHeader">
+          <button class="dropbtn-cat"><a routerLink="/dashboard">DASHBOARD</a></button>
+          <button class="dropbtn-cat"><a routerLink="/manageorders">MY ORDER</a></button>
+          <button class="dropbtn-cat"><a routerLink="/transaction">TRANSACTION</a></button>
+          <button class="dropbtn-cat"><a routerLink="/messages">MESSAGES</a></button>
+          <button class="dropbtn-cat"><a routerLink="/shopsetting">SHOP SETTINGS</a></button>
+          <button class="dropbtn-cat"><a routerLink="/managepage">MY PAGE</a></button>
         </div>
       </div> 
   </div>
 </div>
   <!-- login popup -->
       <div class="container" id="modalContainer">
-          <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-            Forgot Password
-          </button> -->
           <div class="modal" id="myModal-1" role="dialog" >
             <div class="modal-dialog">
               <div class="modal-content ">
                 <div class="modal-header ">
-                  <label style="color: white; margin-left:138px;"><h4>LOGIN / SIGNUP</h4></label>
+                  <label style="color: white; margin-left:138px;"><h4><a style="color: white;" routerLink="/login">LOGIN</a>/<a style="color: white;" routerLink="/signup">SIGNUP</a></h4></label>
                   <button type="button" class="close" data-dismiss="modal" (click)="dispNone();">&times;</button>
                 </div>
                   <div class="modal-body">
-                      <!-- <button type="button" routerLink="/login" style="margin-left: 126px;">
-                          LOGIN TO SCOOPMYART
-                      </button>
+                      <input type="email" placeholder="Email:" style="border: none; margin-left: 135px;" id="login-email">
                       <br>
-                      <label style="margin-left: 224px;">or</label>
+                      <input type="password" placeholder="Password:" style="border: none; margin-left: 135px;" id="login-password">
                       <br>
-                      <button type="button" routerLink="/signup" style="margin-left: 184px;">
-                          SIGN UP
-                      </button> -->
-                      <input type="email" placeholder="Email:" style="border: none; margin-left: 135px;">
+                      <label style="margin-left: 135px;"><a style="color: black;" routerLink="/login">forgot password</a></label>
                       <br>
-                      <input type="password" placeholder="Password:" style="border: none; margin-left: 135px;">
-                      <br>
-                      <label style="margin-left: 135px;">forget password</label>
-                      <br>
-                      <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;<label>I agree to the terms</label> &nbsp;&nbsp; <button style="background: #EFBE24; border: none;" routerLink="/login" (click)=closePop()><label style="color: white">SIGNIN</label></button>
+                      <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;<label>I agree to the terms</label> &nbsp;&nbsp; <button style="background: #EFBE24; border: none;" (click)=closePop()><label style="color: white">SIGNIN</label></button>
                   </div>
               </div>
             </div>

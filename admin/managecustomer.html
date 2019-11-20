@@ -47,50 +47,78 @@
             table-layout: fixed;
         }
     </style>
-
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg" w3-include-html="sidenav.html">
-
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
-                    </a>
-                </div>
-
-                <ul class="nav">
-                    <li>
-                        <a href="managecustomers.html">
-                            <i class="pe-7s-graph"></i>
-                            <p>Manage Customers</p>
+            <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg" w3-include-html="sidenav.html">
+    
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a href="http://www.creative-tim.com" class="simple-text">
+                            Creative Tim
                         </a>
-                    </li>
-
-                </ul>
+                    </div>
+    
+                    <ul class="nav">
+                        <li>
+                            <a href="managecustomer.html">
+                                <i class="pe-7s-graph"></i>
+                                <p>Manage Customers</p>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </div>
+    
             </div>
-
-        </div>
-
-        <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed"style="
-            margin-left: 10px;">
+    <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <a class="navbar-brand" href="#">Manage Customer</a>
                     </div>
-                    <div class="search-container">
-                        <input type="text" placeholder="Search.." name="search" id="search_name" style="
-                    margin-left: 850px;">
-                        <button type="submit"><i class="fa fa-search" onclick="searchuser('customersearchTable')"></i></button>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <!-- <li>
+                                <a href="#">
+                                    <div style="padding-top: 8px;width: 100%;" align="right">
+                                        <p>Log out</p>
+                                    </div>
+                                </a>
+                            </li> -->
+                        </ul>
                     </div>
                 </div>
             </nav>
-
-            <div class="content table-responsive table-full-width" id="customerTable">
-            </div>
-
-            <div class="content table-responsive table-full-width" id="customersearchTable">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card"style="width: 100%">
+                        <div class="header">
+                            <div class="row">
+                                    <h4 class="title">Manage Customers</h4>
+                                <div class="col-md-10">
+                                        <div class="search-container"style="margin-left:10px">
+                                            <input type="text" placeholder="Search.." name="search" id="search_name" style="margin-left: 50px; margin-top: 10px;">
+                                            <button type="submit"><i class="fa fa-search"
+                                            onclick="searchuser('customersearchTable')"></i></button>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div class="content table-responsive table-full-width" id="customerTable">
+                            </div>
+                            <div class="content table-responsive table-full-width" id="customersearchTable">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer" w3-include-html="footer.html">
+                </footer>
             </div>
         </div>
     </div>
@@ -135,12 +163,11 @@
                 if (responseData.data.success == "successful") {
                     var response = responseData.data.result;
                     var user_name = "";
-                    var tabHeader = "<table class='table table-hover table-striped'><thead><th>ID</th><th>User Name</th><th>Name</th><th>Age</th><th>Mail</th><th> </th><th>Phone</th><th>Date of joining</th>";
+                    var tabHeader = "<table class='table table-hover table-striped'style ='width:auto' ><thead><th>ID</th><th>User Name</th><th>Name</th><th>Age</th><th>Mail</th><th> </th><th>Phone</th><th>Date of joining</th>";
                     var tabCategories = tabHeader;
                     response.forEach(element => {
                         tabCategories = tabCategories + buildHtml("customersearchTable", element);
-                        
-                        //document.getElementById('customersearchTable').innerHTML = user_name;
+
                     });
                     tabCategories = tabCategories + "</table>";
                     document.getElementById("customerTable").innerHTML = tabCategories;
@@ -164,7 +191,7 @@
                 if (responseData.data.success == "successful") {
                     var response = responseData.data.result;
                     globCopy2 = response;
-                    var tabHeader = "<table class='table table-hover table-striped'><thead><th>ID</th><th>User Name</th><th>Name</th><th>Age</th><th>Mail</th><th> </th><th>Phone</th><th>Date of joining</th>";
+                    var tabHeader = "<table class='table table-hover table-striped'style ='width:auto'><thead><th>ID</th><th>User Name</th><th>Name</th><th>Age</th><th>Mail</th><th> </th><th>Phone</th><th>Date of joining</th>";
                     var tabCategories = tabHeader;
                     response.forEach(element => {
                         tabCategories = tabCategories + buildHtml("customerTable", element);
@@ -189,13 +216,13 @@
             case "customerTable":
                 htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.name + "</td><td>" + data.age + "</td><td>" + data.email + "</td><td> </td><td>" + data.phone + "</td><td>" + data.doj + "</td> <td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td></tr>";
                 break;
-                case "customersearchTable":
-                
+            case "customersearchTable":
+
                 htmlString = "<tr><td>" + data.id + "</td><td>" + data.username + "</td><td>" + data.Name + "</td><td>" + data.age + "</td><td>" + data.email + "</td><td></td> <td>" + data.phone1 + "</td><td>" + data.doj + "</td><td><img src='assets/img/delete-button.png' onclick=" + "deleteData('" + data.id + "','" + pageName + "');" + "></td></tr>";
                 console.log(htmlString);
                 break;
         }
-             return htmlString;
+        return htmlString;
     }
 </script>
 <footer class="footer">

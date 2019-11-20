@@ -1,5 +1,5 @@
 <div>
-    <div class="grid-order-history">
+    <div class="grid-order-history-head">
         <div class="orders">
                 <label>ORDERS</label>
         </div>
@@ -9,14 +9,16 @@
         <div class="feedback">
                 <label>FEEDBACK</label>
         </div>
+    </div>
+    <div class="grid-order-history" *ngFor="let item of dynamicDataOrderDataAll">
         <div class="prod-name">
-                <label>PAINTING</label>
+                <label style="font-size: 19px; font-variant-caps: all-petite-caps;">{{item.prodName}}</label>
         </div>
         <div class="desc">
-                <p>fine crafted masterpiece</p>
+                <p>{{item.shortDesc}}</p>
         </div>
         <div class="order-no">
-                <label>#00000000ABC</label>
+                <label>#SMACAT{{item.orderId}}{{item.createDate}}</label>
         </div>
         <div class="invoice">
                 <button class="btn-invoice-style">VIEW INVOICE</button>
@@ -67,57 +69,84 @@
                 </div>
                 <div class="stat-bar-1">
                         <div class="stats-1">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left: -54px;" *ngIf="stage1_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left: -124px;
+                                margin-top: -31px;" *ngIf="stage1_full">
+                                </div>
                         </div>
                 </div>
                 <div class="stat-bar-2">
                         <div class="stats-2">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left: 27px;" *ngIf="stage2_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left: -47px; margin-top: -31px;" *ngIf="stage2_full">
+                                </div>
                         </div>
                 </div>
                 <div class="stat-bar-3">
                         <div class="stats-3">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left: 6px;" *ngIf="stage3_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left: -20px;
+                                margin-top: -31px;" *ngIf="stage3_full">
+                                </div>
                         </div>
                 </div>
                 <div class="stat-bar-4">
                         <div class="stats-4">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left: 27px;" *ngIf="stage4_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left: -22px;
+                                margin-top: -31px;" *ngIf="stage4_full">
+                                </div>
                         </div>
                 </div>
                 <div class="stat-bar-5">
                         <div class="stats-5">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left:52px; z-index: 1;" *ngIf="stage5_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left:-20px; margin-top: -31px;" *ngIf="stage5_full">
+                                </div>
                         </div>
                 </div>
                 <div class="stat-bar-6">
                         <div class="stats-6">
-                                <span>  
-                                </span>
+                                <div class="dot-circle" style="margin-left: 57px;" *ngIf="stage6_dot">
+                                </div>
+                                <div class="full-circle" style="margin-left: -20px; margin-top: -31px;" *ngIf="stage6_full">
+                                </div>
                         </div>
                 </div>
                 <div class="label-1">
-                        Mon,11th Dec | 7:35pm
+                        <label>Confirmed on</label>
+                        <br>
+                        <label>{{item.stage_1_date}}</label>
                 </div>
                 <div class="label-2">
-                        Tue,12th Dec | 7:35pm
+                        <label>Payment Confirmed on</label>
+                        <br>
+                        <label>{{item.stage_2_date}}</label>
                 </div>
                 <div class="label-3">
-                        Wed,13th Dec | 7:35pm
+                        <label >Processed on</label>
+                        <br>
+                        <label>{{item.stage_3_date}}</label>
                 </div>
                 <div class="label-4">
-                        Thu,14th Dec | 7:35pm
+                        <label>Expected on</label>
+                        <br>
+                        <label>{{item.stage_4_date}}</label>
                 </div>
                 <div class="label-5">
-                        Fri,12th Dec | 7:35pm
+                        <label>Expected on</label>
+                        <br>
+                        <label>{{item.stage_5_date}}</label>
                 </div>
                 <div class="label-6">
-                        Sat,12th Dec | 7:35pm
+                        <label>Expected on</label>
+                        <br>
+                        <label>{{item.stage_6_date}}</label>
                 </div>
         </div>
         <div class="feedback-stat">

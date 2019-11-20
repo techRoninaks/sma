@@ -1,89 +1,250 @@
-<div id="main">
+<!-- <ul>
+    <li *ngFor="let group of newArray">
+    {{group.name}}
+    <ul>
+        <li *ngFor="let light of group.value">
+        {{light.type}},{{light.price}}
+        </li>
+    </ul>
+    </li>
+</ul> -->
+
+<div id="main" *ngIf=flagAdd>
     <!-- Header -->
     <div class="dvProdHeader" id="dvProdHeader">
         <div class="dvBreadcrumbs">
-            <a routerLink="">Home</a> > <a style="color: gray;">Add Products</a>
+            <a>Home</a> > <a style="color: gray;">Add Products</a>
         </div>
 
     </div>
     <hr>
 </div>
-<div class="dvMain">
+<div class="dvMain" *ngIf=flagAdd>
     <!-- Add Products -->
     <div class="dvAddProdText">
         <img class="imgBord" src="assets/icons/resources (IL)-18.png">
         <h3>ADD PRODUCTS</h3>
     </div>
-    <div class="dvAddProducts">
+    <div class="dvAddProducts" >
         <div class="grid-AddProductBtn">
-            <div class="btnDuplicate">
-                <button class="btnDupli">DUPLICATE</button>
+            <div class="btnDuplicate" *ngIf="editMode">
+                <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button>
             </div>
-            <div class="btnToggleActive">
+            <div class="btnToggleActive" *ngIf="editMode">
                 <div class="toggleTextActive">
                     <p>ACTIVE</p>
                 </div>
-                <div class="btnToggleActive1">
-                    <label class="switchActive" name="answer" value="Show giftCard" >
-                        <input type="checkbox" style="margin-left: 20px;">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
+            </div>
+            <div class="btnToggleActive1" *ngIf="editMode">
+                <label class="switchActive" name="answer" value="Show giftCard">
+                    <input type="checkbox" id="active" style="margin-left: 20px;">
+                    <span class="slider round"></span>
+                </label>
             </div>
         </div>
         <div class="grid-AddProductCat">
             <div class="main-cat">
-                <button (click)="myFunction()" class="dropcat1">Category
-                    <span class="caret"></span>
-                </button>
-                <div id="myDropdown" class="dropdown-content">
-                    <!-- <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()"> -->
-                    <a href="#cake">Cake</a>
-                    <a href="#painting">Painting</a>
-                    <a href="#dress">Dress</a>
+                <!-- MAIN CATEGORY -->
+                <div class="dropcat1">
+                    <p style="text-align: center;">Main Category</p>
+                    <select class="MainCategory" style="margin-top: -1px; width: 300px;" value="2">
+                        <option *ngFor="let item of dynamicMainCategory" (click)="subCategoryLoaded(item.id)">
+                            {{ item.category }} </option>
+                    </select>
                 </div>
             </div>
             <div class="timeline1">
 
             </div>
             <div class="med-cat">
-                <button  class="dropcat2">Category</button>
+                <!-- CATEGORY -->
+                <div class="dropcat2">
+                    <p style="text-align: center;">Category</p>
+                    <input placeholder="catogory" id="subcategory" (keyup)="getSearchCategory();">
+                    <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                        <li *ngFor="let inp of dynamicCategory">
+                            <a (click)="replaceMedCategory(inp.id, inp.category)">
+                                {{inp.id}},{{inp.category}}
+                            </a>
+                        </li>
+                        <li (click)="newCategory()" >
+                            <a>
+                                Create new Subcategory
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- <select class="subCategory" style="margin-top: -1px; width: 300px; margin-left: 0px;">
+                        <option *ngFor="let item of dynamicCategory" (click)="subCategoryLoaded1(item.id)">
+                            {{ item.category }} </option>
+                    </select> -->
+                </div>
             </div>
             <div class="timeline2">
 
             </div>
             <div class="sub-cat">
-                <button  class="dropcat3">Sub Category</button>
-            </div>
-            <div class="grid-AddSubCatBtn">
-                <div class="btnAddSubCat">
-                    <button class="btnSubCat">Add Subcategory</button>
+                <!-- SUB CATEGORY -->
+                <div class="dropcat3">
+                    <p style="text-align: center;">Sub Category</p>
+                    <input placeholder="subcatogory" id="subsubcategory" (keyup)="getSearchSubCategory();">
+                    <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                        <li *ngFor="let inp of dynamicSubCategory">
+                            <a (click)="replaceCategory(inp.id, inp.category)">
+                                {{inp.id}},{{inp.category}}
+                            </a>
+                        </li>
+                        <li (click)="newSubCategory()" >
+                            <a>
+                                Create new Subsubcategory
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- <select class="subCategory1"
+                        style="margin-top: -1px; cursor: pointer; width: 300px; margin-left: 0px;">
+                        <option *ngFor="let item of dynamicSubCategory" (click)="subCategoryLoaded2(item.id)">
+                            {{ item.category }} </option>
+                    </select> -->
                 </div>
             </div>
         </div>
         <hr>
     </div>
     <!-- PRIMARY DETAILS -->
+    <div style="display: inline-flex;">
+        <div *ngFor = "let item of subCategoryArray" class="subCategoryDiv">
+            <p>{{item.val}}<span><img (click)="deleteCategory(item)" src="assets/icons/close.png"></span></p>
+        </div>
+    </div>
     <div class="dvPriDetailsText">
         <img class="imgBord" src="assets/icons/resources (IL)-18.png">
         <h3>PRIMARY DETAILS</h3>
     </div>
-    <div class="dvPrimaryDetails">
-        <div class="grid-ImagesPrimaryDetails">
+    <div class="dvImagesPrimaryDetails">
+        <h5 class="add-Image-Text" style="margin-left: 20px; font-family: BitterBold;"> ADD IMAGES :</h5>
+        <div class="grid-ImagesPrimaryDetails" style="display: flex; margin: 10px;">
+            <input style="display: none;" type="file" id="frontUpload"  (click)="frontUpload()" accept="image/*"
+                #fileInput1>
+            <button (click)="fileInput1.click()" type="button"
+                style="border-block-color: black; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+            <!-- <div
+                style="height: 15%;   width: 12%; background: #009145; margin-top: 25px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                <label style="color: white; text-align: center; font-family:BitterRegular; margin-left: 50px; ">Add
+                    Images</label>
+            </div> -->
+
+            <input style="display: none;" type="file" id="frontUpload2" (click)="frontUpload2()" accept="image/*"
+                #fileInput2>
+            <button (click)="fileInput2.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; margin-left: 10px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload3" (click)="frontUpload3()" accept="image/*"
+                #fileInput3>
+            <button (click)="fileInput3.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload4" (click)="frontUpload4()" accept="image/*"
+                #fileInput4>
+            <button (click)="fileInput4.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload5" (click)="frontUpload5()" accept="image/*"
+                #fileInput5>
+            <button (click)="fileInput5.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload6" (click)="frontUpload6()" accept="image/*"
+                #fileInput6>
+            <button (click)="fileInput6.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload7" (click)="frontUpload7()" accept="image/*"
+                #fileInput7>
+            <button (click)="fileInput7.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload8" (click)="frontUpload8()" accept="image/*"
+                #fileInput8>
+            <button (click)="fileInput8.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload9" (click)="frontUpload9()" accept="image/*"
+                #fileInput9>
+            <button (click)="fileInput9.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
+
+
+            <input style="display: none;" type="file" id="frontUpload10" (click)="frontUpload10()" accept="image/*"
+                #fileInput10>
+            <button (click)="fileInput10.click()" type="button"
+                style="border-block-color: black; margin-left: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                margin-top: 34px; background: #DBDBDB; height: 110px; width: 12%; margin-bottom: -20px; cursor: pointer;">+</button>
 
         </div>
+        <div class="grid-Image-View1" style="display: flex;">
+            <img id="frontPreviewId" style="display: none; margin-left: -442px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront1}}" height="200">
+
+            <img id="frontPreviewId2" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront2}}" height="200">
+
+            <img id="frontPreviewId3" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront3}}" height="200">
+
+            <img id="frontPreviewId4" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront4}}" height="200">
+
+            <img id="frontPreviewId5" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px;" src="{{urlFront5}}" height="200">
+
+            <img id="frontPreviewId6" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront6}}" height="200">
+
+            <img id="frontPreviewId7" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront7}}" height="200">
+
+            <img id="frontPreviewId8" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront8}}" height="200">
+
+            <img id="frontPreviewId9" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront9}}" height="200">
+
+            <img id="frontPreviewId10" style="display: none; margin-left: 12px; width: 140px; height: 105px;
+                margin-top: -50px; " src="{{urlFront10}}" height="200">
+
+        </div>
+    </div>
+
+
+    <div class="dvPrimaryDetails1">
+
         <div class="grid-PrimaryDesc">
             <div class="grid-LeftProd">
-                <p>PRODUCT NAME</p>
+                <p class="productName">PRODUCT NAME</p>
             </div>
             <div class="grid-MedProd1">
-                <input type="text" class="text-Product-Name-Style" id="product-Name">
+                <input type="text" class="text-Product-Name-Style" value="{{allProductInfo.name}}" id="product-Name">
             </div>
             <div class="grid-MedProd2">
                 <p class="productBasePriceText">PRODUCT BASE PRICE</p>
             </div>
             <div class="grid-RightProd">
-                <input type="text" class="text-Product-BasePrice-Style" id="product-BasePrice">
+                <input type="text" class="text-Product-BasePrice-Style" value="{{allProductInfo.base_price}}" (change)="setupPrice()" id="product-BasePrice">
             </div>
         </div>
         <div class="grid-PrimaryDesc1">
@@ -97,13 +258,13 @@
                 <P>SPECIFICATIONS</P>
             </div>
             <div class="grid-ShortDescRight">
-                <input type="text" class="text-Product-ShortDesc-Style" id="product-ShortDesc">
+                <input type="text" class="text-Product-ShortDesc-Style" value="{{allProductInfo.short_desc}}" id="product-ShortDesc">
             </div>
             <div class="grid-LongDescRight">
-                <textarea type="text" class="text-Product-LongDesc-Style" id="product-Desc"></textarea>
+                <textarea type="text" class="text-Product-LongDesc-Style" value="{{allProductInfo.Long_desc}}" id="product-Desc"></textarea>
             </div>
             <div class="grid-SpecRight">
-                <textarea type="list" class="text-Product-Spec-Style" id="product-Spec"></textarea>
+                <textarea type="list" class="text-Product-Spec-Style" value="{{allProductInfo.spec}}" id="product-Spec"></textarea>
             </div>
         </div>
         <div class="grid-PrimaryDesc2">
@@ -117,15 +278,15 @@
                 <p>MINIMUM QTY PER ORDER :</p>
             </div>
             <div class="grid-QtyCountRight">
-                <button class="btnMinQtyCount">-</button>
-                <input class="counterLabel" id="Counter-Label">
-                <button class="btnMaxQtyCount">+</button>
+                <button class="btnMinQtyCount" (click)="decreseCount()">-</button>
+                <input class="counterLabel" value="{{allProductInfo.qty_avble}}"  id="Counter-Label" value="1">
+                <button class="btnMaxQtyCount" (click)="increseCount()">+</button>
             </div>
             <div class="grid-MaxQtyOrderRight">
-                <input type="text" class="Max-Qty-Style" id="Max-Qty-Order">
+                <input type="text" class="Max-Qty-Style" value="{{allProductInfo.max_order_quant}}"  id="Max-Qty-Order">
             </div>
             <div class="grid-MiniQtyOrderRight">
-                <input type="text" class="Min-Qty-Style" id="Min-Qty-Order">
+                <input type="text" class="Min-Qty-Style" value="{{allProductInfo.min_order_quant}}"  id="Min-Qty-Order">
             </div>
         </div>
         <!-- <button class="save" (click)="ngSave()">SAVE</button> -->
@@ -136,36 +297,82 @@
         <h5>ADD VARIENTS</h5>
     </div>
     <div class="grid-Tab-Form">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-            <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-            <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-            <button class="btn btn-default" ng-click="addTab()">+</button>
-        </ul>
+        <!-- <div class="varitentsAdd">
+            <mat-tab-group mat-align-tabs="start" id="varientPlus">
+                <mat-tab label="varient_{{item}}" *ngFor="let item of varients | slice:1; let i = index">
+                    <ng-template matTabContent>
+                        <div style="display: inline-flex;">
+                            <p>VARIENT NAME:</p><input style="background: transparent;border: none;padding: 0px;height: min-content;" id="{{item}}_name"placeholder="Varient Name">
+                        </div>
+                    
+                    <div style="display: inline-flex;">
+                        <div style="margin: 15px; width: max-content;" id="{{item}}_1">
+                            <input placeholder="varient type" id="{{item}}_varient_1">
+                            <input placeholder="price" id="{{item}}_price_1">
+                        </div>
+                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_1" (click)="displayVarientType(item,'2','1')"></div>
 
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <h3>HOME</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
+                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_2">
+                            <input placeholder="varient type" id="{{item}}_varient_2">
+                            <input placeholder="price" id="{{item}}_price_2">
+                        </div>
+                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_2" style="display: none;" (click)="displayVarientType(item,'3','2')"></div>
+                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_3">
+                            <input placeholder="varient type" id="{{item}}_varient_3">
+                            <input placeholder="price" id="{{item}}_price_3">
+                        </div>
+                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_3" style="display: none;" (click)="displayVarientType(item,'4','3')"></div>
+                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_4">
+                            <input placeholder="varient type" id="{{item}}_varient_4">
+                            <input placeholder="price" id="{{item}}_price_4">
+                        </div>
+                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_4" style="display: none;" (click)="displayVarientType(item,'5','4')"></div>
+                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_5">
+                            <input placeholder="varient type" id="{{item}}_varient_5">
+                            <input placeholder="price" id="{{item}}_price_5">
+                        </div>
+                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_5" style="display: none;" (click)="displayVarientType(item,'6','5')"></div>
+                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_6">
+                            <input placeholder="varient type" id="{{item}}_varient_6">
+                            <input placeholder="price" id="{{item}}_price_6">
+                        </div>
+                    
+                    </div>
+                    <button class="saveAddVariant" (click)="saveAddVariant(item)">SAVE</button>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+            <div style="width: max-content;cursor: pointer; color: white; background: #EFBE24; margin: auto; border-radius: 5px; ">
+                <p (click)="addVarients()">Add Varients</p>
             </div>
-            <div id="menu1" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
-            </div>
-            <div id="menu2" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam.</p>
-            </div>
-            <div id="menu3" class="tab-pane fade">
-                <h3>Menu 3</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                </p>
+        </div> -->
+        <div class="varitentsAdd">
+            <mat-tab-group mat-align-tabs="start" id="varientPlus">
+                <mat-tab label="{{item.name}}" *ngFor="let item of varients;let i = index">
+                    <ng-template matTabContent>
+                        <div style="display: inline-flex;">
+                            <p>VARIENT NAME:</p><input (keyup)="enterValue(i,'0','name',item)" style="background: transparent;border: none;padding: 0px;height: min-content;" value="{{item.name}}" id="{{i}}_name"placeholder="Varient Name">
+                        </div>
+                    <div style="display: inline-flex;" >
+                        <div *ngFor="let in of item.value; let j = index">
+                            <div style="margin: 15px;display: grid; width: max-content;" id="{{in}}_1">
+                                <input placeholder="varient type" (keyup)="enterValue(i,j,'type',in)"  id="{{i}}_{{j}}varient_1" value="{{in.type}}">
+                                <input placeholder="price" id="{{i}}_{{j}}price_1" (keyup)="enterValue(i, j,'price', in)"   value="{{in.price}}">
+                            </div>
+                            <div><img src="assets/icons/close.png" id="{{in}}_btn_1" (click)="deleteCell(in, item.value)"></div>
+                        </div>
+                    </div>
+
+                    <button class="saveAddVariant" (click)="saveAddVariant(item)">SAVE</button>
+                    <button class="saveAddVariant" (click)="displayVarientType(item.value)">Add New Variant</button>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+            <div style="width: max-content;cursor: pointer; color: white; background: #EFBE24; margin: auto; border-radius: 5px; ">
+                <p (click)="addVarients()">Add Varients</p>
             </div>
         </div>
+
     </div>
 
     <hr>
@@ -176,12 +383,6 @@
             <h3>PRICE</h3>
         </div>
         <div class="grid-PriceDetails">
-            <div class="grid-LeftPrice">
-                <p class="priceBreakDownText">TAX</p>
-            </div>
-            <div class="grid-LeftPrice1">
-                <p class="dicountText">DISCOUNT</p>
-            </div>
             <div class="grid-LeftPrice2">
                 <p class="actualPriceText">ACTUAL PRICE</p>
             </div>
@@ -190,12 +391,6 @@
             </div>
             <div class="grid-LeftPrice4">
                 <p class="finalText">FINAL</p>
-            </div>
-            <div class="grid-Med">
-                <p class="dotMed">:</p>
-            </div>
-            <div class="grid-Med1">
-                <p class="dotMed1">:</p>
             </div>
             <div class="grid-Med2">
                 <p class="dotMed2">:</p>
@@ -206,20 +401,14 @@
             <div class="grid-Med4">
                 <p class="dotMed4">:</p>
             </div>
-            <div class="grid-RightPrice">
-                {{ dynamicDataPriceDiscTotal.tax }}
-            </div>
-            <div class="grid-RightPrice1">
-                {{ dynamicDataPriceDiscTotal.discount }}
-            </div>
             <div class="grid-RightPrice2">
-                {{ dynamicDataPrice.basePrice }}
+                {{ totalPrice }}
             </div>
-            <div class="grid-RightPrice3">
-                {{ dynamicDataPrice.commisionDedtd }}
+            <div class="grid-RightPrice3" id="commissionDecuction">
+                {{ commDec }}
             </div>
             <div class="grid-RightPrice4">
-                {{ dynamicDataPriceDiscTotal.totalPrice }}
+                {{ basePrice }}
             </div>
         </div>
         <hr>
@@ -235,7 +424,11 @@
                 <h6 class="labelText">LABEL</h6>
             </div>
             <div class="grid-AdvanceDropDownRight">
-
+                <select class="labelDropdown" id="labelSelect" style="margin-top: -1px; width: 200px; margin-left: 66px; background:
+                #EFBE24;border-radius: 5px;">
+                    <option *ngFor="let item of labels" value="{{ item.id }}">
+                        {{ item.label_text }} </option>
+                </select>
             </div>
         </div>
         <div class="grid-AdvanceSettings2">
@@ -249,12 +442,12 @@
                     </div>
                     <div class="grid-LabelRight">
                         <div class="AvgProTimeLabel">
-                            <input class="AvgProTimeLabel-Style" id="Avg-ProTime">
+                            <input class="AvgProTimeLabel-Style" value="{{allProductInfo.avg_prcessing_time}}" id="Avg-ProTime">
                         </div>
                     </div>
                     <div class="grid-LabelRight1">
                         <div class="AvgShipTimeLabel">
-                            <input class="AvgShipTimeLabel-Style" id="Avg-ShipTime">
+                            <input class="AvgShipTimeLabel-Style" value="{{allProductInfo.avg_shpping_time}}"  id="Avg-ShipTime">
                         </div>
                     </div>
                 </div>
@@ -263,10 +456,33 @@
                 <div class="grid-Advance3">
                     <div class="grid-TagText">
                         <h6 class="tagText">TAG :</h6>
+                        <div>
+                            <span *ngFor="let item of tagsArray" style="cursor: pointer"  class="tags">{{item.name}}
+                            <img src="assets/icons/close.png" (click)="deletetags(item)" >
+                            </span>
+                        </div>
                     </div>
                     <div class="grid-TagCard">
                         <div class="AdvanceTagCard">
-                            <input class="AdvanceTagCard-Style" id="Tag-Card">
+                            <div class="ng-autocomplete">
+                                <ng-autocomplete 
+                                  [data]="datas"
+                                  [searchKeyword]="keyword"
+                                  (selected)='selectEvent($event)'
+                                  (inputChanged)='onChangeSearch($event)'
+                                  (inputFocused)='onFocused($event)'
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate">                                
+                                </ng-autocomplete>
+                                 
+                                <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item.name"></a>
+                                </ng-template>
+                                 
+                                <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -285,20 +501,20 @@
                         <p class="uploadImgText">Upload Images</p>
                     </div>
                     <div class="grid-GiftOptionToggleRight1">
-                        <label class="switchGiftOption" name="answer" value="Show giftCard" id="giftOption" >
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchGiftOption" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="giftOption" style="margin-left: 20px;" value="{{allProductInfo.has_gift}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="grid-OrderConfrmToggleRight1">
-                        <label class="switchOrderConfrm" name="answer" value="Show giftCard" id="orderConfrm" >
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchOrderConfrm" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="orderConfrm" style="margin-left: 20px;" value="{{allProductInfo.has_order_confmn}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="grid-UploadImgToggleRight1">
-                        <label class="switchUploadImg" name="answer" value="Show giftCard" id="uploadImg">
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchUploadImg" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="uploadImg" style="margin-left: 20px;" value="{{allProductInfo.can_upload_image}}" >
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -310,8 +526,8 @@
                         <p class="deliveryDateText">Delivery date</p>
                     </div>
                     <div class="grid-DeliveryDateToggleRight2">
-                        <label class="switchDeliveryDate" name="answer" value="Show giftCard" >
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchDeliveryDate" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="deliveryDate" style="margin-left: 20px;" value="{{allProductInfo.can_orderbydate}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -320,15 +536,16 @@
                     </div>
                     <div class="grid-AutoCancelLabelRight2">
                         <div class="AutoCancelLabel">
-                            <input class="AutoCancelLabel-Style" id="Auto-Cancel">
+                            <input class="AutoCancelLabel-Style" id="Auto-Cancel" value="{{allProductInfo.auto_cancel_time}}">
                         </div>
                     </div>
                     <div class="grid-AddCustomTextLeft2">
                         <p class="addCustomText">Add Custom Message Fields</p>
                     </div>
                     <div class="grid-AutoCustomToggleRight2">
-                        <label class="switchAutoCustom" name="answer" value="Show giftCard" id="autoCustom"  >
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchAutoCustom" name="answer" value="Show giftCard" 
+                        >
+                            <input type="checkbox" id="autoCustom" style="margin-left: 20px;" value="{{allProductInfo.add_custom_message_field}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -340,16 +557,25 @@
                         <p class="rfqText">RFQ</p>
                     </div>
                     <div class="grid-RfqToggle">
-                        <label class="switchRfq" name="answer" value="Show giftCard" id="rfq" >
-                            <input type="checkbox" style="margin-left: 20px;">
+                        <label class="switchRfq" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="rfq" style="margin-left: 20px;" value="{{allProductInfo.has_rfq}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="grid-MaxNoText">
-                        <p class="maxNoText">MAX NO :</p>
+                        <p class="maxNoText">MAX NO. IMAGES :</p>
                     </div>
                     <div class="grid-CountLabel">
-                        <input class="CountLabel-Style" id="Max-Count-Label">
+                        <input class="CountLabel-Style" id="Max-Count-Label" value="{{allProductInfo.max_no_of_image}}">
+                    </div>
+                    <div class="grid-InstantBuyText">
+                        <p class="instantBuyText">Instant Buy </p>
+                    </div>
+                    <div class="grid-InstantBuyToggle">
+                        <label class="switchInstant" name="answer" value="Show giftCard">
+                            <input type="checkbox" id="instantBuy" style="margin-left: 20px;" value="{{allProductInfo.has_instant_buy}}">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -364,25 +590,30 @@
             <div class="grid-MsgTitleHead">
                 <div class="grid-MsgTitle-Head">
                     <div class="grid-MsgTitle-Sect1">
-                        <p>Title :</p>
-                        <input type=text class="Msg-Title-Style" id="Msg-Title">
+                        <p class="Msg-title-text">Title :</p>
+                        <input type=text class="Msg-Title-Style" id="Msg-TitleId">
                     </div>
                     <div class="grid-Msg-Add">
-                        <img class="imgPlus" src="assets/icons/plus.png">
+                        <img class="imgPlus" id="imgPlusId" (click)="MsgTitlePlus()" src="assets/icons/plus.png">
                     </div>
-                    <!-- <div class="grid-Ans-Sect2">
-                        <p>Answer :</p>
-                        <input type=text class="Ans-Sect2-Style" id="Ans-Sect2">
-                    </div> -->
                 </div>
             </div>
+
             <div class="grid-MsgTitleFoot">
-                <div class="grid-MsgTitle-Foot">
-                    <div class="grid-MsgTitle-Edit-Close">
-                        <img class="imgEdit" src="assets/icons/edit.png">
-                        <img class="imgClose" src="assets/icons/close.png">
+                <ng-container *ngFor="let item of title">
+                    <div class="grid-MsgTitle-Foot">
+                        <div class="grid-MsgTitle-Label">
+                            <label class="MsgTitle-Label"   id="MsgTitleLabel_{{item.id}}">{{item}}</label>
+                            <input id="MsgEdit_{{item.id}}" style="display: none;" value="{{item.titles}}">
+                        </div>
+                        <div class="grid-MsgTitle-Edit-Close" id="editNow_{{item.id}}">
+                            <!-- <img id="imgEdit-MsgTitle" *ngIf="!editMsg"  (click)="editCell(item.id)" class="imgEdit" src="assets/icons/edit.png"> -->
+                            <img id="imgClose-MsgTitle" *ngIf="!editMsg" (click)="close(item)" class="imgClose"
+                                src="assets/icons/close.png">
+                        </div>
+                        <!-- <div  id="save_{{item.id}}" (click)="editTitle(item.titles, item.id)" style="display: none;background: #EFBE24;color: black;padding: 5px; cursor: pointer;">Save</div> -->
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -432,10 +663,64 @@
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
             <h3>SHIPPING DETAILS :</h3>
         </div>
-    </div>
-    <!-- DELIVERABLE LOCATIONS -->
-    <div class="dvDeliverableLocationText">
-        <h5>DELIVERABLE LOCATIONS</h5>
+        <!-- DELIVERABLE LOCATIONS -->
+        <div class="dvDeliverableLocationText">
+            <h5>DELIVERABLE LOCATIONS</h5>
+        </div>
+        <div class="grid-DeliverableContainer">
+            <div class="grid-DeliverableHead">
+                <div class="grid-DeliverableHeadSub">
+                    <div class="grid-Location">
+                        <p class="Location-Text" style="margin-top: 10px;">LOCATION</p>
+                    </div>
+                    <div class="grid-Price">
+                        <p class="Price-Text" style="margin-top: 10px;" id="Price-Id">PRICE</p>
+                    </div>
+                    <div class="grid-QtyPrice">
+                        <p class="Qty-Price-Text" style="margin-top: 10px;" id="Qty-Price-Id">QTY PRICE</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-DeliverableBody">
+                <div class="grid-DeliverableBodySub">
+                    <input class="deliverable-Location"  id="initialAlias"  value="{{shippingLocation.location_alias}}">
+                    <input class="deliverable-Price"  id="initialprice" value="0">
+                    <input class="deliverable-Qty-Price" id="initialQtn"  value="0">
+                    <!-- <img class="imgEdit" src="assets/icons/edit.png">
+                    <img class="imgClose" src="assets/icons/close.png"> -->
+                </div>
+                <div class="grid-DeliverableBodySub" *ngFor = "let item of shippingLocs">
+                    <p class="deliverable-Location">{{item.pincode}}</p>
+                    <p class="deliverable-Price"  >{{item.price}}</p>
+                    <p class="deliverable-Qty-Price" >{{item.qtn}}</p>
+                    <img class="imgClose" src="assets/icons/close.png" (click)="deleteShiipingLocation(item)">
+                </div>
+                <div class="grid-DeliverableBodySub">
+                    <input class="deliverable-Location" (keyup)="shippingLocationGetter('item')"  id="item_pincode">
+                    <ul id="myUL" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                        <li *ngFor="let inp of shippinglocationArray">
+                            <a (click)="replaceText(inp.pincode,inp.office_name);">
+                                {{inp.office_name}},{{inp.pincode}}
+                            </a>
+                        </li>
+                    </ul>
+                    <input class="deliverable-Price"  id="item_price">
+                    <input class="deliverable-Qty-Price"  id="item_qtn">
+                    <img class="imgClose" src="assets/icons/plus.png" (click)="addShippingLocation('item')" id="item_close">
+                </div>
+                <hr>
+            </div>
+            <!-- <div class="grid-DeliverableFoot">
+                <div class="grid-DeliverableFootSub" style="cursor: pointer;" (click)="addShippingLocation()">
+                    <div class="deliverable-Add-Foot">
+                        <img class="imgPlus" src="assets/icons/plus.png">
+                    </div>
+                    <div class="location-Text-Style" style="margin-left: -172px; color: #009145; margin-top: -26px;">Add
+                        Another Location </div>
+                </div>
+                <hr>
+            </div> -->
+        </div>
     </div>
     <hr>
     <!-- DISCOUNT -->
@@ -453,28 +738,28 @@
                     <div class="grid-Pro-Disc-Container">
                         <div class="grid-Pro-Disc">
                             <div class="grid-Pro-Date-Text">
-                                <p class="dateText">DATE :</p>
+                                <p class="dateText" style="font-family: BitterBold;">DATE :</p>
                             </div>
                             <div class="grid-Label-1">
                                 <input type=date class="Pro-Date-Label-Style-1" id="Pro-Date-1">
                             </div>
                             <div class="grid-minus">
-                                <p>-</p>
+                                <p style="font-family: BitterBold;">-</p>
                             </div>
                             <div class="grid-Label-2">
                                 <input type=date class="Pro-Date-Label-Style-2" id="Pro-Date-2">
                             </div>
                             <div class="grid-Pro-Disc-Text">
-                                <p>DISCOUNT :</p>
+                                <p style="font-family: BitterBold;">DISCOUNT :</p>
                             </div>
                             <div class="grid-Price-Label">
-                                <input type=text placeholder="Rs" class="Pro-Price-Label-Style-2" id="Pro-Price-1">
+                                <input type=text placeholder="price" (keyup)="priceUpdate()" class="Pro-Disc-Label-Style-2" id="Pro-Disc-2">
                             </div>
                             <div class="grid-Disc-Label">
-                                <input type=text placeholder="%" class="Pro-Disc-Label-Style-2" id="Pro-Disc-1">
+                                <input type=text placeholder="%" (keyup)="discountUpdate()" class="Pro-Disc-Label-Style-1" id="Pro-Disc-1">
                             </div>
                             <div class="btnPro-Disc">
-                                <button class="btnPro-Sumit" >SUBMIT</button>
+                                <button class="btnPro-Sumit" (click)="addBulkDisc()">SUBMIT</button>
                             </div>
                         </div>
                     </div>
@@ -493,39 +778,47 @@
                                         <p class="qtyText">QTY</p>
                                     </div>
                                     <div class="grid-Disc-Price">
+                                        <p class="discPriceText">DISCOUNT PERCENTAGE</p>
+                                    </div>
+                                    <div class="grid-Disc-Per">
                                         <p class="discPriceText">DISCOUNTED PRICE</p>
                                     </div>
                                     <div class="grid-Actual-Price">
                                         <p class="actualPriceText">ACTUAL PRICE</p>
                                     </div>
                                     <div class="grid-Qty-Label">
-                                        <input type=text class="Bun-Qty-Label-Style" id="Bundle-Qty">
+                                        <input type=text class="Bun-Qty-Label-Style" id="Bundle-Qty" [(ngModel)]="qtn"  (change)="qtnchanger()">
+                                    </div>
+                                    <div class="grid-Disc-Per-Label">
+                                        <input type=text class="Disc-Price-Label-Style" id="Disc-Pres" (change)="disCount()">
                                     </div>
                                     <div class="grid-Disc-Price-Label">
-                                        <input type=text class="Disc-Price-Label-Style" id="Disc-Price">
+                                        <input type=text class="Disc-Price-Label-Style" id="Disc-Price" value="{{calcu}}">
                                     </div>
                                     <div class="grid-Actual-Price-Label">
-                                        <input type=text class="Actual-Price-Label-Style" id="Actual-Price">
+                                        <input type=text class="Actual-Price-Label-Style" id="Actual-Price" value="{{ calcQtnPrice }}">
                                     </div>
                                     <div class="grid-Add-Bundle">
-                                        <img class="imgPlus" src="assets/icons/plus.png" id="addBulkDisc" >
+                                        <img class="imgPlus" src="assets/icons/plus.png" id="addBulkDiscId"
+                                            (click)=addBulkDiscTwo()>
                                     </div>
                                 </div>
                             </div>
-                            <div class="grid-Bundle-Foot">
-                                <div class="grid-Bundle-Body-1">
+                            <div class="grid-Bundle-Foot" >
+
+                                <div class="grid-Bundle-Body-1" *ngFor="let item of discountArray">
                                     <div class="grid-Qty-Label-1">
-                                        <input type=text class="Bundle-Qty-Label-Style" id="Qty-Label">
+                                        <label type=text class="Bundle-Qty-Label-Style" id="Qty-Label"> {{item.bulkDiscount}}</label>
                                     </div>
                                     <div class="grid-Disc-Price-Label-1">
-                                        <input type=text class="Bundle-Qty-Label-Style" id="Price-Label">
+                                        <label type=text class="Bundle-Qty-Label-Style" id="Price-Label">{{item.discount}} </label>
                                     </div>
                                     <div class="grid-Actual-Price-1">
-                                        <input type=text class="Bundle-Actual-Label-Style" id="Actual-Label">
+                                        <label type=text class="Bundle-Actual-Label-Style" id="Actual-Label">{{item.actualPrice}} </label>
                                     </div>
                                     <div class="grid-Edit-Close-Bundle-1">
-                                        <img class="imgEdit" src="assets/icons/edit.png">
-                                        <img class="imgClose" src="assets/icons/close.png">
+                                        <!-- <img class="imgEdit" src="assets/icons/edit.png" > -->
+                                        <img class="imgClose" src="assets/icons/close.png" (click)="deleteDiscount(item)">
                                     </div>
                                 </div>
 
@@ -543,35 +836,24 @@
             <img class="imgBord" src="assets/icons/resources (IL)-18.png">
             <h3>PRODUCT POLICIES & PRODUCT SHIPPING POLICIES</h3>
         </div>
-        <!-- <div class="grid-Policy">
-            <div class="grid-Policies">
-                <textarea class="textPolicy-Style hidden" id="textPolicy">hgghfgfg</textarea>
-            </div>
-            <div class="grid-PoliciesBtn">
-                <button class="policyBtn" (click)="toggleEdit()">EDIT</button>
-                <button class="policyBtn hidden" (click)="toggleSave()">SAVE</button>
-            </div>
-        </div> -->
         <ng-container *ngIf="editPolicy==0; else policyEdit">
-            <div class="policyTxt">
+            <div class="policyTxt" id="policyId">
                 <p>{{dynamicDataProPolicy.productPolicy}}</p>
+
                 <p>{{dynamicDataShipPolicy.shippingPolicy}}</p>
+
                 <p>{{dynamicDataReturnPolicy.returnPolicy}}</p>
             </div>
             <div class="btnPolicyEdit">
-                <button class="button" type="button" (click)="edit('policy');">EDIT</button>
+                <button id="policyEdit" class="button" type="button" (click)="edit('policy');">EDIT</button>
             </div>
         </ng-container>
         <ng-template #policyEdit>
-            <textarea class="policyTxtArea" id="policyTxtAr">
-                {{dynamicDataProPolicy.productPolicy}}
-
-                {{dynamicDataShipPolicy.shippingPolicy}}
-
-                {{dynamicDataReturnPolicy.returnPolicy}}
+            <textarea class="policyTxtArea" id="policyTxtAr" >
+                {{allProductInfo.shipping_policy}}~{{allProductInfo.return_policy}}~{{allProductInfo.product_policy}}
             </textarea>
             <div class="btnpolicySubmit">
-                <button class="button" type="button" (click)="sub('policy');">SUBMIT</button>
+                <!-- <button id="policyEdit" class="button" type="button" (click)="sub1();">SUBMIT</button> -->
             </div>
         </ng-template>
     </div>
@@ -586,25 +868,31 @@
             <div class="grid-FaqHead">
                 <div class="grid-Faq-Head">
                     <div class="grid-Ques-Sect1">
-                        <p>Question :</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Question :</p>
                         <input type=text class="Ques-Sect1-Style" id="Ques-Sect1">
                     </div>
                     <div class="grid-Add">
-                        <img class="imgPlus" src="assets/icons/plus.png">
+                        <img class="imgPlus" src="assets/icons/plus.png" id="faq-Add-Id" (click)="faqAdd(  )">
                     </div>
                     <div class="grid-Ans-Sect2">
-                        <p>Answer :</p>
+                        <p style="margin-top: 10px; margin-left: 10px;">Answer :</p>
                         <input type=text class="Ans-Sect2-Style" id="Ans-Sect2">
                     </div>
                 </div>
             </div>
             <div class="grid-FaqFoot">
-                <div class="grid-Faq-Foot">
-                    <div class="grid-Faq-Edit-Close">
-                        <img class="imgEdit" src="assets/icons/edit.png">
-                        <img class="imgClose" src="assets/icons/close.png">
+                <ng-container *ngFor="let item of faq;">
+                    <div class="grid-Faq-Foot">
+                        <div class="grid-Faq-Label">
+                            <label class="faq-Label" id="faqLabel">Question :{{item.faqQ}}</label>
+                            <label class="faq-Label" id="faqLabel">Answer :{{item.faqA}}</label>
+                        </div>
+                        <div class="grid-Faq-Edit-Close">
+                            <!-- <img  id="faq-Edit-Id" class="imgEdit" src="assets/icons/edit.png"> -->
+                            <img id="faq-Close-Id" class="imgClose" (click)="FaqClose(item)" src="assets/icons/close.png">
+                        </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -612,7 +900,7 @@
     <div class="grid-BtnLast">
         <div class="grid-dvBtnLast">
             <div class="grid-BtnLastLeft">
-                <button class="btnSaveAsDraft" >SAVE AS DRAFT</button>
+                <button class="btnSaveAsDraft" (click)="publishBtn('save')">SAVE AS DRAFT</button>
             </div>
             <div class="grid-BtnLastRight">
                 <button class="btnPublish" (click)="publishBtn('publish')">PUBLISH</button>

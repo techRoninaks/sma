@@ -23,6 +23,9 @@ export class TransactionComponent implements OnInit {
   constructor(private data: DataService, private route: ActivatedRoute, private cookieService: CookieService) { }
 
   ngOnInit() {
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
     // this.setCookie("sellerId", 2);
     this.tokenSel = this.getCookie("sellerId");
 
@@ -68,5 +71,11 @@ export class TransactionComponent implements OnInit {
         this.transactionData = data;
       }
     );
+  }
+
+  ngOnDestroy() {
+    (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
+    (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
+    (<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
   }
 }

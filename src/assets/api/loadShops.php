@@ -12,7 +12,7 @@
 
     $sql = "select sd.*, sl.seller_name from shop_details sd, shipping_location_shop sls, seller sl where sd.on_vacation = 0 and sls.pincode like '%$pincode%' and sd.id = sls.shop_id and sl.id = sd.seller_id and sl.stage_number = 8 order by sd.rating" . $paginationQuery;
     $result = mysqli_query($con2,$sql);
-
+    // echo $sql;
     $data = array();
     $count = 0;
     $request = "failed";
