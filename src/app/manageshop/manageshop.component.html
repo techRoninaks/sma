@@ -303,10 +303,11 @@
                 </form>
             </div>
             <div class="questionAnswer">
-                <div class="divQA" *ngFor=" let faq of Object.keys(faqShop)">
+                <p id="noFaqId" class="noFaq">No Faqs Available</p>
+                <div class="divQA" id="qAId" *ngFor=" let faq of Object.keys(faqShop)">
                     <form class="qA">
-                        Q:<span class=" question ">{{faqShop[faq].question}}</span>?<br> A:
-                        <span class="answer ">{{faqShop[faq].answer}}</span>
+                        <span class=" question ">Q:{{faqShop[faq].question}}?</span><br> 
+                        <span class="answer ">A:{{faqShop[faq].answer}}</span>
                     </form>
                 </div>
             </div>

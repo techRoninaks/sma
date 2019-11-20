@@ -3,8 +3,13 @@ import { DataService } from '../data.service';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { Router, RouterLink } from '@angular/router';
 
 var imageRfqValue: any = "";
+var imageRfqValue0: any = "";
+var imageRfqValue1: any = "";
+var imageRfqValue2: any = "";
+var imageRUCount: number =0;
 
 @Component({
 	selector: 'app-shop-profile',
@@ -36,6 +41,9 @@ export class ShopProfileComponent implements OnInit {
 	filledStar: any = [];
 	unFilledStar: any = [];
 	imageVALRFQ:any="";
+	imageVALRFQ0: any = "";
+	imageVALRFQ1: any = "";
+	imageVALRFQ2: any = "";
 	likeDislikes: any = [];
 	jr: number = 0;
 	shopRating: any;
@@ -43,7 +51,7 @@ export class ShopProfileComponent implements OnInit {
 	selName: any = "";
 	followC: any=[] ;
 	mostSelling: any = [];
-	shipOption: number;
+	shipOption: any="";
 	ratingData: any = [];
 	bar1: any;
 	bar2: any;
@@ -60,9 +68,16 @@ export class ShopProfileComponent implements OnInit {
 	idP: any;
 	tokenProd:object;
 	imageUploaded:any=0;
+	imageRU0:any;
+	imageRU1:any;
+	imageRU2:any;
+	imageUploadedRfq: any;
+	imageUploadedRfq0: number = 0;
+	imageUploadedRfq1: number = 0;
+	imageUploadedRfq2: number = 0;
 	sellerId:any;
 	ratingShopCount:number;
-	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
+	constructor(private rout: Router,private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
 
@@ -76,84 +91,27 @@ export class ShopProfileComponent implements OnInit {
 
 		this.route.queryParams.subscribe(params => {
 			this.token = params['shop_id'];
+			if (this.token == null || this.token == "")
+			 {
+				alert("No such shop exists, Redirecting to Homepage");
+				this.rout.navigate(['/']);
+			}
 			// console.log(this.token);
-			
-			this.tokenObj = { shop_id: this.token, user_id: this.userId };
-			this.tokenProd = { shop_id: this.token, prod_number: 0};
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
 		});
 
-
-        if(this.sellerId != null || this.sellerId !=0){
-			// this.router.navigate(['/managepage'], { queryParams: { shop_id: this.token } });
-			(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="block";
-        }
-
-
-
-		this.data.getRatingReviewShop(this.token).subscribe(
-			data => {
-				this.ratingReviewShop = data;
-				// console.log(this.ratingReviewShop);
-
-				this.ratingShopCount = Object.keys(this.ratingReviewShop).length;
-				
-				// console.log(x);
-				for (var y = 0; y < this.ratingShopCount; y++) {
-					this.revIdValue[y]=this.ratingReviewShop[y].reviewId;
-				}
-				this.reviewStar = this.ratingReviewShop.rating;
-				this.j = 0;
-				for (this.i = 0; this.i < 5; this.i++) {
-					if (this.i < this.reviewStar) {
-						this.filledStarRat[this.i] = this.i;
-					} else {
-						this.unFilledStarRat[this.j++] = this.i;
-					}
-				}
-				// }
-			}
-		);
-		this.data.getDateDiffShop(this.token).subscribe(
-			data => {
-				this.reviewDateDiffShop = data;
-			},
-			error => console.error(error)
-		);
-		this.data.getShopRevRatings(this.token).subscribe(
-			data => {
-				this.ratingData = data;
-				var totalRatings = this.ratingData.totRat;
-
-				var rat1 = this.ratingData.rat1;
-
-				var rat2 = this.ratingData.rat2;
-
-				var rat3 = this.ratingData.rat3;
-
-				var rat4 = this.ratingData.rat4;
-
-				var rat5 = this.ratingData.rat5;
-
-				this.bar1 = (rat1 * 100) / totalRatings;
-
-				this.bar2 = (rat2 * 100) / totalRatings;
-
-				this.bar3 = (rat3 * 100) / totalRatings;
-
-				this.bar4 = (rat4 * 100) / totalRatings;
-
-				this.bar5 = (rat5 * 100) / totalRatings;
-			}
-		);
-
-		imageRfqValue = document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
-
-
 		this.data.getShopData(this.token).subscribe(
 			data => {
 				this.shopData = data;
+				if (this.shopData.response == 0) {
+					alert("No such shop exists, Redirecting to Homepage");
+					this.rout.navigate(['/']);
+				}
+
+				this.tokenObj = { shop_id: this.token, user_id: this.userId };
+				this.tokenProd = { shop_id: this.token, prod_number: 0};
+
 				this.priv = this.shopData.privateAccount;
 				this.shopRating = this.shopData.ratingShop;
 				this.shipOption = this.shopData.shippingOptionId;
@@ -164,142 +122,204 @@ export class ShopProfileComponent implements OnInit {
 						this.unFilledStar[this.jr++] = this.ir;
 					}
 				}
-				if (this.shipOption == 1) {
-					(<HTMLInputElement><any>document.getElementById("ship")).disabled = false;
-					(<HTMLInputElement><any>document.getElementById("ship")).checked = true;
-					// if (this.shipOption == 2) {
-					// 	(<HTMLInputElement><any>document.getElementById("cod")).disabled = false;
-					// 	if (this.shipOption == 3) {
-					// 		(<HTMLInputElement><any>document.getElementById("pck")).disabled = false;
-					// 	}
-					// }
+				var ship = this.shipOption.split(",");
+				var countShip =Object.keys(ship).length;
+				while (countShip >=0){
+					// console.log(countShip);
+					// console.log(ship[countShip]);
+					if (ship[countShip] == 1) {
+						(<HTMLInputElement><any>document.getElementById("ship")).disabled = false;
+						(<HTMLInputElement><any>document.getElementById("ship")).checked = true;
+					}
+					if (ship[countShip] == 2) {
+						(<HTMLInputElement><any>document.getElementById("hD")).disabled = false;
+						(<HTMLInputElement><any>document.getElementById("hD")).checked = true;
+					}
+					if (ship[countShip] == 3) {
+						(<HTMLInputElement><any>document.getElementById("pck")).disabled = false;
+						(<HTMLInputElement><any>document.getElementById("pck")).checked = true;
+					}
+					countShip--;
 				}
-				else if (this.shipOption == 2) {
-					(<HTMLInputElement><any>document.getElementById("cod")).disabled = false;
-					(<HTMLInputElement><any>document.getElementById("cod")).checked = true;
-					// if (this.shipOption == 3) {
-					// 	(<HTMLInputElement><any>document.getElementById("pck")).disabled = false;
-					// }
-
+				if(this.sellerId == this.shopData.sellerId){
+					// this.router.navigate(['/managepage'], { queryParams: { shop_id: this.token } });
+					console.log('selelrid='+this.sellerId);
+					(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="block";
 				}
-				else if (this.shipOption == 3) {
-					(<HTMLInputElement><any>document.getElementById("pck")).disabled = false;
-					(<HTMLInputElement><any>document.getElementById("pck")).checked = true;
-
+				else{
+					console.log("2");
+					(<HTMLInputElement><any>document.getElementById("sellerBtn")).style.display="none";
 				}
-
-			},
-			error => console.error(error)
-		);
-		this.data.getSellerDetailsShop(this.token).subscribe(
-			data => {
-				this.sellerDataShop = data;
-				if (this.priv == 0) {
-					this.selName = "By " + this.sellerDataShop.sellerName;
-
-				}
-				else {
-					this.selName = "";
-				}
-			},
-			error => console.error(error)
-		);
-		this.data.getProductList(this.tokenProd).subscribe(
-			data => {
-				this.array12 = data;
-			},
-			error => console.error(error)
-		);
-		this.data.getProductData(this.token).subscribe(
-			data => {
-				this.dynamicData = data;
-			},
-			error => console.error(error)
-		);
-		this.data.getFollowInfoShop(this.tokenObj).subscribe(
-			data => {
-				this.followInfo = data;
-				var x = this.followInfo.response;
-				if (this.followInfo.response == "successful") {
-					this.folResult = true;
-				}
-				else if (this.followInfo.response == "unsuccessful") {
-					this.folResult = false;
-				}
-			},
-			error => console.error(error)
-		);
-		this.data.getFolCount(this.token).subscribe(
-			data => {
-				this.followC = data;
-			},
-			error => console.error(error)
-		);
-		this.data.getMostSelling(this.token).subscribe(
-			data => {
-				this.mostSelling = data;
-			},
-			error => console.error(error)
-		);
-		this.data.shopViewIncrement(this.token).subscribe();
-		// console.log(this.ratingReviewShop);
-
-		this.data.getRfqInputs(this.token).subscribe(
-			data => {
-				this.rfqInput = data;
-
-			}
-		);
-
-		this.data.getRfqAddress(this.userId).subscribe(
-			data => {
-				this.rfqAddress = data;
-
-			}
-		);
-		this.data.getLikesDislikesShop(this.tokenObj).subscribe(
-			data => {
-				// console.log(data);
-				this.likeDislikes = data;
-				var likeDisCount: number = Object.keys(this.likeDislikes).length;
-				var x = 0;
-				var q = 0;
-				
-				// console.log(this.ratingShopCount);
-				while (q<this.ratingShopCount){
-					x=0;
-					while (x < likeDisCount) {
-						if(this.revIdValue[q]==this.likeDislikes[x]['reviewId']){
-							var y: number = this.likeDislikes[x]['reviewId'];
-							var z: number = this.likeDislikes[x]['likeDislike'];
-							// console.log("x="+x+",q="+q+",y="+y+",z="+z);
-							if (z == 1) {
-								var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
-								// console.log(ele.src);
-								// console.log("likeImg_" + y);
-								ele.src = "assets/icons/resources (IL)-23.png";
-								// console.log(ele.src);
-								// (<HTMLImageElement><any>document.getElementById("likeImg_"+y)).src="assets/icons/resources (IL)-23.png";
+				this.data.getRatingReviewShop(this.token).subscribe(
+					data => {
+						this.ratingReviewShop = data;
+						// console.log(this.ratingReviewShop);
 		
-							}
-							else if (z == 0) {
-								var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
-								ele1.src = "assets/icons/resources (IL)-24.png";
-								// (<HTMLImageElement><any>document.getElementById("dislikeImg_"+y)).src="assets/icons/resources (IL)-24.png";
+						this.ratingShopCount = Object.keys(this.ratingReviewShop).length;
+						
+						// console.log(x);
+						for (var y = 0; y < this.ratingShopCount; y++) {
+							this.revIdValue[y]=this.ratingReviewShop[y].reviewId;
+						}
+						this.reviewStar = this.ratingReviewShop.rating;
+						this.j = 0;
+						for (this.i = 0; this.i < 5; this.i++) {
+							if (this.i < this.reviewStar) {
+								this.filledStarRat[this.i] = this.i;
+							} else {
+								this.unFilledStarRat[this.j++] = this.i;
 							}
 						}
-						// console.log("x"+x);
-						// console.log("shop revId"+this.revIdValue[q]);
-						// console.log("user revId"+this.likeDislikes[x]['reviewId']);
-						x++;
+						// }
 					}
-					// console.log("q"+q);
-					// console.log("shop revId outer"+this.revIdValue[q]);
-					q++;
-				}
+				);
+				this.data.getDateDiffShop(this.token).subscribe(
+					data => {
+						this.reviewDateDiffShop = data;
+					},
+					error => console.error(error)
+				);
+				this.data.getShopRevRatings(this.token).subscribe(
+					data => {
+						this.ratingData = data;
+						var totalRatings = this.ratingData.totRat;
+						var rat1 = this.ratingData.rat1;
+						var rat2 = this.ratingData.rat2;
+						var rat3 = this.ratingData.rat3;
+						var rat4 = this.ratingData.rat4;
+						var rat5 = this.ratingData.rat5;
+						this.bar1 = (rat1 * 100) / totalRatings;
+						this.bar2 = (rat2 * 100) / totalRatings;
+						this.bar3 = (rat3 * 100) / totalRatings;
+						this.bar4 = (rat4 * 100) / totalRatings;
+						this.bar5 = (rat5 * 100) / totalRatings;
+					}
+				);
+		
+				this.imageUploadedRfq0 = 0;
+				this.imageUploadedRfq1 = 0;
+				this.imageUploadedRfq2 = 0;
+				this.imageRU0 = 0;
+				this.imageRU1 = 0;
+				this.imageRU2 = 0;
+				this.imageUploadedRfq =0;
+				document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
+		
+		
+				
+				this.data.getSellerDetailsShop(this.token).subscribe(
+					data => {
+						this.sellerDataShop = data;
+						if (this.priv == 0) {
+							this.selName = "By " + this.sellerDataShop.sellerName;
+		
+						}
+						else {
+							this.selName = "";
+						}
+					},
+					error => console.error(error)
+				);
+				this.data.getProductList(this.tokenProd).subscribe(
+					data => {
+						this.array12 = data;
+					},
+					error => console.error(error)
+				);
+				// this.data.getProductData(this.token).subscribe(
+				// 	data => {
+				// 		this.dynamicData = data;
+				// 	},
+				// 	error => console.error(error)
+				// );
+				this.data.getFollowInfoShop(this.tokenObj).subscribe(
+					data => {
+						this.followInfo = data;
+						var x = this.followInfo.response;
+						if (this.followInfo.response == "successful") {
+							this.folResult = true;
+						}
+						else if (this.followInfo.response == "unsuccessful") {
+							this.folResult = false;
+						}
+					},
+					error => console.error(error)
+				);
+				this.data.getFolCount(this.token).subscribe(
+					data => {
+						this.followC = data;
+					},
+					error => console.error(error)
+				);
+				this.data.getMostSelling(this.token).subscribe(
+					data => {
+						this.mostSelling = data;
+					},
+					error => console.error(error)
+				);
+				this.data.shopViewIncrement(this.token).subscribe();
+				// console.log(this.ratingReviewShop);
+		
+				this.data.getRfqInputs(this.token).subscribe(
+					data => {
+						this.rfqInput = data;
+		
+					}
+				);
+		
+				this.data.getRfqAddress(this.userId).subscribe(
+					data => {
+						this.rfqAddress = data;
+		
+					}
+				);
+				this.data.getLikesDislikesShop(this.tokenObj).subscribe(
+					data => {
+						// console.log(data);
+						this.likeDislikes = data;
+						var likeDisCount: number = Object.keys(this.likeDislikes).length;
+						var x = 0;
+						var q = 0;
+						
+						// console.log(this.ratingShopCount);
+						while (q<this.ratingShopCount){
+							x=0;
+							while (x < likeDisCount) {
+								if(this.revIdValue[q]==this.likeDislikes[x]['reviewId']){
+									var y: number = this.likeDislikes[x]['reviewId'];
+									var z: number = this.likeDislikes[x]['likeDislike'];
+									// console.log("x="+x+",q="+q+",y="+y+",z="+z);
+									if (z == 1) {
+										var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
+										// console.log(ele.src);
+										// console.log("likeImg_" + y);
+										ele.src = "assets/icons/resources (IL)-23.png";
+										// console.log(ele.src);
+										// (<HTMLImageElement><any>document.getElementById("likeImg_"+y)).src="assets/icons/resources (IL)-23.png";
+				
+									}
+									else if (z == 0) {
+										var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
+										ele1.src = "assets/icons/resources (IL)-24.png";
+										// (<HTMLImageElement><any>document.getElementById("dislikeImg_"+y)).src="assets/icons/resources (IL)-24.png";
+									}
+								}
+								// console.log("x"+x);
+								// console.log("shop revId"+this.revIdValue[q]);
+								// console.log("user revId"+this.likeDislikes[x]['reviewId']);
+								x++;
+							}
+							// console.log("q"+q);
+							// console.log("shop revId outer"+this.revIdValue[q]);
+							q++;
+						}
+					},
+					error => console.error(error)
+				);
 			},
 			error => console.error(error)
 		);
+
 
 	}
 	showMoreProducts(){
@@ -357,48 +377,117 @@ export class ShopProfileComponent implements OnInit {
 	}
 
 	followShop() {
-		this.folResult = true;
-		this.data.getFollowShopPage(this.tokenObj).subscribe();
-		// this.followC.folCount = this.followC.folCount + 1;
-		var y:number= parseInt(this.followC.folCount)  ;
-		y=y+1;
-		this.followC.folCount=y;
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1 ){
+			this.folResult = true;
+			this.data.getFollowShopPage(this.tokenObj).subscribe();
+			// this.followC.folCount = this.followC.folCount + 1;
+			var y:number= parseInt(this.followC.folCount)  ;
+			y=y+1;
+			this.followC.folCount=y;		}
+		else{
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+		}
+
 	
 	}
 
+	// onRfqClick(event) {
+	// 	this.imageUploaded=1;
+	// 	// 		console.log(event.target.files[0]);
+	// 	var reader = new FileReader();
+	// 	reader.readAsDataURL(event.target.files[0]);
+	// 	// reader.onLoad = onLoadCallback;
+	// 	reader.onload = (event) => {
+	// 		var text: any = reader.result;
+	// 		imageRfqValue = text;
+	// 		// console.log(imageRfqValue);
+	// 		this.imageVALRFQ =text;
+
+	// 	};
+	// }
+	onRfqClick(event) {
+		if (this.imageUploadedRfq1 == 1) {
+			this.imageUploadedRfq2 = 1;
+			this.imageUploadedRfq1 = 0;
+			this.imageUploadedRfq0 = 0;
+			this.imageRU2 = 1;
+		}
+		if (this.imageUploadedRfq0 == 1) {
+			this.imageUploadedRfq1 = 1;
+			this.imageUploadedRfq0 = 0;
+			this.imageRU1 = 1;
+		}
+		this.imageUploadedRfq0 = 1;
+		this.imageRU0 = 1;
+		this.imageUploadedRfq = 1;
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		reader.onload = (event) => {
+			var text: any = reader.result;
+			// imageRfqValue = text;
+			// console.log(imageRfqValue);
+			// this.imageVALRFQ = text;
+			if (this.imageUploadedRfq2 == 1) {
+				imageRfqValue2 = text;
+				this.imageVALRFQ2 = text;
+				imageRUCount = 3;
+			}
+			else if (this.imageUploadedRfq1 == 1) {
+				imageRfqValue1 = text;
+				this.imageVALRFQ1 = text;
+				imageRUCount = 2;
+			}
+			else if (this.imageUploadedRfq0 == 1) {
+				imageRfqValue0 = text;
+				this.imageVALRFQ0 = text;
+				imageRUCount = 1;
+			}
+		};
+	}
+	
+	// rfqSubmit() {
+	// 	// alert("loaded");
+	// 	// this.rfqEnabled = 1;
+		// var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;
+		// var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
+		// var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
+		// var productRef = this.prod;
+	// 	var image =imageRfqValue;
+	// 	this.tokenPrice = {seller_id:this.shopData.sellerId , image:image,shop_id: this.token, user_id: this.userId, imageUploaded:this.imageUploaded, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
+
+		// this.data.sendRfqShop(this.tokenPrice).subscribe();
+
+	// }
 	rfqSubmit() {
 		// alert("loaded");
-		// this.rfqEnabled = 1;
 		var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;
 		var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
 		var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
 		var productRef = this.prod;
-		var image =imageRfqValue;
-		this.tokenPrice = {seller_id:this.shopData.sellerId , image:image,shop_id: this.token, user_id: this.userId, imageUploaded:this.imageUploaded, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
-
+		// var image = imageRfqValue;
+		var image0 = imageRfqValue0;
+		var image1 = imageRfqValue1;
+		var image2 = imageRfqValue2;
+		// var image=0;
+		this.tokenPrice = {imageRU0: this.imageRU0, imageRU1: this.imageRU1, imageRU2: this.imageRU2,imageRUCount: imageRUCount,image0: image0, image1: image1, image2: image2,seller_id:this.shopData.sellerId ,shop_id: this.token, user_id: this.userId, imageUploadedRfq:this.imageUploadedRfq, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
+		// image: image,
 		this.data.sendRfqShop(this.tokenPrice).subscribe();
-
+		$("#rfqPopup").modal('hide');
 	}
-
-	onRfqClick(event) {
-		this.imageUploaded=1;
-		// 		console.log(event.target.files[0]);
-		var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-		// reader.onLoad = onLoadCallback;
-		reader.onload = (event) => {
-			var text: any = reader.result;
-			imageRfqValue = text;
-			// console.log(imageRfqValue);
-			this.imageVALRFQ =text;
-
-		};
-	}
-
 	unfollowShop() {
-		this.folResult = false;
-		this.data.getUnfollowShopPage(this.tokenObj).subscribe();
-		this.followC.folCount = parseInt(this.followC.folCount) - parseInt('1');
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1 ){
+			this.folResult = false;
+			this.data.getUnfollowShopPage(this.tokenObj).subscribe();
+			this.followC.folCount = parseInt(this.followC.folCount) - parseInt('1');
+		}
+		else{
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+		}
+
 	}
 	report(revId: any) {
 		console.log(revId);
@@ -564,6 +653,17 @@ export class ShopProfileComponent implements OnInit {
 	}
 	rfqDropdown() {
 		document.getElementById("rfqDropdown").classList.toggle("show");
+	}
+	sendRfq(){
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1 ){
+			$("#rfqPopup").modal('show');
+		}
+		else{
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+		}
+
 	}
 }
 

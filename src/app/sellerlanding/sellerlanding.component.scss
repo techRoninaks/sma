@@ -1005,6 +1005,13 @@ $SubText: 18px;
 				grid-template-columns: repeat(2, 1fr);
 				margin: 15px 40px 0px 40px;
 				width: auto;
+				.noFaq{
+					display:none;
+					font-family:Bitter;
+					font-size: 24px;
+					// justify-self: center;
+					transform: translate(80% ,50%);
+				}
 				.divQA {
 					// grid-area: divQA;
 					// height: auto;

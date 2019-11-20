@@ -44,7 +44,14 @@
     $data = array();
 
 
-
+    //get tax
+    $sqlTax="SELECT value FROM `web_settings` where name = 'tax' ";
+    // echo $sqlTax;
+    $resTax=mysqli_query($con1,$sqlTax);
+    $rowTax=mysqli_fetch_assoc($resTax);
+    $tax=$rowTax["value"];
+    // echo $tax;
+      
     //get current date
     $sql="SELECT CURRENT_DATE";
     $res=mysqli_query($con1,$sql);
@@ -118,23 +125,37 @@
     $rowPrice=mysqli_fetch_assoc($resPrice);
     $shipQtyPrice=$rowPrice["quantity_price"];
     $shipBasePrice=$rowPrice["price"];
-
+    // echo "   ".$shipBasePrice.$sqlPrice."   ";
     $offerIdProduct = $row1["offer_id"];
     $basePrice=$row1["base_price"];
 
-    //get variant info
-    $sqlVariant = "SELECT * FROM `variant_info` where `value` =  '$productVariant'";    
-    // echo $sqlVariant;
-    $resVariant=mysqli_query($con1,$sqlVariant);
-    $rowVariant=mysqli_fetch_array($resVariant);
-    // echo $sqlVariant;
-    // var_dump($rowVariant);
-    $variantInfo=array('variantId' => $rowVariant["variantid"], 'price' =>$rowVariant["price"]);
+    // //get variant info
+    // $sqlVariant = "SELECT * FROM `variant_info` where `value` =  '$productVariant'";    
+    // // echo $sqlVariant;
+    // $resVariant=mysqli_query($con1,$sqlVariant);
+    // $rowVariant=mysqli_fetch_array($resVariant);
+    // // echo $sqlVariant;
+    // // var_dump($rowVariant);
+    // $variantInfo=array('variantId' => $rowVariant["variantid"], 'price' =>$rowVariant["price"]);
 
-    $varId=$variantInfo["variantId"];
-    $varPrice=$variantInfo["price"];
-    // echo $varId;
+    // $varId=$variantInfo["variantId"];
+    // $varPrice=$variantInfo["price"];
+    // // echo $varId;
 
+    $spiltVariant = explode(",", $productVariant);  
+    $variantCount = sizeof($spiltVariant);
+    $varPrice = 0;
+    $varId="";
+    for($variantC=0;$variantC<$variantCount;$variantC++){
+        $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]'";
+        $resultVar = mysqli_query($con1, $sql_queryVar);
+        $rowVariant=mysqli_fetch_array($resultVar);
+        $varIdValue=$rowVariant["variantid"];
+        $varPriceValue=$rowVariant["price"];
+        $varId = $varIdValue.",".$varId;
+        $varPrice = $varPrice + $varPriceValue;
+    }
+    // echo $varId."+".$varPrice;
     //get discount info
     $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";   
     $resDisc=mysqli_query($con1,$sqlDisc);
@@ -161,12 +182,11 @@
             // $disc = $disc +$discBulk;
             $amountBulkDisc=$basePrice*($discBulk/100);
             $priceBulc=$basePrice-$amountBulkDisc+$varPrice;
-            $bulkPriceTotal=$priceBulc*$productQuantity;
-
+            $bulkPriceTotal=$priceBulc*$productQuantity; 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
         else{
@@ -177,7 +197,7 @@
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -194,7 +214,7 @@
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
             // $disc = $disc +$discBulk;
         }
@@ -206,7 +226,7 @@
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -223,7 +243,7 @@
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
             // $disc = $disc +$discBulk;
         }
@@ -235,7 +255,7 @@
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -269,7 +289,7 @@
 
     $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,
     `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'$orderStatus',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
-    0,0,$reqDD,$varId,0)";
+    0,0,$reqDD,'$varId',0)";
     $result2 = mysqli_query($con2, $sql_query2);
     // echo $sql_query2;
 
@@ -670,9 +690,10 @@
     //insertion in customer order
     $sql_query3 = "INSERT INTO `customer_order`(`prodid`, `quantity`, `variants_chosen`, `gift_option`, `gift_note`, `gift_title`, `gift_address`, `is_rfq`,
     `base_price`, `qty_price`, `total_price`, `discount`, `shippingprice`, `tax`, `variantprice`, `has_image`, `orderid`, `promo_disc`, `invoice_number`, 
-    `delivey_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,$varId,$isGift,null,null,null,$isRfq,$basePrice,$qtPrice,
-    $totalAmount,$disc,$shipBasePrice,0,$varPrice,0,$orderId,null,0,'$deliveryDate',null,null)";
+    `delivery_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,'$varId',$isGift,null,null,null,$isRfq,$basePrice,$qtPrice,
+    $totalAmount,$disc,$shipBasePrice,$tax,$varPrice,$imageUploaded,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
+    // echo $sql_query3;
     //customer order id
     $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);

@@ -354,10 +354,11 @@
                 </form>
             </div>
             <div class="questionAnswer">
-                <div class="divQA" *ngFor="let faq of Object.keys(faqSite)">
+                <p id="noFaqId" class="noFaq">No Faqs Available</p>  
+                <div class="divQA" id="qAId" *ngFor="let faq of Object.keys(faqSite)">
                     <form class="qA">
-                        Q:&nbsp;<span class="question">{{faqSite[faq].question}}</span>?<br><br> A:&nbsp;
-                        <span class="answer">{{faqSite[faq].answer}}</span>
+                        <span class="question">Q:{{faqSite[faq].question}}?</span><br><br>
+                        <span class="answer">A:{{faqSite[faq].answer}}</span>
                     </form>
                 </div>
             </div>
