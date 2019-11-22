@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {FormsModule} from '@angular/forms';
-import {MatGridListModule} from '@angular/material';
+import {MatGridListModule, MatIconModule} from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
 import { PlandetailsComponent } from './plandetails/plandetails.component';
 import {MatCardModule, MatButtonModule} from '@angular/material';
@@ -91,7 +91,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatGridListModule,
     MatCardModule, 
     MatTabsModule,
-    MatButtonModule, 
+    MatButtonModule,
+    MatIconModule, 
     MatAutocompleteModule,
     
     RouterModule.forRoot([

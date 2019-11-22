@@ -112,7 +112,7 @@
         </tr>
         <tr>
             <td class="padding15 font15">ID No</td>
-            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcardno}} <span style="position: relative;left: 63%;">View image</span></td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcardno}} <span style="position: relative;left: 63%; cursor: pointer;" (click)="openModal();">View image</span></td>
             <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneridno" value="{{shopDetails.idcardno}}"></td>
         </tr>
         <tr>
@@ -156,7 +156,27 @@
             <tr>
                 <td class="padding15 font15">Shipping Mode</td>
                 <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.shippingmode}}</td>
-                <td class="padding15" *ngIf = "editPaymentDetails"><input id="shippingmode" value="{{shopDetails.shippingmode}}"></td>
+                <td class="padding15" *ngIf = "editPaymentDetails">
+                    <!-- <input id="shippingmode" value="{{shopDetails.shippingmode}}"> -->
+                    <div style="display: inline-flex;width: auto;">
+                        <label class="container" style="display: inline-flex;">Shipping
+                            <input type="checkbox" id="shippingid" style="margin-left: 15px" >
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div style="display: inline-flex;width: auto;">
+                        <label class="container" style="display: inline-flex;">Home Delivery
+                            <input type="checkbox" id="homeid" style="margin-left: 15px" >
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div style="display: inline-flex;width: auto;">
+                        <label class="container" style="display: inline-flex;">Pickup
+                            <input type="checkbox" id="pickupid" style="margin-left: 15px" >
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </td>
             </tr>
         </table>
         <div style="width:80%; margin:auto;margin-top: 35px;">
@@ -165,124 +185,58 @@
                 <!-- <p><img (click)="editLocations()"  *ngIf="newShipping"  src="assets/icons/plus.png"></p> -->
             </div>
 
-            <div class="shippingBody"  id="inputForShippingPrimary"  *ngIf="!newShipping">
+            <div class="shippingBody" id="editShippingLocation" >
                 <div>
-                    <div class="gcountry">{{locationDetails.location_alias}}</div>
-                    <div class="state" id="inputForPincode"></div>
-                    <div class="action">
-                        <img style="border: 2px solid black;border-radius: 5px;margin-right: 5px;" (click) = "editExistingLocations()" src="assets/icons/plus.png">
-                        <img src="assets/icons/close.png" (click) = "deleteShippingLocation(locationDetails.id)">
-                    </div>
-                </div>
-            </div>
-            <div class="shippingBody" *ngIf="newShipping">
-                <div>
+
                     <div class="gcountry">
-                        All over
-                        <input style="width: 100%;margin: auto;" id="shippingLocationPrimary" (keyup)="openDropdownShipping()" value="{{locationDetails.location_alias}}">
+                        Location
+                        <input style="width: 100%;margin: auto;"  (keyup)="shippingLocationGetter()" id="shippingLocationPrimary" value="{{locationDetails.location_alias}}">
                         <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                            <li>
+                            <li *ngIf="allFlag">
                                 <a (click)="replaceTextLocation('All over India');">
                                     All over India
                                 </a>
                             </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over State');">
-                                    All over State
+                            <li *ngIf="allFlag">
+                                <a (click)="replaceTextLocation('My State');">
+                                    My State
                                 </a>
                             </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over District');">
-                                    All over District
+                            <li *ngIf="allFlag">
+                                <a (click)="replaceTextLocation('My City');">
+                                    My City
                                 </a>
                             </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over City');">
-                                    All over City
+                            <li *ngIf="allFlag">
+                                <a (click)="replaceTextLocation('My District');">
+                                    My District
                                 </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over Post Office');">
-                                    All over Post Office
+                            </li>          
+                            <li (click)="replaceTextLocation(inp.pincode,inp.office_name);" *ngFor="let inp of shippinglocationArray">
+                                <a>
+                                    {{inp.office_name}},{{inp.pincode}}
                                 </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('Custom Locations');">
-                                    Custom Locations
-                                </a>
-                            </li>
+                            </li>                  
                         </ul>
                     </div>
-                    <div class="state">
+                    <div class="action">
+                        <div class="editShopDetailsSave" id="saveBtn"  style="cursor: pointer;" (click) = "saveLocationDetails()">Save</div>
+                        <div class="editShopDetailsSave" id="updateBtn"  style="cursor: pointer;display: none;" (click) = "updateShipping()">Update</div>
+                    </div>
+                    <!-- <div class="state">
                         Add Extra pincode
                         <input style="width: 100%;margin: auto;" (keyup)="openDropdownArea()" id="shippingLocationSecondary" placeholder="Custom Pincodes">
-                        <!-- <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                            <li *ngFor="let inp of valueDrop">
-                                <a (click)="replaceTextArea(inp);">
-                                    {{inp}}
-                                </a>
-                            </li>
-                        </ul> -->
-                    </div>
-                    <div class="action">
-                        <div class="editShopDetailsSave" style="cursor: pointer;" (click) = "saveLocationDetails()">Save</div>
-                    </div>
-                    
+                        <img style="position: relative;left: 230%;top: -37px; cursor: pointer;" src="assets/icons/plus.png" (click)="saveLocationDetails()">
+                    </div> -->       
                 </div>
-            </div>
-            <div class="shippingBody" id="editShippingLocation" *ngIf="editLocation">
                 <div>
-                    <div class="gcountry">
-                        All over
-                        <input style="width: 100%;margin: auto;" id="shippingLocationPrimary" (keyup)="openDropdownShipping()" value="{{locationDetails.location_alias}}">
-                        <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                            <li>
-                                <a (click)="replaceTextLocation('All over India');">
-                                    All over India
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over State');">
-                                    All over State
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over District');">
-                                    All over District
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over City');">
-                                    All over City
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('All over Post Office');">
-                                    All over Post Office
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="replaceTextLocation('Custom Locations');">
-                                    Custom Locations
-                                </a>
-                            </li>
-                        </ul>
+                    <div style="display: inline-flex;" *ngFor = "let item of shippingArray; let i = index;">
+                        <p id="{{i}}_pShip">{{item}}</p>
+                        <img src="assets/icons/close.png" (click)="deleteShipping(item)" id="{{i}}_closeShip" style="position: relative;right: -85px;">
+                        <img src="assets/icons/edit.png" (click)="editShippingLocation(i,item)" id="{{i}}_editShip">
+                        <!-- <input value="{{item}}" id="{{i}}_inputShip" style="display: none;"> -->
+                        <!-- <button id="{{i}}_updateShip" (click)="updateShipping(item,i);" style="display: none;">update</button> -->
                     </div>
-                    <div class="state">
-                        Add Extra pincode
-                        <input style="width: 100%;margin: auto;" (keyup)="openDropdownArea()" id="shippingLocationSecondary" placeholder="Custom Pincodes">
-                        <!-- <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                            <li *ngFor="let inp of valueDrop">
-                                <a (click)="replaceTextArea(inp);">
-                                    {{inp}}
-                                </a>
-                            </li>
-                        </ul> -->
-                    </div>
-                    <div class="action">
-                        <div class="editShopDetailsSave" *ngIf = "editLocation" style="cursor: pointer;" (click) = "saveLocationDetails(locationDetails.id)">Save</div>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -306,7 +260,10 @@
                 <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.account_no}}</td>
                 <td class="padding15" *ngIf = "editPaymentDetails"><input id="accountno" value="{{shopDetails.account_no}}"></td>
             </tr>
-            <tr></tr>
+            <tr *ngIf = "editPaymentDetails">
+                <td class="padding15 font15" *ngIf = "editPaymentDetails">Confirm Account No</td>
+                <td class="padding15" ><input id="accountnoConfirm" value="{{shopDetails.account_no}}"></td>
+            </tr>
             <tr>
                 <td class="padding15 font15">Bank Name</td>
                 <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.bankname}}</td>
@@ -324,64 +281,84 @@
         </mat-expansion-panel>
 
 
-        <mat-expansion-panel class="expansionPanel"> 
-            <mat-expansion-panel-header class="expansionHeader">
-                <mat-panel-title class="expansionTitle">
-                ADVANCED SETTINGS
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+    <mat-expansion-panel class="expansionPanel"> 
+        <mat-expansion-panel-header class="expansionHeader">
+            <mat-panel-title class="expansionTitle">
+            ADVANCED SETTINGS
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="line1">
+            <div class="gift">
+                Gift Options
+                <label class="switch-wrap">
+                    <input type="checkbox" id="giftInput" value="{{shopDetails.gift_option}}" />
+                    <div class="switch"></div>
+                </label>
+            </div>
+            <div class="del">
+                Delivery date
+                <label class="switch-wrap">
+                    <input type="checkbox" id="delInput" value="{{shopDetails.deliver_by_date}}"/>
+                    <div class="switch"></div>
+                </label>
+            </div>
+            <div class="rfq">
+                    RFQ
+                <label class="switch-wrap">
+                    <input type="checkbox" id="rfqInput" value="{{shopDetails.rfq}}"/>
+                    <div class="switch"></div>
+                </label>
+            </div>
+
+        </div>
+
+        <div class="line2">
+            <div class="gift">
+                Order Conformation
+                <label class="switch-wrap">
+                    <input type="checkbox" id="orderInput" value="{{shopDetails.order_confirmation}}"/>
+                    <div class="switch"></div>
+                </label>
+            </div>
+            <div class="del">
+                Set cancellation Time
+                <input style="width: 30%; margin-left: 15px;" id="cancellInput" value="{{shopDetails.auto_cancellation_time}}" placeholder="set time">
+            </div>
+        </div>
+
+        <div class="line2">
+            <div class="gift">
+                Average Processing Time :
+                <input style="margin-top: 15px;width: 96%;" id="processInput" value="{{shopDetails.avg_processing_time}}" placeholder="set time">
+            </div>
+            <div class="del">
+                Average Rseponse Time :
+                <input style="margin-top: 15px;width: 86%;" id="responseInput" value="{{shopDetails.avg_response_time}}" placeholder="set time">
+            </div>
+        </div>
+        <div class="editShopDetailsSave" style="cursor: pointer;" (click) = "saveAdvancedDetails()">Save</div>
     
-            <div class="line1">
-                <div class="gift">
-                    Gift Options
-                    <label class="switch-wrap">
-                        <input type="checkbox" id="giftInput" value="{{shopDetails.gift_option}}" />
-                        <div class="switch"></div>
-                    </label>
-                </div>
-                <div class="del">
-                    Delivery date
-                    <label class="switch-wrap">
-                        <input type="checkbox" id="delInput" value="{{shopDetails.deliver_by_date}}"/>
-                        <div class="switch"></div>
-                    </label>
-                </div>
-                <div class="rfq">
-                       RFQ
-                    <label class="switch-wrap">
-                        <input type="checkbox" id="rfqInput" value="{{shopDetails.rfq}}"/>
-                        <div class="switch"></div>
-                    </label>
-                </div>
+        </mat-expansion-panel>
 
-            </div>
 
-            <div class="line2">
-                <div class="gift">
-                    Order Conformation
-                    <label class="switch-wrap">
-                        <input type="checkbox" id="orderInput" value="{{shopDetails.order_confirmation}}"/>
-                        <div class="switch"></div>
-                    </label>
-                </div>
-                <div class="del">
-                    Set cancellation Time
-                    <input style="width: 30%; margin-left: 15px;" id="cancellInput" value="{{shopDetails.auto_cancellation_time}}" placeholder="set time">
-                </div>
-            </div>
+      <!-- The Modal/Lightbox -->
+      <div id="myModal" class="modal">
+        <span class="close cursor" (click)="closeModal()">&times;</span>
+        <div class="modal-content1" style="height: 84%">
+      
+          <div class="mySlides" id="lightBox" >
+            <img src="{{idCardImgSrcFront}}" style="width:50%; height: 50%;padding-right: 10px;">
+            <img src="{{idCardImgSrcBack}}" style="width:50%; height: 50%;padding-left: 10px;">
+          </div>
 
-            <div class="line2">
-                <div class="gift">
-                    Average Processing Time :
-                    <input style="margin-top: 15px;width: 96%;" id="processInput" value="{{shopDetails.avg_processing_time}}" placeholder="set time">
-                </div>
-                <div class="del">
-                    Average Rseponse Time :
-                    <input style="margin-top: 15px;width: 86%;" id="responseInput" value="{{shopDetails.avg_response_time}}" placeholder="set time">
-                </div>
-            </div>
-            <div class="editShopDetailsSave" style="cursor: pointer;" (click) = "saveAdvancedDetails()">Save</div>
-        
-            </mat-expansion-panel>
+          <button class="uploadIdCard" (click)="fileInputIdCardFront.click()">Change id card front</button>
+          <button class="uploadIdCard" (click)="fileInputIdCardBack.click()">Change id card back</button>
+          <button class="uploadIdCard" (click)="uploadIdCardToServer()">Upload id card</button>
+          <input style="display: none" type="file" name="pic" id="idCardHolderFront" accept="image/*" #fileInputIdCardFront>
+          <input style="display: none" type="file" name="pic" id="idCardHolderBack" accept="image/*" #fileInputIdCardBack>
+
+        </div>
+      </div> 
 </div>
 

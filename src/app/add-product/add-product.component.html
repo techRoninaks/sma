@@ -28,15 +28,19 @@
     <div class="dvAddProducts" >
         <div class="grid-AddProductBtn">
             <div class="btnDuplicate" *ngIf="editMode">
-                <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button>
+                <!-- <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button> -->
+                <p>Product Status:<span>{{productStatus}}</span></p>
             </div>
             <div class="btnToggleActive" *ngIf="editMode">
-                <div class="toggleTextActive">
+                <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button>
+                <div class="toggleTextActive"> 
                     <p>ACTIVE</p>
                 </div>
             </div>
             <div class="btnToggleActive1" *ngIf="editMode">
+                
                 <label class="switchActive" name="answer" value="Show giftCard">
+                    
                     <input type="checkbox" id="active" style="margin-left: 20px;">
                     <span class="slider round"></span>
                 </label>
@@ -47,8 +51,8 @@
                 <!-- MAIN CATEGORY -->
                 <div class="dropcat1">
                     <p style="text-align: center;">Main Category</p>
-                    <select class="MainCategory" style="margin-top: -1px; width: 300px;" value="2">
-                        <option *ngFor="let item of dynamicMainCategory" (click)="subCategoryLoaded(item.id)">
+                    <select class="MainCategory" id="mainCategoryId" style="margin-top: -1px; width: 300px;" >
+                        <option *ngFor="let item of dynamicMainCategory" value="{{item.id}}" (click)="subCategoryLoaded(item.id)">
                             {{ item.category }} </option>
                     </select>
                 </div>
@@ -279,7 +283,7 @@
             </div>
             <div class="grid-QtyCountRight">
                 <button class="btnMinQtyCount" (click)="decreseCount()">-</button>
-                <input class="counterLabel" value="{{allProductInfo.qty_avble}}"  id="Counter-Label" value="1">
+                <input class="counterLabel" value="{{allProductInfo.qty_avble}}"  id="Counter-Label" >
                 <button class="btnMaxQtyCount" (click)="increseCount()">+</button>
             </div>
             <div class="grid-MaxQtyOrderRight">
@@ -349,7 +353,11 @@
         <div class="varitentsAdd">
             <mat-tab-group mat-align-tabs="start" id="varientPlus">
                 <mat-tab label="{{item.name}}" *ngFor="let item of varients;let i = index">
-                    <ng-template matTabContent>
+                    <ng-template mat-tab-label>
+                           <p style="width: max-content; margin: auto">{{item.name}}</p>
+                           <img src="assets/icons/close.png" (click)="deleteVarient(item)">
+                        </ng-template>
+                        <ng-template matTabContent>
                         <div style="display: inline-flex;">
                             <p>VARIENT NAME:</p><input (keyup)="enterValue(i,'0','name',item)" style="background: transparent;border: none;padding: 0px;height: min-content;" value="{{item.name}}" id="{{i}}_name"placeholder="Varient Name">
                         </div>
@@ -383,14 +391,20 @@
             <h3>PRICE</h3>
         </div>
         <div class="grid-PriceDetails">
+            <div class="grid-LeftPrice1">
+                <p class="dicountText">ACTUAL PRICE</p>
+            </div>
             <div class="grid-LeftPrice2">
-                <p class="actualPriceText">ACTUAL PRICE</p>
+                <p class="actualPriceText">TAX</p>
             </div>
             <div class="grid-LeftPrice3">
                 <p class="commissionDecuctionText">COMMISSION DEDUCTION</p>
             </div>
             <div class="grid-LeftPrice4">
                 <p class="finalText">FINAL</p>
+            </div>
+            <div class="grid-Med1">
+                <p class="dotMed1">:</p>
             </div>
             <div class="grid-Med2">
                 <p class="dotMed2">:</p>
@@ -401,8 +415,11 @@
             <div class="grid-Med4">
                 <p class="dotMed4">:</p>
             </div>
-            <div class="grid-RightPrice2">
+            <div class="grid-RightPrice1">
                 {{ totalPrice }}
+            </div>
+            <div class="grid-RightPrice2">
+                {{ tax.tax }}
             </div>
             <div class="grid-RightPrice3" id="commissionDecuction">
                 {{ commDec }}
@@ -442,12 +459,14 @@
                     </div>
                     <div class="grid-LabelRight">
                         <div class="AvgProTimeLabel">
-                            <input class="AvgProTimeLabel-Style" value="{{allProductInfo.avg_prcessing_time}}" id="Avg-ProTime">
+                            <p class="AvgProTimeLabel-Style" *ngIf="isOrdered">{{allProductInfo.avg_prcessing_time}}</p>
+                            <input class="AvgProTimeLabel-Style" *ngIf="!isOrdered" value="{{allProductInfo.avg_prcessing_time}}" id="Avg-ProTime">
                         </div>
                     </div>
                     <div class="grid-LabelRight1">
                         <div class="AvgShipTimeLabel">
-                            <input class="AvgShipTimeLabel-Style" value="{{allProductInfo.avg_shpping_time}}"  id="Avg-ShipTime">
+                            <p class="AvgShipTimeLabel-Style" *ngIf="isOrdered">{{allProductInfo.avg_shpping_time}}</p>
+                            <input class="AvgShipTimeLabel-Style" *ngIf="!isOrdered" value="{{allProductInfo.avg_shpping_time}}"  id="Avg-ShipTime">
                         </div>
                     </div>
                 </div>
@@ -536,7 +555,8 @@
                     </div>
                     <div class="grid-AutoCancelLabelRight2">
                         <div class="AutoCancelLabel">
-                            <input class="AutoCancelLabel-Style" id="Auto-Cancel" value="{{allProductInfo.auto_cancel_time}}">
+                            <p class="AutoCancelLabel-Style" *ngIf="isOrdered">{{allProductInfo.auto_cancel_time}}</p>
+                            <input class="AutoCancelLabel-Style" *ngIf="!isOrdered" id="Auto-Cancel" value="{{allProductInfo.auto_cancel_time}}">
                         </div>
                     </div>
                     <div class="grid-AddCustomTextLeft2">
@@ -566,7 +586,7 @@
                         <p class="maxNoText">MAX NO. IMAGES :</p>
                     </div>
                     <div class="grid-CountLabel">
-                        <input class="CountLabel-Style" id="Max-Count-Label" value="{{allProductInfo.max_no_of_image}}">
+                        <input class="CountLabel-Style" id="Max-Count-Label" (change)="maxImageChecker();" value="{{allProductInfo.max_no_of_image}}">
                     </div>
                     <div class="grid-InstantBuyText">
                         <p class="instantBuyText">Instant Buy </p>
@@ -600,16 +620,19 @@
             </div>
 
             <div class="grid-MsgTitleFoot">
-                <ng-container *ngFor="let item of title">
+                <ng-container *ngFor="let item of title; let i = index">
                     <div class="grid-MsgTitle-Foot">
                         <div class="grid-MsgTitle-Label">
-                            <label class="MsgTitle-Label"   id="MsgTitleLabel_{{item.id}}">{{item}}</label>
-                            <input id="MsgEdit_{{item.id}}" style="display: none;" value="{{item.titles}}">
+                            <label class="MsgTitle-Label"   id="MsgTitleLabel_{{i}}">{{item}}</label>
+                            <input id="MsgEdit_{{item.id}}" id="MsgTitleValue_{{i}}" style="display: none;" value="{{item}}">
                         </div>
                         <div class="grid-MsgTitle-Edit-Close" id="editNow_{{item.id}}">
                             <!-- <img id="imgEdit-MsgTitle" *ngIf="!editMsg"  (click)="editCell(item.id)" class="imgEdit" src="assets/icons/edit.png"> -->
-                            <img id="imgClose-MsgTitle" *ngIf="!editMsg" (click)="close(item)" class="imgClose"
+                            <img id="imgClose-MsgTitle" *ngIf="!editMsg" id="{{i}}_deleteTitle" (click)="close(item)" class="imgClose"
                                 src="assets/icons/close.png">
+                            <img id="imgClose-MsgTitle" *ngIf="!editMsg" id="{{i}}_editTitle" (click)="editTitle(item,i)" class="imgClose"
+                                src="assets/icons/edit.png">
+                            <button id="imgClose-MsgTitle" *ngIf="!editMsg" style="display: none;" id="{{i}}_saveTitle" (click)="saveTitle(item,i)" class="imgClose">update</button>
                         </div>
                         <!-- <div  id="save_{{item.id}}" (click)="editTitle(item.titles, item.id)" style="display: none;background: #EFBE24;color: black;padding: 5px; cursor: pointer;">Save</div> -->
                     </div>
@@ -682,31 +705,49 @@
                 </div>
             </div>
             <div class="grid-DeliverableBody">
-                <div class="grid-DeliverableBodySub">
+                <!-- <div class="grid-DeliverableBodySub">
                     <input class="deliverable-Location"  id="initialAlias"  value="{{shippingLocation.location_alias}}">
                     <input class="deliverable-Price"  id="initialprice" value="0">
                     <input class="deliverable-Qty-Price" id="initialQtn"  value="0">
-                    <!-- <img class="imgEdit" src="assets/icons/edit.png">
-                    <img class="imgClose" src="assets/icons/close.png"> -->
-                </div>
-                <div class="grid-DeliverableBodySub" *ngFor = "let item of shippingLocs">
-                    <p class="deliverable-Location">{{item.pincode}}</p>
-                    <p class="deliverable-Price"  >{{item.price}}</p>
-                    <p class="deliverable-Qty-Price" >{{item.qtn}}</p>
-                    <img class="imgClose" src="assets/icons/close.png" (click)="deleteShiipingLocation(item)">
-                </div>
+                    <img class="imgEdit" src="assets/icons/edit.png">
+                    <img class="imgClose" src="assets/icons/close.png">
+                </div> -->
+
                 <div class="grid-DeliverableBodySub">
-                    <input class="deliverable-Location" (keyup)="shippingLocationGetter('item')"  id="item_pincode">
+                    <input class="deliverable-Location" (keyup)="shippingLocationGetter('item')" value="{{shippingLocation.location_alias}}"  id="item_pincode">
                     <ul id="myUL" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                        <li *ngFor="let inp of shippinglocationArray">
-                            <a (click)="replaceText(inp.pincode,inp.office_name);">
+                        <li>
+                            <a (click)="replaceText('All over India','Main');" *ngIf = "selectMain">
+                                All over India
+                            </a>
+                            <a (click)="replaceText('My State','Main');" *ngIf = "selectMain">
+                                My State
+                            </a>
+                            <a (click)="replaceText('My City','Main');" *ngIf = "selectMain">
+                                My City
+                            </a>
+                            <a (click)="replaceText('My District','Main');" *ngIf = "selectMain">
+                                My District
+                            </a>
+                            <a (click)="replaceText(inp.pincode,inp.office_name);" *ngFor="let inp of shippinglocationArray">
                                 {{inp.office_name}},{{inp.pincode}}
                             </a>
                         </li>
                     </ul>
-                    <input class="deliverable-Price"  id="item_price">
-                    <input class="deliverable-Qty-Price"  id="item_qtn">
-                    <img class="imgClose" src="assets/icons/plus.png" (click)="addShippingLocation('item')" id="item_close">
+                    <input class="deliverable-Price"  id="item_price" value="{{shippingLocation.quantity_price}}">
+                    <input class="deliverable-Qty-Price"  id="item_qtn" value="{{shippingLocation.price}}">
+                    <img class="imgClose" src="assets/icons/plus.png" (click)="addShippingLocation('item')" id="item_close" >
+                </div>
+                <div class="grid-DeliverableBodySub" *ngFor = "let item of shippingLocs; let i = index;">
+                    <p class="deliverable-Location" id="{{i}}_p_pincode">{{item.pincode}}</p>
+                    <p class="deliverable-Price"   id="{{i}}_p_price">{{item.price}}</p>
+                    <p class="deliverable-Qty-Price"  id="{{i}}_p_qtn">{{item.qtn}}</p>
+                    <input class="deliverable-Location" placeholder="pincode" id="{{i}}_pincode" style="display: none;" value="{{item.pincode}}">
+                    <input class="deliverable-Price" placeholder="price" id="{{i}}_price" style="display: none;" value="{{item.price}}">
+                    <input class="deliverable-Qty-Price" placeholder="quantity" id="{{i}}_qtn" style="display: none;" value="{{item.qtn}}">
+                    <img class="shipClose" id="{{i}}_close" src="assets/icons/close.png" (click)="deleteShiipingLocation(item)">
+                    <img class="shipEdit" id="{{i}}_edit" src="assets/icons/edit.png" (click)="editShiipingLocation(item,i)">
+                    <button class="shipSave" id="{{i}}_save" (click)="saveShiipingLocation(item,i)">Update</button>
                 </div>
                 <hr>
             </div>
@@ -778,10 +819,10 @@
                                         <p class="qtyText">QTY</p>
                                     </div>
                                     <div class="grid-Disc-Price">
-                                        <p class="discPriceText">DISCOUNT PERCENTAGE</p>
+                                        <p class="discPriceText">DISCOUNTED PRICE</p>
                                     </div>
                                     <div class="grid-Disc-Per">
-                                        <p class="discPriceText">DISCOUNTED PRICE</p>
+                                        <p class="discPriceText">DISCOUNT PERCENTAGE</p>
                                     </div>
                                     <div class="grid-Actual-Price">
                                         <p class="actualPriceText">ACTUAL PRICE</p>
@@ -849,8 +890,17 @@
             </div>
         </ng-container>
         <ng-template #policyEdit>
-            <textarea class="policyTxtArea" id="policyTxtAr" >
-                {{allProductInfo.shipping_policy}}~{{allProductInfo.return_policy}}~{{allProductInfo.product_policy}}
+            <p>Shipping</p>
+            <textarea class="policyTxtArea" id="policyShippingTxtAr" >
+                {{allProductInfo.shipping_policy}}
+            </textarea>
+            <p>Return</p>
+            <textarea class="policyTxtArea" id="policyReturnTxtAr" >
+                {{allProductInfo.return_policy}}
+            </textarea>
+            <p>Product</p>
+            <textarea class="policyTxtArea" id="policyProductTxtAr" >
+                {{allProductInfo.product_policy}}
             </textarea>
             <div class="btnpolicySubmit">
                 <!-- <button id="policyEdit" class="button" type="button" (click)="sub1();">SUBMIT</button> -->
@@ -881,15 +931,18 @@
                 </div>
             </div>
             <div class="grid-FaqFoot">
-                <ng-container *ngFor="let item of faq;">
+                <ng-container *ngFor="let item of faq; let i = index;">
                     <div class="grid-Faq-Foot">
                         <div class="grid-Faq-Label">
-                            <label class="faq-Label" id="faqLabel">Question :{{item.faqQ}}</label>
-                            <label class="faq-Label" id="faqLabel">Answer :{{item.faqA}}</label>
+                            <label class="faq-Label" id="faqQuestion_{{i}}">Question :{{item.faqQ}}</label>
+                            <label class="faq-Label" id="faqAnswer_{{i}}">Answer :{{item.faqA}}</label>
+                            <input placeholder="Question" value={{item.faqQ}} id="faqQuestionInput_{{i}}" style="display: none;">
+                            <input placeholder="Anwser" value={{item.faqA}} id="faqAnswerInput_{{i}}" style="display: none;">
                         </div>
                         <div class="grid-Faq-Edit-Close">
-                            <!-- <img  id="faq-Edit-Id" class="imgEdit" src="assets/icons/edit.png"> -->
-                            <img id="faq-Close-Id" class="imgClose" (click)="FaqClose(item)" src="assets/icons/close.png">
+                            <img  id="{{i}}_editFaq" class="imgEdit" src="assets/icons/edit.png" (click)="FaqEdit(item,i)">
+                            <img id="{{i}}_deleteFaq" class="imgClose" (click)="FaqClose(item)" src="assets/icons/close.png">
+                            <button id="{{i}}_saveFaq" (click)="faqSave(item,i)" style="display: none;">Update</button>
                         </div>
                     </div>
                 </ng-container>
