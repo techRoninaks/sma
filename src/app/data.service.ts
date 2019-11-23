@@ -1768,6 +1768,138 @@ getNotifications(data: any){
     return this.http.post(this.baseUrl + 'assets/api/rfqshop.php', httpParams);
  }
 
+  getcity(state :any){
+let httpParams= new HttpParams()
+.append("state", state);
+return this.http.post(this.baseUrl+'assets/api/getCity.php',httpParams);
+}
+getPincode(city :any){
+let httpParams= new HttpParams()
+.append("city", city);
+return this.http.post(this.baseUrl+'assets/api/getPin.php',httpParams);
+}
+getPincodeDetails(pin :any){
+let httpParams= new HttpParams()
+.append("pin", pin);
+return this.http.post(this.baseUrl+'assets/api/getPincodeDetails.php',httpParams);
+}
+createInvoice(){
+let httpParams= new HttpParams()
+// .append("prodId", prodId)
+// .append("userId", userId);
+return this.http.get(this.baseUrl+'assets/api/createInvoice.php');
+}
+addComplaintData(data: Object,userId:any,sellerId: any){
+let httpParams= new HttpParams()
+.append("userId", userId)
+.append("sellerId", sellerId)
+// .append("userName", data['username'])
+.append("note", data['complaint_desc']);
+return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
+}
+reqUpdate(userId:any,prodId: any){
+let httpParams= new HttpParams()
+.append("prodId", prodId)
+.append("userId", userId);
+return this.http.post(this.baseUrl+'assets/api/reqUpdate.php',httpParams);
+}
+addReviewData(data: Object,userId:any,count:any,prodId: any){
+let httpParams= new HttpParams()
+.append("prodId", prodId)
+.append("rating", count)
+.append("userId", userId)
+.append("title", data['title'])
+.append("note", data['review_desc']);
+return this.http.post(this.baseUrl+'assets/api/addReviewData.php',httpParams);
+}
+getPendingPayData(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/pendingPayOrderData.php',httpParams);
+}
+getReadyShippingData(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/readyShippingData.php',httpParams);
+}
+uploadImage4(data: Object){
+let httpParams = new HttpParams()
+.append("userId", data['user_id'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/image4Upload.php', httpParams);
+}
+uploadImage5(data: Object){
+let httpParams = new HttpParams()
+.append("userId", data['user_id'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/image5Upload.php', httpParams);
+}
+uploadImage6(data: Object){
+let httpParams = new HttpParams()
+.append("userId", data['user_id'])
+.append("image",data['image']);
+return this.http.post(this.baseUrl+'assets/api/image6Upload.php', httpParams);
+}
+getPendingConfirmOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/pendingConfirmOrderDataSeller.php',httpParams);
+}
+getPendingPayOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/pendingPayOrderDataSeller.php',httpParams);
+}
+getProcessingOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/processingOrderDataSeller.php',httpParams);
+}
+getShippedOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/shippedOrderDataSeller.php',httpParams);
+}
+getDeliveredOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/deliveredOrderDataSeller.php',httpParams);
+}
+getClosedOrderDataSeller(data: any){
+let httpParams= new HttpParams()
+.append("sellerId", data)
+return this.http.post(this.baseUrl+'assets/api/closedOrderDataSeller.php',httpParams);
+}
+getPendingConfirmOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/pendingConfirmOrder.php',httpParams);
+}
+getProcessingOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/processingOrder.php',httpParams);
+}
+getShippedOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/shippedOrder.php',httpParams);
+}
+getDeliveredOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/deliveredOrder.php',httpParams);
+}
+getClosedOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/closedOrder.php',httpParams);
+}
+getPendingPayOrder(data: any){
+let httpParams= new HttpParams()
+.append("userId", data)
+return this.http.post(this.baseUrl+'assets/api/pendingPayOrder.php',httpParams);
+}
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
