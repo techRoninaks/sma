@@ -29,7 +29,7 @@
     $sql_query1 ="INSERT INTO `address` (mapping_id,city,country,`state`,addr_type) VALUES ('$seller_id','$city','$country','$state','$addr_type')";
     $result1 = mysqli_query($con2, $sql_query1);
 
-    $sql_query2 ="SELECT `seller_name` FROM `seller` WHERE id='$seller_id'";
+    $sql_query2 ="SELECT `seller_name`,`id` FROM `seller` WHERE id='$seller_id'";
     $result2 = mysqli_query($con2, $sql_query2);
     $row2 = mysqli_fetch_array($result2);
 
@@ -42,7 +42,7 @@
     else
     {
         $status="Success";
-        $data=array('seller_name'=>$row2["seller_name"],'status'=>$status);
+        $data=array('seller_id'=>$row2["id"],'seller_name'=>$row2["seller_name"],'status'=>$status);
         echo json_encode($data);
     }
 ?>

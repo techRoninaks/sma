@@ -18,7 +18,7 @@
             $active_status = 1;
         }
     }  
-    $sql_query = " INSERT INTO `user_card_detail` (`user_id`,card_num,card_holder_name,expmon,exp_year,is_active) VALUES ('$userId','$cardNo','$userName','$exp_month','$exp_year','$active_status')";
+    $sql_query = " INSERT INTO `user_card_detail` (`user_id`,card_num,card_holder_name,expmon,exp_year,is_active) VALUES ($userId,$cardNo,'$userName',$exp_month,$exp_year,$active_status)";
     $result = mysqli_query($con2, $sql_query);
     if(! $result)
     {

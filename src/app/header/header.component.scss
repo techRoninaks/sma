@@ -1,6 +1,6 @@
 $primaryYellowColor: #efbe22;
 $primaryFontColor:black;
-$categorySidePadding:2rem;
+$categorySidePadding:1.5rem;
 
 .collapse{
     a{
@@ -210,7 +210,6 @@ li{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     text-align: center;
     z-index: 1;
-    display: none;
   }
   .dropdown-content a {
     color: black;
@@ -222,11 +221,6 @@ li{
   .dropdown-content a:hover {
     background-color: #DBDBDB
   }
-  //
-  // .dropdown-profile:hover .dropdown-content2{
-  //   display: block;
-  // }
-  //
   .dropdown-profile:hover .dropbtn-login{
     background-color: #DBDBDB;
   }

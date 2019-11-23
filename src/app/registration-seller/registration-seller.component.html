@@ -77,7 +77,7 @@
                 <br>
               </div>
               <div>
-                <button class="button-login" type="submit" [disabled]="!registrationForm.controls.reg_checkbox.valid">CONTINUE</button>
+                <button class="button-login" type="submit" [disabled]="! registrationForm.controls.reg_checkbox.valid">CONTINUE</button>
               </div>
           </form>
         </div>
@@ -139,7 +139,7 @@
                                   </div>
                                   <br>
                                   <div>
-                                    <button class="button-submit" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid">
+                                    <button class="button-submit" type="submit" (click)="verifyOTP()" [disabled]="! fpFormOtp.valid">
                                       SUBMIT
                                     </button>
                                   </div>
@@ -228,7 +228,7 @@
             <label>Owner Name:</label>
           </div>
           <div class="owner-name">
-            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller.owner_name}}</label></div>
+            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].owner_name}}</label></div>
           </div>
           <div class="shop-addr-label">
             <label>Shop Address:</label>
@@ -242,27 +242,49 @@
             </div>
           </div>
           <div class="city">
-            <input type="text" placeholder="City:" formControlName="city" style="border: none; border-radius: 5px; width: 230px;">
+            <!-- <input type="text" placeholder="City:" formControlName="city" style="border: none; border-radius: 5px; width: 230px;">
             <div *ngIf="submitted && registrationFormStage1.controls.city.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.city.errors.required">
                   City is required !
                 </div>
+            </div> -->
+            <select style="width: 233px;" formControlName="city">
+              <option default>Select Your City</option>
+              <option *ngFor="let item of Object.keys(dynamicDataCity)" (click)="selectedCity(dynamicDataCity[item].city);">{{dynamicDataCity[item].city}}</option>
+            </select>
+            <div *ngIf="submitted && registrationFormStage1.controls.city.errors" class="error validator-style">
+              <div *ngIf="registrationFormStage1.controls.city.errors.required">
+                City is required !
+              </div>
             </div>
           </div>
           <div class="state">
-            <input type="text" style="width: 400px;" placeholder="State:" formControlName="state" style="width: 407px; border: none; border-radius: 5px;">
+            <!-- <input type="text" style="width: 400px;" placeholder="State:" formControlName="state" style="width: 407px; border: none; border-radius: 5px;">
             <div *ngIf="submitted && registrationFormStage1.controls.state.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.state.errors.required">
                   State is required !
                 </div>
-            </div>
+            </div> -->
+            <select style="width: 409px;" formControlName="state">
+              <option default>Select Your State</option>
+              <option *ngFor="let item of Object.keys(dynamicDataSeller)" (click)="selectedState(dynamicDataSeller[item].state);">{{dynamicDataSeller[item].state}}</option>
+            </select>
           </div>
           <div class="pin">
-            <input type="text" placeholder="Pincode:" formControlName="pin" style="border: none; border-radius: 5px; width: 230px;">
+            <!-- <input type="text" placeholder="Pincode:" formControlName="pin" style="border: none; border-radius: 5px; width: 230px;">
             <div *ngIf="submitted && registrationFormStage1.controls.pin.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.pin.errors.required">
                   Pin is required !
                 </div>
+            </div> -->
+            <select style="width: 233px;" formControlName="pin">
+              <option default>Select Your Pincode</option>
+              <option *ngFor="let item of Object.keys(dynamicDataPin)" (click)="selectedPin(dynamicDataPin[item].pin);">{{dynamicDataPin[item].pin}}</option>
+            </select>
+            <div *ngIf="submitted && registrationFormStage1.controls.pin.errors" class="error validator-style">
+              <div *ngIf="registrationFormStage1.controls.pin.errors.required">
+                Pin is required !
+              </div>
             </div>
           </div>
           <div class="main-cat-label">
@@ -292,13 +314,13 @@
               <label>Contact No:</label>
           </div>
           <div class="contact">
-            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller.contact}}</label></div>
+            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].contact}}</label></div>
           </div>
           <div class="email-id-label">
             <label>Email ID:</label>
           </div>
           <div class="email-id">
-            <div style="height: 27px; width:240px; border-radius:4px; background: white;"><label>{{dynamicDataSeller.email}}</label></div>
+            <div style="height: 27px; width:240px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].email}}</label></div>
           </div>
           <div class="gst-no-label">
             <label>GST No:</label>
@@ -356,19 +378,19 @@
             <label>Owner Name:</label>
           </div>
           <div class="name-owner">
-            <label><div style="height: 27px; width:350px; border-radius:4px; background: white;">{{dynamicDataSeller.owner_name}}</div></label>
+            <label><div style="height: 27px; width:350px; border-radius:4px; background: white;">{{dynamicDataSeller[0].owner_name}}</div></label>
           </div>
           <div class="email-label-2">
             <label>Email:</label>
           </div>
           <div class="email-2">
-            <label><div style="height: 27px; width:320px; border-radius:4px; background: white;">{{dynamicDataSeller.email}}</div></label>
+            <label><div style="height: 27px; width:320px; border-radius:4px; background: white;">{{dynamicDataSeller[0].email}}</div></label>
           </div>
           <div class="contact-label-2">
             <label>Contact No:</label>
           </div>
           <div class="contact-2">
-            <label><div style="height: 27px; width:240px; border-radius:4px; background: white;">{{dynamicDataSeller.contact}}</div></label>
+            <label><div style="height: 27px; width:240px; border-radius:4px; background: white;">{{dynamicDataSeller[0].contact}}</div></label>
           </div>
           <div class="dob-label">
             <label>Date of birth:</label>
@@ -520,6 +542,7 @@
             </div>
           </div>
           <div class="payment">
+          <form [formGroup]="bankDetailsForm">
             <div class="grid-payment">
               <div class="pay-header">
                 <div style="height: 38px; width: 160px;  background: #009145; border-top-right-radius: 4px; border-bottom-right-radius: 4px; 
@@ -527,46 +550,109 @@
                     <label style="color: white; float: right; margin-right: 17px; margin-top: 6px;">PAYMENT</label>
                 </div>
               </div>
-              <div class="holder-name">
-                  <label>Account holder Name: </label>
-                  <br>
-                  <input type="text" id="accnt-holder-name" class="payment-style">
-              </div>
-              <div class="bank-name">
-                  <label>Bank Name: </label>
-                  <br>
-                  <input type="text" id="bank-name" class="payment-style">
-              </div>
-              <div class="accnt-type">
-                  <label>Account Type: </label>
-                  <br>
-                  <input type="text" id="accnt-type" class="payment-style">
-              </div>
-              <div class="branch">
-                  <label>Branch: </label>
-                  <br>
-                  <input type="text" id="branch" class="payment-style">
-              </div>
-              <div class="accnt-no">
-                  <label>Account Number: </label> 
-                  <br>
-                  <input type="text" id="accnt-no" class="payment-style">
-              </div>
-              <div class="ifsc">
-                  <label>IFSC Code: </label>
-                  <br>
-                  <input type="text" id="ifsc" class="payment-style">
-              </div>
-              <div class="conf-accnt-no">
-                  <label>Confirm Account Number: </label>
-                  <br>
-                  <input type="text" id="conf-accnt-no" class="payment-style">
-              </div>
-              <div class="btn-next">
-                  <button (click)="onSubmitStage4()" style="margin-left: 106px; border: none; border-radius: 4px; height: 30px; width: 100px;
-                  background: #EFBE24; color: white;">NEXT</button>
-              </div>
+                <div class="holder-name">
+                    <label>Account holder Name: </label>
+                    <br>
+                    <input type="text" id="accnt-holder-name" class="payment-style" formControlName="holder_name">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.holder_name.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.holder_name.errors.required">
+                        Account holder Name is required !
+                      </div>
+                    </div>
+                </div>
+                <div class="bank-name">
+                    <label>Bank Name: </label>
+                    <br>
+                    <input type="text" id="bank-name" class="payment-style" formControlName="bank_name">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.bank_name.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.bank_name.errors.required">
+                        Bank Name is required !
+                      </div>
+                    </div>
+                </div>
+                <div class="accnt-type">
+                    <label>Account Type: </label>
+                    <br>
+                    <input type="text" id="accnt-type" class="payment-style" formControlName="accnt_type">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.accnt_type.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.accnt_type.errors.required">
+                        Account type is required !
+                      </div>
+                    </div>
+                </div>
+                <div class="branch">
+                    <label>Branch: </label>
+                    <br>
+                    <input type="text" id="branch" class="payment-style" formControlName="branch">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.branch.errors" class="error validator-style">
+                        <div *ngIf="bankDetailsForm.controls.branch.errors.required">
+                          Branch is required !
+                        </div>
+                    </div>
+                </div>
+                <div class="accnt-no">
+                    <label>Account Number: </label> 
+                    <br>
+                    <input type="text" id="accnt-no" class="payment-style" formControlName="accnt_no">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.accnt_no.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.accnt_no.errors.required">
+                        Account No is required !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.accnt_no.hasError('minlength')">
+                          Enter valid Account Number !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.accnt_no.hasError('maxlength')">
+                        Enter valid Account Number !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.accnt_no.hasError('pattern')">
+                        Enter Only digits !
+                      </div>
+                    </div>
+                </div>
+                <div class="ifsc">
+                    <label>IFSC Code: </label>
+                    <br>
+                    <input type="text" id="ifsc" class="payment-style" formControlName="ifsc">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.ifsc.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.ifsc.errors.required">
+                        IFSC is required !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.ifsc.hasError('minlength')">
+                        Enter valid IFSC !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.ifsc.hasError('maxlength')">
+                        Enter valid IFSC !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.ifsc.hasError('pattern')">
+                        Enter valid IFSC !
+                      </div>
+                    </div>
+                </div>
+                <div class="conf-accnt-no">
+                    <label>Confirm Account Number: </label>
+                    <br>
+                    <input type="text" id="conf-accnt-no" class="payment-style" formControlName="conf_accnt_no">
+                    <div *ngIf="submittedBank && bankDetailsForm.controls.conf_accnt_no.errors" class="error validator-style">
+                      <div *ngIf="bankDetailsForm.controls.conf_accnt_no.errors.required">
+                        Account No is required !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.conf_accnt_no.hasError('minlength')">
+                        Enter valid Account Number !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.conf_accnt_no.hasError('maxlength')">
+                        Enter valid Account Number !
+                      </div>
+                      <div *ngIf="bankDetailsForm.controls.conf_accnt_no.hasError('pattern')">
+                        Enter Only digits !
+                      </div>
+                    </div>
+                </div>
+                <div class="btn-next">
+                    <button (click)="onSubmitStage4()" type="submit" style="margin-left: 106px; border: none; border-radius: 4px; height: 30px; width: 100px;
+                    background: #EFBE24; color: white;">NEXT</button>
+                </div>
             </div>
+          </form>
           </div>
         </div>
         <!--  -->
@@ -649,11 +735,11 @@
           </div>
       </div>
       <form [formGroup]="termsForm">
-        <button style="margin-left: 416px; background: #EFBE24; border: none; border-radius: 3px; color: white;"><a target="_blank" routerLink="/terms&conditions">READ MORE</a></button>
+        <button style="margin-left: 416px; background: #EFBE24; border: none; border-radius: 3px; color: white;"><a target="_blank" routerLink="/terms&conditions">Goto T&C</a></button>
         <br>
         <input type="checkbox" style="margin-left: 286px;" formControlName="t_checkbox"> &nbsp; <label>I agree to the above stated terms and conditions</label>
         <br>
-        <button [disabled]="!termsForm.valid" type="submit" (click)=nextStage(); style="margin-left: 438px; background: #EFBE24; border: none; border-radius: 3px; color: white;">NEXT</button>
+        <button [disabled]="! termsForm.valid" type="submit" (click)=nextStage(); style="margin-left: 438px; background: #EFBE24; border: none; border-radius: 3px; color: white;">NEXT</button>
       </form>
     </div>
   </div>
