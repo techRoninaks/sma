@@ -71,7 +71,8 @@ sendOrderDetails(data: any) {
 		return this.http.post(this.baseUrl+'assets/api/productslist.php', httpParams);
 	}
   
-  sendCartDetails(data: any) {
+
+ sendCartDetails(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
       .append("shopId", data['shop_id'])
@@ -89,6 +90,7 @@ sendOrderDetails(data: any) {
       .append("giftNote", data['gift_note'])
       .append("giftAddress", data['gift_address'])
       .append("msgCount", data['msgCount'])
+      .append("pin", data['pin'])
 
 
     return this.http.post(this.baseUrl + 'assets/api/pricingcart.php', httpParams);
@@ -103,13 +105,15 @@ sendOrderDetails(data: any) {
       .append("userId", data)
     return this.http.post(this.baseUrl + 'assets/api/rfqaddress.php', httpParams);
   }
-  getPriceDate(data: any) {
+ getPriceDate(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
       .append("pin",data['pin'])
       .append("productQuantity",data['prod_quantity'])
       .append("deliveryOption",data['del_option'])
-    return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
+      .append("productVariant",data['productVariant'])
+
+      return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
   }
   sendRfq(data :any) {
     let httpParams = new HttpParams()
@@ -230,7 +234,8 @@ getDateDiffShop(data: any) {
   
   getProductData(data : any){
     let httpParams = new HttpParams()
-    .append("prodId",data)
+    .append("prodId",data['prod_id'])
+    .append("shopId",data['shop_id'])
     return this.http.post(this.baseUrl+'assets/api/datagetter.php',httpParams);
   }
   getVariantInfo(data : any){
@@ -336,11 +341,12 @@ getDateDiffShop(data: any) {
 			.append("shopId", data)
 		return this.http.post(this.baseUrl+'assets/api/shopgetter.php', httpParams);
 	}
-	getSellerDetailsShop(data: any) {
-		let httpParams = new HttpParams()
-			.append("shopId", data)
-		return this.http.post(this.baseUrl+'assets/api/sellerdetailshop.php', httpParams);
-	}
+getSellerDetailsShop(data: any) {
+	let httpParams = new HttpParams()
+	// .append("shopId", data)
+        .append("sellerId", data)
+        return this.http.post(this.baseUrl+'assets/api/sellerdetailshop.php', httpParams);
+}
 
 	getFollowInfoShop(data: any) {
 		let httpParams = new HttpParams()
@@ -991,18 +997,26 @@ getOrderDetailsCheckout(userId: any) {
   .append("userId", userId)
   return this.http.post(this.baseUrl + 'assets/api/getOrderDetailsCheckout.php', httpParams);
 }
-   sendRfqShop(data :any) {
+  sendRfq(data :any) {
     let httpParams = new HttpParams()
-      .append("shopId", data['shop_id'])
-      .append("hasImage", data['imageUploaded'])
+      .append("prodId", data['prod_id'])
+      .append("imageUploaded", data['imageUploadedRfq'])
+      .append("imageRUCount", data['imageRUCount'])
       .append("userId", data['user_id'])
       .append("shopLocation", data['shop_location'])
       .append("note", data['note'])
       .append("productRef", data['product_ref'])
-      .append("image", data['image'])
-      .append("sellerId", data['seller_id'])
+      .append("image0", data['image0'])
+      .append("image1", data['image1'])
+      .append("image2", data['image2'])
+      .append("imageRU0", data['imageRU0'])
+      .append("imageRU1", data['imageRU1'])
+      .append("imageRU2", data['imageRU2'])
+      .append("sellerId", data['seller_identity'])
+      .append("shopId", data['shop_id'])
+      .append("shopName", data['shop_name'])
 
-    return this.http.post(this.baseUrl + 'assets/api/rfqshop.php', httpParams);
+    return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
   }
 
   categoryShop(data: any) {
@@ -1732,6 +1746,26 @@ getNotifications(data: any){
   let httpParams= new HttpParams()
   .append("threadid", threadid)
   return this.http.post(this.baseUrl+'assets/api/fetchmsg.php',httpParams);
+ }
+  sendRfqShop(data :any) {
+    let httpParams = new HttpParams()
+      .append("shopId", data['shop_id'])
+      // .append("hasImage", data['imageUploaded'])
+      .append("imageUploaded", data['imageUploadedRfq'])
+      .append("imageRUCount", data['imageRUCount'])
+      .append("userId", data['user_id'])
+      .append("shopLocation", data['shop_location'])
+      .append("note", data['note'])
+      .append("productRef", data['product_ref'])
+      // .append("image", data['image'])
+      .append("sellerId", data['seller_id'])
+      .append("image0", data['image0'])
+      .append("image1", data['image1'])
+      .append("image2", data['image2'])
+      .append("imageRU0", data['imageRU0'])
+      .append("imageRU1", data['imageRU1'])
+      .append("imageRU2", data['imageRU2'])
+    return this.http.post(this.baseUrl + 'assets/api/rfqshop.php', httpParams);
  }
 
   // deleteCart(id: number) {
