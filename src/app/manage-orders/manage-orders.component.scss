@@ -483,6 +483,7 @@ text-decoration: underline;
             grid-template-rows: auto;
             grid-template-areas: "status";
             margin-top: 4%;
+            font-family: BitterBold;
         }
         .status{
             background: rgb(212, 206, 206);
@@ -498,7 +499,7 @@ text-decoration: underline;
             grid-template-columns: auto auto auto auto auto auto;
             grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
                                  "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
-                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                                 "stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1"
                                  "label-1 label-2 label-3 label-4 label-5 label-6";
             font-size: 8px;
             align-content: center;
@@ -581,39 +582,8 @@ text-decoration: underline;
             grid-area: stat-bar-1;
             margin-top: 20px;
             width: 82%;
-            margin-left: 50%;
+            margin-left: 122px;
         }
-        .stat-bar-2{
-            grid-area: stat-bar-2;
-            margin-top: 20px;
-            width: 82%;
-            margin-left: 20%;
-        }
-        .stat-bar-3{
-            grid-area: stat-bar-3;
-            margin-top: 20px;
-            width: 113%;
-            margin-left: 2%;
-        }
-        .stat-bar-4{
-            grid-area: stat-bar-4;
-            margin-top: 20px;
-            width: 123%;
-            margin-left: -5px;
-        }
-        .stat-bar-5{
-            grid-area: stat-bar-5;
-            margin-top: 20px;
-            width: 82%;
-            margin-left: -20px;
-        }
-        .stat-bar-6{
-            grid-area: stat-bar-6;
-            margin-top: 20px;
-            width: 87%;
-            margin-left: -37%;
-        }
-        // timeline
         .stats-1 {
             padding: 0px 60px;
             display: flex;
@@ -622,64 +592,12 @@ text-decoration: underline;
             position: relative;
             transition: all 200ms ease-in ;
             font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-2 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-3 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-4 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-5 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-6 {
-            padding: 0px 53px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
           }
           .full-circle{
             height: 20px;
             width: 20px;
             background-color: #EFBE24;
             border-radius: 50%;
-            // display: inline-block;
           }
           .dot-circle{
             width: 20px;
@@ -688,8 +606,6 @@ text-decoration: underline;
             border-radius: 25px;
             border: 2px solid #EFBE24;
             position: absolute;
-            top: -11px;
-            left: 47%;
           }
     }
     .section-5{
@@ -724,6 +640,7 @@ text-decoration: underline;
         grid-template-rows: auto;
         grid-template-areas: "orders status";
         margin-top: 4%;
+        font-family: BitterBold;
     }
     .orders{
         background: rgb(212, 206, 206);
@@ -765,18 +682,18 @@ text-decoration: underline;
     }
     .g-status{
         grid-area: g-status;
-        .grid-status{
-            display: grid;
-            grid-template-rows: auto auto auto auto;
-            grid-template-columns: auto auto auto auto auto auto;
-            grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
-                                 "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
-                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
-                                 "label-1 label-2 label-3 label-4 label-5 label-6";
-            font-size: 8px;
-            align-content: center;
-            text-align: center;
-        }
+    }
+    .grid-status-all{
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
+                             "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
+                             "stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1"
+                             "label-1 label-2 label-3 label-4 label-5 label-6";
+        font-size: 8px;
+        align-content: center;
+        text-align: center;
         .pending-conf{
             grid-area: pending-conf;
         }
@@ -852,119 +769,24 @@ text-decoration: underline;
         }
         .stat-bar-1{
             grid-area: stat-bar-1;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 50%;
+            width: 857px;
+            margin-top: 28px;
+            margin-left: 97px;
         }
-        .stat-bar-2{
-            grid-area: stat-bar-2;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 50px;
-        }
-        .stat-bar-3{
-            grid-area: stat-bar-3;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 9px;
-        }
-        .stat-bar-4{
-            grid-area: stat-bar-4;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -24px;
-        }
-        .stat-bar-5{
-            grid-area: stat-bar-5;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -52px;
-        }
-        .stat-bar-6{
-            grid-area: stat-bar-6;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -60px;
-        }
-        // timeline
         .stats-1 {
+            font-weight: 600;
             padding: 0px 60px;
             display: flex;
             justify-content: center;
             border-top: 2px solid #EFBE24;
             position: relative;
             transition: all 200ms ease-in ;
-        }
-        .stats-2 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-3 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-4 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-5 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-6 {
-            padding: 0px 53px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-1{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-2{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-3{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-4{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-5{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-6{
-            font-weight: 600;
-            padding-top: 20px;
         }
         .full-circle{
             height: 20px;
             width: 20px;
             background-color: #EFBE24;
             border-radius: 50%;
-            // display: inline-block;
           }
           .dot-circle{
             width: 20px;
@@ -973,8 +795,6 @@ text-decoration: underline;
             border-radius: 25px;
             border: 2px solid #EFBE24;
             position: absolute;
-            top: -11px;
-            left: 47%;
           }
     }
     .prod-name{
@@ -1017,6 +837,76 @@ text-decoration: underline;
         width: 130px;
         height: 35px;
     }
-    
-// timeline
+}
+.grid-btn-filter{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 15% 15% 13% 13% 13% 12% 12%;
+    grid-template-areas: "all pending-conf pending-pay processing shipped delivered closed";
+    font-family: BitterBold;
+    .btn-filter-style{
+        border: none;
+        background: inherit;
+        cursor: pointer;
+        text-align: center;
+    }
+    .all{
+        grid-area: all;
+    }
+    .pending-conf{
+        grid-area: pending-conf;
+        text-align: center;
+    }
+    .pending-pay{
+        grid-area: pending-pay;
+        text-align: center;
+    }
+    .processing{
+        grid-area: processing;
+        text-align: center;
+    }
+    .shipped{
+        grid-area: shipped;
+        text-align: center;
+    }
+    .delivered{
+        grid-area: delivered;
+        text-align: center;
+    }
+    .closed{
+        grid-area: closed;
+        text-align: center;
+    }
+}
+.grid-no-order{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    grid-template-areas: "header";
+    .header{
+        grid-area: header;
+        text-align: center;
+    }
+}
+.grid-main-filter{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 10%;
+    grid-template-areas: "current past";
+    .current{
+        grid-area: current;
+        text-align: center;
+    }
+    .past{
+        grid-area: past;
+        text-align: center;
+    }
+    .btn-filter-style{
+        // border: solid #EFBE24;
+        background: inherit;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 6px;
+        font-family: BitterBold;
+    }
 }

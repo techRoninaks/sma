@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
       }
       else
       {
-        document.getElementById("profilemenu").style.display="block";
+        // document.getElementById("profilemenu").style.display="block";
         document.getElementById("headerLogin").innerText = this.flag as string;
         document.getElementById("loginButton").innerText ="Log Out";
         document.getElementById("locationlabel").innerText = this.flag4 as string;
@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
       }
       else
       {
-        document.getElementById("profilemenu").style.display="block";
+        // document.getElementById("profilemenu").style.display="block";
         document.getElementById("headerLogin").innerText = this.flag1 as string;
         document.getElementById("loginButton").innerText ="Log Out";
         document.getElementById("locationlabel").innerText = this.flag3 as string;
@@ -162,6 +162,7 @@ export class HeaderComponent implements OnInit {
                   document.getElementById("locationlabel").innerText = this.city as string;
                   document.getElementById("pinlabel").innerText = this.pin as string;
                   this.router.navigate(['/']);
+                  window.location.reload();
                 }
                 else if(data['status'] =="Success2")
                 {
@@ -236,6 +237,7 @@ export class HeaderComponent implements OnInit {
                     document.getElementById("locationlabel").innerText = this.city as string;
                     document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/dashboard']);
+                    window.location.reload();
                   }
                 }
                 else

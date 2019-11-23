@@ -4,14 +4,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" routerLink=""><img src="assets/images/icons/ic_title.png" Height="70%" Width="70%"></a>
+      <a class="navbar-brand" routerLink=""><img src="assets/images/icons/ic_title.png" Height="70%" Width="70%" style="margin-left: 50px;"></a>
       <!-- SCOOP<span>MY</span>ART -->
       <li class="nav-item">
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
           <a class="nav-link">
             <div class="dropdown">
                 <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;<label id="locationlabel">{{location}}</label>&nbsp;<label id="pinlabel">{{pin}}</label></button>
-                  <div class="dropdown-content" id="location_drop_down">
+                  <div class="dropdown-content" id="location_drop_down" style="display: none;">
                   <li>
                     <div>
                       <input type="text" size= "16" class="input_style" placeholder="Enter pincode">
@@ -49,7 +49,7 @@
               <button class="dropbtn-login" (click)="open()"><img src="assets/images/icons/ic_user.png" height="25px" width="25px">
                 <label id="headerLogin">{{temp}}</label>
               </button>
-                <div class="dropdown-content2" id="profilemenu">
+                <div class="dropdown-content2" id="profilemenu" style="display: none;">
                   <li *ngIf="user_signed"><a routerLink="/orders">My orders</a></li>
                   <li *ngIf="sellerSignedIn"><a routerLink="/manageorders">My orders</a></li>
                   <li><a>My messages</a></li>
@@ -67,7 +67,7 @@
       </ul>
     </div>
   </nav>
-  <div class="header-category-bar">
+  <div class="header-category-bar" id="headerCategoryBar">
     <div class="hamburger-div">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -91,6 +91,7 @@
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button> 
+          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{shop_id:'all'}">Shop By Store</a></button>
         </div>
         <div class="dropdown" style="display: none;" id="sellerHeader">
           <button class="dropbtn-cat"><a routerLink="/dashboard">DASHBOARD</a></button>

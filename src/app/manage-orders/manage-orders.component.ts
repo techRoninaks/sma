@@ -26,11 +26,13 @@ export class ManageOrdersComponent implements OnInit {
   j: number = 0;
   status: any =[];
   orderId: any="";
+  noOrders: boolean = false;
   ind_order: boolean = false;
   order_list: boolean = true;
   cancelStatus: boolean = false;
   cancelledStatus: boolean = false;
   cancelled: boolean = true;
+  userAddress: boolean = false;
   stage_0: boolean = false;
   stage_1_dot: boolean = true;
   stage_1_full: boolean = false;
@@ -90,6 +92,11 @@ export class ManageOrdersComponent implements OnInit {
       data=>{
               this.dynamicOrderData=data;
               this.orderId = data['orderId'];
+              var order_stat = data['order_status'];
+              if(order_stat == "shipped" || order_stat == "delivered" || order_stat == "closed")
+              {
+                this.userAddress = true;
+              }
             },
         error=> console.error(error)
       );
@@ -256,7 +263,7 @@ export class ManageOrdersComponent implements OnInit {
       );
   }
   previous(){
-    if(this.j >= 0)
+    if(this.j > 0)
     {
     orderid2 = orderIdArray[this.j];
     console.log(orderid2);
@@ -264,6 +271,14 @@ export class ManageOrdersComponent implements OnInit {
       data=>{
               this.dynamicOrderData=data;
               this.orderId = data['orderId'];
+              var order_stat = data['order_status'];
+              if(order_stat == "pending payment" || order_stat == "pending confirmation" || order_stat == "processing")
+              {
+                this.userAddress = false;
+              }
+              else{
+                this.userAddress = true;
+              }
             },
         error=> console.error(error)
       );
@@ -345,14 +360,22 @@ export class ManageOrdersComponent implements OnInit {
       }
   }
   next(){
-    if(this.l < orderCount)
+    if(this.l < orderCount-1)
     {
-      orderid3 = orderIdArray[this.l];
+      orderid3 = orderIdArray[++this.l];
       console.log(orderid3);
     this.data.getIndividualOrderDataPrev(orderid3).subscribe(
       data=>{
               this.dynamicOrderData=data;
               this.orderId = data['orderId'];
+              var order_stat = data['order_status'];
+              if(order_stat == "pending payment" || order_stat == "pending confirmation" || order_stat == "processing")
+              {
+                this.userAddress = false;
+              }
+              else{
+                this.userAddress = true;
+              }
             },
         error=> console.error(error)
       );
@@ -425,7 +448,7 @@ export class ManageOrdersComponent implements OnInit {
         },
         error=> console.error(error)
       );
-      this.l++;
+      // this.l++;
     }
     else{
       this.l= 0;
@@ -596,37 +619,6 @@ export class ManageOrdersComponent implements OnInit {
     this.ind_order = true;
     this.order_list = false;
   }
-  // myFunction(imgs) {
-	// 	var ele = document.getElementById(imgs) as HTMLImageElement;
-	// 	this.largeSrc = ele.src;
-	// }
-	// openModal() {
-	// 	document.getElementById("myModal").style.display = "block";
-	// }
-	// closeModal() {
-	// 	document.getElementById("myModal").style.display = "none";
-	// }
-	// plusSlides(n) {
-	// 	this.showSlides(slideIndex += n);
-	// }
-	// currentSlide(n) {
-	// 	this.showSlides(slideIndex = n);
-  // }
-  // showSlides(n) {
-	// 	var i;
-	// 	var slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
-	// 	var dots = document.getElementsByClassName("demo") as HTMLCollectionOf<HTMLElement>;
-	// 	if (n > slides.length) { slideIndex = 1 }
-	// 	if (n < 1) { slideIndex = slides.length }
-	// 	for (i = 0; i < slides.length; i++) {
-	// 		slides[i].style.display = "none";
-	// 	}
-	// 	for (i = 0; i < dots.length; i++) {
-	// 		dots[i].className = dots[i].className.replace(" active", "");
-	// 	}
-	// 	slides[slideIndex - 1].style.display = "block";
-	// 	dots[slideIndex - 1].className += " active";
-	// }
   setCookie(cname, value) {
     this.cookieService.set(cname, value);
   }
@@ -635,6 +627,158 @@ export class ManageOrdersComponent implements OnInit {
   }
   deleteCookie(cname) {
     this.cookieService.delete(cname);
+  }
+  allFilter(){
+    this.noOrders = false;
+    this.data.getAllOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("current-btn")).style.border ="solid #EFBE24" ;
+    (<HTMLButtonElement><any>document.getElementById("past-btn")).style.border ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  pendingConfirmFilter(){
+    this.noOrders = false;
+    this.data.getPendingConfirmOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  pendingPayFilter(){
+    this.noOrders = false;
+    this.data.getPendingPayOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  processingFilter(){
+    this.noOrders = false;
+    this.data.getProcessingOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  shippedFilter(){
+    this.noOrders = false;
+    this.data.getShippedOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  deliveredFilter(){
+    this.noOrders = false;
+    this.data.getDeliveredOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  closedFilter(){
+    this.noOrders = false;
+    this.data.getClosedOrderDataSeller(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderDataAll=data;
+        if(this.dynamicDataOrderDataAll==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("current-btn")).style.border ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("past-btn")).style.border ="solid #EFBE24" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-conf-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-pay-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipped-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+  }
+  createInvoice(){
+    this.data.createInvoice().subscribe(
+      data=>{
+        
+      },
+      error=> console.error(error)
+    );
   }
   ngOnDestroy() {
     (<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";

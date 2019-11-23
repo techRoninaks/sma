@@ -7,6 +7,10 @@ import { CookieService } from 'ngx-cookie-service';
 var imageFront: any ="";
 var imageFront2: any ="";
 var imageFront3: any ="";
+var imageFront4: any ="";
+var imageFront5: any ="";
+var imageFront6: any ="";
+declare var Razorpay: any;
 @Component({
   selector: 'app-userprofile-buyer',
   templateUrl: './userprofile-buyer.component.html',
@@ -14,9 +18,14 @@ var imageFront3: any ="";
 })
 export class UserprofileBuyerComponent implements OnInit {
   public token: any;
+  TotalPrice: any;
   shopCount: any;
   fpmobile: any;
   userMobile: any;
+  user_name: any;
+  user_email: any;
+  user_phone: any;
+  noOrders: boolean = false;
   editMode: boolean = false;
   viewMode: boolean = true;
   stage_1_dot: boolean = true;
@@ -34,6 +43,7 @@ export class UserprofileBuyerComponent implements OnInit {
   otpVerified: boolean = false;
   otpVerified2: boolean = false;
   otpSent: boolean = false;
+  count: number=0;
   i: number = 0;
   j: number = 0;
   k: number = 0;
@@ -50,10 +60,11 @@ export class UserprofileBuyerComponent implements OnInit {
   fpFormOtp: FormGroup;
   addAddress: FormGroup;
   addComplaint: FormGroup;
+  addReview: FormGroup;
   cardForm: FormGroup;
   cardFormCvv: FormGroup;
   registrationForm: FormGroup;
-  constructor(private formBuilderPassword: FormBuilder,private formBuilderMobile: FormBuilder ,private formBuilderOtp2: FormBuilder, private formBuilderOtp: FormBuilder,private formBuilderComplaint:FormBuilder,private formBuilderAddress: FormBuilder,private formBuilderUser: FormBuilder,private formBuilderCvv: FormBuilder,private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder,private cookieService: CookieService) { 
+  constructor(private formBuilderPassword: FormBuilder,private formBuilderMobile: FormBuilder ,private formBuilderOtp2: FormBuilder, private formBuilderOtp: FormBuilder,private formBuilderReview:FormBuilder,private formBuilderComplaint:FormBuilder,private formBuilderAddress: FormBuilder,private formBuilderUser: FormBuilder,private formBuilderCvv: FormBuilder,private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder,private cookieService: CookieService) { 
     this.cardForm = this.formBuilderCard.group({
       cardno: ['', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     })
@@ -84,6 +95,10 @@ export class UserprofileBuyerComponent implements OnInit {
       username:['',Validators.required],
       complaint_desc:['',Validators.required],
     })
+    this.addReview = formBuilderReview.group({
+      title:['',Validators.required],
+      review_desc:['',Validators.required],
+    })
     this.fpFormOtp = this.formBuilderOtp.group({
       fp_otp:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?([0-9]\d*)?$/)]]
     })
@@ -96,6 +111,9 @@ export class UserprofileBuyerComponent implements OnInit {
   imageDataFront : object;
   imageDataFront2 : object;
   imageDataFront3 : object;
+  imageDataFront4 : object;
+  imageDataFront5 : object;
+  imageDataFront6 : object;
   dynamicDataUsercard: any = "";
   dynamicDataShopCount: any = "";
   dynamicDataPendingPayCount: any = "";
@@ -115,6 +133,7 @@ export class UserprofileBuyerComponent implements OnInit {
   userId: any;
   orderCount: any;
   submitted :boolean;
+  submittedReview: boolean;
   tokenObj: object;
   ngOnInit() {
     this.id = this.getCookie("userId");
@@ -328,20 +347,51 @@ export class UserprofileBuyerComponent implements OnInit {
       return;
     }
     else{
-      this.data.addCardData(this.cardForm.value,this.cardFormCvv.value,this.id,this.userName).subscribe(
-        data=>{
-          if(data == "Success")
-          {
-            alert("Card Added Successfully");
-            window.location.reload();
-          }
-          else{
-            alert("Error try again");
-          }
-        },
-    error=> console.error(error)
-        );
+      this.checkCard();
     }
+  }
+  checkCard(){
+    this.TotalPrice = 1;
+    this.user_name = this.dynamicDataUsercard.name;
+    this.user_phone = this.dynamicDataUsercard.phoneNo;
+    this.user_email = this.dynamicDataUsercard.email;
+    // this.seller_id = this.getCookie("sellerId");
+    var options = {
+      "key": "rzp_test_dveDexCQKoGszl",
+      "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
+      "currency": "INR",
+      "name": "ScoopMyArt",
+      "description": "Rs.1 for card verification",
+      "image": "favicon.ico", "handler": response => {
+        alert("Transaction successful. Amount will be refunded soon!");
+        this.data.addCardData(this.cardForm.value,this.cardFormCvv.value,this.id,this.userName).subscribe(
+          data=>{
+            if(data == "Success")
+            {
+              alert("Card Added Successfully");
+              window.location.reload();
+            }
+            else{
+              alert("Error try again");
+            }
+          },
+              error=> console.error(error)
+          );
+      },
+      "prefill": {
+        "name": this.user_name,
+        "email": this.user_email,
+        "contact": this.user_phone,
+      },
+      "notes": {},
+      "theme": {
+        "color": "#133E4B"
+      },
+      "modal": {
+        "ondismiss": function () { }
+      }
+    };
+    var rzp1 = new Razorpay(options); rzp1.open();
   }
   frontUpload(){
     imageFront=document.getElementById('frontUpload').addEventListener('change', onFrontClick.bind(this));
@@ -351,6 +401,15 @@ export class UserprofileBuyerComponent implements OnInit {
   }
   frontUpload3(){
     imageFront3=document.getElementById('frontUpload3').addEventListener('change', onFrontClick3.bind(this));
+  }
+  frontUpload4(){
+    imageFront4=document.getElementById('frontUpload4').addEventListener('change', onFrontClick4.bind(this));
+  }
+  frontUpload5(){
+    imageFront5=document.getElementById('frontUpload5').addEventListener('change', onFrontClick5.bind(this));
+  }
+  frontUpload6(){
+    imageFront6=document.getElementById('frontUpload6').addEventListener('change', onFrontClick6.bind(this));
   }
   edit(){
     this.viewMode = false;
@@ -465,28 +524,149 @@ export class UserprofileBuyerComponent implements OnInit {
             }
       }
     }
-  onSubmitComplaint(){
+  onSubmitComplaint(sellerId){
     this.submitted = true;
-    this.data.addComplaintData(this.addComplaint.value,this.id).subscribe(
+    if(this.addComplaint.invalid)
+    {
+      alert("Enter required fiels");
+    }
+    else
+    {
+      this.data.addComplaintData(this.addComplaint.value,this.id,sellerId).subscribe(
+        data=>{
+                if(data == "Success")
+                {
+                  alert("Complaint sent Successfully");
+                  $("#myModal").modal('hide');
+                }
+                else
+                 alert("Error");
+              },
+        error=> console.error(error)
+      );
+      this.imageDataFront = { user_id:this.id ,image:imageFront}
+      this.data.uploadImage1(this.imageDataFront).subscribe(
+      );
+      this.imageDataFront2 = { user_id:this.id ,image:imageFront2}
+      this.data.uploadImage2(this.imageDataFront2).subscribe(
+      );
+      this.imageDataFront3 = { user_id:this.id ,image:imageFront3}
+      this.data.uploadImage3(this.imageDataFront3).subscribe(
+      );
+    }
+  }
+  reqUpdate(prodId){
+    this.data.reqUpdate(this.id,prodId).subscribe(
       data=>{
               if(data == "Success")
               {
-                alert("Complaint sent Successfully");
+                alert("Request sent Successfully");
               }
               else
-               alert("Error");
+                alert("Error");
             },
       error=> console.error(error)
     );
-    this.imageDataFront = { user_id:this.id ,image:imageFront}
-    this.data.uploadImage1(this.imageDataFront).subscribe(
-    );
-    this.imageDataFront2 = { user_id:this.id ,image:imageFront2}
-    this.data.uploadImage2(this.imageDataFront2).subscribe(
-    );
-    this.imageDataFront3 = { user_id:this.id ,image:imageFront3}
-    this.data.uploadImage3(this.imageDataFront3).subscribe(
-    );
+  }
+  openInvoice(orderId){
+    window.open("http://localhost:8080/sma13/src/assets/invoice/"+orderId+'.pdf', '_blank');
+  }
+  addStar(star){
+    if(star == 'star-1'){
+      this.count=1;
+      document.getElementById("star-1").style.display="none";
+      document.getElementById("star-1-active").style.display="ruby";
+      document.getElementById("star-2").style.display="ruby";
+      document.getElementById("star-2-active").style.display="none";
+      document.getElementById("star-3").style.display="ruby";
+      document.getElementById("star-3-active").style.display="none";
+      document.getElementById("star-4").style.display="ruby";
+      document.getElementById("star-4-active").style.display="none";
+      document.getElementById("star-5").style.display="ruby";
+      document.getElementById("star-5-active").style.display="none";
+    }
+    else if(star == 'star-2'){
+      this.count=2;
+      document.getElementById("star-1").style.display="none";
+      document.getElementById("star-1-active").style.display="ruby";
+      document.getElementById("star-2").style.display="none";
+      document.getElementById("star-2-active").style.display="ruby";
+      document.getElementById("star-3").style.display="ruby";
+      document.getElementById("star-3-active").style.display="none";
+      document.getElementById("star-4").style.display="ruby";
+      document.getElementById("star-4-active").style.display="none";
+      document.getElementById("star-5").style.display="ruby";
+      document.getElementById("star-5-active").style.display="none";
+    }
+    else if(star == 'star-3'){
+      this.count=3;
+      document.getElementById("star-1").style.display="none";
+      document.getElementById("star-1-active").style.display="ruby";
+      document.getElementById("star-2").style.display="none";
+      document.getElementById("star-2-active").style.display="ruby";
+      document.getElementById("star-3").style.display="none";
+      document.getElementById("star-3-active").style.display="ruby";
+      document.getElementById("star-4").style.display="ruby";
+      document.getElementById("star-4-active").style.display="none";
+      document.getElementById("star-5").style.display="ruby";
+      document.getElementById("star-5-active").style.display="none";
+    }
+    else if(star == 'star-4'){
+      this.count=4;
+      document.getElementById("star-1").style.display="none";
+      document.getElementById("star-1-active").style.display="ruby";
+      document.getElementById("star-2").style.display="none";
+      document.getElementById("star-2-active").style.display="ruby";
+      document.getElementById("star-3").style.display="none";
+      document.getElementById("star-3-active").style.display="ruby";
+      document.getElementById("star-4").style.display="none";
+      document.getElementById("star-4-active").style.display="ruby";
+      document.getElementById("star-5").style.display="ruby";
+      document.getElementById("star-5-active").style.display="none";
+    }
+    else if(star == 'star-5'){
+      this.count=5;
+      document.getElementById("star-1").style.display="none";
+      document.getElementById("star-1-active").style.display="ruby";
+      document.getElementById("star-2").style.display="none";
+      document.getElementById("star-2-active").style.display="ruby";
+      document.getElementById("star-3").style.display="none";
+      document.getElementById("star-3-active").style.display="ruby";
+      document.getElementById("star-4").style.display="none";
+      document.getElementById("star-4-active").style.display="ruby";
+      document.getElementById("star-5").style.display="none";
+      document.getElementById("star-5-active").style.display="ruby";
+    }
+  }
+  onSubmitReview(prodId){
+    this.submittedReview = true;
+    if(this.addReview.invalid)
+    {
+      alert("Enter required fiels");
+    }
+    else{
+      this.data.addReviewData(this.addReview.value,this.id,this.count,prodId).subscribe(
+        data=>{
+                if(data == "Success")
+                {
+                  alert("Review sent Successfully");
+                  $("#myModalReview").modal('hide');
+                }
+                else
+                 alert("Error");
+              },
+        error=> console.error(error)
+      );
+      this.imageDataFront4 = { user_id:this.id ,image:imageFront4}
+      this.data.uploadImage4(this.imageDataFront4).subscribe(
+      );
+      this.imageDataFront5 = { user_id:this.id ,image:imageFront5}
+      this.data.uploadImage5(this.imageDataFront5).subscribe(
+      );
+      this.imageDataFront6 = { user_id:this.id ,image:imageFront6}
+      this.data.uploadImage6(this.imageDataFront6).subscribe(
+      );
+    }
   }
   changePassword(){
     this.submitted = true;
@@ -524,6 +704,54 @@ export class UserprofileBuyerComponent implements OnInit {
       );
     }
   }
+  pendingPayFilter(){
+    this.noOrders = false;
+    this.data.getPendingPayData(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderData=data;
+        if(this.dynamicDataOrderData==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+  }
+  readyForShippingFilter(){
+    this.noOrders = false;
+    this.data.getReadyShippingData(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderData=data;
+        if(this.dynamicDataOrderData==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+  }
+  allFilter(){
+    this.noOrders = false;
+    this.data.getOrderData(this.id).subscribe(
+      data=>{
+        this.dynamicDataOrderData=data;
+        if(this.dynamicDataOrderData==""){
+          this.noOrders = true;
+        }
+      },
+      error=> console.error(error)
+    );
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+  }
 }
 function onFrontClick(event) {
   var reader = new FileReader();
@@ -555,5 +783,38 @@ function onFrontClick3(event) {
       // console.log(imageFront);
       (<HTMLInputElement>document.getElementById("frontPreviewId3")).style.display = "block";
       this.urlFront3 = imageFront3;
+  };
+}
+function onFrontClick4(event) {
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = (event)=>{
+      var text :any = reader.result;
+      imageFront4 = text;
+      // console.log(imageFront);
+      (<HTMLInputElement>document.getElementById("frontPreviewId4")).style.display = "block";
+      this.urlFront4 = imageFront4;
+  };
+}
+function onFrontClick5(event) {
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = (event)=>{
+      var text :any = reader.result;
+      imageFront5 = text;
+      // console.log(imageFront);
+      (<HTMLInputElement>document.getElementById("frontPreviewId5")).style.display = "block";
+      this.urlFront5 = imageFront5;
+  };
+}
+function onFrontClick6(event) {
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.onload = (event)=>{
+      var text :any = reader.result;
+      imageFront6 = text;
+      // console.log(imageFront);
+      (<HTMLInputElement>document.getElementById("frontPreviewId6")).style.display = "block";
+      this.urlFront6 = imageFront6;
   };
 }

@@ -839,6 +839,7 @@ $SubText: 18px;
 	}
 	.plans {
 		grid-area: plans;
+		padding-bottom: 50px;
 		.main-title {
 			// margin-top: 8%;
 			font-family: BitterBold;
@@ -883,7 +884,7 @@ $SubText: 18px;
 		// }
 		//card-style
 		.card-style {
-			background: #dbdbdb;
+			background: white;
 			background-size: cover;
 			width: 200px;
 			height: 350px;
@@ -892,6 +893,7 @@ $SubText: 18px;
 		.p-style {
 			font-size: 24px;
 			text-align: center;
+			border-bottom: 1px solid #dbdbdb;
 		}
 		.image-style {
 			width: min-content;

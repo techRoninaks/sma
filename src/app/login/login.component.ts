@@ -64,6 +64,16 @@ export class LoginComponent implements OnInit {
     timeout: boolean = false;
     
     ngOnInit() {
+      var seller = this.getCookie('sellerId');
+      var user = this.getCookie('userId');
+      if(seller){
+        // alert("seller");
+        this.router.navigate(['/dashboard']);
+      }
+      else if(user){
+        // alert("user");
+        this.router.navigate(['/']);
+      }
       FB.XFBML.parse();
       this.googleSignIn();
       // signin2.render();
@@ -136,7 +146,7 @@ export class LoginComponent implements OnInit {
                     document.getElementById("locationlabel").innerText = this.city as string;
                     document.getElementById("pinlabel").innerText = this.pin as string;
                     this.router.navigate(['/']);
-                    // window.location.reload();
+                    window.location.reload();
                   }
                   else if(data['status'] =="Success2")
                   {
@@ -209,6 +219,7 @@ export class LoginComponent implements OnInit {
                       document.getElementById("locationlabel").innerText = this.city as string;
                       document.getElementById("pinlabel").innerText = this.pin as string;
                       this.router.navigate(['/dashboard']);
+                      window.location.reload();
                     }
                   }
                   else

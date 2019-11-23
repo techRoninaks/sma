@@ -15,7 +15,7 @@
                         <img src="assets/icons/resources (IL)-18.png" class="img-style" style="margin-top: -294px;
                         margin-left: 4px;
                         height: 45px;">
-                    <img src="assets/icons/manageOrders/painting.jpg" height="210px" width="300px" style="margin-top: -60px;">
+                    <img src="assets/images/product/{{dynamicOrderData.prodId}}/{{dynamicOrderData.prodId}}_0.jpg" height="210px" width="300px" style="margin-top: -60px;">
                 </div>
                 <div class="right-sect-1">
                     <div class="day">
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ship-details">
+                <div class="ship-details" *ngIf="userAddress">
                     <div class="grid-ship-details">
                         <div class="c-name-label">
                             <label>Customer name</label>
@@ -272,56 +272,104 @@
                                         </span>
                                 </div>
                                 <div class="stat-bar-1">
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending confirmation' "> 
                                         <div class="stats-1">
-                                            <div class="dot-circle" style="margin-left: -65px;" *ngIf="stage_1_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left: -184px;
-                                            margin-top: -31px;" *ngIf="stage_1_full">
-                                            </div>
                                         </div>
-                                </div>
-                                <div class="stat-bar-2">
-                                        <div class="stats-2">
-                                                <div class="dot-circle" style="margin-left: -26px;" *ngIf="stage_2_dot">
-                                                </div>
-                                                <div class="full-circle" style="margin-left: -50px; margin-top: -31px;" *ngIf="stage_2_full">
-                                                </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
                                         </div>
-                                </div>
-                                <div class="stat-bar-3">
-                                        <div class="stats-3">
-                                                <div class="dot-circle" style="margin-left: -17px;" *ngIf="stage_3_dot">
-                                                </div>
-                                                <div class="full-circle" style="margin-left: -38px;
-                                                margin-top: -31px;" *ngIf="stage_3_full">
-                                                </div>
+                                        <div class="dot-circle" style="margin-left: 218px; margin-top: -20px;">
                                         </div>
-                                </div>
-                                <div class="stat-bar-4">
-                                        <div class="stats-4">
-                                                <div class="dot-circle" style="margin-left: -23px;" *ngIf="stage_4_dot">
-                                                </div>
-                                                <div class="full-circle" style="margin-left: -41px;
-                                                margin-top: -31px;" *ngIf="stage_4_full">
-                                                </div>
+                                        <div class="dot-circle" style="margin-left: 439px; margin-top: -20px;">
                                         </div>
-                                </div>
-                                <div class="stat-bar-5">
-                                        <div class="stats-5">
-                                                <div class="dot-circle" style="margin-left:35px;" *ngIf="stage_5_dot">
-                                                </div>
-                                                <div class="full-circle" style="margin-left:84px; margin-top: -31px;" *ngIf="stage_5_full">
-                                                </div>
+                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
                                         </div>
-                                </div>
-                                <div class="stat-bar-6">
-                                        <div class="stats-6">
-                                                <div class="dot-circle" style="margin-left: 86px;" *ngIf="stage_6_dot" id="stage_6_circle">
-                                                </div>
-                                                <div class="full-circle" style="margin-left: -20px; margin-top: -31px;" *ngIf="stage_6_full">
-                                                </div>
+                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
                                         </div>
+                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending payment' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'processing' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'shipped' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'delivered' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'closed' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="label-1">
                                         <label *ngIf="stage_1_full">Confirmed on</label>
                                         <label *ngIf="cancelStatus">Cancelled</label>
@@ -330,37 +378,37 @@
                                         <label *ngIf="! stage_1_full"><input type="date" id="stage_1_date"></label>
                                 </div>
                                 <div class="label-2">
-                                        <label *ngIf="stage_2_full">Payment Confirmed on</label>
-                                        <br>
-                                        <label *ngIf="stage_2_full">{{dynamicDataOrderData.stage_2_date}}</label>
-                                        <label *ngIf="! stage_2_full"><input type="date" id="stage_2_date"></label>
-                                    </div>
-                                    <div class="label-3">
-                                        <label *ngIf="stage_3_full">Processed on</label>
-                                        <br>
-                                        <label *ngIf="stage_3_full">{{dynamicDataOrderData.stage_3_date}}</label>
-                                        <label *ngIf="! stage_3_full"><input type="date" id="stage_3_date"></label>
-                                    </div>
-                                    <div class="label-4">
-                                        <label *ngIf="stage_4_full">Expected on</label>
-                                        <br>
-                                        <label *ngIf="stage_4_full">{{dynamicDataOrderData.stage_4_date}}</label>
-                                        <label *ngIf="! stage_4_full"><input type="date" id="stage_4_date"></label>
-                                        <br>
-                                        <label *ngIf="! stage_4_full"><input type="text" placeholder="Tracking link:" id="track_link"></label>
-                                    </div>
-                                    <div class="label-5">
-                                        <label *ngIf="stage_5_full">Expected on</label>
-                                        <br>
-                                        <label *ngIf="stage_5_full">{{dynamicDataOrderData.stage_5_date}}</label>
-                                        <label *ngIf="! stage_5_full"><input type="date" id="stage_5_date"></label>
-                                    </div>
-                                    <div class="label-6">
-                                        <label *ngIf="stage_6_full">Expected on</label>
-                                        <br>
-                                        <label *ngIf="stage_6_full">{{dynamicDataOrderData.stage_6_date}}</label>
-                                        <label *ngIf="! stage_6_full"><input type="date" id="stage_6_date"></label>
-                                    </div>
+                                    <label *ngIf="stage_2_full">Payment Confirmed on</label>
+                                    <br>
+                                    <label *ngIf="stage_2_full">{{dynamicDataOrderData.stage_2_date}}</label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'pending payment'"><input type="date" id="stage_2_date"></label>
+                                </div>
+                                <div class="label-3">
+                                    <label *ngIf="stage_3_full">Processed on</label>
+                                    <br>
+                                    <label *ngIf="stage_3_full">{{dynamicDataOrderData.stage_3_date}}</label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'processing'"><input type="date" id="stage_3_date"></label>
+                                </div>
+                                <div class="label-4">
+                                    <label *ngIf="stage_4_full">Shipped on</label>
+                                    <br>
+                                    <label *ngIf="stage_4_full">{{dynamicDataOrderData.stage_4_date}}</label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'shipped'"><input type="date" id="stage_4_date"></label>
+                                    <br>
+                                    <label *ngIf="dynamicDataOrderData.status == 'shipped'"><input type="text" placeholder="Tracking link:" id="track_link"></label>
+                                </div>
+                                <div class="label-5">
+                                    <label *ngIf="stage_5_full">Delivered on</label>
+                                    <br>
+                                    <label *ngIf="stage_5_full">{{dynamicDataOrderData.stage_5_date}}</label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'delivered'"><input type="date" id="stage_5_date"></label>
+                                </div>
+                                <div class="label-6">
+                                    <label *ngIf="stage_6_full">Closed on</label>
+                                    <br>
+                                    <label *ngIf="stage_6_full">{{dynamicDataOrderData.stage_6_date}}</label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'closed'"><input type="date" id="stage_6_date"></label>
+                                </div>
                         </div>
                         <div>
                             <button class="update-btn" (click)="updateStatus();" *ngIf="! stage_0">Update Status</button>
@@ -394,8 +442,39 @@
             </ul>
             <hr class="hrdiv">
     </div>
+    <div class="grid-main-filter">
+        <div class="current">
+            <button id="current-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">CURRENT ORDERS</button>
+        </div>
+        <div class="past">
+            <button id="past-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">PAST ORDERS</button>
+        </div>
+    </div>
+    <div class="grid-btn-filter">
+            <div class="all">
+                    <button id="all-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">All</button>
+            </div>
+            <div class="pending-conf">
+                    <button id="pending-conf-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingConfirmFilter();">Pending Confirmation</button>
+            </div>
+            <div class="pending-pay">
+                    <button id="pending-pay-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingPayFilter();">Pending Payment</button>
+            </div>
+            <div class="processing">
+                    <button id="processing-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="processingFilter();">Processing</button>
+            </div>
+            <div class="shipped">
+                    <button id="shipped-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="shippedFilter();">Shipped</button>
+            </div>
+            <div class="delivered">
+                    <button id="delivered-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="deliveredFilter();">Delivered</button>
+            </div>
+            <div class="closed">
+                    <button id="closed-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">Closed</button>
+            </div>
+    </div>
     <div class="order-list">
-        <div class="grid-order-history-head" style="width: 90%; margin-left: 5%;">
+        <div class="grid-order-history-head" style="width: 90%; margin-left: 5%;" *ngIf="! noOrders">
                 <div class="orders">
                         <label>ORDERS</label>
                 </div>
@@ -415,7 +494,7 @@
                     <label>#SMACAT{{item.orderId}}{{item.createDate}}</label>
                 </div>
                 <div class="invoice">
-                    <button class="btn-invoice-style">INVOICE</button>
+                    <button class="btn-invoice-style" (click)="createInvoice();" >INVOICE</button>
                 </div>
                 <div class="c-info-label">
                     <label>CUSTOMER INFORMATION</label>
@@ -434,7 +513,7 @@
                     <button class="btn-order-style" (click)=viewOrder();>VIEW ORDER</button>
                 </div>
                 <div class="g-status">
-                    <div class="grid-status" style="margin-top: 103px;">
+                    <div class="grid-status-all" style="margin-top: 103px;">
                             <div class="pending-conf">
                                     <label>Pending Confirmation</label>
                             </div>
@@ -484,57 +563,106 @@
                                                     height="53px">
                                     </span>
                             </div>
+                            
                             <div class="stat-bar-1">
+                                <div *ngIf="item.orderStatus == 'pending confirmation' "> 
                                     <div class="stats-1">
-                                        <div class="dot-circle" style="margin-left: -81px;" *ngIf="stage1_dot">
-                                        </div>
-                                        <div class="full-circle" style="margin-left: -124px;
-                                        margin-top: -31px;" *ngIf="stage1_full">
-                                        </div>
                                     </div>
-                            </div>
-                            <div class="stat-bar-2">
-                                    <div class="stats-2">
-                                            <div class="dot-circle" style="margin-left: -32px;" *ngIf="stage2_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left: -47px; margin-top: -31px;" *ngIf="stage2_full">
-                                            </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
                                     </div>
-                            </div>
-                            <div class="stat-bar-3">
-                                    <div class="stats-3">
-                                            <div class="dot-circle" style="margin-left: 3px;" *ngIf="stage3_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left: -20px;
-                                            margin-top: -31px;" *ngIf="stage3_full">
-                                            </div>
+                                    <div class="dot-circle" style="margin-left: 178px; margin-top: -19px;">
                                     </div>
-                            </div>
-                            <div class="stat-bar-4">
-                                    <div class="stats-4">
-                                            <div class="dot-circle" style="margin-left: 32px;" *ngIf="stage4_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left: -22px;
-                                            margin-top: -31px;" *ngIf="stage4_full">
-                                            </div>
+                                    <div class="dot-circle" style="margin-left: 358px; margin-top: -21px;">
                                     </div>
-                            </div>
-                            <div class="stat-bar-5">
-                                    <div class="stats-5">
-                                            <div class="dot-circle" style="margin-left:52px;" *ngIf="stage5_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left:-20px; margin-top: -31px;" *ngIf="stage5_full">
-                                            </div>
+                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
                                     </div>
-                            </div>
-                            <div class="stat-bar-6">
-                                    <div class="stats-6">
-                                            <div class="dot-circle" style="margin-left: 57px;" *ngIf="stage6_dot">
-                                            </div>
-                                            <div class="full-circle" style="margin-left: -20px; margin-top: -31px;" *ngIf="stage6_full">
-                                            </div>
+                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
                                     </div>
+                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.orderStatus == 'pending payment' "> 
+                                    <div class="stats-1">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 358px; margin-top: -21px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.orderStatus == 'processing' "> 
+                                    <div class="stats-1">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.orderStatus == 'shipped' "> 
+                                    <div class="stats-1">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.orderStatus == 'delivered' "> 
+                                    <div class="stats-1">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 686px; margin-top: -20px;">
+                                    </div>
+                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.orderStatus == 'closed' "> 
+                                    <div class="stats-1">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 686px; margin-top: -20px;">
+                                    </div>
+                                    <div class="full-circle" style="margin-left: 847px; margin-top: -20px;">
+                                    </div>
+                                </div>
                             </div>
+                            
                             <div class="label-1">
                                 <label>Confirmed on</label>
                                 <label *ngIf="! cancelled">Cancelled</label>
@@ -552,17 +680,17 @@
                                     <label>{{item.stage_3_date}}</label>
                             </div>
                             <div class="label-4">
-                                    <label>Expected on</label>
+                                    <label>Shipped on</label>
                                     <br>
                                     <label>{{item.stage_4_date}}</label>
                             </div>
                             <div class="label-5">
-                                    <label>Expected on</label>
+                                    <label>Delivered on</label>
                                     <br>
                                     <label>{{item.stage_5_date}}</label>
                             </div>
                             <div class="label-6">
-                                    <label>Expected on</label>
+                                    <label>Closed on</label>
                                     <br>
                                     <label>{{item.stage_6_date}}</label>
                             </div>
@@ -570,30 +698,9 @@
                 </div>
         </div>
     </div>
-</div>
-<!-- photo popup -->
-<!-- <div id="myModal" class="imgPopup" style="z-index: 10001;">
-    <span class="close cursor " (click)="closeModal()">&times;</span>
-    <div class="modal-content " style="background-color: #000000e8; ">
-        <div class="mySlides" style="background-color: #000000e8; transform: translate(25%); "
-            *ngFor="let imageC of Object.keys(imagesCount)">
-            <div>
-                <div class="numbertext ">{{imageC}} / {{prodImageCount.countPI}}</div>
-                <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
-                    style="width:50% ">
-            </div>
-        </div>
-        <a class="prev " (click)="plusSlides(-1) " style="margin-top: -15%; ">&#10094;</a>
-        <a class="next " (click)="plusSlides(1) " style="margin-top: -15%; ">&#10095;</a>
-
-        <div class="thumbRow ">
-            <div *ngFor="let imageC of Object.keys(imagesCount)">
-                <img class="demo cursor"
-                    src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg"
-                    style="width:10rem;height: 10rem;" (click)="currentSlide(imageC) ">
-            </div>
+    <div class="grid-no-order" *ngIf="noOrders">
+        <div class="header">
+                <label style="font-family: BitterBold; font-size: xx-large;">NO ORDERS AVAILABLE</label>
         </div>
     </div>
-
-</div> -->
-<!-- photo popup -->
+</div>
