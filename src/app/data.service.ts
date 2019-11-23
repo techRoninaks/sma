@@ -1170,10 +1170,14 @@ updateSellerPlanFree(data: any){
       .append("newTerm", newTerm);
     return this.http.post(this.baseUrl + 'assets/api/addNewMidCategory.php', httpParams);
   }
-  getProductInfor(id: any) {
+  getProductInfor(id: any, sellerId: any) {
     let httpParams = new HttpParams()
-      .append("id", id);
+      .append("id", id)
+      .append("sellerid", sellerId);
     return this.http.post(this.baseUrl + 'assets/api/getProductInfor.php', httpParams);
+  }
+  getTaxFromSetting() {
+    return this.http.get(this.baseUrl + 'assets/api/getTaxFromSetting.php');
   }
   
   popUpLogin(email: any,password :any){
@@ -1181,6 +1185,12 @@ updateSellerPlanFree(data: any){
     .append("login_email", email)
     .append("login_password", password);
     return this.http.post(this.baseUrl+'assets/api/popUplogin.php',httpParams);
+  }
+  deleteVariantEditProduct(variant: any,prodid :any){
+    let httpParams= new HttpParams()
+    .append("variant", variant)
+    .append("prodid", prodid);
+    return this.http.post(this.baseUrl+'assets/api/deleteVariantEditProduct.php',httpParams);
   }
 
   updateUserData(data: any,userId: any){
@@ -1217,14 +1227,15 @@ updateSellerPlanFree(data: any){
       .append("userId", data['user_id'])
     return this.http.post(this.baseUrl + 'assets/api/likedislikereviewproduct.php', httpParams);
   }
-  postOffersAddProduct(data: any) {
+  postOffersAddProduct(data: any, prodid : any = "all") {
     let httpParams = new HttpParams()
       .append("dateDrom", data['from_time_stamp'])
       .append("dateTo", data['to_tme_Stamp'])
+      .append("prodid", prodid)
       .append("percentage", data['percentage'])
     return this.http.post(this.baseUrl + 'assets/api/addOffersAddProduct.php', httpParams);
   }
-  getdataPostAddProduct(data: any) {
+  getdataPostAddProduct(data: any, prodid : any = "all") {
      let httpParams = new HttpParams()
      // .append("image", data['image'])
        .append("image1", data['image1'])
@@ -1277,6 +1288,8 @@ updateSellerPlanFree(data: any){
        .append("faqArray", data['faqArray'])
        .append("mainCat", data['mainCat'])
        .append("subCat", data['subCat'])
+       .append("prodid", prodid)
+       .append("commDec", data['commDec'])
        .append("price", data['price']);
      return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
    }
@@ -1287,6 +1300,18 @@ updateSellerPlanFree(data: any){
    .append("userName", data['username'])
    .append("note", data['complaint_desc']);
    return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
+  }
+  uploadIdcardimage(imageFront: any,imageBack:any, sellerid: any){
+    let httpParams= new HttpParams()
+   .append("imageFront", imageFront)
+   .append("imageBack", imageBack)
+   .append("sellerid", sellerid);
+   return this.http.post(this.baseUrl+'assets/api/uploadIdcardimage.php',httpParams);
+  }
+  getSubCatForProductEdit(sub){
+    let httpParams= new HttpParams()
+   .append("sub", sub);
+   return this.http.post(this.baseUrl+'assets/api/getSubCatForProductEdit.php',httpParams);
   }
 
 
@@ -1310,6 +1335,11 @@ deleteCardData(userId: any,cardNo: any){
   let httpParams= new HttpParams()
     .append("addressId", addressId)
     return this.http.post(this.baseUrl+'assets/api/deleteUserAddressData.php',httpParams);
+ }
+ getOfferLimit(sellerid:any){
+  let httpParams= new HttpParams()
+    .append("sellerid", sellerid)
+    return this.http.post(this.baseUrl+'assets/api/getOfferLimit.php',httpParams);
  }
 getOrderData(data: any){
   let httpParams= new HttpParams()
@@ -1403,6 +1433,7 @@ uploadImage1(data: Object){
   .append("accounttype",data['accounttype'])
   .append("accountno",data['accountno'])
   .append("ifsc",data['ifsc'])
+  .append("shippingLoc",data['shippingLoc'])
   .append("bankname",data['bankname']);
   return this.http.post(this.baseUrl+'assets/api/uploadPaymentDetails.php',httpParams);
  }
@@ -1549,6 +1580,12 @@ getShippingLocationAddProduct(id){
  .append("seller_id",id);
   return this.http.post(this.baseUrl+'assets/api/getShippingLocationAddProduct.php' , httpParams);
 }
+getShippingLocationEditProduct(id, prodid){
+  let httpParams= new HttpParams()
+ .append("seller_id",id)
+ .append("prodid",prodid);
+  return this.http.post(this.baseUrl+'assets/api/getShippingLocationEditProduct.php' , httpParams);
+}
 
 getTitleForAddproduct(id){
   let httpParams= new HttpParams()
@@ -1567,6 +1604,13 @@ getShippingLocationProductEdit(id){
  .append("id",id);
   return this.http.post(this.baseUrl+'assets/api/getShippingLocationProductEdit.php' , httpParams);
 }
+
+getCategoryVariantList(categoryid){
+  let httpParams= new HttpParams()
+ .append("categoryid",categoryid);
+  return this.http.post(this.baseUrl+'assets/api/getCategoryVariantList.php' , httpParams);
+}
+
 getFaqForProductEdit(id){
   let httpParams= new HttpParams()
  .append("id",id);

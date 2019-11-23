@@ -1,6 +1,6 @@
 <?php
   require "init.php";
-// $prodid = $_POST['prodid'];
+$editprodid = $_POST['prodid'];
 
 $image1 = $_POST["image1"];
 $image2 = $_POST["image2"];
@@ -14,6 +14,7 @@ $image9 = $_POST["image9"];
 $image10 = $_POST["image10"];
 
 $name = $_POST['name'];
+$commDec = $_POST['commDec'];
 $short_desc = $_POST['short_desc'];
 $Long_desc = $_POST['Long_desc'];
 $spec = $_POST['spec'];
@@ -102,13 +103,28 @@ $quantity_price = $_POST['quantity_price'];
     $active_status = 'inactive';
 
   if($caller =="publish"){
-    $active_status = 'pending_approval';
+    if($editprodid != "all"){
+      // $active_status = 'pending_approval';
+    }
+    else{
+      $active_status = 'pending_approval';
+    } 
   }
   else if($caller =="duplicate"){
-    $active_status = 'yet_to_publish';
+    if($editprodid != "all"){
+      $editprodid = "all";
+    }
+    else{
+      $active_status = 'yet_to_publish';
+    } 
   }
   else if($caller =="save"){
-    $active_status = 'yet_to_publish';
+    if($editprodid != "all"){
+      // $editprodid = "all";
+    }
+    else{
+      $active_status = 'yet_to_publish';
+    }
   }
 
  if($add_custom_message_field == 'true')
@@ -137,7 +153,7 @@ $quantity_price = $_POST['quantity_price'];
 
     $sql_query7 ="SELECT * FROM `offer` WHERE prodid = -99 ORDER BY id DESC LIMIT 1  ";
     $result7 = mysqli_query($con1, $sql_query7);
-    $offersArray = "";
+    $offersArray = "0";
     while($row = mysqli_fetch_assoc($result7)){
         $offersArray = $row['id'];
     }
@@ -156,11 +172,24 @@ $quantity_price = $_POST['quantity_price'];
     $safe_qty = round($qty_avble/2);
 
     $sql_query1 = "INSERT INTO `product` (`name`,`short_desc`,`Long_desc`,`spec`,`shipping_option`,`base_price`,`qty_avble`,`tags`,`avg_prcessing_time`,`avg_shpping_time`,`auto_cancel_time`,`has_rfq`,`has_gift`,`has_order_confmn`,`can_orderbydate`,`has_instant_buy`,`min_order_quant`,`max_order_quant`,`shipping_policy`,`return_policy`,`product_policy`,`shipping_location_id`,`can_upload_image`,`max_no_of_image`,`add_custom_message_field`,`shop_id`,`category_id`,`sub_catgry_id`,`active_status`,`is_returnable`,`remarks`,`bulk_discount_id`,`offer_id`,`cmsn_dedtd`,`label_id`,`safe_qty`) VALUES ('$name','$short_desc','$Long_desc','$spec','$shipping_option',$base_price,$qty_avble,'$tags',$avg_prcessing_time,$avg_shpping_time,$auto_cancel_time,$has_rfq,$has_gift,$has_order_confmn,$can_orderbydate,$has_instant_buy,$min_order_quant,$max_order_quant,'$shipping_policy','$return_policy','$product_policy',5,$can_upload_image,$max_no_of_image,$add_custom_message_field,$shop_id,$mainCat,'$subCat','$active_status',0,'New Product',NULL,$offersArray,8,$labels,$safe_qty)";
-    $result1 = mysqli_query($con1, $sql_query1);
+
+    $sql_query = "UPDATE `product` SET `name`='$name',`short_desc`='$short_desc',`Long_desc`='$Long_desc',`spec`='$spec',`shipping_option`='$shipping_option',`base_price`=$base_price,`offer_id`=$offersArray,`cmsn_dedtd`= $commDec,`shop_id`=$shop_id,`category_id`=$mainCat,`sub_catgry_id`='$subCat',`active_status`='$active_status',`qty_avble`=$qty_avble,`safe_qty`=$safe_qty,`is_returnable`= 0,`label_id`=$labels,`tags`='$tags',`avg_prcessing_time`=$avg_prcessing_time,`avg_shpping_time`=$avg_shpping_time,`auto_cancel_time`=$auto_cancel_time,`has_rfq`=$has_rfq,`has_gift`=$has_gift,`has_order_confmn`=$has_order_confmn,`can_orderbydate`=$can_orderbydate,`has_instant_buy`=$has_instant_buy,`min_order_quant`=$min_order_quant,`max_order_quant`=$max_order_quant,`shipping_policy`='$shipping_policy',`return_policy`='$return_policy',`product_policy`='$product_policy',`can_upload_image`=$can_upload_image,`max_no_of_image`=$max_no_of_image,`add_custom_message_field`=$add_custom_message_field WHERE `prodid` = $editprodid ";
+    if($caller == "publish"){
+      $result1 = mysqli_query($con1, $sql_query1);
+      echo $sql_query1;
+    }
+    else if($caller == "duplicate"){
+      $result1 = mysqli_query($con1, $sql_query1);
+      echo $sql_query1;
+    }
+    else{
+      $result1 = mysqli_query($con1, $sql_query);
+      $editprodid = "all";
+      echo $sql_query;
+    }
+    // $result1 = mysqli_query($con1, $sql_query1);
     
-    echo $sql_query1;
-
-
+    // echo $sql_query1;
     
     $sql_query = "SELECT `prodid` FROM `product` where 1 ORDER BY `prodid` DESC LIMIT 1";
     $result = mysqli_query($con1, $sql_query);
@@ -169,7 +198,7 @@ $quantity_price = $_POST['quantity_price'];
     // echo $prodid;
 
     foreach ($discountArraySelect as $value) {
-      $sql_query = "INSERT INTO `bulk_discount`( `prodid`, `quant`, `discount`) VALUES ($prodid,$value->bulkDiscount,$value->bulk)";
+      $sql_query = "INSERT INTO `bulk_discount`( `prodid`, `quant`, `discount`) VALUES ($prodid,$value->bulkDiscount,$value->discount)";
       $result = mysqli_query($con1, $sql_query);
       if($result){
         "success";
@@ -201,49 +230,65 @@ $quantity_price = $_POST['quantity_price'];
     $addressid = $row['addr_id'];
 
     foreach ($shippingArray as $value) {
-      if($value->pincode == "ALL STATE"){
+      if($value->pincode == "My State"){
         $sql = "SELECT * FROM `address` WHERE id = $addressid";
         $res = mysqli_query($con2, $sql);
         $row = mysqli_fetch_assoc($res);
         $loc = $row['state'];
         $loc = preg_replace('/\s/', '', $loc);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL STATE' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where state like '$loc'))";
-        // echo $sql_query;
+        $result = mysqli_query($con1, $sql_query);
+        $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL STATE', $value->qtn, $value->price from smausr.location where state like '$loc'";
         $result = mysqli_query($con1, $sql_query);
       }
-      if($value->pincode =="ALL INDIA"){
+      if($value->pincode =="All Over India"){
         $sql = "SELECT * FROM `address` WHERE id = $addressid";
         $res = mysqli_query($con2, $sql);
         $row = mysqli_fetch_assoc($res);
         $loc = $row['state'];
-        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL INDIA' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from location))";
+        $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL INDIA' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location))";
+        $result = mysqli_query($con1, $sql_query);
+        $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL INDIA', $value->qtn, $value->price from smausr.location";
         $result = mysqli_query($con1, $sql_query);
       }
-      if($value->pincode =="ALL CITY"){
+      if($value->pincode =="My City"){
         $sql = "SELECT * FROM `address` WHERE id = $addressid";
         $res = mysqli_query($con2, $sql);
         $row = mysqli_fetch_assoc($res);
         $loc = $row['city'];
-        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL CITY' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from location where city like '$loc'))";
+        $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL CITY' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where city like '$loc'))";
+        $result = mysqli_query($con1, $sql_query);
+        $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL CITY', $value->qtn, $value->price from smausr.location where city like '$loc'";
         $result = mysqli_query($con1, $sql_query);
       }
-      if($value->pincode == "ALL DISTRICT"){
+      if($value->pincode == "My District"){
         $sql = "SELECT * FROM `address` WHERE id = $addressid";
         $res = mysqli_query($con2, $sql);
         $row = mysqli_fetch_assoc($res);
         $loc = $row['district'];
-        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL DISTRICT' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from location where district like '$loc'))";
+        $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL DISTRICT' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where district like '$loc'))";
+        $result = mysqli_query($con1, $sql_query);
+        $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL DISTRICT', $value->qtn, $value->price from smausr.location where district like '$loc'";
         $result = mysqli_query($con1, $sql_query);
       }
       else{
         $location = explode(",",$value->pincode);
-        $pincode = $location[1];
-        $sql_query = "INSERT INTO `prod_shipping_price`( `prodid`, `shipping_location`,`type` ,`quantity_price`, `price`) VALUES ($prodid,$pincode,'pincode',$value->qtn,$value->price)";
-        // echo $sql_query;
-        $result = mysqli_query($con1, $sql_query);
+        if(count($location) != 1){
+          $pincode = $location[1];
+          $locationAlias = $location[0];
+          $sql_query = "INSERT INTO `prod_shipping_price`( `prodid`, `shipping_location`,`type` ,`quantity_price`, `price`) VALUES ($prodid,$pincode,'pincode',$value->qtn,$value->price)";
+          $result = mysqli_query($con1, $sql_query);
+          $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'$locationAlias' ,$pincode)";
+          $result = mysqli_query($con1, $sql_query);
+        }
       }
 
     }
+
+
     
     $sql = "SELECT * FROM `shipping_location_product` WHERE prodid = $prodid ORDER BY prodid DESC LIMIT 1 ";
     $res = mysqli_query($con1, $sql);
@@ -262,7 +307,32 @@ $quantity_price = $_POST['quantity_price'];
       $res = mysqli_query($con1, $sql_query);
     }
 
-
+    if($editprodid != "all"){
+      if($result1){
+        $sql = "SELECT `rating`, `rating_count`,`review_count` FROM `product` WHERE prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $rating = $row['rating'];
+        $rating_count = $row['rating_count'];
+        $review_count = $row['review_count'];
+        $sql = "UPDATE `product` SET `rating`='$rating',`rating_count`='$rating_count',`review_count`= '$review_count' WHERE  prodid = $prodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `product` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `bulk_discount` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `faq` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `offer` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `prod_message` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `prod_shipping_price` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `shipping_location_product` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+      }
+    }
 
 
     $mob = 0;
@@ -449,7 +519,7 @@ if($image10 != 1){
   $success = file_put_contents($file, $data);
 }
 
-    if(! $result)
+    if(! $result1)
     {
         $status="Error";
         echo json_encode($status);

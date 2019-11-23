@@ -84,6 +84,10 @@ $SubText: 18px;
     margin: 0;
 	background: #EFBE24;
 	z-index: 111;
+
+	li{
+		position: absolute;
+	}
 }
 
 #myUL li a {
@@ -166,6 +170,32 @@ $SubText: 18px;
 	padding: 7px;
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+.shipClose{
+	height: 24px;
+	position: relative;
+	margin-top: -46px;
+	left: -200px;
+	cursor: pointer;
+}
+.shipEdit{
+    height: 24px;
+    position: absolute;
+    margin-top: 42px;
+	left: 302px;
+	cursor: pointer;
+}
+.shipSave{
+	height: 24px;
+	position: absolute;
+	margin-top: -114px;
+	left: 165px;
+	cursor: pointer;
+	display: none;
+	border: 0;
+	border-radius: 5px;
+	background: #EFBE24;
 }
 
 .varitentsAdd{

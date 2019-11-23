@@ -1,18 +1,15 @@
 <?php
 require "init.php";
 $seller_id = $_POST['seller_id'];
-$sql_query = "SELECT * FROM `shop_details` WHERE `seller_id` = $seller_id ";
-$result = mysqli_query($con2, $sql_query);
-$row=mysqli_fetch_assoc($result);
-$locaId  = $row['shipping_locations'];
-$sql_query = "SELECT * FROM `shipping_location_shop`  WHERE `id` = $locaId ";
-$result = mysqli_query($con2, $sql_query);
+$prodid = $_POST['prodid'];
+$sql_query = "SELECT * FROM `prod_shipping_price` WHERE prodid = $prodid GROUP BY type";
+$result = mysqli_query($con1, $sql_query);
 $count =0;
 $data = array();
 $locaName  = "";
 while($row=mysqli_fetch_assoc($result))
 {
-    switch($row["location_alias"]){
+    switch($row["type"]){
         case "ALL STATE":
         $locaName = "My State";
         break;
@@ -25,8 +22,10 @@ while($row=mysqli_fetch_assoc($result))
         case "ALL INDIA":
         $locaName = "All Over India";
         break;
+        default:
+        $locaName = $row['shipping_location'];
     }
-    $data = array('id'=>$row["id"],'location_alias'=>$row["location_alias"],'quantity_price'=> 0,'price'=> 0);
+    $data[] = array('id'=>$row["id"],'pincode'=>$locaName,'price'=>$row["quantity_price"],'qtn'=>$row["price"]);
 }
 echo json_encode($data);
 ?>
