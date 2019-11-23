@@ -77,6 +77,7 @@ export class ShopProfileComponent implements OnInit {
 	imageUploadedRfq2: number = 0;
 	sellerId:any;
 	ratingShopCount:number;
+	onVacation:any;
 	constructor(private rout: Router,private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
 
 	ngOnInit() {
@@ -108,7 +109,10 @@ export class ShopProfileComponent implements OnInit {
 					alert("No such shop exists, Redirecting to Homepage");
 					this.rout.navigate(['/']);
 				}
-
+				this.onVacation = this.shopData.onVac;
+				if (this.onVacation == 1) {
+					(<HTMLInputElement><any>document.getElementById("onVac")).style.display="block";
+				}
 				this.tokenObj = { shop_id: this.token, user_id: this.userId };
 				this.tokenProd = { shop_id: this.token, prod_number: 0};
 
@@ -336,9 +340,19 @@ export class ShopProfileComponent implements OnInit {
 
 	addTagProduct(x: any) {
 		var y = this.defRfqTag;
-		this.prod[y++] = x;
-		this.defRfqTag = y;
-		// console.log(this.prod);
+		var z = this.defRfqTag;
+		var flag = 1;
+		while (z >= 0) {
+			if (x == this.prod[z]) {
+				flag = 0;
+				// console.log(z);
+			}
+			z--;
+		}
+		if (flag == 1) {
+			this.prod[y++] = x;
+			this.defRfqTag = y;
+		}
 	}
 	delProduct(id: any) {
 		var n = this.Object.keys(this.prod).length;
@@ -393,20 +407,6 @@ export class ShopProfileComponent implements OnInit {
 	
 	}
 
-	// onRfqClick(event) {
-	// 	this.imageUploaded=1;
-	// 	// 		console.log(event.target.files[0]);
-	// 	var reader = new FileReader();
-	// 	reader.readAsDataURL(event.target.files[0]);
-	// 	// reader.onLoad = onLoadCallback;
-	// 	reader.onload = (event) => {
-	// 		var text: any = reader.result;
-	// 		imageRfqValue = text;
-	// 		// console.log(imageRfqValue);
-	// 		this.imageVALRFQ =text;
-
-	// 	};
-	// }
 	onRfqClick(event) {
 		if (this.imageUploadedRfq1 == 1) {
 			this.imageUploadedRfq2 = 1;
@@ -447,19 +447,7 @@ export class ShopProfileComponent implements OnInit {
 		};
 	}
 	
-	// rfqSubmit() {
-	// 	// alert("loaded");
-	// 	// this.rfqEnabled = 1;
-		// var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;
-		// var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
-		// var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
-		// var productRef = this.prod;
-	// 	var image =imageRfqValue;
-	// 	this.tokenPrice = {seller_id:this.shopData.sellerId , image:image,shop_id: this.token, user_id: this.userId, imageUploaded:this.imageUploaded, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
 
-		// this.data.sendRfqShop(this.tokenPrice).subscribe();
-
-	// }
 	rfqSubmit() {
 		// alert("loaded");
 		var shopName = (<HTMLInputElement><any>document.getElementById("rfqShop")).value;

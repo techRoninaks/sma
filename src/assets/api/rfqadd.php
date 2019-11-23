@@ -36,7 +36,7 @@
     $addId=$orderInfoAddress["address"];
 
 
-    $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,`is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,'undefined','pending_confirmation',null,'2020-02-02 12:56:15',null,1,0,'pending',0,0,0,0,$addId)";
+    $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,`is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,'undefined','pending_confirmation',null,null,null,1,0,'pending',0,0,0,0,$addId)";
     $result2 = mysqli_query($con2, $sql_query2);
     // echo $sql_query2;
     // echo "<br>";
@@ -239,7 +239,7 @@
     $sql_query3 = "INSERT INTO `customer_order`(`prodid`, `quantity`, `variants_chosen`, `gift_option`, `gift_note`, `gift_title`, `gift_address`, `is_rfq`,
     `base_price`, `qty_price`, `total_price`, `discount`, `shippingprice`, `tax`, `variantprice`, `has_image`, `orderid`, `promo_disc`, `invoice_number`, 
     `delivery_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES (0,1,'0',0,null,null,null,1,0,0,
-    0,0,0,0,0,0,$orderId,null,0,'2025-02-02 12:56:15',null,null)";
+    0,0,0,0,0,0,$orderId,null,0,null,null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
 
 
