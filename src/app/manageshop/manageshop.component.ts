@@ -115,6 +115,51 @@ export class ManageshopComponent implements OnInit {
 					this.tokenFaq = { shop_id: this.token, number_faq: 0 };
 					if (this.priv == 0) {
 						this.selName = "By " + this.sellerDataShop.sellerName;
+          });
+
+		this.route.queryParams.subscribe(params => {
+			this.token = params['shop_id'];
+			// console.log(this.token);
+			this.tokenObj = { shop_id: this.token, user_id: this.userId };
+			this.tokenFaq = { shop_id: this.token, number_faq: 0 };
+
+			// console.log(this.tokenObj);
+			// this.token = params['userId'];
+		});
+		if(this.sellerId != null){
+			if(this.token == null){
+				this.token = this.sellerId;
+			}		
+		}
+		this.data.getShopData(this.token).subscribe(
+			data => {
+				this.shopData = data;
+				this.priv = this.shopData.privateAccount;
+				this.shopRating = this.shopData.ratingShop;
+				this.shipOption = this.shopData.shippingOptionId;
+				this.privOption = this.shopData.privateAccount;
+				// console.log(this.privOption);
+				this.vacOption = this.shopData.onVac;
+				// console.log(this.vacOption);
+				for (this.ir = 0; this.ir < 5; this.ir++) {
+					if (this.ir < this.shopRating) {
+						this.filledStar[this.ir] = this.ir;
+					} else {
+						this.unFilledStar[this.jr++] = this.ir;
+					}
+				}
+
+				if (this.privOption == '1') {
+					(<HTMLInputElement><any>document.getElementById('privacyTog')).checked = true;
+				}
+				else {
+					(<HTMLInputElement><any>document.getElementById('privacyTog')).checked = false;
+				}
+				if (this.vacOption == '1') {
+					(<HTMLInputElement><any>document.getElementById('vacTog')).checked = true;
+					document.getElementById("vacationToggle").style.display = "block";
+					if ((this.shopData.vacStartDate != null) && (this.shopData.vacEndDate != null)) {
+						(<HTMLInputElement><any>document.getElementById("dateSetRadio")).checked = true;
 					}
 					else {
 						this.selName = "";

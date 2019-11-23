@@ -23,7 +23,7 @@
 
     $status = "deliverable";
 
-    $offerCondition = " AND O.id = p.offer_id AND DAY(NOW()) < o.to_tme_stamp GROUP BY p.prodid ORDER BY percentage ";
+    $offerCondition = " AND o.id = p.offer_id AND DAY(NOW()) < o.to_tme_stamp GROUP BY p.prodid ORDER BY percentage ";
 
     $paginationQuery = " limit $tagNum offset $offset ";
 //Filter madness starts here

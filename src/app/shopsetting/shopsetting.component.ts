@@ -7,6 +7,7 @@ var imageCoverValue : any = 1 ;
 var productTwoValue : any = 1 ;
 var productOneValue : any = 1 ;
 var productThreeValue : any = 1 ;
+var slideIndex = 1;
 
 @Component({
   selector: 'app-shopsetting',
@@ -31,6 +32,15 @@ export class ShopsettingComponent implements OnInit {
   editLocation: boolean = false;
   valueDrop : any = "";
   editShippingLocations : any = ""; 
+  idCardImgSrcFront : any = "";
+  idCardImgSrcBack : any = "";
+  frontFlag: boolean = false;
+  backFlag: boolean = false;
+  shippinglocationArray: Object;
+  shippingArray: any = [];
+  arrayPos: any;
+  selectArrayCell: any;
+  allFlag : boolean = true;
 
   constructor( private cookieService: CookieService, private route : Router, private data : DataService ) { }
 
@@ -50,7 +60,8 @@ export class ShopsettingComponent implements OnInit {
     else{
       this.data.getShopDetailsSettings(this.sellerId).subscribe(data=>{
         this.shopDetails = data;
-        // console.log(this.shopDetails['gift_option']);
+        this.idCardImgSrcFront ="assets/images/seller/"+this.sellerId+"/"+this.sellerId+"idfront.jpg"; 
+        this.idCardImgSrcBack ="assets/images/seller/"+this.sellerId+"/"+this.sellerId+"idback.jpg"; 
         
         if(this.shopDetails['gift_option'] == '1'){
           (<HTMLInputElement><any>document.getElementById('giftInput')).checked = true;
@@ -79,15 +90,27 @@ export class ShopsettingComponent implements OnInit {
       })
 
       this.data.getShippingLocationSettings(this.sellerId).subscribe(data=>{
-        this.locationDetails = data;
-        if(this.locationDetails.length == 0){
-          this.newShipping = true;
+        this.shippingArray = data;
+        for(var i = 0; i< this.shippingArray.length; i++){
+          if(this.shippingArray[i]=="All over India"){
+            this.allFlag = false;
+          }
+          if(this.shippingArray[i]=="My State"){
+            this.allFlag = false;
+          }
+          if(this.shippingArray[i]=="My City"){
+            this.allFlag = false;
+          }
+          if(this.shippingArray[i]=="My District"){
+            this.allFlag = false;
+          }
         }
+        // if(this.locationDetails.length == 0){
+        //   this.newShipping = true;
+        // }
       })
       this.data.getCategoryForSetting().subscribe(data=>{
         this.shopCategory = data;
-        console.log(this.shopCategory);
-        
       })
     }
 
@@ -95,6 +118,8 @@ export class ShopsettingComponent implements OnInit {
     document.getElementById('productOneImageHolder').addEventListener('change', this.onProductOneClick.bind(this));
     document.getElementById('productTwoImageHolder').addEventListener('change', this.onProductTwoClick.bind(this));
     document.getElementById('productThreeImageHolder').addEventListener('change', this.onProductThreeClick.bind(this));
+    document.getElementById('idCardHolderFront').addEventListener('change', this.onIdCardClick.bind(this));
+    document.getElementById('idCardHolderBack').addEventListener('change', this.onIdCardClickBack.bind(this));
   }
   ngOnDestroy() {
 		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
@@ -118,6 +143,21 @@ export class ShopsettingComponent implements OnInit {
       case 'ownerdetails': this.editOwnerDetails = true;
         break;
       case 'paymentdetails': this.editPaymentDetails = true;
+      var modeArray = this.shopDetails['shippingmode'].split(',');
+      setTimeout(()=>{    //<<<---    using ()=> syntax
+        for(var i = 0; i < modeArray.length; i++){
+          if(modeArray[i]=="home delivery"){
+            (<HTMLInputElement><any>document.getElementById('homeid')).checked = true;
+          }
+          if(modeArray[i]=="shipping"){
+            (<HTMLInputElement><any>document.getElementById('shippingid')).checked = true;
+          }
+          if(modeArray[i]=="pickup"){
+            (<HTMLInputElement><any>document.getElementById('pickupid')).checked = true;
+          }
+        }
+      }, 2000);
+
         break;
       default:break;
     }
@@ -170,12 +210,29 @@ export class ShopsettingComponent implements OnInit {
 
   savePaymentDetails(){
     var shippingform = (<HTMLInputElement><any>document.getElementById('shippingform')).value;
-    var shippingmode = (<HTMLInputElement><any>document.getElementById('shippingmode')).value;
+    var shippingmode = (<HTMLInputElement><any>document.getElementById('shippingid')).checked;
+    var homemode = (<HTMLInputElement><any>document.getElementById('homeid')).checked;
+    var pickupmode = (<HTMLInputElement><any>document.getElementById('pickupid')).checked;
     var accountholder = (<HTMLInputElement><any>document.getElementById('accountholder')).value;
     var accounttype = (<HTMLInputElement><any>document.getElementById('accounttype')).value;
     var accountno = (<HTMLInputElement><any>document.getElementById('accountno')).value;
+    var accountnoConfirm = (<HTMLInputElement><any>document.getElementById('accountnoConfirm')).value;
     var bankname = (<HTMLInputElement><any>document.getElementById('bankname')).value;
     var ifsc = (<HTMLInputElement><any>document.getElementById('ifsc')).value;
+    var shippingModeBlock =  "";
+    if(shippingmode){
+      shippingModeBlock = shippingModeBlock + "shipping,"
+    }
+    if(homemode){
+      shippingModeBlock = shippingModeBlock + "home delivery,"
+    }
+    if(pickupmode){
+      shippingModeBlock = shippingModeBlock + "pickup"
+    }
+    if(accountno != accountnoConfirm){
+      alert("Account number mismatch");
+      return;
+    }
 
     this.shopDetails.shop_location = shippingform;
     this.shopDetails.shippingmode = shippingmode;
@@ -186,7 +243,11 @@ export class ShopsettingComponent implements OnInit {
     this.shopDetails.ifsc = ifsc;
     this.editPaymentDetails  = false;
 
-    this.shopPaymentUpload = { seller_id: this.sellerId, shippingform: shippingform, shippingmode: shippingmode, accountholder: accountholder, accounttype: accounttype, accountno: accountno, ifsc: ifsc, bankname: bankname};
+    for(var i = 0; i<this.shippingArray.length; i++){
+      this.shippingArray[i] = this.shippingArray[i].replace(/,/g, '_');
+    }
+
+    this.shopPaymentUpload = { seller_id: this.sellerId, shippingform: shippingform, shippingmode: shippingModeBlock, accountholder: accountholder, accounttype: accounttype, accountno: accountno, ifsc: ifsc, bankname: bankname, shippingLoc: this.shippingArray};
     this.data.updatePaymentDetailsSettings(this.shopPaymentUpload).subscribe(data=>{
       // console.log(data);
     });
@@ -208,30 +269,60 @@ export class ShopsettingComponent implements OnInit {
     
   }
 
-  saveLocationDetails(id : any ="default"){
+  saveLocationDetails(){
     var primaryArea = (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value;
-    var SecondaryArea = (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).value;
-    (<HTMLInputElement><any>document.getElementById('inputForPincode')).innerText = SecondaryArea;
-
-    this.locationDetails.location_alias = primaryArea;
-
-    this.editShippingLocations = { sellerId : this.sellerId , primaryArea : primaryArea , SecondaryArea : SecondaryArea };
-    this.editLocation = false;
-
-    if(id == "default"){
-      this.data.uploadShippingLocations(this.editShippingLocations).subscribe(data=>{
-
-      })
+    if(primaryArea == "All over India"){
+      this.allFlag = false;
     }
-    else{
-      this.editShippingLocations = { sellerId : this.sellerId , primaryArea : primaryArea , SecondaryArea : SecondaryArea,shop_id : id };
-      this.data.updateShippingLocation(this.editShippingLocations).subscribe(data=>{
-
-      })
+    if(primaryArea=="My State"){
+      this.allFlag = false;
     }
+    if(primaryArea=="My City"){
+      this.allFlag = false;
+    }
+    if(primaryArea=="My District"){
+      this.allFlag = false;
+    }
+    this.shippingArray.push(primaryArea);
+    (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value = "";
+  }
+  deleteShipping(cell){
+    if(cell == "All over India"){
+      this.allFlag = true;
+    }
+    if(cell=="My State"){
+      this.allFlag = true;
+    }
+    if(cell=="My City"){
+      this.allFlag = true;
+    }
+    if(cell=="My District"){
+      this.allFlag = true;
+    }
+    this.shippingArray.splice( this.shippingArray.indexOf(cell), 1 );
+  }
 
-    this.editLocation = false;
-    (<HTMLInputElement><any>document.getElementById('inputForShippingPrimary')).style.display = 'block';
+  editShippingLocation(pos, item){
+    (<HTMLInputElement><any>document.getElementById(pos+'_pShip')).style.display="none";
+    (<HTMLInputElement><any>document.getElementById(pos+'_closeShip')).style.display="none";
+    (<HTMLInputElement><any>document.getElementById(pos+'_editShip')).style.display="none";
+    (<HTMLInputElement><any>document.getElementById("updateBtn")).style.display="block";
+    (<HTMLInputElement><any>document.getElementById("saveBtn")).style.display="none";
+    (<HTMLInputElement><any>document.getElementById("shippingLocationPrimary")).value=item;
+    this.arrayPos = pos;
+    this.selectArrayCell = item;
+    // (<HTMLInputElement><any>document.getElementById(pos+'_updateShip')).style.display="block";
+  }
+
+  updateShipping(){
+    var loc = (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value;
+    var index = this.shippingArray.indexOf(this.selectArrayCell);
+    this.shippingArray[index] = loc;
+    (<HTMLInputElement><any>document.getElementById(this.arrayPos+'_pShip')).style.display="block";
+    (<HTMLInputElement><any>document.getElementById(this.arrayPos+'_closeShip')).style.display="block";
+    (<HTMLInputElement><any>document.getElementById(this.arrayPos+'_editShip')).style.display="block";
+    (<HTMLInputElement><any>document.getElementById(this.arrayPos+'_inputShip')).style.display="none";
+    (<HTMLInputElement><any>document.getElementById(this.arrayPos+'_updateShip')).style.display="none";
   }
 
   uploadMainImage(){
@@ -246,7 +337,6 @@ export class ShopsettingComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			imageCoverValue = text;
-      console.log(imageCoverValue);
       (<HTMLInputElement><any>document.getElementById('mainImageSrc')).src = imageCoverValue; 
 		};
 	}
@@ -258,7 +348,6 @@ export class ShopsettingComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			productOneValue = text;
-      console.log(productOneValue);
       (<HTMLInputElement><any>document.getElementById('productOneSrc')).src = productOneValue; 
 		};
   }
@@ -279,26 +368,66 @@ export class ShopsettingComponent implements OnInit {
 		reader.onload = (event) => {
 			var text: any = reader.result;
 			productTwoValue = text;
-      console.log(productTwoValue);
       (<HTMLInputElement><any>document.getElementById('productTwoSrc')).src = productTwoValue; 
 		};
 	}
   onProductThreeClick(event) {
-		// 		console.log(event.target.files[0]);
-		var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-		// reader.onLoad = onLoadCallback;
-		reader.onload = (event) => {
-			var text: any = reader.result;
-			productThreeValue = text;
-      console.log(productThreeValue);
-      (<HTMLInputElement><any>document.getElementById('productThreeSrc')).src = productThreeValue; 
-		};
+    // 		console.log(event.target.files[0]);
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      // reader.onLoad = onLoadCallback;
+      reader.onload = (event) => {
+        var text: any = reader.result;
+        productThreeValue = text;
+        this.frontFlag = true;
+      };
+  }
+  
+  onIdCardClick(event) {
+    var check = confirm("Are you sure, id card will be changed");
+    if(check){
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => {
+        var text: any = reader.result;
+        this.idCardImgSrcFront = text;
+        this.backFlag = true;
+      };
+    }
 	}
-  editLocations(){
-    this.editLocation = true;
-    (<HTMLInputElement><any>document.getElementById('editShippingLocation')).style.display = 'none'; 
-    
+  onIdCardClickBack(event) {
+    var check = confirm("Are you sure, id card will be changed");
+    if(check){
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => {
+        var text: any = reader.result;
+        this.idCardImgSrcBack = text;
+        this.frontFlag = true;
+      };
+    }
+  }
+  
+  uploadIdCardToServer(){
+    if(this.frontFlag && this.backFlag){
+      this.data.uploadIdcardimage(this.idCardImgSrcFront,this.idCardImgSrcBack, this.sellerId).subscribe(data=>{
+
+      })
+    }
+    else{
+      console.log(this.frontFlag);  
+      console.log(this.backFlag);  
+      
+    }
+  }
+
+
+  shippingLocationGetter(){
+    var search = (<HTMLInputElement><any>document.getElementById("shippingLocationPrimary")).value;
+    (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "block";
+    this.data.getAutoShippingLocation(search).subscribe(data=>{
+      this.shippinglocationArray = data;
+    })
   }
 
   openDropdownShipping(){
@@ -313,21 +442,29 @@ export class ShopsettingComponent implements OnInit {
     (<HTMLInputElement><any>document.getElementById('myUL2')).style.display ="none";
   }
 
-  replaceTextLocation(text : any){
-    (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value = text;
-    (<HTMLInputElement><any>document.getElementById('myUL1')).style.display ="none";
-    (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).style.display ="block";
-    if(text == "All over India"){
-      (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).style.display ="none";
-      this.data.getDropdownForShipping(text).subscribe(data=>{
-        this.valueDrop = data;
-      })
+  replaceTextLocation(pin : any, text: any = ""){
+    if(text == ""){
+      (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value = pin;
+      (<HTMLInputElement><any>document.getElementById('myUL1')).style.display ="none";
+      (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).style.display ="block";
     }
     else{
-      this.data.getDropdownForShipping(text).subscribe(data=>{
-        this.valueDrop = data;
-      })
+      (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value = pin+","+text;
+      (<HTMLInputElement><any>document.getElementById('myUL1')).style.display ="none";
+      (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).style.display ="block";
     }
+
+    // if(text == "All over India"){
+    //   (<HTMLInputElement><any>document.getElementById('shippingLocationSecondary')).style.display ="none";
+    //   this.data.getDropdownForShipping(text).subscribe(data=>{
+    //     this.valueDrop = data;
+    //   })
+    // }
+    // else{
+    //   this.data.getDropdownForShipping(text).subscribe(data=>{
+    //     this.valueDrop = data;
+    //   })
+    // }
   }
 
   editExistingLocations(){
@@ -343,6 +480,16 @@ export class ShopsettingComponent implements OnInit {
 	}
 	deleteCookie(cname) {
 		this.cookieService.delete(cname);
-	}
-
+  }
+  openModal() {
+    document.getElementById("myModal").style.display = "block";
+    document.getElementById("lightBox").style.display = "block";
+  }
+  
+  // Close the Modal
+  closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
+  
 }
+
