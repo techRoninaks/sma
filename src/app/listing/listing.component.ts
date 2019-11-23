@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-var imageRfqValue: any = "";
+var imageRfqValue0: any = "";
+var imageRfqValue1: any = "";
+var imageRfqValue2: any = "";
 var imageValue0: any = "";
 var imageValue1: any = "";
 var imageValue2: any = "";
@@ -20,16 +22,8 @@ var imageValue7: any = "";
 var imageValue8: any = "";
 var imageValue9: any = "";
 var imageUCount: number = 0;
-// var imageU0: any;
-// var imageU1: any;
-// var imageU2: any;
-// var imageU3: any;
-// var imageU4: any;
-// var imageU5: any;
-// var imageU6: any;
-// var imageU7: any;
-// var imageU9: any;
-// var imageU8: any;
+var imageRUCount: number =0;
+
 export interface User {
 	name: string;
 }
@@ -111,7 +105,9 @@ export class ListingComponent implements OnInit {
 	imageVAL7: any = "";
 	imageVAL8: any = "";
 	imageVAL9: any = "";
-	imageVALRFQ: any = "";
+	imageVALRFQ0: any = "";
+	imageVALRFQ1: any = "";
+	imageVALRFQ2: any = "";
 	dynamicDataUser: any = "";
 	dynamicDataVariant: any = "";
 	dynamicDataVariants: any = "";
@@ -150,7 +146,13 @@ export class ListingComponent implements OnInit {
 	imageUploaded7: any;
 	imageUploaded8: any;
 	imageUploaded9: any;
-	imageUploadedRfq: number = 0;
+	imageRU0:any;
+	imageRU1:any;
+	imageRU2:any;
+	imageUploadedRfq: any;
+	imageUploadedRfq0: number = 0;
+	imageUploadedRfq1: number = 0;
+	imageUploadedRfq2: number = 0;
 	variant: object;
 	tokenFaq: object;
 	uploadImageCount: any = [];
@@ -176,7 +178,7 @@ export class ListingComponent implements OnInit {
 	imageSrc: string;
 	Object = Object;
 	tokenObj: object;
-	shopToken: object;
+	shopToken: any;
 	formAddress: object;
 	fgOrderDetails: FormGroup;
 	tokenPrice: object;
@@ -205,10 +207,13 @@ export class ListingComponent implements OnInit {
 	giftEnable: any = 0;
 	defRfqTag: any = 1;
 	myControl: any;
+	faqCount: any;
+	addToCartValue: any = "ADD TO CART";
 	// orderId: any = "";
 	prodImageCount: any = [];
 	imagesCount: any = [];
 	pincodeValue: number;
+	tok: object;
 	undelData: any = [];
 	pinToken: object;
 	shipLocId: number;
@@ -217,7 +222,8 @@ export class ListingComponent implements OnInit {
 	likeDislikes: any = [];
 	orderConfValue: number = 0;
 	instantBuyValue: number = 0;
-	
+	varTypes: any ;
+	onVac:any;
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
@@ -239,8 +245,13 @@ export class ListingComponent implements OnInit {
 
 			this.token = params['prod_id'];
 			this.shopToken = params['shop_id'];
+			if (this.token == null || this.shopToken == null)
+			 {
+				alert("No such product exists, Redirecting to Homepage");
+				this.rout.navigate(['/']);
+			}
 			this.tokenFaq = { prod_id: this.token, number_faq: 0 };
-
+			this.tok = { prod_id: this.token, shop_id: this.shopToken };
 			// console.log(this.token);
 			this.tokenObj = { prod_id: this.token, user_id: this.userId };
 			// console.log(this.tokenObj);
@@ -251,10 +262,53 @@ export class ListingComponent implements OnInit {
 
 
 
-		this.data.getProductData(this.token).subscribe(
+		this.data.getProductData(this.tok).subscribe(
 			data => {
 				// console.log(data);
 				this.dynamicData = data;
+				// console.log(this.dynamicData.response)
+				if (this.dynamicData.response == 0) {
+					alert("No such product exists, Redirecting to Homepage");
+					this.rout.navigate(['/']);
+				}
+				this.onVac = this.dynamicData.vac;
+
+				this.activeStatusProd = this.dynamicData.activeStatus;
+				if (this.activeStatusProd == "inactive") {
+
+					var sID = parseInt(this.getCookie("sellerId"));
+					if (sID == this.dynamicData.sellerId) {
+						document.getElementById("buyNowId").style.display = "none";
+						document.getElementById("reqNowId").style.display = "none";
+						document.getElementById("addToCart").style.display = "none";
+						document.getElementById("rfqButtonId").style.display = "none";
+						document.getElementById("giftButton").style.display = "none";
+					}
+					else {
+						alert("Inactive Product, Redirecting to Homepage");
+						this.rout.navigate(['/']);
+					}
+				}
+				else{
+					if(this.onVac == "1"){
+						setTimeout(function(){ 
+							document.getElementById("giftButton").style.display = "none";
+							document.getElementById("buyNowId").style.display = "none";
+							document.getElementById("reqNowId").style.display = "none";
+							document.getElementById("addToCart").style.display = "none";
+							document.getElementById("rfqButtonId").style.display = "none";
+							document.getElementById("vacId").style.display = "ruby";
+						}, 100);
+					}
+					else if(this.onVac == "0"){
+						//no change
+					}
+
+
+				}
+				
+
+
 				var str = this.dynamicData.specification;
 				var res = str.split("!~!");
 				this.spec = res;
@@ -295,6 +349,9 @@ export class ListingComponent implements OnInit {
 					(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
 					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
 				}
+				else if (this.orderConfValue == 0) {
+					(<HTMLInputElement><any>document.getElementById("idConf")).style.display = "none";
+				}
 				if (this.instantBuyValue == 0) {
 					(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
 				}
@@ -307,11 +364,7 @@ export class ListingComponent implements OnInit {
 						this.unFilledStar[this.j++] = this.i;
 					}
 				}
-				this.activeStatusProd = this.dynamicData.activeStatus;
-				if (this.activeStatusProd == "inactive") {
-					document.getElementById("buyNowId").style.display = "none";
-					document.getElementById("reqNowId").style.display = "block";
-				}
+
 				// 632458
 
 				this.pinToken = { pin: this.pincodeValue, prod_id: this.token, ship_id: this.shipLocId };
@@ -388,9 +441,15 @@ export class ListingComponent implements OnInit {
 
 		document.getElementById('productImage').addEventListener('change', this.onClick.bind(this));
 
-		this.imageUploadedRfq = 0;
-		imageRfqValue = document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
-
+		this.imageUploadedRfq0 = 0;
+		this.imageUploadedRfq1 = 0;
+		this.imageUploadedRfq2 = 0;
+		this.imageRU0 = 0;
+		this.imageRU1 = 0;
+		this.imageRU2 = 0;
+		this.imageUploadedRfq =0;
+		// imageRfqValue = document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
+		document.getElementById('shopRfq').addEventListener('change', this.onRfqClick.bind(this));
 		// console.log(this.imageValue);
 		// }
 		this.data.getFollowInfo(this.tokenObj).subscribe(
@@ -444,6 +503,8 @@ export class ListingComponent implements OnInit {
 			data => {
 				// console.log(data);
 				this.variantCount = data;
+				// console.log(Object.keys(this.variantCount).length);
+				this.varTypes = Object.keys(this.variantCount).length;
 			},
 			error => console.error(error)
 		);
@@ -528,6 +589,19 @@ export class ListingComponent implements OnInit {
 		this.data.getFaqProduct(this.tokenFaq).subscribe(
 			data => {
 				this.faqProduct = data;
+				this.faqCount = this.faqProduct[0].response;
+				if (this.faqCount == 0) {
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+				}
+				else if (this.faqCount == 1) {
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "block";
+				}
+				else if (this.faqCount == -1) {
+					// console.log(this.faqCount);
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+					(<HTMLInputElement><any>document.getElementById("noFaqId")).style.display = "block";
+					this.faqProduct="";
+				}
 
 			}
 		);
@@ -722,7 +796,7 @@ export class ListingComponent implements OnInit {
 		var addr6 = giftAdd.split("!~!")
 		var addr7 = giftAdd.split("!~!")
 
-		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
+		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote + "  " + addr1[0] + " " + addr2[1] + " " + addr3[2] + " " + addr4[3] + " " + addr5[4] + " " + addr6[5] + " " + addr7[6]);
 
 		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[0]);
 		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[1]);
@@ -885,12 +959,15 @@ export class ListingComponent implements OnInit {
 		}
 	}
 	submitFaq() {
+		alert("Question submitted");
+
 		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
 		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
 		if (faqSearchInputLength >= 5) {
 			this.tokenFaqSubmit = { prod_id: this.token, submitFaq: faqSearchInput };
 			this.data.getFaqProductSubmit(this.tokenFaqSubmit).subscribe();
 		}
+		(<HTMLInputElement><any>document.getElementById("submitFaq")).value = "";
 	}
 
 
@@ -907,7 +984,7 @@ export class ListingComponent implements OnInit {
 		for (i = 0; i < dots.length; i++) {
 			dots[i].className = dots[i].className.replace(" active", "");
 		}
-		// slides[slideIndex - 1].style.display = "block";
+		slides[slideIndex - 1].style.display = "block";
 		dots[slideIndex - 1].className += " active";
 	}
 	readMore() {
@@ -916,12 +993,29 @@ export class ListingComponent implements OnInit {
 		document.getElementById("seeMore").style.display = "none";
 	}
 	followShop() {
-		this.folResult = true;
-		this.data.getFollowShop(this.tokenObj).subscribe();
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1) {
+			this.folResult = true;
+			this.data.getFollowShop(this.tokenObj).subscribe();
+		}
+		else {
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+
+		}
+
 	}
 	unfollowShop() {
-		this.folResult = false;
-		this.data.getUnfollowShop(this.tokenObj).subscribe();
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1) {
+			this.folResult = false;
+			this.data.getUnfollowShop(this.tokenObj).subscribe();
+		}
+		else {
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+
+		}
 	}
 	report(revId: any) {
 		// console.log(revId);
@@ -932,6 +1026,7 @@ export class ListingComponent implements OnInit {
 	likeCount(revId: any) {
 		// console.log(revId);
 		// console.log(typeof(revId));
+
 		var x = (<HTMLImageElement><any>document.getElementById("likeImg_" + revId)).src;
 		var y = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + revId)).src;
 
@@ -1042,7 +1137,7 @@ export class ListingComponent implements OnInit {
 				this.datePickerDefault = 0;
 				(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "none";
 				(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
-				alert("Buy now changed to Request Order");
+				alert("Delivery on this date requires seller confirmation before buying!");
 			}
 		}
 		else {
@@ -1090,16 +1185,42 @@ export class ListingComponent implements OnInit {
 
 
 	onRfqClick(event) {
+		if (this.imageUploadedRfq1 == 1) {
+			this.imageUploadedRfq2 = 1;
+			this.imageUploadedRfq1 = 0;
+			this.imageUploadedRfq0 = 0;
+			this.imageRU2 = 1;
+		}
+		if (this.imageUploadedRfq0 == 1) {
+			this.imageUploadedRfq1 = 1;
+			this.imageUploadedRfq0 = 0;
+			this.imageRU1 = 1;
+		}
+		this.imageUploadedRfq0 = 1;
+		this.imageRU0 = 1;
 		this.imageUploadedRfq = 1;
-		// 		console.log(event.target.files[0]);
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
-		// reader.onLoad = onLoadCallback;
 		reader.onload = (event) => {
 			var text: any = reader.result;
-			imageRfqValue = text;
+			// imageRfqValue = text;
 			// console.log(imageRfqValue);
-			this.imageVALRFQ = text;
+			// this.imageVALRFQ = text;
+			if (this.imageUploadedRfq2 == 1) {
+				imageRfqValue2 = text;
+				this.imageVALRFQ2 = text;
+				imageRUCount = 3;
+			}
+			else if (this.imageUploadedRfq1 == 1) {
+				imageRfqValue1 = text;
+				this.imageVALRFQ1 = text;
+				imageRUCount = 2;
+			}
+			else if (this.imageUploadedRfq0 == 1) {
+				imageRfqValue0 = text;
+				this.imageVALRFQ0 = text;
+				imageRUCount = 1;
+			}
 		};
 	}
 
@@ -1110,12 +1231,15 @@ export class ListingComponent implements OnInit {
 		var shopLocation = (<HTMLInputElement><any>document.getElementById("rfqLocations")).value;
 		var note = (<HTMLInputElement><any>document.getElementById("rfqNote")).value;
 		var productRef = this.prod;
-		var image = imageRfqValue;
+		// var image = imageRfqValue;
+		var image0 = imageRfqValue0;
+		var image1 = imageRfqValue1;
+		var image2 = imageRfqValue2;
 		// var image=0;
 		console.log(this.sellerDetails.sellerId);
 		console.log(this.sellerDetails.shopId);
-		this.tokenPrice = { seller_identity: this.sellerDetails.sellerId, shop_id: this.sellerDetails.shopId, image: image, prod_id: this.token, user_id: this.userId, imageUploadedRfq: this.imageUploadedRfq, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
-
+		this.tokenPrice = {  imageRUCount: imageRUCount,image0: image0, image1: image1, image2: image2,seller_identity: this.sellerDetails.sellerId, imageRU0: this.imageRU0, imageRU1: this.imageRU1, imageRU2: this.imageRU2, shop_id: this.sellerDetails.shopId,  prod_id: this.token, user_id: this.userId, imageUploadedRfq: this.imageUploadedRfq, shop_name: shopName, shop_location: shopLocation, note: note, product_ref: productRef };
+		// image: image,
 		this.data.sendRfq(this.tokenPrice).subscribe();
 		$("#rfqPopup").modal('hide');
 	}
@@ -1142,9 +1266,21 @@ export class ListingComponent implements OnInit {
 	}
 	addTagProduct(x: any) {
 		var y = this.defRfqTag;
-		this.prod[y++] = x;
-		this.defRfqTag = y;
-		console.log(this.prod);
+		var z = this.defRfqTag;
+		var flag = 1;
+		while (z >= 0) {
+			if (x == this.prod[z]) {
+				flag = 0;
+				// console.log(z);
+			}
+			z--;
+		}
+		if (flag == 1) {
+			this.prod[y++] = x;
+			this.defRfqTag = y;
+		}
+
+		// console.log(this.prod);
 	}
 	delProduct(id: any) {
 		var n = this.Object.keys(this.prod).length;
@@ -1374,7 +1510,25 @@ export class ListingComponent implements OnInit {
 				// console.log(z);
 				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
 				var message = z;
-				var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+
+				var productVariantValue: any =[];
+				console.log(this.varTypes);
+				var varVal=0;
+				var varCount =0;
+				var res :any = [];
+				var val :any = [] ;
+				while(varVal<this.varTypes){
+					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+					val =  res.split(",");
+					productVariantValue[varVal] =val[0];
+					varCount = varVal;
+					varVal++;
+					// console.log(productVariantValue+"....................");
+				}
+				this.varName = productVariantValue;
+
+				console.log(productVariantValue)
+
 				var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
 				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
 				var desiredDate = "none";
@@ -1399,8 +1553,7 @@ export class ListingComponent implements OnInit {
 				// console.log(image);
 				// alert("working");
 
-				var res = productVariant.split(" ");
-				this.varName = res[0];
+
 
 				if (ship == true) {
 					var deliveryOption = "shipping";
@@ -1492,7 +1645,23 @@ export class ListingComponent implements OnInit {
 				// console.log(z);
 				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
 				var message = z;
-				var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+				var productVariantValue: any =[];
+				console.log(this.varTypes);
+				var varVal=0;
+				var varCount =0;
+				var res :any = [];
+				var val :any = [] ;
+				while(varVal<this.varTypes){
+					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+					val =  res.split(",");
+					productVariantValue[varVal] =val[0];
+					varCount = varVal;
+					varVal++;
+					// console.log(productVariantValue+"....................");
+				}
+				this.varName = productVariantValue;
+
+				console.log(productVariantValue)
 				var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
 				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
 				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
@@ -1516,8 +1685,8 @@ export class ListingComponent implements OnInit {
 				}
 				// console.log("pin"+pin);
 				// console.log("pinV"+this.pincodeValue);
-				var res = productVariant.split(" ");
-				this.varName = res[0];
+				// var res = productVariant.split(" ");
+				// this.varName = res[0];
 
 				if (ship == true) {
 					var deliveryOption = "shipping";
@@ -1620,7 +1789,24 @@ export class ListingComponent implements OnInit {
 			// console.log(z);
 			// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
 			var message = z;
-			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			// var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+			var productVariantValue: any =[];
+			console.log(this.varTypes);
+			var varVal=0;
+			var varCount =0;
+			var res :any = [];
+			var val :any = [] ;
+			while(varVal<this.varTypes){
+				res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+				val =  res.split(",");
+				productVariantValue[varVal] =val[0];
+				varCount = varVal;
+				varVal++;
+				// console.log(productVariantValue+"....................");
+			}
+			this.varName = productVariantValue;
+
+			console.log(productVariantValue)
 			var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
 			// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
 			var desiredDate = "none";
@@ -1645,8 +1831,8 @@ export class ListingComponent implements OnInit {
 			// console.log(image);
 			// alert("working");
 
-			var res = productVariant.split(" ");
-			this.varName = res[0];
+			// var res = productVariant.split(" ");
+			// this.varName = res[0];
 
 			if (ship == true) {
 				var deliveryOption = "shipping";
@@ -1756,94 +1942,153 @@ export class ListingComponent implements OnInit {
 		alert("your request has been sent");
 	}
 	submitCart() {
-		if (this.giftEnable == 0) {
-			var msgCount: any = this.Object.keys(this.messageTitle).length;
-			// console.log(msgCount);
-			var msg: any = [];
-			for (var i: any = 0; i < msgCount; i++) {
-				msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
-				// console.log(msg[i]);
-			}
-			var z: any = [];
-			// z=JSON.stringify(msg);
-			z = msg;
+		var userIdValue = parseInt(this.userId);
 
-			// console.log(z);
-			// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
-			var message = z;
-			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
-			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
-			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
-			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
-			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+		if (userIdValue >= 1) {
+			this.addToCartValue = "ADDED TO CART";
+			(<HTMLInputElement><any>document.getElementById("addToCart")).disabled = true;
+			(<HTMLInputElement><any>document.getElementById("addToCart")).style.cursor = "not-allowed";
 
-			var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
-			if (x == 0) {
-				var desiredDate = "none";
-			} else {
-				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
-			}
-			var res = productVariant.split(" ");
-			this.varName = res[0];
+			if (this.giftEnable == 0) {
+				var pin = parseInt(this.getCookie("userPin"));
 
-			if (ship == true) {
-				var deliveryOption = "shipping";
-			}
-			else if (cod == true) {
-				var deliveryOption = "cod";
-			}
-			else if (pickup == true) {
-				var deliveryOption = "pickup";
-			}
-			this.tokenPrice = { gift_title: null, gift_note: null, gift_address: null, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+				var msgCount: any = this.Object.keys(this.messageTitle).length;
+				// console.log(msgCount);
+				var msg: any = [];
+				for (var i: any = 0; i < msgCount; i++) {
+					msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
+					// console.log(msg[i]);
+				}
+				var z: any = [];
+				// z=JSON.stringify(msg);
+				z = msg;
 
-			this.data.sendCartDetails(this.tokenPrice).subscribe();
+				// console.log(z);
+				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+				var message = z;
+				// var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+				var productVariantValue: any =[];
+				console.log(this.varTypes);
+				var varVal=0;
+				var varCount =0;
+				var res :any = [];
+				var val :any = [] ;
+				while(varVal<this.varTypes){
+					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+					val =  res.split(",");
+					productVariantValue[varVal] =val[0];
+					varCount = varVal;
+					varVal++;
+					// console.log(productVariantValue+"....................");
+				}
+				this.varName = productVariantValue;
+
+				console.log(productVariantValue)
+				var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+				var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+				var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+				var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
+				var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+				var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
+				if (x == 0) {
+					var desiredDate = "none";
+				} else {
+					var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+				}
+				// var res = productVariant.split(" ");
+				// this.varName = res[0];
+
+				if (ship == true) {
+					var deliveryOption = "shipping";
+				}
+				else if (cod == true) {
+					var deliveryOption = "hd";
+				}
+				else if (pickup == true) {
+					var deliveryOption = "pickup";
+				}
+				this.tokenPrice = {pin:pin, gift_title: null, gift_note: null, gift_address: null, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+
+				this.data.sendCartDetails(this.tokenPrice).subscribe();
+			}
+			if (this.giftEnable == 1) {
+				var pin = parseInt(this.getCookie("userPin"));
+
+				var msgCount: any = this.Object.keys(this.messageTitle).length;
+				// console.log(msgCount);
+				var msg: any = [];
+				for (var i: any = 0; i < msgCount; i++) {
+					msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
+					// console.log(msg[i]);
+				}
+				var z: any = [];
+				// z=JSON.stringify(msg);
+				z = msg;
+				// console.log(z);
+				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+				var message = z;
+				// var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+				var productVariantValue: any =[];
+				console.log(this.varTypes);
+				var varVal=0;
+				var varCount =0;
+				var res :any = [];
+				var val :any = [] ;
+				while(varVal<this.varTypes){
+					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+					val =  res.split(",");
+					productVariantValue[varVal] =val[0];
+					varCount = varVal;
+					varVal++;
+					// console.log(productVariantValue+"....................");
+				}
+				this.varName = productVariantValue;
+
+				console.log(productVariantValue)
+				var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+				var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+				// var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+				var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+				var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
+				var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+
+				var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
+				if (x == 0) {
+					var desiredDate = "none";
+				} else {
+					var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;	
+				}
+				// var res = productVariant.split(" ");
+				// this.varName = res[0];
+
+				if (ship == true) {
+					var deliveryOption = "shipping";
+				}
+				else if (cod == true) {
+					var deliveryOption = "hd";
+				}
+				else if (pickup == true) {
+					var deliveryOption = "pickup";
+				}
+				this.tokenPrice = { pin:pin,gift_title: this.titleGift, gift_note: this.noteGift, gift_address: this.addressGift, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+
+				this.data.sendCartDetails(this.tokenPrice).subscribe();
+				// $(".btnAtcart").prop('disabled',true);
+				// (<HTMLInputElement><any>document.getElementById("addToCartValue")).style.cursor= "not-allowed";
+			}
+
+
 		}
-		if (this.giftEnable == 1) {
-			var msgCount: any = this.Object.keys(this.messageTitle).length;
-			// console.log(msgCount);
-			var msg: any = [];
-			for (var i: any = 0; i < msgCount; i++) {
-				msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
-				// console.log(msg[i]);
-			}
-			var z: any = [];
-			// z=JSON.stringify(msg);
-			z = msg;
-			// console.log(z);
-			// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
-			var message = z;
-			var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
-			var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
-			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
-			// var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
-			var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-			var cod = (<HTMLInputElement><any>document.getElementById("cOD")).checked;
-			var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+		else {
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
 
-			var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
-			if (x == 0) {
-				var desiredDate = "none";
-			} else {
-				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
-			}
-			var res = productVariant.split(" ");
-			this.varName = res[0];
-
-			if (ship == true) {
-				var deliveryOption = "shipping";
-			}
-			else if (cod == true) {
-				var deliveryOption = "cod";
-			}
-			else if (pickup == true) {
-				var deliveryOption = "pickup";
-			}
-			this.tokenPrice = { gift_title: this.titleGift, gift_note: this.noteGift, gift_address: this.addressGift, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
-
-			this.data.sendCartDetails(this.tokenPrice).subscribe();
 		}
+
+
+
+
 	}
 
 	pincodeChange() {
@@ -1881,10 +2126,26 @@ export class ListingComponent implements OnInit {
 		var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
 		var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
 		var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
-		var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
-		var res = productVariant.split(" ");
-		this.varName = res[0];
+		// var productVariant = (<HTMLInputElement><any>document.getElementById("variantValue")).value;
+		// var res = productVariant.split(" ");
+		// this.varName = res[0];
+		var productVariantValue: any =[];
+		console.log(this.varTypes);
+		var varVal=0;
+		var varCount =0;
+		var res :any = [];
+		var val :any = [] ;
+		while(varVal<this.varTypes){
+			res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+			val =  res.split(",");
+			productVariantValue[varVal] =val[0];
+			varCount = varVal;
+			varVal++;
+			// console.log(productVariantValue+"....................");
+		}
+		this.varName = productVariantValue;
 
+		console.log(productVariantValue)
 
 		var pin = parseInt(this.getCookie("userPin"));
 		if (ship == true) {
@@ -1896,7 +2157,7 @@ export class ListingComponent implements OnInit {
 		else if (pickup == true) {
 			var deliveryOption = "pickup";
 		}
-		this.tokenPriceGetter = { prod_id: this.token, prod_quantity: productQuantity, del_option: deliveryOption, pin: pin }
+		this.tokenPriceGetter = { prod_id: this.token, prod_quantity: productQuantity, del_option: deliveryOption, pin: pin ,productVariant:this.varName}
 		this.data.getPriceDate(this.tokenPriceGetter).subscribe(
 			data => {
 				// console.log(data);
@@ -1907,4 +2168,18 @@ export class ListingComponent implements OnInit {
 		);
 		this.bPrice = parseInt(this.dynamicData.basePrice) * productQuantity;
 	}
+	sendRfq() {
+		var userIdValue = parseInt(this.userId);
+		if (userIdValue >= 1) {
+			$("#rfqPopup").modal('show');
+		}
+		else {
+			(<HTMLInputElement><any>document.getElementById("instantBuyId")).style.display = "none";
+			$("#loginModal").modal('show');
+		}
+
+	}
+	// variantAdd(x:any){
+	// 	alert(x);
+	// }
 }

@@ -111,9 +111,11 @@
                 </div>
             </div>
             <div class="btnsSel">
-                <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" data-toggle="modal"
+                <!-- <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" data-toggle="modal"
+                    id="rfqButtonId">SEND RFQ</button> -->
+                    <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" (click)="sendRfq();"
                     id="rfqButtonId">SEND RFQ</button>
-                <button class="btnAtcart btnStyle" (click)="submitCart();">ADD TO CART</button>
+                <button class="btnAtcart btnStyle"  id="addToCart" (click)="submitCart();" >{{addToCartValue}}</button>
             </div>
 
         </div>
@@ -160,11 +162,19 @@
             </p>
         </div>
         <div class="pSize">
-            <p>Select An Option</p>
+            <!-- <p>Select An Option</p>
             <select id="variantValue" class="dropdown">
                 <option *ngFor="let item of Object.keys(variantData)"> {{variantData[item].value}}
                 </option>
-            </select>
+            </select> -->
+            <!-- ratingReview[item].reviewId -->
+            <div *ngFor="let group of variantCount; let i = index;">
+                <p>{{group.name}}</p>
+                <select id="{{i}}_variantValue" class="dropdown" >
+                    <option *ngFor="let light of group.value" (click)="variantAdd(light.type);"> {{light.type}},{{light.price}}
+                    </option>
+                </select>
+            </div>
         </div>
         <div class="pQuantity" style="margin-top:10px;">
             <p>Quantity</p>
@@ -227,6 +237,7 @@
             <input type="date" id="datePickerId" (change)="reqDate();">
         </div>
         <div class="pButton">
+            <p id="vacId" class="vacClass" style="display:none;">Seller is on Vacation</p>
             <div class="dvBuyBtn">
                 <div class="dvMain-Container-Grid" id="buyModalContainer" style="z-index: 10001;">
                     <!-- data-toggle="modal" -->
@@ -267,7 +278,7 @@
                                         Note : <input type="text" name="note" id="fNote"><br>
                                         Address:<br>
                                         <div style="transform: translate(5rem,-1rem);">
-                                            <input class="addr1Shop" style="height: 30px" placeholder="house name"
+                                            <input class="addr1Shop" style="height: 30px" placeholder="House name"
                                                 id="shopNameId">
                                             <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
                                                 placeholder="street address">
@@ -297,7 +308,7 @@
                 </div>
             </div>
         </div>
-        <div class="pConfirmation" style="background-color: whitesmoke">
+        <div class="pConfirmation" id="idConf" style="background-color: whitesmoke">
             <p class="orderConf descD">ORDER CONFIRMATION PERIOD: </p>
             <span class="confTime policies"
                 style="background-color: white; height: 25px; width: 50px;">{{dynamicData.avgConfirmTime}} hrs</span>
@@ -522,10 +533,11 @@
                 </form>
             </div>
             <div class="questionAnswer">
-                <div class="divQA" *ngFor=" let faq of Object.keys(faqProduct)">
-                    <form class="qA">
-                        Q:<span class=" question ">{{faqProduct[faq].question}}</span>?<br> A:
-                        <span class="answer ">{{faqProduct[faq].answer}}</span>
+                <p id="noFaqId" class="noFaq">No Faqs Available</p>
+                <div class="divQA" id="qAId" *ngFor=" let faq of Object.keys(faqProduct)">
+                    <form class="qA" >
+                        <span id="qId" class="question">Q:{{faqProduct[faq].question}}?</span>
+                        <span id="aId" class="answer">A:{{faqProduct[faq].answer}}</span>
                     </form>
                 </div>
             </div>
@@ -657,8 +669,17 @@
                                 #fileInputRfq>
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
-                            <div *ngIf="imageUploadedRfq == 1">
+                            <!-- <div *ngIf="imageUploadedRfq == 1">
                                 <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                            </div> -->
+                            <div *ngIf="imageRU0 == 1">
+                                <img [src]="imageVALRFQ0" style="max-height: 100px;margin-top:5px;">
+                            </div>
+                            <div *ngIf="imageRU1 == 1">
+                                <img [src]="imageVALRFQ1" style="max-height: 100px;margin-top:5px;">
+                            </div>
+                            <div *ngIf="imageRU2 == 1">
+                                <img [src]="imageVALRFQ2" style="max-height: 100px;margin-top:5px;">
                             </div>
                         </div>
                         <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']">Apply</button>

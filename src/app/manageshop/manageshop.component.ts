@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Router, RouterLink } from '@angular/router';
 
 var imageCoverValue: any = "";
 var imageLogoValue: any = "";
@@ -78,8 +79,9 @@ export class ManageshopComponent implements OnInit {
 	tokenFaq: object;
 	tokenUpload: object;
 	addressData: any = [];
+	loggedIn:number;
 	rfqInput: any = [];
-	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) { }
+	constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService,private routers: Router) { }
 
 	ngOnInit() {
 		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
@@ -89,6 +91,31 @@ export class ManageshopComponent implements OnInit {
 		this.userId = this.getCookie("userId");
 		// this.setCookie("sellerId", 1);
 		this.sellerId = this.getCookie("sellerId");
+		this.loggedIn = parseInt(this.getCookie("isLoggedIn"));
+		// console.log(this.loggedIn);
+		// this.route.queryParams.subscribe(params => {
+		// 	this.token = params['shop_id'];
+		// 	// console.log(this.token);
+
+
+		// 	// console.log(this.tokenObj);
+		// 	// this.token = params['userId'];
+		// });
+		if(this.loggedIn == 0 || this.getCookie("sellerId") == "0" || this.getCookie("sellerId") == "" ){
+			alert("Redirecting to Homepage");
+			this.routers.navigate(['/']);
+		}
+		else{
+			this.data.getSellerDetailsShop(this.sellerId).subscribe(
+				data => {
+					this.sellerDataShop = data;
+					this.token = this.sellerDataShop.shopId;
+					// console.log(this.token);
+					this.tokenObj = { shop_id: this.token, user_id: this.userId };
+					this.tokenFaq = { shop_id: this.token, number_faq: 0 };
+					if (this.priv == 0) {
+						this.selName = "By " + this.sellerDataShop.sellerName;
+          });
 
 		this.route.queryParams.subscribe(params => {
 			this.token = params['shop_id'];
@@ -135,115 +162,170 @@ export class ManageshopComponent implements OnInit {
 						(<HTMLInputElement><any>document.getElementById("dateSetRadio")).checked = true;
 					}
 					else {
-						(<HTMLInputElement><any>document.getElementById("untilRadio")).checked = true;
+						this.selName = "";
 					}
-				}
-				else {
-					(<HTMLInputElement><any>document.getElementById('vacTog')).checked = false;
-				}
-
-			},
-			error => console.error(error)
-		);
-		imageCoverValue = document.getElementById('shopCover').addEventListener('change', this.onCoverClick.bind(this));
-		imageLogoValue = document.getElementById('shopLogo').addEventListener('change', this.onLogoClick.bind(this));
-		this.data.getSellerDetailsShop(this.token).subscribe(
-			data => {
-				this.sellerDataShop = data;
-				if (this.priv == 0) {
-					this.selName = "By " + this.sellerDataShop.sellerName;
-
-				}
-				else {
-					this.selName = "";
-				}
-			},
-			error => console.error(error)
-		);
-
-		this.data.categoryShop(this.token).subscribe(
-			data => {
-				this.rfqInput = data;
-
-			}
-		);
-
-		this.data.getProductListManage(this.token).subscribe(
-			data => {
-				this.array12 = data;
-			},
-			error => console.error(error)
-		);
-
-
-		this.data.getProductData(this.token).subscribe(
-			data => {
-				this.dynamicData = data;
-			},
-			error => console.error(error)
-		);
-
-		this.data.categoryListShop(this.token).subscribe(
-			data => {
-				this.catName = data;
-				// console.log(this.catName);
-				// this.prod=this.catName.category;
-				var catCount: any;
-				catCount = Object.keys(this.catName).length;
-				// console.log(catCount);
-				this.defRfqTag = catCount;
-				catCount -= 1;
-				// console.log(catCount);
-
-				for (var x = catCount; x > -1; x--) {
-					// console.log(x);
-					this.prod[x] = this.catName[x].category;
-				}
-				// console.log(this.prod);
-			}
-		);
-
-
-		this.data.getAddressShop(this.token).subscribe(
-			data => {
-				this.addressData = data;
-			},
-			error => console.error(error)
-		);
-
-		// this.data.getFollowInfoShop(this.tokenObj).subscribe(
-		// 	data => {
-		// 		this.followInfo = data;
-		// 		var x = this.followInfo.response;
-		// 		if (this.followInfo.response == "successful") {
-		// 			this.folResult = true;
-		// 		}
-		// 		else if (this.followInfo.response == "unsuccessful") {
-		// 			this.folResult = false;
-		// 		}
-		// 	},
-		// 	error => console.error(error)
-		// );
-		this.data.getFolCount(this.token).subscribe(
-			data => {
-				this.followC = data;
-			},
-			error => console.error(error)
-		);
-		this.data.getMostSelling(this.token).subscribe(
-			data => {
-				this.mostSelling = data;
-			},
-			error => console.error(error)
-		);
-		this.data.shopViewIncrement(this.token).subscribe();
-
-		this.data.getFaqShop(this.tokenFaq).subscribe(
-			data => {
-				this.faqShop = data;
-
-			}
-		);
+					this.data.getShopData(this.token).subscribe(
+						data => {
+							this.shopData = data;
+							this.priv = this.shopData.privateAccount;
+							this.shopRating = this.shopData.ratingShop;
+							this.shipOption = this.shopData.shippingOptionId;
+							this.privOption = this.shopData.privateAccount;
+							// console.log(this.privOption);
+							this.vacOption = this.shopData.onVac;
+							// console.log(this.vacOption);
+							for (this.ir = 0; this.ir < 5; this.ir++) {
+								if (this.ir < this.shopRating) {
+									this.filledStar[this.ir] = this.ir;
+								} else {
+									this.unFilledStar[this.jr++] = this.ir;
+								}
+							}
+			
+							if (this.privOption == '1') {
+								(<HTMLInputElement><any>document.getElementById('privacyTog')).checked = true;
+							}
+							else {
+								(<HTMLInputElement><any>document.getElementById('privacyTog')).checked = false;
+							}
+							if (this.vacOption == '1') {
+								(<HTMLInputElement><any>document.getElementById('vacTog')).checked = true;
+								document.getElementById("vacationToggle").style.display = "block";
+								if ((this.shopData.vacStartDate != null) && (this.shopData.vacEndDate != null)) {
+									(<HTMLInputElement><any>document.getElementById("dateSetRadio")).checked = true;
+								}
+								else {
+									(<HTMLInputElement><any>document.getElementById("untilRadio")).checked = true;
+								}
+							}
+							else {
+								(<HTMLInputElement><any>document.getElementById('vacTog')).checked = false;
+							}
+							
+							if(this.sellerId != this.shopData.sellerId){
+								alert("Redirecting to Homepage");
+								this.routers.navigate(['/']);
+							}
+	
+						},
+						error => console.error(error)
+					);
+					imageCoverValue = document.getElementById('shopCover').addEventListener('change', this.onCoverClick.bind(this));
+					imageLogoValue = document.getElementById('shopLogo').addEventListener('change', this.onLogoClick.bind(this));
+					// this.data.getSellerDetailsShop(this.token).subscribe(
+					// 	data => {
+					// 		this.sellerDataShop = data;
+					// 		if (this.priv == 0) {
+					// 			this.selName = "By " + this.sellerDataShop.sellerName;
+			
+					// 		}
+					// 		else {
+					// 			this.selName = "";
+					// 		}
+					// 	},
+					// 	error => console.error(error)
+					// );
+			
+					this.data.categoryShop(this.token).subscribe(
+						data => {
+							this.rfqInput = data;
+			
+						}
+					);
+			
+					this.data.getProductListManage(this.token).subscribe(
+						data => {
+							this.array12 = data;
+						},
+						error => console.error(error)
+					);
+			
+			
+					// this.data.getProductData(this.token).subscribe(
+					// 	data => {
+					// 		this.dynamicData = data;
+					// 	},
+					// 	error => console.error(error)
+					// );
+			
+					this.data.categoryListShop(this.token).subscribe(
+						data => {
+							this.catName = data;
+							// console.log(this.catName);
+							// this.prod=this.catName.category;
+							var catCount: any;
+							catCount = Object.keys(this.catName).length;
+							// console.log(catCount);
+							this.defRfqTag = catCount;
+							catCount -= 1;
+							// console.log(catCount);
+			
+							for (var x = catCount; x > -1; x--) {
+								// console.log(x);
+								this.prod[x] = this.catName[x].category;
+							}
+							// console.log(this.prod);
+						}
+					);
+			
+			
+					this.data.getAddressShop(this.token).subscribe(
+						data => {
+							this.addressData = data;
+						},
+						error => console.error(error)
+					);
+			
+					// this.data.getFollowInfoShop(this.tokenObj).subscribe(
+					// 	data => {
+					// 		this.followInfo = data;
+					// 		var x = this.followInfo.response;
+					// 		if (this.followInfo.response == "successful") {
+					// 			this.folResult = true;
+					// 		}
+					// 		else if (this.followInfo.response == "unsuccessful") {
+					// 			this.folResult = false;
+					// 		}
+					// 	},
+					// 	error => console.error(error)
+					// );
+					this.data.getFolCount(this.token).subscribe(
+						data => {
+							this.followC = data;
+						},
+						error => console.error(error)
+					);
+					this.data.getMostSelling(this.token).subscribe(
+						data => {
+							this.mostSelling = data;
+						},
+						error => console.error(error)
+					);
+					this.data.shopViewIncrement(this.token).subscribe();
+			
+					this.data.getFaqShop(this.tokenFaq).subscribe(
+						data => {
+							this.faqShop = data;
+							// console.log(this.faqShop[0].response);
+							if(this.faqShop[0].response==0){
+								(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+							}
+							else if(this.faqShop[0].response==1){
+								(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "block";
+							}
+							else if (this.faqShop[0].response == -1) {
+								// console.log(this.faqCount);
+								(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+								(<HTMLInputElement><any>document.getElementById("noFaqId")).style.display = "block";
+								this.faqShop="";
+							}						}
+					);
+				},
+				error => console.error(error)
+			);
+		}
+		
+		
 		// console.log(this.ratingReviewShop);
 	}
 	faqMore() {
@@ -341,9 +423,13 @@ export class ManageshopComponent implements OnInit {
 		}
 	}
 	delProduct(id: any) {
-		this.idP = id;
-		document.getElementById("product" + id).style.display = "none";
-		this.data.delProdManage(this.idP).subscribe();
+		var check = confirm("Are you sure you want to delete?");
+		 if(check){
+			this.idP = id;
+			document.getElementById("product" + id).style.display = "none";
+			this.data.delProdManage(this.idP).subscribe();
+		 }
+
 	}
 	edit(x: any) {
 		// this.editDefault=1;

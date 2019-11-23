@@ -4,8 +4,28 @@
     $pin = $_POST["pin"];
     $productQuantity = $_POST["productQuantity"];
     $deliveryOption = $_POST["deliveryOption"];
-
+    $productVariant = $_POST["productVariant"];
     $data = array();
+
+    //get tax
+    $sqlTax="SELECT value FROM `web_settings` where name = 'tax' ";
+    $resTax=mysqli_query($con1,$sqlTax);
+    $rowTax=mysqli_fetch_assoc($resTax);
+    $tax=$rowTax["value"];
+        
+    $spiltVariant = explode(",", $productVariant);  
+    $variantCount = sizeof($spiltVariant);
+    $varPrice = 0;
+    $varId="";
+    for($variantC=0;$variantC<$variantCount;$variantC++){
+        $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]'";
+        $resultVar = mysqli_query($con1, $sql_queryVar);
+        $rowVariant=mysqli_fetch_array($resultVar);
+        $varIdValue=$rowVariant["variantid"];
+        $varPriceValue=$rowVariant["price"];
+        $varId = $varIdValue.",".$varId;
+        $varPrice = $varPrice + $varPriceValue;
+    }
 
     //get current date
     $sql="SELECT CURRENT_DATE";
@@ -78,24 +98,24 @@
         if($productQuantity>=$quantBulk){
             // $disc = $disc +$discBulk;
             $amountBulkDisc=$basePrice*($discBulk/100);
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc + $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
         else{
             $amountBulkDisc=0;
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc + $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -106,25 +126,25 @@
         $shipOption=2;
         if($productQuantity>=$quantBulk){
             $amountBulkDisc=$basePrice*($discBulk/100);
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc+ $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
             // $disc = $disc +$discBulk;
         }
         else{
             $amountBulkDisc=0;
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc+ $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -135,25 +155,25 @@
         $shipOption=3;
         if($productQuantity>=$quantBulk){
             $amountBulkDisc=$basePrice*($discBulk/100);
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc+ $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
             // $disc = $disc +$discBulk;
         }
         else{
             $amountBulkDisc=0;
-            $priceBulc=$basePrice-$amountBulkDisc;
+            $priceBulc=$basePrice-$amountBulkDisc+ $varPrice;
             $bulkPriceTotal=$priceBulc*$productQuantity;
 
             $amountDisc=$bulkPriceTotal*($disc/100);
             $price=$bulkPriceTotal-$amountDisc;
 
-            $totalAmountQt=$price+$qtPrice+$shipBasePrice;
+            $totalAmountQt=$price+$qtPrice+$shipBasePrice+$tax;
             $totalAmount=round($totalAmountQt);
         }
     }
@@ -202,6 +222,6 @@
     // $totalAmount=round($totalAmountQt);
     // // $price=round($price);
     // // $basePriceTotal=$price*$productQuantity;
-    // // $totalAmount=$basePriceTotal+$varPrice;
+    // // $totalAmount=$basePriceTotal+$varPrice;f
     echo json_encode($data = array('tPrice' => $totalAmount, 'dDate' => $deliveryDate));
 ?>
