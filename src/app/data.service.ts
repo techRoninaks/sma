@@ -115,21 +115,21 @@ sendOrderDetails(data: any) {
 
       return this.http.post(this.baseUrl + 'assets/api/pricedategetter.php', httpParams);
   }
-  sendRfq(data :any) {
-    let httpParams = new HttpParams()
-      .append("prodId", data['prod_id'])
-      .append("hasImage", data['imageUploadedRfq'])
-      .append("userId", data['user_id'])
-      .append("shopLocation", data['shop_location'])
-      .append("note", data['note'])
-      .append("productRef", data['product_ref'])
-      .append("image", data['image'])
-      .append("sellerId", data['seller_identity'])
-      .append("shopId", data['shop_id'])
-      .append("shopName", data['shop_name'])
+//   sendRfq(data :any) {
+//     let httpParams = new HttpParams()
+//       .append("prodId", data['prod_id'])
+//       .append("hasImage", data['imageUploadedRfq'])
+//       .append("userId", data['user_id'])
+//       .append("shopLocation", data['shop_location'])
+//       .append("note", data['note'])
+//       .append("productRef", data['product_ref'])
+//       .append("image", data['image'])
+//       .append("sellerId", data['seller_identity'])
+//       .append("shopId", data['shop_id'])
+//       .append("shopName", data['shop_name'])
 
-    return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
-  }
+//     return this.http.post(this.baseUrl + 'assets/api/rfqadd.php', httpParams);
+//   }
   // shop Component
   getProductListManage(data: any) {
     let httpParams = new HttpParams()
