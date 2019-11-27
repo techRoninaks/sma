@@ -1,6 +1,9 @@
 <?php
 require_once('init.php');
 
+// Initialise constructor call via creating an object.
+$obj = new Messages();
+
 class Messages {
 
     private $doAction;
@@ -46,5 +49,3 @@ class Messages {
         MysqliDb::getInstance()->disconnectAll();
     }
 }
-
-$obj = new Messages();
