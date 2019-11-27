@@ -15,12 +15,12 @@ $con2 = mysqli_connect(DB_HOST, DB_USER_NAME, DB_USER_PASS, DB_SMA_USER);
 
 // Check connection
 if ($con1->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    echo "Failed to connect to MySQL: " . $con1->connect_error;
     exit();
 }
 
 if ($con2->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    echo "Failed to connect to MySQL: " . $con2->connect_error;
     exit();
 }
 
