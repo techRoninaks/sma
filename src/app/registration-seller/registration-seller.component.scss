@@ -1,5 +1,12 @@
 // Media Query
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
+@mixin sm-lesser{
+  @media (max-width: 600px) {    
+      @content;
+  }
+} 
+
 @mixin sm{
     @media (min-width: 600px) {    
         @content;
@@ -50,6 +57,26 @@
     grid-template-rows: 10% 90% ;
     grid-template-areas: "left-grid  right-grid"
                          "left-grid  right-grid";
+                         @include sm-lesser{
+                          display: grid;
+                        grid-template-columns: auto;
+                        grid-template-rows: auto auto;
+                        grid-template-areas: "left-grid"
+                                              // "left-grid"
+                                            //  "right-grid"
+                                             "right-grid";
+                                             .left-grid{
+                                              grid-area: left-grid;
+                                              padding-right: 15%;
+                                              margin-left: 3%;
+                                              @include sm-lesser{
+                                                margin-left: -6%;
+                                              }
+                                            }
+                                            .right-grid{
+                                              grid-area: right-grid;
+                                            }
+                        }
   }
   .left-grid{
     grid-area: left-grid;
@@ -128,6 +155,9 @@
   
   .button-green-layout{
     margin-top: 2%;
+    @include sm-lesser{
+      margin-left: -22px;
+    }
   }
   .button-green-login
   {
@@ -140,6 +170,9 @@
     border: none;
     font-family: "BitterBold";
     margin-left: 41px;
+    @include sm-lesser{
+      margin-left: 50px;
+    }
   }
   .login-layout{
     background-color: #F1F1F1;
@@ -151,6 +184,9 @@
     width: 80%;
     height: 80%;
     font-size: 14px;
+    @include sm-lesser{
+      margin-left: 28px;
+    }
   }
   .side-layout{
     background-color: white;
@@ -172,11 +208,18 @@
     border-radius: 4px;
     border-style: none;
     padding: 1%;
+    @include sm-lesser{
+      margin-left:-20px;
+      width:61%;
+    }
   }
   .login-layout-3{
-    margin-left: 17%;
+    margin-left: 7%;
     border-style: none;
     font-family: "BitterBold";
+    @include sm-lesser{
+      margin-left: 2%;
+    }
   }
   ul {
     list-style-type: none;
@@ -333,6 +376,9 @@
     grid-template-areas: "header"
                           "body";
     margin-top: 100px;
+    @include sm-lesser{
+      margin-bottom: 0%;
+    }
   }
   .header{
       grid-area: header;
@@ -343,6 +389,9 @@
       border-radius: 4px;
       height: 70px;
       font-family: BitterBold;
+      @include sm-lesser{
+        display: none;
+      }
       .grid-header{
         display: grid;
         grid-template-rows: auto auto;
@@ -350,6 +399,9 @@
         grid-template-areas: "div-shop-det div-owner-info div-payment div-terms div-launch"
                             "shop-det owner-info payment terms launch";
         margin-left: 37px;
+        @include sm-lesser{
+          display: none;
+        }
         .prime-label-style-stage-1{
           color: black;
         }
@@ -443,6 +495,24 @@
                           ". main-cat-drop-down-2 . ."
                           "email-id-label  email-id  gst-no-label  gst-no"
                           ". . . btn-next";
+    @include sm-lesser{
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto auto;
+      grid-template-areas: "shop-name-label    shop-name"
+                          "owner-name-label   owner-name"
+                          "shop-addr-label   shop-addr "
+                          ". state"
+                          ". city"
+                          ". pin"
+                          "main-cat-label  main-cat-drop-down"
+                          ". main-cat-drop-down-1"
+                          ". main-cat-drop-down-2"
+                          "contact-label  contact"
+                          "email-id-label  email-id"
+                          "gst-no-label  gst-no"
+                          ". btn-next";
+    }
   }
   .div-body{
     grid-area: body;
@@ -463,6 +533,9 @@
     width: 1000px;
     height: 600px;
     font-family: BitterBold;
+    @include sm-lesser{
+       height: 800px;    
+      }
   }
   .div-body-stage-2{
     grid-area: body;
@@ -481,8 +554,9 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: 1000px;
+    height: 1222px;
     font-family: BitterBold;
+    margin-bottom: 138px;
   }
   .div-body-stage-5{
     grid-area: body;
@@ -493,6 +567,12 @@
     width: 1000px;
     height: 1000px;
     font-family: BitterBold;
+    margin-bottom: 90px;
+    @include sm-lesser{
+      width: 100%;
+      height: 97%;
+
+    }
   }
   .div-body-1{
     grid-area: body;
@@ -501,26 +581,43 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: 985px;
+    height: auto;
     margin-top: 65px;
     border-radius: 12px;
+    @include sm-lesser{
+      margin-left: 33px;
+      height: 16%;
+      width: 83%;
+    }
   }
   .main-cat-drop-down-1{
     margin-top: 20px;
     grid-area: main-cat-drop-down-1;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .main-cat-drop-down-2{
     margin-top: 20px;
     grid-area: main-cat-drop-down-2;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .gst-no-label{
     margin-left: 83px;
     margin-top: 20px;
     grid-area: gst-no-label;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .gst-no{
     margin-top: 20px;
     grid-area: gst-no;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .btn-next{
     grid-area: btn-next;
@@ -529,67 +626,114 @@
     margin-left: 60px;
     margin-top: 60px;
     grid-area: shop-name-label; 
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .shop-name{
     margin-top: 60px;
     grid-area: shop-name;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
+    
   .owner-name-label{
     margin-left: 83px;
     margin-top: 60px;
     grid-area: owner-name-label;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .owner-name{
     margin-top: 60px;
     grid-area: owner-name;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .shop-addr-label{
     margin-left: 60px;
     grid-area: shop-addr-label;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
+ 
   }
   .shop-addr{
     grid-area: shop-addr;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .city{
     grid-area: city;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .state{
     grid-area: state;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .pin{
     grid-area: pin;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .main-cat-label{
     margin-left: 60px;
     grid-area: main-cat-label;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .main-cat-drop-down{
     grid-area: main-cat-drop-down;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .contact-label{
     margin-left: 83px;
     grid-area: contact-label;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .contact{
     grid-area: contact;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .email-id-label{
     margin-left: 60px;
     grid-area: email-id-label;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: 17px;
+    }
   }
   .email-id{
     grid-area: email-id;
     margin-top: 20px;
+    @include sm-lesser{
+      margin-left: -88%;
+    }
   }
   .grid-stage-2{
     display: grid;
@@ -601,12 +745,29 @@
                          "id-type-label id-drop-down . upload-label ."
                          ". . . front back"
                          ". . . . btn-next";
+    @include sm-lesser{
+      display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto; 
+    grid-template-areas: "label-owner-name name-owner . "
+                         "email-label-2 email-2 ."
+                         "contact-label-2 contact-2 . "
+                         "dob-label dob ."
+                         "id-no-label id-no . "
+                         "id-type-label id-drop-down ."
+                         "upload-label . ."
+                         "front back ."
+                         ". . btn-next";
+    }
   }
   .front{
     grid-area: front;
   }
   .back{
     grid-area: back;
+    @include sm-lesser() {
+      margin-left: -196px;
+    }
   }
   .label-owner-name{
     margin-left: 25px;
@@ -616,6 +777,9 @@
   .name-owner{
     margin-top: 45px;
     grid-area: name-owner;
+    @include sm-lesser() {
+      margin-left: -196px;
+    }
   }
   .email-label-2{
     margin-left: 25px;
@@ -625,14 +789,23 @@
   .email-2{
     margin-top: 20px;
     grid-area: email-2;
+@include sm-lesser{
+  margin-left: -196px;
+    }
   }
   .contact-label-2{
     margin-top: 20px;
     grid-area: contact-label-2;
+    @include sm-lesser() {
+      margin-left: 25px;
+    }
   }
   .contact-2{
     margin-top: 20px;
     grid-area: contact-2;
+    @include sm-lesser {
+      margin-left: -196px;
+    }
   }
   .dob-label{
     margin-left: 25px;
@@ -642,14 +815,23 @@
   .dob{
     margin-top: 20px;
     grid-area: dob;
+    @include sm-lesser {
+      margin-left: -196px;
+    }
   }
   .id-no-label{
     margin-top: 20px;
     grid-area: id-no-label;
+    @include sm-lesser {
+      margin-left: 25px;
+    }
   }
   .id-no{
     margin-top: 20px;
     grid-area: id-no;
+    @include sm-lesser{
+      margin-left: -196px;
+    }
   }
   .id-type-label{
     margin-left: 25px;
@@ -659,10 +841,16 @@
   .id-drop-down{
     margin-top: 20px;
     grid-area: id-drop-down;
+    @include sm-lesser{
+      margin-left: -196px;
+    }
   }
   .upload-label{
     margin-top: 20px;
     grid-area: upload-label;
+    @include sm-lesser {
+      margin-left: 25px;
+    }
   }
   .btn-next{
     margin-top: 40px;
@@ -673,6 +861,9 @@
     width: 100px;
     background: white;
     border-radius: 6px;
+    @include sm-lesser {
+      margin-left: 25px;
+    }
   }
   .main-grid-terms{
     display: grid;
@@ -742,6 +933,13 @@
   background: #ece5e5;
   margin-left: 55px;
   margin-top: 94px;
+  @include sm-lesser{
+    height: 510px;
+    width: 344px;
+    margin-left: -1px;
+
+  
+  }
 }
 .checklist-desc{
   grid-area: checklist-desc;
@@ -760,6 +958,20 @@
                         "c-desc c-desc c-desc"
                         "b1 b2 b3"
                         "b4 b5 b6";
+                        @include sm-lesser{
+                          display: table-row;
+                          grid-template-rows: auto;
+                          grid-template-columns: auto;
+                          grid-template-areas: "c-heading"
+                                                "c-desc"
+                                                "b1"
+                                                "b2"
+                                                "b3"
+                                                "b4" 
+                                                "b5"
+                                                 "b6";
+                          
+                        }
 }
 .c-heading{
   grid-area: c-heading;
@@ -771,28 +983,40 @@
   grid-area: b1;
 }
 .b2{
+  margin-top: 2%;
   grid-area: b2;
 }
 .b3{
+  margin-top: 2%;
   grid-area: b3;
 }
 .b4{
+  margin-top: 2%;
   grid-area: b4;
-  margin-top: 30px;
 }
 .b5{
+  margin-top: 2%;
   grid-area: b5;
-  margin-top: 30px;
 }
 .b6{
+  margin-top: 2%;
   grid-area: b6;
-  margin-top: 30px;
 }
 .grid-menu{
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 33% 33% 33%;
   grid-template-areas: "menu-1 menu-2 menu-3";
+  @include sm-lesser{
+    display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: "menu-1"
+                      "menu-2"
+                      "menu-3";
+  margin-top: 42px;
+  
+  }
 }
 .grid-submenu-1{
   display: grid;
@@ -843,6 +1067,9 @@
   border-radius: 12px;
   margin-left: 53px;
   margin-top: 16px;
+  @include sm-lesser{
+    margin-left:28px;
+  }
 }
 .menu-2{
   grid-area: menu-2;
@@ -852,6 +1079,10 @@
   border-radius: 12px;
   margin-left: 32px;
   margin-top: 16px;
+  @include sm-lesser{
+    margin-left: 28px;
+    margin-top: 60px;
+  }
 }
 .menu-3{
   grid-area: menu-3;
@@ -861,6 +1092,10 @@
   border-radius: 12px;
   margin-left: 12px;
   margin-top: 16px;
+  @include sm-lesser{
+    margin-left: 28px;
+    margin-top: 60px;
+  }
 }
 .grid-promotion{
   display: grid;
@@ -870,9 +1105,16 @@
                         "h-desc"
                         "h-plan"
                         "btn-launch";
+                      padding-top: -5%;
 }
 .btn-launch{
   grid-area: btn-launch;
+  margin-top: -279px;
+  @include sm-lesser{
+    margin-top: -117px;
+    margin-left: -314px;
+
+  }
 }
 .header-promo{
   grid-area: header-promo;
@@ -882,6 +1124,12 @@
   border-radius: 4px;
   margin-left: 45px;
   margin-top: 67px;
+  @include sm-lesser{
+    width: 345px;
+    margin-left: 25px;
+
+
+  }
 }
 .h-desc{
   grid-area: h-desc;
@@ -894,6 +1142,14 @@
     font-size: 200%;
     text-align: center;
     color: black;
+    @include sm-lesser{
+      margin-top: 7%;
+      font-size: 102%;
+      margin-left: -20px;
+      margin-bottom: -49px;
+
+
+    }
 }
 
 .card-title{
@@ -929,6 +1185,10 @@
     width: 200px;
     height: 350px;
     font-family: BitterBold;
+    @include sm-lesser{
+      margin-left: 15%;
+      margin-top: 10%;
+    }
 }
 .p-style{
   font-size: 24px;
@@ -940,12 +1200,25 @@
 }
 //grid
 .main-grid{
+  margin-bottom: 25%;
   font-family: "BitterRegular";
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto ;
   grid-template-areas: "card-1 card-2 card-3 card-4";
   margin-left: 9px;
+  @include sm-lesser{
+    font-family: "BitterRegular";
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto ;
+  grid-template-areas: "card-1"
+                       "card-2"
+                       "card-3"
+                       "card-4";
+  margin-left: 9px;
+
+  }
 }
 .card-1{
   grid-area: card-1;
@@ -979,6 +1252,12 @@
   border-radius: 7px;
   margin-left: 68px;
   margin-top: 30px;
+  @include sm-lesser{
+    width: 300px;
+    margin-left: 50px;
+   margin-top: 30px;
+
+  }
 }
 .payment{
   grid-area: payment;
@@ -994,6 +1273,24 @@
                        "label-shipping-to . ."
                        "world india kerala"
                        "custom . .";
+  @include sm-lesser{
+    display: grid;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: auto auto;
+    grid-template-areas: "label-ship ."
+                         "label-ship-from ship-from"
+                         "label-ship-mode ."
+                         "shipping ."
+                         "home ."
+                         "pickup ."
+                         "label-shipping-to ."
+                         "world ."
+                         "india ."
+                         "kerala ."
+                         "custom .";
+  
+
+    }               
 }
 .label-ship{
   margin-top: 40px;
@@ -1003,55 +1300,106 @@
   margin-top: 20px;
   margin-left: 64px;
   grid-area: label-ship-from;
+  @include sm-lesser{
+    margin-left: 30px;
+
+  }
 }
 .ship-from{
   margin-top: 20px;
   grid-area: ship-from;
+  @include sm-lesser{
+    margin-left: -508x;
+
+  }
 }
 .label-ship-mode{
   margin-top: 20px;
   margin-left: 64px;
   grid-area: label-ship-mode;
+  @include sm-lesser{
+    margin-left: 30px;
+
+  }
 }
 .shipping{
   margin-top: 20px;
   margin-left: 123px;
   grid-area: shipping;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -31px;
+
+  }
 }
 .home{
   margin-top: 20px;
   grid-area: home;
   margin-left: 70px;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -4px;
+
+  }
 }
 .pickup{
   margin-top: 20px;
   grid-area: pickup;
   margin-left: 20px;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -4px;
+
+  }
 }
 .label-shipping-to{
   margin-top: 20px;
   margin-left: 64px;
   grid-area: label-shipping-to;
+  @include sm-lesser{
+    margin-left: 30px;
+
+  }
 }
 .world{
   margin-top: 20px;
   margin-left: 123px;
   grid-area: world;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -31px;
+
+  }
 }
 .india{
   margin-top: 20px;
   grid-area: india;
   margin-left: 70px;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -4px;
+
+  }
 }
 .kerala{
   margin-top: 20px;
   grid-area: kerala;
   margin-left: 20px;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -4px;
+
+  }
 }
 .custom{
   margin-top: 20px;
   grid-area: custom;
   margin-left: 123px;
+  @include sm-lesser{
+    margin-left: 168px;
+    margin-top: -4px;
+
+  }
 }
 .grid-location{
   display: grid;
@@ -1086,30 +1434,67 @@
                        "conf-accnt-no btn-next";
   margin-top: 57px;
   margin-left: 155px;
+  @include sm-lesser{
+    display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: "pay-header"
+                      "holder-name"
+                      "bank-name"
+                      "accnt-type"
+                      "branch"
+                       "accnt-no" 
+                       "ifsc"
+                       "conf-accnt-no"
+                       "btn-next";
+
+  }
 }
 .holder-name{
   grid-area: holder-name;
+  @include sm-lesser{
+    margin-left: -100px;
+    margin-top: 10px;
+  }
 }
 .bank-name{
   margin-left: -92px;
   grid-area: bank-name;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .accnt-type{
   grid-area: accnt-type;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .branch{
   margin-left: -92px;
   grid-area: branch;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .accnt-no{
   grid-area: accnt-no;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .ifsc{
   margin-left: -92px;
   grid-area: ifsc;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .conf-accnt-no{
   grid-area: conf-accnt-no;
+  @include sm-lesser{
+    margin-left: -100px;
+  }
 }
 .btn-next{
   grid-area: btn-next;
@@ -1118,4 +1503,351 @@
   border: none;
   border-radius: 4px;
   width: 300px;
+}
+.shopnew{
+  border: none; 
+  border-radius: 5px; 
+  width: 245px;
+  @include sm-lesser{
+       width: 161px;
+}
+}
+.ownernew{
+  height: 27px; 
+  width:230px; 
+  border-radius:4px;
+   background: white;
+   @include sm-lesser{
+     width: 161px;
+   }
+}
+.addressnew{
+  width: 407px; border: none; border-radius: 5px;
+  @include sm-lesser{
+    width:161px
+  }
+}
+.categorynew{
+  border: none;
+   width: 240px; 
+   border-radius: 4px;
+  @include sm-lesser{
+    width: 226px;
+    background: white;
+
+  }
+
+}
+.btnNextnew{
+margin-top: 40px; margin-left: 75px; border: none; border-radius: 4px; height: 30px; width: 100px;
+            background: #EFBE24; color: white;
+            @include sm-lesser{
+              margin-top: 2px;
+              margin-left: -377px;
+            }
+
+
+
+}
+.main1{
+ width: 240px;border-radius:4px;background-color: white;border:none;
+  @include sm-lesser{
+    width: 161px;
+  }
+}
+.main2{
+  width: 240px; border-radius: 4px;background: white;border:none;
+  @include sm-lesser{
+    width: 161px;
+  }
+}
+.main3{
+   width: 240px; background: white;border-radius: 4px;border:none;
+  @include sm-lesser{
+    width: 161px;
+  }
+}
+.contactNew{
+
+height: 27px; width:230px; border-radius:4px; background: white;
+@include sm-lesser{
+width:161px;
+}
+}
+.emailNew{
+height: 27px; width:240px; border-radius:4px; background: white;
+@include sm-lesser{
+  width: 161px;;
+}
+}
+.gst1{
+  border: none; border-radius: 5px; width: 230px;
+  @include sm-lesser{
+    width: 161px;
+  }
+}
+.city1{
+width: 233px;
+@include sm-lesser{
+  width: 161px;
+  border: 1px;
+  background-color: white;
+
+}
+}
+.state1{
+  width: 233px;
+  @include sm-lesser{
+    width: 161px;
+    border: 1px;
+    background-color: white;
+  }
+  }
+.pin1{
+    width: 233px;
+    @include sm-lesser{
+      width: 161px;
+      border: 1px;
+      background-color: white;
+
+    }
+}
+.shopdet{
+  @include sm-lesser{
+  grid-area: shop-det;
+  margin-left: 27px;
+  font-weight: 100;
+}
+}
+.nameOwner{
+height: 27px; width:350px; border-radius:4px; background: white;
+@include sm-lesser{
+  width: 170px;
+
+}
+}
+.email1{
+  height: 27px; width:350px; border-radius:4px; background: white;
+  @include sm-lesser{
+    width: 170px;
+  
+  }
+  }
+  .contact1{
+    height: 27px; width:350px; border-radius:4px; background: white;
+    @include sm-lesser{
+      width: 170px;
+    
+    }
+    }
+    .date1{
+
+    width: 320px; border: none;  border-radius: 4px;
+    @include sm-lesser{
+      width: 170px;
+
+    }
+  }
+  .id1{
+
+    width: 320px; border: none;  border-radius: 4px;
+    @include sm-lesser{
+      width: 170px;
+
+    }
+  }
+  .id2{
+
+    width: 320px; border: none;  border-radius: 4px;
+    @include sm-lesser{
+      width: 170px;
+
+    }
+  }
+  .next{
+    margin-top: 40px; border: none; border-radius: 4px; height: 30px; width: 100px;
+    background: #EFBE24; color: white;
+
+    @include sm-lesser{
+          margin-left:-470px ;
+          margin-top:-25px ;
+    }
+  }
+  .next2{
+    margin-top: 40px; border: none; border-radius: 4px; height: 30px; width: 100px;
+    background: #EFBE24; color: white;
+
+    @include sm-lesser{
+          margin-left:0px ;
+          margin-top: -15px;
+    }
+  }
+  .terms{
+  margin-left: 416px; background: none; border: none; border-radius: 3px; color: white;
+  @include sm-lesser{
+        margin-left: 136px;
+  }
+  }
+  .check{
+    margin-left: 286px;
+    @include sm-lesser{
+          margin-left: 28px;
+    }
+    }
+.next3{
+      margin-left: 438px; background: #EFBE24; border: none; border-radius: 3px; color: white;    
+        @include sm-lesser{
+            margin-left: 136px;
+      }
+      }
+
+.desch{
+        margin-top: 55px; margin-left: 125px; font-size: 31px; margin-right: 60px;       
+          @include sm-lesser{
+                margin-left: 59px;
+                margin-top: 20px;
+                font-size: 12px;
+          }
+          }
+ .desch1{
+  margin-top: 2px; margin-left: 213px; font-size: 31px; margin-right: 60px;       
+  @include sm-lesser{
+        margin-left: 98px;
+         margin-top: -16px;
+        font-size: 12px;
+              }
+              }
+.promohead{
+margin-left: 338px;margin-top: 5px;
+  @include sm-lesser{
+    margin-left: 80px;
+  }
+ }
+ .welcome1{
+  height: 36px; width:1000px; background:#009145;border-top-left-radius: 12px; border-top-right-radius: 12px;
+  @include sm-lesser{
+    width:100%;
+  }
+
+ }
+.welcome2{
+  color: white; margin-left: 453px; font-size: 18px; font-family: BitterBold; margin-top: 4px;
+  @include sm-lesser{
+    margin-left: 125px;
+  }
+}
+.welcomeMsg{
+  margin-left: 408px; color: black; font-size: 20px; font-family: BitterBold;
+  @include sm-lesser{
+    margin-left: 65px;
+  }
+  
+}.paragraph{
+  margin-left: 75px; margin-right: 50px;
+  @include sm-lesser{
+    margin-left: 31px;
+    width:93%
+  }
+}
+.checklist1{
+  margin-left: 238px; font-size: 18px; font-family: BitterBold;
+  @include sm-lesser{
+    margin-left: 9px;
+    font-size: 17px;
+    text-align: center;
+  }
+}
+.imageup{
+  margin-left: 381px; margin-top: -47px; height: 85px;
+  @include sm-lesser{
+    margin-left: 143px;
+    margin-top:-46px;
+  }
+}
+.font2{
+  margin-left: 32px;
+  @include sm-lesser{
+    margin-left: 10px;
+  }
+}
+.b11{
+  margin-left: 50px;
+  @include sm-lesser{
+    margin-left: 72px;
+
+  }
+}
+.b21{
+  margin-left: 23px;
+  @include sm-lesser{
+    margin-left: 72px;
+
+  }
+}
+.b31{
+  margin-left: 23px;
+  @include sm-lesser{
+    margin-left: 72px;
+  }
+}
+.b41{
+  margin-left: 50px;
+   @include sm-lesser{
+    margin-left: 72px;
+  }
+}
+.b51{
+  margin-left: 23px;
+  @include sm-lesser{
+    margin-left: 72px;
+  }
+}
+.b61{
+  margin-left: 30px;
+  @include sm-lesser{
+    margin-left: 72px;
+  }
+}
+.dashboard1{
+margin-left: 410px; background: #EFBE24; color: white; border: none; 
+      border-radius: 4px; font-family: BitterBold; height: 32px;
+  @include sm-lesser{
+    margin-left: 30%;
+    margin-top: 10px;
+    margin-bottom: 16%;
+  }
+}
+.dashboardComment{
+  margin-left: 366px;
+  @include sm-lesser{
+          margin-left: 63px;
+  }
+}
+
+.chooseCity{
+  border: none; border-radius: 5px; width: 150px;
+  @include sm-lesser{
+margin-left: -500px;
+  }
+}
+.location1{
+  height: 50px; width: 500px; background: #009145; border-top-left-radius: 7px; border-top-right-radius: 7px;
+  @include sm-lesser{
+    height: 48px;
+    width: 298px;
+    margin-left: 0%;
+  }
+}
+.city2{
+  border: none; width: 291px; border-radius: 5px; margin-left: -466px; margin-top: 54px; height: 33px;
+  @include sm-lesser{
+width: 177px;
+margin-left: -268px;
+  }
+}
+.addButton1{
+  border: none; background: inherit; margin-top: 36px; margin-left: -115px; font-size: 37px; color: #009145;
+  @include sm-lesser{
+    margin-left: -72px;
+  }
 }
