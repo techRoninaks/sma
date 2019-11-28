@@ -50,9 +50,9 @@
                     aria-haspopup="true" aria-expanded="false"><img class="icon"
                         src="assets/icons/resources (TP)-18.png">Status </button>
                 <div class="dropdown-menu dpMenu" aria-labelledby="dropdownMenu">
-                    <div class="dropdown-item dpItem" (click)="allStatus();" style="height: 40px;">All</div>
+                    <div class="dropdown-item dpItem adj" (click)="allStatus();" style="height: 40px;">All</div>
                     <div *ngFor="let sta of Object.keys(this.transactionStatus)">
-                        <div class="dropdown-item dpItem" (click)="stat(transactionStatus[sta].status);" style="height: 40px;">
+                        <div class="dropdown-item dpItem adj" (click)="stat(transactionStatus[sta].status);" style="height: 40px;">
                             {{transactionStatus[sta].status}}</div>
                     </div>
                 </div>
