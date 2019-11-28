@@ -1900,6 +1900,52 @@ let httpParams= new HttpParams()
 .append("userId", data)
 return this.http.post(this.baseUrl+'assets/api/pendingPayOrder.php',httpParams);
 }
+  
+  cartDeliveryPrice(data) {
+let httpParams = new HttpParams()
+.append("prodId", data['prodId'])
+.append("pincode", data['pincode'])
+.append("deliveryOption", data['deliveryOption'])
+.append("productQuantity", data['productQuantity']);
+return this.http.post(this.baseUrl + 'assets/api/cartDeliveryPrice.php', httpParams);
+}
+
+deleteCartProductfn(id, userId, prodid, quantity, pincode) {
+let httpParams = new HttpParams()
+.append("id", id)
+.append("user_id", userId)
+.append("prodid", prodid)
+.append("quantity", quantity)
+.append("pincode", pincode);
+return this.http.post(this.baseUrl + 'assets/api/deleteCartProduct.php', httpParams);
+}
+
+addrUndeliverableCart(prodId, pincode) {
+let httpParams = new HttpParams()
+.append("prodId", prodId)
+// .append("userId",userId);
+.append("pincode", pincode);
+return this.http.post(this.baseUrl + 'assets/api/addrUndeliverableCart.php', httpParams);
+}
+
+getcartCheckout(id) {
+let httpParams = new HttpParams()
+.append("id", id);
+return this.http.post(this.baseUrl + 'assets/api/cartCheckout.php', httpParams);
+
+getCustomerOrderCheckout(orderid) {
+let httpParams = new HttpParams()
+.append("orderid", orderid);
+// .append("prodid", prodid);
+// .append("pin", data['pin']);
+return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
+}
+
+cartImgProdUpload(data) {
+    let httpParams = new HttpParams()
+        .append("prodId", data);
+    return this.http.post(this.baseUrl + 'assets/api/cartImgProdUƒpload.php', httpParams);
+}
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
