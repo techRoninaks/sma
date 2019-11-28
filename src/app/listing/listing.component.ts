@@ -121,6 +121,7 @@ export class ListingComponent implements OnInit {
 	dynamicMsgTitle: any = "";
 	TotalPrice: any;
 	variantValue: any;
+	todayD: any;
 	revIdValue: any = [];
 	Name: any;
 	email: any;
@@ -224,6 +225,7 @@ export class ListingComponent implements OnInit {
 	instantBuyValue: number = 0;
 	varTypes: any ;
 	onVac:any;
+	baseTotalPrice: any;
 	ngOnInit() {
 		// this.setCookie("userId", 2);
 		this.userId = this.getCookie("userId");
@@ -236,10 +238,12 @@ export class ListingComponent implements OnInit {
 		this.datePickerDefault = 1;
 		(<HTMLInputElement><any>document.getElementById("sh")).checked = true;
 		(<HTMLInputElement><any>document.getElementById("showAvailable")).style.display = "none";
-
-
-
-
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
+		this.todayD = mm + '/' + dd + '/' + yyyy;
+		// console.log(todayD);
 		this.route.queryParams.subscribe(params => {
 
 
@@ -256,7 +260,6 @@ export class ListingComponent implements OnInit {
 			this.tokenObj = { prod_id: this.token, user_id: this.userId };
 			// console.log(this.tokenObj);
 			// this.token = params['userId'];
-			this.tokenPriceGetter = { prod_id: this.token, pin: this.pincodeValue, prod_quantity: 1, del_option: "shipping" };
 		});
 
 
@@ -326,7 +329,8 @@ export class ListingComponent implements OnInit {
 				this.bPrice = this.dynamicData.basePrice;
 				this.orderConfValue = this.dynamicData.hasOrderConfirm;
 				this.instantBuyValue = this.dynamicData.hasInstantBuy;
-
+				this.tokenPriceGetter = { prod_id: this.token, pin: this.pincodeValue, prod_quantity: this.minOQuant, del_option: "shipping" };
+				this.baseTotalPrice = this.minOQuant * this.bPrice;
 				//rfq 1st prod
 				this.prod[0] = this.dynamicData.name;
 				this.largeSrc = "assets/images/product/" + this.dynamicData.prodId + "/" + this.dynamicData.prodId + "_0.jpg";
@@ -408,7 +412,14 @@ export class ListingComponent implements OnInit {
 				else if (this.addImageOrNot == 1) {
 					(<HTMLInputElement><any>document.getElementById("imageShowOrNot")).style.display = "block";
 				}
-
+				this.data.getPriceDate(this.tokenPriceGetter).subscribe(
+					data => {
+						// console.log(data);
+						this.priceDate = data;
+		
+					},
+					error => console.error(error)
+				);
 
 
 			},
@@ -491,14 +502,7 @@ export class ListingComponent implements OnInit {
 		);
 
 
-		this.data.getPriceDate(this.tokenPriceGetter).subscribe(
-			data => {
-				// console.log(data);
-				this.priceDate = data;
-
-			},
-			error => console.error(error)
-		);
+	
 		this.data.getVariantCount(this.token).subscribe(
 			data => {
 				// console.log(data);
@@ -645,25 +649,6 @@ export class ListingComponent implements OnInit {
 					// console.log("shop revId outer"+this.revIdValue[q]);
 					q++;
 				}
-				// var x = 0;
-				// while (x < likeDisCount) {
-				// 	var y: number = this.likeDislikes[x]['reviewId'];
-				// 	var z: number = this.likeDislikes[x]['likeDislike'];
-				// 	// console.log("y="+y+",z="+z);
-				// 	if (z == 1) {
-				// 		var ele = (<HTMLImageElement><any>document.getElementById("likeImg_" + y));
-				// 		ele.src = "assets/icons/resources (IL)-23.png";
-				// 		// (<HTMLImageElement><any>document.getElementById("likeImg_"+y)).src="assets/icons/resources (IL)-23.png";
-
-				// 	}
-				// 	else if (z == 0) {
-				// 		var ele1 = (<HTMLImageElement><any>document.getElementById("dislikeImg_" + y));
-				// 		ele1.src = "assets/icons/resources (IL)-24.png";
-				// 		// (<HTMLImageElement><any>document.getElementById("dislikeImg_"+y)).src="assets/icons/resources (IL)-24.png";
-				// 	}
-				// 	x++;
-				// }
-
 			},
 			error => console.error(error)
 		);
@@ -900,16 +885,15 @@ export class ListingComponent implements OnInit {
 
 
 	count_inc() {
-
+		this.priceChangeGetter();
 		if (this.counter < this.maxOQuant) {
 			this.counter++;
 			var xy: HTMLElement = document.getElementById("count") as HTMLElement;
-
 			// this.fgOrderDetails.controls['quantity'].setValue(this.counter);
 		}
 	}
 	count_dec() {
-
+		this.priceChangeGetter();
 		if (this.counter > this.minOQuant) {
 			this.counter--;
 			var xy = document.getElementById("count") as HTMLElement;
@@ -956,6 +940,14 @@ export class ListingComponent implements OnInit {
 				}
 			);
 			(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+		}
+		else if(faqSearchInputLength <3){
+			this.tokenFaq = { prod_id: this.token, number_faq: 0 };
+			this.data.getFaqProduct(this.tokenFaq).subscribe(
+				data => {
+					this.faqProduct = data;
+				}
+			);
 		}
 	}
 	submitFaq() {
@@ -1130,6 +1122,10 @@ export class ListingComponent implements OnInit {
 		var x = (<HTMLInputElement><any>document.getElementById("datePickerId")).value.length;
 		// console.log(x);
 		if (x != 0) {
+			var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+			if(desiredDate<this.todayD){
+				console.log("false");
+			}
 			if (this.activeStatusProd == "inactive") {
 				(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "none";
 				(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
@@ -2130,7 +2126,9 @@ export class ListingComponent implements OnInit {
 		// var res = productVariant.split(" ");
 		// this.varName = res[0];
 		var productVariantValue: any =[];
-		console.log(this.varTypes);
+		var productVariantPrice: any = 0;
+
+		// console.log(this.varTypes);
 		var varVal=0;
 		var varCount =0;
 		var res :any = [];
@@ -2139,13 +2137,14 @@ export class ListingComponent implements OnInit {
 			res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
 			val =  res.split(",");
 			productVariantValue[varVal] =val[0];
+			productVariantPrice = productVariantPrice + parseInt(val[1]);
 			varCount = varVal;
 			varVal++;
 			// console.log(productVariantValue+"....................");
 		}
 		this.varName = productVariantValue;
 
-		console.log(productVariantValue)
+		// console.log(productVariantValue)
 
 		var pin = parseInt(this.getCookie("userPin"));
 		if (ship == true) {
@@ -2166,7 +2165,8 @@ export class ListingComponent implements OnInit {
 			},
 			error => console.error(error)
 		);
-		this.bPrice = parseInt(this.dynamicData.basePrice) * productQuantity;
+		// this.bPrice = parseInt(this.dynamicData.basePrice) * productQuantity;
+		this.baseTotalPrice = ((parseInt(this.dynamicData.basePrice)+productVariantPrice) * productQuantity)+1;
 	}
 	sendRfq() {
 		var userIdValue = parseInt(this.userId);
@@ -2179,6 +2179,7 @@ export class ListingComponent implements OnInit {
 		}
 
 	}
+
 	// variantAdd(x:any){
 	// 	alert(x);
 	// }

@@ -489,6 +489,8 @@ $SubText: 18px;
                     border-radius: 5px;
                     .imgBanner {
                         width: inherit;
+                        height: 20rem;
+                        object-fit: cover;
                     }
                     .dvUndeliver {
                         position: relative;
