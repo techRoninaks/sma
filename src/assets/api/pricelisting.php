@@ -214,8 +214,27 @@
     $resDisc=mysqli_query($con1,$sqlDisc);
     $rowDisc=mysqli_fetch_array($resDisc);
     $discountInfo=array('percentage' => $rowDisc["percentage"]);
-    $disc=$discountInfo["percentage"];
-
+    // $disc=$discountInfo["percentage"];
+    $offStartDate = $rowDisc["from_time_stamp"];
+    $offEndDate = $rowDisc["to_tme_Stamp"];
+    $tDateValue2=$row["CURRENT_DATE"];
+    $sql="SELECT DATEDIFF('$tDateValue2', '$offEndDate') AS DateDiffNew, DATEDIFF('$offStartDate', '$tDateValue2') AS DateDiffOld";
+    // echo $sql;
+    $res=mysqli_query($con1,$sql);
+    $row=mysqli_fetch_assoc($res);
+    $ddN=$row["DateDiffNew"];
+    $ddO=$row["DateDiffOld"];
+    //  echo $ddN."<br>".$ddO."<br>".$tDateValue2."<br>".$sql."<br>";
+    // ($ddN>0 and $ddO<0) OR $ddO<0 
+    if($ddN<0 AND $ddO<0){
+        $disc=$discountInfo["percentage"];
+        // echo 1;
+    }
+    else
+    {
+        // echo 2;
+        $disc = 0;
+    }
 
     //shipping qty price 
     if($deliveryOption=="shipping")
@@ -247,7 +266,7 @@
     //final price calc
     $discPrice = $minBulk * ((100-$disc)/100);
     $price = $discPrice + $qtPrice + $shipBasePrice;
-    $priceAfterTax = $price * ((100-$tax)/100);
+    $priceAfterTax = $price * (1+($tax/100));
     $totalAmount = round($priceAfterTax);
 
     // echo $totalAmount;

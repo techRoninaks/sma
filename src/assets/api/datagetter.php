@@ -29,7 +29,7 @@
         $ddN=$row["DateDiffNew"];
         $ddO=$row["DateDiffOld"];
         // ($ddN>0 and $ddO<0) OR $ddO<0 
-        if(($onVac == 1)AND(($ddN>0 AND $ddO<0)OR($ddO<0))){
+        if(($onVac == 1)AND(($ddN<0 AND $ddO<0)OR($ddO<0))){
             $sql_query2 = "SELECT seller_id FROM `shop_details` where id = $shopId ";
             $result2 = mysqli_query($con2 , $sql_query2);
             $row2=mysqli_fetch_array($result2);
