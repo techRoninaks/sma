@@ -9,13 +9,13 @@
     <div class="grid-main">
         <div class="section-1">
             <div class="grid-1">
-                <label style="margin-top: -309px; margin-left: 43px;">{{dynamicOrderData.createdDate}}</label>
+                <label class="date-style">{{dynamicOrderData.createdDate}}</label>
                 <div class="left-sect">
                         <label class="text-style">#SMACAT{{dynamicOrderData.orderId}}{{dynamicOrderData.createDate}}</label>
                         <img src="assets/icons/resources (IL)-18.png" class="img-style" style="margin-top: -294px;
                         margin-left: 4px;
                         height: 45px;">
-                    <img src="assets/images/product/{{dynamicOrderData.prodId}}/{{dynamicOrderData.prodId}}_0.jpg" height="210px" width="300px" style="margin-top: -60px;">
+                    <img src="assets/images/product/{{dynamicOrderData.prodId}}/{{dynamicOrderData.prodId}}_0.jpg" height="210px" width="300px" class="manage-img-style">
                 </div>
                 <div class="right-sect-1">
                     <div class="day">
@@ -124,19 +124,19 @@
                         <div class="amount">
                             <span class="dot"></span>
                             <img src="assets/icons/manageOrders/MIO icons-02.png" height="60px" width="70px"class="img-style">
-                            <p>Amount payable:</p>
+                            <p class="amount-style">Amount payable:</p>
                             <p>{{dynamicOrderData.total_price}}</p>
                         </div>
                         <div class="ship">
                             <span class="dot"></span>
                             <img src="assets/icons/manageOrders/MIO icons-03.png" height="60px" width="70px"class="img-style">
-                            <p>Shipment charge:</p>
+                            <p class="amount-style">Shipment charge:</p>
                             <p>{{dynamicOrderData.shippingprice}}</p>
                         </div>
                         <div class="subtotal">
                             <span class="dot"></span>
                             <img src="assets/icons/manageOrders/MIO icons-04.png" height="70px" width="70px" class="img-style">
-                            <p>Total:</p>
+                            <p class="amount-style">Total:</p>
                             <p>{{dynamicOrderData.total_price}}</p>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
             </div>
         </div>
         <div class="section-4">
-                <div class="grid-order-history-head" style="width: 90%; margin-left: 5%;">
+                <div class="grid-order-history-head">
                         <div class="status">
                                 <label>STATUS</label>
                         </div>
@@ -275,97 +275,97 @@
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'pending confirmation' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'pending payment' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'processing' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'shipped' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'delivered' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="dot-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                     <div *ngIf="dynamicDataOrderData.orderStatus == 'closed' "> 
                                         <div class="stats-1">
                                         </div>
-                                        <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
+                                        <div class="full-circle i-circle-1" style=" margin-top: -11px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 218px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-2" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 439px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-3" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 647px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-4" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 854px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-5" style=" margin-top: -20px;">
                                         </div>
-                                        <div class="full-circle" style="margin-left: 1059px; margin-top: -20px;">
+                                        <div class="full-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
                                 </div>
@@ -442,265 +442,267 @@
             </ul>
             <hr class="hrdiv">
     </div>
-    <div class="grid-main-filter">
-        <div class="current">
-            <button id="current-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">CURRENT ORDERS</button>
+    <div class="order-list-style">
+        <div class="grid-main-filter">
+            <div class="current">
+                <button id="current-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">CURRENT ORDERS</button>
+            </div>
+            <div class="past">
+                <button id="past-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">PAST ORDERS</button>
+            </div>
         </div>
-        <div class="past">
-            <button id="past-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">PAST ORDERS</button>
-        </div>
-    </div>
-    <div class="grid-btn-filter">
-            <div class="all">
-                    <button id="all-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">All</button>
-            </div>
-            <div class="pending-conf">
-                    <button id="pending-conf-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingConfirmFilter();">Pending Confirmation</button>
-            </div>
-            <div class="pending-pay">
-                    <button id="pending-pay-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingPayFilter();">Pending Payment</button>
-            </div>
-            <div class="processing">
-                    <button id="processing-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="processingFilter();">Processing</button>
-            </div>
-            <div class="shipped">
-                    <button id="shipped-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="shippedFilter();">Shipped</button>
-            </div>
-            <div class="delivered">
-                    <button id="delivered-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="deliveredFilter();">Delivered</button>
-            </div>
-            <div class="closed">
-                    <button id="closed-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">Closed</button>
-            </div>
-    </div>
-    <div class="order-list">
-        <div class="grid-order-history-head" style="width: 90%; margin-left: 5%;" *ngIf="! noOrders">
-                <div class="orders">
-                        <label>ORDERS</label>
+        <div class="grid-btn-filter">
+                <div class="all">
+                        <button id="all-btn" style="margin-top: 55px; float: right;" class="btn-filter-style" (click)="allFilter();">All</button>
                 </div>
-                <div class="status">
-                        <label>STATUS</label>
+                <div class="pending-conf">
+                        <button id="pending-conf-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingConfirmFilter();">Pending Confirmation</button>
+                </div>
+                <div class="pending-pay">
+                        <button id="pending-pay-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingPayFilter();">Pending Payment</button>
+                </div>
+                <div class="processing">
+                        <button id="processing-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="processingFilter();">Processing</button>
+                </div>
+                <div class="shipped">
+                        <button id="shipped-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="shippedFilter();">Shipped</button>
+                </div>
+                <div class="delivered">
+                        <button id="delivered-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="deliveredFilter();">Delivered</button>
+                </div>
+                <div class="closed">
+                        <button id="closed-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();">Closed</button>
                 </div>
         </div>
-        
-        <div class="grid-order-history" *ngFor="let item of dynamicDataOrderDataAll">
-                <div class="prod-name">
-                    <label style="font-size: 19px; font-variant-caps: all-petite-caps;">{{item.prodName}}</label>
-                </div>
-                <div class="desc">
-                    <p style="font-family:Bitter;">{{item.shortDesc}}</p>
-                </div>
-                <div class="order-no">
-                    <label>#SMACAT{{item.orderId}}{{item.createDate}}</label>
-                </div>
-                <div class="invoice">
-                    <button class="btn-invoice-style" (click)="createInvoice();" >INVOICE</button>
-                </div>
-                <div class="c-info-label">
-                    <label>CUSTOMER INFORMATION</label>
-                </div>
-                <div class="c-name">
-                    <label style="font-family: Bitter;">Name:</label>
-                    <br>
-                    <label style="font-family: Bitter;">{{item.custName}}</label>
-                </div>
-                <div class="c-location">
-                    <label style="font-family: Bitter;">Location:</label>
-                    <br>
-                    <label style="font-family: Bitter;">{{item.custPlace}},{{item.custPin}}</label>
-                </div>
-                <div class="order-btn">
-                    <button class="btn-order-style" (click)=viewOrder();>VIEW ORDER</button>
-                </div>
-                <div class="g-status">
-                    <div class="grid-status-all" style="margin-top: 103px;">
-                            <div class="pending-conf">
-                                    <label>Pending Confirmation</label>
-                            </div>
-                            <div class="pending-pay">
-                                    <label>Pending Payment</label>
-                            </div>
-                            <div class="processing">
-                                    <label>Processing</label>
-                            </div>
-                            <div class="shipped">
-                                    <label>Shipped</label>
-                            </div>
-                            <div class="deliver">
-                                    <label>Delivered</label>
-                            </div>
-                            <div class="closed">
-                                    <label>Closed</label>
-                            </div>
-                            <div class="ic-pending-conf">
-                                    <span class="dot">
-                                            <img src="assets/images/userProfile/ic_pending_conf.png"
-                                                    style="padding-top: 11%;">
-                                    </span>
-                            </div>
-                            <div class="ic-pending-pay">
-                                    <span class="dot">
-                                            <img src="assets/images/userProfile/ic_pending_pay.png"
-                                                    style="padding-top: 20%;">
-                                    </span>
-                            </div>
-                            <div class="ic-processing">
-                                    <img src="assets/images/userProfile/ic_processing.jpg" width="65px"
-                                            height="60px" style="border-radius: 50%;">
-                            </div>
-                            <div class="ic-shipped">
-                                    <img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
-                                            style="border-radius: 50%;">
-                            </div>
-                            <div class="ic-deliver">
-                                    <img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
-                                            style="border-radius: 50%;">
-                            </div>
-                            <div class="ic-closed">
-                                    <span class="dot">
-                                            <img src="assets/images/userProfile/ic_closed.png"
-                                                    style="padding-top: 7%; margin-top: 7%;" width="50px"
-                                                    height="53px">
-                                    </span>
-                            </div>
-                            
-                            <div class="stat-bar-1">
-                                <div *ngIf="item.orderStatus == 'pending confirmation' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                                <div *ngIf="item.orderStatus == 'pending payment' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                                <div *ngIf="item.orderStatus == 'processing' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                                <div *ngIf="item.orderStatus == 'shipped' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                                <div *ngIf="item.orderStatus == 'delivered' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="dot-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                                <div *ngIf="item.orderStatus == 'closed' "> 
-                                    <div class="stats-1">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: -12px; margin-top: -11px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 178px; margin-top: -19px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 358px; margin-top: -21px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 520px; margin-top: -21px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 686px; margin-top: -20px;">
-                                    </div>
-                                    <div class="full-circle" style="margin-left: 847px; margin-top: -20px;">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="label-1">
-                                <label>Confirmed on</label>
-                                <label *ngIf="! cancelled">Cancelled</label>
-                                <br>
-                                <label>{{item.stage_1_date}}</label>
-                            </div>
-                            <div class="label-2">
-                                <label>Payment Confirmed on</label>
-                                <br>
-                                <label>{{item.stage_2_date}}</label>
-                            </div>
-                            <div class="label-3">
-                                    <label >Processed on</label>
-                                    <br>
-                                    <label>{{item.stage_3_date}}</label>
-                            </div>
-                            <div class="label-4">
-                                    <label>Shipped on</label>
-                                    <br>
-                                    <label>{{item.stage_4_date}}</label>
-                            </div>
-                            <div class="label-5">
-                                    <label>Delivered on</label>
-                                    <br>
-                                    <label>{{item.stage_5_date}}</label>
-                            </div>
-                            <div class="label-6">
-                                    <label>Closed on</label>
-                                    <br>
-                                    <label>{{item.stage_6_date}}</label>
-                            </div>
+        <div class="order-list">
+            <div class="grid-order-history-head" style="margin-left: 5%;" *ngIf="! noOrders">
+                    <div class="orders">
+                            <label>ORDERS</label>
                     </div>
-                </div>
+                    <div class="status">
+                            <label>STATUS</label>
+                    </div>
+            </div>
+            
+            <div class="grid-order-history" *ngFor="let item of dynamicDataOrderDataAll">
+                    <div class="prod-name">
+                        <label style="font-size: 19px; font-variant-caps: all-petite-caps;">{{item.prodName}}</label>
+                    </div>
+                    <div class="desc">
+                        <p style="font-family:Bitter;">{{item.shortDesc}}</p>
+                    </div>
+                    <div class="order-no">
+                        <label>#SMACAT{{item.orderId}}{{item.createDate}}</label>
+                    </div>
+                    <div class="invoice">
+                        <button class="btn-invoice-style" (click)="createInvoice();" >INVOICE</button>
+                    </div>
+                    <div class="c-info-label">
+                        <label>CUSTOMER INFORMATION</label>
+                    </div>
+                    <div class="c-name">
+                        <label style="font-family: Bitter;">Name:</label>
+                        <br>
+                        <label style="font-family: Bitter;">{{item.custName}}</label>
+                    </div>
+                    <div class="c-location">
+                        <label style="font-family: Bitter;">Location:</label>
+                        <br>
+                        <label style="font-family: Bitter;">{{item.custPlace}},{{item.custPin}}</label>
+                    </div>
+                    <div class="order-btn">
+                        <button class="btn-order-style" (click)=viewOrder();>VIEW ORDER</button>
+                    </div>
+                    <div class="g-status">
+                        <div class="grid-status-all" style="margin-top: 103px;">
+                                <div class="pending-conf">
+                                        <label>Pending Confirmation</label>
+                                </div>
+                                <div class="pending-pay">
+                                        <label>Pending Payment</label>
+                                </div>
+                                <div class="processing">
+                                        <label>Processing</label>
+                                </div>
+                                <div class="shipped">
+                                        <label>Shipped</label>
+                                </div>
+                                <div class="deliver">
+                                        <label>Delivered</label>
+                                </div>
+                                <div class="closed">
+                                        <label>Closed</label>
+                                </div>
+                                <div class="ic-pending-conf">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_pending_conf.png"
+                                                        style="padding-top: 11%;">
+                                        </span>
+                                </div>
+                                <div class="ic-pending-pay">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_pending_pay.png"
+                                                        style="padding-top: 20%;">
+                                        </span>
+                                </div>
+                                <div class="ic-processing">
+                                        <img src="assets/images/userProfile/ic_processing.jpg" width="65px"
+                                                height="60px" style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-shipped">
+                                        <img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
+                                                style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-deliver">
+                                        <img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
+                                                style="border-radius: 50%;">
+                                </div>
+                                <div class="ic-closed">
+                                        <span class="dot">
+                                                <img src="assets/images/userProfile/ic_closed.png"
+                                                        style="padding-top: 7%; margin-top: 7%;" width="50px"
+                                                        height="53px">
+                                        </span>
+                                </div>
+                                
+                                <div class="stat-bar-1">
+                                    <div *ngIf="item.orderStatus == 'pending confirmation' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="dot-circle circle-2" style="margin-top: -19px;">
+                                        </div>
+                                        <div class="dot-circle circle-3" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-4" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-5" style="margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.orderStatus == 'pending payment' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle circle-2" style="margin-top: -19px;">
+                                        </div>
+                                        <div class="dot-circle circle-3" style=" margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-4" style=" margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-5" style=" margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.orderStatus == 'processing' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle circle-2" style=" margin-top: -19px;">
+                                        </div>
+                                        <div class="full-circle circle-3" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-4" style=" margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-5" style="margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.orderStatus == 'shipped' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle circle-2" style=" margin-top: -19px;">
+                                        </div>
+                                        <div class="full-circle circle-3" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="full-circle circle-4" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="dot-circle circle-5" style="margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.orderStatus == 'delivered' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle circle-2" style="margin-top: -19px;">
+                                        </div>
+                                        <div class="full-circle circle-3" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="full-circle circle-4" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="full-circle circle-5" style="margin-top: -20px;">
+                                        </div>
+                                        <div class="dot-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="item.orderStatus == 'closed' "> 
+                                        <div class="stats-1">
+                                        </div>
+                                        <div class="full-circle circle-1" style="margin-top: -11px;">
+                                        </div>
+                                        <div class="full-circle circle-2" style="margin-top: -19px;">
+                                        </div>
+                                        <div class="full-circle circle-3" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="full-circle circle-4" style="margin-top: -21px;">
+                                        </div>
+                                        <div class="full-circle circle-5" style="margin-top: -20px;">
+                                        </div>
+                                        <div class="full-circle circle-6" style="margin-top: -20px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="label-1">
+                                    <label>Confirmed on</label>
+                                    <label *ngIf="! cancelled">Cancelled</label>
+                                    <br>
+                                    <label>{{item.stage_1_date}}</label>
+                                </div>
+                                <div class="label-2">
+                                    <label>Payment Confirmed on</label>
+                                    <br>
+                                    <label>{{item.stage_2_date}}</label>
+                                </div>
+                                <div class="label-3">
+                                        <label >Processed on</label>
+                                        <br>
+                                        <label>{{item.stage_3_date}}</label>
+                                </div>
+                                <div class="label-4">
+                                        <label>Shipped on</label>
+                                        <br>
+                                        <label>{{item.stage_4_date}}</label>
+                                </div>
+                                <div class="label-5">
+                                        <label>Delivered on</label>
+                                        <br>
+                                        <label>{{item.stage_5_date}}</label>
+                                </div>
+                                <div class="label-6">
+                                        <label>Closed on</label>
+                                        <br>
+                                        <label>{{item.stage_6_date}}</label>
+                                </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-    </div>
-    <div class="grid-no-order" *ngIf="noOrders">
-        <div class="header">
-                <label style="font-family: BitterBold; font-size: xx-large;">NO ORDERS AVAILABLE</label>
+        <div class="grid-no-order" *ngIf="noOrders">
+            <div class="header">
+                    <label style="font-family: BitterBold; font-size: xx-large;">NO ORDERS AVAILABLE</label>
+            </div>
         </div>
     </div>
 </div>
