@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Condition } from 'selenium-webdriver';
+var imageRfqValue: any = "";
 var imageRfqValue0: any = "";
 var imageRfqValue1: any = "";
 var imageRfqValue2: any = "";
@@ -37,6 +39,7 @@ declare var Razorpay: any;
 	styleUrls: ['./listing.component.scss']
 })
 export class ListingComponent implements OnInit {
+	submitted: boolean;
 	shipping_id: any;
 	router: any;
 	flag: number;
@@ -68,7 +71,6 @@ export class ListingComponent implements OnInit {
 	unFilledStarRat: any = [];
 	filledStarRatArray: any = [];
 	unFilledStarRatArray: any = [];
-	submitted = false;
 	success = false;
 	reviewDateDiff: any = "";
 	faqProduct: any = [];
@@ -165,13 +167,21 @@ export class ListingComponent implements OnInit {
 	hasRfqBit: number;
 	hasGiftBit: number;
 	hasDatePickerBit: number;
+	datePickerDefaultCheckOut: any;
+	activeStatusCheckOut: any;
+
 	constructor(private rout: Router, private data: DataService, private formBuilder: FormBuilder, private elementRef: ElementRef, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
-			customername: ['', Validators.required],
-			address: ['', Validators.required],
-			email: ['', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
-			contact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-
+			fullname: ['', Validators.required],
+			reg_address1: ['', Validators.required],
+			reg_address2: ['', Validators.required],
+			reg_city: ['', Validators.required],
+			reg_dist: ['', Validators.required],
+			reg_state: ['', Validators.required],
+			reg_country: ['', Validators.required],
+			reg_pin: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+			reg_email: ['', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
+			reg_mobile_no: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
 		})
 	}
 	dynamicData: any = "";
@@ -223,6 +233,7 @@ export class ListingComponent implements OnInit {
 	likeDislikes: any = [];
 	orderConfValue: number = 0;
 	instantBuyValue: number = 0;
+
 	varTypes: any ;
 	onVac:any;
 	baseTotalPrice: any;
@@ -723,29 +734,35 @@ export class ListingComponent implements OnInit {
 		document.getElementById('savedAddr').style.display = "block";
 	}
 	formSave() {
-		var contact_name = (<HTMLInputElement><any>document.getElementById("contactName-Form")).value;
-		var addr1 = (<HTMLInputElement><any>document.getElementById("addr1-Form")).value;
-		var addr2 = (<HTMLInputElement><any>document.getElementById("addr2-Form")).value;
-		var country = (<HTMLInputElement><any>document.getElementById("country-Form")).value;
-		var city = (<HTMLInputElement><any>document.getElementById("city-Form")).value;
-		var district = (<HTMLInputElement><any>document.getElementById("District-Form")).value;
-		var contact_email = (<HTMLInputElement><any>document.getElementById("contact-Email-Form")).value;
-		var state = (<HTMLInputElement><any>document.getElementById("state-Form")).value;
-		var pincode = (<HTMLInputElement><any>document.getElementById("pincode-Form")).value;
-		var contact_number = (<HTMLInputElement><any>document.getElementById("contact-Number-Form")).value;
+		this.submitted = true;
+		if (this.checkoutForm.invalid) {
+			// alert("Enter Details");
+		}
+		else {
+			var contact_name = (<HTMLInputElement><any>document.getElementById("contactName-Form")).value;
+			var addr1 = (<HTMLInputElement><any>document.getElementById("addr1-Form")).value;
+			var addr2 = (<HTMLInputElement><any>document.getElementById("addr2-Form")).value;
+			var country = (<HTMLInputElement><any>document.getElementById("country-Form")).value;
+			var city = (<HTMLInputElement><any>document.getElementById("city-Form")).value;
+			var district = (<HTMLInputElement><any>document.getElementById("District-Form")).value;
+			var contact_email = (<HTMLInputElement><any>document.getElementById("contact-Email-Form")).value;
+			var state = (<HTMLInputElement><any>document.getElementById("state-Form")).value;
+			var pincode = (<HTMLInputElement><any>document.getElementById("pincode-Form")).value;
+			var contact_number = (<HTMLInputElement><any>document.getElementById("contact-Number-Form")).value;
 
-		this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
+			this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
 
-		this.data.getsaveNewAddress(this.formAddress, this.orderid).subscribe();
-		// this.id = "2";
-		this.data.getNewAddr(this.orderid).subscribe(
-			data => {
-				this.dynamicNewAddr = data;
-				// console.log(this.dynamicNewAddr);
-			},
-			error => console.error(error)
-		);
-
+			this.data.getsaveNewAddress(this.formAddress, this.orderid).subscribe();
+			// this.id = "2";
+			this.data.getNewAddr(this.orderid).subscribe(
+				data => {
+					this.dynamicNewAddr = data;
+					// console.log(this.dynamicNewAddr);
+				},
+				error => console.error(error)
+			);
+			document.getElementById('formGroup').style.display = "none";
+		}
 	}
 
 	setCookie(cname, value) {
@@ -757,40 +774,72 @@ export class ListingComponent implements OnInit {
 
 	//checkout giftoption
 	giftoption() {
-		document.getElementById('showGiftCard').style.display = "block";
-		// this.cookieService.set("amal","mann");
-		// var aml = this.cookieService.get("amal");
-		// console.log(aml);
-
 		// Cookie Section BEGN
 
 		//setting cookies , remove on commit
-
-
 		//get data from cookies
-		// var i = 0;
 		var giftTitle = this.getCookie("giftTitle");
 		var giftNote = this.getCookie("giftNote");
 		var giftAdd = this.getCookie("giftAddress");
 
-		var addr1 = giftAdd.split("!~!")
-		var addr2 = giftAdd.split("!~!")
-		var addr3 = giftAdd.split("!~!")
-		var addr4 = giftAdd.split("!~!")
-		var addr5 = giftAdd.split("!~!")
-		var addr6 = giftAdd.split("!~!")
-		var addr7 = giftAdd.split("!~!")
+		var addre1 = giftTitle.split("!~!");
+		var addre2 = giftNote.split("!~!");
+		var addr3 = giftAdd.split("!~!");
+		var addr4 = giftAdd.split("!~!");
+		var addr5 = giftAdd.split("!~!");
+		var addr6 = giftAdd.split("!~!");
+		var addr7 = giftAdd.split("!~!");
+		var addr8 = giftAdd.split("!~!");
+		var addr9 = giftAdd.split("!~!");
 
-		document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote + "  " + addr1[0] + " " + addr2[1] + " " + addr3[2] + " " + addr4[3] + " " + addr5[4] + " " + addr6[5] + " " + addr7[6]);
+		// document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
 
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[0]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[1]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[2]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[3]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[4]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[5]);
-		// document.getElementById("Gift-Note-Sect1").innerText = (addr1[6]);
+		document.getElementById("giftTitleId").innerText = (addre1[0]);
+		document.getElementById("giftNoteId").innerText = (addre2[1]);
+		document.getElementById("giftHouseNameId").innerText = (addr3[2]);
+		document.getElementById("giftStreetAddrId").innerText = (addr4[3]);
+		document.getElementById("giftCityId").innerText = (addr5[4]);
+		document.getElementById("giftDistrictId").innerText = (addr6[5]);
+		document.getElementById("giftStateId").innerText = (addr7[6]);
+		document.getElementById("giftCountryId").innerText = (addr8[7]);
+		document.getElementById("giftPincodeId").innerText = (addr9[8]);
 
+		var giftOptionState = (<HTMLInputElement><any>document.getElementById("giftOption")).checked;
+		// console.log(giftOptionState);
+
+
+		if (giftOptionState) {
+			// giftOptionCard = 1;
+			document.getElementById('showGiftCard').style.display = "block";
+		}
+		else {
+			document.getElementById('showGiftCard').style.display = "none";
+		}
+		// giftOptionCard = 0;
+
+
+		var contact_name = (<HTMLInputElement><any>document.getElementById("contactName-Form")).value;
+		var addr1 = (<HTMLInputElement><any>document.getElementById("giftHouseNameId")).value;
+		var addr2 = (<HTMLInputElement><any>document.getElementById("giftStreetAddrId")).value;
+		var country = (<HTMLInputElement><any>document.getElementById("giftCountryId")).value;
+		var city = (<HTMLInputElement><any>document.getElementById("giftCityId")).value;
+		var district = (<HTMLInputElement><any>document.getElementById("giftDistrictId")).value;
+		var contact_email = (<HTMLInputElement><any>document.getElementById("contact-Email-Form")).value;
+		var state = (<HTMLInputElement><any>document.getElementById("giftStateId")).value;
+		var pincode = (<HTMLInputElement><any>document.getElementById("giftPincodeId")).value;
+		var contact_number = (<HTMLInputElement><any>document.getElementById("contact-Number-Form")).value;
+
+		this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
+
+		this.data.saveAddressGiftNote(this.formAddress, this.orderid, this.userId ).subscribe();
+		// this.id = "2";
+		this.data.getNewAddr(this.orderid).subscribe(
+			data => {
+				this.dynamicNewAddr = data;
+				// console.log(this.dynamicNewAddr);
+			},
+			error => console.error(error)
+		);
 	}
 
 	// address change
@@ -1168,6 +1217,8 @@ export class ListingComponent implements OnInit {
 		this.titleGift = title;
 		this.addressGift = address;
 		this.noteGift = note;
+
+
 		// console.log(title);
 		// console.log(note);
 		// console.log(address);
@@ -1177,6 +1228,45 @@ export class ListingComponent implements OnInit {
 		// console.log(this.cookieService.get("giftTitle")+"cookie");
 		// console.log(this.cookieService.get("giftNote")+"cookie");
 		// console.log(this.cookieService.get("giftAddress")+"cookie");
+
+		var giftTitle = this.getCookie("giftTitle");
+		var giftNote = this.getCookie("giftNote");
+		var giftAdd = this.getCookie("giftAddress");
+
+		var addr1 = giftTitle.split("!~!");
+		var addr2 = giftNote.split("!~!");
+		var addr3 = giftAdd.split("!~!");
+		var addr4 = giftAdd.split("!~!");
+		var addr5 = giftAdd.split("!~!");
+		var addr6 = giftAdd.split("!~!");
+		var addr7 = giftAdd.split("!~!");
+		var addr8 = giftAdd.split("!~!");
+		var addr9 = giftAdd.split("!~!");
+
+		(<HTMLInputElement><any>document.getElementById('giftTitleId')).value = addr1[0];
+		(<HTMLInputElement><any>document.getElementById('giftNoteId')).value = addr2[0];
+		(<HTMLInputElement><any>document.getElementById('giftHouseNameId')).value = addr3[0];
+		(<HTMLInputElement><any>document.getElementById('giftStreetAddrId')).value = addr4[1];
+		(<HTMLInputElement><any>document.getElementById('giftCityId')).value = addr5[2];
+		(<HTMLInputElement><any>document.getElementById('giftDistrictId')).value = addr6[3];
+		(<HTMLInputElement><any>document.getElementById('giftStateId')).value = addr7[4];
+		(<HTMLInputElement><any>document.getElementById('giftCountryId')).value = addr8[5];
+		(<HTMLInputElement><any>document.getElementById('giftPincodeId')).value = addr9[6];
+
+
+		// document.getElementById("giftTitleId").innerText = (addr1[0]);
+		// document.getElementById("giftNoteId").innerText = (addr2[1]);
+		// document.getElementById("giftHouseNameId").innerText = (addr3[2]);
+		// document.getElementById("giftStreetAddrId").innerText = (addr4[3]);
+		// document.getElementById("giftCityId").innerText = (addr5[4]);
+		// document.getElementById("giftStateId").innerText = (addr6[5]);
+		// document.getElementById("giftCountryId").innerText = (addr7[6]);
+		// document.getElementById("giftPincodeId").innerText = (addr8[7]);
+
+		// document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
+		(<HTMLInputElement><any>document.getElementById("giftOption")).checked = true;
+		document.getElementById('showGiftCard').style.display = "block";
+
 	}
 
 
@@ -1623,11 +1713,28 @@ export class ListingComponent implements OnInit {
 						},
 						error => console.error(error)
 					);
+
+					this.data.readFileProdImage(this.token).subscribe(
+						data => {
+							this.prodImageCount = data;
+							var iCount = this.prodImageCount.countPI;
+							for (var x: any = 0; x < iCount; x++) {
+								this.imagesCount[x] = x;
+							}
+							// console.log(this.imagesCount);
+						},
+						error => console.error(error)
+					);
 				});
 
 
 			}
 			else if (x == 'requestOrder') {
+
+				document.getElementById('checkOutId').style.display = "none";
+				document.getElementById('reqId').style.display = "block";
+
+
 				var msgCount: any = this.Object.keys(this.messageTitle).length;
 				// console.log(msgCount);
 				var msg: any = [];
@@ -1754,6 +1861,19 @@ export class ListingComponent implements OnInit {
 						},
 						error => console.error(error)
 					);
+
+					this.data.readFileProdImage(this.token).subscribe(
+						data => {
+							this.prodImageCount = data;
+							var iCount = this.prodImageCount.countPI;
+							for (var x: any = 0; x < iCount; x++) {
+								this.imagesCount[x] = x;
+							}
+							// console.log(this.imagesCount);
+						},
+						error => console.error(error)
+					);
+
 				});
 
 				//sonu 
@@ -1902,6 +2022,19 @@ export class ListingComponent implements OnInit {
 					},
 					error => console.error(error)
 				);
+
+				this.data.readFileProdImage(this.token).subscribe(
+					data => {
+						this.prodImageCount = data;
+						var iCount = this.prodImageCount.countPI;
+						for (var x: any = 0; x < iCount; x++) {
+							this.imagesCount[x] = x;
+						}
+						// console.log(this.imagesCount);
+					},
+					error => console.error(error)
+				);
+
 			});
 
 
@@ -1919,7 +2052,7 @@ export class ListingComponent implements OnInit {
 		else {
 			alert('pick a date');
 		}
-
+		document.getElementById('ApplyTextMsgId').style.display = "block";
 	}
 
 	redirect(c: any) {
@@ -2180,7 +2313,33 @@ export class ListingComponent implements OnInit {
 
 	}
 
-	// variantAdd(x:any){
-	// 	alert(x);
-	// }
+
+	reqDatePickerDelivery() {
+		var x = (<HTMLInputElement><any>document.getElementById("reqDatePicker")).value.length;
+		// console.log(x);
+		if (x != 0) {
+			if (this.activeStatusCheckOut == "inactive") {
+				(<HTMLInputElement><any>document.getElementById("checkOutId")).style.display = "none";
+				(<HTMLInputElement><any>document.getElementById("reqId")).style.display = "block";
+			} else {
+				this.datePickerDefaultCheckOut = 0;
+				(<HTMLInputElement><any>document.getElementById("checkOutId")).style.display = "none";
+				(<HTMLInputElement><any>document.getElementById("reqId")).style.display = "block";
+				// alert("Checkout changed to Request Order");
+			}
+		}
+		else {
+			if (this.activeStatusCheckOut == "inactive") {
+				(<HTMLInputElement><any>document.getElementById("checkOutId")).style.display = "none";
+				(<HTMLInputElement><any>document.getElementById("reqId")).style.display = "block";
+			} else {
+				this.datePickerDefaultCheckOut = 1;
+				(<HTMLInputElement><any>document.getElementById("checkOutId")).style.display = "block";
+				(<HTMLInputElement><any>document.getElementById("reqId")).style.display = "none";
+				// alert("Request Order changed to Checkout);
+			}
+		}
+		document.getElementById('ApplyTextMsgId').style.display = "none";
+	}
+
 }

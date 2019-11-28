@@ -21,6 +21,7 @@ $SubText: 18px;
 	}
 }
 
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @mixin sm {
 	@media (min-width: 600px) {
@@ -30,29 +31,53 @@ $SubText: 18px;
 
 /* Medium devices (landscape tablets, 768px and up) */
 @mixin md {
-	@media (min-width: 768px) {
-		@content;
-	}
+
+    @media (min-width: 768px) {
+
+        @content;
+
+    }
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @mixin lg {
-	@media (min-width: 992px) {
-		@content;
-	}
+
+    @media (min-width: 992px) {
+
+        @content;
+
+    }
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @mixin xlg {
-	@media (min-width: 1200px) {
-		@content;
-	}
+
+    @media (min-width: 1200px) {
+
+        @content;
+
+    }
+
 }
 @mixin xxlg {
 	@media (min-width: 1500px) {
 		@content;
 	}
 }
+
+@mixin xxlg {
+
+    @media (min-width: 1500px) {
+
+        @content;
+
+    }
+
+}
+
+
 
 .breadcrumb {
 	padding: 10px 10px;
@@ -135,6 +160,7 @@ $SubText: 18px;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: auto auto;
+
 	// grid-template-areas: "selDesc quanDel" "policy policy" "review review" "question question";
 	grid-template-areas: "seller quanDel" "description quanDel" "policy policy" "review review" "question question";
 	@include sm-lesser {
@@ -1935,6 +1961,12 @@ $SubText: 18px;
 	margin-bottom: 10px;
 	margin-top: 30px;
 	font-family: "BitterBold";
+	@include sm-lesser {
+		text-align: center;
+		margin-bottom: 10px;
+		margin-top: 30px;
+		font-family: "BitterBold";
+	}
 }
 
 // MATERIAL SIZE VARIANT INFO
@@ -1947,6 +1979,14 @@ $SubText: 18px;
 		padding: 15px;
 		margin-left: -52px;
 		text-align: center;
+		@include sm-lesser {
+			border: 2px solid#efbe24;
+			width: 310px;
+			border-radius: 5px;
+			padding: 15px;
+			margin-left: -52px;
+			text-align: center;
+		}
 	}
 }
 
@@ -1959,10 +1999,19 @@ $SubText: 18px;
 	grid-template-columns: auto auto auto;
 	grid-template-rows: auto;
 	grid-template-areas: "custName Qty qtyLabel";
+	@include sm-lesser{
+		display: grid;
+		grid-template-columns: auto auto auto;
+		grid-template-rows: auto;
+		grid-template-areas: "custName Qty qtyLabel";
+	}
 	.custName {
 		grid-area: custName;
 		.dvCustomerName {
 			margin-left: 76px;
+			@include sm-lesser {
+				margin-left: 38px;
+			}
 		}
 	}
 	.Qty {
@@ -1981,6 +2030,9 @@ $SubText: 18px;
 			height: 28px;
 			width: 28px;
 			text-align: center;
+			@include sm-lesser {
+				margin-left: -36px;
+			}
 		}
 	}
 }
@@ -2002,6 +2054,14 @@ $SubText: 18px;
 	grid-template-areas:
 		"Addr"
 		"btnAddr";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				"Addr"
+				"btnAddr";
+		}
 	.Address {
 		grid-area: Addr;
 		background: #dbdbdb;
@@ -2011,6 +2071,10 @@ $SubText: 18px;
 		margin-left: 48px;
 		height: 120px;
 		padding: 18px;
+		@include sm-lesser {
+			width: 298px;
+			margin-left: 30px;
+		}
 	}
 	.btnAddr {
 		grid-area: btnAddr;
@@ -2037,6 +2101,14 @@ $SubText: 18px;
 	grid-template-areas:
 		"labelAddr1 labelAddr2"
 		"btnAddr1 btnAddr2";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				"labelAddr1 labelAddr2"
+				"btnAddr1 btnAddr2";
+		}
 	.labelAddress1 {
 		grid-area: labelAddr1;
 		background: white;
@@ -2045,6 +2117,11 @@ $SubText: 18px;
 		margin-left: 15px;
 		width: 220px;
 		height: 58px;
+		@include sm-lesser {
+			margin-left: 30px;
+			width: 150px;
+			height: 120px;
+		}
 	}
 	.labelAddress2 {
 		grid-area: labelAddr2;
@@ -2054,6 +2131,11 @@ $SubText: 18px;
 		margin-left: 15px;
 		width: 220px;
 		height: 58px;
+		@include sm-lesser {
+			margin-left: -20px;
+			width: 140px;
+			height: 120px;
+		}
 	}
 	.btnAddress1 {
 		grid-area: btnAddr1;
@@ -2065,6 +2147,11 @@ $SubText: 18px;
 			width: 232px;
 			padding: 5px;
 			border: none;
+			@include sm-lesser {
+				width: 146px;
+				padding: 5px;
+				margin-left: 1px;
+			}
 		}
 	}
 	.btnAddress2 {
@@ -2077,6 +2164,10 @@ $SubText: 18px;
 			width: 232px;
 			padding: 5px;
 			border: none;
+			@include sm-lesser {
+				margin-left: -47px;
+				width: 143px;
+			}
 		}
 	}
 }
@@ -2091,15 +2182,24 @@ $SubText: 18px;
 		width: 480px;
 		margin-bottom: 15px;
 		border: none;
+		@include sm-lesser {
+			margin-left: 32px;
+			width: 300px;
+		}
 	}
 }
 // FORM GROUP ADDR
+
+
 .dvFormGroup {
 	grid-area: grid-FormGroupAddr;
 	background: #dbdbdb;
 	margin-left: 10px;
 	width: 480px;
 	border-radius: 5px;
+	@include sm-lesser {
+		width: 338px;
+	}
 }
 .grid-Addr-Form {
 	display: grid;
@@ -2108,28 +2208,57 @@ $SubText: 18px;
 	grid-template-areas:
 		"left-Addr-Form Right-Addr-Form"
 		"btnSave btnSave";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				"left-Addr-Form Right-Addr-Form"
+				"btnSave btnSave";
+		}
 	.grid-left-Form {
 		grid-area: left-Addr-Form;
 		.dvContactName {
 			padding: 10px;
+		}
+		.name-style {
+			color: #e75c4a;
 		}
 		.card-input-style-address {
 			border-radius: 5px;
 			border: none;
 			margin-left: 2px;
 			width: 215px;
+			@include sm-lesser {
+				width: 150px;
+			}
 		}
 		.dvAddr2 {
 			padding: 10px;
 		}
+		.addr2-style {
+			color: #e75c4a;
+		}
 		.dvCountry {
 			padding: 10px;
+		}
+		.country-style {
+			color: #e75c4a;
 		}
 		.dvCity {
 			padding: 10px;
 		}
+		.city-style {
+			color: #e75c4a;
+		}
 		.dvEmail {
 			padding: 10px;
+		}
+		.email-style {
+			color: #e75c4a;
+		}
+		.email-vaild-style {
+			color: #e75c4a;
 		}
 	}
 	.grid-Right-Form {
@@ -2137,23 +2266,59 @@ $SubText: 18px;
 		.dvAddr1 {
 			padding: 10px;
 		}
+		.addr1-style {
+			color: #e75c4a;
+		}
 		.card-input-style-address {
 			border-radius: 5px;
 			border: none;
 			margin-left: 2px;
 			width: 215px;
+			@include sm-lesser {
+				width: 140px;
+			}
 		}
 		.dvState {
 			padding: 10px;
 		}
+		.state-style{
+			color: #e75c4a;
+		}
 		.dvPincode {
 			padding: 10px;
+		}
+		.pin-style {
+			color: #e75c4a;
+		}
+		.pin-valid-style {
+			color: #e75c4a;
+		}
+		.pin-valid-style {
+			color: #e75c4a;
+		}
+		.pin-digit-style {
+			color: #e75c4a;
 		}
 		.dvDistrict {
 			padding: 10px;
 		}
+		.district-style {
+			color: #e75c4a;
+		}
 		.dvPhone {
 			padding: 10px;
+		}
+		.phoneno-style {
+			color: #e75c4a;
+		}
+		.phoneno-Valid-style {
+			color: #e75c4a;
+		}
+		.phoneno-valid-style {
+			color: #e75c4a;
+		}
+		.phone-digit-style {
+			color: #e75c4a;
 		}
 	}
 	.btnSaveForm {
@@ -2166,6 +2331,9 @@ $SubText: 18px;
 			width: 80px;
 			color: white;
 			border: none;
+			@include sm-lesser {
+				margin-left: 136px;
+			}
 		}
 	}
 }
@@ -2187,6 +2355,9 @@ $SubText: 18px;
 	.grid-left-DeliOption {
 		grid-area: left-DeliOption;
 		margin-left: 52px;
+		@include sm-lesser {
+			margin-left: 20px;
+		}
 	}
 	.grid-Med-DeliOption {
 		grid-area: Med-DeliOption;
@@ -2206,37 +2377,66 @@ $SubText: 18px;
 .grid-Prod-Deli-Date {
 	display: grid;
 	grid-template-columns: auto auto;
-	grid-template-rows: auto auto;
-	grid-template-areas:
-		"dvDeliveryDate dvPrice"
-		"dvDeliveryDate1 dvApplyBtn";
-	.grid-Deli-Date {
-		grid-area: dvDeliveryDate;
-		color: #009145;
-		margin-left: -24px;
-	}
-	.grid-Price {
-		grid-area: dvPrice;
-		color: #009145;
-		margin-left: -80px;
-	}
-	.grid-Deli-Date1 {
-		grid-area: dvDeliveryDate1;
-		margin-left: -35px;
-		.dateText {
-			border-color: #efbe24;
-		}
-	}
-	.grid-ApplyBtn {
-		grid-area: dvApplyBtn;
-		.btnApply {
-			border-radius: 5px;
-			color: white;
-			font-family: "Bitter";
-			margin-left: -198px;
-			border: none;
-		}
-	}
+	grid-template-rows: auto auto auto;
+	grid-template-areas: "dvDeliveryDate dvPrice"
+						"dvDeliveryDate1 dvApplyBtn"
+						"ApplyTextMsg ApplyTextMsg";
+						@include sm-lesser {
+							display: grid;
+							grid-template-columns: auto auto;
+							grid-template-rows: auto auto auto;
+							grid-template-areas: "dvDeliveryDate dvPrice"
+												"dvDeliveryDate1 dvApplyBtn"
+												"ApplyTextMsg ApplyTextMsg";
+						}
+						.grid-Deli-Date {
+							grid-area: dvDeliveryDate;
+							color: #009145;
+							margin-left: -34px;
+							.deliveryText {
+								margin-left: 40px;
+							}
+						}
+						.grid-Price {
+							grid-area: dvPrice;
+							color: #009145;
+							margin-left: 6px;
+							.priceText {
+								margin-left: -148px;
+							}
+						}
+						.grid-Deli-Date1 {
+							grid-area: dvDeliveryDate1;
+							margin-left: -35px;
+							.dateText {
+								border-color: #EFBE24;
+							}
+						}
+						.grid-ApplyBtn {
+							grid-area: dvApplyBtn;
+							.btnApply {
+								border-radius: 5px;
+								color:white;
+								font-family: "Bitter";
+								margin-left: -198px;
+								border: none;
+							}
+						}
+						.grid-ApplyTextMsg {
+							grid-area: ApplyTextMsg;
+							.applyTextMsg1 {
+								font-family: "Bitter";
+								margin-top: 40px;
+								width: 400px;
+								margin-left: 46px;
+								color:#e75c4a;
+								@include sm-lesser {
+									width: 350px;
+									margin-left: 2px;
+								}
+							}
+						}
+
 }
 
 // GIFT OPTION
@@ -2248,82 +2448,94 @@ $SubText: 18px;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto;
 	grid-template-areas: "dvGiftOptionText dvGiftOptionToggle";
+	@include sm-lesser {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-template-rows: auto;
+		grid-template-areas: "dvGiftOptionText dvGiftOptionToggle";
+	}
 	.grid-Text-GiftOption {
 		grid-area: dvGiftOptionText;
 		margin-top: 60px;
 		margin-left: 44px;
+		@include sm-lesser {
+
+		}
 	}
 	.grid-GiftOptionToggle {
 		grid-area: dvGiftOptionToggle;
 	}
-	.btnGiftOption {
-		margin-left: -144px;
-		margin-top: 54px;
+			.btnGiftOption {
+				margin-left: -144px;
+				margin-top: 54px;
+				@include sm-lesser {
+					margin-left: -96px;
+				}
+			}
+				.switchActive {
+					position: relative;
+					display: inline-block;
+					width: 68px;
+					height: 38px;
+					margin-left: -6%;
+					margin-bottom: -2px;
+					margin-top: -8px;
+				}
+		
+				.switch input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+		
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #f1f1f1;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+					background:white;
+				}
+		
+				.slider:before {
+					position: absolute;
+					content: "";
+					height: 30px;
+					width: 30px;
+					left: 4px;
+					bottom: 4px;
+					background-color: #efbe24;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+				}
+		
+				input:checked + .slider {
+					background-color: #dbdbdb;
+				}
+		
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+		
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+		
+				/* Rounded sliders */
+				.slider.round {
+					border-radius: 34px;
+				}
+		
+				.slider.round:before {
+					border-radius: 50%;
+				}
 	}
-	.switchActive {
-		position: relative;
-		display: inline-block;
-		width: 68px;
-		height: 38px;
-		margin-left: -6%;
-		margin-bottom: -2px;
-		margin-top: -8px;
-	}
-
-	.switch input {
-		opacity: 0;
-		width: 0;
-		height: 0;
-	}
-
-	.slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #f1f1f1;
-		-webkit-transition: 0.4s;
-		transition: 0.4s;
-		background: white;
-	}
-
-	.slider:before {
-		position: absolute;
-		content: "";
-		height: 30px;
-		width: 30px;
-		left: 4px;
-		bottom: 4px;
-		background-color: #efbe24;
-		-webkit-transition: 0.4s;
-		transition: 0.4s;
-	}
-
-	input:checked + .slider {
-		background-color: #dbdbdb;
-	}
-
-	input:focus + .slider {
-		box-shadow: 0 0 1px #2196f3;
-	}
-
-	input:checked + .slider:before {
-		-webkit-transform: translateX(26px);
-		-ms-transform: translateX(26px);
-		transform: translateX(26px);
-	}
-
-	/* Rounded sliders */
-	.slider.round {
-		border-radius: 34px;
-	}
-
-	.slider.round:before {
-		border-radius: 50%;
-	}
-}
 
 // GIFT NOTE
 .dvGiftNote {
@@ -2336,13 +2548,39 @@ $SubText: 18px;
 	grid-template-areas:
 		"dvGiftNoteText"
 		"dvGiftNoteCard";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				"dvGiftNoteText"
+				"dvGiftNoteCard";
+				}
 	.grid-dvGiftNoteText {
 		grid-area: dvGiftNoteText;
 	}
 	.grid-dvGiftNoteCard {
 		grid-area: dvGiftNoteCard;
-		// .Gift-Note-Style {
-		// }
+			.Gift-Note-Style {
+				background:#dbdbdb; 
+				width: 468px;
+				border-radius: 5px;
+				height: 300px;
+				padding: 25px;
+				margin-left: 15px;
+			.Gift-Note-Style-1 {
+				background:#dbdbdb; 
+				width: 468px;
+				border-radius: 5px;
+				height: 300px;
+				padding: 25px;
+				margin-left: 15px;
+				@include sm-lesser {
+					background:#dbdbdb; 
+					width: 315px;
+				}
+			}
+		}
 	}
 }
 
@@ -2357,6 +2595,10 @@ $SubText: 18px;
 		border-radius: 5px;
 		padding: 15px;
 		margin-left: 80px;
+		@include sm-lesser {
+			width: 294px;
+			margin-left: 30px;
+		}
 	}
 }
 
@@ -2364,15 +2606,25 @@ $SubText: 18px;
 .dvproductImages {
 	grid-area: grid-ProductImages;
 }
-.prodTextImg {
-	text-align: center;
-	font-family: "BitterBold";
-	margin-top: 16px;
-}
-.dvprodImages {
-	margin-left: 20px;
-	width: 300px;
-}
+	.prodTextImg {
+		text-align: center;
+		font-family: "BitterBold";
+		margin-top: 16px;
+	}
+	.dvprodImages{
+		display: flex;
+		margin-left: 8px;
+		
+	}
+	.dvprodImages1 {
+		width: 60px;
+		margin-left: 5px;
+		@include sm-lesser {
+			width: 36px;
+			margin-left: 4px;
+		}
+	}
+
 
 // PRICELISTING
 .dvPriceListing {
@@ -2393,12 +2645,28 @@ $SubText: 18px;
 		"Left-Qty	grid-Med4	Right-Qty"
 		"Left-Tax	grid-Med5	Right-Tax"
 		"Left-Total	grid-Med6	Right-Total";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto 20% auto;
+			grid-template-rows: repeat(7, auto);
+			grid-template-areas:
+				"Left-BasePrice	grid-Med	Right-BasePrice"
+				"Left-ShipppingPrice	grid-Med1	Right-ShippingPrice"
+				"Left-DiscPrice	grid-Med2	Right-DiscPrice"
+				"Left-VariancePrice	grid-Med3	Right-VariancePrice"
+				"Left-Qty	grid-Med4	Right-Qty"
+				"Left-Tax	grid-Med5	Right-Tax"
+				"Left-Total	grid-Med6	Right-Total";
+		}
 	.dvBasePrice {
 		grid-area: Left-BasePrice;
 		.BasePriceText {
 			color: #807b7b;
 			margin-left: 52px;
 			font-family: "Bitter";
+			@include sm-lesser {
+				margin-left: -12px;
+			}
 		}
 	}
 	.dvShippingPrice {
@@ -2408,6 +2676,9 @@ $SubText: 18px;
 			margin-left: 86px;
 			font-family: "Bitter";
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: 22px;
+			}
 		}
 	}
 	.dvDiscPrice {
@@ -2417,6 +2688,9 @@ $SubText: 18px;
 			margin-left: 40px;
 			font-family: "Bitter";
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -22px;
+			}
 		}
 	}
 	.dvVariancePrice {
@@ -2426,6 +2700,9 @@ $SubText: 18px;
 			margin-left: 87px;
 			font-family: "Bitter";
 			margin-top: -10px;
+			@include sm-lesser{
+				margin-left: 22px;
+			}
 		}
 	}
 	.dvQty {
@@ -2435,6 +2712,9 @@ $SubText: 18px;
 			margin-left: 1px;
 			font-family: "Bitter";
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -64px;
+			}
 		}
 	}
 	.dvTax {
@@ -2444,12 +2724,18 @@ $SubText: 18px;
 			margin-left: 2px;
 			font-family: "Bitter";
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -62px;
+			}
 		}
 	}
 	.dvTotal {
 		grid-area: Left-Total;
 		.TotalText {
 			margin-left: 16px;
+			@include sm-lesser {
+				margin-left: -50px;
+			}
 		}
 	}
 
@@ -2458,6 +2744,9 @@ $SubText: 18px;
 		.dot {
 			color: #807b7b;
 			margin-left: -172px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed1 {
@@ -2466,6 +2755,9 @@ $SubText: 18px;
 			color: #807b7b;
 			margin-left: -172px;
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed2 {
@@ -2474,6 +2766,9 @@ $SubText: 18px;
 			color: #807b7b;
 			margin-left: -172px;
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed3 {
@@ -2482,6 +2777,9 @@ $SubText: 18px;
 			color: #807b7b;
 			margin-left: -172px;
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed4 {
@@ -2490,6 +2788,9 @@ $SubText: 18px;
 			color: #807b7b;
 			margin-left: -172px;
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed5 {
@@ -2498,12 +2799,18 @@ $SubText: 18px;
 			color: #807b7b;
 			margin-left: -172px;
 			margin-top: -10px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvMed6 {
 		grid-area: grid-Med6;
 		.dot6 {
 			margin-left: -172px;
+			@include sm-lesser {
+				margin-left: -122px;
+			}
 		}
 	}
 	.dvRight-BasePrice {
@@ -2511,6 +2818,9 @@ $SubText: 18px;
 		color: #807b7b;
 		margin-left: -150px;
 		font-family: "Bitter";
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-ShippingPrice {
 		grid-area: Right-ShippingPrice;
@@ -2518,6 +2828,9 @@ $SubText: 18px;
 		margin-left: -150px;
 		font-family: "Bitter";
 		margin-top: -10px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-DiscPrice {
 		grid-area: Right-DiscPrice;
@@ -2525,6 +2838,9 @@ $SubText: 18px;
 		margin-left: -150px;
 		font-family: "Bitter";
 		margin-top: -10px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-VariancePrice {
 		grid-area: Right-VariancePrice;
@@ -2532,6 +2848,9 @@ $SubText: 18px;
 		margin-left: -150px;
 		font-family: "Bitter";
 		margin-top: -10px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-Qty {
 		grid-area: Right-Qty;
@@ -2539,6 +2858,9 @@ $SubText: 18px;
 		margin-left: -150px;
 		font-family: "Bitter";
 		margin-top: -10px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-Tax {
 		grid-area: Right-Tax;
@@ -2546,10 +2868,16 @@ $SubText: 18px;
 		margin-left: -150px;
 		font-family: "Bitter";
 		margin-top: -10px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 	.dvRight-Total {
 		grid-area: Right-Total;
 		margin-left: -150px;
+		@include sm-lesser {
+			margin-left: -60px;
+		}
 	}
 }
 
@@ -2565,6 +2893,9 @@ $SubText: 18px;
 		border: none;
 		margin-bottom: 100px;
 		width: 120px;
+		@include sm-lesser {
+			margin-left: 124px;
+		}
 	}
 	.btnRfq {
 		margin-left: 188px;
@@ -2575,5 +2906,9 @@ $SubText: 18px;
 		border: none;
 		margin-bottom: 100px;
 		width: 156px;
+		@include sm-lesser {
+			margin-left: 110px;
+			margin-top: -5px;
+		}
 	}
 }

@@ -816,70 +816,165 @@
                 </div>
                 <!-- FORM GROUP -->
                 <div class="dvFormGroup" id="formGroup" style="display :none">
-                    <form class="formGroup">
+                    <form [formGroup]="checkoutForm" (ngSubmit)="formSave()">
                         <div class="grid-Addr-Form">
                             <div class="grid-left-Form">
                                 <div class="dvContactName">
                                     <label>Contact Name</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="contactName-Form">
-
+                                    <input type="text" class="card-input-style-address" id="contactName-Form"
+                                        formControlName="fullname">
+                                    <div *ngIf="submitted && checkoutForm.controls.fullname.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.fullname.errors.required" class="name-style">
+                                            Name is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvAddr2">
                                     <label>Address 2</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="addr2-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="addr2-Form"
+                                        formControlName="reg_address2">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_address2.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_address2.errors.required"
+                                            class="addr2-style">
+                                            Address 2 is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvCountry">
                                     <label>Country</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="country-Form">
-                                    <!-- <input type="text" size="24" class="card-input-style-address" matInput
-                                        [formControl]="myControl" [matAutocomplete]="auto" id="country-Form"> -->
-                                    <!-- <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                            {{option.name}}
-                                        </mat-option>
-                                    </mat-autocomplete> -->
+                                    <input type="text" size="24" class="card-input-style-address" id="country-Form"
+                                        formControlName="reg_country">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_country.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_country.errors.required"
+                                            class="country-style">
+                                            Country is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvCity">
                                     <label>City</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="city-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="city-Form"
+                                        formControlName="reg_city">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_city.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_city.errors.required" class="city-style">
+                                            City is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvEmail">
                                     <label>Email</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address"
-                                        id="contact-Email-Form">
+                                        id="contact-Email-Form" formControlName="reg_email">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_email.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_email.errors.required"
+                                            class="email-style">
+                                            Email is required !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_email.hasError('pattern')"
+                                            class="email-vaild-style">
+                                            Enter valid Email !
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-Right-Form">
                                 <div class="dvAddr1">
                                     <label>Address 1</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="addr1-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="addr1-Form"
+                                        formControlName="reg_address1">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_address1.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_address1.errors.required"
+                                            class="addr1-style">
+                                            Address 1 is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvState">
                                     <label>State</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="state-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="state-Form"
+                                        formControlName="reg_state">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_state.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_state.errors.required"
+                                            class="state-style">
+                                            State is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvPincode">
                                     <label>PinCode</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="pincode-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="pincode-Form"
+                                        formControlName="reg_pin">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_pin.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_pin.errors.required" class="pin-style">
+                                            Pincode is required !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_pin.hasError('minlength')"
+                                            class="pin-valid-style">
+                                            Enter valid Pincode !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_pin.hasError('maxlength')"
+                                            class="pin-valid-style">
+                                            Enter valid pincode !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_pin.hasError('pattern')"
+                                            class="pin-digit-style">
+                                            Enter Only digits !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvDistrict">
                                     <label>District</label>
                                     <br>
-                                    <input type="text" size="24" class="card-input-style-address" id="District-Form">
+                                    <input type="text" size="24" class="card-input-style-address" id="District-Form"
+                                        formControlName="reg_dist">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_dist.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_dist.errors.required"
+                                            class="district-style">
+                                            District is required !
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dvPhone">
                                     <label>Phone</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address"
-                                        id="contact-Number-Form">
+                                        id="contact-Number-Form" formControlName="reg_mobile_no">
+                                    <div *ngIf="submitted && checkoutForm.controls.reg_mobile_no.errors"
+                                        class="error validator-style">
+                                        <div *ngIf="checkoutForm.controls.reg_mobile_no.errors.required"
+                                            class="phoneno-style">
+                                            Phone Number is required !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_mobile_no.hasError('minlength')"
+                                            class="phoneno-Valid-style">
+                                            Enter valid Phone Number !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_mobile_no.hasError('maxlength')"
+                                            class="phoneno-valid-style">
+                                            Enter valid Phone Number !
+                                        </div>
+                                        <div *ngIf="checkoutForm.controls.reg_mobile_no.hasError('pattern')"
+                                            class="phone-digit-style">
+                                            Enter Only digits !
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="btnSaveForm">
@@ -911,17 +1006,22 @@
                     <p>THE PRODUCT WILL BE DELIVERED BEFORE</p>
                     <div class="grid-Prod-Deli-Date">
                         <div class="grid-Deli-Date">
-                            <p>DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
+                            <p class="deliveryText">DELIVERY DATE : {{ dynamicDataCustomerOrder.deliveryDate }}</p>
                         </div>
                         <div class="grid-Price">
-                            <p>PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
+                            <p class="priceText">PRICE : {{ dynamicDataCustomerOrder.basePrice }}</p>
                         </div>
-                        <div class="grid-Deli-Date1">
-                            <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date">
+                        <div class="grid-Deli-Date1" id="datePickerTextId">
+                            <input type="Date" id="reqDatePicker" class="dateText" placeholder="Date"
+                                (change)="reqDatePickerDelivery();">
                         </div>
                         <div class="grid-ApplyBtn">
                             <button type="apply" class="btnApply btn-warning" id="btnApply"
                                 (click)="applyRequest()">Apply</button>
+                        </div>
+                        <div class="grid-ApplyTextMsg" id="ApplyTextMsgId" style="display: none;">
+                            <p class="applyTextMsg1">Delivery on this date requires seller confirmation before buying!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -934,7 +1034,7 @@
                         <div class="grid-GiftOptionToggle">
                             <div class="btnGiftOption" id="btn-Gift-Option">
                                 <label class="switchActive" name="answer" value="Show giftCard" (click)=giftoption()>
-                                    <input type="checkbox" style="margin-left: 10px;">
+                                    <input type="checkbox" style="margin-left: 10px;" id="giftOption">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -943,30 +1043,79 @@
                 </div>
                 <!-- NOTE -->
                 <div class="dvGiftNote">
-                    <div class="grid-GiftOptionNote">
-                        <div class="grid-dvGiftNoteText">
+                    <div class="grid-GiftOptionNote1">
+                        <!-- <div class="grid-dvGiftNoteText">
                             <p style="margin-left: 30px;">Note :</p>
-                        </div>
-                        <div class="grid-dvGiftNoteCard" id="showGiftCard" style="display: none;">
-                            <textarea type=text class="Gift-Note-Style"
-                                style="border-radius: 5px; margin-left: 20px; width:460px; border: none; height: 130px;"
-                                id="Gift-Note-Sect1"></textarea>
+                        </div> -->
+                    </div>
+                        <div class="grid-dvGiftNoteCard" id="showGiftCard" style="display: none;"> 
+                            <div class="Gift-Note-Style" >
+                                <form id="Gift-Note-Sect1" class="Gift-Note-Style-1" id="Gift-Note-Sect1" style="background:#dbdbdb; width: 468px;
+                                border-radius: 5px;
+                                height: 300px;
+                                padding: 25px;
+                                margin-left: 15px;">
+                                    Title : <input class="Title-Style" type="text" name="text" id="giftTitleId" style="border: none; margin-bottom: 5px; border-radius: 5px; margin-left: 4px;"><br>
+                                    Note : <input class="Note-Style" type="text" name="note" id="giftNoteId" style="border: none;margin-bottom: 5px; border-radius: 5px;"><br>
+                                    Address:<br>
+                                        <input class="addr1Shop" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px;" placeholder="house name"
+                                            id="giftHouseNameId">
+                                        <input class="addr2Shop" id="giftStreetAddrId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px; margin-left: 7px;"
+                                            placeholder="street address">
+                                        <input class="cityShop" id="giftCityId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px;" placeholder="city">
+                                        <input class="districtShop" id="giftDistrictId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px; margin-left: 7px;"
+                                            placeholder="district">
+                                        <input class="stateShop" id="giftStateId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px;"
+                                            placeholder="state">
+                                        <input class="countryShop" id="giftCountryId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px; margin-left: 7px;"
+                                            placeholder="country">
+                                        <input class="pincodeShop" id="giftPincodeId" style="height: 30px; border: none;margin-bottom: 5px; border-radius: 5px;"
+                                            placeholder="pincode">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- MESSAGE TITLE -->
-                <div class="dvMessageTitle">
-                    <p class="MsgTitleText">Message Title : {{ dynamicMsgTitle.title }}</p>
-                </div>
+                    <!-- MESSAGE TITLE -->
+                    <div class="dvMessageTitle">
+                        <p class="MsgTitleText">Message Title : {{ dynamicMsgTitle.title }}</p>
+                    </div>
 
 
+                    <!-- PRODUCT IMAGE -->
+                    <div class="dvproductImages">
+                        <p class="prodTextImg">PRODUCT IMAGES</p>
+                    </div>
+                    <div class="dvprodImages">
+                        <!-- <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg"
+                        style="margin-left: 5px; " onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg"
+                        style="margin-left: 5px; " onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg"
+                        style="margin-left: 5px; " onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg"
+                        style="margin-left: 5px;" onError="this.src = 'assets/images/defaultReview2.png'"> -->
+                        <div *ngFor="let imageC of Object.keys(imagesCount)">
+                            <img class="dvprodImages1"
+                                src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg">
+                            <br>
                 <!-- PRODUCT IMAGE -->
-                <div class="dvproductImages">
+<!--                 <div class="dvproductImages">
                     <p class="prodTextImg">PRODUCT IMAGES</p>
                 </div>
-                <div class="dvprodImages" style="display: flex;">
+                <div class="dvprodImages" style="display: flex;"> -->
                     <!-- <img src="/src/assets/images/{{prodId}}/{{prodId}}_).jpg"> -->
-                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
+<!--                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg"
                         style="margin-left: 5px; ">
                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg"
@@ -985,9 +1134,9 @@
                         style="margin-left: 5px; display: none;">
                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg"
                         style="margin-left: 5px; display: none;">
-                </div>
+                </div> -->
                 <!-- PRICE VARIATION -->
-                <div class="dvPriceListing">
+<!--                 <div class="dvPriceListing">
                     <h6>PRICE FOR VARIATIONS & QUALITY</h6>
                     <div class="dvPriceDetails">
                         <div class="dvBasePrice">
@@ -1048,22 +1197,87 @@
                             {{ dynamicDataCustomerOrder.quantity }}
                         </div>
                         <div class="dvRight-Tax">
-                            {{ dynamicDataCustomerOrder.tax }}
-                        </div>
-                        <div class="dvRight-Total">
-                            {{dynamicDataCustomerOrder.totalPrice}}
+                            {{ dynamicDataCustomerOrder.tax }} -->
                         </div>
                     </div>
-                </div>
-                <div class="dvBtnCheckout-Rfq">
-                    <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
-                        data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
+                    <!-- PRICE VARIATION -->
+                    <div class="dvPriceListing">
+                        <h6>PRICE FOR VARIATIONS & QUALITY</h6>
+                        <div class="dvPriceDetails">
+                            <div class="dvBasePrice">
+                                <p class="BasePriceText">Base Price</p>
+                            </div>
+                            <div class="dvShippingPrice">
+                                <p class="ShippingText">Shipping Price</p>
+                            </div>
+                            <div class="dvDiscPrice">
+                                <p class="DiscText">Discount</p>
+                            </div>
+                            <div class="dvVariancePrice">
+                                <p class="VarianceText">Variance Price</p>
+                            </div>
+                            <div class="dvQty">
+                                <p class="QtyText">Qty</p>
+                            </div>
+                            <div class="dvTax">
+                                <p class="TaxText">Tax</p>
+                            </div>
+                            <div class="dvTotal">
+                                <h6 class="TotalText">Total </h6>
+                            </div>
+                            <div class="dvMed">
+                                <p class="dot">:</p>
+                            </div>
+                            <div class="dvMed1">
+                                <p class="dot1">:</p>
+                            </div>
+                            <div class="dvMed2">
+                                <p class="dot2">:</p>
+                            </div>
+                            <div class="dvMed3">
+                                <p class="dot3">:</p>
+                            </div>
+                            <div class="dvMed4">
+                                <p class="dot4">:</p>
+                            </div>
+                            <div class="dvMed5">
+                                <p class="dot5">:</p>
+                            </div>
+                            <div class="dvMed6">
+                                <p class="dot6">:</p>
+                            </div>
+                            <div class="dvRight-BasePrice">
+                                {{dynamicDataCustomerOrder.basePrice}}
+                            </div>
+                            <div class="dvRight-ShippingPrice">
+                                {{dynamicDataCustomerOrder.shippingPrice}}
+                            </div>
+                            <div class="dvRight-DiscPrice">
+                                {{dynamicDataCustomerOrder.discount}}%
+                            </div>
+                            <div class="dvRight-VariancePrice">
+                                {{dynamicDataCustomerOrder.variantPrice}}
+                            </div>
+                            <div class="dvRight-Qty">
+                                {{ dynamicDataCustomerOrder.quantity }}
+                            </div>
+                            <div class="dvRight-Tax">
+                                {{ dynamicDataCustomerOrder.tax }}
+                            </div>
+                            <div class="dvRight-Total">
+                                {{dynamicDataCustomerOrder.totalPrice}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dvBtnCheckout-Rfq">
+                        <button type="btnCheckOut" class="btnPayment btn-warning" data-toggle="modal"
+                            data-target="#checkOut" id="checkOutId" (click)="checkout()">CHECK OUT</button>
 
-                    <button type="btnCheckOut" style="display: none;" class="btnRfq btn-warning" data-toggle="modal"
-                        id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
+                        <button type="btnCheckOut" style="display: none;" class="btnRfq btn-warning" data-toggle="modal"
+                            id="reqId" data-target="#requestOrder" (click)="reqDateNow();">REQUEST ORDER</button>
+                    </div>
                 </div>
+
             </div>
-
         </div>
     </div>
-</div>
