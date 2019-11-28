@@ -11,13 +11,9 @@
   $pincode = $_POST['pincode'];
   $contact_email = $_POST['contact_email'];
   $contact_number = $_POST['contact_number'];
-  // $addr2 = "roninaks";
-  // $addr1 = "roninaks";
-
-            $result = array();
+          $result = array();
           $status = "";
-          $sql_query = "INSERT INTO `address`( `mapping_id`, `addr1`, `addr2`, `city`, `district`, `state`, `country`, `pincode`, `contact_email`, `contact_number`, `contact_name`, `addr_type`) VALUES ($mapping_id,'$addr1','$addr2','$city','$district','$state','$country',$pincode,'$contact_email',$contact_number,'$contact_name','shipping')";
-          // $sql_query = "INSERT INTO `address` (mapping_id,contact_name,addr1,addr2,country,state,city,pincode,contact_email,contact_number) VALUES ('$contact_name''$addr1','$addr2','$country','$state','$city','$pincode','$contact_email','$contact_number')";
+          $sql_query = "INSERT INTO `address`( `mapping_id`, `addr1`, `addr2`, `city`, `district`, `state`, `country`, `pincode`,`contact_email`, `contact_number`, `contact_name`, `addr_type`) VALUES ($mapping_id,'$addr1','$addr2','$city','$district','$state','$country',$pincode,'$contact_email',$contact_number,'$contact_name','shipping')";
           $result = mysqli_query($con2, $sql_query);
           echo $sql_query;
           echo $result;

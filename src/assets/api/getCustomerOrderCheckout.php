@@ -1,10 +1,9 @@
 <?php
     require "init.php";
     // header("Access-Control-Allow-Origin: *");
-    $orderid = $_POST['orderid'] ;
+    $orderid = $_POST['orderid'];
     $data = array();
-    // $count = 0;
-    $sql_query = "SELECT * FROM `customer_order` where orderid = $orderid";
+    $sql_query = "SELECT * FROM `customer_order` where orderid = '$orderid'";
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
         $data=array(
@@ -23,8 +22,10 @@
         'variantPrice'=>$row["variantprice"],
         'tax'=>$row["tax"],
         'deliveryDate'=>$row["delivey_date"]);
+
     }
-    echo json_encode($data);
-    //echo "hello";
+
     
+    echo json_encode($data);
+
 ?>
