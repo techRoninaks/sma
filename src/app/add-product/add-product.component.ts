@@ -126,7 +126,7 @@ export class AddProductComponent implements OnInit {
   subCategoryArray :any =[];
   subCategoryArrayJustVal :any =[];
 
-  title : any = "";
+  title : any = [];
   faq : any = [];
   varients : any = [];
   shippingLocs : any = [];
@@ -1100,7 +1100,6 @@ export class AddProductComponent implements OnInit {
     (<HTMLInputElement><any>document.getElementById("Msg-TitleId")).value = "";
     console.log(this.title);
   }
-
   close(id: any) {
     this.title.splice( this.title.indexOf(id), 1 );
     console.log(this.title);
@@ -1479,6 +1478,7 @@ function onFrontClick(event) {
     // console.log(imageFront);
     (<HTMLInputElement>document.getElementById("frontPreviewId")).style.display = "block";
     this.urlFront1 = imageFront1;
+    document.getElementById('btn-add-image-1').innerHTML = "Change image";
   };
 }
 function onFrontClick2(event) {
@@ -1490,6 +1490,7 @@ function onFrontClick2(event) {
     // console.log(imageFront2);
     (<HTMLInputElement>document.getElementById("frontPreviewId2")).style.display = "block";
     this.urlFront2 = imageFront2;
+    document.getElementById('btn-add-image-2').innerHTML = "Change image";
   };
 }
 function onFrontClick3(event) {
@@ -1501,6 +1502,7 @@ function onFrontClick3(event) {
     // console.log(imageFront3);
     (<HTMLInputElement>document.getElementById("frontPreviewId3")).style.display = "block";
     this.urlFront3 = imageFront3;
+    document.getElementById('btn-add-image-3').innerHTML = "Change image";
   };
 }
 function onFrontClick4(event) {
@@ -1512,6 +1514,7 @@ function onFrontClick4(event) {
     // console.log(imageFront4);
     (<HTMLInputElement>document.getElementById("frontPreviewId4")).style.display = "block";
     this.urlFront4 = imageFront4;
+    document.getElementById('btn-add-image-4').innerHTML = "Change image";
   };
 }
 function onFrontClick5(event) {
@@ -1523,6 +1526,7 @@ function onFrontClick5(event) {
     // console.log(imageFront5);
     (<HTMLInputElement>document.getElementById("frontPreviewId5")).style.display = "block";
     this.urlFront5 = imageFront5;
+    document.getElementById('btn-add-image-5').innerHTML = "Change image";
   };
 }
 function onFrontClick6(event) {
@@ -1534,6 +1538,7 @@ function onFrontClick6(event) {
     // console.log(imageFront6);
     (<HTMLInputElement>document.getElementById("frontPreviewId6")).style.display = "block";
     this.urlFront6 = imageFront6;
+    document.getElementById('btn-add-image-6').innerHTML = "Change image";
   };
 }
 function onFrontClick7(event) {
@@ -1545,6 +1550,7 @@ function onFrontClick7(event) {
     // console.log(imageFront7);
     (<HTMLInputElement>document.getElementById("frontPreviewId7")).style.display = "block";
     this.urlFront7 = imageFront7;
+    document.getElementById('btn-add-image-7').innerHTML = "Change image";
   };
 }
 function onFrontClick8(event) {
@@ -1556,6 +1562,7 @@ function onFrontClick8(event) {
     // console.log(imageFront8);
     (<HTMLInputElement>document.getElementById("frontPreviewId8")).style.display = "block";
     this.urlFront8 = imageFront8;
+    document.getElementById('btn-add-image-8').innerHTML = "Change image";
   };
 }
 function onFrontClick9(event) {
@@ -1567,6 +1574,7 @@ function onFrontClick9(event) {
     // console.log(imageFront8);
     (<HTMLInputElement>document.getElementById("frontPreviewId9")).style.display = "block";
     this.urlFront9 = imageFront9;
+    document.getElementById('btn-add-image-9').innerHTML = "Change image";
   };
 }
 function onFrontClick10(event) {
@@ -1578,6 +1586,7 @@ function onFrontClick10(event) {
     // console.log(imageFront8);
     (<HTMLInputElement>document.getElementById("frontPreviewId10")).style.display = "block";
     this.urlFront10 = imageFront10;
+    document.getElementById('btn-add-image-10').innerHTML = "Change image";
   };
 
 

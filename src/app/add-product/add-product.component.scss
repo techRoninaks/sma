@@ -49,7 +49,20 @@ $SubText: 18px;
 	}
 }
 
+input{
+	width:inherit;
+}
+
+
 // Class List
+
+// .slide-content .scroller {
+// 	width: 1024px;
+//   }
+
+//   * {
+// 	border: 1px solid #f00 !important;
+//   }
 
 .dvProdHeader {
 	grid-template-columns: 100%;
@@ -57,8 +70,8 @@ $SubText: 18px;
 	display: grid;
 	width: auto;
 	background: white;
-	margin: 5% 5% 0 5%;
-	padding: 30px;
+	margin: 5% 10% 0 10%;
+	padding: 0px;
 
 	.dvBreadcrumbs {
 		display: inline-block;
@@ -84,9 +97,10 @@ $SubText: 18px;
     margin: 0;
 	background: #EFBE24;
 	z-index: 111;
+	width: 30%;
 
 	li{
-		position: absolute;
+
 	}
 }
 
@@ -109,7 +123,7 @@ $SubText: 18px;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background: #EFBE24
+    background: #EFBE24;
 }
 
 #myUL1 li a {
@@ -201,8 +215,12 @@ $SubText: 18px;
 .varitentsAdd{
 	width: 80%;
 	margin: auto;
-	background: #ddd;
-	border-radius: 6px;
+	border-radius: 12px;
+
+}
+
+.dvMain{
+	padding: 0 10%;
 }
 
 .dvMain-Grid {
@@ -226,10 +244,12 @@ $SubText: 18px;
 }
 // ADD PRODUCTS
 .dvAddProdText {
+	margin-bottom: 5%;
 	.imgBord {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
+		
 		width: 300px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
@@ -247,6 +267,7 @@ $SubText: 18px;
 	}
 }
 .dvAddProducts {
+	margin: 0% 0% 10% 0%;
 	grid-area: grid-AddProducts;
 }
 .grid-AddProductBtn {
@@ -346,9 +367,19 @@ $SubText: 18px;
 }
 .grid-AddProductCat {
 	display: grid;
-	grid-template-columns: auto 10% auto 10% auto;
+	// grid-template-columns: 1fr 0.5fr 1fr fr 1fr ;
+	// grid-template-columns: auto 10% auto 10% auto;
 	grid-template-rows: auto;
 	grid-template-areas: "main-cat timeline1 med-cat timeline2 sub-cat";
+
+	@media only screen and (min-width: 0px) and (max-width: 1200px){
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-areas: "main-cat" "timeline1" "med-cat" "timeline2" "sub-cat";
+		row-gap: 40px;
+		justify-content: center;
+		align-items: center;
+	}
 
 	input{
 		width: 100%;
@@ -362,8 +393,12 @@ $SubText: 18px;
 			font-family: BitterBold;
 			border-radius: 5px;
 			height: 50px;
-			margin-left: 100px;
+			// margin-left: 100px;
 			cursor: pointer;
+			.p{
+				margin: 0;
+				padding: 0;
+			}
 		}
 	}
 	.dropbtn {
@@ -415,8 +450,6 @@ $SubText: 18px;
 	.show {
 		display: block;
 	}
-	.timeline1 {
-	}
 	.med-cat {
 		grid-area: med-cat;
 		z-index: 12;
@@ -427,7 +460,7 @@ $SubText: 18px;
 			font-family: BitterBold;
 			border-radius: 5px;
 			height: 50px;
-			margin-right: 205px;
+			// margin-right: 205px;
 			cursor: pointer;
 		}
 	}
@@ -444,15 +477,15 @@ $SubText: 18px;
 			font-family: BitterBold;
 			border-radius: 5px;
 			height: 50px;
-			margin-right: 50px;
-			margin-left: -200px;
+			// margin-right: 50px;
+			// margin-left: -200px;
 			cursor: pointer;
 
 
 		}
 	}
 	.subCategory {
-		margin-left: 160px;
+		// margin-left: 160px;
 		width: 200px;
 	}
 }
@@ -475,34 +508,34 @@ $SubText: 18px;
 		margin-left: 5px;
 	}
 }
-.grid-AddSubCatBtn {
-	display: grid;
-	grid-template-columns: auto auto;
-	grid-template-rows: auto;
-	grid-template-areas: ". btnAddSubCat";
-	.btnAddSubCat {
-		grid-area: btnAddSubCat;
-		margin-left: 238%;
-		margin-bottom: 50%;
-		.btnSubCat {
-			background: #efbe24;
-			color: white;
-			font-family: BitterBold;
-			border-radius: 5px;
-			height: 50px;
-			width: 300px;
-			margin-left: 82px;
-			cursor: pointer;
-		}
-	}
-}
+// .grid-AddSubCatBtn {
+// 	display: grid;
+// 	grid-template-columns: auto auto;
+// 	grid-template-rows: auto;
+// 	grid-template-areas: ". btnAddSubCat";
+// 	.btnAddSubCat {
+// 		grid-area: btnAddSubCat;
+// 		margin-left: 238%;
+// 		margin-bottom: 50%;
+// 		.btnSubCat {
+// 			background: #efbe24;
+// 			color: white;
+// 			font-family: BitterBold;
+// 			border-radius: 5px;
+// 			height: 50px;
+// 			width: 300px;
+// 			margin-left: 82px;
+// 			cursor: pointer;
+// 		}
+// 	}
+// }
 // PRIMARY DETAILS
 .dvPriDetailsText {
 	.imgBord {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 350px;
+		width: 250px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
@@ -510,7 +543,8 @@ $SubText: 18px;
 		text-align: center;
 		font-family: "BitterBold";
 		// position: absolute;
-		transform: translate(0px, -0.45em);
+		font-size: $Text;
+		transform: translate(0px, -0.2em);
 		z-index: 1;
 	}
 	p {
@@ -520,74 +554,137 @@ $SubText: 18px;
 }
 .dvImagesPrimaryDetails {
 	grid-area: grid-PrimaryDetails;
+	margin-top: 5% ;
 }
 .grid-ImagesPrimaryDetails {
-	margin-left: 80px;
+	padding: 40px 0px;
+	display: flex;
+	  flex-wrap: wrap;
+	  justify-content: center;
+}
+
+.btn_add_image{
+	border: none; 
+	border-radius: 12px;
+	margin-top: 34px;
+	background: #DBDBDB; 
+	padding: 20px;
+	margin: 10px;
+	width: 18%;
+	height: 120px;
+	cursor: pointer;
+	color: gray;
+	font-size: 20px;
+
+	@media only screen and (min-width: 300px) and (max-width: 600px){
+		width: 18%;
+		height: 60px;
+		padding: 10px;
+		font-size: 15px;
+	}
+	@media only screen and (min-width: 0px) and (max-width: 300px){
+		width: 18%;
+		height: 30px;
+		margin: 5px;
+		padding: 5px;
+		font-size: 10px;
+	}
 }
 .grid-Image-View1 {
-	margin-left: 30%;
 	margin-bottom: 5%;
 	margin-top: 5%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 .dvPrimaryDetails1 {
 	grid-area: grid-PrimaryDetails1;
-	margin-left: 80px;
 }
 .grid-PrimaryDesc {
 	display: grid;
-	grid-template-columns: repeat(4, auto);
+	// grid-template-columns: 0.5f 2f 1f 0.5f;
 	grid-template-rows: auto;
+	column-gap: 8px;
 	grid-template-areas: "grid-LeftProd grid-MedProd1 grid-MedProd2 grid-RightProd";
+	@media only screen and (min-width: 750px) and (max-width: 1200px){
+		grid-template-areas: "grid-LeftProd grid-MedProd1" "grid-MedProd2 grid-RightProd";
+	}
+
+	@media only screen and (min-width: 0px) and (max-width: 750px){
+		grid-template-areas: "grid-LeftProd" "grid-MedProd1" "grid-MedProd2" "grid-RightProd";
+	}
+
 	.grid-LeftProd {
 		grid-area: grid-LeftProd;
 		.productName {
-			margin-left: 8px;
+			color: $smaDarkGray;
+			text-align: start;
+			margin-left: 12px;
+			margin-right: 8px;
 			font-family: "BitterBold";
 		}
+
+		p{margin: 16px 0;}
 	}
 	.grid-MedProd1 {
 		grid-area: grid-MedProd1;
+		align-self: center;
 		.text-Product-Name-Style {
-			width: 600px;
-			height: 30px;
+			height: 32px;
 			background: #dbdbdb;
 			border: none;
-			margin-right: -125px;
 			border-radius: 5px;
+			
 		}
 	}
 	.grid-MedProd2 {
 		grid-area: grid-MedProd2;
 		.productBasePriceText {
-			margin-right: 0px;
-			margin-left: 150px;
 			font-family: "BitterBold";
+			margin-left: 12px;
+			margin-right: 8px;
 		}
+		p{margin: 16px 0;}
 	}
 	.grid-RightProd {
 		grid-area: grid-RightProd;
+		align-self: center;
 		.text-Product-BasePrice-Style {
 			background: #dbdbdb;
 			border: none;
 			width: 100px;
-			margin-right: 150px;
 			border-radius: 5px;
 			text-align: center;
 		}
 	}
 }
 .grid-PrimaryDesc1 {
+	color: $smaDarkGray;
 	display: grid;
-	grid-template-columns: 30% 70%;
+	margin-top: 10px;
+	padding-right: 20px;
+	text-align: start;
+	column-gap: 8px;
+	grid-template-columns: 20% 80%;
 	grid-template-rows: auto auto auto;
 	grid-template-areas:
 		"grid-ShortDescLeft grid-ShortDescRight"
 		"grid-LongDescLeft grid-LongDescRight"
 		"grid-SpecLeft grid-SpecRight";
+
+		@media only screen and (min-width: 0px) and (max-width: 1200px){
+			grid-template-columns: auto;
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+			"grid-ShortDescLeft" "grid-ShortDescRight"
+			"grid-LongDescLeft" "grid-LongDescRight"
+			"grid-SpecLeft" "grid-SpecRight";
+		}
 	.grid-ShortDescLeft {
 		grid-area: grid-ShortDescLeft;
 		margin-left: 8px;
 		font-family: "BitterBold";
+		p{margin: 16px 0;}
 	}
 	.grid-LongDescLeft {
 		grid-area: grid-LongDescLeft;
@@ -606,9 +703,8 @@ $SubText: 18px;
 		.text-Product-ShortDesc-Style {
 			background: #dbdbdb;
 			border: none;
+			width: 100%;
 			height: 50px;
-			width: 1110px;
-			margin-left: -235px;
 			border-radius: 5px;
 		}
 	}
@@ -618,9 +714,8 @@ $SubText: 18px;
 		.text-Product-LongDesc-Style {
 			background: #dbdbdb;
 			border: none;
-			height: 50px;
-			width: 1110px;
-			margin-left: -235px;
+			width: 100%;
+			height: 100px;
 			border-radius: 5px;
 		}
 	}
@@ -631,9 +726,8 @@ $SubText: 18px;
 		.text-Product-Spec-Style {
 			background: #dbdbdb;
 			border: none;
-			height: 50px;
-			width: 1110px;
-			margin-left: -235px;
+			width: 100%;
+			height: 100px;
 			border-radius: 5px;
 		}
 	}
@@ -648,25 +742,28 @@ $SubText: 18px;
 		"grid-MiniQtyOrderLeft grid-MiniQtyOrderRight";
 	.grid-NoOfPieceLeft {
 		grid-area: grid-NoOfPieceLeft;
-		margin-left: 400px;
+		text-align: end;
 		font-family: "BitterBold";
+		p{margin: 16px 0;}
 	}
 	.grid-MaxQtyOrderLeft {
 		grid-area: grid-MaxQtyOrderLeft;
-		margin-left: 400px;
 		font-family: "BitterBold";
+		text-align: end;
+		p{margin: 16px 0;}
 	}
 	.grid-MiniQtyOrderLeft {
 		grid-area: grid-MiniQtyOrderLeft;
-		margin-left: 400px;
 		font-family: "BitterBold";
+		text-align: end;
+		p{margin: 16px 0;}
 	}
 	.grid-QtyCountRight {
 		grid-area: grid-QtyCountRight;
-		margin-left: -30px;
+		align-self: center;
+		padding: 0 12px;
 		.btnMinQtyCount {
 			background: #dbdbdb;
-			margin-left: 20px;
 			border-top-left-radius: 5px;
 			border-bottom-left-radius: 5px;
 			border: none;
@@ -678,35 +775,35 @@ $SubText: 18px;
 			border: none;
 			text-align: center;
 			width: 30px;
-			margin-left: -10px;
 		}
 		.btnMaxQtyCount {
 			background: #dbdbdb;
 			border-top-right-radius: 5px;
 			border-bottom-right-radius: 5px;
-			margin-right: 50px;
 			border: none;
 			height: 27px;
 			cursor: pointer;
 		}
 	}
 	.grid-MaxQtyOrderRight {
+		align-self: center;
+		padding: 0 12px;
 		grid-area: grid-MaxQtyOrderRight;
 		.Max-Qty-Style {
 			background: #dbdbdb;
 			border: none;
-			margin-left: -10px;
 			width: 70px;
 			text-align: center;
 			border-radius: 5px;
 		}
 	}
 	.grid-MiniQtyOrderRight {
+		align-self: center;
+		padding: 0 12px;
 		grid-area: grid-MiniQtyOrderRight;
 		.Min-Qty-Style {
 			background: #dbdbdb;
 			border: none;
-			margin-left: -10px;
 			width: 70px;
 			text-align: center;
 			border-radius: 5px;
@@ -714,7 +811,7 @@ $SubText: 18px;
 	}
 }
 
-// ADD VARIENTS
+// // ADD VARIENTS
 .dvAddVarientsText {
 	// .imgBord {
 	// 	display: block;
@@ -741,6 +838,107 @@ $SubText: 18px;
 }
 .grid-Tab-Form {
 	grid-area: grid-Tab-Form;
+
+	.input-style-tab{
+		text-align: center;
+		font-family: "BitterBold";
+		border: none;
+		padding: 2px 5px;
+		height: 35px; 
+		margin-bottom: 20px;
+		background: white; 
+		border-radius: 5px;
+	}
+
+	.close-varient{
+		text-align: start;
+		padding-left: 20px;
+		margin-bottom:10px;
+		img{
+			width: 30px;
+		}
+	}
+
+	.saveAddVariant{
+		float: right;
+		background: #efbe24;
+		color: white;
+		border-radius: 5px;
+		border:none;
+		font-family: "BitterBold";
+		cursor: pointer;
+		background-color: #efbe24;
+		&:hover{
+			cursor: pointer;
+			background-color: #dba716;
+		}
+	}
+
+	.addVariant{
+		border-radius: 5px;
+		border:2px solid $smaGray;
+		font-family: "BitterBold";
+		cursor: pointer;
+		:hover{
+			cursor: pointer;
+			background-color: #dba61623;
+		}
+
+	}
+
+	::ng-deep .mat-tab-label{
+		opacity: 1;
+		padding: 0px;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		::ng-deep .mat-ink-bar{
+			background-color: peru;
+		}
+	}
+
+	::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+		background-color: $smaYellow;
+		height: 4px;
+	}
+
+	::ng-deep .mat-tab-label mat-ripple mat-tab-label-active ng-star-inserted{
+		padding: 0;
+	}
+
+	::ng-deep .mat-tab-label-content{
+		background: $smaGreen;
+		border: 1px solid #025f2f;
+		opacity: 1;
+
+		p{
+			font-size: $SubText;
+			font-family: "BitterBold";
+			color: white;
+
+		}
+
+		img{
+			padding: 0 20px;
+			width: 60px;
+		}
+	}
+
+	::ng-deep .mat-tab-body-wrapper{
+		padding: 5% 10%;
+		background: $smaLightGray;
+		border-bottom-left-radius: 12px;
+		border-bottom-right-radius: 12px;
+
+		p{
+			font-size: $SubText;
+			font-family: "BitterBold";
+		}
+
+		.input-new-varient{
+			padding-left: 20px;
+			background: $smaGray;
+		}
+	}
 	.nav {
 		grid-area: nav;
 		margin-left: 300px;
@@ -756,15 +954,15 @@ $SubText: 18px;
 	}
 }
 
-// PRICE
+// // PRICE
 
 .dvPriceText {
 	.imgBord {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 150px;
-		height: 50px;
+		width: 120px;
+		height: 40px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
@@ -772,8 +970,9 @@ $SubText: 18px;
 		text-align: center;
 		font-family: "BitterBold";
 		// position: absolute;
-		transform: translate(0px, -0.45em);
+		transform: translate(0px, -0.25em);
 		z-index: 1;
+		font-size: $SubHeader;
 	}
 	p {
 		text-align: justify;
@@ -784,6 +983,8 @@ $SubText: 18px;
 	grid-area: grid-Price;
 }
 .grid-PriceDetails {
+	margin-top: 50px;
+	margin-bottom: 50px;
 	display: grid;
 	grid-template-columns: 40% 20% 40%;
 	grid-template-rows: repeat(5, auto);
@@ -796,66 +997,71 @@ $SubText: 18px;
 	.grid-LeftPrice {
 		grid-area: grid-LeftPrice;
 		.priceBreakDownText {
-			margin-left: 77%;
 			font-family: "BitterBold";
+			text-align: end;
+			color: $smaDarkGray;
 		}
 	}
 	.grid-LeftPrice1 {
 		grid-area: grid-LeftPrice1;
 		.dicountText {
-			margin-left: 77%;
 			font-family: "BitterBold";
+			text-align: end;
+			color: $smaDarkGray;
 		}
 	}
 	.grid-LeftPrice2 {
 		grid-area: grid-LeftPrice2;
 		.actualPriceText {
-			margin-left: 77%;
 			font-family: "BitterBold";
+			text-align: end;
+			color: $smaDarkGray;
 		}
 	}
 	.grid-LeftPrice3 {
 		grid-area: grid-LeftPrice3;
 		.commissionDecuctionText {
-			margin-left: 77%;
 			font-family: "BitterBold";
+			text-align: end;
+			color: $smaDarkGray;
 		}
 	}
 	.grid-LeftPrice4 {
 		grid-area: grid-LeftPrice4;
 		.finalText {
-			margin-left: 77%;
 			font-family: "BitterBold";
+			text-align: end;
+			color: $smaDarkGray;
 		}
 	}
 	.grid-Med {
 		grid-area: grid-Med;
 		.dotMed {
-			margin-left: 200px;
+			text-align: center;
 		}
 	}
 	.grid-Med1 {
 		grid-area: grid-Med1;
 		.dotMed1 {
-			margin-left: 200px;
+			text-align: center;
 		}
 	}
 	.grid-Med2 {
 		grid-area: grid-Med2;
 		.dotMed2 {
-			margin-left: 200px;
+			text-align: center;
 		}
 	}
 	.grid-Med3 {
 		grid-area: grid-Med3;
 		.dotMed3 {
-			margin-left: 200px;
+			text-align: center;
 		}
 	}
 	.grid-Med4 {
 		grid-area: grid-Med4;
 		.dotMed4 {
-			margin-left: 200px;
+			text-align: center;
 		}
 	}
 	.grid-RightPrice {
@@ -907,19 +1113,21 @@ $SubText: 18px;
 
 // ADVANCED SETTINGS
 .dvAdvanceSettingsText {
+	padding: 15px 0px 60px 0px;
 	.imgBord {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 370px;
+		width: 270px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
 	}
 	h3 {
 		text-align: center;
 		font-family: "BitterBold";
+		font-size: $Text;
 		// position: absolute;
-		transform: translate(0px, -0.45em);
+		transform: translate(0px, -0.25em);
 		z-index: 1;
 	}
 	p {
@@ -931,26 +1139,36 @@ $SubText: 18px;
 	grid-area: grid-AdvanceSettings;
 }
 .grid-AdvanceSettings1 {
+	padding: 10px 0px 0px 30px;
 	display: grid;
-	grid-template-columns: 10% 90%;
+	grid-template-columns: 20% 80%;
 	grid-template-rows: auto;
 	grid-template-areas: "grid-AdvanceTextLeft grid-AdvanceDropDownRight";
 	.grid-AdvanceTextLeft {
 		grid-area: grid-AdvanceTextLeft;
 		.labelText {
-			margin-left: 100px;
 			font-family: "BitterBold";
 		}
 	}
 	.grid-AdvanceDropDownRight {
+		height: 32px;
 		grid-area: grid-AdvanceDropDownRight;
 	}
 }
 .grid-AdvanceSettings2 {
 	display: grid;
+	padding: 30px 30px 20px 30px;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: auto;
+	column-gap: 10px;
 	grid-template-areas: "grid-AdvanceSettingsLeft grid-AdvanceSettingsRight";
+	@media only screen and (min-width: 0px) and (max-width: 1200px){
+		display: grid;
+		padding: 30px 30px 20px 30px;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
+		grid-template-areas: "grid-AdvanceSettingsLeft" "grid-AdvanceSettingsRight";
+	}
 	.grid-AdvanceSettingsLeft {
 		grid-area: grid-AdvanceSettingsLeft;
 		.grid-Advance2 {
@@ -960,17 +1178,23 @@ $SubText: 18px;
 			grid-template-areas:
 				"grid-AvgLeft grid-LabelRight"
 				"grid-AvgLeft1 grid-LabelRight1";
+
+			@media only screen and (min-width: 0px) and (max-width: 700px){
+				grid-template-columns: auto;
+				grid-template-rows: auto;
+				grid-template-areas:
+				"grid-AvgLeft" "grid-LabelRight"
+				"grid-AvgLeft1" "grid-LabelRight1";
+			}
 			.grid-AvgLeft {
 				grid-area: grid-AvgLeft;
 				.avgProcessingTimeText {
-					margin-left: 100px;
 					font-family: "BitterBold";
 				}
 			}
 			.grid-AvgLeft1 {
 				grid-area: grid-AvgLeft1;
 				.avgShippingTimeText {
-					margin-left: 100px;
 					font-family: "BitterBold";
 				}
 			}
@@ -1016,7 +1240,7 @@ $SubText: 18px;
 				.AdvanceTagCard {
 					.AdvanceTagCard-Style {
 						background: #dbdbdb;
-						width: 300px;
+						width: 100%;
 						height: 50px;
 						border: none;
 						border-radius: 5px;
@@ -1028,14 +1252,23 @@ $SubText: 18px;
 }
 .grid-AdvanceSettings3 {
 	display: grid;
+	padding: 10px 30px 20px 30px;
 	grid-template-columns: auto auto auto;
+	column-gap: 8px;
 	grid-template-rows: repeat(3, auto);
 	grid-template-areas: "grid-Advance3Left grid-Advance3Med grid-Advance3Right";
+	@media only screen and (min-width: 100px) and (max-width: 900px){
+		display: grid;
+		padding: 10px 30px 20px 30px;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		grid-template-areas: "grid-Advance3Left" "grid-Advance3Med" "grid-Advance3Right";
+	}
 	.grid-Advance3Left {
 		grid-area: grid-Advance3Left;
 		.grid-AdLeft {
 			display: grid;
-			grid-template-columns: auto auto;
+			grid-template-columns: 50% 50%;
 			grid-template-rows: repeat(3, auto);
 			grid-template-areas:
 				"grid-GiftOptionTextLeft1 grid-GiftOptionToggleRight1"
@@ -1044,21 +1277,18 @@ $SubText: 18px;
 			.grid-GiftOptionTextLeft1 {
 				grid-area: grid-GiftOptionTextLeft1;
 				.giftOptionText {
-					margin-left: 100px;
 					font-family: "BitterBold";
 				}
 			}
 			.grid-OrderConfrmTextLeft1 {
 				grid-area: grid-OrderConfrmTextLeft1;
 				.orderConfirmationText {
-					margin-left: 100px;
 					font-family: "BitterBold";
 				}
 			}
 			.grid-UploadImgTextLeft1 {
 				grid-area: grid-UploadImgTextLeft1;
 				.uploadImgText {
-					margin-left: 100px;
 					font-family: "BitterBold";
 				}
 			}
@@ -1260,7 +1490,7 @@ $SubText: 18px;
 		grid-area: grid-Advance3Med;
 		.grid-AdMed {
 			display: grid;
-			grid-template-columns: auto auto;
+			grid-template-columns: 50% 50%;
 			grid-template-rows: repeat(3, auto);
 			grid-template-areas:
 				"grid-DeliveryDateTextLeft2 grid-DeliveryDateToggleRight2"
@@ -1430,7 +1660,7 @@ $SubText: 18px;
 	}
 	.grid-AdRight {
 		display: grid;
-		grid-template-columns: auto auto;
+		grid-template-columns: 50% 50%;
 		grid-template-rows: repeat(3, auto);
 		grid-template-areas:
 			"grid-RfqText grid-RfqToggle"
@@ -1605,9 +1835,11 @@ $SubText: 18px;
 	// 	z-index: 0;
 	// }
 	h5 {
+		padding-top: 30px;
 		text-align: center;
 		font-family: "BitterBold";
 		// position: absolute;
+		font-size: $Text;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
 	}
@@ -1621,51 +1853,52 @@ $SubText: 18px;
 }
 .grid-MsgTitleContainer {
 	display: grid;
+	padding: 5% 10%;
 	grid-template-columns: auto;
 	grid-template-rows: repeat(2, auto);
 	grid-template-areas:
 		"grid-MsgTitleHead"
 		"grid-MsgTitleFoot";
+
+	@media only screen and (min-width: 0px) and (max-width: 600px){padding: 3% 0};
+
 	.grid-MsgTitleHead {
 		grid-area: grid-MsgTitleHead;
 		background: #f1f1f1;
-		width: 600px;
-		margin-left: 430px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
+		grid-template-columns: 80% 20%;
+		grid-template-rows: repeat(2, auto);
+		grid-template-areas: "grid-MsgTitle-Head grid-Msg-Add";
 		.grid-MsgTitle-Head {
 			display: grid;
+			padding: 1% 5%;
 			grid-template-columns: 80% 20%;
 			grid-template-rows: repeat(2, auto);
 			grid-template-areas: "grid-MsgTitle-Sect1 grid-Msg-Add";
 			.grid-MsgTitle-Sect1 {
-				grid-area: grid-Ques-Sect1;
 				.Msg-title-text {
-					margin-left: -555px;
 					font-family: "BitterBold";
 					margin-top: 10px;
 				}
 				.Msg-Title-Style {
-					margin-left: -556px;
-					width: 460px;
+					width: 100%;
 					border: none;
+					padding: 5px 0px;
 					border-radius: 5px;
 				}
 				.MsgTitle-Sect1-Style {
 					background: white;
-					width: 450px;
 					border: none;
-					margin-left: 20px;
 				}
 			}
 			.grid-Msg-Add {
-				grid-area: grid-Add;
 				margin-top: 40px;
+				text-align: center;
 				.imgPlus {
 					cursor: pointer;
-					margin-left: -66px;
 					margin-bottom: 22px;
-					height: 20px;
+					height: 24px;
 					margin-top: 13px;
 				}
 			}
@@ -1675,42 +1908,39 @@ $SubText: 18px;
 	.grid-MsgTitleFoot {
 		grid-area: grid-MsgTitleFoot;
 		background: #dbdbdb;
-		width: 600px;
-		margin-left: 430px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 		.grid-MsgTitle-Foot {
 			display: grid;
-			grid-template-columns: 80% 20%;
+			grid-template-columns: 70% 30%;
 			grid-template-rows: auto;
 			grid-template-areas: "grid-MsgTitle-Label grid-MsgTitle-Edit-Close";
 			.grid-MsgTitle-Label {
 				grid-area: grid-MsgTitle-Label;
+				padding: 0% 10%;
 				.MsgTitle-Label {
-				margin-left: 45px;
 				margin-top: 10px;
 				}
 			}
 			.grid-MsgTitle-Edit-Close {
-				grid-area: grid-Faq-Edit-Close;
-				.imgEdit {
-					cursor: pointer;
-					margin-left: -93px;
-					height: 20px;
-					margin-top: -28px;
-				}
-				.imgClose {
-					cursor: pointer;
-					margin-left: 5px;
-					height: 20px;
-					margin-top: -28px;
-				}
+				text-align: center;
+				align-self: center;
+			}
+			.imgEdit {
+				cursor: pointer;
+				height: 20px;
+			}
+			.imgClose {
+				cursor: pointer;
+				margin-left: 30px;
+				height: 20px;
 			}
 		}
 	}
 }
 // SHIPPING OPTIONS
 .dvShippingOptionsText {
+	padding: 35px 0px;
 	.imgBord {
 		display: block;
 		margin-left: auto;
@@ -1736,9 +1966,11 @@ $SubText: 18px;
 }
 .grid-RadioBtn {
 	display: grid;
+	text-align: center;
 	grid-template-columns: auto auto auto;
 	grid-template-rows: auto;
 	grid-template-areas: "grid-RadioShipping grid-RadioHomeDelivery grid-RadioPickup";
+	p{margin:16px 0px}
 	.grid-RadioShipping {
 		grid-area: grid-RadioShipping;
 		.grid-Shipping {
@@ -1749,10 +1981,10 @@ $SubText: 18px;
 			.grid-ShippingText {
 				grid-area: grid-ShippingText;
 				font-family: "BitterBold";
-				margin-left: 180px;
 			}
 			.grid-ShippingRadioBtn {
 				grid-area: grid-ShippingRadioBtn;
+				align-self: center;
 			}
 		}
 	}
@@ -1769,6 +2001,7 @@ $SubText: 18px;
 			}
 			.grid-HomeDeliveryRadioBtn {
 				grid-area: grid-HomeDeliveryRadioBtn;
+				align-self: center;
 			}
 		}
 	}
@@ -1785,6 +2018,7 @@ $SubText: 18px;
 			}
 			.grid-PickupRadioBtn {
 				grid-area: grid-PickupRadioBtn;
+				align-self: center;	
 			}
 		}
 	}
@@ -1792,6 +2026,7 @@ $SubText: 18px;
 // SHIPPING DETAILS
 
 .dvShippingDetailsText {
+	padding: 35px 0px;
 	.imgBord {
 		display: block;
 		margin-left: auto;
@@ -1838,17 +2073,19 @@ $SubText: 18px;
 	}
 }
 .grid-DeliverableContainer {
-	display: grid;
+	padding: 0 10%;
 	grid-template-columns: auto;
 	grid-template-rows: repeat(3, auto);
 	grid-template-areas:
 		"grid-DeliverableHead"
 		"grid-DeliverableBody"
 		"grid-DeliverableFoot";
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		padding: 0;
+	}
+
 	.grid-DeliverableHead {
 		grid-area: grid-DeliverableHead;
-		width: 1050px;
-		margin-left: 230px;
 		.grid-DeliverableHeadSub {
 			display: grid;
 			grid-template-columns: auto auto auto;
@@ -1882,23 +2119,26 @@ $SubText: 18px;
 	.grid-DeliverableBody {
 		grid-area: grid-DeliverableBody;
 		background: white;
-		width: 1050px;
-		margin-left: 230px;
+		border: 1px solid #3333333f;
 		.grid-DeliverableBodySub {
-			width: 1050px;
-			margin-left: 230px;
 			display: grid;
-			grid-template-columns: auto auto auto;
+			column-gap: 10px;
+			padding: 10px;
+			grid-template-columns: auto auto auto auto auto;
 			grid-template-rows: auto;
-			grid-template-areas: "deliverable-Location deliverable-Price deliverable-Qty-Price";
+			grid-template-areas: "deliverable-Location deliverable-Price deliverable-Qty-Price shipEdit shipClose";
+
+			input{
+				border:1px solid #3333333f;
+				text-align: center;
+				width: inherit;
+				color: gray;
+			}
 			.deliverable-Location {
 				grid-area: deliverable-Location;
 				background: white;
 				font-family: "BitterBold";
 				text-align: center;
-				width: 250px;
-				margin-left: -42%;
-				margin-top: 10%;
 				border-radius: 5px;
 			}
 			.deliverable-Price {
@@ -1906,33 +2146,41 @@ $SubText: 18px;
 				background: white;
 				font-family: "BitterBold";
 				text-align: center;
-				width: 160px;
-				margin-left: -60%;
 				border-radius: 5px;
-				height: 30px;
-				margin-top: 42px;
 			}
 			.deliverable-Qty-Price {
 				grid-area: deliverable-Qty-Price;
 				background: white;
 				font-family: "BitterBold";
 				text-align: center;
-				width: 160px;
-				margin-left: -52%;
 				border-radius: 5px;
-				height: 30px;
-				margin-top: 42px;
+			}
+			.shipClose{
+				grid-area: shipClose;
+				position: relative;
+				margin-top: 5px;
+				left: 0;
+				height: 18px;
+				align-self: start;
+			}
+			.shipEdit{
+				grid-area: shipEdit;
+				position: relative;
+				margin-top: 5px;
+				left: 0;
+				height: 16px;
+				align-self: start;
+			}
+			img{
+				align-self: center;
 			}
 			.imgEdit {
-				margin-left: 180%;
+				align-self: center;
 				height: 24px;
-				margin-top: -28px;
 				cursor: pointer;
 			}
 			.imgClose {
-				margin-left: 116%;
 				height: 24px;
-				margin-top: -28px;
 				cursor: pointer;
 			}
 		}
@@ -1940,11 +2188,7 @@ $SubText: 18px;
 	.grid-DeliverableFoot {
 		grid-area: grid-DeliverableFoot;
 		background: white;
-		width: 1050px;
-		margin-left: 230px;
 		.grid-DeliverableFootSub {
-			width: 1050px;
-			margin-left: 230px;
 			display: grid;
 			grid-template-columns: auto;
 			grid-template-rows: auto;
@@ -1952,8 +2196,6 @@ $SubText: 18px;
 			.deliverable-Add-Foot {
 				grid-area: deliverable-Add-Foot;
 				background: white;
-				margin-left: -230px;
-				width: 1050px;
 				border-bottom-left-radius: 5px;
 				border-bottom-right-radius: 5px;
 				.imgPlus {
@@ -1963,7 +2205,6 @@ $SubText: 18px;
 					cursor: pointer;
 				}
 				.location-Text-Style {
-					margin-left: -172px;
 					color:#009145;
 					margin-top: -26px;
 				}
@@ -1977,7 +2218,7 @@ $SubText: 18px;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 200px;
+		width: 160px;
 		height: 50px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
@@ -1985,7 +2226,7 @@ $SubText: 18px;
 	h3 {
 		text-align: center;
 		font-family: "BitterBold";
-		// position: absolute;
+		font-size: $SubHeader;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
 	}
@@ -1998,14 +2239,34 @@ $SubText: 18px;
 	grid-area: grid-Discount;
 }
 .grid-Discount-Container {
+	margin-top: 50px;
+	column-gap: 10px;
 	display: grid;
-	grid-template-columns: 50% 50%;
+	// grid-template-columns: 40% 60%;
 	grid-template-rows: auto;
-	grid-template-areas: "grid-Pro-Discount-Left grid-Bundle-Discount-Right";
+	grid-template-areas: "grid-Pro-Discount-Left . grid-Bundle-Discount-Right";
+
+	@media only screen and (min-width: 0px) and (max-width: 1400px){	
+		margin-top: 30px;
+		display: grid;
+		// grid-template-columns: 40% 60%;
+		grid-template-rows: auto;
+		grid-template-areas: "grid-Pro-Discount-Left" "grid-Bundle-Discount-Right";
+		align-items: center;
+		justify-items: center;
+		row-gap: 30px;
+		width: fit-content;
+	
+	}
 	.grid-Pro-Discount-Left {
 		grid-area: grid-Pro-Discount-Left;
+		@media only screen and (min-width: 0px) and (max-width: 1400px){
+			grid-area: grid-Pro-Discount-Left;
+			width: inherit;
+		}
 		.grid-Pro-Discount {
 			display: grid;
+			input{width: inherit;}
 			grid-template-columns: auto;
 			grid-template-rows: repeat(2, auto);
 			grid-template-areas:
@@ -2016,58 +2277,77 @@ $SubText: 18px;
 				text-align: center;
 				.proDiscText {
 					font-family: "BitterBold";
-					margin-left: 65px;
+					margin-bottom: 24px;
 				}
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
 				background: #f1f1f1;
-				width: 500px;
-				height: 250px;
-				margin-left: 150px;
-				border-radius: 5px;
+				width: auto;
+				border-radius: 12px;
+				padding: 10px;
+				box-shadow: 5px 5px 8px 3px #0505051c;
 				.grid-Pro-Disc {
+					p{margin: 16px 0px;
+					font-size: 14px}
+					text-align: center;
 					display: grid;
+					padding: 10px;
 					grid-template-columns: auto auto auto auto;
 					grid-template-rows: repeat(4, auto);
 					grid-template-areas:
 						"grid-Pro-Date-Text grid-Label-1 grid-minus grid-Label-2"
-						"grid-Pro-Disc-Text grid-Price-Label grid-Price-Label grid-Price-Label"
-						". grid-Disc-Label grid-Disc-Label grid-Disc-Label"
+						"grid-Pro-Disc-Text grid-Price-Label . ."
+						". grid-Disc-Label . ."
 						". . . btnPro-Disc";
+						@media only screen and (min-width: 0px) and (max-width: 600px){
+							grid-template-columns: auto;
+							grid-template-rows: auto;
+							grid-template-areas:
+								"grid-Pro-Date-Text" "grid-Label-1" "grid-minus" "grid-Label-2"
+								"grid-Pro-Disc-Text" "grid-Price-Label"
+								"grid-Disc-Label"
+								"btnPro-Disc";
+						}
 					.grid-Pro-Date-Text {
 						grid-area: grid-Pro-Date-Text;
+						align-self: center;
 						.dateText {
-							margin-top: 20px;
-							margin-left: 20px;
+							text-align: start;
 						}
 					}
 					.grid-Label-1 {
 						grid-area: grid-Label-1;
+						align-self: center;
 						.Pro-Date-Label-Style-1 {
 							background: #dbdbdb;
 							border: none;
-							margin-top: 20px;
+							color: gray;
+							text-align: center;
 							border-radius: 5px;
 						}
 					}
 					.grid-minus {
 						grid-area: grid-minus;
-						margin-top: 20px;
 					}
 					.grid-Label-2 {
 						grid-area: grid-Label-2;
+						align-self: center;
 						.Pro-Date-Label-Style-2 {
 							background: #dbdbdb;
 							border: none;
-							margin-top: 20px;
+							color: gray;
+							text-align: center;
 							border-radius: 5px;
 						}
 					}
 					.grid-Pro-Disc-Text {
+						text-align: start;
+						padding-right:10px ;
 						grid-area: grid-Pro-Disc-Text;
 					}
 					.grid-Price-Label {
+						align-self: center;
 						grid-area: grid-Price-Label;
 						.Pro-Price-Label-Style-2 {
 							background: #dbdbdb;
@@ -2075,6 +2355,14 @@ $SubText: 18px;
 							text-align: center;
 							border-radius: 5px;
 						}
+
+						// input{
+						// 	text-align: center;
+						// 	border: none;
+						// 	background: $smaGray;
+						// 	border-radius: 8px;
+						// 	height: 30px;
+						// }
 					}
 					.grid-Disc-Label {
 						grid-area: grid-Disc-Label;
@@ -2084,15 +2372,32 @@ $SubText: 18px;
 							text-align: center;
 							border-radius: 5px;
 						}
+						input{
+							text-align: center;
+							border: none;
+							background: $smaGray;
+							border-radius: 8px;
+							height: 30px;
+							width: inherit;
+						}
 					}
 					.btnPro-Disc {
 						grid-area: btnPro-Disc;
+						margin-top: 30px;
 						.btnPro-Sumit {
 							background: #efbe24;
 							color: white;
 							border-radius: 5px;
+							height: 40px;
+							border:none;
 							font-family: "BitterBold";
 							cursor: pointer;
+							background-color: #efbe24;
+							box-shadow: 5px 5px 10px 2px #05050513;
+							&:hover{
+								cursor: pointer;
+								background-color: #dba716;
+						}
 						}
 					}
 				}
@@ -2103,25 +2408,31 @@ $SubText: 18px;
 
 	.grid-Bundle-Discount-Right {
 		grid-area: grid-Bundle-Discount-Right;
+		@media only screen and (min-width: 0px) and (max-width: 1400px){
+			grid-area: grid-Bundle-Discount-Right;
+			width: inherit;
+		}	
 		.addBundleText {
 			font-family: "BitterBold";
+			margin-bottom: 24px;
 		}
 		.grid-Bundle-Discount {
 			display: grid;
 			grid-template-columns: auto;
 			grid-template-rows: repeat(2, auto);
+			column-gap: 15px;
 			grid-template-areas:
 				"grid-Pro-Disc-Text"
 				"grid-Pro-Disc-Container";
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
-				margin-left: -58px;
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
 				.grid-Bundle-Disc {
 					display: grid;
+					box-shadow: 5px 5px 8px 3px #0505051c;
 					grid-template-columns: auto;
 					grid-template-rows: auto auto;
 					grid-template-areas:
@@ -2130,11 +2441,22 @@ $SubText: 18px;
 					.grid-Bundle-Head {
 						grid-area: grid-Bundle-Head;
 						background: #f1f1f1;
-						border-top-left-radius: 5px;
-						border-top-right-radius: 5px;
-						margin-left: -36px;
-						height: 80px;
+						border-top-left-radius: 8px;
+						border-top-right-radius: 8px;
+						padding-bottom: 20px;
+						align-self: center;
 						.grid-Bundle-Body {
+							padding: 8px 30px;
+							column-gap: 8px;
+							text-align: center;
+							p{font-size: 14px;}
+
+							@media only screen and (min-width: 0px) and (max-width: 600px){
+								p{font-size: 8px;}
+								padding: 0px;
+							}
+
+							input{width: inherit;}
 							display: grid;
 							grid-template-columns: auto auto auto auto;
 							grid-template-rows: repeat(2, auto);
@@ -2142,11 +2464,14 @@ $SubText: 18px;
 								"grid-Qty-Text grid-Disc-Per grid-Disc-Price grid-Actual-Price ."
 								"grid-Qty-Label grid-Disc-Per-Label grid-Disc-Price-Label grid-Actual-Price-Label grid-Add-Bundle";
 							.grid-Qty-Text {
+								align-self: center;
 								grid-area: grid-Qty-Text;
-								text-align: center;
 								.qtyText {
 									font-family: "BitterBold";
-									margin-top: 10px;
+									width: 50px;
+									text-align: center;
+
+									margin: 10px 0px 16px 10px;
 								}
 							}
 							.grid-Disc-Price {
@@ -2155,6 +2480,7 @@ $SubText: 18px;
 								.discPriceText {
 									font-family: "BitterBold";
 									margin-top: 10px;
+									width: inherit;
 								}
 							}
 							.grid-Disc-Per {
@@ -2171,6 +2497,7 @@ $SubText: 18px;
 								.actualPriceText {
 									font-family: "BitterBold";
 									margin-top: 10px;
+									width: inherit;
 								}
 							}
 							.grid-Qty-Label {
@@ -2179,7 +2506,6 @@ $SubText: 18px;
 									background: white;
 									border: none;
 									text-align: center;
-									margin-left: 40px;
 									width: 50px;
 									border-radius: 5px;
 								}
@@ -2191,7 +2517,6 @@ $SubText: 18px;
 									border: none;
 									text-align: center;
 									border-radius: 5px;
-									margin-left: 40px;
 								}
 							}
 							.grid-Disc-Per-Label {
@@ -2201,7 +2526,6 @@ $SubText: 18px;
 									border: none;
 									text-align: center;
 									border-radius: 5px;
-									margin-left: 40px;
 								}
 							}
 							.grid-Actual-Price-Label {
@@ -2210,8 +2534,7 @@ $SubText: 18px;
 									background: white;
 									border: none;
 									text-align: center;
-									border-radius: 5px;
-									margin-left: 40px;
+									border-radius: 8px;
 								}
 							}
 							.grid-Add-Bundle {
@@ -2226,10 +2549,9 @@ $SubText: 18px;
 					.grid-Bundle-Foot {
 						grid-area: grid-Bundle-Foot;
 						background: #dbdbdb;
-						height: 38px;
-						border-bottom-left-radius: 5px;
-						border-bottom-right-radius: 5px;
-						margin-left: -36px;
+						padding: 10px 40px;
+						border-bottom-left-radius: 8px;
+						border-bottom-right-radius: 8px;
 						.grid-Bundle-Body-1 {
 							display: grid;
 							grid-template-columns: auto auto auto auto;
@@ -2264,10 +2586,10 @@ $SubText: 18px;
 							}
 							.grid-Edit-Close-Bundle-1 {
 								grid-area: grid-Add-Bundle-1;
+								text-align: center;
 								.imgEdit {
 									cursor: pointer;
 									height: 24px;
-									margin-left: 550px;
 								}
 								.imgClose {
 									cursor: pointer;
@@ -2285,10 +2607,10 @@ $SubText: 18px;
 // POLICIES
 .ProdPoliciesText {
 	.imgBord {
-		display: block;
+		display: none;
 		margin-left: auto;
 		margin-right: auto;
-		width: 780px;
+		width: auto;
 		height: 50px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
@@ -2311,11 +2633,9 @@ $SubText: 18px;
 .policyTxt {
 	font-family: Bitter;
 	width: 800px;
-	margin-left: 345px;
 }
 .btnPolicyEdit {
 	.button {
-		margin-left: 720px;
 		width: 80px;
 		height: 30px;
 		background: #efbe24;
@@ -2325,16 +2645,18 @@ $SubText: 18px;
 		border-radius: 5px;
 	}
 }
+.policy-wrapper{
+	margin: 50px 0;
+	padding: 0 10%;
+}
 .policyTxtArea {
 	font-family: Bitter;
-	width: 800px;
-	margin-left: 345px;
+	width: 100%;
 	border-radius: 5px;
 }
 .btnpolicySubmit {
 	.button {
 		margin-top: 20px;
-		margin-left: 720px;
 		width: 80px;
 		height: 30px;
 		background: #efbe24;
@@ -2344,33 +2666,32 @@ $SubText: 18px;
 		border-radius: 5px;
 	}
 }
-// .grid-Policy {
-// 	display: grid;
-// 	grid-template-columns: auto;
-// 	grid-template-rows: repeat(2, auto);
-// 	grid-template-areas:
-// 		"grid-Policies"
-// 		"grid-PoliciesBtn";
-// 	.grid-Policies {
-// 		grid-area: grid-Policies;
-// 		.textPolicy-Style {
-// 			margin-left: 300px;
-// 			width: 900px;
-// 		}
-// 	}
-// .grid-PoliciesBtn {
-// 	grid-area: grid-PoliciesBtn;
-// 	.policyBtn {
-// 		background: #efbe24;
-// 		margin-left: 710px;
-// 		width: 80px;
-// 		height: 40px;
-// 		margin-top: 20px;
-// 	}
-// }
-// }
+.grid-Policy {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: repeat(2, auto);
+	grid-template-areas:
+		"grid-Policies"
+		"grid-PoliciesBtn";
+	.grid-Policies {
+		grid-area: grid-Policies;
+		.textPolicy-Style {
+			width: 900px;
+		}
+	}
+.grid-PoliciesBtn {
+	grid-area: grid-PoliciesBtn;
+	.policyBtn {
+		background: #efbe24;
+		width: 80px;
+		height: 40px;
+		margin-top: 20px;
+	}
+}
+}
 // FAQ
 .dvFaqText {
+	margin-bottom: 30px;
 	.imgBord {
 		display: block;
 		margin-left: auto;
@@ -2397,22 +2718,25 @@ $SubText: 18px;
 }
 .grid-FaqContainer {
 	display: grid;
+	padding : 0 15%;
 	grid-template-columns: auto;
-	grid-template-rows: repeat(2, auto);
+	grid-template-rows: repeat(1, auto);
 	grid-template-areas:
 		"grid-FaqHead"
 		"grid-FaqFoot";
+
+	@media only screen and (min-width: 0px) and (max-width: 600px){padding: 0;}
+
 	.grid-FaqHead {
 		grid-area: grid-FaqHead;
 		background: #f1f1f1;
-		width: 600px;
-		margin-left: 450px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		height: 170px;
+		padding: 20px 40px;
+		p{margin: 16px 0px;}
 		.grid-Faq-Head {
 			display: grid;
-			grid-template-columns: 80% 20%;
+			grid-template-columns: 90% 10%;
 			grid-template-rows: repeat(2, auto);
 			grid-template-areas:
 				"grid-Ques-Sect1 grid-Add"
@@ -2421,29 +2745,28 @@ $SubText: 18px;
 				grid-area: grid-Ques-Sect1;
 				.Ques-Sect1-Style {
 					background: white;
-					width: 450px;
+					width: 100%;
 					border: none;
-					margin-left: 20px;
+					padding: 5px;
 					border-radius: 5px;
 				}
 			}
 			.grid-Add {
 				grid-area: grid-Add;
-				margin-top: 40px;
+				align-self: end;
+				text-align: center;
 				.imgPlus {
 					cursor: pointer;
-					margin-left: 50px;
 					height: 22px;
-					margin-top: 12px;
 				}
 			}
 			.grid-Ans-Sect2 {
 				grid-area: grid-Ans-Sect2;
 				.Ans-Sect2-Style {
 					background: white;
-					width: 450px;
+					width: 100%;
 					border: none;
-					margin-left: 20px;
+					padding: 5px;
 					border-radius: 5px;
 				}
 			}
@@ -2452,8 +2775,6 @@ $SubText: 18px;
 	.grid-FaqFoot {
 		grid-area: grid-FaqFoot;
 		background: #dbdbdb;
-		width: 600px;
-		margin-left: 450px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 
@@ -2493,20 +2814,24 @@ $SubText: 18px;
 }
 .grid-dvBtnLast {
 	display: grid;
+	column-gap: 40px;
 	grid-template-columns: auto auto;
 	grid-template-rows: auto;
 	grid-template-areas: "grid-BtnLastLeft grid-BtnLastRight";
 	.grid-BtnLastLeft {
 		grid-area: grid-BtnLastLeft;
+		text-align: end;
 		.btnSaveAsDraft {
 			margin-top: 40px;
 			margin-bottom: 40px;
-			margin-left: 600px;
+			height: 40px;
+			padding: 5px;
 			background: #efbe24;
 			color: white;
 			font-family: BitterBold;
 			border-radius: 5px;
 			cursor: pointer;
+			border: none;
 		}
 	}
 	.grid-BtnLastRight {
@@ -2514,12 +2839,14 @@ $SubText: 18px;
 		.btnPublish {
 			margin-top: 40px;
 			margin-bottom: 40px;
-			margin-right: 650px;
 			background: #efbe24;
+			padding: 5px;
+			height: 40px;
 			color: white;
 			font-family: BitterBold;
 			border-radius: 5px;
 			cursor: pointer;
+			border:none;
 		}
 	}
 }
