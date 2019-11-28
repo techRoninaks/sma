@@ -52,7 +52,7 @@
                               Enter Only digits !
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">Verify</button>
+                        <button type="button"  data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">Verify</button>
                     </div><br>
                     <div>
                       <input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password" formControlName="reg_password">
@@ -195,7 +195,7 @@
               <img src="assets/icons/sellerReg/Registration(seller side)-34-31.png" class="img-style-5">
           </div>
           <div class="shop-det">
-            <label class="prime-label-style-stage-1">SHOP DETAILS</label>
+            <label class="prime-label-style-stage-1 shopdet">SHOP DETAILS</label>
           </div>
           <div class="owner-info">
               <label class="label-style-stage-1">OWNER INFO</label>
@@ -211,13 +211,15 @@
           </div>
         </div>
     </div>
+    <label style="margin-left: 60px;font-size: 25px;"> SHOP DETAILS</label>
+
     <div class="div-body-stage-1">
         <form [formGroup]="registrationFormStage1" (ngSubmit)="onSubmitStage2()" class="grid-form">
           <div class="shop-name-label">
               <label>Shop Name:</label>
           </div>
-          <div class="shop-name">
-              <input type="text" formControlName="shop_name" style="border: none; border-radius: 5px; width: 245px;">
+          <div class="shop-name ">
+              <input type="text" class ="shopnew" formControlName="shop_name">
               <div *ngIf="submitted && registrationFormStage1.controls.shop_name.errors" class="error validator-style">
                   <div *ngIf="registrationFormStage1.controls.shop_name.errors.required">
                     Shop Name is required !
@@ -228,13 +230,13 @@
             <label>Owner Name:</label>
           </div>
           <div class="owner-name">
-            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].owner_name}}</label></div>
+            <div class ="ownernew"><label>{{dynamicDataSeller[0].owner_name}}</label></div>
           </div>
           <div class="shop-addr-label">
             <label>Shop Address:</label>
           </div>
           <div class="shop-addr">
-            <input type="text" style="width: 400px;" placeholder="Address:" formControlName="shop_address" style="width: 407px; border: none; border-radius: 5px;">
+            <input type="text" class = "addressnew" placeholder="Address:" formControlName="shop_address">
             <div *ngIf="submitted && registrationFormStage1.controls.shop_address.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.shop_address.errors.required">
                   Shop Address is required !
@@ -248,7 +250,7 @@
                   City is required !
                 </div>
             </div> -->
-            <select style="width: 233px;" formControlName="city">
+            <select class="city1"formControlName="city">
               <option default>Select Your City</option>
               <option *ngFor="let item of Object.keys(dynamicDataCity)" (click)="selectedCity(dynamicDataCity[item].city);">{{dynamicDataCity[item].city}}</option>
             </select>
@@ -265,7 +267,7 @@
                   State is required !
                 </div>
             </div> -->
-            <select style="width: 409px;" formControlName="state">
+            <select class="state1" formControlName="state">
               <option default>Select Your State</option>
               <option *ngFor="let item of Object.keys(dynamicDataSeller)" (click)="selectedState(dynamicDataSeller[item].state);">{{dynamicDataSeller[item].state}}</option>
             </select>
@@ -277,7 +279,7 @@
                   Pin is required !
                 </div>
             </div> -->
-            <select style="width: 233px;" formControlName="pin">
+            <select class="pin1" formControlName="pin">
               <option default>Select Your Pincode</option>
               <option *ngFor="let item of Object.keys(dynamicDataPin)" (click)="selectedPin(dynamicDataPin[item].pin);">{{dynamicDataPin[item].pin}}</option>
             </select>
@@ -291,7 +293,7 @@
             <label>Main Category</label>
           </div>
           <div class="main-cat-drop-down">
-            <select formControlName="main_category" style="border: none; width: 240px; border-radius: 4px;">
+            <select formControlName="main_category" class="main1" >
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
             <div *ngIf="submitted && registrationFormStage1.controls.main_category.errors" class="error validator-style">
@@ -301,12 +303,12 @@
             </div>
           </div>
           <div class="main-cat-drop-down-1">
-            <select style="border: none; width: 240px; border-radius: 4px;">
+            <select class="main2">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
           </div>
           <div class="main-cat-drop-down-2">
-            <select style="border: none; width: 240px; border-radius: 4px;">
+            <select class="main3">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
           </div>
@@ -314,23 +316,22 @@
               <label>Contact No:</label>
           </div>
           <div class="contact">
-            <div style="height: 27px; width:230px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].contact}}</label></div>
+            <div class="contactNew"><label>{{dynamicDataSeller[0].contact}}</label></div>
           </div>
           <div class="email-id-label">
             <label>Email ID:</label>
           </div>
           <div class="email-id">
-            <div style="height: 27px; width:240px; border-radius:4px; background: white;"><label>{{dynamicDataSeller[0].email}}</label></div>
+            <div class="emailNew"><label>{{dynamicDataSeller[0].email}}</label></div>
           </div>
           <div class="gst-no-label">
             <label>GST No:</label>
           </div>
           <div class="gst-no">
-            <input type="text" style="border: none; border-radius: 5px; width: 230px;" id="gst-no">
+            <input type="text" class="gst1" id="gst-no">
           </div>
           <div class="btn-next">
-            <button type="submit" style="margin-top: 40px; margin-left: 75px; border: none; border-radius: 4px; height: 30px; width: 100px;
-            background: #EFBE24; color: white;">NEXT</button>
+            <button type="submit" class = "btnNextnew" >NEXT</button>
           </div>
         </form>
     </div>
@@ -372,43 +373,45 @@
             </div>
           </div>
       </div>
+      <label style="margin-left: 60px;font-size: 25px;">OWNER INFO</label>
+
       <div class="div-body-stage-2">
         <div class="grid-stage-2">
           <div class="label-owner-name">
             <label>Owner Name:</label>
           </div>
           <div class="name-owner">
-            <label><div style="height: 27px; width:350px; border-radius:4px; background: white;">{{dynamicDataSeller[0].owner_name}}</div></label>
+            <label><div class="nameOwner">{{dynamicDataSeller[0].owner_name}}</div></label>
           </div>
           <div class="email-label-2">
             <label>Email:</label>
           </div>
           <div class="email-2">
-            <label><div style="height: 27px; width:320px; border-radius:4px; background: white;">{{dynamicDataSeller[0].email}}</div></label>
+            <label><div class="email1">{{dynamicDataSeller[0].email}}</div></label>
           </div>
           <div class="contact-label-2">
             <label>Contact No:</label>
           </div>
           <div class="contact-2">
-            <label><div style="height: 27px; width:240px; border-radius:4px; background: white;">{{dynamicDataSeller[0].contact}}</div></label>
+            <label><div class="contact1">{{dynamicDataSeller[0].contact}}</div></label>
           </div>
           <div class="dob-label">
             <label>Date of birth:</label>
           </div>
           <div class="dob">
-            <input type="date" id="seller-dob" style="width: 320px; border: none;  border-radius: 4px;">
+            <input type="date" class="date1" id="seller-dob">
           </div>
           <div class="id-no-label">
             <label>ID No:</label>
           </div>
           <div class="id-no">
-            <input type="text" id="id-no" style="width: 240px; border: none;  border-radius: 4px;">
+            <input type="text" id="id-no" class="id1">
           </div>
           <div class="id-type-label">
             <label>ID Type:</label>
           </div>
           <div class="id-drop-down">
-            <select id="id-type" style="width: 320px; border: none; border-radius: 4px;">
+            <select id="id-type" class="id2">
                 <option *ngFor="let item of Object.keys(dynamicDataId)">{{dynamicDataId[item].id_card_type}}</option>
             </select>
           </div>
@@ -434,8 +437,7 @@
           <div class="btn-next">
             <img id="frontPreviewId" style="display: none; margin-left: -151px; width: 100px; height: 100px;" [src]="urlFront" height="200">
             <img id="backPreviewId" style="display: none; margin-top: -100px; margin-left: -2px; width: 100px; height: 100px;" [src]="urlBack" height="200">
-            <button (click)="onSubmitStage3()" style="margin-top: 40px; border: none; border-radius: 4px; height: 30px; width: 100px;
-            background: #EFBE24; color: white;">NEXT</button>
+            <button (click)="onSubmitStage3()" class="next">NEXT</button>
           </div>
         </div>
       </div>
@@ -478,7 +480,8 @@
         </div>
       </div>
     </div>
-      <div class="div-body-stage-3">
+    <label style="margin-left: 60px;font-size: 25px;">PAYMENT SHIPPING</label>
+      <div class="div-body-stage-3">        
         <div class="grid-shipping-main">
           <div class="ship-details">
             <div class="grid-shipping">
@@ -491,7 +494,7 @@
                 <label>Shipping From:</label>
               </div>
               <div class="ship-from">
-                  <select id="ship-city" style="border: none; border-radius: 5px; width: 150px;">
+                  <select id="ship-city" class="chooseCity">
                       <option>Choose City</option>
                       <option *ngFor="let item of Object.keys(dynamicDataLoc)">{{dynamicDataLoc[item].city}}</option>
                   </select>
@@ -526,15 +529,15 @@
             </div>
           </div>
           <div class="location">
-            <div style="height: 50px; width: 500px; background: #009145; border-top-left-radius: 7px; border-top-right-radius: 7px;">
+            <div class="location1">
               <label style="color: white; font-size: 19px; margin-left: 51px; margin-top: 11px;">LOCATION</label>
             </div>
             <div class="grid-location">
               <div class="location-input">
-                <input type="text" id="city" style="border: none; width: 291px; border-radius: 5px; margin-left: -466px; margin-top: 54px; height: 33px;">
+                <input type="text" id="city" class="city2">
               </div>
               <div class="addbtn">
-                <button style="border: none; background: inherit; margin-top: 36px; margin-left: -115px; font-size: 37px; color: #009145;">+</button>
+                <button class="addButton1">+</button>
               </div>
               <div class="location-list">
                 <!-- <label style="margin-left: -432px; margin-top: 127px;">Tamilnadu,600046</label> -->
@@ -648,8 +651,7 @@
                     </div>
                 </div>
                 <div class="btn-next">
-                    <button (click)="onSubmitStage4()" type="submit" style="margin-left: 106px; border: none; border-radius: 4px; height: 30px; width: 100px;
-                    background: #EFBE24; color: white;">NEXT</button>
+                    <button (click)="onSubmitStage4()" type="submit" class="next2">NEXT</button>
                 </div>
             </div>
           </form>
@@ -683,6 +685,7 @@
             <br> -->
       </div>
   </div>
+
   <div class="background-div" *ngIf="stage_4">
     <div class="header">
       <div class="grid-header">
@@ -722,6 +725,8 @@
         </div>
       </div>
     </div>
+    <label style="margin-left: 60px;font-size: 25px;"> TERMS AND CONDITIONS</label>
+
     <div class="div-body">
       <div class="mod-date">
           <label>Last modified: Oct 2019</label>
@@ -735,11 +740,11 @@
           </div>
       </div>
       <form [formGroup]="termsForm">
-        <button style="margin-left: 416px; background: #EFBE24; border: none; border-radius: 3px; color: white;"><a target="_blank" routerLink="/terms&conditions">Goto T&C</a></button>
+        <button class="terms"><a target="_blank" routerLink="/terms&conditions">Goto T&C</a></button>
         <br>
-        <input type="checkbox" style="margin-left: 286px;" formControlName="t_checkbox"> &nbsp; <label>I agree to the above stated terms and conditions</label>
+        <input type="checkbox" class="check" formControlName="t_checkbox"> &nbsp; <label>I agree to the above stated terms and conditions</label>
         <br>
-        <button [disabled]="! termsForm.valid" type="submit" (click)=nextStage(); style="margin-left: 438px; background: #EFBE24; border: none; border-radius: 3px; color: white;">NEXT</button>
+        <button [disabled]="! termsForm.valid" type="submit" (click)=nextStage(); class="next3">NEXT</button>
       </form>
     </div>
   </div>
@@ -785,14 +790,16 @@
         </div>
       </div>
     </div>
+    <label style="margin-left: 60px;font-size: 25px;">LAUNCH</label>
+
       <div class="div-body-stage-5">
         <div class="grid-promotion">
           <div class="header-promo">
-            <label style ="color: white; margin-left: 345px; font-size: 18px; font-family: BitterBold; margin-top: 4px;">PROMOTIONAL PERIOD</label>
+            <label class="promoheader promohead">PROMOTIONAL PERIOD</label>
           </div>
           <div class="h-desc">
-            <p style="margin-top: 55px; margin-left: 125px; font-size: 31px; margin-right: 60px;">"The Only thing that is stopping you from your</p>
-            <p style="margin-left: 197px; font-size: 31px; margin-right: 60px;">destiny is the launch button below"</p>
+            <p class="desch">"The Only thing that is stopping you from your</p>
+            <p class="desch1">destiny is the launch button below"</p>
           </div>
           <div class="h-plan">
               <div class="main-title">
@@ -817,13 +824,13 @@
                                     <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataFree.planPrice}}/month</p>
                                 </div>
                                 <div>
-                                    <p style="margin-left: 50px;">DISCOUNT: ₹{{dynamicDataFree.planDiscount}}</p>
+                                    <p style="text-align: center;">DISCOUNT: ₹{{dynamicDataFree.planDiscount}}</p>
                                 </div>
                                 <div>
-                                    <p style="margin-left: 28px;">DURATION: {{dynamicDataFree.duration}} days</p>
+                                    <p style="text-align: center;">DURATION: {{dynamicDataFree.duration}} days</p>
                                 </div>
                             </mat-card-content>
-                            <mat-card-actions>
+                            <mat-card-actions style="margin-left: 25%;">
                                 <button mat-button class="btn-style" (click)=checkoutFree(); style="margin-top: 2px;">TRY NOW</button>
                             </mat-card-actions>
                           </mat-card>
@@ -844,13 +851,13 @@
                                                   <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataBasic.planPrice}}/month</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 50px;">DISCOUNT: ₹{{dynamicDataBasic.planDiscount}}</p>
+                                                  <p style="text-align: center;">DISCOUNT: ₹{{dynamicDataBasic.planDiscount}}</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 28px;">DURATION: {{dynamicDataBasic.duration}} days</p>
+                                                  <p style="text-align: center;">DURATION: {{dynamicDataBasic.duration}} days</p>
                                           </div>
                                   </mat-card-content>
-                                  <mat-card-actions>
+                                  <mat-card-actions style="margin-left: 25%;">
                                   <button mat-button class="btn-style" (click)=checkoutBasic();>TRY NOW</button>
                                   </mat-card-actions>
                           </mat-card>
@@ -871,13 +878,13 @@
                                                   <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPremium.planPrice}}/month</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 50px;">DISCOUNT: ₹{{dynamicDataPremium.planDiscount}}</p>
+                                                  <p style="text-align: center;">DISCOUNT: ₹{{dynamicDataPremium.planDiscount}}</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 28px;">DURATION: {{dynamicDataPremium.duration}} days</p>
+                                                  <p style="text-align: center;">DURATION: {{dynamicDataPremium.duration}} days</p>
                                           </div>
                                   </mat-card-content>
-                                  <mat-card-actions>
+                                  <mat-card-actions style="margin-left: 25%;">
                                   <button mat-button class="btn-style" (click)=checkoutPremium();>TRY NOW</button>
                                   </mat-card-actions>
                           </mat-card>
@@ -898,13 +905,13 @@
                                                   <p class="p-style"><i class="fa fa-rupee" style="font-size:24px"></i>{{dynamicDataPlus.planPrice}}/month</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 50px;">DISCOUNT: ₹{{dynamicDataPlus.planDiscount}}</p>
+                                                  <p style="text-align: center;">DISCOUNT: ₹{{dynamicDataPlus.planDiscount}}</p>
                                           </div>
                                           <div>
-                                                  <p style="margin-left: 28px;">DURATION: {{dynamicDataPlus.duration}} days</p>
+                                                  <p style="text-align: center;">DURATION: {{dynamicDataPlus.duration}} days</p>
                                           </div>
                                   </mat-card-content>
-                                  <mat-card-actions>
+                                  <mat-card-actions style="margin-left: 25%;">
                                   <button mat-button class="btn-style" (click)=checkoutPlus();>TRY NOW</button>
                                   </mat-card-actions>
                           </mat-card>
@@ -962,45 +969,45 @@
       </div>
     </div>
     <div class="div-body-1">
-      <div style="height: 36px; width:1000px; background:#009145;border-top-left-radius: 12px; border-top-right-radius: 12px;">
-        <label style="color: white; margin-left: 453px; font-size: 18px; font-family: BitterBold; margin-top: 4px;">WELCOME</label>
+      <div class="welcome1">
+        <label class="welcome2">WELCOME</label>
       </div>
       <div class="grid-welcome">
         <div class="welcome-msg">
-          <label style="margin-left: 408px; color: black; font-size: 20px; font-family: BitterBold;">Welcome Message</label>
+          <label class="welcomeMsg">Welcome Message</label>
           <br>
-          <p style="margin-left: 75px; margin-right: 50px;">Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
+          <p class="paragraph">Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
               Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
               Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
               Lorem lipsumLorem lipsumLorem lipsumLorem lipsumLorem lipsum
           </p>
         </div>
         <div class="checklist">
-            <img src="assets/icons/sellerReg/Registration(seller side)-37.png" style="margin-left: 381px; margin-top: -47px; height: 85px;">
+            <img src="assets/icons/sellerReg/Registration(seller side)-37.png" class="imageup">
             <div class="grid-checklist">
               <div class="c-heading">
-                <label style="margin-left: 238px; font-size: 18px; font-family: BitterBold;">Show checklist for how to get welcome pack</label>
+                <label class="checklist1">Show checklist for how to get welcome pack</label>
               </div>
               <div class="c-desc">
-                <p style="margin-left: 32px;">Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet</p>
+                <p style class="font2">Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet Lorem lipsum dolor sut amet</p>
               </div>
               <div class="b1">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 50px;">&nbsp;&nbsp;<label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b11">&nbsp;&nbsp;<label>Lorem lipsum dolor sut amet </label>
               </div>
               <div class="b2">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 23px;"> <label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b21"> <label>Lorem lipsum dolor sut amet </label>
               </div>
               <div class="b3">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 30px;"> <label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b31"> <label>Lorem lipsum dolor sut amet </label>
               </div>
               <div class="b4">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 50px;"> <label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b41"> <label>Lorem lipsum dolor sut amet </label>
               </div>
               <div class="b5">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 23px;"> <label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b51"> <label>Lorem lipsum dolor sut amet </label>
               </div>
               <div class="b6">
-                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" style="margin-left: 30px;"> <label>Lorem lipsum dolor sut amet </label>
+                <img src="assets/icons/sellerReg/Registration(seller side)-39.png" class="b61"> <label>Lorem lipsum dolor sut amet </label>
               </div>
             </div>
         </div>
@@ -1044,9 +1051,8 @@
         </div>
       </div>
       <br>
-      <label style="margin-left: 366px;">Call/ Email us for any assistance</label>
+      <label class="dashboardComment">Call/ Email us for any assistance</label>
       <br>
-      <button (click)="sellerSignIn();" style="margin-left: 410px; margin-left: 410px; background: #EFBE24; color: white; border: none; 
-      border-radius: 4px; font-family: BitterBold; height: 32px;">MY DASHBOARD</button>
+      <button (click)="sellerSignIn();" class="dashboard1">MY DASHBOARD</button>
     </div>
   </div>

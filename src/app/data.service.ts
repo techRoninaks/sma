@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class DataService {
 
-  baseUrl = "";
+  baseUrl = "http://localhost:8080/sma/src/";
   // baseUrl = "http://localhost/Angular/sma23/src/";
 
   constructor( private http: HttpClient ) { }
@@ -1308,13 +1308,13 @@ updateSellerPlanFree(data: any){
      return this.http.post(this.baseUrl + 'assets/api/dataPostAddProduct.php', httpParams);
    }
   
-  addComplaintData(data: Object,userId:any){
-    let httpParams= new HttpParams()
-   .append("userId", userId)
-   .append("userName", data['username'])
-   .append("note", data['complaint_desc']);
-   return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
-  }
+  // addComplaintData(data: Object,userId:any){
+  //   let httpParams= new HttpParams()
+  //  .append("userId", userId)
+  //  .append("userName", data['username'])
+  //  .append("note", data['complaint_desc']);
+  //  return this.http.post(this.baseUrl+'assets/api/addComplaintData.php',httpParams);
+  // }
   uploadIdcardimage(imageFront: any,imageBack:any, sellerid: any){
     let httpParams= new HttpParams()
    .append("imageFront", imageFront)

@@ -1,5 +1,11 @@
 // Media Query
 /* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm-lesser{
+  @media (max-width: 600px) {    
+      @content;
+  }
+} 
+
 @mixin sm{
   @media (min-width: 600px) {    
       @content;
@@ -50,6 +56,41 @@
   grid-template-rows: 10% 90% ;
   grid-template-areas: "left-grid  right-grid"
                        "left-grid  right-grid";
+  @include sm-lesser{
+    display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: "left-grid"
+                        // "left-grid"
+                      //  "right-grid"
+                       "right-grid";
+                       .left-grid{
+                        grid-area: left-grid;
+                        padding-right: 15%;
+                        margin-left: 4%;
+                      }
+                      .right-grid{
+                        grid-area: right-grid;
+                      }
+  }
+  // @include md{
+  //   display: grid;
+  // grid-template-columns: auto;
+  // grid-template-rows: auto auto;
+  // grid-template-areas: "left-grid"
+  //                       // "left-grid"
+  //                     //  "right-grid"
+  //                      "right-grid";
+  //                      .left-grid{
+  //                       grid-area: left-grid;
+  //                       padding-right: 15%;
+  //                       margin-left: 4%;
+  //                     }
+  //                     .right-grid{
+  //                       grid-area: right-grid;
+  //                     }
+  // }
+  
 }
 .left-grid{
   grid-area: left-grid;
@@ -81,6 +122,7 @@
   border-radius: 2px;
   border: none;
   font-family: "BitterBold";
+  margin-bottom: 25%;
 }
 .button-fp{
   width: 100px;
@@ -113,7 +155,7 @@
 }
 .button-signup-fb
 {
-  width: 40%;
+  width: 47%;
   text-align: center;
   margin-left:30%;
   padding: 1%;
@@ -122,10 +164,18 @@
   border-radius: 6px;
   border: none;
   font-family: "BitterBold";
+  font-size: 14px;
+  @include sm-lesser{
+    margin-left: 25%;
+  }
+  @include md{
+    margin-left: 25%;
+  }
+
 }
 .button-signup-google
 {
-  width: 40%;
+  width: 47%;
   text-align: center;
   margin-left:30%;
   padding: 1%;
@@ -134,10 +184,17 @@
   border-radius: 6px;
   border: none;
   font-family: "BitterBold";
+  font-size: 14px;
+  @include sm-lesser{
+    margin-left: 25%;
+  }
+  @include md{
+    margin-left: 25%;
+  }
 }
 .button-signup-insta
 {
-  width: 40%;
+  width: 47%;
   text-align: center;
   margin-left:30%;
   padding: 1%;
@@ -147,6 +204,13 @@
   border-radius: 6px;
   border: none;
   font-family: "BitterBold";
+  font-size: 13px;
+  @include sm-lesser{
+    margin-left: 25%;
+  }
+  @include md(){
+    margin-left: 25%;
+  }
 }
 .button-green-layout{
   margin-left: 6%;
@@ -163,17 +227,31 @@
   border-radius: 2px;
   border: none;
   font-family: "BitterBold";
+  @include sm-lesser{
+    margin-left: 3%;
+
+  }
+  @include md{
+    margin-left: 5%;
+  }
 }
 .login-layout{
   background-color: #F1F1F1;
-  margin-left: 6%;
+  margin-left: 10%;
   margin-right: 10%;
   margin-top: 0;
   margin-bottom: 10%;
   font-family: "BitterBold";
-  width: 80%;
-  height: 90%;
+  width: 75%;
+  height: 92%;
   font-size: 14px;
+  @include sm-lesser{
+    margin-left: 12%;
+
+  }
+  @include md{
+    margin-left: 13%;
+  }
 }
 .side-layout{
   background-color: white;
@@ -185,6 +263,9 @@
   width: 80%;
   height: 80%;
   font-size: 14px;
+  @include md{
+    margin-left: 30%;
+  }
 }
 .login-layout-2{
   margin-left: 3%;
@@ -215,6 +296,23 @@
   margin-left: 12%;
   border-style: none;
   font-family: "BitterBold";
+  @include sm-lesser{
+    font-size: 14px;
+    margin-left: 2%;
+
+  }
+  @include md{
+    font-size: 120%;
+  }
+}
+@include sm-lesser{
+
+  .veriftBtn{
+
+
+    margin-left: 25%;
+    margin-top: 5%;
+  }
 }
 ul {
   list-style-type: none;
@@ -223,7 +321,14 @@ ul {
   font-family: "BitterBold";
   font-weight: 100;
   text-align: center;
-  font-size: 200%;
+  font-size: 149%;
+  @include sm-lesser{
+    font-size : 200%;
+
+  }
+  @include md{
+    font-size: 30px;
+  }
 }
 .title-fp{
   text-align: center;
@@ -239,7 +344,7 @@ ul {
   font-size: 210%;
 }
 .left-grid-title-3{
-  font-size: 180%;
+  font-size: 160%;
 }
 .left-grid-feature{
   padding: 0 0 0 20px;
