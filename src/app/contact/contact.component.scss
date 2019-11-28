@@ -1,3 +1,40 @@
+/* Smaller devices */
+@mixin sm-lesser {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @mixin sm {
+    @media (min-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @mixin md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @mixin lg {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @mixin xlg {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+
+
+
 .breadcrumb-layout{
     margin-left: 5%;
     width: auto;
@@ -43,9 +80,13 @@ text-decoration: underline;
 .section-1{
     grid-area: section-1;
     margin-top: 7%;
+   
 }
+
+
 .section-2{
     grid-area: section-2;
+    margin-left: 31px;
 }
 .section-3{
     grid-area: section-3;
@@ -57,17 +98,54 @@ text-decoration: underline;
     margin-left: 0%;
     height: 39px;
     width: 190px;
+    
 }
 .text-style{
-    margin-left: 35%;
-    font-size: 18px;
-    transform: translate(149px,6px);
+    @include sm-lesser {
+        font-size: 18px;
+        transform: translate(149px, 6px);
+        margin-left: -30px;
+    }
+    @include md{
+        margin-left: 24%;
+        font-size: 18px;
+        transform: translate(149px, 6px);
+        margin-top: 4%;
+    }
+    @include lg{
+        margin-left: 33%;
+        font-size: 18px;
+        transform: translate(149px,6px);
+    }
+    @include xlg{
+        margin-left: 32%;
+        font-size: 18px;
+        transform: translate(149px,6px);
+    }
+    
 }
+
 .desc-style{
     font-family: BitterRegular;
     margin-right: 5%;
     margin-bottom: 5%;
     padding-left: 143px;
+    @include sm-lesser {
+        font-family: BitterRegular;
+        margin-right: 25%;
+        margin-bottom: 5%;
+        padding-left: 146px;
+        text-align: justify;
+        margin-left: -16%;
+    }
+    @include md {
+        font-family: BitterRegular;
+        margin-right: 7%;
+        margin-bottom: 5%;
+        padding-left: 129px;
+        text-align: justify;
+        margin-left: -2%;
+    }
 }
 .p-style{
     margin-top: 2%;
@@ -75,7 +153,11 @@ text-decoration: underline;
     margin-left: 6%;
 }
 .grid-form{
-    display: grid;
+    
+    
+    
+    @include sm-lesser{
+        display: grid;
     grid-template-rows: auto auto auto auto;
     grid-template-columns: 50% 50%;
     grid-template-areas: "name email"
@@ -85,9 +167,59 @@ text-decoration: underline;
     background: rgb(228, 225, 225);
     height: 90%;
     width: 64%;
-    margin-left: 17%;
+    margin-left: 41px;
     border-radius: 6px;
     margin-bottom: 23%;
+
+    }
+    @include md{
+        display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "name email"
+                         "mobile purpose"
+                         "additional-remarks additional-remarks"
+                         ". btn-submit";
+    background: rgb(228, 225, 225);
+    height: 90%;
+    width: 64%;
+    margin-left: 121px;
+    border-radius: 6px;
+    margin-bottom: 23%;
+
+    }
+    @include lg{
+        display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "name email"
+                         "mobile purpose"
+                         "additional-remarks additional-remarks"
+                         ". btn-submit";
+    background: rgb(228, 225, 225);
+    height: 90%;
+    width: 64%;
+    margin-left: 148px;
+    border-radius: 6px;
+    margin-bottom: 23%;
+
+    }
+    @include xlg{
+        display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "name email"
+                         "mobile purpose"
+                         "additional-remarks additional-remarks"
+                         ". btn-submit";
+    background: rgb(228, 225, 225);
+    height: 90%;
+    width: 64%;
+    margin-left: 180px;
+    border-radius: 6px;
+    margin-bottom: 23%;
+
+    }
 }
 .name{
     margin-top: 17%;
@@ -117,19 +249,38 @@ text-decoration: underline;
 .btn-submit{
     grid-area: btn-submit;
     margin-left: 55%;
-    margin-top: 13%;
+    margin-top: 42px;
 }
 .btn-style{
     border-radius: 4px;
     background: #EFBE24;
     border: none;
     color: white;
+    @include xlg{
+        margin-left: 14px;
+        margin-top: 2px;
+
+    }
+    @include sm-lesser {
+        margin-left: -47%;
+        margin-top: 5%;
+    }
+    @include md{
+        margin-top: 6%;
+        margin-left: -5%;
+    }
 }
 .text-field-style{
     border: none;
     width: 65%;
     border-radius: 6px;
     height: 37%;
+    @include sm-lesser{
+        border: none;
+        width: 65%;
+        border-radius: 4px;
+        height: 49%;
+    }
 }
 .text-area-style{
     border: none;
@@ -161,21 +312,62 @@ text-decoration: underline;
     margin-left: -76%;
     height: 75px;
     width: 75px;
+    @include sm-lesser{
+        margin-left: 23%;
+        height: 75px;
+        width: 75px;
+        margin-top: 38%;
+    }
 }
 .label-style-call{
     margin-left: -61%;
     margin-top: 5%;
     font-family: BitterRegular;
+    @include sm-lesser{
+        margin-left: 1%;
+        margin-top: 66%;
+        font-family: BitterRegular;
+    }
+    @include md{
+        margin-left: -56%;
+        margin-top: 5%;
+     font-family: BitterRegular;
+    }
 }
 .img-style-email{
     margin-left: 47%;
     height: 75px;
     width: 75px;
+    @include sm-lesser{
+        margin-left: 23%;
+        height: 75px;
+        width: 75px
+        
+    }
+    @include md{
+        margin-left: 74%;
+        height: 75px;
+        width: 75px;
+    }
 }
 .label-style-email{
     margin-left: 3%;
     margin-top: 5%;
     font-family: BitterRegular;
+    @include sm-lesser{
+        margin-left: -8%;
+        margin-top: 26%;
+        font-family: BitterRegular;
+        
+    }
+    @include md{
+        margin-left: 12%;
+        margin-top: 5%;
+        font-family: BitterRegular;
+
+    }
+
+    
 }
 .grid-footer{
     display: grid;
@@ -187,7 +379,7 @@ text-decoration: underline;
 .left-sect{
     grid-area: left-sect;
     height: 240px;
-    background: rgb(228, 225, 225);
+    background: #f7f7f7;
     border-right: 1px solid rgb(99, 95, 95);
     border-left: 1px solid rgb(99, 95, 95);
     border-top: 1px solid rgb(99, 95, 95);
@@ -196,7 +388,7 @@ text-decoration: underline;
 .middle-sect{
     grid-area: middle-sect;
     height: 240px;
-    background: rgb(228, 225, 225);
+    background: #f7f7f7;
     border-right: 1px solid rgb(99, 95, 95);
     border-top: 1px solid rgb(99, 95, 95);
     border-bottom: 1px solid rgb(99, 95, 95);
@@ -204,7 +396,7 @@ text-decoration: underline;
 .right-sect{
     grid-area: right-sect;
     height: 240px;
-    background: rgb(228, 225, 225);
+    background: #f7f7f7;
     border-right: 1px solid rgb(99, 95, 95);
     border-top: 1px solid rgb(99, 95, 95);
     border-bottom: 1px solid rgb(99, 95, 95);
@@ -218,19 +410,62 @@ text-decoration: underline;
                          "desc-1";
 }
 .img-security{
-    grid-area: img-security;
-    padding-left: 44%;
-    padding-top: 11%;
+    
+    @include sm-lesser{
+        margin-left: -32%;
+        grid-area: img-security;
+        padding-left: 58%;
+        padding-top: 11%;
+
+
+    }
+    @include md{
+        margin-left: 0%;
+        grid-area: img-security;
+        padding-left: 38%;
+        padding-top: 11%;
+    }
+    @include xlg{
+        margin-left: 7%;
+        grid-area: img-security;
+        padding-left: 36%;
+        padding-top: 10%;
+    }
+
+
 }
 .foot-head-1{
-    grid-area: foot-head-1;
-    text-align: center;
+    @include xlg{
+        grid-area: foot-head-1;
+        text-align: center;
+        margin-top: 18px;
+    }
+    @include sm-lesser{
+        grid-area: foot-head-1;
+        text-align: center;
+        margin-top: 6%;
+
+    }
+    @include md{
+        grid-area: foot-head-1;
+        text-align: center;
+        margin-top: 10px;
+    }
+
 }
 .desc-1{
     grid-area: desc-1;
     text-align: center;
     font-family: Bitter;
     font-size: 14px;
+    @include sm-lesser{
+        grid-area: desc-1;
+        text-align: center;
+       font-family: Bitter;
+        font-size: 12px;
+
+    }
+
 }
 .grid-trustpay{
     display: grid;
@@ -241,19 +476,53 @@ text-decoration: underline;
                          "desc-2";
 }
 .img-trustpay{
-    grid-area: img-trustpay;
-    padding-left: 42%;
-    padding-top: 8.5%;
+
+    
+    @include sm-lesser{
+        grid-area: img-trustpay;
+        padding-left: 18%;
+        padding-top: 8.5%;
+    }
+    @include md{
+        grid-area: img-trustpay;
+        padding-left: 36%;
+        padding-top: 11.5%;
+    }
+    @include xlg{
+        grid-area: img-trustpay;
+        padding-left: 45%;
+        padding-top: 10.5%;
+
+    }
 }
 .foot-head-2{
-    grid-area: foot-head-2;
-    text-align: center;
+    @include md{
+        grid-area: foot-head-2;
+        text-align: center;
+        margin-top: 0px;
+        margin-left: 0px;
+
+    }
+    @include xlg{
+        grid-area: foot-head-2;
+        text-align: center;
+        margin-top: 7px;
+
+    }
+    
 }
 .desc-2{
     grid-area: desc-2;
     text-align: center;
     font-family: Bitter;
     font-size: 14px;
+    @include sm-lesser{
+        grid-area: desc-2;
+        text-align: center;
+       font-family: Bitter;
+        font-size: 12px;
+
+    }
 }
 .grid-help{
     display: grid;
@@ -264,13 +533,37 @@ text-decoration: underline;
                          "desc-3";
 }
 .img-help{
-    grid-area: img-help;
-    padding-left: 42%;
-    padding-top: 1%;
+    @include xlg{
+        margin-left: 0%;
+        grid-area: img-help;
+        padding-left: 46%;
+        padding-top: 3%;
+
+    }
+    
+    @include sm-lesser{
+        margin-left: 0%;
+        grid-area: img-help;
+        padding-left: 25%;
+        padding-top: 1%;
+    }
+    @include md{
+        margin-left: 0%;
+        grid-area: img-help;
+        padding-left: 38%;
+        padding-top: 4%;
+
+    }
+    
 }
 .foot-head-3{
     grid-area: foot-head-3;
     text-align: center;
+    @include md{
+        grid-area: foot-head-3;
+        text-align: center;
+        margin-top: 3px;
+    }
 }
 .desc-3{
     grid-area: desc-3;
@@ -278,6 +571,13 @@ text-decoration: underline;
     padding-top: 0.5%;
     font-family: Bitter;
     font-size: 14px;
+    @include sm-lesser{
+        grid-area: desc-3;
+        text-align: center;
+       font-family: Bitter;
+        font-size: 12px;
+
+    }
 }
 .validator-style-1{
     color: #e75c4a;
