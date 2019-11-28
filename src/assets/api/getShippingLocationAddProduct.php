@@ -9,9 +9,24 @@ $sql_query = "SELECT * FROM `shipping_location_shop`  WHERE `id` = $locaId ";
 $result = mysqli_query($con2, $sql_query);
 $count =0;
 $data = array();
+$locaName  = "";
 while($row=mysqli_fetch_assoc($result))
 {
-    $data = array('id'=>$row["id"],'location_alias'=>$row["location_alias"],'shop_id'=>$row["pincode"],'shop_id'=>$row["pincode"]);
+    switch($row["location_alias"]){
+        case "ALL STATE":
+        $locaName = "My State";
+        break;
+        case "ALL CITY":
+        $locaName = "My City";
+        break;
+        case "ALL DISTRICT":
+        $locaName = "My District";
+        break;
+        case "ALL INDIA":
+        $locaName = "All Over India";
+        break;
+    }
+    $data = array('id'=>$row["id"],'location_alias'=>$row["location_alias"],'quantity_price'=> 0,'price'=> 0);
 }
 echo json_encode($data);
 ?>

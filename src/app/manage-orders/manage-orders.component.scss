@@ -1,3 +1,47 @@
+/* Smaller devices */
+@mixin sm-lesser {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @mixin sm {
+    @media (min-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @mixin md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @mixin lg {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @mixin xlg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+  @mixin mlg {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+  @mixin xxlg {
+    @media (min-width: 1500px) {
+        @content;
+    }
+}
 .breadcrumb-layout{
     margin-left: 5%;
     width: auto;
@@ -41,6 +85,9 @@ text-decoration: underline;
                          "section-5";
     font-family: BitterBold;
     margin-top: 80px;
+    @include sm-lesser{
+        font-size: 11px;
+    }
     .section-1{
         grid-area: section-1;
         .grid-1{
@@ -54,14 +101,42 @@ text-decoration: underline;
             padding-top: 50px;
             padding-right: 174px;
             grid-row-gap: 30px;
+            @include sm-lesser{
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto auto auto auto auto;
+                grid-template-areas: 
+                "left-sect"
+                "left-sect"
+                "left-sect"
+                "right-sect-1"
+                "right-sect-2"
+                "right-sect-3";
+                padding-left: 2%;
+            }
+            .date-style{
+                margin-top: -309px; 
+                margin-left: 43px;
+                @include sm-lesser{
+                    margin-top: -568px;
+                    margin-left: 10px;
+                    font-size: 13px;
+                }
+            }
             .left-sect{
                 grid-area: left-sect;
-                background: rgb(221, 215, 215);
+                background: #f7f7f7;
                 height: 230px;
                 width: 331px;
                 border-radius: 5px;
                 padding-left: 17px;
                 padding-top: 11px;
+                .manage-img-style{
+                    margin-top: -60px;
+                    @include sm-lesser{
+                        margin-top: -53px;
+                    }
+                }
                 .text-style{
                     margin-left: 28%;
                     font-size: 18px;
@@ -70,10 +145,13 @@ text-decoration: underline;
             }
             .right-sect-1{
                 grid-area: right-sect-1;
-                background: rgb(221, 215, 215);
+                background: #f7f7f7;
                 height: 60px;
                 width: 430px;
                 border-radius: 5px;
+                @include sm-lesser{
+                    width: 318px;
+                }
                 .day{
                     height: 70px;
                     width: 60px;
@@ -93,6 +171,14 @@ text-decoration: underline;
                     grid-template-rows: auto;
                     grid-template-columns: 33% 33% 33%;
                     grid-template-areas: "label-1 date label-2";
+                    // @include sm-lesser{
+                    //     display: grid;
+                    //     grid-template-rows: auto auto auto;
+                    //     grid-template-columns: auto;
+                    //     grid-template-areas: "label-1"
+                    //                          "date"
+                    //                          "label-2";
+                    // }
                 }
                 .label-1{
                     grid-area: label-1;
@@ -117,6 +203,9 @@ text-decoration: underline;
                     grid-template-columns: 70% 15% 15%;
                     grid-template-rows: auto;
                     grid-template-areas: "status nav-1 nav-2";
+                    @include sm-lesser{
+                        margin-left: 0%;
+                    }
                     a{
                         text-decoration: none;
                         display: inline-block;
@@ -152,7 +241,10 @@ text-decoration: underline;
                       }
                       .nav-1{
                         grid-area: nav-1;
-                        margin-left: -25%;
+                        margin-left: -64%;
+                        @include sm-lesser{
+                            margin-left: -5%;
+                        }
                         .left {
                         transform: rotate(135deg);
                         -webkit-transform: rotate(135deg);
@@ -161,7 +253,10 @@ text-decoration: underline;
                     }
                     .nav-2{
                         grid-area: nav-2;
-                        margin-left: -43%;
+                        margin-left: -82%;
+                        @include sm-lesser{
+                            margin-left: 7%;
+                        }
                         .right {
                             transform: rotate(-45deg);
                             -webkit-transform: rotate(-45deg);
@@ -170,18 +265,25 @@ text-decoration: underline;
                     .status{
                         grid-area: status;
                         background: rgb(20, 98, 20);
-                        height: 55px;
+                        height: 40px;
                         width: 296px;
                         border-radius: 5px;
+                        @include sm-lesser{
+                            height: 40px;
+                            width: 220px;
+                        }
                     }
                 }
             }
             .right-sect-3{
                 grid-area: right-sect-3;
-                background: rgb(221, 215, 215);
-                height: 60px;
+                background: #f7f7f7;
+                height: 80px;
                 width: 430px;
                 border-radius: 5px;
+                @include sm-lesser{
+                    width: 330px;
+                }
                 .grid-pro-desc{
                     display: grid;
                     grid-template-rows: 50% 50%;
@@ -189,7 +291,13 @@ text-decoration: underline;
                     grid-template-areas: "qty tax total"
                                          "var-price . ship-price";
                     font-size: 13px;
-                    margin-left: 10px;
+                    padding-left: 27px;
+                    padding-top: 10px;
+                    @include sm-lesser{
+                        font-size: 11px;
+                        padding-left: 18px;
+                        padding-top: 14px;
+                    }
                 }
                 .qty{
                     grid-area: qty;
@@ -216,15 +324,28 @@ text-decoration: underline;
             grid-template-rows: auto;
             grid-template-columns: 50% 50%;
             grid-template-areas: "prod-details card-total";
+            @include sm-lesser{
+                display: grid;
+                grid-template-rows: auto auto;
+                grid-template-columns: auto;
+                grid-template-areas: "prod-details"
+                                     "card-total"; 
+            }
         }
         .prod-details{
             grid-area: prod-details;
-            height: 250px;
-            width: 352px;
-            background: rgb(221, 215, 215);
+            height: 265px;
+            width: 380px;
+            background: #f7f7f7;
             margin-left: 191px;
             margin-top: 50px;
             border-radius: 6px;
+            @include sm-lesser{
+                height: 230px;
+                margin-left: 13px;
+                margin-top: 20px;
+                width: 350px;
+            }
             .grid-pro-card{
                 display: grid;
                 grid-template-rows: auto auto auto auto auto auto;
@@ -235,8 +356,11 @@ text-decoration: underline;
                                      "var-2 place"
                                      "cust-name-label cust-name"
                                      "attachment .";
-                margin-top: 8px;
-                margin-left: 15px;
+                margin-top: 16px;
+                margin-left: 19px;
+                @include sm-lesser{
+                    margin-left: 35px;
+                }
             }
             .cust-name{
                 grid-area: cust-name;
@@ -297,6 +421,10 @@ text-decoration: underline;
             margin-left: 15px;
             margin-top: 50px;
             border-radius: 6px;
+            @include sm-lesser{
+                width: 360px;
+                margin-left: 11px;
+            }
             .grid-total-card{
                 display: grid;
                 grid-template-rows: auto;
@@ -305,6 +433,9 @@ text-decoration: underline;
                 font-size: 12px;
                 font-family: Bitter;
                 text-align: center;
+                .amount-style{
+                    margin-bottom: 7px;
+                }
                 .dot {
                     height: 90px;
                     width: 90px;
@@ -321,25 +452,25 @@ text-decoration: underline;
             }
             .amount{
                 grid-area: amount;
-                height: 113px;
+                height: 126px;
                 width: 117px;
-                background: rgb(221, 215, 215);
+                background: #f7f7f7;
                 margin-top: 40px;
                 border-radius: 5px;
             }
             .ship{
                 grid-area: ship;
-                height: 113px;
+                height: 126px;
                 width: 117px;
-                background: rgb(221, 215, 215);
+                background: #f7f7f7;
                 margin-top: 40px;
                 border-radius: 5px;
             }
             .subtotal{
                 grid-area: subtotal;
-                height: 113px;
+                height: 126px;
                 width: 117px;
-                background: rgb(221, 215, 215);
+                background: #f7f7f7;
                 margin-top: 40px;
                 border-radius: 5px;
             }
@@ -352,23 +483,35 @@ text-decoration: underline;
             grid-template-rows: auto;
             grid-template-columns: 50% 50%;
             grid-template-areas: "gift-details ship-details";
+            @include sm-lesser{
+                display: grid;
+                grid-template-rows: auto auto;
+                grid-template-columns: auto;
+                grid-template-areas: "gift-details"
+                                     "ship-details";
+            }
         }
         .gift-details{
             grid-area: gift-details;
-            height: 200px;
-            width: 352px;
-            background: rgb(221, 215, 215);
+            height: 220px;
+            width: 379px;
+            background: #f7f7f7;
             margin-left: 191px;
             margin-top: 50px;
             border-radius: 6px;
+            @include sm-lesser{
+                margin-left: 13px;
+                width: 349px;
+                margin-top: -30px;
+            }
             .grid-gift-details{
                 display: grid;
                 grid-template-columns: auto;
                 grid-template-rows: auto auto;
                 grid-template-areas: "note"
                                      "address";
-                margin-left: 10px;
-                margin-top: 11px;
+                margin-left: 28px;
+                margin-top: 22px;
                 .gift-style{
                     font-family: Bitter;
                     font-size: 12px;
@@ -383,12 +526,16 @@ text-decoration: underline;
         }
         .ship-details{
             grid-area: ship-details;
-            height: 200px;
-            width: 400px;
-            background: rgb(221, 215, 215);
+            height: 220px;
+            width: 415px;
+            background: #f7f7f7;
             margin-left: 15px;
             margin-top: 50px;
             border-radius: 6px;
+            @include sm-lesser{
+                height: 183px;
+                width: 347px;
+            }
             .grid-ship-details{
                 display: grid;
                 grid-template-columns: 50% 50%;
@@ -398,8 +545,12 @@ text-decoration: underline;
                                      "c-address address"
                                      "track-no-label track-no"
                                      "ship-type-label ship-type";
-                margin-left: 10px;
-                margin-top: 11px;
+                margin-left: 20px;
+                margin-top: 17px;
+                @include sm-lesser{
+                    margin-left: 30px;
+                    margin-top: 19px;
+                }
             }
             .c-name-label{
                 grid-area: c-name-label;
@@ -441,13 +592,18 @@ text-decoration: underline;
     .section-4{
         grid-area: section-4;
         margin-bottom: 480px;
+        overflow-x: scroll;
         .grid-order-history{
-            background: rgb(233, 232, 232);
+            background: #f7f7f7;
             width: 1296px;
             height: 400px;
             margin-left: 72px;
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
+            @include sm-lesser{
+                margin-left: 2%;
+                // width: 1296px;
+            }
             .update-btn{
                 margin-top: 81px;
                 margin-left: 600px;
@@ -483,9 +639,16 @@ text-decoration: underline;
             grid-template-rows: auto;
             grid-template-areas: "status";
             margin-top: 4%;
+            font-family: BitterBold;
+            width: 90%; 
+            margin-left: 5%;
+            @include sm-lesser{
+                margin-left: 2%;
+                width: 257%;
+            }
         }
         .status{
-            background: rgb(212, 206, 206);
+            background: #dbdbdb;
             grid-area: status;
             text-align: center;
             padding: 5px;
@@ -498,7 +661,7 @@ text-decoration: underline;
             grid-template-columns: auto auto auto auto auto auto;
             grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
                                  "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
-                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                                 "stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1"
                                  "label-1 label-2 label-3 label-4 label-5 label-6";
             font-size: 8px;
             align-content: center;
@@ -581,39 +744,8 @@ text-decoration: underline;
             grid-area: stat-bar-1;
             margin-top: 20px;
             width: 82%;
-            margin-left: 50%;
+            margin-left: 122px;
         }
-        .stat-bar-2{
-            grid-area: stat-bar-2;
-            margin-top: 20px;
-            width: 82%;
-            margin-left: 20%;
-        }
-        .stat-bar-3{
-            grid-area: stat-bar-3;
-            margin-top: 20px;
-            width: 113%;
-            margin-left: 2%;
-        }
-        .stat-bar-4{
-            grid-area: stat-bar-4;
-            margin-top: 20px;
-            width: 123%;
-            margin-left: -5px;
-        }
-        .stat-bar-5{
-            grid-area: stat-bar-5;
-            margin-top: 20px;
-            width: 82%;
-            margin-left: -20px;
-        }
-        .stat-bar-6{
-            grid-area: stat-bar-6;
-            margin-top: 20px;
-            width: 87%;
-            margin-left: -37%;
-        }
-        // timeline
         .stats-1 {
             padding: 0px 60px;
             display: flex;
@@ -622,64 +754,16 @@ text-decoration: underline;
             position: relative;
             transition: all 200ms ease-in ;
             font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-2 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-3 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-4 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-5 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
-          }
-          .stats-6 {
-            padding: 0px 53px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-            font-weight: 600;
-            padding-top: 20px;
+            width: 1074px;
+            @include sm-lesser{
+                width: 1070px;
+            }
           }
           .full-circle{
             height: 20px;
             width: 20px;
             background-color: #EFBE24;
             border-radius: 50%;
-            // display: inline-block;
           }
           .dot-circle{
             width: 20px;
@@ -687,9 +771,7 @@ text-decoration: underline;
             background-color: white;
             border-radius: 25px;
             border: 2px solid #EFBE24;
-            position: absolute;
-            top: -11px;
-            left: 47%;
+            position: relative;
           }
     }
     .section-5{
@@ -724,9 +806,14 @@ text-decoration: underline;
         grid-template-rows: auto;
         grid-template-areas: "orders status";
         margin-top: 4%;
+        font-family: BitterBold;
+        width: 90%;
+        @include sm-lesser{
+            width: 313%;
+        }
     }
     .orders{
-        background: rgb(212, 206, 206);
+        background: #dbdbdb;
         border-top-left-radius: 18px;
         grid-area: orders;
         text-align: center;
@@ -734,7 +821,7 @@ text-decoration: underline;
         padding: 5px;
     }
     .status{
-        background: rgb(212, 206, 206);
+        background: #dbdbdb;
         grid-area: status;
         text-align: center;
         padding: 5px;
@@ -754,7 +841,7 @@ text-decoration: underline;
                                 "order-btn g-status";
         border-radius: 18px;
         width: 90%;
-        background: rgb(241, 239, 239);
+        background: #f7f7f7;
         margin-left: 5%;
         font-family: BitterBold;
         font-size: 14px;
@@ -762,21 +849,29 @@ text-decoration: underline;
         margin-bottom: 8%;
         padding-top: 3%;
         margin-top: -3%;
+        // padding-left: 30px;
+        @include xxlg{
+            margin-top: -2%;
+        }
+        @include sm-lesser{
+            width: 313%;
+            padding-left: 30px;
+        }
     }
     .g-status{
         grid-area: g-status;
-        .grid-status{
-            display: grid;
-            grid-template-rows: auto auto auto auto;
-            grid-template-columns: auto auto auto auto auto auto;
-            grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
-                                 "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
-                                 "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
-                                 "label-1 label-2 label-3 label-4 label-5 label-6";
-            font-size: 8px;
-            align-content: center;
-            text-align: center;
-        }
+    }
+    .grid-status-all{
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
+                             "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
+                             "stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1"
+                             "label-1 label-2 label-3 label-4 label-5 label-6";
+        font-size: 8px;
+        align-content: center;
+        text-align: center;
         .pending-conf{
             grid-area: pending-conf;
         }
@@ -852,119 +947,41 @@ text-decoration: underline;
         }
         .stat-bar-1{
             grid-area: stat-bar-1;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 50%;
+            width: 857px;
+            margin-top: 28px;
+            margin-left: 97px;
+            @include xxlg{
+                width: 1141px;
+                margin-left: 126px;
+            }
         }
-        .stat-bar-2{
-            grid-area: stat-bar-2;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 50px;
-        }
-        .stat-bar-3{
-            grid-area: stat-bar-3;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: 9px;
-        }
-        .stat-bar-4{
-            grid-area: stat-bar-4;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -24px;
-        }
-        .stat-bar-5{
-            grid-area: stat-bar-5;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -52px;
-        }
-        .stat-bar-6{
-            grid-area: stat-bar-6;
-            margin-top: 25px;
-            width: 82%;
-            margin-left: -60px;
-        }
-        // timeline
         .stats-1 {
+            font-weight: 600;
             padding: 0px 60px;
             display: flex;
             justify-content: center;
             border-top: 2px solid #EFBE24;
             position: relative;
             transition: all 200ms ease-in ;
-        }
-        .stats-2 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-3 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-4 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-5 {
-            padding: 0px 60px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-6 {
-            padding: 0px 53px;
-            display: flex;
-            justify-content: center;
-            border-top: 2px solid #EFBE24;
-            position: relative;
-            transition: all 200ms ease-in ;
-        }
-        .stats-1{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-2{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-3{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-4{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-5{
-            font-weight: 600;
-            padding-top: 20px;
-        }
-        .stats-6{
-            font-weight: 600;
-            padding-top: 20px;
+            width: 855px;
+            @include sm-lesser{
+                width: 770px;
+            }
+            @include xlg{
+                width: 780px;
+            }
+            @include mlg{
+                width: 855px;
+            }
+            @include xxlg{
+                width: 1144px;
+            }
         }
         .full-circle{
             height: 20px;
             width: 20px;
             background-color: #EFBE24;
             border-radius: 50%;
-            // display: inline-block;
           }
           .dot-circle{
             width: 20px;
@@ -972,9 +989,7 @@ text-decoration: underline;
             background-color: white;
             border-radius: 25px;
             border: 2px solid #EFBE24;
-            position: absolute;
-            top: -11px;
-            left: 47%;
+            position: relative;
           }
     }
     .prod-name{
@@ -1017,6 +1032,282 @@ text-decoration: underline;
         width: 130px;
         height: 35px;
     }
-    
-// timeline
+}
+.grid-btn-filter{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 15% 15% 13% 13% 13% 12% 12%;
+    grid-template-areas: "all pending-conf pending-pay processing shipped delivered closed";
+    font-family: BitterBold;
+    @include sm-lesser{
+        font-size: 15px;
+    }
+    .btn-filter-style{
+        border: none;
+        background: inherit;
+        cursor: pointer;
+        text-align: center;
+    }
+    .all{
+        grid-area: all;
+        @include sm-lesser{
+            margin-left: 125px;
+        } 
+    }
+    .pending-conf{
+        grid-area: pending-conf;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 225px;
+        } 
+    }
+    .pending-pay{
+        grid-area: pending-pay;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 325px;
+        } 
+    }
+    .processing{
+        grid-area: processing;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 425px;
+        } 
+    }
+    .shipped{
+        grid-area: shipped;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 525px;
+        } 
+    }
+    .delivered{
+        grid-area: delivered;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 625px;
+        } 
+    }
+    .closed{
+        grid-area: closed;
+        text-align: center;
+        @include sm-lesser{
+            margin-left: 725px;
+        } 
+    }
+}
+.grid-no-order{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    grid-template-areas: "header";
+    .header{
+        grid-area: header;
+        text-align: center;
+    }
+}
+.grid-main-filter{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 10%;
+    grid-template-areas: "current past";
+    @include sm-lesser{
+        font-size: 11px;
+        margin-left: 100%;
+    }
+    .current{
+        grid-area: current;
+        text-align: center;
+    }
+    .past{
+        grid-area: past;
+        text-align: center;
+    }
+    .btn-filter-style{
+        // border: solid #EFBE24;
+        background: inherit;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 6px;
+        font-family: BitterBold;
+        @include sm-lesser{
+            height: 30px;
+            width: 140px;
+        }
+        @include xlg{
+            font-size: 15px;
+        }
+    }
+}
+.circle-1{
+    @include sm-lesser{
+        margin-left: -2%;
+    }
+    @include xlg{
+        margin-left: -19px;
+    }
+    @include mlg{
+        margin-left: -12px;
+    }
+    @include xxlg{
+        margin-left: -12px;
+    }
+}
+.circle-2{
+    @include sm-lesser{
+        margin-left: 18%;
+    }
+    @include xlg{
+        margin-left: 157px;
+    }
+    @include mlg{
+        margin-left: 178px;
+    }
+    @include xxlg{
+        margin-left: 235px;
+    }
+}
+.circle-3{
+    @include sm-lesser{
+        margin-left: 37.5%;
+    }
+    @include xlg{
+        margin-left: 322px;
+    }
+    @include mlg{
+        margin-left:  358px;
+    }
+    @include xxlg{
+        margin-left: 473px;
+    }
+}
+.circle-4{
+    @include sm-lesser{
+        margin-left: 55%;
+    }
+    @include xlg{
+        margin-left: 470px;
+    }
+    @include mlg{
+        margin-left: 520px;
+    }
+    @include xxlg{
+        margin-left: 693px;
+    }
+}
+.circle-5{
+    @include sm-lesser{
+        margin-left: 72.5%;
+    }
+    @include xlg{
+        margin-left: 621px;
+    }
+    @include mlg{
+        margin-left: 686px; 
+    }
+    @include xxlg{
+        margin-left: 915px;
+    }
+}
+.circle-6{
+    @include sm-lesser{
+        margin-left: 90%;
+    }
+    @include xlg{
+        margin-left: 770px;
+    }
+    @include mlg{
+        margin-left: 847px; 
+    }
+    @include xxlg{
+        margin-left: 1136px;
+    }
+}
+.i-circle-1{
+    @include sm-lesser{
+        margin-left: -12px;
+    }
+    @include xlg{
+        margin-left: -19px;
+    }
+    @include mlg{
+        margin-left: -12px;
+    }
+    @include xxlg{
+        margin-left: -12px;
+    }
+}
+.i-circle-2{
+    @include sm-lesser{
+        margin-left: 217px;
+    }
+    @include xlg{
+        margin-left: 157px;
+    }
+    @include mlg{
+        margin-left: 218px;
+    }
+    @include xxlg{
+        margin-left: 235px;
+    }
+}
+.i-circle-3{
+    @include sm-lesser{
+        margin-left: 438px;
+    }
+    @include xlg{
+        margin-left: 322px;
+    }
+    @include mlg{
+        margin-left: 439px;
+    }
+    @include xxlg{
+        margin-left: 473px;
+    }
+}
+.i-circle-4{
+    @include sm-lesser{
+        margin-left: 645px;
+    }
+    @include xlg{
+        margin-left: 470px;
+    }
+    @include mlg{
+        margin-left: 647px;
+    }
+    @include xxlg{
+        margin-left: 693px;
+    }
+}
+.i-circle-5{
+    @include sm-lesser{
+        margin-left: 853px;
+    }
+    @include xlg{
+        margin-left: 621px;
+    }
+    @include mlg{
+        margin-left: 854px;
+    }
+    @include xxlg{
+        margin-left: 915px;
+    }
+}
+.i-circle-6{
+    @include sm-lesser{
+        margin-left: 1060px;
+    }
+    @include xlg{
+        margin-left: 770px;
+    }
+    @include mlg{
+        margin-left: 1059px;
+    }
+    @include xxlg{
+        margin-left: 1136px;
+    }
+}
+.order-list-style{
+    overflow-x: scroll;
 }

@@ -19,8 +19,8 @@
                 <img src="assets/images/shop/{{token}}/{{token}}_logo.jpg">
             </div>
             <div class="shopInfo">
-                <div id="sellerBtn" style="transform: translate(0px,-25px);float:right;display:none;">
-                    <button [routerLink]="['/managepage']" [queryParams]="{shop_id:token}" style="background-color:#efbe24;color:white;border-radius:5px; border:none;box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);">go to manage page</button>
+                <div id="sellerBtn"  style="transform: translate(0px,-25px);float:right;">
+                    <button class="sellerBtn"[routerLink]="['/managepage']" [queryParams]="{shop_id:token}" >go to manage page</button>
                 </div>
                 <div class="shopStarFoll">
                     <div class="shopStar">
@@ -44,7 +44,7 @@
                 <div class="shopBtnInfo">
                     <div class="dvFromRfq">
                         From:<a>{{shopData.shopLocation}}</a><br>
-                        <button type="button" class="btRfq" data-target="#rfqPopup" data-toggle="modal">RFQ</button>
+                        <button type="button" class="btRfq" data-target="#rfqPopup" (click)="sendRfq();">RFQ</button>
                     </div>
                     <div class="dvShipsFollow">
                         Ships to:<a>All over India</a><br>
@@ -58,6 +58,7 @@
                         </ng-template>
                     </div>
                 </div>
+                <p id="onVac" class="onVac">Seller is on Vacation</p>
             </div>
         </div>
         <div class="shopBio">
@@ -76,10 +77,11 @@
                     </div>
                     <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">
                         <div class="dvShopName">
-                            <p>{{array12[item].sellerName}}</p>
+                            <!-- <p>{{array12[item].shopName}}</p> -->
+                            <p>{{shopData.shopName}}</p>
                         </div>
                         <div class="dvSellerName">
-                            <p>{{array12[item].sellerName}}</p>
+                            <p>{{selName}}</p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +90,16 @@
                     <img class="imgBanner"
                         src="assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg">
                     <div class="dvUndeliver">
-                        <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
+                        <!-- <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div> -->
+                        <div class="overlay" *ngIf="array12[item].status == 'inactive'"
+                        style="background-color: #FF1D25">
+                        INACTIVE</div>
+                    <div class="overlay" *ngIf="array12[item].status == 'active'" style="background-color: #009145">
+                        ACTIVE</div>
+                    <div class="overlay" *ngIf="array12[item].status == 'pending'"
+                        style="background-color: #333333">
+                        PENDING
+                    </div>
                     </div>
                 </div>
                 <div class="dvCardName">
@@ -110,8 +121,7 @@
                 <div class="dvCardPrice">
                     <p class="pPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}&emsp;</p>
                     <p class="pActualPrice"><i class="fa fa-rupee"></i>{{array12[item].basePrice}}</p>
-                    <!-- <p class="pOffer">({{array12[item].offerPercent}}%)</p> -->
-                    <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1">RFQ</button>
+                     <button type="button" class="btnRfqList" *ngIf="array12[item].hasRfq == 1">RFQ</button>
                 </div>
             </div>
         </div>
@@ -125,13 +135,13 @@
         <p class="headClass">SHIPMENT INFO</p>
         <div class="dvForm">
             <form>
-                SHIPPING<input type="radio" value="oneDay" class="shipDelivery radio-custom" name="delivery" disabled="true"
-                    id="ship"> CASH ON DELIVERY<input type="radio" value="cashOn" class="coDelivery radio-custom" name="delivery"
-                    disabled="true" id="cod">PICKUP<input type="radio" value="doorTD" class="pckDelivery radio-custom"
-                    name="delivery" disabled="true" id="pck">
+                SHIPPING<input type="radio" value="oneDay" class="shipDelivery radio-custom"  disabled="true"
+                    id="ship"> Home Delivery<input type="radio" value="cashOn" class="hDelivery radio-custom" 
+                    disabled="true" id="hD">PICKUP<input type="radio" value="doorTD" class="pckDelivery radio-custom"
+                     disabled="true" id="pck">
                 <br>
-                <br> Average Processing Time : <span class="shipmentDetails">5days</span><br><br> Average Shipping Time &nbsp;&nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br><br> Average
-                Response Time &nbsp;&nbsp;: <span class="shipmentDetails"> 5days</span><br>
+                <br> Average Processing Time : <span class="shipmentDetails">{{shopData.avgProcessingTime}}hrs</span><br><br> Average Shipping Time &nbsp;&nbsp;&nbsp;: <span class="shipmentDetails">{{shopData.avgShippingTime}}hrs</span><br><br> Average
+                Response Time &nbsp;&nbsp;: <span class="shipmentDetails">{{shopData.avgResponseTime}}hrs</span><br>
             </form>
         </div>
 
@@ -287,8 +297,8 @@
                         <i class="fa fa-star active" style="color: #efbe24"></i> 
                     </div>
                 </div>
-                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onError="this.src = 'assets/images/defaultReview2.png'">
-                  
+                <img class="revIcon" src="assets/images/review/{{ratingReviewShop[item].reviewId}}/1.jpg" onerror="this.style.display = 'none'">
+                <!-- onError="this.src = 'assets/images/defaultReview2.png'" -->
                     <!-- <div (load)="reviewRatings(item);">
                         <i class="fa fa-star active" *ngFor="let x of filledStarRat"></i>
                         <i class="fa fa-star-o" *ngFor="let x of unFilledStarRat"></i>
@@ -358,12 +368,53 @@
                                 #fileInputRfq >
                             <button type="button" class="btnCover" (click)="fileInputRfq.click()"
                                 style="background-color: #efbe24;color: white;">Upload image</button>
-                                <div *ngIf="imageUploaded == 1">
+                                <!-- <div *ngIf="imageUploaded == 1">
                                     <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                                </div> -->
+                                <div *ngIf="imageRU0 == 1">
+                                    <img [src]="imageVALRFQ0" style="max-height: 100px;margin-top:5px;">
                                 </div>
-                        </div>
+                                <div *ngIf="imageRU1 == 1">
+                                    <img [src]="imageVALRFQ1" style="max-height: 100px;margin-top:5px;">
+                                </div>
+                                <div *ngIf="imageRU2 == 1">
+                                    <img [src]="imageVALRFQ2" style="max-height: 100px;margin-top:5px;">
+                                </div>
+                            </div>
                         <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']" >Apply</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- loginpopup -->
+<div class="container" id="loginModalContainer" style="z-index: 10001;">
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content dvModalContent">
+                <div class="modal-header dvModalHeader">
+                </div>
+                <div class="modal-body" style="padding:0 10% 0 10%;">
+                    <br>
+                    <p style="text-align: center;justify-self:center">Please Login to continue...</p>
+                    <br>
+                    <button (click)="redirect('login');" [routerLink]="['/login']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
+                    <p style="text-align: center;justify-self:center">OR</p>
+                    <button (click)="redirect('signup');" [routerLink]="['/signup']"
+                        [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
+                        style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
+                    <br>
+                    <br>
+                    <div id="instantBuyId">
+                        <button (click)="submitInstantBuy('instantBuy');"
+                            style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant
+                            Buy</button>
+                    </div>
+
                 </div>
             </div>
         </div>

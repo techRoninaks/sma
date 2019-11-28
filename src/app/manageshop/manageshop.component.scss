@@ -208,7 +208,8 @@ $SubText: 18px;
 					font-family: BitterBold;
 					background-color: #dbdbdb;
 					color: #646464;
-					margin-left: 1.1rem;
+					margin-left: 2.1rem;
+					margin-top:10px;
 					width: 10rem;
 					transform: translate(0px, -1.7rem);
 					// font-weight: bold;
@@ -1130,6 +1131,13 @@ $SubText: 18px;
 				grid-template-columns: repeat(2, 1fr);
 				margin: 0px 40px 0px 40px;
 				width: auto;
+				.noFaq{
+					display:none;
+					font-family:Bitter;
+					font-size: 24px;
+					// justify-self: center;
+					transform: translate(50% ,50%);
+				}
 				.divQA {
 					// grid-area: divQA;
 					// height: auto;

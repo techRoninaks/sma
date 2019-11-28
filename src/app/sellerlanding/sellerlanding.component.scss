@@ -14,6 +14,48 @@ $Header: 30px;
 $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
+
+// custom sub font sizes
+$textSmall : 12px;
+$textMedium : 14px;
+$textLarge : 16px;
+
+
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin md {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin lg-smaller {
+	@media (max-width: 992px) {
+		@content;
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@mixin xlg {
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
 .mGrid {
 	display: grid;
 	grid-template-rows: repeat(9, auto);
@@ -22,7 +64,7 @@ $SubText: 18px;
 	width: auto;
 	.headClass {
 		font-family: BitterBold;
-		font-size: $Header;
+		font-size: $Text;
 		text-align: center;
 	}
 	.banner {
@@ -61,6 +103,7 @@ $SubText: 18px;
 			display: none;
 			height: 500px;
 			z-index: 15;
+			background: $smaYellow;
 		}
 		.slideImg {
 			vertical-align: middle;
@@ -263,7 +306,7 @@ $SubText: 18px;
 	}
 	.about {
 		grid-area: about;
-		margin: 25px 100px 50px 100px;
+		margin: 1em 10em;
 		width: auto;
 		.aboutHeader {
 			img {
@@ -281,9 +324,10 @@ $SubText: 18px;
 			}
 		}
 		.pAbout {
+			margin-top: 70px;
 			text-align: justify;
 			text-align: center;
-			font-size: $SubText;
+			font-size: $textLarge;
 			font-family: Bitter;
 			color: #646464;
 		}
@@ -292,19 +336,44 @@ $SubText: 18px;
 		grid-area: spec;
 		// height: 100px;
 		// margin-bottom: 50px;
-		margin: 5% 0% 5% 5%;
+		margin: 10% 10% 5% 10%;
 		width: auto;
 		display: grid;
+		justify-content: space-around;
 		grid-template-columns: repeat(4, auto);
 		height: auto;
-		grid-template-rows: 25% 50% 25%;
-		// grid-row-gap: 20%;
+		// grid-template-rows: 25% 50% 25%;
+		grid-row-gap: 20%;
 		grid-template-areas: "spec1 spec2 spec3 spec4" ". . . ." "spec5 spec6 spec7 spec8";
+		@include sm-lesser(){
+			margin: 10% 10% 5% 10%;
+			width: auto;
+			display: grid;
+			justify-content: space-around;
+			grid-template-columns: repeat(2, auto);
+			height: auto;
+			// grid-template-rows: 25% 50% 25%;
+			grid-row-gap: 10%;
+			grid-template-areas: "spec1 spec2" "spec3 spec4" "spec5 spec6" "spec7 spec8";
+		}
+
+		@media only screen and (min-width: 600px) and (max-width: 1400px){
+			margin: 10% 10% 5% 10%;
+			width: auto;
+			display: grid;
+			justify-content: space-around;
+			grid-template-columns: repeat(3, auto);
+			height: auto;
+			// grid-template-rows: 25% 50% 25%;
+			grid-row-gap: 15%;
+			grid-template-areas: "spec1 spec2 spec3" "spec4 spec5 spec6" "spec7 spec8 .";
+		}
 		.headSpec {
 			justify-self: center;
 			text-align: center;
 			width: auto;
-			font-size: $Text;
+			padding: 5%;
+			font-size: $textLarge;
 			font-family: BitterBold;
 			color: #646464;
 		}
@@ -312,16 +381,17 @@ $SubText: 18px;
 			justify-self: center;
 			text-align: center;
 			width: auto;
-			font-size: $SubText;
+			padding: 5%;
+			font-size: $textMedium;
 			font-family: Bitter;
 			color: #949494;
 			height: auto;
 		}
 		#specId {
-			height: 22rem;
+			height: auto;
 		}
 		.spec1 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec1;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -331,12 +401,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec2 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec2;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -346,12 +416,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec3 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec3;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -361,12 +431,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec4 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec4;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -376,12 +446,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec5 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec5;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -391,12 +461,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec6 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec6;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -406,12 +476,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec7 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec7;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -421,12 +491,12 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.spec8 {
-			padding-top: 15%;
+			padding: 15% 5% 5% 10%;
 			grid-area: spec8;
 			// margin: 5em 2em;
 			background: radial-gradient(
@@ -436,14 +506,13 @@ $SubText: 18px;
 				whitesmoke 70px,
 				whitesmoke
 			);
-			border-radius: 8px;
+			border-radius: 16px;
 			position: relative;
-			width: 275px;
+			width: 250px;
 		}
 		.circle {
 			width: 85px;
 			height: 85px;
-			background: #efbe24;
 			border-radius: 50%;
 			position: absolute;
 			top: 0;
@@ -504,14 +573,17 @@ $SubText: 18px;
 				text-align: center;
 				font-size: 3rem;
 				padding: 100px;
+				margin-bottom: 20px;
+				margin-top: 60px;
 				font-family: BitterBold;
 				font-size: $Header;
+				background-color: whitesmoke;
 			}
 			&:hover {
 				cursor: pointer;
 			}
 			grid-area: banRight;
-			background-color: whitesmoke;
+			
 			display: block;
 		}
 		margin-bottom: 50px;
@@ -524,7 +596,8 @@ $SubText: 18px;
 		height: auto;
 		width: auto;
 		grid-template-areas: ". headerWork ." "how1 how2 how3";
-		margin-bottom: 50px;
+		padding: 0% 10%;
+		background-color: whitesmoke;
 		.workHeader {
 			grid-area: headerWork;
 			img {
@@ -533,7 +606,7 @@ $SubText: 18px;
 				margin-right: auto;
 				width: 300px;
 				z-index: 0;
-				transform: translate(0rem, 3rem);
+				transform: translate(0rem,4rem);
 			}
 			// h2 {
 			// 	text-align: center;
@@ -544,43 +617,69 @@ $SubText: 18px;
 		}
 		.how1 {
 			grid-area: how1;
-			margin: 5%;
+			margin: 12% 5%;
 			width: auto;
-			padding-right: 5%;
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			#seeMore1 {
-				margin-left: 10rem;
 				background-color: #efbe24;
 				color: white;
+				border: none;
+				border-radius: 8px;
+				padding: 10px 15px;
+				font-family: BitterBold;
+				font-size: $textLarge;
+				box-shadow: 5px 5px 10px 2px #05050513;
 			}
 		}
 		.how2 {
 			grid-area: how2;
-			margin: 5%;
+			margin: 12% 5%;
 			width: auto;
-			padding-right: 5%;
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			#seeMore2 {
-				margin-left: 10rem;
 				background-color: #efbe24;
 				color: white;
+				border: none;
+				border-radius: 8px;
+				padding: 10px 15px;
+				font-family: BitterBold;
+				font-size: $textLarge;
+				box-shadow: 5px 5px 10px 2px #05050513;
 			}
 		}
 		.how3 {
 			grid-area: how3;
-			margin: 5%;
+			margin: 12% 5%;
 			width: auto;
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			#seeMore3 {
-				margin-left: 10rem;
 				background-color: #efbe24;
 				color: white;
+				border: none;
+				border-radius: 8px;
+				padding: 10px 15px;
+				font-family: BitterBold;
+				font-size: $textLarge;
+				box-shadow: 5px 5px 10px 2px #05050513;
 			}
 		}
 		.headHow {
 			justify-self: center;
 			text-align: center;
 			width: auto;
-			font-size: $Text;
+			padding: 8px;
+			font-size: $textLarge;
 			font-family: BitterBold;
-			color: #646464;
+			color: $smaDarkGray;
 		}
 		.bodyHow {
 			justify-self: center;
@@ -589,16 +688,17 @@ $SubText: 18px;
 			p {
 				height: 5rem;
 				display: -webkit-box;
+				padding: 5%;
 				-webkit-line-clamp: initial;
 				overflow: hidden;
-				font-size: $SubText;
+				font-size: $textMedium;
 				font-family: Bitter;
 				color: #949494;
 			}
 		}
 		img {
-			transform: translate(11rem, 0px);
-			height: 55px;
+			margin-bottom: 5%;
+			height: 60px;
 		}
 	}
 	.quote {
@@ -606,6 +706,7 @@ $SubText: 18px;
 		// height: 500px;
 		background-color: #efbe24;
 		margin-bottom: 50px;
+		margin-top: 15px;
 		display: grid;
 		width: auto;
 		grid-template-rows: 15% auto;
@@ -655,6 +756,7 @@ $SubText: 18px;
 		}
 		.post1 {
 			grid-area: post1;
+			padding: 0 15%;
 			.imgP {
 				display: grid;
 				grid-template-rows: auto;
@@ -674,6 +776,7 @@ $SubText: 18px;
 					justify-self: center;
 					text-align: center;
 					width: auto;
+					padding: 0;
 					font-size: 16px;
 					font-family: Bitter;
 					color: #333333;
@@ -694,11 +797,13 @@ $SubText: 18px;
 		}
 		.post2 {
 			grid-area: post2;
+			padding: 0 15%;
 			.imgP {
 				display: grid;
 				grid-template-rows: auto;
 				grid-template-columns: auto;
 				grid-template-areas: "imageP";
+				
 				#imageP {
 					grid-area: imageP;
 					clip-path: circle(50% at 50% 50%);
@@ -839,10 +944,11 @@ $SubText: 18px;
 	}
 	.plans {
 		grid-area: plans;
+		padding: 0px 10% 15% 10%;
 		.main-title {
-			// margin-top: 8%;
+			padding: 5% 0 3% 0;
 			font-family: BitterBold;
-			font-size: 200%;
+			font-size: $Header;
 			text-align: center;
 			color: black;
 		}
@@ -883,27 +989,56 @@ $SubText: 18px;
 		// }
 		//card-style
 		.card-style {
-			background: #dbdbdb;
+			background: white;
 			background-size: cover;
-			width: 200px;
-			height: 350px;
+			// width: 250px;
+			// height: 350px;
+
+			// @include sm-lesser{
+			// 	width: 150px;
+			// }
+			
 			font-family: BitterBold;
 		}
 		.p-style {
 			font-size: 24px;
 			text-align: center;
+			border-bottom: 1px solid #dbdbdb;
+		}
+
+		.p2-style{
+			text-align: center;
 		}
 		.image-style {
 			width: min-content;
 			margin: auto;
+
+			img{
+				height: 96px;
+				padding: 8px;
+			}
 		}
 		//grid
 		.main-grid {
 			font-family: "BitterRegular";
 			display: grid;
-			grid-template-columns: 10% 20% 20% 20% 20% 10%;
-			grid-template-rows: auto;
-			grid-template-areas: ". card-1 card-2 card-3 card-4 .";
+			// grid-template-columns: 10% 20% 20% 20% 20% 10%;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			
+			grid-column-gap: 1em;
+			// grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+			grid-template-areas: "card-1 card-2 card-3 card-4 ";
+
+			@include sm-lesser(){
+				font-family: "BitterRegular";
+				display: grid;
+				// grid-template-columns: 10% 20% 20% 10%;
+				grid-template-columns:  1fr 1fr;
+				row-gap: 10%;
+				grid-column-gap: 10%;
+				grid-row-start: 20px;
+				grid-template-areas: "card-1 card-2" "card-3 card-4 ";
+			}
 		}
 		.card-1 {
 			grid-area: card-1;
@@ -932,7 +1067,7 @@ $SubText: 18px;
 			width: 550px;
 			height: 50px;
 			z-index: 0;
-			transform: translate(0rem, 3rem);
+			transform: translate(0rem, 2.5rem);
 		}
 		// h2 {
 		// 	text-align: center;
@@ -951,15 +1086,28 @@ $SubText: 18px;
 			.divSA {
 				grid-area: divSA;
 				display: grid;
-				grid-template-columns: 5% 45% 45% 5%;
+				margin: 5%;
+				grid-template-columns: 5% 40% 45% 5%;
 				grid-template-rows: auto;
 				grid-template-areas: ". search askQ .";
+
+				@include sm-lesser(){
+					grid-area: divSA;
+					display: grid;
+					margin: 5%;
+					grid-template-columns: 5% 45% 5%;
+					grid-template-rows: auto;
+					grid-template-areas: ". search ."  ". askQ .";
+
+				}
 				.search {
+					padding: 0;
 					grid-area: search;
+					
 					.searchBox {
-						transform: translate(0rem, -7px);
 						width: 30rem;
 						background-color: #dbdbdb;
+						transform: translate(0rem, -14px);
 						border:none;
 						height: 40px;
 						padding-left: 20px;
@@ -1005,6 +1153,13 @@ $SubText: 18px;
 				grid-template-columns: repeat(2, 1fr);
 				margin: 15px 40px 0px 40px;
 				width: auto;
+				.noFaq{
+					display:none;
+					font-family:Bitter;
+					font-size: 24px;
+					// justify-self: center;
+					transform: translate(80% ,50%);
+				}
 				.divQA {
 					// grid-area: divQA;
 					// height: auto;

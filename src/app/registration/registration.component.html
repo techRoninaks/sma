@@ -143,10 +143,10 @@
               <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">
                   Verify
               </button> -->
-              <button type="button" class="btn btn-warning" (click)="newVerify();" *ngIf="Otp">
+              <button type="button" class="btn btn-warning verifyBtn" (click)="newVerify();" *ngIf="Otp" style="margin-left:25%;margin-top: 5%;" >
                 Verify
               </button>
-              <img src="assets/icons/userProfile/ic_ver_gif.png" *ngIf="otpVerified" style="margin-left: -30px;  height: 28px; margin-top: -3px;">
+              <img src="assets/icons/userProfile/ic_ver_gif.png" *ngIf="otpVerified" >
             <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
               <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
                 Mobile no is required !
@@ -178,14 +178,12 @@
                 </div>
               </div>
             </div> <br>
+                  
               
             <div class="text-input-style" ng-app="myApp" ng-controller="myCtrl" >
-                <!-- <input type="radio" formControlName="gender" value="M"> Male &nbsp; &nbsp;<input type="radio" formControlName="gender"
-                  value="F"> Female &nbsp; &nbsp;<input type="radio" formControlName="gender" value="O"> Other -->
-                  <!-- <select ng-model="selectedName" ng-options="x for x in names" formControlName="gender">
-                  </select> -->
-                  <select [(ngModel)]="selectedLevel" formControlName="gender">
-                      <option *ngFor="let item of data1" [ngValue]="item">{{item.name}}</option>
+              <label>Gender:</label><br>
+                  <select [(ngModel)]="selectedLevel" formControlName="gender" style="border: 1px solid;">
+                      <option  *ngFor="let item of data1" [ngValue]="item">{{item.name}}</option>
                   </select>
                   
                   <div *ngIf="submitted && registrationForm.controls.gender.errors" class="error validator-style">

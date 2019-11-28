@@ -13,13 +13,16 @@ declare var Razorpay: any;
   styleUrls: ['./registration-seller.component.scss']
 })
 export class RegistrationSellerComponent implements OnInit {
+  Object = Object;
   registrationForm: FormGroup;
   sellerRegForm: FormGroup;
+  bankDetailsForm: FormGroup;
   registrationFormStage1: FormGroup;
   fpFormMobile: FormGroup;
   fpFormOtp: FormGroup;
   termsForm: FormGroup;
   submitted: boolean;
+  submittedBank: boolean;
   fpmobile : string=""; 
   fpOTP : string="";
   g_seller_id: any="";
@@ -29,7 +32,7 @@ export class RegistrationSellerComponent implements OnInit {
 
   otpVerified: boolean = false;
 
-  constructor(private data: DataService,private formBuilder: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderTerms: FormBuilder,private router: Router,private cookieService: CookieService) { 
+  constructor(private data: DataService,private formBuilderBank: FormBuilder,private formBuilder: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderTerms: FormBuilder,private router: Router,private cookieService: CookieService) { 
     this.registrationForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       reg_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
@@ -60,6 +63,15 @@ export class RegistrationSellerComponent implements OnInit {
     this.termsForm=formBuilderTerms.group({
       t_checkbox:['',Validators.required]
     })
+    this.bankDetailsForm=formBuilderBank.group({
+      holder_name:['',Validators.required],
+      bank_name:['',Validators.required],
+      accnt_type:['',Validators.required],
+      branch:['',Validators.required],
+      accnt_no:['',[Validators.required,Validators.minLength(9),Validators.maxLength(18),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      conf_accnt_no:['',[Validators.required,Validators.minLength(9),Validators.maxLength(18),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      ifsc:['',[Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/)]],
+    })
   }
   dynamicDataSeller: any = "";
   dynamicDataCat: any = "";
@@ -69,6 +81,9 @@ export class RegistrationSellerComponent implements OnInit {
   dynamicDataBasic: any = "";
   dynamicDataPremium: any = "";
   dynamicDataPlus: any = "";
+  dynamicDataCity: any = "";
+  dynamicDataPin: any = "";
+  dynamicDataPinDetails: any = "";
   gst_no: any ="";
   price: any ="";
   discount: any ="";
@@ -102,8 +117,9 @@ export class RegistrationSellerComponent implements OnInit {
   branch : any="";
   accnt_no : any="";
   ifsc : any="";
+  accntno : any="";
+  conf_accntno : any ="";
   conf_accnt_no : any="";
-  Object = Object;
   sellerData3 : object;
   sellerData4 : object;
   imageDataFront : object;
@@ -189,6 +205,30 @@ export class RegistrationSellerComponent implements OnInit {
   deleteCookie(cname) {
     this.cookieService.delete(cname);
   }
+  selectedState(state){
+    this.data.getcity(state).subscribe(
+      data=>{
+        this.dynamicDataCity=data;
+      },
+        error=> console.error(error)
+    );
+  }
+  selectedCity(city){
+    this.data.getPincode(city).subscribe(
+      data=>{
+        this.dynamicDataPin=data;
+      },
+        error=> console.error(error)
+    );
+  }
+  selectedPin(pin){
+    this.data.getPincodeDetails(pin).subscribe(
+      data=>{
+        this.dynamicDataPinDetails=data;
+      },
+        error=> console.error(error)
+    );
+  }
   mobileFetch(){
     this.seller_mobile = this.registrationForm.controls['reg_mobile_no'].value;
     (<HTMLInputElement><any>document.getElementById("fp_mobile_no")).value=this.seller_mobile;
@@ -226,9 +266,9 @@ export class RegistrationSellerComponent implements OnInit {
       alert('Enter Required Fields');
       return;
     }
-    else if(this.otpVerified == false){
-      alert("Please Verify Mobile to Continue Registration Process...!")
-    }
+    // else if(this.otpVerified == false){
+    //   alert("Please Verify Mobile to Continue Registration Process...!")
+    // }
     else if( this.pwd != this.cpwd ){
       alert('Password mismatch');
     }
@@ -344,23 +384,35 @@ export class RegistrationSellerComponent implements OnInit {
     imageBack=document.getElementById('backUpload').addEventListener('change', onBackClick.bind(this));
   }
   onSubmitStage4(){
-    this.ship_city = (<HTMLInputElement>document.getElementById("ship-city")).value;
-    var checkedValue = (<HTMLInputElement>document.querySelector('.shipping-mode:checked')).value;
-    var checkedValue2 = (<HTMLInputElement>document.querySelector('.shipping-place:checked')).value;
-    // this.country = (<HTMLSelectElement>document.getElementById("country")).value;
-    // this.state = (<HTMLSelectElement>document.getElementById("state")).value;
-    // this.district = (<HTMLSelectElement>document.getElementById("district")).value;
-    this.city = (<HTMLSelectElement>document.getElementById("city")).value;
-    this.accnt_holder_name = (<HTMLSelectElement>document.getElementById("accnt-holder-name")).value;
-    this.bank_name = (<HTMLSelectElement>document.getElementById("bank-name")).value;
-    this.accnt_type = (<HTMLSelectElement>document.getElementById("accnt-type")).value;
-    this.branch = (<HTMLSelectElement>document.getElementById("branch")).value;
-    this.accnt_no = (<HTMLSelectElement>document.getElementById("accnt-no")).value;
-    this.ifsc = (<HTMLSelectElement>document.getElementById("ifsc")).value;
-    this.conf_accnt_no = (<HTMLSelectElement>document.getElementById("conf-accnt-no")).value;
-    
-    this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id};
-    this.data.addSellerDataStage4(this.sellerData4).subscribe(
+    this.submittedBank = true;
+    this.accntno = this.bankDetailsForm.controls['accnt_no'].value;
+    this.conf_accntno = this.bankDetailsForm.controls['conf_accnt_no'].value;
+    if(this.accntno != this.conf_accntno)
+    {
+      alert("Account Number mismatch, try again...!")
+    }
+    else if(this.bankDetailsForm.invalid)
+    {
+      alert("Enter required fiels");
+    }
+    else
+    {
+      this.ship_city = (<HTMLInputElement>document.getElementById("ship-city")).value;
+      var checkedValue = (<HTMLInputElement>document.querySelector('.shipping-mode:checked')).value;
+      var checkedValue2 = (<HTMLInputElement>document.querySelector('.shipping-place:checked')).value;
+      // this.country = (<HTMLSelectElement>document.getElementById("country")).value;
+      // this.state = (<HTMLSelectElement>document.getElementById("state")).value;
+      // this.district = (<HTMLSelectElement>document.getElementById("district")).value;
+      this.city = (<HTMLSelectElement>document.getElementById("city")).value;
+      this.accnt_holder_name = (<HTMLSelectElement>document.getElementById("accnt-holder-name")).value;
+      this.bank_name = (<HTMLSelectElement>document.getElementById("bank-name")).value;
+      this.accnt_type = (<HTMLSelectElement>document.getElementById("accnt-type")).value;
+      this.branch = (<HTMLSelectElement>document.getElementById("branch")).value;
+      this.accnt_no = (<HTMLSelectElement>document.getElementById("accnt-no")).value;
+      this.ifsc = (<HTMLSelectElement>document.getElementById("ifsc")).value;
+      this.conf_accnt_no = (<HTMLSelectElement>document.getElementById("conf-accnt-no")).value;
+      this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id};
+      this.data.addSellerDataStage4(this.sellerData4).subscribe(
       data=>{
               if(data['status'] == "Success")
               {
@@ -368,7 +420,9 @@ export class RegistrationSellerComponent implements OnInit {
                 this.stage_3=false;
                 this.stage_4=true;
                 this.seller_name = data['seller_name'];
+                this.seller_id = data['seller_id'];
                 this.setCookie("sellerName",this.seller_name);
+                this.setCookie("sellerId",this.seller_id);
               }
               else
               {
@@ -377,6 +431,7 @@ export class RegistrationSellerComponent implements OnInit {
             },
         error=> console.error(error)
       );
+    }
   }
   idCardlist(){
     this.data.getIdCardlist().subscribe(
@@ -455,7 +510,7 @@ export class RegistrationSellerComponent implements OnInit {
     }
   }
   checkoutFree(){
-    this.seller_id = this.g_seller_id;
+    this.seller_id = this.getCookie("sellerId");
     this.data.updateSellerPlanFree(this.seller_id).subscribe(
       data=>{
               if(data == "Success")
@@ -478,7 +533,7 @@ export class RegistrationSellerComponent implements OnInit {
     this.seller_name = this.dynamicDataSeller.owner_name;
     this.seller_mobile = this.dynamicDataSeller.contact;
     this.seller_mail = this.dynamicDataSeller.email;
-    this.seller_id = this.g_seller_id;
+    this.seller_id = this.getCookie("sellerId");
     var options = {
       "key": "rzp_test_dveDexCQKoGszl",
       "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
@@ -524,7 +579,7 @@ export class RegistrationSellerComponent implements OnInit {
     this.seller_name = this.dynamicDataSeller.owner_name;
     this.seller_mobile = this.dynamicDataSeller.contact;
     this.seller_mail = this.dynamicDataSeller.email;
-    this.seller_id = this.g_seller_id;
+    this.seller_id = this.getCookie("sellerId");
     var options = {
       "key": "rzp_test_dveDexCQKoGszl",
       "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
@@ -570,7 +625,7 @@ export class RegistrationSellerComponent implements OnInit {
     this.seller_name = this.dynamicDataSeller.owner_name;
     this.seller_mobile = this.dynamicDataSeller.contact;
     this.seller_mail = this.dynamicDataSeller.email;
-    this.seller_id = this.g_seller_id;
+    this.seller_id = this.getCookie("sellerId");
     var options = {
       "key": "rzp_test_dveDexCQKoGszl",
       "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20

@@ -35,6 +35,9 @@
 // }
 // Color Palette
 
+
+
+
 $smaYellow: #efbe24;
 $smaLightGray: #f1f1f1;
 $smaGray: #dbdbdb;
@@ -43,12 +46,25 @@ $smaRed: #ff1d25;
 $smaDarkGray: #333333;
 // font-family: BitterBold;
 
-// Font Sizes
+// Font Sizes 
 
 $Header: 30px;
 $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
+
+@mixin phone {
+	@media only screen and (max-width:600px) {
+		@content;
+	}
+	
+}
+@mixin tablet{
+	@media only screen and (min-width: 768px) and (max-width: 1024px){
+		@content;
+	}
+}
+
 .transHeader {
 	img {
 		display: block;
@@ -58,6 +74,20 @@ $SubText: 18px;
 		z-index: 0;
 		transform: translate(0rem, 2rem);
 	}
+	@include phone{
+		img{
+			display: block;
+		margin-left: 30px;
+		margin-right: auto;
+		width: 300px;
+		z-index: 0;
+		transform: translate(0rem, 2rem);
+
+		}
+	}
+
+
+
 	.headerT {
 		text-align: center;
 		//   position: absolute;
@@ -66,7 +96,21 @@ $SubText: 18px;
 		font-size: $Header;
 		font-family: BitterBold;
 	}
+	@include phone{
+		.headerT{
+			text-align: center;
+			margin-left:0px;
+		//   position: absolute;
+		transform: translate(0px, -0.45em);
+		z-index: 1;
+		font-size: $Header;
+		font-family: BitterBold;
+		}
+	}
+
 }
+
+
 
 .transactionTable {
 	display: grid;
@@ -111,6 +155,7 @@ $SubText: 18px;
 			margin-top: 12px;
 			p {
 				grid-area: status;
+				
 			}
 			.drpStatus {
 				grid-area: drpStatus;
@@ -206,7 +251,333 @@ $SubText: 18px;
 			}
 		}
 	}
+
+	
 }
+@include phone
+             {
+
+
+				
+		.transactionTable {
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	grid-template-columns: 10% auto 10%;					//chamges made
+	grid-template-areas: ". transTbHeader ." ". transTbData .";
+	.transTbHeader {
+		display: grid;
+		grid-template-columns:repeat(4, auto);
+		grid-template-rows: repeat(2, auto);							//changes made																	
+		grid-template-areas: ". transNoHeader custNameHeader orderNoHeader statusHeader .";
+		grid-area: transTbHeader;
+		background-color: #efbe24;
+		color: white;
+		justify-self: center;
+		text-align: center;
+		font-family: BitterBold;
+		font-size: 8px;
+		border-top-left-radius: 25px;
+		border-top-right-radius: 25px;
+		.transNoHeader {
+			grid-area: transNoHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			margin-left: -16px;
+		}
+		.custNameHeader {
+			grid-area: custNameHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			margin-left: -20px;
+		}
+		.orderNoHeader {
+			grid-area: orderNoHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			margin-left: -9px;
+		}
+		.statusHeader {
+			grid-area: statusHeader;
+			display: grid;
+			grid-template-columns: 90% 10%;
+			grid-template-rows: auto;
+			grid-template-areas: "status drpStatus";
+			margin-top: 12px;
+			p {
+				grid-area: status;
+			}
+			.drpStatus {
+				grid-area: drpStatus;
+			}
+			.dpBtn {
+				background-color: #efbe24;
+				color: white;
+				border: none;
+			}
+			.dpItem {
+				background-color: #f1f1f1;
+				color: #646464;
+				padding: 1px 1px 1px 1px;
+				font-family: Bitter;
+				font-size: 5px;
+				// margin-right: 1px;
+				// height: 10px;
+
+				&:hover {
+					background-color: #dbdbdb;
+					color: #000000;
+				}
+			}
+			.dpMenu {
+				padding: 2px 12px 2px 12px;
+				background-color: #f1f1f1;
+				border-bottom-left-radius: 25px;
+				border-bottom-right-radius: 25px;
+				z-index:15;
+				height: 85px;
+				min-width: 4.3rem;   
+			}
+		}
+		#transHeader {
+			img {
+				// z-index: 1;
+				// transform: translate(-2rem, 2px);
+				// position: relative;
+				// height: 8px;
+				// margin-top: 10px;
+				// margin-left: 30px;
+				height: 10px;
+				padding: 5px;
+				margin-top: 2px;
+				margin-left: 20px;
+
+			}
+		}
+	}
+	.transTbData {
+		display: grid;
+		grid-template-columns: 100%;				//chges made
+		grid-template-rows: auto;
+		grid-area: transTbData;
+		background-color: whitesmoke;
+		border-bottom-left-radius: 25px;
+		border-bottom-right-radius: 25px;
+		margin-bottom: 50px;
+		padding-bottom: 10px;
+		// justify-self: center;
+		// text-align: center;
+
+		.tbData {
+			display: grid;
+			grid-template-columns: 5% 22% 22% 22% 22% 5%;
+			grid-template-rows: auto;
+			grid-template-areas: ". transNoData prodNameData orderNoData statusData .";
+			background-color: whitesmoke;
+			border-bottom-left-radius: 25px;
+			border-bottom-right-radius: 25px;
+			p{
+				text-align: center;
+			}
+			.transNoData {
+				grid-area: transNoData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: 8px;
+			}
+			.prodNameData {
+				grid-area: prodNameData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: 8px;
+			}
+			.orderNoData {
+				grid-area: orderNoData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: 8px;
+			}
+			.statusData {
+				grid-area: statusData;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: 8px;
+			}
+			#transData {
+			}
+		}
+	}
+
+	
+}
+
+
+}
+
+@include tablet{
+
+	
+
+.transactionTable {
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	grid-template-columns: 10% auto 10%;
+	grid-template-areas: ". transTbHeader ." ". transTbData .";
+	.transTbHeader {
+		display: grid;
+		grid-template-columns: 5% 22% 22% 22% 22% 5%;
+		grid-template-rows: auto;
+		grid-template-areas: ". transNoHeader custNameHeader orderNoHeader statusHeader .";
+		grid-area: transTbHeader;
+		background-color: #efbe24;
+		color: white;
+		justify-self: center;
+		text-align: center;
+		font-family: BitterBold;
+		font-size: $Text;
+		border-top-left-radius: 25px;
+		border-top-right-radius: 25px;
+		.transNoHeader {
+			grid-area: transNoHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			font-size: 15px;
+		}
+		.custNameHeader {
+			grid-area: custNameHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			font-size: 15px;
+		}
+		.orderNoHeader {
+			grid-area: orderNoHeader;
+			border-right: 1px solid lightgrey;
+			margin-top: 12px;
+			font-size: 15px;
+		}
+		.statusHeader {
+			grid-area: statusHeader;
+			display: grid;
+			grid-template-columns: 90% 10%;
+			grid-template-rows: auto;
+			grid-template-areas: "status drpStatus";
+			margin-top: 12px;
+			font-size: 15px;
+			p {
+				grid-area: status;
+				
+			}
+			.drpStatus {
+				grid-area: drpStatus;
+			}
+			.dpBtn {
+				background-color: #efbe24;
+				color: white;
+				border: none;
+			}
+			.dpItem {
+				background-color: #f1f1f1;
+				color: #646464;
+				padding: 10px 10px 10px 10px;
+				font-family: Bitter;
+				//    height: 10px;
+				     
+				font-size: 9px;
+
+
+				&:hover {
+					background-color: #dbdbdb;
+					color: #000000;
+				}
+			}
+			.dpMenu {
+				padding: 2px 12px 2px 12px;
+				background-color: #f1f1f1;
+				border-bottom-left-radius: 25px;
+				border-bottom-right-radius: 25px;
+				z-index:15;
+				min-width: 5rem;   /////status dropdown
+			}
+		}
+		#transHeader {
+			img {
+
+				display: none;
+				// z-index: 1;
+				// transform: translate(-2rem, 2px);
+				// position: absolute;
+				// // height: $Text;
+				// height: 10px;
+				// margin-left: 13px;
+				// margin-top: 5px;
+
+			}
+		}
+	}
+	.transTbData {
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: auto;
+		grid-area: transTbData;
+		background-color: whitesmoke;
+		border-bottom-left-radius: 25px;
+		border-bottom-right-radius: 25px;
+		margin-bottom: 50px;
+		padding-bottom: 15px;
+		// justify-self: center;
+		// text-align: center;
+
+		.tbData {
+			display: grid;
+			grid-template-columns: 5% 22% 22% 22% 22% 5%;
+			grid-template-rows: auto;
+			grid-template-areas: ". transNoData prodNameData orderNoData statusData .";
+			background-color: whitesmoke;
+			border-bottom-left-radius: 25px;
+			border-bottom-right-radius: 25px;
+			p{
+				text-align: center;
+			}
+			.transNoData {
+				grid-area: transNoData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: $Text;
+			}
+			.prodNameData {
+				grid-area: prodNameData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: $Text;
+			}
+			.orderNoData {
+				grid-area: orderNoData;
+				border-right: 1px solid lightgrey;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: $Text;
+			}
+			.statusData {
+				grid-area: statusData;
+				border-bottom: 1px solid lightgray;
+				font-family: Bitter;
+				font-size: $Text;
+			}
+			#transData {
+			}
+		}
+	}
+
+	
+}
+}
+
+
+
 
 // .transTbHd {
 //     background-color:#efbe24;

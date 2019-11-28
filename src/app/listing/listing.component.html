@@ -11,34 +11,24 @@
             data-target="#undeliverableModal">undeliverable</button> -->
         <!-- Modal -->
         <div class="modal fade" id="undeliverableModal" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modalWidth" style="width: 22.5rem;">
                 <!-- Modal content-->
-                <div class="modal-content dvModalContent">
-                    <div class="modal-header dvModalHeader">
-                    </div>
-                    <div class="modal-body" style="padding:0 10% 0 10%;">
-                        <div>
+                <div class="modal-content dvModalContent" style="border-radius: 15px;padding: 0% 0% 5% 0%;">
+                    <div class="modal-body">
+                        <div class="undelStyle">
                             <img class="undeliverableIcon" src="assets/icons/img_549368.png">
-                            <ul>
-                                <ul>
-                                    <span id="undel">{{undel}}</span> <span>{{pincodeValue}}</span>
-                                </ul>
-                                <form>
-                                    <input type="text" placeholder="Enter Pincode" id="undPincode"
-                                        value="{{pincodeValue}}" (change)="pincodeChange();"
-                                        (click)="priceChangeGetter();">
-                                    <br>
-                                    <label for="changePincode"> Change Pincode</label><br>
-                                    <input type="radio" class="aP" name="drone" value="availableProducts"
-                                        id="undCategory">
-                                    <!-- [routerLink]="['/category']" [queryParams]="{cat_id:this.dynamicData.categoryId}" -->
-                                    <label for="availableProducts"> Available Products</label><br>
-                                    <input type="radio" class="cP" name="drone" id="undContinue" value="continue">
-                                    <label for="continue"> Continue on this page</label><br>
-                                    <button class="btnRfq btnStyle" type="submit"
-                                        (click)="undeliverable();">Apply</button>
-                                </form>
-                            </ul>
+                            <p id="undel " class="undelP" style="color:#949494; font-family:BitterBold; font-size:20px;">{{undel}}</p>
+                            <p class="undelP" style="color:#ff1d25; font-family:BitterBold; font-size:20px;">{{pincodeValue}}</p>
+                            <input type="text" class="pincodeInput" placeholder="Enter Pincode" id="undPincode" value="{{pincodeValue}}"
+                                (change)="pincodeChange();" (click)="priceChangeGetter();">
+                            <div class="undelRadio">
+                                <label for="changePincode" class="labelStyle" style="margin-left: 10px;">&nbsp;Change Pincode</label><br>
+                                <input type="radio" class="aP" name="drone" value="availableProducts" id="undCategory">
+                                <label for="availableProducts" class="labelStyle">&nbsp;See Available Products</label><br>
+                                <input type="radio" class="cP" name="drone" id="undContinue" value="continue">
+                                <label for="continue" class="labelStyle">&nbsp;Continue on this page</label><br>
+                                <button class="btnRfq btnStyle undelApply" type="submit" (click)="undeliverable();">Apply</button> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,7 +38,7 @@
 </div>
 
 <div class="gridT">
-    <div class="divSelDesc">
+    <!-- <div class="divSelDesc"> -->
         <!-- SELLER -->
         <div class="divSeller">
             <div class="sellerDetails">
@@ -61,7 +51,7 @@
                 <!-- <img src="assets/icons/resources (IL)-04.png"> -->
                 <div class="follow">
                     <ng-container *ngIf="folResult; else notFollowing">
-                        <button class="btnFollow" (click)="unfollowShop();"><img class="followIcon"
+                        <button class="btnUnFollow" (click)="unfollowShop();"><img class="followIcon"
                                 src="assets/icons/resources (IL)-04.png">Unfollow</button>
                     </ng-container>
                     <ng-template #notFollowing>
@@ -72,29 +62,6 @@
                 </div>
             </div>
 
-            <!-- <div class="prodImage">
-                <div class="pImage">
-                    <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
-                        (click)="openModal();currentSlide(1)">
-                    <img src="assets/icons/resources (IL)-19.png" class="bannerProduct">
-                </div>
-                <div class="imageSlider">
-                    <img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_3.jpg"
-                        (click)="myFunction('img1');" id="img1">
-                    <br>
-                    <img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_4.jpg"
-                        (click)="myFunction('img2');" id="img2">
-                    <br>
-                    <img class="smallImage" src="assets/images/chocolate-cream-cake-half-kg-eggless_5.jpg"
-                        (click)="myFunction('img3');" id="img3">
-                    <br>
-                    <img class="smallImage" src="assets/images/dentalia-demo-deoctor-3-1-750x750.jpg"
-                        (click)="myFunction('img4');" id="img4">
-                    <br>
-                    <img class="smallImage" src="assets/images/Screenshot_20190712-201603.png"
-                        (click)="myFunction('img5');" id="img5">
-                </div>
-            </div> -->
             <div class="prodImage">
                 <div class="pImage">
                     <img src="{{ largeSrc }}" class="productImageLarge" id="largeImage"
@@ -111,9 +78,11 @@
                 </div>
             </div>
             <div class="btnsSel">
-                <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" data-toggle="modal"
+                <!-- <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" data-toggle="modal"
+                    id="rfqButtonId">SEND RFQ</button> -->
+                <button type="button" class="btnRfq btnStyle" data-target="#rfqPopup" (click)="sendRfq();"
                     id="rfqButtonId">SEND RFQ</button>
-                <button class="btnAtcart btnStyle" (click)="submitCart();">ADD TO CART</button>
+                <button class="btnAtcart btnStyle" id="addToCart" (click)="submitCart();">{{addToCartValue}}</button>
             </div>
 
         </div>
@@ -136,16 +105,12 @@
                 <button id="seeMore" class="btnStyle" (click)="readMore();">SEE MORE</button>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
     <div class="divQuanDel">
-        <!-- <div class="pButton">
-      <div class="container" id="buyModalContainer" style="z-index: 10001;">
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#buyNowPopup">BUY
-              NOW</button> -->
         <!-- QUANTITY -->
         <div class="pName">
-            <h3>{{dynamicData.name}}</h3>
-            <p>{{dynamicData.shortDesc}}</p>
+            <p class="pNames">{{dynamicData.name}}</p>
+            <p class="pShortDesc">{{dynamicData.shortDesc}}</p>
         </div>
         <div class="pRating">
             <div>
@@ -156,21 +121,25 @@
         <div class="pDiscount">
             <p style="color: #009145;">{{discountLabel.discountText}}</p>
             <p><i class="fa fa-rupee" style="font-size:16px"></i>{{priceDate.tPrice}}&nbsp;&nbsp;
-                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{bPrice}}</del>
+                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{baseTotalPrice}}</del>
             </p>
         </div>
         <div class="pSize">
-            <p>Select An Option</p>
-            <select id="variantValue" class="dropdown">
-                <option *ngFor="let item of Object.keys(variantData)"> {{variantData[item].value}}
-                </option>
-            </select>
+            <div *ngFor="let group of variantCount; let i = index;">
+                <p class="pCss">{{group.name}}:</p>
+                <select id="{{i}}_variantValue" class="dropdown drop" (change)="priceChangeGetter();">
+                    <option *ngFor="let light of group.value" (click)="variantAdd(light.type);">
+                        {{light.type}},{{light.price}}
+                    </option>
+                </select>
+            </div>
         </div>
         <div class="pQuantity" style="margin-top:10px;">
-            <p>Quantity</p>
-            <button type="button" id='1' (click)="count_dec()" (click)="priceChangeGetter();" class="minus">-</button>
+            <p class="pCss">Quantity</p>
+            <button type="button" id='1' (click)="count_dec()" class="minus">-</button>
             <input type="text" id="count" id="productQuantity" value="{{counter}}">
-            <button type="button" id='2' (click)="count_inc()" (click)="priceChangeGetter();" class="plus">+</button>
+            <button type="button" id='2' (click)="count_inc()" class="plus">+</button>
+            <!-- (click)="priceChangeGetter();" -->
         </div>
         <div class="pAvailable" style="color: red" id="showAvailable">
             Sold Count:<span>{{dynamicData.soldCount}}&nbsp;</span> Remaining Count:
@@ -183,60 +152,62 @@
             </div>
         </div>
         <div class="pImages" id="imageShowOrNot">
-            <p>Product Image</p>
+            <p class="pCss">Add Images</p>
             <input style="display: none" type="file" name="pic" id="productImage" accept="image/*" #fileInput>
             <button type="button" class="btnStyle" (click)="fileInput.click()"
-                style="background-color: #efbe24;color: white;">Upload
+                style="background-color: #efbe24;color: white;margin-bottom: 15px;">Upload
                 Image</button>
             <!-- <input type="submit"> -->
-            <div *ngIf="imageU0 == 1">
-                <img [src]="imageVAL0" style="max-height: 100px;margin-top:5px;">
+            <div class="uploadImgContParent" *ngIf="imageU0 == 1">
+                <div class="uploadImgCont" *ngIf="imageU0 == 1">
+                    <img [src]="imageVAL0" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU1 == 1">
+                    <img [src]="imageVAL1" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU2 == 1">
+                    <img [src]="imageVAL2" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU3 == 1">
+                    <img [src]="imageVAL3" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU4 == 1">
+                    <img [src]="imageVAL4" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU5 == 1">
+                    <img [src]="imageVAL5" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU6 == 1">
+                    <img [src]="imageVAL6" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU7 == 1">
+                    <img [src]="imageVAL7" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU8 == 1">
+                    <img [src]="imageVAL8" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
+                <div class="uploadImgCont" *ngIf="imageU9 == 1">
+                    <img [src]="imageVAL9" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                </div>
             </div>
-            <div *ngIf="imageU1 == 1">
-                <img [src]="imageVAL1" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU2 == 1">
-                <img [src]="imageVAL2" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU3 == 1">
-                <img [src]="imageVAL3" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU4 == 1">
-                <img [src]="imageVAL4" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU5 == 1">
-                <img [src]="imageVAL5" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU6 == 1">
-                <img [src]="imageVAL6" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU7 == 1">
-                <img [src]="imageVAL7" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU8 == 1">
-                <img [src]="imageVAL8" style="max-height: 100px;margin-top:5px;">
-            </div>
-            <div *ngIf="imageU9 == 1">
-                <img [src]="imageVAL9" style="max-height: 100px;margin-top:5px;">
-            </div>
+
 
 
         </div>
         <div class="pdatePicker" id="datePickClass">
             <span>Pick desired date for delivery:</span>
-            <input type="date" id="datePickerId" (change)="reqDate();">
+            <input type="date" id="datePickerId" (change)="reqDate(); ">
         </div>
         <div class="pButton">
+            <p id="vacId" class="vacClass" style="display:none;">Seller is on Vacation</p>
             <div class="dvBuyBtn">
                 <div class="dvMain-Container-Grid" id="buyModalContainer" style="z-index: 10001;">
                     <!-- data-toggle="modal" -->
-                    <button type="submit" id="buyNowId" class="btn btn-warning btnStyle"
-                        style="width: 120px; height: 35px;margin-left: -5px;" (click)="submitPrice('buyNow');">BUY
+                    <button type="submit" id="buyNowId" class="btn btn-warning btnStyle btM"
+                        (click)="submitPrice('buyNow');">BUY
                         NOW</button>
                     <!-- data-target="#buyNowPopup" -->
-                    <button type="submit" class="btn btn-warning btnStyle"
-                        style="width: 160px; height: 35px;margin-left: -5px;" id="reqNowId"
-                        (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
+                    <button type="submit" class="btn btn-warning btnStyle btMR" id="reqNowId" (click)="submitPrice('requestOrder');">REQUEST ORDER</button>
                     <!-- data-target="#buyModal" -->
                     <!-- data-toggle="modal" -->
                     <div class="modal fade" id="buyModal" role="dialog">
@@ -252,8 +223,8 @@
             <div class="dvGiftBtn">
                 <div class="container" id="giftModalContainer" style="z-index: 10001;">
 
-                    <button type="button" class="btn btn-warning btnStyle" id="giftButton" style="height: 35px;"
-                        data-toggle="modal" data-target="#giftModal">GIFT</button>
+                    <button type="button" class="btn btn-warning btnStyle btM" id="giftButton" data-toggle="modal"
+                        data-target="#giftModal">GIFT</button>
                     <!-- Modal -->
                     <div class="modal fade" id="giftModal" role="dialog">
                         <div class="modal-dialog">
@@ -261,27 +232,36 @@
                                 <div class="modal-header dvModalHeader">
                                     <button type="button" class="close" id="giftClose"
                                         data-dismiss="modal">&times;</button>
+                                    <p style="text-align: center;margin: 0;font-size: 20px;font-family: BitterBold;">
+                                        Gift Popup</p>
                                 </div>
                                 <div class="modal-body" style="padding:0 10% 0 10%;">
-                                    <form>
-                                        Title : <input type="text" name="text" id="fText"><br>
-                                        Note : <input type="text" name="note" id="fNote"><br>
-                                        Address:<br>
-                                        <div style="transform: translate(5rem,-1rem);">
-                                            <input class="addr1Shop" style="height: 30px" placeholder="house name"
-                                                id="shopNameId">
-                                            <input class="addr2Shop" id="addr2ShopId" style="height: 30px"
-                                                placeholder="street address">
-                                            <input class="cityShop" id="cityShopId" style="height: 30px"
-                                                placeholder="city">
-                                            <input class="districtShop" id="districtShopId" style="height: 30px"
-                                                placeholder="district">
-                                            <input class="stateShop" id="stateShopId" style="height: 30px"
-                                                placeholder="state">
-                                            <input class="countryShop" id="countryShopId" style="height: 30px"
-                                                placeholder="country">
-                                            <input class="pincodeShop" id="pincodeShopId" style="height: 30px"
-                                                placeholder="pincode">
+                                    <div class="giftStyle">
+                                        <p
+                                            style="width:max-content;margin-bottom: 0px;transform: translate(-10px , 30px);">
+                                            Title :</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
+                                            class="addrS giftT" name="text" id="fText"><br>
+                                        <p
+                                            style="width:max-content;margin-bottom: 0px;transform: translate(-10px , 30px);">
+                                            Note :</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="note" id="fNote" class="addrS giftN" ><br>
+                                        <p
+                                            style="width:max-content;margin-bottom: 0px;transform: translate(-10px , 35px);">
+                                            Address:</p><br>
+                                        <div class="giftA">
+                                            <input class="addr1Shop addrS" style="height: 30px;width: inherit;"
+                                                placeholder="House name" id="shopNameId">
+                                            <input class="addr2Shop addrS" id="addr2ShopId"
+                                                style="height: 30px;width: inherit;" placeholder="street address">
+                                            <input class="cityShop addrS" id="cityShopId"
+                                                style="height: 30px;width: inherit;" placeholder="city">
+                                            <input class="districtShop addrS" id="districtShopId"
+                                                style="height: 30px;width: inherit;" placeholder="district">
+                                            <input class="stateShop addrS" id="stateShopId"
+                                                style="height: 30px;width: inherit;" placeholder="state">
+                                            <input class="countryShop addrS" id="countryShopId"
+                                                style="height: 30px;width: inherit;" placeholder="country">
+                                            <input class="pincodeShop addrS" id="pincodeShopId"
+                                                style="height: 30px;width: inherit;" placeholder="pincode">
                                         </div>
 
 
@@ -290,7 +270,7 @@
                                                 style="background-color: #efbe24;color:white;" (click)="gift();"
                                                 value="Apply" data-dismiss="modal">
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +278,7 @@
                 </div>
             </div>
         </div>
-        <div class="pConfirmation" style="background-color: whitesmoke">
+        <div class="pConfirmation" id="idConf" style="background-color: whitesmoke">
             <p class="orderConf descD">ORDER CONFIRMATION PERIOD: </p>
             <span class="confTime policies"
                 style="background-color: white; height: 25px; width: 50px;">{{dynamicData.avgConfirmTime}} hrs</span>
@@ -310,18 +290,18 @@
         <div class="pCourier">
             <div class="dvShip">
                 <input type="radio" id="sh" name="shippingOption" value="shipping" (change)="priceChangeGetter();">
-                <label for="normalCourier">Shipping</label>
+                &nbsp;<label for="normalCourier">Shipping</label>
             </div>
 
 
             <div class="dvCod">
                 <input type="radio" id="hD" name="shippingOption" value="homeDelivery" (change)="priceChangeGetter();">
-                <label for="homeDelivery">Home Delivery</label>
+                &nbsp;<label for="homeDelivery">Home Delivery</label>
             </div>
             <div class="dvPickup">
                 <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp"
                     (change)="priceChangeGetter();">
-                <label for="pickUp">PickUp</label>
+                &nbsp;<label for="pickUp">PickUp</label>
             </div>
         </div>
         <div class="pTime">
@@ -336,8 +316,7 @@
             </div>
         </div>
         <div class="pDate">
-            <p style="font-family:Bitter;color:#949494;">THE PRODUCT WILL BE DELIVERED BEFORE :<span
-                    style="font-family:Bitter;color: #009145;">{{priceDate.dDate}}</span></p>
+            <p style="font-family:Bitter;color:#949494;margin-top: 15px;">THE PRODUCT WILL BE DELIVERED BEFORE :<span style="font-family:Bitter;color: #009145;">{{priceDate.dDate}}</span></p>
         </div>
     </div>
     <!-- POLICY -->
@@ -347,11 +326,11 @@
             <p class="headClass">PRODUCT POLICIES</p>
             <p class="policies">{{dynamicData.prodPolicy}}</p>
         </div>
-        <div class="shopPolicy">
+        <!-- <div class="shopPolicy">
             <img src="assets/icons/resources (IL)-18.png">
             <p class="headClass">SHOP POLICIES</p>
             <p class="policies">{{dynamicData.prodPolicy}}</p>
-        </div>
+        </div> -->
         <div class="shipPolicy">
             <img src="assets/icons/resources (IL)-18.png">
             <p class="headClass">SHIP POLICIES</p>
@@ -374,7 +353,8 @@
                         <span class="rating-num">{{dynamicData.rating}}</span>
                         <div class="rating-stars">
                             <div>
-                                <i class="fa fa-star active" *ngFor="let item of filledStar"></i>
+                                <i class="fa fa-star active" *ngFor="let item of filledStar"
+                                    style="color: #efbe24;"></i>
                                 <i class="fa fa-star-o" *ngFor="let item of unFilledStar"></i>
                             </div>
                         </div>
@@ -465,35 +445,35 @@
                             <i class="fa fa-star active" *ngFor="let itemx of filledStarRatArray[item]"></i>
                             <i class="fa fa-star-o" *ngFor="let itemy of unFilledStarRatArray[item]"></i>
                         </div> -->
-                        <div *ngIf="ratingReview[item].rating == 1">
+                        <div class="revSt" *ngIf="ratingReview[item].rating == 1">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 2">
+                        <div class="revSt" *ngIf="ratingReview[item].rating == 2">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 3">
+                        <div class="revSt" *ngIf="ratingReview[item].rating == 3">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 4">
+                        <div class="revSt" *ngIf="ratingReview[item].rating == 4">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <div *ngIf="ratingReview[item].rating == 5">
+                        <div class="revSt" *ngIf="ratingReview[item].rating == 5">
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
                             <i class="fa fa-star active" style="color: #efbe24"></i>
@@ -502,7 +482,9 @@
                         </div>
                     </div>
                     <img class="revIcon" src="assets/images/review/{{ratingReview[item].reviewId}}/1.jpg"
-                        onError="this.src = 'assets/images/defaultReview2.png'">
+                        onerror="this.style.display = 'none'">
+                    <!-- onError="this.src = 'assets/images/defaultReview2.png'" -->
+
                 </div>
             </div>
         </div>
@@ -524,10 +506,11 @@
                 </form>
             </div>
             <div class="questionAnswer">
-                <div class="divQA" *ngFor=" let faq of Object.keys(faqProduct)">
+                <p id="noFaqId" class="noFaq">No Faqs Available</p>
+                <div class="divQA" id="qAId" *ngFor=" let faq of Object.keys(faqProduct)">
                     <form class="qA">
-                        Q:<span class=" question ">{{faqProduct[faq].question}}</span>?<br> A:
-                        <span class="answer ">{{faqProduct[faq].answer}}</span>
+                        <span id="qId" class="question">Q:{{faqProduct[faq].question}}?</span>
+                        <span id="aId" class="answer">A:{{faqProduct[faq].answer}}</span>
                     </form>
                 </div>
             </div>
@@ -607,8 +590,9 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content dvModalContent">
-                <div class="modal-header dvModalHeader">
+                <div class="modal-header dvModalHeader" style="padding: 0.5rem;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p style="text-align: center;margin: 0;font-size: 20px;font-family: BitterBold;">RFQ</p>
                 </div>
                 <div class="modal-bod" style="padding:0 10% 10% 10%;">
                     <div class="rfqForm">
@@ -619,8 +603,9 @@
                         </div>
                         <div class="rfqSL">
                             <p class="rfqLocation">Location:</p>
-                            <select style="width: 16rem;" id="rfqLocations">
-                                <option class="rfqLocationInput" *ngFor="let add of Object.keys(rfqAddress)">
+                            <select id="rfqLocations" class=rfqL>
+                                <option class="rfqLocationInput" style="background-color:white;"
+                                    *ngFor="let add of Object.keys(rfqAddress)">
                                     {{rfqAddress[add].address}}
                             </select>
                         </div>
@@ -657,10 +642,18 @@
                         <div class="uploadRfq">
                             <input style="display: none" type="file" name="pic" id="shopRfq" accept="image/*"
                                 #fileInputRfq>
-                            <button type="button" class="btnCover" (click)="fileInputRfq.click()"
-                                style="background-color: #efbe24;color: white;">Upload image</button>
-                            <div *ngIf="imageUploadedRfq == 1">
-                                <img [src]="imageVALRFQ" style="max-height: 100px;margin-top:5px;">
+                            <button type="button" class="btnUpload" (click)="fileInputRfq.click()"><img
+                                    class="imgUpload" src="assets/icons/resources (IL)-25.png"></button>
+                            <div class="uploadImgContParent" *ngIf="imageRU0 == 1">
+                                <div class="uploadImgCont" *ngIf="imageRU0 == 1">
+                                    <img [src]="imageVALRFQ0" class="rfqImgU" >
+                                </div>
+                                <div class="uploadImgCont" *ngIf="imageRU1 == 1">
+                                    <img [src]="imageVALRFQ1">
+                                </div>
+                                <div class="uploadImgCont" *ngIf="imageRU2 == 1">
+                                    <img [src]="imageVALRFQ2" >
+                                </div>
                             </div>
                         </div>
                         <button class="btnRfq" (click)="rfqSubmit();" [routerLink]="['/messages']">Apply</button>
@@ -674,27 +667,27 @@
 <!-- loginpopup -->
 <div class="container" id="loginModalContainer" style="z-index: 10001;">
     <div class="modal fade" id="loginModal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width:22.5rem">
             <!-- Modal content-->
             <div class="modal-content dvModalContent">
                 <div class="modal-header dvModalHeader">
+                    <p style="text-align: center;margin: 0;font-size: 18px;font-family: BitterBold;">Login</p>
                 </div>
-                <div class="modal-body" style="padding:0 10% 0 10%;">
+                <div class="modal-body" style="padding:0 10% 5% 10%;">
                     <br>
-                    <p style="text-align: center;justify-self:center">Please Login to continue...</p>
+                    <p style="text-align: center;justify-self:center;font-size: 16px;font-family: Bitter;">Please Login or Signup</p>
                     <br>
                     <button (click)="redirect('login');" [routerLink]="['/login']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
-                        style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
-                    <p style="text-align: center;justify-self:center">OR</p>
+                        style="background-color: #efbe24; color:white; transform: translate(3.5rem,-1rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;">Login</button>
+                    <p style="text-align: center;justify-self:center;font-size: 16px;font-family: Bitter;transform: translate(0.5rem,-2.45rem);">OR</p>
                     <button (click)="redirect('signup');" [routerLink]="['/signup']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
-                        style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
+                        style="background-color: #efbe24; color:white;transform: translate(11.5rem,-5rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;">SignUp</button>
                     <br>
                     <br>
                     <div id="instantBuyId">
-                        <button (click)="submitInstantBuy('instantBuy');"
-                            style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant
+                        <button (click)="submitInstantBuy('instantBuy');"style="transform: translate(6.25rem,-2.5rem);background-color: #efbe24;color:white;border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;">Instant
                             Buy</button>
                     </div>
 
@@ -711,13 +704,15 @@
             <!-- Modal content-->
             <div class="modal-content dvModalContent">
                 <div class="modal-header dvModalHeader">
+                    <p style="text-align: center;margin: 0;font-size: 20px;font-family: BitterBold;">Direct pickup</p>
                 </div>
                 <div class="modal-body" style="padding:0 10% 20px 10%;">
                     <br>
-                    <p style="text-align: center;justify-self:center">Seller Address : {{dPSeller}}</p>
+                    <p style="text-align: center;justify-self:center;font-size: 16px;font-family: Bitter;">Seller
+                        Address : {{dPSeller}}</p>
                     <br>
                     <button id="pickupDetailsId" (click)="pickupchecker();"
-                        style="background-color: #efbe24;color:white;">ok</button>
+                        style="background-color: #efbe24;color:white;border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;left: 45%;position: relative;">ok</button>
 
                 </div>
             </div>
@@ -1114,6 +1109,95 @@
                             <img class="dvprodImages1"
                                 src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_{{imageC}}.jpg">
                             <br>
+                <!-- PRODUCT IMAGE -->
+<!--                 <div class="dvproductImages">
+                    <p class="prodTextImg">PRODUCT IMAGES</p>
+                </div>
+                <div class="dvprodImages" style="display: flex;"> -->
+                    <!-- <img src="/src/assets/images/{{prodId}}/{{prodId}}_).jpg"> -->
+<!--                     <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_0.jpg">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_1.jpg"
+                        style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_2.jpg"
+                        style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_3.jpg"
+                        style="margin-left: 5px; ">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_4.jpg"
+                        style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_5.jpg"
+                        style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_6.jpg"
+                        style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_7.jpg"
+                        style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_8.jpg"
+                        style="margin-left: 5px; display: none;">
+                    <img src="assets/images/product/{{dynamicData.prodId}}/{{dynamicData.prodId}}_9.jpg"
+                        style="margin-left: 5px; display: none;">
+                </div> -->
+                <!-- PRICE VARIATION -->
+<!--                 <div class="dvPriceListing">
+                    <h6>PRICE FOR VARIATIONS & QUALITY</h6>
+                    <div class="dvPriceDetails">
+                        <div class="dvBasePrice">
+                            <p class="BasePriceText">Base Price</p>
+                        </div>
+                        <div class="dvShippingPrice">
+                            <p class="ShippingText">Shipping Price</p>
+                        </div>
+                        <div class="dvDiscPrice">
+                            <p class="DiscText">Discount</p>
+                        </div>
+                        <div class="dvVariancePrice">
+                            <p class="VarianceText">Variance Price</p>
+                        </div>
+                        <div class="dvQty">
+                            <p class="QtyText">Qty</p>
+                        </div>
+                        <div class="dvTax">
+                            <p class="TaxText">Tax</p>
+                        </div>
+                        <div class="dvTotal">
+                            <h6 class="TotalText">Total </h6>
+                        </div>
+                        <div class="dvMed">
+                            <p class="dot">:</p>
+                        </div>
+                        <div class="dvMed1">
+                            <p class="dot1">:</p>
+                        </div>
+                        <div class="dvMed2">
+                            <p class="dot2">:</p>
+                        </div>
+                        <div class="dvMed3">
+                            <p class="dot3">:</p>
+                        </div>
+                        <div class="dvMed4">
+                            <p class="dot4">:</p>
+                        </div>
+                        <div class="dvMed5">
+                            <p class="dot5">:</p>
+                        </div>
+                        <div class="dvMed6">
+                            <p class="dot6">:</p>
+                        </div>
+                        <div class="dvRight-BasePrice">
+                            {{dynamicDataCustomerOrder.basePrice}}
+                        </div>
+                        <div class="dvRight-ShippingPrice">
+                            {{dynamicDataCustomerOrder.shippingPrice}}
+                        </div>
+                        <div class="dvRight-DiscPrice">
+                            {{dynamicDataCustomerOrder.discount}}%
+                        </div>
+                        <div class="dvRight-VariancePrice">
+                            {{dynamicDataCustomerOrder.variantPrice}}
+                        </div>
+                        <div class="dvRight-Qty">
+                            {{ dynamicDataCustomerOrder.quantity }}
+                        </div>
+                        <div class="dvRight-Tax">
+                            {{ dynamicDataCustomerOrder.tax }} -->
                         </div>
                     </div>
                     <!-- PRICE VARIATION -->

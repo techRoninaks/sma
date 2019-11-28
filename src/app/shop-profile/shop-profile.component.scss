@@ -14,39 +14,45 @@ $Header: 30px;
 $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
-@mixin sm {
-    @media (max-width: 1050px) {
-        @content;
-    }
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
 }
 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin sm {
+	@media (min-width: 600px) {
+		@content;
+	}
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
-
 @mixin md {
-    @media (min-width: 768px) {
-        @content;
-    }
+	@media (min-width: 768px) {
+		@content;
+	}
 }
-
 
 /* Large devices (laptops/desktops, 992px and up) */
-
 @mixin lg {
-    @media (min-width: 992px) {
-        @content;
-    }
+	@media (min-width: 992px) {
+		@content;
+	}
 }
-
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-
 @mixin xlg {
-    @media (min-width: 1200px) {
-        @content;
-    }
+	@media (min-width: 1200px) {
+		@content;
+	}
 }
-
+@mixin xxlg {
+	@media (min-width: 1500px) {
+		@content;
+	}
+}
 .breadcrumb {
     padding: 10px 10px;
     list-style: none;
@@ -116,6 +122,9 @@ $SubText: 18px;
         img {
             width: 100%;
         }
+        @include sm-lesser{
+            width:24rem;
+         }
     }
     .shopDescBio {
         grid-area: shopDescBio;
@@ -126,11 +135,36 @@ $SubText: 18px;
         grid-template-columns: 49% 2% 49%;
         grid-template-rows: auto;
         grid-template-areas: "shopDesc . shopBio";
+        @include sm-lesser {
+            display: grid;
+            grid-template-columns: Auto;
+            grid-template-rows: repeat(2, auto);
+            grid-template-areas: "shopDesc" "shopBio";
+            width: 24rem;
+        }
         @include sm {
             display: grid;
             grid-template-columns: Auto;
             grid-template-rows: repeat(2, auto);
             grid-template-areas: "shopDesc" "shopBio";
+        }
+        @include lg {
+            display: grid;
+            grid-template-columns:  49% 2% 49%;
+            grid-template-rows: auto;
+            grid-template-areas: "shopDesc . shopBio";
+        }
+        @include xlg {
+            display: grid;
+            grid-template-columns:  49% 2% 49%;
+            grid-template-rows: auto;
+            grid-template-areas: "shopDesc . shopBio";
+        }
+        @include xxlg {
+            display: grid;
+            grid-template-columns:  49% 2% 49%;
+            grid-template-rows: auto;
+            grid-template-areas: "shopDesc . shopBio";
         }
         .shopDesc {
             grid-area: shopDesc;
@@ -144,8 +178,50 @@ $SubText: 18px;
             grid-template-rows: auto;
             height: 20rem;
             grid-template-areas: ". shopLogo shopInfo";
+            @include sm-lesser{
+                display: grid;
+                grid-template-rows: auto;
+                grid-template-columns: 7% 24% 62%;
+                grid-template-areas: ". shopLogo shopInfo";    
+                width:24rem;
+                height: auto; 
+            }
+            @include sm{
+                display: grid;
+                grid-template-rows: auto;
+                grid-template-columns: 15% 25% 50%;
+                grid-template-areas: ". shopLogo shopInfo";     
+            }
+            @include lg {
+                display: grid;
+                grid-template-columns: 10% 35% 50%;
+                grid-template-rows: auto;
+                grid-template-areas: ". shopLogo shopInfo";            
+            }
+            @include xlg {
+                display: grid;
+                grid-template-rows: auto;
+                grid-template-columns: 10% 35% 50%;
+                grid-template-areas: ". shopLogo shopInfo";
+            }
+            @include xxlg {
+                display: grid;
+                grid-template-columns: 25% 25% 50%;
+                grid-template-rows: auto;
+                grid-template-areas: ". shopLogo shopInfo";                                                                                
+            }
             .shopLogo {
-                margin-block-start: 43%;
+                margin-block-start: 40%;
+                @include sm-lesser{
+                    margin-block-start: 65%;
+                    font-size: 15px;
+                }
+                @include xlg {
+                    margin-block-start: 30%;
+                }
+                @include lg {
+                    margin-block-start: 30%;
+                }
                 grid-area: shopLogo;
                 img {
                     width: 100%;
@@ -154,11 +230,45 @@ $SubText: 18px;
                     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                     width:auto;
                     border-radius:5px;
+                    @include sm-lesser{
+                        height:5rem;
+                    }
                 }
             }
             .shopInfo {
                 grid-area: shopInfo;
                 margin-block-start: 13%;
+                @include lg{
+                    margin-block-start: 13%
+                }
+                @include xlg {
+
+                    margin-block-start: 13%;
+
+                }
+                @include xxlg {
+
+                    margin-block-start: 10%;
+ 
+                }
+                .onVac{
+                    font-family: Bitter;
+                    font-size: 20px;
+                    color: #ff1d25;
+                    margin-top: 25px;
+                    display: none;
+                }
+                .sellerBtn{
+                    background-color:#efbe24;
+                    color:white;
+                    border-radius:5px; 
+                    border:none;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    &:hover{
+                        cursor:pointer;
+                        background-color: #ddb01d;
+                    }
+                }
                 .shopStarFoll {
                     display: grid;
                     grid-template-rows: auto;
@@ -189,10 +299,16 @@ $SubText: 18px;
                     grid-template-columns: 50% 50%;
                     grid-template-rows: auto;
                     grid-template-areas: "dvFromRfq dvShipsFollow";
+                    @include sm-lesser{
+                        font-size: 15px;
+                    }
                     .dvFromRfq {
                         grid-area: dvFromRfq;
                         .btRfq {
                             // grid-area: btnRfq;
+                            @include sm-lesser{
+                                margin-top:30px;
+                            }
                             width: 70px;
                             margin: auto;
                             border-radius:5px;
@@ -200,11 +316,18 @@ $SubText: 18px;
                             color:white;
                             border:none;
                             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                            &:hover{
+                                cursor:pointer;
+                                background-color: #ddb01d;
+                            }
                         }
                     }
                     .dvShipsFollow {
                         grid-area: dvShipsFollow;
                         .btnFollowShop {
+                            @include sm-lesser{
+                                margin-top:8px;
+                            }
                             width: 135px;
                             margin: auto;
                             border-radius:5px;
@@ -213,6 +336,10 @@ $SubText: 18px;
                             color:white;
                             border:none;
                             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                            &:hover{
+                                cursor:pointer;
+                                background-color: #ddb01d;
+                            }
                             // background-color: #ff1d25;
                         }
                         // img {
@@ -230,30 +357,64 @@ $SubText: 18px;
             background-color: whitesmoke;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             width: auto;
-            border-radius: 10px;
-            // height: max-content;
+            border-radius: 10px;// height: max-content;
             max-height: max-content;
             height: 20rem;
             // padding-bottom: 25px;
+            @include sm-lesser{
+                height:auto;
+                width: 24rem;
+            }
             .bioHeader {
                 margin-block-start: 5%;
                 margin-inline-start: 5%;
                 font-family: BitterBold;
                 font-size: $Header;
+                @include sm-lesser{
+                    font-size: 25px;
+                }
             }
             .bioTxt {
                 margin-inline-end: 10%;
                 margin-inline-start: 5%;
+                @include sm-lesser{
+                    font-size: 16px;
+                }
+            }
+            @include sm-lesser{
+               width:24rem;
             }
         }
-    }
+    }                                                               
     .shopProducts {
         grid-area: shopProducts;
         // background-color: wheat;
+        @include sm-lesser{
+            width:24rem;
+         }
         height: auto;
         // margin-top: 5%;
         .dvCatMain {
             grid-template-columns: repeat(3, 1fr);
+            
+            @include sm-lesser{
+                grid-template-columns: repeat(1, 1fr);
+                display: grid;
+                width: auto;
+                margin: 5%;
+            }
+            @include sm{
+                grid-template-columns: repeat(2, 1fr);
+                display: grid;
+                width: auto;
+                margin: 5%;
+            }
+            @include lg{
+                grid-template-columns: repeat(3, 1fr);
+                display: grid;
+                width: auto;
+                margin: 5%;
+            }
             display: grid;
             width: auto;
             margin: 5%;
@@ -328,6 +489,8 @@ $SubText: 18px;
                     border-radius: 5px;
                     .imgBanner {
                         width: inherit;
+                        height: 20rem;
+                        object-fit: cover;
                     }
                     .dvUndeliver {
                         position: relative;
@@ -428,26 +591,28 @@ $SubText: 18px;
                 }
             }
             .dvCardPrice {
-                grid-template-columns: auto auto auto;
-                // auto
-                grid-template-areas: "p-price ac-price p-offer";
+                // grid-template-columns: auto auto auto;
+                // // auto
+                // grid-template-areas: "p-price ac-price p-offer";
                 // btn-rfq
                 display: grid;
+                grid-template-columns: 23% 43% 33%;
+                grid-template-areas: "p-price ac-price rfqList";
                 p {
                     font-family: BitterBold;
                     font-size: 24px;
                     display: inline;
                 }
-                // @include sm-lesser {
-                // 	p {
-                // 		font-size: 20px;
-                // 	}
-                // }
-                // @include lg {
-                // 	p {
-                // 		font-size: 16px;
-                // 	}
-                // }
+                @include sm-lesser {
+                	p {
+                		font-size: 20px;
+                	}
+                }
+                @include lg {
+                	p {
+                		font-size: 16px;
+                	}
+                }
                 .pPrice {
                     grid-area: p-price;
                 }
@@ -456,33 +621,33 @@ $SubText: 18px;
                     text-decoration: line-through;
                     color: gray;
                 }
-                // @include sm-lesser {
-                // 	.pActualPrice {
-                // 		justify-self: center;
-                // 	}
-                // }
-                // @include lg {
-                // 	.pActualPrice {
-                // 		justify-self: center;
-                // 	}
-                // }
+                @include sm-lesser {
+                	.pActualPrice {
+                		justify-self: center;
+                	}
+                }
+                @include lg {
+                	.pActualPrice {
+                		justify-self: center;
+                	}
+                }
                 .pOffer {
                     grid-area: p-offer;
                     color: green;
                 }
-                // @include sm-lesser {
-                // 	.pOffer {
-                // 		justify-self: end;
-                // 	}
-                // }
-                // @include lg {
-                // 	.pOffer {
-                // 		justify-self: end;
-                // 	}
-                // }
-                .btnRfq{
+                @include sm-lesser {
+                	.pOffer {
+                		justify-self: end;
+                	}
+                }
+                @include lg {
+                	.pOffer {
+                		justify-self: end;
+                	}
+                }
+                .btnRfqList{
+                    grid-area: rfqList;
                     cursor: pointer;
-                    grid-area: btn-rfq;
                     font-family: BitterBold;
                     font-size: 20px;
                     border: none;
@@ -490,21 +655,22 @@ $SubText: 18px;
                     background: red;
                     padding: 5px;
                     color: white;
-                    float: right;
-                    transform: translate(0px,-50px);
+                    // float: right;
+                    // transform: translate(0px,-50px);
+                    
                 }
-                // @include sm-lesser{
-                //     .btnRfq{
-                //         font-size: inherit;
-                //         margin-top: auto;
-                //         margin-bottom: auto;
-                //     }
-                // }
-                // @include lg{
-                //     .btnRfq{
-                //         font-size: 16px;
-                //     }
-                // }
+                @include sm-lesser{
+                    .btnRfqList{
+                        font-size: inherit;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                    }
+                }
+                @include lg{
+                    .btnRfqList{
+                        font-size: 16px;
+                    }
+                }
             }
             // @include sm-lesser {
             // 	.dvCardPrice {
@@ -612,7 +778,7 @@ $SubText: 18px;
                     margin-inline-end: 80px;
 
                 }
-                .coDelivery {
+                .hDelivery {
                     // margin-inline-end: 20px;
                     margin-inline-end: 70px;
 

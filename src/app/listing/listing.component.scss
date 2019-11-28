@@ -3,7 +3,6 @@
 
 $smaYellow: #efbe24;
 $smaLightGray: #f1f1f1;
-$smaGray: #dbdbdb;
 $smaGreen: #009145;
 $smaRed: #ff1d25;
 $smaDarkGray: #333333;
@@ -15,34 +14,22 @@ $Header: 30px;
 $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
-
-
 /* Smaller devices */
-
 @mixin sm-lesser {
-
-    @media (max-width: 600px) {
-
-        @content;
-
-    }
-
+	@media (max-width: 600px) {
+		@content;
+	}
 }
 
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
-
 @mixin sm {
-
-    @media (min-width: 600px) {
-
-        @content;
-
-    }
-
+	@media (min-width: 600px) {
+		@content;
+	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-
 @mixin md {
 
     @media (min-width: 768px) {
@@ -54,7 +41,6 @@ $SubText: 18px;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-
 @mixin lg {
 
     @media (min-width: 992px) {
@@ -66,7 +52,6 @@ $SubText: 18px;
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-
 @mixin xlg {
 
     @media (min-width: 1200px) {
@@ -75,6 +60,11 @@ $SubText: 18px;
 
     }
 
+}
+@mixin xxlg {
+	@media (min-width: 1500px) {
+		@content;
+	}
 }
 
 @mixin xxlg {
@@ -113,14 +103,54 @@ $SubText: 18px;
 }
 
 .divMargin {
-	// margin-left: 10%;
-	// margin-right: 10%;
 	margin: 5%;
 	width: auto;
-	.modal-body {
-		.undeliverableIcon {
-			height: 50px;
-			width: 100px;
+}
+
+.modalWidth{
+	width: auto;
+}
+
+.undelStyle{
+	@include sm-lesser{
+		width: 20rem;
+	}
+	.undelP{
+		margin: 0px;
+		transform: translate(125px,-30px);
+		width: max-content;
+	}
+	.labelStyle{
+		margin-bottom: 15px;
+	}
+	.undeliverableIcon{
+		transform: translate(5px,25px);
+		height: 55px;
+		width: 105px;
+	}
+	.pincodeInput{
+		transform: translate(10%, 0px);
+		width: 85%;
+		border: none;
+		border-radius: 5px;
+		text-align: center;
+		height: 35px;
+		color:#949494;
+	}
+	.undelApply{
+		margin-left: 25%;
+		background-color: #efbe24;
+		color:white;
+		border: none; 
+		border-radius: 5px; 
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		font-family: Bitter;
+	}
+	.undelRadio{
+		width: max-content;
+		transform: translate(50%,5%);	
+		@include sm-lesser{
+			transform: translate(50%, 5%);
 		}
 	}
 }
@@ -130,18 +160,55 @@ $SubText: 18px;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: auto auto;
-	grid-template-areas: "selDesc quanDel" "policy policy" "review review" "question question";
-	// @include sm {
-	// 	// width: auto;
-	// 	display: grid;
-	// 	grid-template-columns: Auto;
-	// 	grid-template-rows: repeat(5, auto);
-	// 	grid-template-areas: "selDesc " "quanDel" "policy" "review" "question";
-	// }
+
+	// grid-template-areas: "selDesc quanDel" "policy policy" "review review" "question question";
+	grid-template-areas: "seller quanDel" "description quanDel" "policy policy" "review review" "question question";
+	@include sm-lesser {
+		// width: auto;
+		display: grid;
+		grid-template-columns: Auto;
+		grid-template-rows: repeat(6, auto);
+		// grid-template-areas: "selDesc " "quanDel" "policy" "review" "question";
+		grid-template-areas: "seller" "quanDel" "description" "policy" "review" "question";
+
+	
+	}
+	@include md {
+		// width: auto;
+		display: grid;
+		grid-template-columns: Auto;
+		grid-template-rows: repeat(6, auto);
+		// grid-template-areas: "selDesc " "quanDel" "policy" "review" "question";
+		grid-template-areas: "seller" "quanDel" "description" "policy" "review" "question";
+
+	
+	}
+	@include lg{
+		display: grid;
+		grid-template-columns: 50% 2% 48%;
+		grid-template-rows: auto auto;
+		grid-template-areas: "seller . quanDel" "description . quanDel" "policy policy policy" "review review review" "question question question";
+	}
+	@include xlg {
+		// width: auto;
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: auto auto;
+		grid-template-areas: "seller quanDel" "description quanDel" "policy policy" "review review" "question question";
+	
+	}
+
+	.disabled{
+		pointer-events: none;
+	  }
 	.headClass {
 		font-family: BitterBold;
 		font-size: $Header;
 		text-align: center;
+		@include sm-lesser{
+			font-size: 20px;
+		}
+
 	}
 	.shipmentDetails {
 		font-family: Bitter;
@@ -155,19 +222,24 @@ $SubText: 18px;
 		font-family: Bitter;
 		font-size: $SubText;
 		color: #646464;
+		@include sm-lesser{
+			font-size: 13px;
+		}
 	}
 	.descD {
 		font-family: BitterBold;
 		font-size: $SubText;
 		color: #333333;
+		@include sm-lesser{
+			font-size: 16px;
+		}
 	}
-	.btnStyle{
+	.btnStyle {
 		background-color: #efbe24;
 		border: none;
 		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 		border-radius: 2px;
-		height:30px;
-		// padding:6px 25px 6px 25px;
+		height: 30px;
 		&:hover {
 			cursor: pointer;
 			background-color: #ddb01d;
@@ -175,237 +247,344 @@ $SubText: 18px;
 		color: white;
 		font-family: BitterBold;
 		font-size: 16px;
+		@include sm-lesser{
+			font-size: 10px;
+			height: 20px;
+		}
 	}
-	.timeStyle{
+	.timeStyle {
 		box-shadow: 0px 6px 10px -4px rgba(0, 0, 0, 0.2);
 		border-radius: 3px;
 		padding: 10px 60px 0px 45px;
 		width: 28rem;
-		background-color:whitesmoke;
+		background-color: whitesmoke;
 		margin-top: 15px;
 		color: #333333;
 		font-family: Bitter;
 		font-size: 18px;
+		@include sm-lesser{
+			font-size: 15px;
+			width: 20rem;
+			text-align: center;
+			padding-bottom: 6px;
+		}
+	}
+	.pCss{
+		font-family: Bitter;
+		font-size: 17px;
+		margin-bottom: 5px;
+		margin-top: 15px;
 	}
 }
 
-.divSelDesc {
-	// margin: 5%;
-	grid-area: selDesc;
+.divSeller {
+	grid-area: seller;
+	position: relative;
+	float: left;
+	box-sizing: border-box;
+	align-self: center;
+	margin: 5% 10% auto 10%;
+	width: auto;
 	display: grid;
-	grid-template-rows: 50% 50%;
-	grid-template-areas: "seller" "description";
-	.divSeller {
-		grid-area: seller;
-		// width: 34%;
-		// overflow: auto;
-		// margin-block-start: 2%;
-		position: relative;
-		// margin-inline-start: 15%;
-		// background-color: rgb(241,241,241);
-		// min-height: 400px;
-		float: left;
-		box-sizing: border-box;
-		align-self: center;
-		margin: 5% 10% auto 10%;
-		width: auto;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas: "sellerDetails " "prodImage" "btnsSel";
+	@include sm-lesser{
+		margin: 0px;
+		width: 23rem;
+	}
+	.sellerDetails {
+		grid-area: sellerDetails;
 		display: grid;
-		grid-template-rows: repeat(3, auto);
-		grid-template-areas: "sellerDetails " "prodImage" "btnsSel";
-		.sellerDetails {
-			grid-area: sellerDetails;
-			display: grid;
-			grid-template-columns: 20% 50% 30%;
+		grid-template-columns: 20% 52% 30%;
+		grid-template-areas: "sellerIcon sellerInfo follow ";
+		@include sm-lesser{
+			grid-template-columns: 8% 51% 1%;			
 			grid-template-areas: "sellerIcon sellerInfo follow ";
-			.sellerIcon {
-				height: 5rem;
-				grid-area: sellerIcon;
-				// margin-inline-start: 4rem;
-				margin-top: 1rem;
-				width: 5rem;
-				position: absolute;
-				top: -5%;
-				z-index: 1;
-				left: 15%;
-				border-radius: 50%;
-				border: 5px solid whitesmoke;
-			}
-			.sellerInfo {
-				grid-area: sellerInfo;
-				width: auto;
-				cursor: pointer;
-				.companyName {
-					margin: 0rem 0rem 0rem 4rem;
-					border-bottom: solid;
-					// border-bottom-style: solid;
-					border-bottom-color: whitesmoke;
-				}
-				.sellerName {
-					margin: 0rem 0rem 0rem 4rem;
-				}
-			}
-			.follow {
-				grid-area: follow;
-				margin: 0.5rem 0rem 0rem 2rem;
-				.btnFollow {
-					width: 95px;
-					z-index: 0;
-					background-color:#ff1d25;
-					padding: 5px 0px 5px 30px;
-					font-size: 14px;
-					color:white;
-					font-family: BitterBold;
-					margin-left: 19px;
-					border: none;
-					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-					border-radius: 2px;
-					height:30px;
-					// padding:6px 25px 6px 25px;
-					&:hover {
-						cursor: pointer;
-						background-color: #ec0e15;
-					}
-				}
-				img {
-					z-index: 1;
-					transform: translate(-25px, 2px);
-					position: absolute;
-					height: 20px;
-				}
+			width: 23rem;		
+		}
+		.sellerIcon {
+			height: 5rem;
+			grid-area: sellerIcon;
+			// margin-inline-start: 4rem;
+			margin-top: 1rem;
+			width: 5rem;
+			position: absolute;
+			top: -5%;
+			z-index: 1;
+			left: 15%;
+			border-radius: 50%;
+			border: 5px solid whitesmoke;
+			@include sm-lesser{
+				height: 4rem;
+				width: 4rem;
+				left: 5%;
 			}
 		}
-		.prodImage {
-			grid-area: prodImage;
-			display: grid;
-			grid-template-columns: 65% 0% 13%;
-			grid-template-areas: "pImage . imageSlider ";
-			.pImage {
-				grid-area: pImage;
-				margin: 1rem auto auto 2rem;
-				// margin:1rem auto auto 0;
-				object-fit: inherit;
-				.productImageLarge {
-					width: 100%;
-					height: 20rem;
-					// clip-path: polygon(16% 6%, 20% 10%, 26% 10%, 30% 6%, 32% 0, 100% 0, 100% 100%, 0 100%, 0 0, 14% 0);
-					margin: -1rem auto auto 1rem;
-					object-fit: inherit;
-					z-index: 0;
-					border: 5px solid whitesmoke;
-				}
-				.bannerProduct {
-					z-index: 1;
-					// transform: translate(auto, -265%);
-					// transform: translate(19rem, -20rem);
-					// transform: translate(-7.5rem, -1rem);
-					position: absolute;
-					// grid-column-end: 3;
-					display: block;
-					// margin-left: auto;
-					// margin-right: auto;
-					margin: -20rem 0rem 0rem 19.25rem;
-					// margin-top: 10%;
-				}
+		.sellerInfo {
+			grid-area: sellerInfo;
+			width: auto;
+			font-family: Bitter;
+			font-size: $SubText;
+			cursor: pointer;
+			@include sm-lesser{
+				font-size: 10px;
+				margin-top: 10px;
 			}
-			.imageSlider {
-				grid-area: imageSLider;
-				margin: 0rem auto auto 1rem;
-				// margin:1rem auto auto 0;
-				max-height: 20rem;
-				grid-row-start: -2;
-				grid-row-end: -1;
-				width: auto;
-				height: auto;
-				object-fit: fill;
-				overflow-y: scroll;
-				grid-column-start: imageSlider-end;
-				grid-column-end: auto;
-				scrollbar-width: thin;
-				display: grid;
-				grid-template-rows: auto;
-				margin-left: 5px;
-				.smallImage {
-					height: 6rem;
-					// width: 5rem;
-					padding-bottom: 0.5rem;
-				}
+			.companyName {
+				margin: 0rem 0rem 0rem 4rem;
+				border-bottom: solid;
+				// border-bottom-style: solid;
+				border-bottom-color: whitesmoke;
+			}
+			.sellerName {
+				margin: 0rem 0rem 0rem 4rem;
 			}
 		}
-		.btnsSel {
-			grid-area: btnsSel;
-			display: grid;
-			grid-template-columns: 30% 40% 30%;
-			grid-template-areas: "btnRfq . btnAtcart ";
-			.btnRfq {
-				grid-area: btnRfq;
-				width: 110px;
-				// margin: auto;
-				// background-color: #efbe24;
-				margin: 10px 50px;
+		.follow {
+			grid-area: follow;
+			margin: 0.5rem 0rem 0rem 2rem;
+			@include sm-lesser{
+				margin: 0.5rem 0rem 10px 2rem;
+			}
+			.btnUnFollow{
+				width: 115px;
+				z-index: 0;
+				background-color: #ff1d25;
+				padding: 5px 0px 5px 30px;
+				font-size: 14px;
+				color: white;
+				font-family: BitterBold;
+				margin-left: 19px;
+				border: none;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				border-radius: 2px;
 				height: 30px;
+				// padding:6px 25px 6px 25px;
+				&:hover {
+					cursor: pointer;
+					background-color: #ec0e15;
+				}
+				@include sm-lesser{
+					width: 80px;
+					font-size: 10px;
+					margin-left: 22px;
+					height: 25px;
+					padding: 4px 2px 3px 25px;
+				}
 			}
-			.btnAtcart {
-				grid-area: btnAtcart;
-				width: 130px;
-				margin: 10px 15px;
-				// background-color: #efbe24;
+			.btnFollow {
+				width: 95px;
+				z-index: 0;
+				background-color: #ff1d25;
+				padding: 5px 0px 5px 30px;
+				font-size: 14px;
+				color: white;
+				font-family: BitterBold;
+				margin-left: 19px;
+				border: none;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				border-radius: 2px;
+				height: 30px;
+				// padding:6px 25px 6px 25px;
+				&:hover {
+					cursor: pointer;
+					background-color: #ec0e15;
+				}
+				@include sm-lesser{
+					width: 80px;
+					font-size: 10px;
+					margin-left: 22px;
+					height: 25px;
+					padding: 4px 2px 3px 25px;
+				}
+			}
+			img {
+				z-index: 1;
+				transform: translate(-25px, 2px);
+				position: absolute;
+				height: 20px;
+				@include sm-lesser{
+					transform: translate(-24px, -3px);
+				}
 			}
 		}
 	}
-	.divDescription {
-		grid-area: description;
-		// width: 34%;
-		// margin-inline-start: 15%;
-		// margin-block-start: 5%;
-		overflow: auto;
-		// margin-block-end: 2%;
-		height: auto;
-		// min-height: 400px;
-		background-color: rgb(241, 241, 241);
-		float: left;
-		box-sizing: border-box;
-		align-self: center;
-		margin: 5% 10% 5% 10%;
-		scrollbar-width: thin;
-		width: auto;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		border-radius: 3px;
-		.desc {
-			margin: 1rem auto auto 2rem;
-			width: 28rem;
-			ul {
-				list-style: disc;
-				margin-left: -35px;
-				color: lightgray;
-			}
+	.prodImage {
+		grid-area: prodImage;
+		display: grid;
+		// grid-template-columns: 65% 0% 13%;
+		grid-template-columns: 67% 7% 20%;
+		margin-left: 2rem;
+		grid-template-areas: "pImage . imageSlider ";
+		@include sm-lesser{
+			grid-template-columns: 72% 1% 24%;
+			margin-left: 0px;
+			width: 23rem;
+		}
 
-			// ul li::before {
-			// 	content: "\f111";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-			// 	color: #646464; /* Change the color */
-			// 	font-weight: bold; /* If you want it to be bold */
-			// 	display: inline-block; /* Needed to add space between the bullet and the text */
-			// 	width: 1em; /* Also needed for space (tweak if needed) */
-			// 	margin-left: -1em; /* Also needed for space (tweak if needed) */
-			// }
-			.longD {
-				#lDesc {
-					height: 6rem;
-					display: -webkit-box;
-					-webkit-line-clamp: initial;
-					overflow: hidden;
+		.pImage {
+			grid-area: pImage;
+			margin: 1rem auto auto 2rem;
+			// margin:1rem auto auto 0;
+			object-fit: inherit;
+			margin-top: 1rem;
+			margin-left: -1rem;
+			display: grid;
+			grid-template-rows: auto;
+			grid-template-columns: 99% 1%;
+			grid-template-areas:"productImageLarge bannerProduct";
+			.productImageLarge {
+				grid-area:productImageLarge;
+				width: 100%;
+				height: 20rem;
+				// clip-path: polygon(16% 6%, 20% 10%, 26% 10%, 30% 6%, 32% 0, 100% 0, 100% 100%, 0 100%, 0 0, 14% 0);
+				margin: -1rem auto auto 1rem;
+				object-fit: inherit;
+				z-index: 0;
+				border: 5px solid whitesmoke;
+				@include sm-lesser{
+					height: 15rem;				
 				}
+			}
+			.bannerProduct {
+				grid-area:bannerProduct;
+				z-index: 1;
+				transform: translateX(-7rem);
+				margin-top: -1rem;
+				@include sm-lesser{
+					transform: translateX(-4rem);
+					margin-top: -1rem;
+					height: 5rem;
+					width: 5rem;		
+				}
+			}
+		}
+		.imageSlider {
+			grid-area: imageSlider;
+			margin: 0rem auto auto 1rem;
+			// margin:1rem auto auto 0;
+			max-height: 20rem;
+			grid-row-start: -2;
+			grid-row-end: -1;
+			width: 7rem;
+			height: 20rem;
+			object-fit: fill;
+			overflow-y: scroll;
+			grid-column-start: imageSlider-start;
+			grid-column-end: auto;
+			scrollbar-width: thin;
+			display: grid;
+			grid-template-rows: auto;
+			margin-left: 5px;
+			@include sm-lesser{
+				height: 15rem;		
+				width: auto;		
+			}
+			.smallImage {
+				height: 6rem;
+				width: inherit;
+				padding-bottom: 0.5rem;
+			}
+		}
+	}
+	.btnsSel {
+		grid-area: btnsSel;
+		display: grid;
+		grid-template-columns: 30% 19% 50%;
+		grid-template-areas: "btnRfq . btnAtcart ";
+		@include sm-lesser{
+			grid-template-columns: 10% 4% 0%;
+			width: 23rem;
+		}
+		.btnRfq {
+			grid-area: btnRfq;
+			width: 110px;
+			// margin: auto;
+			// background-color: #efbe24;
+			margin: 10px 50px;
+			height: 30px;
+			@include sm-lesser{
+				width: 85px;
+				margin: 10px 5px;
+				height: 20px;		
+				font-size: 10px;
+			}
+		}
+		.btnAtcart {
+			grid-area: btnAtcart;
+			width: 130px;
+			margin: 10px 15px;
+			// background-color: #efbe24;
+			@include sm-lesser{
+				width: 85px;
+				margin: 10px 0px 10px 8rem;
+				height: 20px;
+				font-size: 10px;
 			}
 		}
 	}
 }
+.divDescription {
+	grid-area: description;
+	overflow: auto;
+	height: auto;
+	background-color: rgb(241, 241, 241);
+	float: left;
+	box-sizing: border-box;
+	align-self: center;
+	margin: 5% 10% 5% 10%;
+	scrollbar-width: thin;
+	width: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	@include sm-lesser{
+		overflow-Y: auto;
+		// margin: -51% 1% 5% 1%;
+		margin: -51% 1% 5% 5%;
+		overflow-x: -moz-hidden-unscrollable;
+		width: 20rem;
+	}
+	.desc {
+		margin: 1rem auto auto 2rem;
+		width: 28rem;
+		padding-bottom: 20px;
+		@include sm-lesser{
+			margin: 1rem auto auto 1rem;
+			width: 16rem;
+		}
+		ul {
+			list-style: disc;
+			margin-left: -35px;
+			color: lightgray;
+		}
 
+		// ul li::before {
+		// 	content: "\f111";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+		// 	color: #646464; /* Change the color */
+		// 	font-weight: bold; /* If you want it to be bold */
+		// 	display: inline-block; /* Needed to add space between the bullet and the text */
+		// 	width: 1em; /* Also needed for space (tweak if needed) */
+		// 	margin-left: -1em; /* Also needed for space (tweak if needed) */
+		// }
+		.longD {
+			#lDesc {
+				height: 6rem;
+				display: -webkit-box;
+				-webkit-line-clamp: initial;
+				overflow: hidden;
+			}
+			.btnStyle{
+				margin-top: 15px;
+			}
+		}
+	}
+}
 .divQuanDel {
 	grid-area: quanDel;
 	height: auto;
 	min-height: 800px;
 	box-sizing: border-box;
 	align-self: center;
-	margin: 5% 10% auto 10%;
 	width: auto;
 	display: grid;
 	grid-template-columns: auto auto;
@@ -425,21 +604,112 @@ $SubText: 18px;
 		"pCourier pCourier"
 		"pTime pTime"
 		"pDate pDate";
+		margin: 5% 10% auto 10%;
+		@include sm-lesser{
+			margin: 5% 7% 50% 6%;
+			grid-template-columns: 45% 23%;
+			width: 21rem;
+			margin: auto;
+			margin-bottom: 50%;
+			.pCss{
+				font-size: 15px;
+			}
+		}
+		@include lg{
+			margin:0px;
+		}
 
 	.pName {
 		grid-area: pName;
+		.pNames{
+			font-family: BitterBold;
+			font-size: $Header;
+			@include sm-lesser{
+				font-size:20px;
+			}
+		}
+		.pShortDesc{
+			font-family: Bitter;
+			font-size: $SubText;
+			color:#949494;
+			@include sm-lesser{
+				font-size:15px;
+			}
+		}
 	}
 	.pRating {
 		grid-area: pRating;
 	}
 	.pDiscount {
 		grid-area: pDiscount;
+			font-family: Bitter;
+			font-size: $SubText;
+			@include sm-lesser{
+				font-size:15px;
+			}
 	}
 	.pSize {
 		grid-area: pSize;
+		.drop{
+			width: 28rem;
+			height: 40px;
+			font-family: Bitter;
+			font-size: 16px;
+			padding-left: 25px;
+			@include sm-lesser{
+				width: 15rem;
+				font-size: 12px;
+				height: 30px;
+			}
+		}
 	}
 	.pQuantity {
 		grid-area: pQuantity;
+		#productQuantity{
+			height: 39px;
+			border: 1px #efbe24 solid;
+			text-align: center;
+			width: 75px;
+			font-family: Bitter;
+			font-size: 16px;
+			@include sm-lesser{
+				height: 30px;
+				width: 60px;
+				font-size: 13px;
+				transform: translate(0px,-2px);
+			}
+		}
+		.plus{
+			height: 40px;
+			width: 40px;
+			border: none;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			font-family: Bitter;
+			font-size: 20px;
+			color:white;
+			background-color:#efbe24;
+			@include sm-lesser{
+				height: 30px;
+				width: 25px;
+			}
+		}
+		.minus{
+			height: 40px;
+			width: 40px;
+			border: none;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			font-family: Bitter;
+			font-size: 20px;
+			color:white;
+			background-color:#efbe24;	
+			@include sm-lesser{
+				height: 30px;
+				width: 25px;
+			}
+		}
+
 	}
 	.pAvailable {
 		grid-area: pAvailable;
@@ -451,15 +721,56 @@ $SubText: 18px;
 	}
 	.pImages {
 		grid-area: pImages;
+		.uploadImgContParent{
+			overflow-x: scroll;
+			width: 28rem;
+			display: inline-flex;
+			scrollbar-width: thin;
+			.uploadImgCont{
+				width: max-content;
+				padding-right: 5px;
+				.imgUpl{
+					@include sm-lesser{
+						height: 60px;
+					}
+				}
+			}
+			@include sm-lesser{
+				width: 18rem;
+			}
+		}
+		.btnStyle{
+			height: 25px;
+		}
+
 	}
 	.pdatePicker {
 		grid-area: pdatePicker;
 		margin: 5px;
+		font-family: Bitter;
+		font-size: $SubText;
+		margin: 1rem 0px 1rem 0px;
+		@include sm-lesser{
+			font-size: 15px;
+		}
+		#datePickerId{
+			border: 1px #efbe24 solid;
+		}
 	}
 	.pButton {
 		grid-area: pButton;
 		margin: 5px;
-
+		width: auto;
+		@include sm-lesser{
+			margin: 0px;
+		}
+		.vacClass{
+			display: ruby;
+			font-size: 20px;
+			font-family: Bitter;
+			color: #ff1d25;
+			margin-bottom: -2rem;
+		}
 		form {
 			background-color: whitesmoke;
 			#fText {
@@ -490,9 +801,38 @@ $SubText: 18px;
 		grid-template-areas: "dvBuyBtn dvGiftBtn";
 		.dvBuyBtn {
 			grid-area: dvBuyBtn;
+			.btM{
+				width: 120px;
+				height: 35px;
+				margin-left: -5px;
+				margin-bottom: 15px;
+			}			
+			.btMR{
+				width: 160px; 
+				height: 35px;
+				margin-left: -5px;
+				margin-bottom: 15px;
+			}
+
+			@include sm-lesser{
+				.btM{
+					width: 80px;
+					height: 25px;
+					// margin-left: -40px;
+				}
+			}
 		}
 		.dvGiftBtn {
 			grid-area: dvGiftBtn;
+			.btM{
+				height: 35px;
+				margin-left: 45px;
+			}			
+			@include sm-lesser{
+				.btM{
+					height: 25px;
+				}
+			}
 		}
 	}
 	.pConfirmation {
@@ -501,28 +841,21 @@ $SubText: 18px;
 		border-radius: 3px;
 		padding: 10px 60px 0px 45px;
 		width: 28rem;
-		.orderConf{
-			display:inline;
+		.orderConf {
+			display: inline;
 		}
-		.confTime{
-			background-color:
-			white;
+		.confTime {
+			background-color: white;
 			height: 25px;
 			width: 50px;
 			display: inline-block;
 			text-align: center;
-			font-family:BitterBold;
+			font-family: BitterBold;
 		}
 	}
 	.pDelivery {
 		grid-area: pDelivery;
 		img {
-			// display: block;
-			// margin-left: auto;
-			// margin-right: auto;
-			// width: 300px;
-			// z-index: 0;
-			// transform: translate(-10rem, 2.75rem);
 			display: block;
 			margin-left: 10rem;
 			margin-right: auto;
@@ -530,6 +863,10 @@ $SubText: 18px;
 			z-index: 0;
 			-webkit-transform: translate(-10rem, 2.75rem);
 			transform: translate(-9.75rem, 3rem);
+			@include sm-lesser{
+				width: 215px;
+				transform: translate(-10rem, 2rem);
+			}
 		}
 	}
 	.pCourier {
@@ -537,6 +874,11 @@ $SubText: 18px;
 		display: grid;
 		grid-template-columns: 30% 30% 30%;
 		grid-template-areas: "dvShip dvCod dvPickup";
+		@include sm-lesser{
+			grid-template-columns: 36% 54% 27%;
+			margin-top: 1rem;
+			font-size: 13px;
+		}
 		.dvShip {
 			grid-area: dvShip;
 		}
@@ -554,7 +896,6 @@ $SubText: 18px;
 		grid-area: pDate;
 	}
 }
-
 .divPolicy {
 	grid-area: policy;
 	margin-top: 5%;
@@ -562,14 +903,11 @@ $SubText: 18px;
 	height: auto;
 	background-color: rgb(241, 241, 241);
 	box-sizing: border-box;
-	// width: 100vw;
-	// position: relative;
-	// left: 50%;
-	// right: 50%;
-	// margin-left: -50.5vw;
-	// margin-right: -50.5vw;
+	@include sm-lesser{
+		width: 23.25rem;
+	}
+
 	.prodPolicy {
-		// margin: 0rem 1rem 5rem 1rem;
 		img {
 			display: block;
 			margin-left: auto;
@@ -577,10 +915,13 @@ $SubText: 18px;
 			width: 300px;
 			z-index: 0;
 			transform: translate(0rem, 3rem);
+			@include sm-lesser{
+				width: 200px;			
+				transform: translate(0rem, 2rem);
+			}
 		}
 		h2 {
 			text-align: center;
-			//   position: absolute;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
 		}
@@ -590,7 +931,6 @@ $SubText: 18px;
 		}
 	}
 	.shopPolicy {
-		// margin: 0rem 1rem 5rem 1rem;
 		img {
 			display: block;
 			margin-left: auto;
@@ -598,11 +938,13 @@ $SubText: 18px;
 			width: 300px;
 			transform: translate(0rem, 3rem);
 			z-index: 0;
-			// position: absolute;
+			@include sm-lesser{
+				width: 200px;			
+				transform: translate(0rem, 2rem);
+			}
 		}
 		h2 {
 			text-align: center;
-			//   position: absolute;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
 		}
@@ -612,7 +954,6 @@ $SubText: 18px;
 		}
 	}
 	.shipPolicy {
-		// margin: 0rem 1rem 5rem 1rem;
 		img {
 			display: block;
 			margin-left: auto;
@@ -620,11 +961,13 @@ $SubText: 18px;
 			width: 300px;
 			transform: translate(0rem, 3rem);
 			z-index: 0;
-			// position: absolute;
+			@include sm-lesser{
+				width: 200px;			
+				transform: translate(0rem, 2rem);
+			}
 		}
 		h2 {
 			text-align: center;
-			//   position: absolute;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
 		}
@@ -633,9 +976,7 @@ $SubText: 18px;
 			text-align: center;
 		}
 	}
-
 	.retPolicy {
-		// margin: 0rem 1rem 5rem 1rem;
 		img {
 			display: block;
 			margin-left: auto;
@@ -643,11 +984,13 @@ $SubText: 18px;
 			width: 300px;
 			transform: translate(0rem, 3rem);
 			z-index: 0;
-			// position: absolute;
+			@include sm-lesser{
+				width: 200px;			
+				transform: translate(0rem, 2rem);
+			}
 		}
 		h2 {
 			text-align: center;
-			//   position: absolute;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
 		}
@@ -659,12 +1002,13 @@ $SubText: 18px;
 }
 .divReview {
 	grid-area: review;
-	// background-color: whitesmoke;
 	width: 100%;
 	height: auto;
 	font-weight: 300px;
-	// margin-top: 5%;
-	// margin-bottom: 5%
+	@include sm-lesser{
+		width: 23rem;
+		margin-left: 5px;
+	}
 	img {
 		display: block;
 		margin-left: auto;
@@ -672,45 +1016,49 @@ $SubText: 18px;
 		width: 300px;
 		transform: translate(0rem, 3rem);
 		z-index: 0;
+		@include sm-lesser{
+			width: 200px;
+			transform: translate(0rem, 2rem);	
+		}
 	}
 	h2 {
 		text-align: center;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
 	}
-	.reviewTop {
-		// background-image: linear-gradient(white, whitesmoke);
-	}
+	// .reviewTop {
+	// 	// background-image: linear-gradient(white, whitesmoke);
+	// }
 	.rating {
 		grid-area: rating;
 		width: 30rem;
 		margin: 0 auto;
 		margin-top: 2em;
-		// background-color: white;
 		padding: 4px;
 		margin-bottom: 2em;
+		@include sm-lesser{
+			width: 23rem;
+		}
 		.inner {
-			// padding: 1em;
-			// background-color: white;
-			// overflow: hidden;
-			// position: relative;
-			// -webkit-border-radius: 4px;
-			// -moz-border-radius: 4px;
-			// border-radius: 4px;
 			padding: 1em;
 			background-color: whitesmoke;
 			overflow: hidden;
 			width: 30rem;
 			height: 15rem;
 			border-radius: 15px;
+			@include sm-lesser{
+				width: 22.5rem;
+			}
 		}
 		.rating {
 			float: left;
 			width: 50%;
-			// margin-right: 5%;
 			text-align: center;
 			background-color: transparent;
 			border-right: 2px solid #dbdbdb;
+			@include sm-lesser{
+				width: 33%;
+			}
 		}
 
 		.rating-num {
@@ -732,8 +1080,8 @@ $SubText: 18px;
 
 		.rating-users {
 			font-size: 16px;
-			.icon-user {
-			}
+			// .icon-user {
+			// }
 		}
 
 		.histo {
@@ -742,6 +1090,9 @@ $SubText: 18px;
 			font-size: 13px;
 			transform: translate(0px, 34px);
 			margin-left: 20px;
+			@include sm-lesser{
+				width: 60%;
+			}
 		}
 
 		.histo-star {
@@ -796,56 +1147,61 @@ $SubText: 18px;
 		}
 	}
 	.review {
-		// margin: 0% 5% 0% 5%;
-		// margin-top: 50px;
-		// margin-bottom: 50px;
 		background-color: white;
 		grid-area: revData;
 		display: grid;
 		padding-bottom: 20px;
 		grid-template-columns: 10% 12% 12% 55%;
-		// border-bottom: 2px lightgray solid;
 		grid-template-rows: 5% 95%;
-		// padding-bottom: 3.5rem;
 		padding-top: 50px;
 		grid-template-areas: ". revProfIcon revName revData ";
+		@include sm-lesser{
+			grid-template-columns: 9% 12% 12% 55%;
+			padding-top: 30px;
+			margin: auto;
+		}
 		.revProfIcon {
 			grid-area: revProfIcon;
-			// border-bottom: 2px lightgray solid;
 			border-top: 2px lightgray solid;
-			// padding-bottom: 10rem;
 			padding-top: 30px;
+			@include sm-lesser{
+				padding-top: 23px;
+			}
 			.revProfImg {
 				height: 90px;
 				width: 90px;
 				transform: translate(0px, 10px);
+				@include sm-lesser{
+					height: 40px;
+					width: 40px;
+				}
 			}
 		}
 		.revName {
-			// margin-top: 1%;
 			grid-area: revName;
-			// border-bottom: 2px lightgray solid;
-			// padding-bottom: 12.5rem;
 			border-top: 2px lightgray solid;
-			// padding-bottom: 10rem;
 			padding-top: 30px;
 			.rName {
 				grid-area: rName;
 				font-family: BitterBold;
 				font-size: 16px;
+				@include sm-lesser{
+					font-size: 10px;
+					margin-bottom: 0.5rem;
+				}
 			}
 			.rAgo {
 				grid-area: rAgo;
 				font-family: Bitter;
 				font-size: 13px;
 				color: #949494;
+				@include sm-lesser{
+					font-size: 7px;
+				}
 			}
 		}
 		.revData {
-			// margin-top: 1%;
-			// border-bottom: 2px lightgray solid;
 			border-top: 2px lightgray solid;
-			// padding-bottom: 10rem;
 			padding-top: 30px;
 			grid-area: revData;
 			grid-template-columns: auto;
@@ -859,12 +1215,19 @@ $SubText: 18px;
 				grid-area: rTitle;
 				font-family: BitterBold;
 				font-size: 16px;
+				@include sm-lesser{
+					font-size: 10px;
+					margin-bottom: .5rem;
+				}
 			}
 			.rDesc {
 				grid-area: rDesc;
 				font-family: Bitter;
 				font-size: 14px;
 				color: #949494;
+				@include sm-lesser{
+					font-size: 9px;
+				}
 			}
 			.starLikes {
 				display: grid;
@@ -872,6 +1235,9 @@ $SubText: 18px;
 				grid-template-rows: auto auto;
 				grid-template-areas: "icLike likeCount icDislike dislikeCount btnReport ";
 				grid-area: starLikes;
+				@include sm-lesser{
+					grid-template-columns: 25px 5px 30px 25px 50px auto;
+				}
 				.icLike {
 					grid-area: icLike;
 					width: 30px;
@@ -879,11 +1245,18 @@ $SubText: 18px;
 					transform: translate(0px, 0px);
 					&:hover {
 						cursor: pointer;
+					}				
+					@include sm-lesser{
+						width: 15px;
+						height: 15px;
 					}
 				}
 				.likeCount {
 					grid-area: likeCount;
-					transform: translate(0px, 0px);
+					transform: translate(0px, 0px);					
+					@include sm-lesser{
+						font-size: 10px;
+					}
 				}
 				.icDislike {
 					grid-area: icDislike;
@@ -893,10 +1266,17 @@ $SubText: 18px;
 					&:hover {
 						cursor: pointer;
 					}
+					@include sm-lesser{
+						width: 15px;
+						height: 15px;
+					}
 				}
 				.dislikeCount {
 					grid-area: dislikeCount;
 					transform: translate(0px, 0px);
+					@include sm-lesser{
+						font-size: 10px;
+					}
 				}
 				.btnReport {
 					grid-area: btnReport;
@@ -906,6 +1286,15 @@ $SubText: 18px;
 					&:hover {
 						cursor: pointer;
 					}
+					@include sm-lesser{
+						font-size: 10px;
+					}
+				}
+				.revSt{
+					@include sm-lesser{
+						margin-top: -7px;
+						font-size: 13px;
+					}
 				}
 			}
 			.revIcon {
@@ -913,18 +1302,26 @@ $SubText: 18px;
 				width: 100px;
 				height: 100px;
 				float: left;
+				@include sm-lesser{
+					width: 50px;
+					height: 50px;
+					margin-top: -2.5rem;
+				}
 			}
 		}
 	}
 }
-
 .divQuestion {
 	margin: 5% 5% auto 5%;
 	width: Auto;
 	grid-area: question;
-	height: 300px;
+	height: auto;
 	margin-block-end: 5%;
 	box-sizing: border-box;
+	@include sm-lesser{
+		margin: 5% 0% auto 2%;
+		width: 22.75rem;
+	}
 	img {
 		display: block;
 		margin-left: auto;
@@ -933,11 +1330,22 @@ $SubText: 18px;
 		height: 50px;
 		z-index: 0;
 		transform: translate(0rem, 2rem);
+		@include sm-lesser{
+			width: 22.5rem;
+			margin-left: 0px;
+			margin-right: 0px;		
+		}
 	}
 	p {
 		text-align: center;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+	}
+	.headClass{
+		@include sm-lesser{
+			font-size: 19px;
+			text-align: center;
+		}
 	}
 	.divCustomerQA {
 		display: grid;
@@ -951,9 +1359,21 @@ $SubText: 18px;
 		.divSA {
 			grid-area: divSA;
 			display: grid;
-			grid-template-columns: 5% 45% 45% 5%;
 			grid-template-rows: auto;
 			grid-template-areas: ". search askQ .";
+			@include sm-lesser{
+				grid-template-areas: "search askQ";
+			}
+			@include lg{
+				grid-template-columns: 3% 48% 53% 0%;
+			}
+			@include xlg{
+				grid-template-columns: 3% 45% 51% 3%;
+			}
+			@include xxlg{
+				grid-template-columns: 5% 45% 45% 5%;
+			}
+
 			.search {
 				grid-area: search;
 				.searchBox {
@@ -964,19 +1384,27 @@ $SubText: 18px;
 					border: none;
 					height: 40px;
 					padding-left: 20px;
+					@include sm-lesser{
+						width: 6rem;
+						height: 25px;
+						font-size: 10px;
+					}
+					@include lg{
+						width: 23rem;
+					}
+					@include xlg{
+						width: 27rem;
+					}
 				}
 				button {
 					background-color: #dbdbdb;
 					border: none;
 					height: 40px;
 					border: none;
-					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-					// border-radius: 5px;
-					// // padding:6px 25px 6px 25px;
-					// &:hover{
-					// 	cursor: pointer;
-					// 	background-color: #ddb01d;
-					// }
+					@include sm-lesser{
+						transform: translate(0rem,0px);
+						height: 25px;
+					}
 					&:hover {
 						cursor: pointer;
 						background-color: #cfcfcf;
@@ -985,6 +1413,9 @@ $SubText: 18px;
 						height: 25px;
 						width: 20px;
 						transform: translate(0rem, 0rem);
+						@include sm-lesser{
+							height: 20px;
+						}
 					}
 				}
 			}
@@ -997,32 +1428,59 @@ $SubText: 18px;
 					border: none;
 					height: 40px;
 					padding-left: 20px;
+					@include sm-lesser{
+						width: 7rem;
+						height: 25px;
+						font-size: 10px;
+					}
+					@include lg{
+						width: 23rem;
+					}
+					@include xlg{
+						width: 26rem;
+					}
 				}
 				button {
 					background-color: #efbe24;
 					color: white;
 					border: none;
-					// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-					// border-radius: 5px;
-					// // padding:6px 25px 6px 25px;
+					@include sm-lesser{
+						height: 25px;
+						transform: translate(0rem,0px);
+						font-size: 10px;
+					}
 					&:hover {
 						cursor: pointer;
 						background-color: #ddb01d;
 					}
-					// border: none;
 					height: 40px;
-					// &:hover {
-					// 	cursor: pointer;
-					// 	background-color: #dba716;
-					// }
 				}
 			}
 		}
 		.questionAnswer {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			margin: 0px 40px 0px 40px;
 			width: auto;
+			@include sm-lesser{
+				font-size: 10px;
+			}
+			@include lg{
+				margin: 0px -30px 0px 5px;
+			}
+			@include xlg{
+				margin: 0px 40px 0px 10px;
+			}
+			@include xxlg{
+				margin: 0px 40px 0px 40px;
+			}
+
+			.noFaq{
+				display:none;
+				font-family:Bitter;
+				font-size: 24px;
+				// justify-self: center;
+				transform: translate(50% ,50%);
+			}
 			.divQA {
 				// grid-area: divQA;
 				// height: auto;
@@ -1036,19 +1494,32 @@ $SubText: 18px;
 					margin-left: 10%;
 					.question {
 						color: #333333;
+						display: block;
 					}
 					.answer {
 						margin-top: 10px;
 						color: #949494;
+						display: block;
 					}
 				}
 			}
 		}
 	}
 	.dvMore {
+		@include sm-lesser{
+			transform: translate(10rem,-2rem);
+			width: max-content;
+		}
 		img {
 			height: 50px;
 			width: 50px;
+			@include sm-lesser{
+				height: 25px;
+				width: 25px;
+			}
+			@include sm{
+				transform: translate(0px,0px);
+			}
 		}
 		&:hover {
 			cursor: pointer;
@@ -1177,20 +1648,202 @@ $SubText: 18px;
 }
 
 .rfqForm {
-	/* Dropdown Button */
-	// .dropBtnRfq {
-	// 	background-color: #4caf50;
-	// 	color: white;
-	// 	padding: 16px;
-	// 	font-size: 16px;
-	// 	border: none;
-	// 	cursor: pointer;
-	// }
-	/* Dropdown button on hover & focus */
-	// .dropBtnRfq:hover,
-	// .dropBtnRfq:focus {
-	// 	background-color: #3e8e41;
-	// }
+	font-family: Bitter;
+	font-size: 16px;
+	margin-top: 2rem;
+	display: grid;
+	padding-bottom: 25%;
+	grid-template-columns: auto;
+	grid-row-gap: 5%;
+	grid-template-rows: repeat(7, auto);
+	grid-template-areas:
+		"rfqSN"
+		"rfqSL"
+		"rfqN"
+		"rfqTag"
+		"chips"
+		"upload"
+		"btnRfq";
+		@include sm-lesser{
+			font-size: 12px;
+		}
+	.rfqSN {
+		grid-area: rfqSN;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: repeat(2,auto);
+		grid-template-areas: "rfqShopName" "rfqShopNameInput";
+		@include sm-lesser{
+			width: 18rem;		
+		}
+		.rfqShopName {
+			grid-area: rfqShopName;
+		}
+		.rfqShopNameInput {
+			grid-area: rfqShopNameInput;
+			border: none;
+			border-radius: 5px;
+			background-color:#dbdbdb;
+			padding: 6px;
+			@include sm-lesser{
+				padding: 4px;
+			}
+		}
+	}
+	.rfqSL {
+		grid-area: rfqSL;
+		display: grid;
+		grid-template-columns: 20% auto;
+		grid-template-rows: auto;
+		grid-template-areas: "rfqLocation rfqLocationInput";
+		@include sm-lesser{
+			width: 18rem;		
+		}
+		.rfqLocation {
+			grid-area: rfqLocation;
+		}
+		.rfqLocationInput {
+			grid-area: rfqLocationInput;			
+			border: none;
+			border-radius: 5px;
+			padding: 6px;
+			background-color:#dbdbdb;
+		}
+		.rfqL{
+			width: 20rem;
+			background-color: #dbdbdb;
+			border:none;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			@include sm-lesser{
+				width: 14.5rem;	
+				height: 25px;	
+			}
+		}
+	}
+	.rfqN {
+		grid-area: rfqN;
+		display: grid;
+		// grid-template-columns: 35% auto;
+		// grid-template-rows: auto;		
+		grid-template-columns: auto;
+		grid-template-rows: repeat(2,auto);
+		grid-template-areas: "rfqNote" "rfqNoteInput";
+		.rfqNote {
+			grid-area: rfqNote;
+		}
+		.rfqNoteInput {
+			grid-area: rfqNoteInput;
+			border: none;
+			border-radius: 5px;
+			background-color:#dbdbdb;
+			padding: 6px;
+		}
+	}
+	.rfqTag {
+		grid-area: rfqTag;
+		display: grid;
+		// grid-template-columns: 35% auto;
+		// grid-template-rows: auto;
+		grid-template-columns: auto;
+		grid-template-rows: repeat(2,auto);
+		grid-template-areas: "dropBtnRfq" "dropdownRfq";
+
+		.dropBtnRfq {
+			grid-area: dropBtnRfq;
+		}
+		.dropdownRfq {
+			grid-area: dropdownRfq;
+		}
+		#myInput{
+			border: none;
+			background-color:#dbdbdb;
+			border-radius: 5px;
+			padding: 5px;
+			@include sm-lesser{
+				padding: 3px;
+				font-size: 13px;
+			}
+		}
+	}
+	.chips {
+		grid-area: chips;
+		display: flex;
+		overflow-x: scroll;
+		scrollbar-width: thin;
+		.chipsOuter {
+			margin: 5px;
+			.chip {
+				display: inline-block;
+				padding: 0 25px;
+				height: auto;
+				font-size: 16px;
+				width: max-content;
+				line-height: auto;
+				border-radius: 25px;
+				background-color: #efbe24;
+				color: white;
+				@include sm-lesser{
+					padding: 5px 12px 0px 12px;
+					font-size: 13px;
+				}
+			}
+
+			.closebtn {
+				padding-left: 10px;
+				color: #888;
+				font-weight: bold;
+				float: right;
+				font-size: 20px;
+				margin-top: -4px;
+				cursor: pointer;
+			}
+
+			.closebtn:hover {
+				color: #000;
+			}
+		}
+	}
+	.uploadRfq {
+		grid-area: upload;
+		.uploadImgContParent{
+			overflow-x: scroll;
+			width: 25rem;
+			display: inline-flex;
+			scrollbar-width: thin;
+			.uploadImgCont{
+				width: max-content;
+				padding-right: 5px;
+				.rfqImgU{
+					max-height: 100px;
+					margin-top:5px;
+					@include sm-lesser{
+						height: 60px;
+					}
+				}
+			}
+			@include sm-lesser{
+				width: 18rem;
+			}
+		}
+		.btnUpload{
+			background-color:#dbdbdb;
+			padding: 0px 5px 5px 0px;
+			.imgUpload{
+				height: 25px;
+				width: 30px;
+			}
+		}
+	}
+	.btnRfq {
+		grid-area: btnRfq;
+		margin-bottom: 2rem;
+		color:white;
+		background-color:#efbe24;
+		@include sm-lesser{
+			height: 25px;
+		}
+	}
 	#myInput {
 		background-image: url("/css/searchicon.png");
 		background-position: 10px 12px;
@@ -1226,110 +1879,35 @@ $SubText: 18px;
 		display: none;
 	}
 }
-.rfqForm {
-	display: grid;
-	padding-bottom: 25%;
-	grid-template-columns: auto;
-	grid-row-gap: 5%;
-	grid-template-rows: repeat(7, auto);
-	grid-template-areas:
-		"rfqSN"
-		"rfqSL"
-		"rfqN"
-		"rfqTag"
-		"chips"
-		"upload"
-		"btnRfq";
-	.rfqSN {
-		grid-area: rfqSN;
-		display: grid;
-		grid-template-columns: 35% auto;
-		grid-template-rows: auto;
-		grid-template-areas: "rfqShopName rfqShopNameInput";
-		.rfqShopName {
-			grid-area: rfqShopName;
-		}
-		.rfqShopNameInput {
-			grid-area: rfqShopNameInput;
-		}
-	}
-	.rfqSL {
-		grid-area: rfqSL;
-		display: grid;
-		grid-template-columns: 35% auto;
-		grid-template-rows: auto;
-		grid-template-areas: "rfqLocation rfqLocationInput";
-		.rfqLocation {
-			grid-area: rfqLocation;
-		}
-		.rfqLocationInput {
-			grid-area: rfqLocationInput;
-		}
-	}
-	.rfqN {
-		grid-area: rfqN;
-		display: grid;
-		grid-template-columns: 35% auto;
-		grid-template-rows: auto;
-		grid-template-areas: "rfqNote rfqNoteInput";
-		.rfqNote {
-			grid-area: rfqNote;
-		}
-		.rfqNoteInput {
-			grid-area: rfqNoteInput;
-		}
-	}
-	.rfqTag {
-		grid-area: rfqTag;
-		display: grid;
-		grid-template-columns: 35% auto;
-		grid-template-rows: auto;
-		grid-template-areas: "dropBtnRfq dropdownRfq";
-		.dropBtnRfq {
-			grid-area: dropBtnRfq;
-		}
-		.dropdownRfq {
-			grid-area: dropdownRfq;
-		}
-	}
-	.chips {
-		grid-area: chips;
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(auto, 1fr);
-		.chipsOuter {
-			margin: 5px;
-			.chip {
-				display: inline-block;
-				padding: 0 25px;
-				height: auto;
-				font-size: 16px;
-				width: max-content;
-				line-height: auto;
-				border-radius: 25px;
-				background-color: #efbe24;
-			}
 
-			.closebtn {
-				padding-left: 10px;
-				color: #888;
-				font-weight: bold;
-				float: right;
-				font-size: 20px;
-				cursor: pointer;
-			}
-
-			.closebtn:hover {
-				color: #000;
-			}
+.giftStyle{
+	.addrS{
+		background-color:transparent;
+		border: none;
+		border-bottom: 1px solid black;
+	}
+	.giftT{
+		width: 19.75rem;
+		margin-left: 45px;
+		@include sm-lesser{
+			width: 15.75rem;		
 		}
 	}
-	.uploadRfq {
-		grid-area: upload;
+	.giftN{
+		width: 19.75rem;
+		margin-left: 45px;
+		@include sm-lesser{
+			width: 15.75rem;		
+		}
 	}
-	.btnRfq {
-		grid-area: btnRfq;
+	.giftA{
+		transform: translate(4rem,-1rem);
+		width:20rem;
+		@include sm-lesser{
+			width: 14.5rem;
+		}
 	}
+
 }
 
 // CHECKOUT POPUP (BUY NOW)
@@ -2334,4 +2912,3 @@ $SubText: 18px;
 		}
 	}
 }
-

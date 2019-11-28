@@ -38,7 +38,7 @@ $row=mysqli_fetch_assoc($result);
 $locationId = $row['id'];
 $sql_query = "UPDATE `shop_details` SET `shipping_locations`='$locationId' WHERE `seller_id` = $seller_id ";
 $result = mysqli_query($con2, $sql_query);
-// echo $sql_query;
+echo $sql_query;
 
 
 if($result){

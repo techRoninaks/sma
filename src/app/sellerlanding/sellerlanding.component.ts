@@ -48,9 +48,11 @@ export class SellerlandingComponent implements OnInit {
 
 	constructor(private router: Router, private data: DataService) { }
 	ngOnInit() {
-		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
 		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
 		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('headerCategoryBar')).style.display ="none";
+		
 		// console.log(Object.keys(this.repeatPost));
 		// this.testimonal = 0;
 		this.vidPlay = 1;
@@ -118,6 +120,18 @@ export class SellerlandingComponent implements OnInit {
 			data => {
 				this.faqSite = data;
 				// console.log(this.faqSite);
+				if(this.faqSite[0].response==0){
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+				}
+				else if(this.faqSite[0].response==1){
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "block";
+				}
+				else if (this.faqSite[0].response == -1) {
+					// console.log(this.faqCount);
+					(<HTMLInputElement><any>document.getElementById("moreFaq")).style.display = "none";
+					(<HTMLInputElement><any>document.getElementById("noFaqId")).style.display = "block";
+					this.faqSite="";
+				}
 
 			}
 		);
@@ -323,8 +337,8 @@ export class SellerlandingComponent implements OnInit {
 		(<HTMLInputElement><any>document.getElementById("submitFaq")).value="";
 	}
 	ngOnDestroy() {
-		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="block";
-		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="none";
-		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('mainHeader')).style.display ="none";
+		(<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
+		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="none";
 	}	
 }

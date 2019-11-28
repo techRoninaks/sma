@@ -1,3 +1,47 @@
+/* Smaller devices */
+@mixin sm-lesser {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @mixin sm {
+    @media (min-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @mixin md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @mixin lg {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @mixin xlg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+  @mixin mlg {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+  @mixin xxlg {
+    @media (min-width: 1500px) {
+        @content;
+    }
+}
 .main-grid{
     display: grid;
     font-family: BitterRegular;
@@ -7,8 +51,6 @@
     grid-template-columns: auto;
     grid-template-rows: repeat(3,auto);
 }
-
-
 .sub-grid-1{
     grid-area: grid-1;
     // background: yellow;
@@ -23,6 +65,33 @@
     height: 112%;
     grid-template-areas: "primarycard  sub-card-1"
                          "primarycard  sub-card-2";
+    .title-fp{
+        margin-left: 126px;
+    }
+    .btnChange{
+        margin-left: 164px;
+    }
+    @include sm-lesser{
+        display: grid;
+        grid-template-areas:"primarycard"
+                            "primarycard"
+                            "sub-card-1"
+                            "sub-card-2";
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: auto;
+        background: #F1F1F1;
+        margin-left: 0px;
+        margin-top: 0px;
+        height: 400px;
+        width: 480px;
+        .title-fp{
+            margin-left: 45px;
+            font-size: 24px;
+        }
+        .btnChange{
+            margin-left: 100px;
+        }
+    }
 }  
 .primary-card-grid{
     grid-area: primarycard;
@@ -39,6 +108,9 @@
     width: auto;
     margin-bottom: -23%;
     font-family: BitterBold;
+    .link-style{
+        color: black;
+    }
 }
 
 .sub-card-grid-2{
@@ -59,9 +131,6 @@
 .sub-card-style-4{
     margin-left: -20%;
     grid-area: right-2;
-    .link-style{
-        color: black;
-    }
 }
 
 a.notif {
@@ -74,6 +143,14 @@ a.notif {
     text-decoration: none;
     margin-top: -37%;
     margin-left: 19%;
+    @include sm-lesser{
+        margin-top: -32%;
+        margin-left: 17%;
+    }
+    @include xxlg{
+        margin-top: -26%;
+        margin-left: 14%;
+    }
   }
   .num {
     position: absolute;
@@ -94,6 +171,22 @@ a.notif {
     grid-template-areas: "leftarea  rightarea-1"
                          "leftarea  rightarea-2"
                          ". btn-password";
+    @include sm-lesser {
+        display: grid;
+        grid-template-areas:"leftarea"
+                            "leftarea"
+                            "rightarea-1"
+                            "rightarea-2"
+                            "."
+                            "btn-password";
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-columns: auto;
+        margin-left: 0px;
+        margin-top: 0px;
+        height: auto;
+        width: auto;
+        float: none;
+    }
 }
 .btn-password{
     grid-area: btn-password;
@@ -118,24 +211,37 @@ a.notif {
                          "l-address col-2 r-address"
                          "l-phone col-3 r-phone"
                          "l-email col-4 r-email";
-        .col-1{
+    .col-1{
         grid-area: col-1;
         // margin-left: -83%;
+        @include sm-lesser{
+            margin-left: -246px;
+        }
     }
     .col-2{
         grid-area: col-2;
+        @include sm-lesser{
+            margin-left: -118px;
+        }
         // margin-left: -83%;
     }
     .col-3{
         grid-area: col-3;
+        @include sm-lesser{
+            margin-left: -118px;
+        }
         // margin-left: -83%;
     }
     .col-4{
         grid-area: col-4;
+        @include sm-lesser{
+            margin-left: -118px;
+        }
         // margin-left: -83%;
     }
     .l-name{
         grid-area: l-name;
+        font-family: BitterBold;
     }
     .r-name{
         grid-area: r-name;
@@ -143,6 +249,7 @@ a.notif {
     }
     .l-address{
         grid-area: l-address;
+        font-family: BitterBold;
     }
     .r-address{
         grid-area: r-address;
@@ -150,6 +257,7 @@ a.notif {
     }
     .l-phone{
         grid-area: l-phone;
+        font-family: BitterBold;
     }
     .r-phone{
         grid-area: r-phone;
@@ -157,6 +265,7 @@ a.notif {
     }
     .l-email{
         grid-area: l-email;
+        font-family: BitterBold;
     }
     .r-email{
         grid-area: r-email;
@@ -230,6 +339,11 @@ a.notif {
     height: 61%;
     float: right;
     margin-right: 15%;
+    @include sm-lesser{
+        float: none;
+        height: 33px;
+        margin-left: 111px;
+    }
 }
 .btn-style-2{
     border-radius: 6px;
@@ -240,15 +354,62 @@ a.notif {
     height: 38%;
     float: right;
     margin-right: 15%;
+    @include sm-lesser{
+        float: none;
+        height: 33px;
+        margin-left: 111px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 .text-style{
     font-family: BitterRegular;
 }
 .sub-grid-2{
     grid-area: grid-2;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 50px;
+    @include sm-lesser{
+        margin-top: 250px;
+    }
+    @include xxlg{
+        width: auto;
+    }
 }
 .sub-grid-3{
     grid-area: grid-3;
+    @include xxlg{
+        width: auto;
+    }
+    .grid-btn-filter{
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 45% 10% 11% 12%;
+        grid-template-areas: "current-order-label all pending-pay ready-shipping";
+        font-family: BitterBold;
+        @include sm-lesser{
+            font-size: 11px;
+        }
+        .btn-filter-style{
+            border: none;
+            background: inherit;
+            cursor: pointer;
+            text-align: center;
+        }
+    }
+    .current-order-label{
+        grid-area: current-order-label;
+    }
+    .all{
+        grid-area: all;
+        text-align: center;
+    }
+    .pending-pay{
+        grid-area: pending-pay;
+    }
+    .ready-shipping{
+        grid-area: ready-shipping;
+    }
 }
 .grid-2{
     margin-top: 8%;
@@ -258,6 +419,13 @@ a.notif {
     grid-template-rows: auto;
     grid-gap: 2%;
     grid-template-areas: "shopFollowing savedCards";
+    @include sm-lesser{
+        display: grid;
+        grid-template-areas: "shopFollowing"
+                            "savedCards";
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
 }
 .grid-3{
     margin-top:4%;
@@ -267,6 +435,13 @@ a.notif {
     font-family: BitterBold;
     grid-gap: 2%;
     grid-template-areas: "updates savedAddress";
+    @include sm-lesser{
+        display: grid;
+        grid-template-areas: "updates"
+                            "savedAddress";
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
 }
 .shop-following{
     border-radius: 17px;
@@ -275,6 +450,10 @@ a.notif {
     width: 75%;
     height: auto;
     font-family: BitterBold;
+    @include sm-lesser{
+        width: 363px;
+        margin-left: -368px;
+    }
 }
 .saved-cards{
     border-radius: 17px;
@@ -282,12 +461,19 @@ a.notif {
     grid-area: savedCards;
     width: 75%;
     height: auto;
+    @include sm-lesser{
+        width: 363px;
+        margin-left: -368px;
+        margin-top: 35px;
+    }
 }
 .style-header{
-    background: rgb(177, 172, 172);
+    // background: rgb(177, 172, 172);
+    background: #dbdbdb;
 }
 .style-body{
-    background: rgb(212, 206, 206);
+    // background: rgb(212, 206, 206);
+    background: #f7f7f7;
 }
 .updates-card{
     border-radius: 17px;
@@ -295,6 +481,10 @@ a.notif {
     grid-area: updates;
     width: 75%;
     height: auto;
+    @include sm-lesser{
+        width: 363px;
+        margin-left: -368px;
+    }
 }
 .address-card{
     border-radius: 17px;
@@ -302,6 +492,14 @@ a.notif {
     grid-area: savedAddress;
     width: 75%;
     height: auto;
+    @include sm-lesser{
+        width: 363px;
+        margin-left: -368px;
+        margin-top: 35px;
+        .saved-card-style{
+            font-size: 11px;
+        }
+    }
 }
 .grid-shop-following{
     display: grid;
@@ -310,6 +508,9 @@ a.notif {
     font-family: BitterBold;
     grid-template-areas: "images description-1 description-1 follow follow"
                          "images description-2 description-3 rating rate-icon";
+    @include sm-lesser{
+        font-size: 11px;
+    }
 }
 .shop-image{
     grid-area: images;
@@ -342,6 +543,9 @@ a.notif {
                         "new-card new-card new-card new-card new-card"
                         "cvv val-label val . ver-gif";
     font-family: BitterBold;
+    @include sm-lesser{
+        font-size: 11px;
+    }
     .card-no{
         grid-area: card-no;
     }
@@ -378,16 +582,25 @@ a.notif {
         grid-area: val-label;
         margin-top: 15px;
         margin-left: 30px;
+        @include sm-lesser{
+            margin-left: 7px;
+        }
     }
     .val{
         grid-area: val;
         margin-top: 15px;
         margin-left: 45px;
+        @include sm-lesser{
+            margin-left: 17px;
+        }
     }
     .ver-gif{
         grid-area: ver-gif;
         margin-top: 15px;
         margin-left: 30px;
+        @include sm-lesser{
+            margin-left: 2px;
+        }
     }
 }
 .card-input-style{
@@ -400,6 +613,10 @@ a.notif {
     border: none;
     text-align: left;
     height: 60%;
+    @include sm-lesser{
+        height: 24px;
+        width: 135px;
+    }
 }
 .grid-update-card{
     display: grid;
@@ -408,6 +625,9 @@ a.notif {
     grid-template-areas: "message date_time"
                          "expiry-time button";
     font-family: BitterBold;
+    @include sm-lesser{
+        font-size: 11px;
+    }
 }
 .update-message{
     grid-area: message;
@@ -428,6 +648,9 @@ a.notif {
     grid-template-areas: "address delete select"
                          "add-address . .";
     font-family: BitterBold;
+    @include sm-lesser{
+        font-size: 11px;
+    }
 }
 .address{
     grid-area: address;
@@ -484,6 +707,12 @@ a.notif {
     margin-left: 46%;
     width: 35%;
     height: 164%;
+    @include sm-lesser{
+        font-size: 11px;
+        border-radius: 4px;
+        margin-left: 83px;
+        height: 30px;
+    }
 }
 .button-style-update{
     background-color: #EFBE24;
@@ -515,7 +744,7 @@ a.notif {
                             "invoice . btn-complaint";
     border-radius: 18px;
     width: 90%;
-    background: rgb(241, 239, 239);
+    background: #f7f7f7;
     margin-left: 5%;
     font-family: BitterBold;
     font-size: 14px;
@@ -523,16 +752,21 @@ a.notif {
     margin-bottom: 8%;
     padding-top: 3%;
     margin-top: -3%;
+    @include xxlg{
+        margin-top: -2%;
+        padding-top: 2%;
+    }
 }
 .grid-order-history-head{
     display: grid;
     grid-template-columns: 20% auto 20%;
     grid-template-rows: auto;
     grid-template-areas: "orders status feedback";
-    margin-top: 4%;
+    margin-top: 4%;    
+    font-family: BitterBold;
 }
 .orders{
-    background: rgb(212, 206, 206);
+    background: #dbdbdb;
     border-top-left-radius: 18px;
     grid-area: orders;
     text-align: center;
@@ -540,13 +774,13 @@ a.notif {
     padding: 5px;
 }
 .status{
-    background: rgb(212, 206, 206);
+    background: #dbdbdb;
     grid-area: status;
     text-align: center;
     padding: 5px;
 }
 .feedback{
-    background: rgb(212, 206, 206);
+    background: #dbdbdb;
     border-top-right-radius: 18px;
     grid-area: feedback;
     text-align: center;
@@ -577,6 +811,17 @@ a.notif {
     border-radius: 8px;
     width: 67%;
     height: 58%;
+    @include sm-lesser{
+        font-size: 6px;
+        border-radius: 2px;
+    }
+    @include xlg{
+        width: 76%;
+    }
+    @include xxlg{
+        width: 48%;
+        height: 48%;
+    }
 }
 .btn-complaint{
     grid-area: btn-complaint;
@@ -591,8 +836,14 @@ a.notif {
     color: white;
     border: none;
     border-radius: 8px;
-    width: 72%;
-    height: 72%;
+    height: 34px;
+    font-size: 14px;
+    margin-left: 1px;
+    width: 155px;
+    @include sm-lesser{
+        height: 20px;
+        width: 71px;
+    }
 }
 .prod-name{
     grid-area: prod-name;
@@ -628,6 +879,17 @@ a.notif {
     border-radius: 8px;
     width: 56%;
     height: 61%;
+    @include sm-lesser{
+        font-size: 7px;
+        border-radius: 3px;
+    }
+    @include xlg{
+        width: 65%;
+    }
+    @include xxlg{
+        width: 45%;
+        height: 50%;
+    }
 }
 .grid-status{
     display: grid;
@@ -635,12 +897,27 @@ a.notif {
     grid-template-columns: auto auto auto auto auto auto;
     grid-template-areas: "pending-conf pending-pay processing shipped deliver closed"
                          "ic-pending-conf ic-pending-pay ic-processing ic-shipped ic-deliver ic-closed"
-                         "stat-bar-1 stat-bar-2 stat-bar-3 stat-bar-4 stat-bar-5 stat-bar-6"
+                         "stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1 stat-bar-1"
                          "label-1 label-2 label-3 label-4 label-5 label-6";
     font-size: 8px;
     align-content: center;
     text-align: center;
-    height: 150px;
+    height: 166px;
+    .full-circle{
+        height: 20px;
+        width: 20px;
+        background-color: #EFBE24;
+        border-radius: 50%;
+        // display: inline-block;
+      }
+      .dot-circle{
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 25px;
+        border: 2px solid #EFBE24;
+        position: relative;
+      }
 }
 .pending-conf{
     grid-area: pending-conf;
@@ -681,32 +958,38 @@ a.notif {
 .label-1{
     grid-area: label-1;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .label-2{
     grid-area: label-2;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .label-3{
     grid-area: label-3;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .label-4{
     grid-area: label-4;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .label-5{
     grid-area: label-5;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .label-6{
     grid-area: label-6;
     border-bottom: 1px solid rgb(114, 114, 114);
-    margin-bottom: -42px;
+    margin-bottom: -47px;
+    margin-top: 5px;
 }
 .dot {
     height: 65px;
@@ -719,39 +1002,8 @@ a.notif {
     grid-area: stat-bar-1;
     margin-top: 20px;
     width: 82%;
-    margin-left: 52px;
+    margin-left: 76px;
 }
-.stat-bar-2{
-    grid-area: stat-bar-2;
-    margin-top: 20px;
-    width: 82%;
-    margin-left: 30px;
-}
-.stat-bar-3{
-    grid-area: stat-bar-3;
-    margin-top: 20px;
-    width: 82%;
-    margin-left:-14px;
-}
-.stat-bar-4{
-    grid-area: stat-bar-4;
-    margin-top: 20px;
-    width: 82%;
-    margin-left: -39px;
-}
-.stat-bar-5{
-    grid-area: stat-bar-5;
-    margin-top: 20px;
-    width: 82%;
-    margin-left: -50px;
-}
-.stat-bar-6{
-    grid-area: stat-bar-6;
-    margin-top: 20px;
-    width: 82%;
-    margin-left: -65px;
-}
-// timeline
 .stats-1 {
     padding: 0px 0px;
     display: flex;
@@ -759,147 +1011,15 @@ a.notif {
     border-top: 2px solid #EFBE24;
     position: relative;
     transition: all 200ms ease-in ;
-  }
-  .stats-2 {
-    padding: 0px 60px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #EFBE24;
-    position: relative;
-    transition: all 200ms ease-in ;
-  }
-  .stats-3 {
-    padding: 0px 60px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #EFBE24;
-    position: relative;
-    transition: all 200ms ease-in ;
-  }
-  .stats-4 {
-    padding: 0px 60px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #EFBE24;
-    position: relative;
-    transition: all 200ms ease-in ;
-  }
-  .stats-5 {
-    padding: 0px 60px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #EFBE24;
-    position: relative;
-    transition: all 200ms ease-in ;
-  }
-  .stats-6 {
-    padding: 0px 53px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #EFBE24;
-    position: relative;
-    transition: all 200ms ease-in ;
-  }
-  .stats-1{
     font-weight: 600;
     padding-top: 20px;
+    @include xxlg{
+        width: 861px;
+        // position: relative;
+        margin-left: 2%;
+    }
   }
-  .stats-1 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: -8%;
-  }
-  .stats-1.span.sp:before{
-    background: #EFBE24;
-  }
-  .stats-2{
-    font-weight: 600;
-    padding-top: 20px;
-  }
-  .stats-2 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 22%;
-  }
-  .stats-3{
-    font-weight: 600;
-    padding-top: 20px;
-  }
-  .stats-3 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 42%;
-  }
-  .stats-4{
-    font-weight: 600;
-    padding-top: 20px;
-  }
-  .stats-4 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 44%;
-  }
-  .stats-5{
-    font-weight: 600;
-    padding-top: 20px;
-  }
-  .stats-5 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 47%;
-  }
-  .stats-6{
-    font-weight: 600;
-    padding-top: 20px;
-  }
-  .stats-6 span:before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 94%;
-  }
-// timeline
-
 // popup
-.btn-lg{
-    font-size: 14px;
-    padding: 0;
-}
 .container{
     height: auto;
 }
@@ -925,10 +1045,13 @@ a.notif {
     margin-left: 6%;
 }
 .user-style{
-    width: 400px;
+    width: 410px;
     height: 33px;
     border: none;
     border-radius: 5px;
+    @include sm-lesser{
+        width: 285px;
+    }
 }
 .write-complaint{
     grid-area: write-complaint;
@@ -945,11 +1068,14 @@ a.notif {
     color: white;
 }
 .text-area-style{
-    width: 400px;
+    width: 410px;
     border: none;
     border-radius: 5px;
     margin-top: 5%;
     height: 150px;
+    @include sm-lesser{
+        width: 285px;
+    }
 }
 .submit{
     background-color: #EFBE24;
@@ -957,8 +1083,13 @@ a.notif {
     border: none;
     border-radius: 8px;
     width: 21%;
-    height: 17%;
-    margin-left: 65%;
+    height: 41px;
+    margin-left: 312px;
+    @include sm-lesser{
+        margin-left: 211px;
+        height: 34px;
+        border-radius: 4px;
+    }
 }
 .flex-container {
     display: flex;
@@ -1004,23 +1135,6 @@ a.notif {
     grid-area: btn-submit;
 }
 //popup2
-.full-circle{
-    height: 20px;
-    width: 20px;
-    background-color: #EFBE24;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .dot-circle{
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #EFBE24;
-    position: absolute;
-    top: -11px;
-    left: 60%;
-  }
   .validator-style{
     color: #e75c4a;
     font-family: BitterRegular;
@@ -1056,3 +1170,204 @@ a.notif {
     background: white;
     border: none;
   }
+  .grid-no-order{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    grid-template-areas: "header";
+    .header{
+        grid-area: header;
+        text-align: center;
+    }
+}
+.circle-1{
+    margin-left: -13px;
+    @include sm-lesser{
+        margin-left: -50px;
+    }
+    @include xlg{
+        margin-left: -18px;
+    }
+    @include mlg{
+        margin-left: -1.5%;
+    }
+    @include xxlg{
+        margin-left: 1.5%;
+    }
+}
+.circle-2{
+    margin-left: 128px;
+    @include sm-lesser{
+        margin-left: 11px;
+    }
+    @include xlg{
+        margin-left: 106px;
+    }
+    @include mlg{
+        margin-left: 20%;
+    }
+    @include xxlg{
+        margin-left: 23%;
+    }
+}
+.circle-3{
+    margin-left: 254px;
+    @include sm-lesser{
+        margin-left: 76px;
+    }
+    @include xlg{
+        margin-left: 220px;
+    }
+    @include mlg{
+        margin-left: 40.5%;
+    }
+    @include xxlg{
+        margin-left: 43%;
+    }
+}
+.circle-4{
+    margin-left: 379px;
+    @include sm-lesser{
+        margin-left: 142px;
+    }
+    @include xlg{
+        margin-left: 330px;
+    }
+    @include mlg{
+        margin-left: 60%;
+    }
+    @include xxlg{
+        margin-left: 62.5%;
+    }
+}
+.circle-5{
+    margin-left: 504px;
+    @include sm-lesser{
+        margin-left: 206px;
+    }
+    @include xlg{
+        margin-left: 440px;
+    }
+    @include mlg{
+        margin-left: 79.5%;
+    }
+    @include xxlg{
+        margin-left: 82%;
+    }
+}
+.circle-6{
+    margin-left: 629px;
+    @include sm-lesser{
+        margin-left: 268px;
+    }
+    @include xlg{
+        margin-left: 550px;
+    }
+    @include mlg{
+        margin-left: 98.5%;
+    }
+    @include xxlg{
+        margin-left: 102%;
+    }
+}
+@include sm-lesser{
+    .stat-line{
+        margin-left: -43px;
+    }
+    .order-no-style{
+        font-size: 8px;
+    }
+    .desc-style{
+        font-size: 10px;
+    }
+    .label-style{
+        font-size: 6px;
+    }
+    .date-style{
+        font-size: 6px;
+    }
+    .btn-complaint-mob{
+        font-size: 6px;
+        border-radius: 3px;
+    }
+}
+@include xxlg{
+    .modal{
+        margin-left: 0%;
+    }
+    .del-before{
+        margin-top: 8%;
+    }
+}
+.del-date{
+    margin-top: -16%;
+    font-family: Bitter;
+    @include sm-lesser{
+        margin-top: -40px;
+        font-size: 9px;
+    }
+    @include xxlg{
+        margin-top: -11%;
+    }
+}
+.btn-review{
+    background:#0c700c; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    height: 34px;
+    font-size: 14px;
+    margin-left: -14px;
+    width: 155px;
+    @include sm-lesser{
+        margin-right: 106px;
+        margin-left: -14px;
+        width: 70px;
+        border-radius: 3px;
+        height: 22px;
+        font-size: 6px;
+    }
+}
+.no-order{
+    font-family: BitterBold; 
+    font-size: xx-large;
+    @include sm-lesser{
+        font-size: large;
+    }
+}
+.modal-review{
+    border-radius: 18px; 
+    width: 665px; 
+    margin-left: -52px;
+    @include sm-lesser{
+        width: auto;
+        margin-left: auto;
+    }
+    @include xxlg{
+        margin-left: -60px;
+    }
+}
+.title-style{
+    width: 550px;
+    height: 33px;
+    border: none;
+    border-radius: 5px;
+    @include sm-lesser{
+        width: 285px;
+    }
+}
+.title-style-2{
+    width: 550px;
+    border: none;
+    border-radius: 5px;
+    @include sm-lesser{
+        width: 285px;
+    }
+}
+.btn-review-submit{
+    margin-top: 14px; 
+    margin-left: 418px;
+    @include sm-lesser{
+        margin-left: 214px;
+    }
+}

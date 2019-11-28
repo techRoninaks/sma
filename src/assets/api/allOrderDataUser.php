@@ -26,7 +26,7 @@
         $orderId = $orderIdArray[$j];
         $orderIdShort = $orderIdArray[$j];
 
-        $sql_query1="SELECT `created_date`,`customerid`,`order_status`,`delivery_date` FROM `purchase_order` WHERE orderid = $orderId";
+        $sql_query1="SELECT `created_date`,`customerid`,`sellerid`,`order_status`,`delivery_date` FROM `purchase_order` WHERE orderid = $orderId";
         $result1 = mysqli_query($con2, $sql_query1);
         $row1 = mysqli_fetch_array($result1);
         
@@ -34,6 +34,7 @@
         $orderStatus = $row1["order_status"];
         $delivery = $row1["delivery_date"];
         $custId = $row1["customerid"];
+        $sellerId = $row1["sellerid"];
 
         $sql_query11 = "SELECT `contact_name`,`pincode`,`city` FROM `address` where mapping_id ='$custId' && `addr_type`='shipping'";
         $result11 = mysqli_query($con2, $sql_query11);
@@ -61,7 +62,7 @@
             $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
             $result10 = mysqli_query($con2, $sql_query10);
             $row10 = mysqli_fetch_array($result10);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         else if($orderStatus == 'pending payment')
         {
@@ -71,7 +72,7 @@
             $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
             $result5 = mysqli_query($con2, $sql_query5);
             $row5 = mysqli_fetch_array($result5);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         else if($orderStatus == 'processing')
         {
@@ -84,7 +85,7 @@
             $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
             $result6 = mysqli_query($con2, $sql_query6);
             $row6 = mysqli_fetch_array($result6);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         else if($orderStatus == 'shipped')
         {
@@ -100,7 +101,10 @@
             $sql_query7 = "SELECT `date` FROM `order_stage_date` where `stage` = 'shipped' ";
             $result7 = mysqli_query($con2, $sql_query7);
             $row7 = mysqli_fetch_array($result7);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $sql_query8 = "SELECT `shipping_tracking_number`, `shipping_tracking_hyperlink` FROM `customer_order` where `orderid` = $orderId ";
+            $result8 = mysqli_query($con2, $sql_query8);
+            $row8 = mysqli_fetch_array($result8);
+            $response[$arraycount]=array('tracking_number'=>$row8['shipping_tracking_number'],'tracking_hyperlink'=>$row8['shipping_tracking_hyperlink'],'sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         else if($orderStatus == 'delivered')
         {
@@ -119,7 +123,7 @@
             $sql_query8 = "SELECT `date` FROM `order_stage_date` where `stage` = 'delivered' ";
             $result8 = mysqli_query($con2, $sql_query8);
             $row8 = mysqli_fetch_array($result8);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         else if($orderStatus == 'closed')
         {
@@ -141,7 +145,7 @@
             $sql_query9 = "SELECT `date` FROM `order_stage_date` where `stage` = 'closed' ";
             $result9 = mysqli_query($con2, $sql_query9);
             $row9 = mysqli_fetch_array($result9);
-            $response[$arraycount]=array('custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'stage_6_date'=>$row9['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+            $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'custName'=>$row11['contact_name'],'custPlace'=>$row11['city'],'custPin'=>$row11['pincode'],'orderIdShort'=>$orderIdShort,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'stage_6_date'=>$row9['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
         }
         $arraycount++;
         $j++;
