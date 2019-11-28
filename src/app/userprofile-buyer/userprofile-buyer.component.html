@@ -218,8 +218,7 @@
 					<form [formGroup]="fpFormPassword">
 						<div class="modal-body">
 						<div class="title-fp">
-						<h3 style="font-family: BitterBold;
-						margin-left: 126px;">Change Password</h3>
+							<h3 style="font-family: BitterBold;">Change Password</h3>
 						</div>
 						<div>
 							<input type="password" size="20" class="text-input-style" placeholder="Enter Current Password:"  id="current_password" formControlName="current_password">
@@ -248,7 +247,7 @@
 						</div>
 						<br>
 						<div>
-						<button style="margin-left: 164px; width: auto; border: none; background: #EFBE24; border-radius: 3px; 
+						<button class="btnChange" style="width: auto; border: none; background: #EFBE24; border-radius: 3px; 
 						height: 35px; color: white;" type="submit" (click)="changePassword()">
 						  Change Password
 						</button>
@@ -528,7 +527,7 @@
 							<div >
 							   <form [formGroup]="addAddress" class="grid-add-address">
 								<div class="country">
-									<label>Country</label>
+									<label class="saved-card-style">Country</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="country">
 									<div *ngIf="submitted && addAddress.controls.country.errors" class="error validator-style">
@@ -539,7 +538,7 @@
 									
 								</div>
 								<div class="state">
-									<label>State</label>
+									<label class="saved-card-style">State</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="state">
 									<div *ngIf="submitted && addAddress.controls.state.errors" class="error validator-style">
@@ -549,7 +548,7 @@
 									</div>
 								</div>
 								<div class="city">
-									<label>City</label>
+									<label class="saved-card-style">City</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="city">
 									<div *ngIf="submitted && addAddress.controls.city.errors" class="error validator-style">
@@ -559,7 +558,7 @@
 									</div>
 								</div>
 								<div class="pin">
-									<label>Pin</label>
+									<label class="saved-card-style">Pin</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="pin">
 									<div *ngIf="submitted && addAddress.controls.pin.errors" class="error validator-style">
@@ -578,7 +577,7 @@
 									</div>
 								</div>
 								<div class="email">
-									<label>Email</label>
+									<label class="saved-card-style">Email</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="email">
 									<div *ngIf="submitted && addAddress.controls.email.errors" class="error validator-style">
@@ -591,7 +590,7 @@
 									</div>
 								</div>
 								<div class="phone">
-									<label>Phone</label>
+									<label class="saved-card-style">Phone</label>
 									<br>
 									<input type="text" size="24" class="card-input-style-address" formControlName="mobile">
 									<div *ngIf="submitted && addAddress.controls.mobile.errors" class="error validator-style">
@@ -653,10 +652,10 @@
 				<label style="font-size: 19px; font-variant-caps: all-petite-caps;">{{dynamicDataOrderData[item].prodName}}</label>
 			</div>
 			<div class="desc">
-				<p>{{dynamicDataOrderData[item].shortDesc}}</p>
+				<p class="desc-style" >{{dynamicDataOrderData[item].shortDesc}}</p>
 			</div>
 			<div class="order-no">
-				<label>#SMACAT{{dynamicDataOrderData[item].orderId}}{{dynamicDataOrderData[item].createDate}}</label>
+				<label class="order-no-style">#SMACAT{{dynamicDataOrderData[item].orderId}}{{dynamicDataOrderData[item].createDate}}</label>
 			</div>
 			<div class="invoice">
 				<button class="btn-invoice-style" (click)="openInvoice(dynamicDataOrderData[item].orderId);">VIEW INVOICE</button>
@@ -664,22 +663,22 @@
 
 			<div class="grid-status">
 				<div class="pending-conf">
-					<label>Pending Confirmation</label>
+					<label class="label-style" >Pending Confirmation</label>
 				</div>
 				<div class="pending-pay">
-					<label>Pending Payment</label>
+					<label class="label-style">Pending Payment</label>
 				</div>
 				<div class="processing">
-					<label>Processing</label>
+					<label class="label-style">Processing</label>
 				</div>
 				<div class="shipped">
-					<label>Shipped</label>
+					<label class="label-style">Shipped</label>
 				</div>
 				<div class="deliver">
-					<label>Delivered</label>
+					<label class="label-style">Delivered</label>
 				</div>
 				<div class="closed">
-					<label>Closed</label>
+					<label class="label-style">Closed</label>
 				</div>
 				<div class="ic-pending-conf">
 					<span class="dot">
@@ -714,147 +713,146 @@
 				</div>
 				<div class="stat-bar-1">
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'pending confirmation' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="dot-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="dot-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="dot-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="dot-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="dot-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'pending payment' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="full-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="full-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="dot-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="dot-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="dot-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="dot-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'processing' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="full-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="full-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="full-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="full-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="dot-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="dot-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="dot-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'shipped' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="full-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="full-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="full-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="full-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="full-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="full-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="dot-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="dot-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'delivered' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="full-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="full-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="full-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="full-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="full-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="full-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="full-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="full-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="dot-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="dot-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 					<div *ngIf="dynamicDataOrderData[item].orderStatus == 'closed' "> 
-						<div class="stats-1">
+						<div class="stats-1 stat-line">
 						</div>
-						<div class="full-circle" style="margin-left: -13px; margin-top: -31px;">
+						<div class="full-circle circle-1" style=" margin-top: -31px;">
 						</div>
-						<div class="full-circle" style="margin-left: 128px; margin-top: -19px;">
+						<div class="full-circle circle-2" style=" margin-top: -19px;">
 						</div>
-						<div class="full-circle" style="margin-left: 254px; margin-top: -21px;">
+						<div class="full-circle circle-3" style=" margin-top: -21px;">
 						</div>
-						<div class="full-circle" style="margin-left: 379px; margin-top: -21px;">
+						<div class="full-circle circle-4" style=" margin-top: -21px;">
 						</div>
-						<div class="full-circle" style="margin-left: 504px; margin-top: -20px;">
+						<div class="full-circle circle-5" style=" margin-top: -20px;">
 						</div>
-						<div class="full-circle" style="margin-left: 629px; margin-top: -20px;">
+						<div class="full-circle circle-6" style=" margin-top: -20px;">
 						</div>
 					</div>
 				</div>
 				
 				<div class="label-1">
-				       <label>{{dynamicDataOrderData[item].stage_1_date}}</label>
+				       <label class="date-style">{{dynamicDataOrderData[item].stage_1_date}}</label>
 				</div>
 				<div class="label-2">
-					<label>{{dynamicDataOrderData[item].stage_2_date}}</label>
+					<label class="date-style">{{dynamicDataOrderData[item].stage_2_date}}</label>
 				 </div>
 				 <div class="label-3">
-					<label>{{dynamicDataOrderData[item].stage_3_date}}</label>
+					<label class="date-style">{{dynamicDataOrderData[item].stage_3_date}}</label>
 				 </div>
 				 <div class="label-4">
-					<label>{{dynamicDataOrderData[item].stage_4_date}}</label>
+					<label class="date-style">{{dynamicDataOrderData[item].stage_4_date}}</label>
 					<br>
-					<a><label>{{dynamicDataOrderData[item].tracking_hyperlink}}</label></a>
+					<a><label class="date-style">{{dynamicDataOrderData[item].tracking_hyperlink}}</label></a>
 					<br>
-					<label>Tracking No:{{dynamicDataOrderData[item].tracking_number}}</label>
+					<label class="date-style">Tracking No:{{dynamicDataOrderData[item].tracking_number}}</label>
 				 </div>
 				 <div class="label-5">
-					<label>{{dynamicDataOrderData[item].stage_5_date}}</label>
+					<label class="date-style">{{dynamicDataOrderData[item].stage_5_date}}</label>
 				 </div>
 				 <div class="label-6">
-					<label>{{dynamicDataOrderData[item].stage_6_date}}</label>
+					<label class="date-style">{{dynamicDataOrderData[item].stage_6_date}}</label>
 				 </div>
 			</div>
 			<div class="feedback-stat">
 				<label>{{dynamicDataOrderData[item].orderStatus}}</label>
 			</div>
 			<div class="feedback-desc" *ngIf="dynamicDataOrderData[item].orderStatus != 'closed' ">
-				<p style="font-family: Bitter;">delivery before</p>
+				<p style="font-family: Bitter;" class="del-before">delivery before</p>
 				<br>
-				<p style="margin-top: -16%; font-family: Bitter;">{{dynamicDataOrderData[item].delivery}}</p>
+				<p class="del-date">{{dynamicDataOrderData[item].delivery}}</p>
 			</div>
 			<div class="btn-req-update">
 				<button class="btn-req-update-style" *ngIf="dynamicDataOrderData[item].orderStatus != 'closed'" (click)="reqUpdate(dynamicDataOrderData[item].prodId);">REQUEST UPDATE</button>
 				<div *ngIf="dynamicDataOrderData[item].orderStatus == 'closed'">
 					<div class="container" style="height: auto;">
 						<!-- Trigger the modal with a button -->
-						<button type="button" class="btn btn-info btn-lg btn-complaint-style"
-							style="height: 30px; background:#0c700c; margin-left: -14px; width: 155px;" data-toggle="modal"
+						<button type="button" class="btn-review" data-toggle="modal"
 								data-target="#myModalReview">REVIEW</button>
 						<!-- Modal -->
 						<div class="modal fade" id="myModalReview" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
-								<div class="modal-content" style="border-radius: 18px; width: 665px; margin-left: -52px;">
+								<div class="modal-content" class="modal-review">
 									<div class="modal-header" style="border-top-right-radius: 18px; border-top-left-radius: 18px;">
 											<h4 class="modal-title" style="text-align: center; margin-left: auto;">
 												REVIEW
@@ -868,7 +866,7 @@
 												<div class="username">
 														<label>Title</label>
 														<br>
-														<input type="text" class="user-style" style="width: 550px;" formControlName="title">
+														<input type="text" class="user-style title-style" formControlName="title">
 														<div *ngIf="submittedReview && addReview.controls.title.errors" class="error validator-style">
 																<div *ngIf="addReview.controls.title.errors.required">
 																		Required
@@ -876,7 +874,7 @@
 														</div>
 												</div>
 												<div class="write-complaint">
-														<textarea placeholder="Review" class="text-area-style" style="width: 550px;" formControlName="review_desc"></textarea>
+														<textarea placeholder="Review" class="text-area-style title-style-2" formControlName="review_desc"></textarea>
 														<div *ngIf="submittedReview && addReview.controls.review_desc.errors" class="error validator-style">
 																<div *ngIf="addReview.controls.review_desc.errors.required">
 																		Required
@@ -895,7 +893,7 @@
 															<span class="fa fa-star active" (click)="addStar('star-5');" id="star-5-active" style="display: none; color: #EFBE24;"></span>
 														</div>
 														<div>
-															<button class="submit" (click)="onSubmitReview(dynamicDataOrderData[item].prodId);" type="submit" style="margin-top: 14px;">Submit</button>
+															<button class="submit btn-review-submit" (click)="onSubmitReview(dynamicDataOrderData[item].prodId);" type="submit">Submit</button>
 														</div>
 														
 												</div>
@@ -941,15 +939,14 @@
 			<div class="btn-complaint">
 				<div class="container" style="height: auto;">
 					<!-- Trigger the modal with a button -->
-					<button type="button" class="btn btn-info btn-lg btn-complaint-style"
-							style="height: 30px;" data-toggle="modal"
-							data-target="#myModal">COMPLAINT</button>
+					<button type="button" class="btn-lg btn-complaint-style btn-complaint-mob"
+					 data-toggle="modal" data-target="#myModal">COMPLAINT</button>
 					<!-- Modal -->
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
 							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
+							<div class="modal-content" style="border-radius: 18px;">
+								<div class="modal-header" style="border-top-right-radius: 18px; border-top-left-radius: 18px;">
 										<h4 class="modal-title"
 												style="text-align: center; margin-left: auto;">
 												COMPLAINT</h4>
@@ -979,7 +976,7 @@
 													</div>
 												</div>
 												<br>
-												<button class="submit" (click)="onSubmitComplaint(dynamicDataOrderData[item].sellerId);" type="submit">Submit</button>
+												<button class="submit" (click)="onSubmitComplaint(dynamicDataOrderData[item].sellerId);" type="submit" style="margin-top: 18px;">Submit</button>
 											</div>
 											<div class="add-image">
 												<label>Add image</label>
@@ -1008,7 +1005,7 @@
 										</div>
 									</form>
 								</div>
-								<div class="modal-footer">
+								<div class="modal-footer" style="border-bottom-right-radius: 18px; border-bottom-left-radius: 18px;">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div>
@@ -1021,7 +1018,7 @@
 	</div>
 	<div class="grid-no-order" *ngIf="noOrders">
 		<div class="header">
-			<label style="font-family: BitterBold; font-size: xx-large;">NO ORDERS AVAILABLE</label>
+			<label class="no-order">NO ORDERS AVAILABLE</label>
 		</div>
 	</div>
 </div>
