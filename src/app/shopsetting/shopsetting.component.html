@@ -40,7 +40,7 @@
             <tr>
                 <td class="padding15 font15">Shop Name</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.shopname}}<span>
-                    <img src="assets/icons/edit.png" (click)="edit('shopdetails')" style="position: relative; left: 79%;">
+                    <img src="assets/icons/edit.png" class="adj" (click)="edit('shopdetails')" style="position: relative; left: 79%;">
                 </span></td>
                 <td class="padding15" *ngIf = "editShopDetails"><input  id="name" value="{{shopDetails.shopname}}"></td>
             </tr>
@@ -96,7 +96,7 @@
         <tr>
             <td class="padding15 font15">Owner's Name</td>
             <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.name}}<span>
-                <img src="assets/icons/edit.png" (click)="edit('ownerdetails')" style="position: relative; left: 79%;">
+                <img src="assets/icons/edit.png" class="adj2" (click)="edit('ownerdetails')" style="position: relative; left: 79%;">
             </span></td>
             <td class="padding15" *ngIf = "editOwnerDetails"><input  id="ownername" value="{{shopDetails.name}}"></td>
         </tr>
@@ -112,7 +112,7 @@
         </tr>
         <tr>
             <td class="padding15 font15">ID No</td>
-            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcardno}} <span style="position: relative;left: 63%; cursor: pointer;" (click)="openModal();">View image</span></td>
+            <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.idcardno}} <span style="position: relative;left: 25%; cursor: pointer;" (click)="openModal();">View image</span></td>
             <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneridno" value="{{shopDetails.idcardno}}"></td>
         </tr>
         <tr>
@@ -149,7 +149,7 @@
             <tr>
                 <td class="padding15 font15">Shipping From</td>
                 <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.shop_location}}<span>
-                    <img src="assets/icons/edit.png" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
+                    <img src="assets/icons/edit.png" class="adj3" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
                 </span></td>
                 <td class="padding15" *ngIf = "editPaymentDetails"><input  id="shippingform" value="{{shopDetails.shop_location}}"></td>
             </tr>
@@ -246,7 +246,7 @@
             <tr>
                 <td class="padding15 font15">Account holder name</td>
                 <td class="padding15" *ngIf = "!editPaymentDetails">{{shopDetails.account_holder}}<span>
-                    <img src="assets/icons/edit.png" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
+                    <img src="assets/icons/edit.png" class="adj4" (click)="edit('paymentdetails')" style="position: relative; left: 79%;">
                 </span></td>
                 <td class="padding15" *ngIf = "editPaymentDetails"><input  id="accountholder" value="{{shopDetails.account_holder}}"></td>
             </tr>
