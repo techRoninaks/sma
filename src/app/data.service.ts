@@ -483,14 +483,14 @@ getSellerDetailsShop(data: any) {
     return this.http.post(this.baseUrl+'assets/api/changePassword.php',httpParams);
   }
 
-  deleteCartProductfn(id: any, userId: any, prodid:any , quantity){
-    let httpParams = new HttpParams()
-    .append("id",id)
-    .append("user_id",userId)
-    .append("prodid",prodid)
-    .append("quantity",quantity);
-    return this.http.post(this.baseUrl+'assets/api/deleteCartProduct.php',httpParams);
-  }
+//   deleteCartProductfn(id: any, userId: any, prodid:any , quantity){
+//     let httpParams = new HttpParams()
+//     .append("id",id)
+//     .append("user_id",userId)
+//     .append("prodid",prodid)
+//     .append("quantity",quantity);
+//     return this.http.post(this.baseUrl+'assets/api/deleteCartProduct.php',httpParams);
+//   }
   
   getTrending(tagNum: any, pageNum: any){
     let httpParams= new HttpParams()
