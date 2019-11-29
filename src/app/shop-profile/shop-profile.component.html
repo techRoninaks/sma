@@ -261,35 +261,35 @@
                         src="assets/icons/resources (IL)-11.png">
                     <p class="dislikeCount" id="dislikeCount_{{ratingReviewShop[item].reviewId}}">{{ratingReviewShop[item].dislikes}}</p>
                     <button class="btnReport" (click)="report(ratingReviewShop[item].reviewId);">Report</button>
-                    <div *ngIf="ratingReviewShop[item].rating == 1"> 
+                    <div class="revSt" *ngIf="ratingReviewShop[item].rating == 1"> 
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                     </div>
-                    <div *ngIf="ratingReviewShop[item].rating == 2"> 
+                    <div class="revSt" *ngIf="ratingReviewShop[item].rating == 2"> 
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                     </div>
-                    <div *ngIf="ratingReviewShop[item].rating == 3"> 
+                    <div class="revSt" *ngIf="ratingReviewShop[item].rating == 3"> 
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                     </div>
-                    <div *ngIf="ratingReviewShop[item].rating == 4"> 
+                    <div class="revSt" *ngIf="ratingReviewShop[item].rating == 4"> 
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star-o"></i>
                     </div>
-                    <div *ngIf="ratingReviewShop[item].rating == 5"> 
+                    <div class="revSt" *ngIf="ratingReviewShop[item].rating == 5"> 
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
                         <i class="fa fa-star active" style="color: #efbe24"></i>
