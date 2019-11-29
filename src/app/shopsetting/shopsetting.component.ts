@@ -379,6 +379,8 @@ export class ShopsettingComponent implements OnInit {
       reader.onload = (event) => {
         var text: any = reader.result;
         productThreeValue = text;
+        (<HTMLInputElement><any>document.getElementById('productThreeSrc')).src = productThreeValue; 
+
         this.frontFlag = true;
       };
   }
