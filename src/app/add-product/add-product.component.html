@@ -38,9 +38,9 @@
             </div>
             <div class="btnToggleActive" *ngIf="editMode">
                 <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button>
-                <div class="toggleTextActive"> 
-                    <p>ACTIVE</p>
-                </div>
+            </div>
+            <div class="toggleTextActive0"> 
+                <p>ACTIVE</p>
             </div>
             <div class="btnToggleActive1" *ngIf="editMode">
                 
@@ -362,8 +362,8 @@
                     </ng-template>
                 </mat-tab>
             </mat-tab-group>
-            <div style="width: max-content;cursor: pointer; color: white; background: #EFBE24; margin:10px auto; border-radius: 5px; padding:5px">
-                <p (click)="addVarients()" style="margin: 0px;">Add Varients</p>
+            <div style="width: max-content;cursor: pointer; color: white; background: #EFBE24; margin:10px auto; border-radius: 5px; padding:5px;">
+                <p (click)="addVarients()" style="margin: 0px;  font-size:12px;">Add Varients</p>
             </div>
         </div>
 
@@ -760,7 +760,7 @@
             <div class="grid-Pro-Discount-Left">
                 <div class="grid-Pro-Discount">
                     <div class="grid-Pro-Disc-Text">
-                        <h6 class="proDiscText">PRODUCT DISCOUNT</h6>
+                        <p class="proDiscText">PRODUCT DISCOUNT</p>
                     </div>
                     <div class="grid-Pro-Disc-Container">
                         <div class="grid-Pro-Disc">
