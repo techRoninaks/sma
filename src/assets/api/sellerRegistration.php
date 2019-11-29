@@ -7,7 +7,7 @@
     $stage_number = 1;
     $response =array();
     
-    $sql_query ="INSERT INTO `seller` (seller_name,username,email,phone1,password,stage_number,dob,salt,account_no,account_holder,account_type,gst,bankname,ifsc,idcard_type,idcardno,idimage,is_private,addr_id) VALUES ('$fullname','$fullname','$reg_email','$reg_mobile_no','$reg_password','$stage_number','1996-1-1','null',111,'null','null','null','null','null','null','null','null',1,0)"; 
+    $sql_query ="INSERT INTO `seller` (seller_name,username,email,phone1,password,stage_number,dob,salt,account_no,account_holder,account_type,gst,bankname,ifsc,idcard_type,idcardno,idimage,is_private,addr_id,doj) VALUES ('$fullname','$fullname','$reg_email','$reg_mobile_no','$reg_password','$stage_number','1996-1-1','null',111,'null','null','null','null','null','null','null','null',1,0,CURRENT_DATE())"; 
 
     $result = mysqli_query($con2, $sql_query);
     // echo $sql_query;

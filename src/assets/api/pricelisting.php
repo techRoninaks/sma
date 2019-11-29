@@ -105,7 +105,8 @@
     $varPrice = 0;
     $varId="";
     for($variantC=0;$variantC<$variantCount;$variantC++){
-        $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]'";
+        $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]' and prodid = $prodId ";
+        // echo $sql_queryVar;
         $resultVar = mysqli_query($con1, $sql_queryVar);
         $rowVariant=mysqli_fetch_array($resultVar);
         $varIdValue=$rowVariant["variantid"];

@@ -22,9 +22,9 @@
     `returning_customers_count`, `shop_view_count`, `private_acc`, `follower_count`, `t_and_c`, `shop_policy`, `plan_id`, 
     `plan_join_date`, `plan_exp_date`, `rfq`, `cover_photo`, `deliver_by_date`, `shipping_option_id`, `shipping_locations`, 
     `auto_cancellation_time`, `avg_shipping_time`, `avg_processing_time`, `avg_response_time`, `category_id`, `sub_category_id`, 
-    `tags`, `description`) 
+    `tags`, `description`,`return_policy`,`shipping_policy`,`product_policy`,`is_verified`) 
     VALUES (NULL, '$seller_id', '$shop_name', '', '', '', '',0, '$shop_address', '', '', '', '', '',0, NULL, '', NULL,0,0,0,0,
-     '',0, '', '',0,'2019-1-1', NULL, '', '', '', '',0,0,0,0,0, '$cat_id', '', '', '')";
+     '',0, '', '',0,'2019-1-1', NULL, '', '', '', '',0,0,0,0,0, '$cat_id', '', '', '','','','',0)";
     $result1 = mysqli_query($con2, $sql_query1);
 
     $sql_query2 ="INSERT INTO `address` (addr1,city,state,pincode,mapping_id,`addr2`,`district`,`country`,
@@ -37,7 +37,7 @@
     $addr_id = $row4['id'];
     $pincode = $row4['pincode'];
     // echo $pincode;
-    $sql_query5 ="UPDATE `shop_details` SET `addr_id`= '$addr_id' ";
+    $sql_query5 ="UPDATE `shop_details` SET `addr_id`= '$addr_id' where seller_id = $seller_id";
     $result5 = mysqli_query($con2, $sql_query5);
 
     $sql_query6 ="UPDATE `seller` SET `gst`= '$gst',`stage_number`='$stage_number' WHERE id ='$seller_id'";

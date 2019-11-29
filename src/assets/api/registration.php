@@ -33,11 +33,11 @@
             $result2 = mysqli_query($con2, $sql_query2);
             $row2 = mysqli_fetch_array($result2);
             $id =$row2['id'];
-            $sql_query1 = " INSERT INTO `address` (mapping_id,addr1,addr2,city,district,state,country,pincode,contact_email,contact_number,contact_name) VALUES ('$id','$reg_address1','$reg_address2','$reg_city','$reg_dist','$reg_state','$reg_country','$reg_pin','$reg_email','$reg_mobile_no','$fullname')";
+            $sql_query1 = " INSERT INTO `address` (mapping_id,addr1,addr2,city,district,state,country,pincode,contact_email,contact_number,contact_name,addr_type) VALUES ('$id','$reg_address1','$reg_address2','$reg_city','$reg_dist','$reg_state','$reg_country','$reg_pin','$reg_email','$reg_mobile_no','$fullname','communication')";
             $result1 = mysqli_query($con2, $sql_query1);
             $sql_query3 = "UPDATE `user`SET addr_id='$id' WHERE id = '$id'";
             $result3 = mysqli_query($con2, $sql_query3);
-            if(! $result && ! $result1 && ! $result3)
+            if(!$result && !$result1 && !$result3)
             {
                 $status="Error";
                 echo json_encode($status);
