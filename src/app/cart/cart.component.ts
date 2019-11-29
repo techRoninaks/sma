@@ -121,11 +121,11 @@ export class CartComponent implements OnInit {
       this.data.getproduct(temp).subscribe(data => {
         this.dynamicData = data;
 
-        this.data.variantInfoCartChosen(this.prodId).subscribe(data => {
-          this.dynamicVariantInfo = data;
-          console.log(this.dynamicVariantInfo);
-        },
-        );
+        // this.data.variantInfoCartChosen(this.prodId).subscribe(data => {
+        //   this.dynamicVariantInfo = data;
+        //   console.log(this.dynamicVariantInfo);
+        // },
+        // );
         var addrSplit = (<HTMLInputElement><any>document.getElementById("dropDownAddrId")).value;
         var addressSplit = addrSplit.split(",")
         var pincode = addressSplit[6];

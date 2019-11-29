@@ -609,7 +609,7 @@ export class AddProductComponent implements OnInit {
   }
 
   saveAddVariant(variantArray){
-    console.log(this.editProdid);
+    console.log(variantArray);
 
     if(this.editMode){
       this.data.addProductVarients(JSON.stringify(variantArray), this.editProdid).subscribe(data=>{
@@ -617,7 +617,7 @@ export class AddProductComponent implements OnInit {
       })
     }
     else{
-      this.data.addProductVarients(variantArray).subscribe(data=>{
+      this.data.addProductVarients(JSON.stringify(variantArray)).subscribe(data=>{
       })
     }
 
@@ -1042,7 +1042,6 @@ export class AddProductComponent implements OnInit {
             window.location.href = './dashboard';
           }
           else{
-            alert(x);
           }
         });
       }

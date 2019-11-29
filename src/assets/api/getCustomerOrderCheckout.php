@@ -21,7 +21,7 @@
         'shippingPrice'=>$row["shippingprice"],
         'variantPrice'=>$row["variantprice"],
         'tax'=>$row["tax"],
-        'deliveryDate'=>$row["delivey_date"]);
+        'deliveryDate'=>$row["delivery_date"]);
 
     }
 
