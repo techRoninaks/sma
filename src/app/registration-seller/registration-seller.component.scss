@@ -377,7 +377,8 @@
                           "body";
     margin-top: 100px;
     @include sm-lesser{
-      margin-bottom: 0%;
+      margin-bottom: 18%;
+      
     }
   }
   .header{
@@ -521,8 +522,13 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: 810px;
+    height: 840px;
+    margin-bottom: 85px;
     font-family: BitterBold;
+    @include sm-lesser{
+      margin-top: -36px;
+      margin-bottom: 43px;
+    }
   }
   .div-body-stage-1{
     grid-area: body;
@@ -533,8 +539,10 @@
     width: 1000px;
     height: 600px;
     font-family: BitterBold;
+    margin-bottom: 52px;
     @include sm-lesser{
-       height: 800px;    
+       height: 800px;margin-top: -73px;margin-bottom: 57px;
+
       }
   }
   .div-body-stage-2{
@@ -543,9 +551,15 @@
     background: rgb(235, 232, 232);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 45px;
     width: 1000px;
-    height: 600px;
+    height: 534px;
     font-family: BitterBold;
+    @include sm-lesser{
+      margin-bottom: 6px;
+      height: 608px;
+      margin-top: -24px;
+    }
   }
   .div-body-stage-3{
     grid-area: body;
@@ -557,6 +571,10 @@
     height: 1222px;
     font-family: BitterBold;
     margin-bottom: 138px;
+    @include sm-lesser{
+      margin-top: -115px;
+      margin-bottom: 100px;
+    }
   }
   .div-body-stage-5{
     grid-area: body;
@@ -570,7 +588,9 @@
     margin-bottom: 90px;
     @include sm-lesser{
       width: 100%;
-      height: 97%;
+      height: 100%;
+      margin-top: -182px;
+      margin-bottom: 218px;
 
     }
   }
@@ -581,9 +601,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: auto;
+    height: 87%;
     margin-top: 65px;
     border-radius: 12px;
+    margin-bottom: 112px;
     @include sm-lesser{
       margin-left: 33px;
       height: 16%;
@@ -862,7 +883,7 @@
     background: white;
     border-radius: 6px;
     @include sm-lesser {
-      margin-left: 25px;
+      margin-left: 30px;
     }
   }
   .main-grid-terms{
@@ -906,6 +927,9 @@
     padding: 1% 7% 3% 3%;
     font-family: BitterRegular;
     height: auto;
+    @include sm-lesser{
+      width: 41%;
+    }
 }
 .doc-style{
     width: 105%;
@@ -936,7 +960,7 @@
   @include sm-lesser{
     height: 510px;
     width: 344px;
-    margin-left: -1px;
+    margin-left: -18px;
 
   
   }
@@ -1068,7 +1092,7 @@
   margin-left: 53px;
   margin-top: 16px;
   @include sm-lesser{
-    margin-left:28px;
+    margin-left:17px;
   }
 }
 .menu-2{
@@ -1080,7 +1104,7 @@
   margin-left: 32px;
   margin-top: 16px;
   @include sm-lesser{
-    margin-left: 28px;
+    margin-left: 17px;
     margin-top: 60px;
   }
 }
@@ -1093,7 +1117,7 @@
   margin-left: 12px;
   margin-top: 16px;
   @include sm-lesser{
-    margin-left: 28px;
+    margin-left: 17px;
     margin-top: 60px;
   }
 }
@@ -1126,7 +1150,7 @@
   margin-top: 67px;
   @include sm-lesser{
     width: 345px;
-    margin-left: 25px;
+    margin-left: 15px;
 
 
   }
@@ -1252,10 +1276,13 @@
   border-radius: 7px;
   margin-left: 68px;
   margin-top: 30px;
+  margin-bottom: 20px;
   @include sm-lesser{
     width: 300px;
     margin-left: 50px;
    margin-top: 30px;
+   height: 180px;
+   margin-bottom: 30px;
 
   }
 }
@@ -1507,7 +1534,7 @@
 .shopnew{
   border: none; 
   border-radius: 5px; 
-  width: 245px;
+  width: 241px;
   @include sm-lesser{
        width: 161px;
 }
@@ -1522,7 +1549,7 @@
    }
 }
 .addressnew{
-  width: 407px; border: none; border-radius: 5px;
+  width: 241px; border: none; border-radius: 5px;
   @include sm-lesser{
     width:161px
   }
@@ -1596,7 +1623,7 @@ width: 233px;
 }
 }
 .state1{
-  width: 233px;
+  width: 241px;
   @include sm-lesser{
     width: 161px;
     border: 1px;
@@ -1620,47 +1647,52 @@ width: 233px;
 }
 }
 .nameOwner{
-height: 27px; width:350px; border-radius:4px; background: white;
+height: 27px; width:321px; border-radius:4px; background: white;
 @include sm-lesser{
-  width: 170px;
+  width: 181px;
+  margin-left: -46px;
 
 }
 }
 .email1{
-  height: 27px; width:350px; border-radius:4px; background: white;
+  height: 27px; width:321px; border-radius:4px; background: white;
   @include sm-lesser{
-    width: 170px;
+    width: 181px;
+    margin-left: -46px
   
   }
   }
   .contact1{
-    height: 27px; width:350px; border-radius:4px; background: white;
+    height: 27px; width:321px; border-radius:4px; background: white;margin-left: -45px;
     @include sm-lesser{
-      width: 170px;
+      width: 181px;
+      margin-left: -46px
     
     }
     }
     .date1{
 
-    width: 320px; border: none;  border-radius: 4px;
+    width: 321px; border: none;  border-radius: 4px;
     @include sm-lesser{
-      width: 170px;
+      width: 181px;
+      margin-left: -46px
 
     }
   }
   .id1{
 
-    width: 320px; border: none;  border-radius: 4px;
+    width: 321px; border: none;  border-radius: 4px;margin-left: -45px;
     @include sm-lesser{
-      width: 170px;
-
+      width: 181px;
+      margin-left: -46px
     }
   }
   .id2{
 
-    width: 320px; border: none;  border-radius: 4px;
+    width: 321px; border: none;  border-radius: 4px;
     @include sm-lesser{
-      width: 170px;
+      width: 181px;
+      margin-left: -46px
 
     }
   }
@@ -1669,7 +1701,7 @@ height: 27px; width:350px; border-radius:4px; background: white;
     background: #EFBE24; color: white;
 
     @include sm-lesser{
-          margin-left:-470px ;
+          margin-left:-458px ;
           margin-top:-25px ;
     }
   }
@@ -1679,13 +1711,13 @@ height: 27px; width:350px; border-radius:4px; background: white;
 
     @include sm-lesser{
           margin-left:0px ;
-          margin-top: -15px;
+          margin-top: 10px;
     }
   }
   .terms{
-  margin-left: 416px; background: none; border: none; border-radius: 3px; color: white;
+  margin-left: 480px; background: none; border: none; border-radius: 3px; color: white;
   @include sm-lesser{
-        margin-left: 136px;
+        margin-left: 146px;
   }
   }
   .check{
@@ -1695,9 +1727,9 @@ height: 27px; width:350px; border-radius:4px; background: white;
     }
     }
 .next3{
-      margin-left: 438px; background: #EFBE24; border: none; border-radius: 3px; color: white;    
+      margin-left: 490px; background: #EFBE24; border: none; border-radius: 3px; color: white;    
         @include sm-lesser{
-            margin-left: 136px;
+            margin-left: 154px;
       }
       }
 
@@ -1712,8 +1744,8 @@ height: 27px; width:350px; border-radius:4px; background: white;
  .desch1{
   margin-top: 2px; margin-left: 213px; font-size: 31px; margin-right: 60px;       
   @include sm-lesser{
-        margin-left: 98px;
-         margin-top: -16px;
+        margin-left: 92px;
+         margin-top: -34px;
         font-size: 12px;
               }
               }
@@ -1721,6 +1753,7 @@ height: 27px; width:350px; border-radius:4px; background: white;
 margin-left: 338px;margin-top: 5px;
   @include sm-lesser{
     margin-left: 80px;
+    color: white;
   }
  }
  .welcome1{
@@ -1828,6 +1861,7 @@ margin-left: 410px; background: #EFBE24; color: white; border: none;
   border: none; border-radius: 5px; width: 150px;
   @include sm-lesser{
 margin-left: -500px;
+height: 103%;
   }
 }
 .location1{
@@ -1838,16 +1872,113 @@ margin-left: -500px;
     margin-left: 0%;
   }
 }
+.location2{
+  color: white; font-size: 19px; margin-left: 35px; margin-top: 11px;
+  @include sm-lesser{
+    margin-left: 31px;
+  }
+  
+  
+  
+}
 .city2{
-  border: none; width: 291px; border-radius: 5px; margin-left: -466px; margin-top: 54px; height: 33px;
+  border: none; width: 291px; border-radius: 5px; margin-left: -466px; margin-top: 25px; height: 33px;
   @include sm-lesser{
 width: 177px;
 margin-left: -268px;
+margin-top: 20px;
   }
 }
 .addButton1{
-  border: none; background: inherit; margin-top: 36px; margin-left: -115px; font-size: 37px; color: #009145;
+  border: none; background: inherit; margin-top: 9px; margin-left: -115px; font-size: 37px; color: #009145;
   @include sm-lesser{
     margin-left: -72px;
+    margin-top: 1px;
   }
+}
+.back1{
+  height: 27px;  width: 100px; background: #009145; margin-top: 25px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+  @include sm-lesser{
+    height: 26px;
+    margin-top: 26px;
+  }
+}
+.front1{
+  height: 27px;  width: 100px; background: #009145; margin-top: 25px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+  @include sm-lesser{
+    height: 25px;
+    margin-top: 25px;
+  }
+}
+.owner1{
+  margin-left: 119px;font-size: 25px;margin-top: -27px;display: none;
+  @include sm-lesser{
+    margin-left: 119px;font-size: 25px;margin-top: -57px;font-family:BitterBold;display: block;
+  }
+}
+.shopDetails1{
+  margin-left: 100px;font-size: 25px;margin-top: -73px;display: none;
+  @include sm-lesser{
+    margin-left: 100px;font-size: 25px;margin-top: -73px;display: block;font-family: BitterBold;
+  }
+}
+.paymentShipping1{
+  margin-left: 60px;font-size: 25px;display: none;
+  @include sm-lesser{
+    margin-left: 81px;
+    margin-top: -68px;
+    font-family: BitterBold;
+    font-size: 25px;
+    display: block;
+  }
+}
+.shippingLabel3{
+  height: 38px; width: 160px; background: #009145; border-top-right-radius: 4px; border-bottom-right-radius: 4px;
+  @include sm-lesser{
+    height: 38px;
+  }
+}
+.shippingLabel4{
+  color: white; float: right; margin-right: 17px;margin-top: 6px;
+  @include sm-lesser{
+    margin-right: 34px;
+    margin-top: 6px;
+  }
+}
+.payment1{
+  color: white; float: right; margin-right: 17px; margin-top: 6px;
+  @include sm-lesser{
+    margin-right: 32px;
+  }
+}
+.term1{
+  margin-left: 60px;font-size: 25px;display: none;
+  @include sm-lesser{
+    margin-left: 36px;
+    margin-top: -52px;
+    font-family: BitterBold;
+    display: block;
+  }
+}
+.label4{
+  font-size: 19px;
+  @include sm-lesser{
+    font-size: 13px;
+  }
+}
+.launch2{
+  margin-left: 60px;font-size: 25px;display:none;
+  @include sm-lesser{
+    margin-left: 130px;font-size: 25px;display:block;margin-top: -66px;font-family: BitterBold;
+
+  }
+
+}
+.launch5{
+  margin-left: 442px;  background: #EFBE24;  color: white;  
+  border: none;  border-radius: 4px;  font-family: BitterBold;  height: 38px;  
+  margin-top: 93px;  width: 117px;
+@include sm-lesser{
+  margin-top: 69px;
+}
 }
