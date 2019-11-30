@@ -7,20 +7,20 @@
   }
 } 
 
-@mixin sm{
-    @media (min-width: 600px) {    
-        @content;
-    }
-  } 
+// @mixin sm{
+//     @media (min-width: 600px) {    
+//         @content;
+//     }
+//   } 
   /* Medium devices (landscape tablets, 768px and up) */
   @mixin md {
-    @media (min-width: 768px) {    
+    @media (min-width: 610px) and (max-width: 900px){    
         @content;
     }
   } 
   /* Large devices (laptops/desktops, 992px and up) */
   @mixin lg {
-    @media (min-width: 992px) {    
+    @media (max-width: 992px) {    
         @content;
     }
   } 
@@ -173,6 +173,9 @@
     @include sm-lesser{
       margin-left: 50px;
     }
+    @include md{
+      margin-left: 23px;
+    }
   }
   .login-layout{
     background-color: #F1F1F1;
@@ -186,6 +189,9 @@
     font-size: 14px;
     @include sm-lesser{
       margin-left: 28px;
+    }
+    @include md{
+      height: 85%;
     }
   }
   .side-layout{
@@ -212,6 +218,9 @@
       margin-left:-20px;
       width:61%;
     }
+    @include md{
+      width: 66%;
+    }
   }
   .login-layout-3{
     margin-left: 7%;
@@ -219,6 +228,9 @@
     font-family: "BitterBold";
     @include sm-lesser{
       margin-left: 2%;
+    }
+    @include md{
+      margin-left: 3%;
     }
   }
   ul {
@@ -239,16 +251,29 @@
   .left-grid-title-1{
     font-size: 250%;
     color: rgb(128, 123, 123);
+    @include md{
+      margin-left: -19%;
+    }
   }
   .left-grid-title-2{
     font-size: 210%;
+    @include md{
+      margin-left: -19%;
+    }
   }
   .left-grid-title-3{
     font-size: 180%;
+    @include md{
+      margin-left: -19%;
+    }
   }
   .left-grid-feature{
     padding: 0 0 0 20px;
+    @include md{
+      margin-left: -17%;
+    }
   }
+
   
   // Breadcrumb
   
@@ -393,6 +418,10 @@
       @include sm-lesser{
         display: none;
       }
+      @include md{
+        width: 767px;
+        margin-left: 0%;
+      }
       .grid-header{
         display: grid;
         grid-template-rows: auto auto;
@@ -448,20 +477,40 @@
         grid-area: shop-det;
         margin-left: 27px;
         font-weight: 100;
+        @include md{
+          margin-left: 34px;
+          font-size: 14px;
+        }
       }
       .owner-info{
         grid-area: owner-info;
         margin-left: -17px;
+        @include md{
+          font-size: 14px;
+          margin-left: -6%;
+        }
       }
       .payment{
         grid-area: payment;
+        @include md{
+          font-size: 14px;
+          margin-left: 5px;
+        }
       }
       .terms{
         grid-area: terms;
         margin-left: -38px;
+        @include md{
+          font-size: 14px;
+          margin-left: -30px;
+        }
       }
       .launch{
         grid-area: launch;
+        @include md{
+          font-size: 14px;
+          margin-left: 5%;
+        }
       }
       .div-shop-det{
         grid-area: div-shop-det;
@@ -529,6 +578,9 @@
       margin-top: -36px;
       margin-bottom: 43px;
     }
+    @include md{
+      width: 766px;
+    }
   }
   .div-body-stage-1{
     grid-area: body;
@@ -542,6 +594,11 @@
     margin-bottom: 52px;
     @include sm-lesser{
        height: 800px;margin-top: -73px;margin-bottom: 57px;
+    }
+    @include md{
+    width: 767px;
+    margin-left: 0%;
+    height: 500px;
 
       }
   }
@@ -560,6 +617,10 @@
       height: 608px;
       margin-top: -24px;
     }
+    @include md{
+      width: 763px;
+      margin-left: 0%;
+    }
   }
   .div-body-stage-3{
     grid-area: body;
@@ -574,6 +635,10 @@
     @include sm-lesser{
       margin-top: -115px;
       margin-bottom: 100px;
+    }
+    @include md{
+      width: 764px;
+      height: 1058px;
     }
   }
   .div-body-stage-5{
@@ -593,6 +658,10 @@
       margin-bottom: 218px;
 
     }
+    @include md{
+      width: 769px;
+      height: 910px;
+    }
   }
   .div-body-1{
     grid-area: body;
@@ -601,14 +670,19 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    height: 87%;
-    margin-top: 65px;
+    height: 91%;
+    margin-top: 14px;
     border-radius: 12px;
     margin-bottom: 112px;
     @include sm-lesser{
       margin-left: 33px;
       height: 16%;
       width: 83%;
+    }
+    @include md{
+      width: 765px;
+      margin-top: 0px;
+      height: 93%;
     }
   }
   .main-cat-drop-down-1{
@@ -632,6 +706,9 @@
     @include sm-lesser{
       margin-left: 17px;
     }
+    @include md{
+      margin-left:47px;
+    }
   }
   .gst-no{
     margin-top: 20px;
@@ -650,6 +727,9 @@
     @include sm-lesser{
       margin-left: 17px;
     }
+    @include md{
+      margin-left: 12px;
+    }
   }
   .shop-name{
     margin-top: 60px;
@@ -666,6 +746,9 @@
     @include sm-lesser{
       margin-left: 17px;
     }
+    @include md{
+      margin-left: 47px;
+    }
   }
   .owner-name{
     margin-top: 60px;
@@ -680,6 +763,9 @@
     margin-top: 20px;
     @include sm-lesser{
       margin-left: 17px;
+    }
+    @include md{
+      margin-left: 10px;
     }
  
   }
@@ -696,6 +782,13 @@
     @include sm-lesser{
       margin-left: -88%;
     }
+    @include md{
+      background-color: white;
+      border-radius: 4px;
+      height: 54%;
+      width: 180px;
+      margin-left: 15%;
+    }
   }
   .state{
     grid-area: state;
@@ -710,6 +803,13 @@
     @include sm-lesser{
       margin-left: -88%;
     }
+    @include md{
+      width: 180px;
+      background-color: white;
+      border-radius: 4px;
+      height: 54%;
+      margin-left: 15%;
+    }
   }
   .main-cat-label{
     margin-left: 60px;
@@ -717,6 +817,9 @@
     margin-top: 20px;
     @include sm-lesser{
       margin-left: 17px;
+    }
+    @include md{
+      margin-left: 10px;
     }
   }
   .main-cat-drop-down{
@@ -733,6 +836,9 @@
     @include sm-lesser{
       margin-left: 17px;
     }
+    @include md{
+      margin-left: 47px;
+      }
   }
   .contact{
     grid-area: contact;
@@ -740,6 +846,7 @@
     @include sm-lesser{
       margin-left: -88%;
     }
+    
   }
   .email-id-label{
     margin-left: 60px;
@@ -747,6 +854,9 @@
     margin-top: 20px;
     @include sm-lesser{
       margin-left: 17px;
+    }
+    @include md{
+      margin-left: 10px;
     }
   }
   .email-id{
@@ -885,6 +995,9 @@
     @include sm-lesser {
       margin-left: 30px;
     }
+    @include md{
+      margin-left: -27%;
+    }
   }
   .main-grid-terms{
     display: grid;
@@ -945,9 +1058,13 @@
                         "callus"
                         "btn-dashboard";
   margin-top: 50px;
+
 }
 .welcome-msg{
   grid-area: welcome-msg;
+  @include md{
+    width: 78%;
+  }
 }
 .checklist{
   grid-area: checklist;
@@ -964,9 +1081,16 @@
 
   
   }
+  @include md{
+    width: 763px;
+    margin-left: 0px;
+  }
 }
 .checklist-desc{
   grid-area: checklist-desc;
+  @include md{
+    margin-left: -10%;
+  }
 }
 .callus{
   grid-area:callus;
@@ -1005,26 +1129,50 @@
 }
 .b1{
   grid-area: b1;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .b2{
   margin-top: 2%;
   grid-area: b2;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .b3{
   margin-top: 2%;
   grid-area: b3;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .b4{
   margin-top: 2%;
   grid-area: b4;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .b5{
   margin-top: 2%;
   grid-area: b5;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .b6{
   margin-top: 2%;
   grid-area: b6;
+  @include md{
+    width: 251px;
+    font-size: 12px;
+  }
 }
 .grid-menu{
   display: grid;
@@ -1154,6 +1302,9 @@
 
 
   }
+  @include md{
+    width: 664px;
+  }
 }
 .h-desc{
   grid-area: h-desc;
@@ -1212,6 +1363,9 @@
     @include sm-lesser{
       margin-left: 15%;
       margin-top: 10%;
+    }
+    @include md{
+      width: 140px;
     }
 }
 .p-style{
@@ -1284,6 +1438,10 @@
    height: 180px;
    margin-bottom: 30px;
 
+  }
+  @include md{
+    height: 205px;
+    margin-left: 130px;
   }
 }
 .payment{
@@ -1530,6 +1688,9 @@
   border: none;
   border-radius: 4px;
   width: 300px;
+  @include md{
+    width: 180px;
+  }
 }
 .shopnew{
   border: none; 
@@ -1537,6 +1698,10 @@
   width: 241px;
   @include sm-lesser{
        width: 161px;
+}
+@include md{
+  width: 180px;
+  margin-left: -18px;
 }
 }
 .ownernew{
@@ -1547,11 +1712,19 @@
    @include sm-lesser{
      width: 161px;
    }
+   @include md{
+     width: 180px;
+     margin-left: 15%;
+   }
 }
 .addressnew{
   width: 241px; border: none; border-radius: 5px;
   @include sm-lesser{
     width:161px
+  }
+  @include md{
+    width: 180px;
+    margin-left: -5%;
   }
 }
 .categorynew{
@@ -1572,6 +1745,9 @@ margin-top: 40px; margin-left: 75px; border: none; border-radius: 4px; height: 3
               margin-top: 2px;
               margin-left: -377px;
             }
+            @include md{
+              margin-top: -8px;
+            }
 
 
 
@@ -1581,17 +1757,29 @@ margin-top: 40px; margin-left: 75px; border: none; border-radius: 4px; height: 3
   @include sm-lesser{
     width: 161px;
   }
+  @include md{
+    width: 180px;
+    margin-left: -7%;
+  }
 }
 .main2{
   width: 240px; border-radius: 4px;background: white;border:none;
   @include sm-lesser{
     width: 161px;
   }
+  @include md{
+    width: 180px;
+    margin-left: -7%;
+  }
 }
 .main3{
    width: 240px; background: white;border-radius: 4px;border:none;
   @include sm-lesser{
     width: 161px;
+  }
+  @include md{
+    width: 180px;
+    margin-left: -7%;
   }
 }
 .contactNew{
@@ -1600,17 +1788,29 @@ height: 27px; width:230px; border-radius:4px; background: white;
 @include sm-lesser{
 width:161px;
 }
+@include md{
+  margin-left: 15%;
+  width: 180px;
+}
 }
 .emailNew{
 height: 27px; width:240px; border-radius:4px; background: white;
 @include sm-lesser{
   width: 161px;;
 }
+@include md{
+  width: 180px;
+  margin-left: -7%;
+}
 }
 .gst1{
   border: none; border-radius: 5px; width: 230px;
   @include sm-lesser{
     width: 161px;
+  }
+  @include md{
+    width: 180px;
+    margin-left: 15%;
   }
 }
 .city1{
@@ -1653,13 +1853,21 @@ height: 27px; width:321px; border-radius:4px; background: white;
   margin-left: -46px;
 
 }
+@include md{
+  width: 180px;
+  margin-left: 46px;
+}
 }
 .email1{
   height: 27px; width:321px; border-radius:4px; background: white;
   @include sm-lesser{
     width: 181px;
     margin-left: -46px
-  
+
+  }
+  @include md{
+    width: 180px;
+    margin-left: 46px;
   }
   }
   .contact1{
@@ -1668,6 +1876,10 @@ height: 27px; width:321px; border-radius:4px; background: white;
       width: 181px;
       margin-left: -46px
     
+    }
+    @include md{
+      width: 180px;
+      margin-left: 0px;
     }
     }
     .date1{
@@ -1678,6 +1890,10 @@ height: 27px; width:321px; border-radius:4px; background: white;
       margin-left: -46px
 
     }
+    @include md{
+      width: 180px;
+      margin-left: 46px;
+    }
   }
   .id1{
 
@@ -1685,6 +1901,10 @@ height: 27px; width:321px; border-radius:4px; background: white;
     @include sm-lesser{
       width: 181px;
       margin-left: -46px
+    }
+    @include md{
+      width: 180px;
+      margin-left: 0px;
     }
   }
   .id2{
@@ -1695,6 +1915,10 @@ height: 27px; width:321px; border-radius:4px; background: white;
       margin-left: -46px
 
     }
+    @include md{
+  width: 180px;
+  margin-left: 46px;
+}
   }
   .next{
     margin-top: 40px; border: none; border-radius: 4px; height: 30px; width: 100px;
@@ -1703,6 +1927,9 @@ height: 27px; width:321px; border-radius:4px; background: white;
     @include sm-lesser{
           margin-left:-458px ;
           margin-top:-25px ;
+    }
+    @include md{
+      margin-left: -27%;
     }
   }
   .next2{
@@ -1713,11 +1940,17 @@ height: 27px; width:321px; border-radius:4px; background: white;
           margin-left:0px ;
           margin-top: 10px;
     }
+    @include md{
+      margin-left: -13%;
+    }
   }
   .terms{
   margin-left: 480px; background: none; border: none; border-radius: 3px; color: white;
   @include sm-lesser{
         margin-left: 146px;
+  }
+  @include md{
+    margin-left: 330px;
   }
   }
   .check{
@@ -1725,11 +1958,17 @@ height: 27px; width:321px; border-radius:4px; background: white;
     @include sm-lesser{
           margin-left: 28px;
     }
+    @include md{
+      margin-left: 118px;
+    }
     }
 .next3{
       margin-left: 490px; background: #EFBE24; border: none; border-radius: 3px; color: white;    
         @include sm-lesser{
             margin-left: 154px;
+      }
+      @include md{
+        margin-left: 340px;
       }
       }
 
@@ -1740,6 +1979,10 @@ height: 27px; width:321px; border-radius:4px; background: white;
                 margin-top: 20px;
                 font-size: 12px;
           }
+          @include md{
+            font-size: 24px;
+            margin-left: 13%;
+              }
           }
  .desch1{
   margin-top: 2px; margin-left: 213px; font-size: 31px; margin-right: 60px;       
@@ -1748,18 +1991,29 @@ height: 27px; width:321px; border-radius:4px; background: white;
          margin-top: -34px;
         font-size: 12px;
               }
+              @include md{
+                font-size: 24px;
+                margin-top: -20px;
+                margin-left: 180px;
+              }
               }
 .promohead{
-margin-left: 338px;margin-top: 5px;
+margin-left: 338px;margin-top: 5px;color: white;
   @include sm-lesser{
     margin-left: 80px;
     color: white;
+  }
+  @include md{
+    margin-left: 240px;
   }
  }
  .welcome1{
   height: 36px; width:1000px; background:#009145;border-top-left-radius: 12px; border-top-right-radius: 12px;
   @include sm-lesser{
     width:100%;
+  }
+  @include md{
+    width: 765px;
   }
 
  }
@@ -1768,13 +2022,20 @@ margin-left: 338px;margin-top: 5px;
   @include sm-lesser{
     margin-left: 125px;
   }
+  @include md{
+    margin-left: 330px;
+    font-size: 20px;
+    margin-top: 3px;
+  }
 }
 .welcomeMsg{
   margin-left: 408px; color: black; font-size: 20px; font-family: BitterBold;
   @include sm-lesser{
     margin-left: 65px;
   }
-  
+  @include md{
+    margin-left: 296px;
+  }
 }.paragraph{
   margin-left: 75px; margin-right: 50px;
   @include sm-lesser{
@@ -1789,12 +2050,18 @@ margin-left: 338px;margin-top: 5px;
     font-size: 17px;
     text-align: center;
   }
+  @include md{
+    margin-left: 168px;
+  }
 }
 .imageup{
   margin-left: 381px; margin-top: -47px; height: 85px;
   @include sm-lesser{
     margin-left: 143px;
     margin-top:-46px;
+  }
+  @include md{
+    margin-left: 333px;
   }
 }
 .font2{
@@ -1849,11 +2116,17 @@ margin-left: 410px; background: #EFBE24; color: white; border: none;
     margin-top: 10px;
     margin-bottom: 16%;
   }
+  @include md{
+    margin-left: 280px;
+  }
 }
 .dashboardComment{
   margin-left: 366px;
   @include sm-lesser{
           margin-left: 63px;
+  }
+  @include md{
+    margin-left: 240px;
   }
 }
 
@@ -1887,6 +2160,9 @@ height: 103%;
 width: 177px;
 margin-left: -268px;
 margin-top: 20px;
+  }
+  @include md{
+    margin-left: -425px;
   }
 }
 .addButton1{
@@ -1965,6 +2241,9 @@ margin-top: 20px;
   @include sm-lesser{
     font-size: 13px;
   }
+  @include md{
+    margin-left: 0%;
+  }
 }
 .launch2{
   margin-left: 60px;font-size: 25px;display:none;
@@ -1980,5 +2259,9 @@ margin-top: 20px;
   margin-top: 93px;  width: 117px;
 @include sm-lesser{
   margin-top: 69px;
+}
+@include md{
+  margin-left: 331px;
+  margin-top: 130px;
 }
 }
