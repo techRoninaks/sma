@@ -19,8 +19,8 @@
     FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
     WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' AND p.active_status IN ('active') ";
 
-    $locationQuery = " AND p.shipping_location_id = sls.id and sls.pincode LIKE '%$pincode%'";
-
+    $locationQuery = " AND  sls.pincode LIKE '%$pincode%'";
+    // p.shipping_location_id = sls.id and
     $status = "deliverable";
 
     $newCondition = " AND YEAR(NOW()) = YEAR(p.created_date) AND MONTH(NOW()) = MONTH(p.created_date) ORDER BY MONTH(p.created_date) ";

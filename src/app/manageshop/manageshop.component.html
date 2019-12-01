@@ -29,7 +29,7 @@
         <div class="shopDesc">
             <div class="shopLogo">
                 <img (click)="fileInputLogo.click()" src="assets/images/shop/{{token}}/{{token}}_logo.jpg"
-                    style="cursor: pointer;" alt="click to change shop logo">
+                    style="cursor: pointer;" alt="+">
                 <!-- <p class="img__description">This image looks super neat.</p> -->
                 <!-- <div class="upload-btn-wrapper">
                     <button class="btn">Upload a file</button>
@@ -37,7 +37,7 @@
                 </div> -->
                 <input style="display: none" type="file" name="pic" id="shopLogo" accept="image/*" #fileInputLogo
                     (change)="submitLogo();">
-                <button type="button" (click)="submitLogo();" class="btnLogo">Change Photo</button>
+                <button type="button" (click)="fileInputLogo.click()" class="btnLogo">Change Photo</button>
                 <!-- <button type="submit" class="btnLogo" (click)="submitLogo();" style="transform: translate(0px,-1.7rem);background-color: #efbe24;color: white;margin-left: 1.1rem;
                 width: 10rem;"><img style="width: 20px;height: 20px;"
                         src="assets/icons/upload.png"></button> -->

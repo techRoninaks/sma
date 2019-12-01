@@ -73,7 +73,7 @@
                     <ul id="myUL2" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
                         <li *ngFor="let inp of dynamicCategory">
                             <a (click)="replaceMedCategory(inp.id, inp.category)">
-                                {{inp.id}},{{inp.category}}
+                                {{inp.category}}
                             </a>
                         </li>
                         <li (click)="newCategory()" >
@@ -99,7 +99,7 @@
                     <ul id="myUL1" class="rfqUL" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
                         <li *ngFor="let inp of dynamicSubCategory">
                             <a (click)="replaceCategory(inp.id, inp.category)">
-                                {{inp.id}},{{inp.category}}
+                                {{inp.category}}
                             </a>
                         </li>
                         <li (click)="newSubCategory()" >
@@ -529,7 +529,7 @@
                     <div class="grid-AutoCustomToggleRight2">
                         <label class="switchAutoCustom" name="answer" value="Show giftCard" 
                         >
-                            <input type="checkbox" id="autoCustom" style="margin-left: 12px;" value="{{allProductInfo.add_custom_message_field}}">
+                            <input type="checkbox" id="autoCustom"  style="margin-left: 12px;" (change)="isMessageSelect()" value="{{allProductInfo.add_custom_message_field}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -566,7 +566,7 @@
         </div>
     </div>
     <!-- MESSAGE TITLE -->
-    <div class="dvMsgTitle">
+    <div class="dvMsgTitle" *ngIf="isMessage">
         <div class="dvMsgTitleText">
             <div style="margin: auto;width: max-content;height: max-content;display: flex;">
                 <h5 style="width: max-content;">MESSAGE TITLE</h5>

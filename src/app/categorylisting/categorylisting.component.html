@@ -212,7 +212,7 @@
         <div class="dvCard" *ngFor="let item of Object.keys(array12)">
             <div class="dvCardLogo">
                 <div class="dvLogo">
-                    <img class="imgLogo" src="assets/images/shop/{{array12[item].prodId}}/{{array12[item].prodId}}_logo.jpg" [routerLink]="['/shop']"
+                    <img class="imgLogo" src="assets/images/shop/{{array12[item].shopId}}/{{array12[item].shopId}}_logo.jpg" [routerLink]="['/shop']"
                         [queryParams]="{shop_id:array12[item].shopId}">
                 </div>
                 <div class="dvSeller" [routerLink]="['/shop']" [queryParams]="{shop_id:array12[item].shopId}">

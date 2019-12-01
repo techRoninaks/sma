@@ -432,7 +432,7 @@ export class ManageshopComponent implements OnInit {
 
 			this.shopAddress = { categ: categ, seller_id: this.sellerId, shop_id: this.token, shopNameId: shopNameId, addr2ShopId: addr2ShopId, cityShopId: cityShopId, districtShopId: districtShopId, stateShopId: stateShopId, countryShopId: countryShopId, pincodeShopId: pincodeShopId };
 			this.data.shopAddressUpload(this.shopAddress).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			this.addressData.addr1 = shopNameId;
 			this.addressData.addr2 = addr2ShopId;
@@ -448,7 +448,7 @@ export class ManageshopComponent implements OnInit {
 			var y = (<HTMLInputElement><any>document.getElementById('prodTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
 			this.data.editManage(this.z).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			// (<HTMLInputElement><any>document.getElementById('prodPolicyId')).innerText=y;
 			this.shopData.productPolicy = y;
@@ -459,7 +459,7 @@ export class ManageshopComponent implements OnInit {
 			var y = (<HTMLInputElement><any>document.getElementById('bioTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
 			this.data.editManage(this.z).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			// (<HTMLInputElement><any>document.getElementById('bioId')).innerHTML=y;
 			this.shopData.descriptionShop = y;
@@ -471,7 +471,7 @@ export class ManageshopComponent implements OnInit {
 			var y = (<HTMLInputElement><any>document.getElementById('shipTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
 			this.data.editManage(this.z).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			// (<HTMLInputElement><any>document.getElementById('shipPolicyId')).innerHTML=y;
 			this.shopData.shipPolicy = y;
@@ -484,7 +484,7 @@ export class ManageshopComponent implements OnInit {
 			var y = (<HTMLInputElement><any>document.getElementById('shopTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
 			this.data.editManage(this.z).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			// (<HTMLInputElement><any>document.getElementById('shopPolicyId')).innerHTML=y;
 			this.shopData.shopPolicy = y;
@@ -497,7 +497,7 @@ export class ManageshopComponent implements OnInit {
 			var y = (<HTMLInputElement><any>document.getElementById('retTxtAr')).value;
 			this.z = { shop_id: this.token, val: y, type: type };
 			this.data.editManage(this.z).subscribe(data=>{
-				window.location.reload();
+				// window.location.reload();
 			});
 			// (<HTMLInputElement><any>document.getElementById('returnPolicyId')).innerHTML=y;
 			this.shopData.returnPolicy = y;
@@ -547,23 +547,25 @@ export class ManageshopComponent implements OnInit {
 		};
 	}
 	submitCover() {
+		setTimeout(()=>{
 		var image = imageCoverValue;
-		// console.log(image);
 		this.tokenUpload = { image: image, shop_id: this.token };
 
 		// setTimeout(function () {
-		this.data.uploadShopCover(this.tokenUpload).subscribe(data=>{
-			window.location.reload();
-		});
-		// }, 3000);
+			this.data.uploadShopCover(this.tokenUpload).subscribe(data=>{
+				window.location.reload();
+			});
+		}, 3000);
 
 	}
 	submitLogo() {
-		var image = imageLogoValue;
-		this.tokenUpload = { image: image, shop_id: this.token };
-		this.data.uploadShopLogo(this.tokenUpload).subscribe(data=>{
-			window.location.reload();
-		});
+		setTimeout(()=>{
+			var image = imageLogoValue;
+			this.tokenUpload = { image: image, shop_id: this.token };
+			this.data.uploadShopLogo(this.tokenUpload).subscribe(data=>{
+				window.location.reload();
+			});
+		}, 3000);
 	}
 
 	filterFunction() {

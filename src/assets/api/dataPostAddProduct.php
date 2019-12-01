@@ -228,6 +228,9 @@ else if($active_status == 'false')
     $result = mysqli_query($con1, $sql_query);
     $rowprodid = mysqli_fetch_assoc($result);
     $prodid=$rowprodid["prodid"];
+    if($editprodid != 'all'){
+      $prodid = $editprodid;
+    }
 
     if($editprodid != "all"){
       if($result1){
@@ -300,6 +303,8 @@ else if($active_status == 'false')
         $row = mysqli_fetch_assoc($res);
         $loc = $row['state'];
         $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "SET global group_concat_max_len=1500000000;";
+        $result = mysqli_query($con1, $sql_query);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL STATE' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where state like '$loc'))";
         $result = mysqli_query($con1, $sql_query);
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL STATE', $value->qtn, $value->price from smausr.location where state like '$loc'";
@@ -311,10 +316,13 @@ else if($active_status == 'false')
         $row = mysqli_fetch_assoc($res);
         $loc = $row['state'];
         $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "SET global group_concat_max_len=1500000000;";
+        $result = mysqli_query($con1, $sql_query);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL INDIA' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location))";
-        // echo $sql_query;
+        echo $sql_query;
         $result = mysqli_query($con1, $sql_query);
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL INDIA', $value->qtn, $value->price from smausr.location";
+        echo $sql_query;
         $result = mysqli_query($con1, $sql_query);
       }
       if($value->pincode =="My City"){
@@ -323,6 +331,8 @@ else if($active_status == 'false')
         $row = mysqli_fetch_assoc($res);
         $loc = $row['city'];
         $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "SET global group_concat_max_len=1500000000;";
+        $result = mysqli_query($con1, $sql_query);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL CITY' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where city like '$loc'))";
         $result = mysqli_query($con1, $sql_query);
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL CITY', $value->qtn, $value->price from smausr.location where city like '$loc'";
@@ -334,6 +344,8 @@ else if($active_status == 'false')
         $row = mysqli_fetch_assoc($res);
         $loc = $row['district'];
         $loc = preg_replace('/\s/', '', $loc);
+        $sql_query = "SET global group_concat_max_len=1500000000;";
+        $result = mysqli_query($con1, $sql_query);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL DISTRICT' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location where district like '$loc'))";
         $result = mysqli_query($con1, $sql_query);
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL DISTRICT', $value->qtn, $value->price from smausr.location where district like '$loc'";
@@ -346,7 +358,7 @@ else if($active_status == 'false')
           $locationAlias = $location[0];
           $sql_query = "INSERT INTO `prod_shipping_price`( `prodid`, `shipping_location`,`type` ,`quantity_price`, `price`) VALUES ($prodid,$pincode,'pincode',$value->qtn,$value->price)";
           $result = mysqli_query($con1, $sql_query);
-          $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'$locationAlias' ,$pincode)";
+          $sql_query = "SET global group_concat_max_len=1500000000 ;insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'$locationAlias' ,$pincode)";
           $result = mysqli_query($con1, $sql_query);
         }
       }
