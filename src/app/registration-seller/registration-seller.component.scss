@@ -2172,6 +2172,18 @@ margin-top: 20px;
     margin-top: 1px;
   }
 }
+
+.button-fp{
+  width: 100px;
+  text-align: center;
+  // margin-left:35%;
+  padding: 0.7%;
+  color: white;
+  background: #EFBE24;
+  border-radius: 2px;
+  border: none;
+  font-family: "BitterBold";
+
 .back1{
   height: 27px;  width: 100px; background: #009145; margin-top: 25px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
   @include sm-lesser{
@@ -2264,4 +2276,5 @@ margin-top: 20px;
   margin-left: 331px;
   margin-top: 130px;
 }
+
 }

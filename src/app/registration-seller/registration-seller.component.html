@@ -36,7 +36,7 @@
                           </div>
                       </div>
                     </div><br>
-                    <div>
+                    <!-- <div>
                       <input type="text" placeholder="Mobile No  :" size="40" class="text-input-style" id="reg_mobile_no" formControlName="reg_mobile_no">
                         <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
                             <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
@@ -53,7 +53,55 @@
                             </div>
                         </div>
                         <button type="button"  data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">Verify</button>
-                    </div><br>
+                    </div><br> -->
+                    <div>
+                      <input type="tel" placeholder="Mobile No  :" class="text-input-style" id="reg_mobile_no"
+                        formControlName="reg_mobile_no" style="width: 307px;">
+                        <div *ngIf="sentOTP">
+                          <form [formGroup]="fpFormOtp">
+                            <input type="text" placeholder="Enter OTP:" class="text-input-style" formControlName="fp_otp" style="margin-top: 21px; width: 53.5%;">
+                            <div *ngIf="submitted && fpFormOtp.controls.fp_otp.errors" class="error validator-style">
+                              <div *ngIf="fpFormOtp.controls.fp_otp.errors.required">
+                                Enter OTP !
+                              </div>
+                              <div *ngIf="fpFormOtp.controls.fp_otp.hasError('minlength')">
+                                Enter valid OTP !
+                              </div>
+                              <div *ngIf="fpFormOtp.controls.fp_otp.hasError('maxlength')">
+                                Enter valid OTP !
+                              </div>
+                              <div *ngIf="fpFormOtp.controls.fp_otp.hasError('pattern')">
+                                Enter Only digits !
+                              </div>
+                            </div>
+                          </form>
+                          <div *ngIf="sentOTP">
+                              <button class="button-fp" type="submit" (click)="verifyOTP()" [disabled]="!fpFormOtp.valid" style="margin-left: 207px;
+                              margin-top: 15px;">Verify OTP</button>
+                          </div>
+                        </div>
+                        <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">
+                            Verify
+                        </button> -->
+                        <button type="button" class="btn btn-warning verifyBtn" (click)="newVerify();" *ngIf="Otp" style="margin-left:2%;margin-top: 0%;" >
+                          Verify
+                        </button>
+                        <img src="assets/icons/userProfile/ic_ver_gif.png" *ngIf="otpVerified" >
+                      <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
+                        <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
+                          Mobile no is required !
+                        </div>
+                        <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('minlength')">
+                          Enter valid Mobile Number !
+                        </div>
+                        <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('maxlength')">
+                          Enter valid Mobile Number !
+                        </div>
+                        <div *ngIf="registrationForm.controls.reg_mobile_no.hasError('pattern')">
+                          Enter Only digits !
+                        </div>
+                      </div>
+                    </div> <br>
                     <div>
                       <input type="password" placeholder="Password  :" size="40" class="text-input-style" id="reg_password" formControlName="reg_password">
                       <div *ngIf="submitted && registrationForm.controls.reg_password.errors" class="error validator-style">
@@ -298,19 +346,29 @@
             </select>
             <div *ngIf="submitted && registrationFormStage1.controls.main_category.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.main_category.errors.required">
-                  Minimum one category is required !
+                  Category is required !
                 </div>
             </div>
           </div>
           <div class="main-cat-drop-down-1">
-            <select class="main2">
+            <select class="main2" formControlName="main_category1">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
+            <div *ngIf="submitted && registrationFormStage1.controls.main_category1.errors" class="error validator-style">
+              <div *ngIf="registrationFormStage1.controls.main_category1.errors.required">
+                Category is required !
+              </div>
+            </div>
           </div>
           <div class="main-cat-drop-down-2">
-            <select class="main3">
+            <select class="main3" formControlName="main_category2">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
+            <div *ngIf="submitted && registrationFormStage1.controls.main_category2.errors" class="error validator-style">
+              <div *ngIf="registrationFormStage1.controls.main_category2.errors.required">
+                Category is required !
+              </div>
+            </div>
           </div>
           <div class="contact-label">
               <label>Contact No:</label>
@@ -685,7 +743,6 @@
             <br> -->
       </div>
   </div>
-
   <div class="background-div" *ngIf="stage_4">
     <div class="header">
       <div class="grid-header">

@@ -24,6 +24,7 @@ export class ManageOrdersComponent implements OnInit {
   k: number = 0;
   l: number = 0;
   j: number = 0;
+  Object = Object;
   status: any =[];
   orderId: any="";
   noOrders: boolean = false;
@@ -74,7 +75,6 @@ export class ManageOrdersComponent implements OnInit {
   stageDate :any;
   cancel_reason : any;
   stageName : any ="";
-  Object=Object;
   dynamicOrderData: any = [];
   largeSrc: any;
   dynamicDataOrderData: any=[];
@@ -266,7 +266,7 @@ export class ManageOrdersComponent implements OnInit {
     if(this.j > 0)
     {
     orderid2 = orderIdArray[this.j];
-    console.log(orderid2);
+    // console.log(orderid2);
     this.data.getIndividualOrderDataPrev(orderid2).subscribe(
       data=>{
               this.dynamicOrderData=data;
@@ -363,7 +363,7 @@ export class ManageOrdersComponent implements OnInit {
     if(this.l < orderCount-1)
     {
       orderid3 = orderIdArray[++this.l];
-      console.log(orderid3);
+      // console.log(orderid3);
     this.data.getIndividualOrderDataPrev(orderid3).subscribe(
       data=>{
               this.dynamicOrderData=data;
@@ -615,7 +615,96 @@ export class ManageOrdersComponent implements OnInit {
         error=> console.error(error)
       );
   }
-  viewOrder(){
+  viewOrder(orderIdShort){
+    this.data.getViewOrderData(this.id,orderIdShort).subscribe(
+      data=>{
+              this.dynamicOrderData=data;
+              this.orderId = data['orderId'];
+              var order_stat = data['order_status'];
+              if(order_stat == "shipped" || order_stat == "delivered" || order_stat == "closed")
+              {
+                this.userAddress = true;
+              }
+            },
+        error=> console.error(error)
+      );
+      this.data.getViewOrderDataSeller(this.id,orderIdShort).subscribe(
+        data=>{
+          this.i =0;
+          this.dynamicDataOrderData=data;
+          orderCount= data['orderCount'];
+          this.j = orderCount-1;
+          orderIdArray = data['orderIdArray'];
+          orderIdShort = data['orderIdShort'];
+          this.status = data['orderStatus'];
+          if(this.status == "cancelled")
+          {
+            this.cancelledStatus = true;
+            this.cancelStatus = true;
+          }
+          else if(this.status == "pending confirmation")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+          }
+          else if(this.status == "pending payment")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+            this.stage_2_dot = false;
+            this.stage_2_full = true;
+          }
+          else if(this.status == "processing")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+            this.stage_2_dot = false;
+            this.stage_2_full = true;
+            this.stage_3_dot = false;
+            this.stage_3_full = true;
+          }
+          else if(this.status == "shipped")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+            this.stage_2_dot = false;
+            this.stage_2_full = true;
+            this.stage_3_dot = false;
+            this.stage_3_full = true;
+            this.stage_4_dot = false;
+            this.stage_4_full = true;
+          }
+          else if(this.status == "delivered")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+            this.stage_2_dot = false;
+            this.stage_2_full = true;
+            this.stage_3_dot = false;
+            this.stage_3_full = true;
+            this.stage_4_dot = false;
+            this.stage_4_full = true;
+            this.stage_5_dot = false;
+            this.stage_5_full = true;
+          }
+          else if(this.status == "closed")
+          {
+            this.stage_1_dot = false;
+            this.stage_1_full = true;
+            this.stage_2_dot = false;
+            this.stage_2_full = true;
+            this.stage_3_dot = false;
+            this.stage_3_full = true;
+            this.stage_4_dot = false;
+            this.stage_4_full = true;
+            this.stage_5_dot = false;
+            this.stage_5_full = true;
+            this.stage_6_dot = false;
+            this.stage_6_full = true;
+          }
+        },
+        error=> console.error(error)
+      );
     this.ind_order = true;
     this.order_list = false;
   }

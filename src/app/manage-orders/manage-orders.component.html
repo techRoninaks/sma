@@ -81,11 +81,14 @@
                             <p>Varients:</p>
                         </div>
                         <div class="var-1">
-                            <p> <img src="assets/icons/manageOrders/MIO icons-05.png" height="20px" width="20px"></p>
+                            <p>{{dynamicOrderData.variantArray[0].var_name}}: {{dynamicOrderData.variantArray[0].var_value}}<img src="assets/icons/manageOrders/MIO icons-05.png" height="20px" width="20px"></p>
                         </div>
-                        <div class="var-2">
-                            <p>{{dynamicOrderData.var_name}}: {{dynamicOrderData.var_value}} <img src="assets/icons/manageOrders/MIO icons-05.png" height="20px" width="20px"></p>
+                        <!-- <div class="var-2">
+                            <p>{{dynamicOrderData.var_name_array[1]}}: {{dynamicOrderData.var_value_array[1]}} <img src="assets/icons/manageOrders/MIO icons-05.png" height="20px" width="20px"></p>
                         </div>
+                        <div class="var-3">
+                            <p>{{dynamicOrderData.var_name_array[2]}}: {{dynamicOrderData.var_value_array[2]}} <img src="assets/icons/manageOrders/MIO icons-05.png" height="20px" width="20px"></p>
+                        </div> -->
                         <div class="pincode-label">
                             <p>Pincode & location:</p>
                         </div>
@@ -511,7 +514,7 @@
                         <label style="font-family: Bitter;">{{item.custPlace}},{{item.custPin}}</label>
                     </div>
                     <div class="order-btn">
-                        <button class="btn-order-style" (click)=viewOrder();>VIEW ORDER</button>
+                        <button class="btn-order-style" (click)=viewOrder(item.orderIdShort);>VIEW ORDER</button>
                     </div>
                     <div class="g-status">
                         <div class="grid-status-all" style="margin-top: 103px;">
