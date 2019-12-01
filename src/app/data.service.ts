@@ -1908,10 +1908,10 @@ let httpParams= new HttpParams()
 return this.http.post(this.baseUrl+'assets/api/pendingPayOrder.php',httpParams);
 }
   
-  cartDeliveryPrice(prodid,pincode,data) {
+cartDeliveryPrice(prodId: any,pincode: any,data) {
 let httpParams = new HttpParams()
-.append("prodId", data['prodId'])
-.append("pincode", data['pincode'])
+.append("prodId", prodId)
+.append("pincode", pincode)
 .append("deliveryOption", data['deliveryOption'])
 .append("productQuantity", data['productQuantity']);
 return this.http.post(this.baseUrl + 'assets/api/cartDeliveryPrice.php', httpParams);
@@ -1953,6 +1953,16 @@ cartImgProdUpload(data) {
     let httpParams = new HttpParams()
         .append("prodId", data);
     return this.http.post(this.baseUrl + 'assets/api/cartImgProdUƒpload.php', httpParams);
+}
+  dynamicOfferCart(prodId: any) {
+let httpParams = new HttpParams()
+.append("prodid", prodId)
+return this.http.post(this.baseUrl + 'assets/api/dynamicOfferCart.php', httpParams);
+}
+  variantInfoCartChosen(prodId: any) {
+let httpParams = new HttpParams()
+.append("prodId", prodId);
+return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', httpParams);
 }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
