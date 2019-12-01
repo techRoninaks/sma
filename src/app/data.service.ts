@@ -865,18 +865,22 @@ getdynamicPriceAddProduct(prodid: any) {
     .append("reg_password", data['reg_password']);
     return this.http.post(this.baseUrl+'assets/api/sellerRegistration.php',httpParams);
   }
- addSellerDataStage2(data: Object,seller_id:any,gst_no:any){
-  let httpParams= new HttpParams()
-  .append("seller_id",seller_id )
-  .append("gst_no",gst_no )
-  .append("shop_name", data['shop_name'])
-  .append("shop_address", data['shop_address'])
-  .append("city", data['city'])
- .append("state", data['state'])
-  .append("pin", data['pin'])
-  .append("main_category", data['main_category']);
-  return this.http.post(this.baseUrl+'assets/api/sellerRegistration2.php',httpParams);
- }
+ addSellerDataStage2(data: Object,seller_id:any,gst_no:any)
+  {  
+    let httpParams= new HttpParams()  
+    .append("seller_id",seller_id )  
+    .append("gst_no",gst_no )  
+    .append("shop_name", data['shop_name'])  
+    .append("shop_address", data['shop_address'])  
+    .append("city", data['city'])  
+    .append("state", data['state'])  
+    .append("pin", data['pin'])  
+    .append("main_category", data['main_category'])  
+    .append("main_category1", data['main_category1'])  
+    .append("main_category2", data['main_category2']);  
+    return this.http.post(this.baseUrl+'assets/api/ sellerRegistration2.php',httpParams); 
+  }
+  
  addSellerDataStage3(data: Object){
   let httpParams= new HttpParams()
   .append("id_no", data['id_no'])
@@ -1964,6 +1968,22 @@ let httpParams = new HttpParams()
 .append("prodId", prodId);
 return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', httpParams);
 }
+  getViewOrderData(data: any,orderIdShort: any)
+  {  
+    let httpParams= new HttpParams()  
+    .append("orderIdShort", orderIdShort)  
+    .append("id", data);  
+    return this.http.post(this.baseUrl+'assets/api/ viewSellerOrderData.php',httpParams);  
+  } 
+  
+  getViewOrderDataSeller(data: any,orderIdShort: any)
+  {  
+    let httpParams= new HttpParams()  
+    .append("orderIdShort", orderIdShort)  
+    .append("sellerId", data);  
+    return this.http.post(this.baseUrl+'assets/api/ viewOrderDataSeller.php',httpParams);  
+  }
+
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
