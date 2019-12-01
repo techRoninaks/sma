@@ -8,6 +8,8 @@
     $pin = $_POST['pin'];
     $gst = $_POST['gst_no'];
     $main_category = $_POST['main_category'];
+    $main_category1 = $_POST['main_category1'];
+    $main_category2 = $_POST['main_category2'];
     $response = array();
     $stage_number = 2;
     
@@ -15,6 +17,18 @@
     $result3 = mysqli_query($con1, $sql_query3);
     $row3= mysqli_fetch_array($result3);
     $cat_id = $row3['category_id'];
+
+    $sql_query7 ="SELECT `category_id` FROM `category` WHERE `category`= '$main_category1'";
+    $result7 = mysqli_query($con1, $sql_query7);
+    $row7= mysqli_fetch_array($result7);
+    $cat_id2 = $row7['category_id'];
+
+    $sql_query8 ="SELECT `category_id` FROM `category` WHERE `category`= '$main_category2'";
+    $result8 = mysqli_query($con1, $sql_query8);
+    $row8= mysqli_fetch_array($result8);
+    $cat_id2 = $row8['category_id'];
+
+    $cat_id_main = $cat_id +","+ $cat_id2 +","+ $cat_id1;
 
     $sql_query1 ="INSERT INTO `shop_details` (`id`, `seller_id`, `shopname`, `primary_image`, `prod_image_1`, `prod_image_2`, 
     `prod_image_3`, `addr_id`, `shop_location`, `issue_return`, `issue_refund`, `requires_confirmation`, `gift_option`, 
@@ -24,7 +38,7 @@
     `auto_cancellation_time`, `avg_shipping_time`, `avg_processing_time`, `avg_response_time`, `category_id`, `sub_category_id`, 
     `tags`, `description`) 
     VALUES (NULL, '$seller_id', '$shop_name', '', '', '', '',0, '$shop_address', '', '', '', '', '',0, NULL, '', NULL,0,0,0,0,
-     '',0, '', '',0,'2019-1-1', NULL, '', '', '', '',0,0,0,0,0, '$cat_id', '', '', '')";
+     '',0, '', '',0,'2019-1-1', NULL, '', '', '', '',0,0,0,0,0, '$cat_id_main', '', '', '')";
     $result1 = mysqli_query($con2, $sql_query1);
 
     $sql_query2 ="INSERT INTO `address` (addr1,city,state,pincode,mapping_id,`addr2`,`district`,`country`,

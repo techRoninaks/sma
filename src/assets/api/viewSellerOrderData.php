@@ -1,14 +1,14 @@
 <?php
     require "init.php";
     $sellerId =$_POST["id"];
+    $orderIdShort = $_POST["orderIdShort"];
     $data = array();
     $variantArray = array();
 
-    $sql_query1 = "SELECT `orderid`,`delivery_date`,`customerid`,`order_status`,`created_date` FROM `purchase_order` where sellerid =  '$sellerId' ";
+    $sql_query1 = "SELECT `orderid`,`delivery_date`,`customerid`,`order_status`,`created_date` FROM `purchase_order` where sellerid =  '$sellerId' && orderid= $orderIdShort";
     $result1 = mysqli_query($con2, $sql_query1);
     $row1=mysqli_fetch_array($result1);
     $orderId=$row1["orderid"];
-    $orderIdShort = $row1["orderid"];
     $delivery_date = $row1["delivery_date"];
     $custId = $row1["customerid"];
 

@@ -1,3 +1,59 @@
+/* Smaller devices */
+@mixin sm-lesser {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @mixin sm {
+    @media (min-width: 600px) {
+      @content;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @mixin md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 1024px and less) */
+  @mixin lg {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @mixin xlg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+  /* Extra large devices (large laptops and desktops, 1400px and up) */
+  @mixin mlg {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+  /* Extra large devices (large laptops and desktops, 1500px and up) */
+  @mixin xxlg {
+    @media (min-width: 1500px) {
+        @content;
+    }
+  }
+.main-style{
+    @include sm-lesser{
+        width: 384%;
+    }
+}
+.main-style-2{
+    @include sm-lesser{
+        overflow-x: scroll;
+    }
+}
 .grid-order-history{
     display: grid;
     grid-template-columns: 20% auto 20%;
@@ -9,7 +65,7 @@
                             "invoice . btn-complaint";
     border-radius: 18px;
     width: 90%;
-    background: rgb(241, 239, 239);
+    background: #f7f7f7;
     margin-left: 5%;
     font-family: BitterBold;
     font-size: 14px;
@@ -17,14 +73,36 @@
     margin-bottom: 8%;
     padding-top: 3%;
     margin-top: -3%;
+    @include xxlg{
+        padding-top: 2%;
+        margin-top: -2%;
+    }
     .btn-complaint-style{
         background-color: #EFBE24;
         color: white;
         border: none;
         border-radius: 8px;
         width: 154px;
-        height: 72px;
+        height: 30px;
         margin-left: -14px;
+        @include xxlg{
+            height: 40px;
+            width: 170px;
+        }
+    }
+    .btn-review-style{
+        background-color: #EFBE24;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        height: 30px; 
+        background:#0c700c; 
+        margin-left: -14px; 
+        width: 155px;
+        @include xxlg{
+            height: 40px;
+            width: 170px;
+        }
     }
     .orders{
         background: rgb(212, 206, 206);
@@ -60,6 +138,9 @@
         border-right: 1px solid rgb(114, 114, 114);
         padding-left: 25px;
         margin-top: -42%;
+        @include xxlg{
+            margin-top: -35%;
+        }
     }
     .order-no{
         grid-area: order-no;
@@ -82,6 +163,13 @@
         border-radius: 8px;
         width: 56%;
         height: 61%;
+        @include xlg{
+            width: 65%;
+        }
+        @include xxlg{
+            height: 40px;
+            width: 170px;
+        }
     }
     .feedback-stat{
         grid-area: feedback-stat;
@@ -93,6 +181,15 @@
         margin-top: -46%;
         border-left: 1px solid rgb(114, 114, 114);
         padding-left: 25px;
+        @include xxlg{
+            margin-top: -38%;
+        }
+        .date-style{
+            margin-top: -16%;
+            @include xxlg{
+                margin-top: -12%;
+            }
+        }
     }
     .btn-req-update{
         grid-area: btn-req-update;
@@ -107,6 +204,13 @@
         border-radius: 8px;
         width: 67%;
         height: 58%;
+        @include xlg{
+            width: 154px;
+        }
+        @include xxlg{
+            height: 40px;
+            width: 170px;
+        }
     }
     .btn-complaint{
         grid-area: btn-complaint;
@@ -127,7 +231,16 @@
         font-size: 8px;
         align-content: center;
         text-align: center;
-        width: 778px;
+        width: auto;
+        @include xlg{
+            width: 85px;
+        }
+        @include mlg{
+            width: auto;
+        }
+        @include xxlg{
+            width: auto;
+        }
         .full-circle{
             height: 20px;
             width: 20px;
@@ -141,7 +254,7 @@
             background-color: white;
             border-radius: 25px;
             border: 2px solid #EFBE24;
-            position: absolute;
+            position: relative;
         }
     }
     .pending-conf{
@@ -185,36 +298,90 @@
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .label-2{
         grid-area: label-2;
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .label-3{
         grid-area: label-3;
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .label-4{
         grid-area: label-4;
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .label-5{
         grid-area: label-5;
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .label-6{
         grid-area: label-6;
         border-bottom: 1px solid rgb(114, 114, 114);
         margin-bottom: -31px;
         margin-top: 15px;
+        @include xlg{
+            margin-bottom: -28px;
+        }
+        @include mlg{
+            margin-bottom: -31px;
+        }
+        @include xxlg{
+            margin-bottom: -41px;
+        }
     }
     .dot {
         height: 65px;
@@ -237,6 +404,17 @@
         border-top: 2px solid #EFBE24;
         position: relative;
         transition: all 200ms ease-in ;
+        @include xlg{
+            width: 92%;
+            margin-left: -1%;
+        }
+        @include mlg{
+            width: 99%;
+        }
+        @include xxlg{
+            width: 134%;
+            margin-left: 3%;
+        }
       }
     // timeline
 }
@@ -249,8 +427,16 @@
     width: 1296px;
     margin-left: 72px;
     font-family: BitterBold;
+    @include xlg{
+        width: 90%;
+        margin-left: 5%;
+    }
+    @include xxlg{
+        width: 90%;
+        margin-left: 5%;
+    }
     .orders{
-        background: rgb(212, 206, 206);
+        background: #dbdbdb;
         border-top-left-radius: 18px;
         grid-area: orders;
         text-align: center;
@@ -258,13 +444,13 @@
         padding: 5px;
     }
     .status{
-        background: rgb(212, 206, 206);
+        background: #dbdbdb;
         grid-area: status;
         text-align: center;
         padding: 5px;
     }
     .feedback{
-        background: rgb(212, 206, 206);
+        background: #dbdbdb;
         border-top-right-radius: 18px;
         grid-area: feedback;
         text-align: center;
@@ -342,6 +528,9 @@
         text-align: center;
         border-radius: 6px;
         font-family: BitterBold;
+        @include xlg{
+            font-size: 15px;
+        }
     }
 }
 .flex-container {
@@ -394,10 +583,13 @@
     margin-left: 6%;
 }
 .user-style{
-    width: 400px;
+    width: 550px;
     height: 33px;
     border: none;
     border-radius: 5px;
+    @include sm-lesser{
+        width: 86%;
+    }
 }
 .write-complaint{
     grid-area: write-complaint;
@@ -414,11 +606,14 @@
     color: white;
 }
 .text-area-style{
-    width: 400px;
+    width: 550px;
     border: none;
     border-radius: 5px;
     margin-top: 5%;
     height: 150px;
+    @include sm-lesser{
+        width: 86%;
+    }
 }
 .submit{
     background-color: #EFBE24;
@@ -478,3 +673,109 @@
     font-family: BitterRegular;
 }
 //popup2
+.circle-1{
+    @include sm-lesser{
+        margin-left: -2%;
+    }
+    @include xlg{
+        margin-left: -3%;
+    }
+    @include mlg{
+        margin-left: -2%;
+    }
+    @include xxlg{
+        margin-left: 1.5%;
+    }
+}
+.circle-2{
+    @include sm-lesser{
+        margin-left: 18%;
+    }
+    @include xlg{
+        margin-left: 21%;
+    }
+    @include mlg{
+        margin-left: 21%; 
+    }
+    @include xxlg{
+        margin-left: 31%;
+    }
+}
+.circle-3{
+    @include sm-lesser{
+        margin-left: 41.5%;
+    }
+    @include xlg{
+        margin-left: 38%;
+    }
+    @include mlg{
+        margin-left: 41.5%;
+    }
+    @include xxlg{
+        margin-left: 59%;
+    }
+}
+.circle-4{
+    @include sm-lesser{
+        margin-left: 60.5%;
+    }
+    @include xlg{
+        margin-left: 55%;
+    }
+    @include mlg{
+        margin-left: 60.5%;
+    }
+    @include xxlg{
+        margin-left: 84%;
+    }
+}
+.circle-5{
+    @include sm-lesser{
+        margin-left: 79.5%;
+    }
+    @include xlg{
+        margin-left: 72.5%;
+    }
+    @include mlg{
+        margin-left: 79%;
+    }
+    @include xxlg{
+        margin-left: 110%;
+    }
+}
+.circle-6{
+    @include sm-lesser{
+        margin-left: 98%;
+    }
+    @include xlg{
+        margin-left: 89.5%;
+    }
+    @include mlg{
+        margin-left: 98%;
+    }
+    @include xxlg{
+        margin-left: 135%;
+    }
+}
+.modal-review{
+    border-radius: 18px; 
+    width: 665px; 
+    margin-left: -52px;
+    @include sm-lesser{
+        width: auto;
+        margin-left: auto;
+    }
+}
+.modal-content{
+    border-radius: 18px; 
+    width: 665px; 
+    margin-left: -52px;
+    @include sm-lesser{
+        width: auto;
+        margin-left: auto;
+    }
+    @include mlg{
+        width: 665px; 
+        margin-left: -52px;
+    }
+}

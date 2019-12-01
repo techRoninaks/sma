@@ -2,6 +2,7 @@
     require "init.php";
     $orderid =$_POST["orderid"];
     $data = array();
+    $variantArray = array();
 
     $sql_query1 = "SELECT `orderid`,`delivery_date`,`customerid`,`order_status`,`created_date` FROM `purchase_order` where orderid =  '$orderid' ";
     $result1 = mysqli_query($con2, $sql_query1);
@@ -38,30 +39,39 @@
     $result2 = mysqli_query($con2 , $sql_query2);
     $row2=mysqli_fetch_array($result2);
     $prodId = $row2["prodid"];
-    $variantId = $row2["variants_chosen"];
+
     $tracking_no = $row2["shipping_tracking_number"];
 
     $sql_query3 = "SELECT * FROM `product` where prodid =  '$prodId' ";
     $result3 = mysqli_query($con1 , $sql_query3);
     $row3=mysqli_fetch_array($result3);
 
-    $sql_query4 = "SELECT * FROM `variant_info` where `prodid` =  '$prodId' && `variantid`= '$variantId'";
-    $result4 = mysqli_query($con1 , $sql_query4);
-
     $sql_query5 = "SELECT `contact_name`,`addr1`,`contact_number`,`pincode`,`city` FROM `address` where mapping_id ='$custId' && `addr_type`='shipping'";
     $result5 = mysqli_query($con2, $sql_query5);
     $row5=mysqli_fetch_array($result5);
 
-    while($row4=mysqli_fetch_assoc($result4))
+    $variantList = $row2["variants_chosen"];
+    $varSplit = (explode(",",$variantList));
+    $arrayCount =sizeof($varSplit);
+    $count1 =0;
+    for ($i=0; $i<$arrayCount; $i++)
     {
-        $data = array('prodId'=>$prodId,'createdDate'=>$createDate2,'createDate'=>$mdate,'orderId'=>$orderId,'gift_note'=>$row2['gift_note'],'gift_address'=>$row2['gift_address'],'gift_title'=>$row2['gift_title'],
-        'quantity'=>$row2['quantity'],'tax'=>$row2['tax'],'variantprice'=>$row2['variantprice'],
-        'shippingprice'=>$row2['shippingprice'],'total_price'=>$row2['total_price'],'order_status'=>$row1['order_status'],
-        'shipment_type'=>$row3['shipping_option'],'tracking_no'=>$tracking_no,'cust_name'=>$row5['contact_name'],
-        'cust_address'=>$row5['addr1'],'cust_mobile'=>$row5['contact_number'],
-        'cust_pin'=>$row5['pincode'],'cust_city'=>$row5['city'],'remaining_days'=>$diff->format("%a"),
-        'delivery_date'=>$delivery_date,'var_name'=>$row4["name"],'var_value'=>$row4["value"],'var_price'=>$row4["price"],
-        'prod_name'=>$row3["name"],'short_desc'=>$row3["short_desc"]);
+        $sql_query4 = "SELECT * FROM `variant_info` where `prodid` =  '$prodId' && `variantid`= '$varSplit[$i]'";
+        $result4 = mysqli_query($con1 , $sql_query4);
+        while($row4=mysqli_fetch_array($result4))
+        {
+            $variantArray[$count1++]= array('var_name'=>$row4["name"],'var_value'=>$row4["value"],'var_price'=>$row4["price"]);
+        }
     }
+
+    $data = array('prodId'=>$prodId,'createdDate'=>$createDate2,'createDate'=>$mdate,'orderId'=>$orderId,'gift_note'=>$row2['gift_note'],'gift_address'=>$row2['gift_address'],'gift_title'=>$row2['gift_title'],
+    'quantity'=>$row2['quantity'],'tax'=>$row2['tax'],'variantprice'=>$row2['variantprice'],
+    'shippingprice'=>$row2['shippingprice'],'total_price'=>$row2['total_price'],'order_status'=>$row1['order_status'],
+    'shipment_type'=>$row3['shipping_option'],'tracking_no'=>$tracking_no,'cust_name'=>$row5['contact_name'],
+    'cust_address'=>$row5['addr1'],'cust_mobile'=>$row5['contact_number'],
+    'cust_pin'=>$row5['pincode'],'cust_city'=>$row5['city'],'remaining_days'=>$diff->format("%a"),
+    'delivery_date'=>$delivery_date,'variantArray'=>$variantArray,
+    'prod_name'=>$row3["name"],'short_desc'=>$row3["short_desc"]);
+
     echo json_encode($data);
 ?>

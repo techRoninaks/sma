@@ -90,6 +90,9 @@ text-decoration: underline;
     }
     .section-1{
         grid-area: section-1;
+        @include xxlg{
+            margin-left: 5%;
+        }
         .grid-1{
             display: grid;
             grid-template-columns: 50% 50%;
@@ -245,6 +248,15 @@ text-decoration: underline;
                         @include sm-lesser{
                             margin-left: -5%;
                         }
+                        @include xlg{
+                            margin-left: -12%;
+                        }
+                        @include mlg{
+                            margin-left: -69%
+                        }
+                        @include xxlg{
+                            margin-left: -174%;
+                        }
                         .left {
                         transform: rotate(135deg);
                         -webkit-transform: rotate(135deg);
@@ -256,6 +268,15 @@ text-decoration: underline;
                         margin-left: -82%;
                         @include sm-lesser{
                             margin-left: 7%;
+                        }
+                        @include xlg{
+                            margin-left: -14%;
+                        }
+                        @include mlg{
+                            margin-left: -80%
+                        }
+                        @include xxlg{
+                            margin-left: -222%;
                         }
                         .right {
                             transform: rotate(-45deg);
@@ -319,6 +340,9 @@ text-decoration: underline;
     }
     .section-2{
         grid-area: section-2;
+        @include xxlg{
+            margin-left: 5%;
+        }
         .grid-2{
             display: grid;
             grid-template-rows: auto;
@@ -346,6 +370,9 @@ text-decoration: underline;
                 margin-top: 20px;
                 width: 350px;
             }
+            @include xxlg{
+                margin-left: 264px;
+            }
             .grid-pro-card{
                 display: grid;
                 grid-template-rows: auto auto auto auto auto auto;
@@ -353,7 +380,7 @@ text-decoration: underline;
                 grid-template-areas: "prod-name-label prod-name"
                                      "var-label pincode-label"
                                      "var-1 pincode"
-                                     "var-2 place"
+                                     ". place"
                                      "cust-name-label cust-name"
                                      "attachment .";
                 margin-top: 16px;
@@ -383,10 +410,14 @@ text-decoration: underline;
                 grid-area: var-1;
                 font-family: Bitter;
             }
-            .var-2{
-                grid-area: var-2;
-                font-family: Bitter;
-            }
+            // .var-2{
+            //     grid-area: var-2;
+            //     font-family: Bitter;
+            // }
+            // .var-3{
+            //     grid-area: var-3;
+            //     font-family: Bitter;
+            // }
             .pincode{
                 grid-area: pincode;
                 font-family: Bitter;
@@ -424,6 +455,9 @@ text-decoration: underline;
             @include sm-lesser{
                 width: 360px;
                 margin-left: 11px;
+            }
+            @include xxlg{
+                margin-left: 8%;
             }
             .grid-total-card{
                 display: grid;
@@ -478,6 +512,9 @@ text-decoration: underline;
     }
     .section-3{
         grid-area: section-3;
+        @include xxlg{
+            margin-left: 5%;
+        }
         .grid-3{
             display: grid;
             grid-template-rows: auto;
@@ -503,6 +540,9 @@ text-decoration: underline;
                 margin-left: 13px;
                 width: 349px;
                 margin-top: -30px;
+            }
+            @include xxlg{
+                margin-left: 264px;
             }
             .grid-gift-details{
                 display: grid;
@@ -535,6 +575,9 @@ text-decoration: underline;
             @include sm-lesser{
                 height: 183px;
                 width: 347px;
+            }
+            @include xxlg{
+                margin-left: 8%;
             }
             .grid-ship-details{
                 display: grid;
@@ -604,6 +647,14 @@ text-decoration: underline;
                 margin-left: 2%;
                 // width: 1296px;
             }
+            @include xlg{
+                margin-left: 5%;
+                width: 90%;
+            }
+            @include xxlg{
+                margin-left: 5%;
+                width: 90%;
+            }
             .update-btn{
                 margin-top: 81px;
                 margin-left: 600px;
@@ -612,6 +663,12 @@ text-decoration: underline;
                 color:white;
                 border-radius: 6px;
                 height: 41px;
+                @include xlg{
+                    margin-left: 45%;
+                }
+                @include xxlg{
+                    margin-left: 47%;
+                }
             }
         }
         .cancel-btn{
@@ -757,6 +814,17 @@ text-decoration: underline;
             width: 1074px;
             @include sm-lesser{
                 width: 1070px;
+            }
+            @include xlg{
+                width: 100%;
+                margin-left: -1%;
+            }
+            @include mlg{
+                width: 101%;
+            }
+            @include xxlg{
+                width: 101%;
+                margin-left: 2%;
             }
           }
           .full-circle{
@@ -1226,16 +1294,16 @@ text-decoration: underline;
 }
 .i-circle-1{
     @include sm-lesser{
-        margin-left: -12px;
+        margin-left: -1.5%;
     }
     @include xlg{
-        margin-left: -19px;
+        margin-left: -3%;
     }
     @include mlg{
         margin-left: -12px;
     }
     @include xxlg{
-        margin-left: -12px;
+        margin-left: 1.5%;
     }
 }
 .i-circle-2{
@@ -1243,13 +1311,13 @@ text-decoration: underline;
         margin-left: 217px;
     }
     @include xlg{
-        margin-left: 157px;
+        margin-left: 19.5%;
     }
     @include mlg{
         margin-left: 218px;
     }
     @include xxlg{
-        margin-left: 235px;
+        margin-left: 23%;
     }
 }
 .i-circle-3{
@@ -1257,13 +1325,13 @@ text-decoration: underline;
         margin-left: 438px;
     }
     @include xlg{
-        margin-left: 322px;
+        margin-left: 40%;
     }
     @include mlg{
         margin-left: 439px;
     }
     @include xxlg{
-        margin-left: 473px;
+        margin-left: 43.5%;
     }
 }
 .i-circle-4{
@@ -1271,13 +1339,13 @@ text-decoration: underline;
         margin-left: 645px;
     }
     @include xlg{
-        margin-left: 470px;
+        margin-left: 59.5%;
     }
     @include mlg{
         margin-left: 647px;
     }
     @include xxlg{
-        margin-left: 693px;
+        margin-left: 63.5%;
     }
 }
 .i-circle-5{
@@ -1285,13 +1353,13 @@ text-decoration: underline;
         margin-left: 853px;
     }
     @include xlg{
-        margin-left: 621px;
+        margin-left: 79%;
     }
     @include mlg{
         margin-left: 854px;
     }
     @include xxlg{
-        margin-left: 915px;
+        margin-left: 83%;
     }
 }
 .i-circle-6{
@@ -1299,13 +1367,13 @@ text-decoration: underline;
         margin-left: 1060px;
     }
     @include xlg{
-        margin-left: 770px;
+        margin-left: 98.5%;
     }
     @include mlg{
         margin-left: 1059px;
     }
     @include xxlg{
-        margin-left: 1136px;
+        margin-left: 103%;
     }
 }
 .order-list-style{

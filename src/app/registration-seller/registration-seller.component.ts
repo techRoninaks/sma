@@ -29,6 +29,8 @@ export class RegistrationSellerComponent implements OnInit {
   gotp: any ="" ;
   mobileNo: any= "";
   fp_mobile: any ="" ;
+  sentOTP: boolean = false;
+  Otp: boolean = true;
 
   otpVerified: boolean = false;
 
@@ -53,6 +55,8 @@ export class RegistrationSellerComponent implements OnInit {
       state:['',Validators.required],
       pin:['',Validators.required],
       main_category:['',Validators.required],
+      maincategory1:['',Validators.required],
+      maincategory2:['',Validators.required],
     })
     this.fpFormMobile = this.formBuilderMobile.group({
       fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
@@ -449,6 +453,24 @@ export class RegistrationSellerComponent implements OnInit {
       error=> console.error(error)
     );
   }
+  newVerify(){
+    this.fpmobile = this.registrationForm.controls['reg_mobile_no'].value;
+    if(this.fpmobile==""){
+      alert("Enter Mobile No:");
+    }
+    else{
+      this.data.checkMobile(this.fpmobile).subscribe(
+        data => { 
+            alert('OTP Sent Successfully');
+            this.gotp = this.generateOTP();
+            this.requestOtp(this.gotp, this.fpmobile);
+            this.sentOTP = true;
+            this.Otp = false;
+        },
+        error => console.error(error)
+      );
+    }
+  }
   onSubmitSendOtp(){
     this.submitted = true;
     var response;
@@ -500,6 +522,7 @@ export class RegistrationSellerComponent implements OnInit {
           {
             alert('OTP verified');
             this.otpVerified = true;
+            this.sentOTP = false;
             $("#myModal").modal('hide');
           }
           else
