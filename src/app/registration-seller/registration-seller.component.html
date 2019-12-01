@@ -259,7 +259,7 @@
           </div>
         </div>
     </div>
-    <label style="margin-left: 60px;font-size: 25px;"> SHOP DETAILS</label>
+    <label class="shopDetails1"> SHOP DETAILS</label>
 
     <div class="div-body-stage-1">
         <form [formGroup]="registrationFormStage1" (ngSubmit)="onSubmitStage2()" class="grid-form">
@@ -431,7 +431,7 @@
             </div>
           </div>
       </div>
-      <label style="margin-left: 60px;font-size: 25px;">OWNER INFO</label>
+      <label class="owner1">OWNER INFO</label>
 
       <div class="div-body-stage-2">
         <div class="grid-stage-2">
@@ -481,7 +481,7 @@
               <input style="display: none;" type="file" id="frontUpload" (click)="frontUpload()" accept="image/*" #fileInput1>
               <button (click)="fileInput1.click()" type="button" style="border: none; margin-left: 37px;
               margin-top: 34px; background: inherit;">+</button>
-              <div style="height: 16px;  width: 100px; background: #009145; margin-top: 25px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;"><label style="color: white; font-family:BitterRegular; margin-left: 30px;">Front</label></div>
+              <div class="front1"><label style="color: white; font-family:BitterRegular; margin-left: 30px;">Front</label></div>
             </div>
           </div>
           <div class="back">
@@ -489,7 +489,7 @@
                 <input style="display: none;" type="file" id="backUpload" (click)="backUpload()" accept="image/*" #fileInput2>
                 <button (click)="fileInput2.click()" style="border: none; margin-left: 37px;
                 margin-top: 34px; background: inherit;">+</button>
-                <div style="height: 16px;  width: 100px; background: #009145; margin-top: 25px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;"><label style="color: white; font-family:BitterRegular; margin-left: 30px;">Back</label></div>
+                <div class="back1"><label style="color: white; font-family:BitterRegular; margin-left: 30px;">Back</label></div>
             </div>
           </div>
           <div class="btn-next">
@@ -538,14 +538,14 @@
         </div>
       </div>
     </div>
-    <label style="margin-left: 60px;font-size: 25px;">PAYMENT SHIPPING</label>
+    <label class="paymentShipping1">PAYMENT SHIPPING</label>
       <div class="div-body-stage-3">        
         <div class="grid-shipping-main">
           <div class="ship-details">
             <div class="grid-shipping">
               <div class="label-ship">
-                  <div style="height: 25px; width: 160px; background: #009145; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
-                    <label style="color: white; float: right; margin-right: 17px;">SHIPPING</label>
+                  <div class="shippingLabel3">
+                    <label class="shippingLabel4">SHIPPING</label>
                   </div>
               </div>
               <div class="label-ship-from">
@@ -588,7 +588,7 @@
           </div>
           <div class="location">
             <div class="location1">
-              <label style="color: white; font-size: 19px; margin-left: 51px; margin-top: 11px;">LOCATION</label>
+              <label class="location2">LOCATION</label>
             </div>
             <div class="grid-location">
               <div class="location-input">
@@ -608,7 +608,7 @@
               <div class="pay-header">
                 <div style="height: 38px; width: 160px;  background: #009145; border-top-right-radius: 4px; border-bottom-right-radius: 4px; 
                 margin-left: -155px; margin-top: -40px;">
-                    <label style="color: white; float: right; margin-right: 17px; margin-top: 6px;">PAYMENT</label>
+                    <label class="payment1">PAYMENT</label>
                 </div>
               </div>
                 <div class="holder-name">
@@ -782,7 +782,7 @@
         </div>
       </div>
     </div>
-    <label style="margin-left: 60px;font-size: 25px;"> TERMS AND CONDITIONS</label>
+    <label class="term1"> TERMS AND CONDITIONS</label>
 
     <div class="div-body">
       <div class="mod-date">
@@ -799,7 +799,7 @@
       <form [formGroup]="termsForm">
         <button class="terms"><a target="_blank" routerLink="/terms&conditions">Goto T&C</a></button>
         <br>
-        <input type="checkbox" class="check" formControlName="t_checkbox"> &nbsp; <label>I agree to the above stated terms and conditions</label>
+        <input type="checkbox" class="check" formControlName="t_checkbox"> &nbsp; <label class="label4">I agree to the above stated terms and conditions</label>
         <br>
         <button [disabled]="! termsForm.valid" type="submit" (click)=nextStage(); class="next3">NEXT</button>
       </form>
@@ -847,7 +847,7 @@
         </div>
       </div>
     </div>
-    <label style="margin-left: 60px;font-size: 25px;">LAUNCH</label>
+    <label class=launch2>LAUNCH</label>
 
       <div class="div-body-stage-5">
         <div class="grid-promotion">
@@ -976,9 +976,7 @@
               </div>
           </div>
           <div class="btn-launch">
-            <button style="margin-left: 442px;  background: #EFBE24;  color: white;  
-            border: none;  border-radius: 4px;  font-family: BitterBold;  height: 38px;  
-            margin-top: 59px;  width: 117px;" (click)=welcome();>LAUNCH</button>
+            <button class="launch5" (click)=welcome();>LAUNCH</button>
           </div>
         </div>
       </div>

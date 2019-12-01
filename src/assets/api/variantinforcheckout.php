@@ -1,7 +1,7 @@
 <?php
     require "init.php";
     // header("Access-Control-Allow-Origin: *"); 
-    $data = array();
+    $data1 = array();
     $prodid = $_POST["prodid"];
     $userid = $_POST["userid"];
 
@@ -22,8 +22,9 @@
     }
 
     $variantid = $data2['variantsChosen'] ;
+    $variantid = explode(",", $variantid);
 
-    $sql_query = "SELECT * FROM `variant_info` WHERE prodid = $prodid AND variantid = $variantid";
+    $sql_query = "SELECT * FROM `variant_info` WHERE prodid = $prodid AND variantid = $variantid[0]";
     // echo $sql_query;
 
     $result = mysqli_query($con1, $sql_query);

@@ -76,6 +76,7 @@ export class CartComponent implements OnInit {
   pincode: any = [];
   tokenDeliveryPrice: object;
   deliveryOption: any =[];
+  dynamicOfferCart: any =[];
 
   constructor(private data: DataService, private cookieService: CookieService, private formBuilder: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({
@@ -134,7 +135,11 @@ export class CartComponent implements OnInit {
           console.log(this.dynamicShippingPrice);
         },
         );
-
+        this.data.dynamicOfferCart(this.prodId).subscribe(data => {
+          this.dynamicOfferCart = data;
+          console.log(this.dynamicOfferCart);
+        },
+        );
 
       });
     }
@@ -147,6 +152,7 @@ export class CartComponent implements OnInit {
 
 
   }
+
   changeShippingOption(pos){
     var addrSplit = (<HTMLInputElement><any>document.getElementById("dropDownAddrId")).value;
     var addressSplit = addrSplit.split(",")

@@ -831,7 +831,7 @@ export class ListingComponent implements OnInit {
 
 		this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
 
-		this.data.saveAddressGiftNote(this.formAddress, this.orderid, this.userId ).subscribe();
+		// this.data.saveAddressGiftNote(this.formAddress, this.orderid, this.userId ).subscribe();
 		// this.id = "2";
 		this.data.getNewAddr(this.orderid).subscribe(
 			data => {
@@ -884,6 +884,11 @@ export class ListingComponent implements OnInit {
 			"description": this.dynamicDataProName.name,
 			"image": "favicon.ico", "handler": response => {
 				alert("Booking successful. Thank you!");
+				console.log(response);
+				var dataTrans = {txnid:response.razorpay_payment_id,orderId: this.orderid, prodname:this.dynamicData['name']};
+				this.data.updateTransaction(dataTrans).subscribe(data=>{
+
+				})
 			},
 			"prefill": {
 				"name": this.Name,

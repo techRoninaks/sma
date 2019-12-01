@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma23/src/";
+  // baseUrl = "http://localhost/Angular/sma24/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -460,6 +460,13 @@ getSellerDetailsShop(data: any) {
     .append("login_password", data['login_password']);
     return this.http.post(this.baseUrl+'assets/api/login.php',httpParams);
   }
+  updateTransaction(data: Object){
+    let httpParams= new HttpParams()
+    .append("txnid", data['txnid'])
+    .append("prodname", data['prodname'])
+    .append("orderId", data['orderId']);
+    return this.http.post(this.baseUrl+'assets/api/updateTransaction.php',httpParams);
+  }
 
   checkMobile(data: string){
     let httpParams= new HttpParams()
@@ -684,11 +691,11 @@ getcheckoutFinal(id: any, shippingType) {
       .append("userId", userId);
     return this.http.post(this.baseUrl + 'assets/api/cart.php', httpParams);
   }
-  getcartCheckout(id: any) {
-    let httpParams = new HttpParams()
-      .append("id", id);
-    return this.http.post(this.baseUrl + 'assets/api/cartCheckout.php', httpParams);
-  }
+  // getcartCheckout(id: any) {
+  //   let httpParams = new HttpParams()
+  //     .append("id", id);
+  //   return this.http.post(this.baseUrl + 'assets/api/cartCheckout.php', httpParams);
+  // }
 getUser() {
     return this.http.get(this.baseUrl + 'assets/api/bulkdiscountcheckout.php');
   }
@@ -986,11 +993,11 @@ getPurchaseOrderDateReqOrderCheckout(orderid: any) {
     return this.http.post(this.baseUrl + 'assets/api/getMsgTitleProCheckout.php', httpParams);
   }
 
-getCustomerOrderCheckout(orderid: any) {
-     let httpParams = new HttpParams()
-     .append("orderid", orderid);
-    return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
-   }
+// getCustomerOrderCheckout(orderid: any) {
+//      let httpParams = new HttpParams()
+//      .append("orderid", orderid);
+//     return this.http.post(this.baseUrl + 'assets/api/getCustomerOrderCheckout.php', httpParams);
+//    }
 
 getOrderDetailsCheckout(userId: any) {
   let httpParams = new HttpParams()
@@ -1901,10 +1908,10 @@ let httpParams= new HttpParams()
 return this.http.post(this.baseUrl+'assets/api/pendingPayOrder.php',httpParams);
 }
   
-  cartDeliveryPrice(data) {
+cartDeliveryPrice(prodId: any,pincode: any,data) {
 let httpParams = new HttpParams()
-.append("prodId", data['prodId'])
-.append("pincode", data['pincode'])
+.append("prodId", prodId)
+.append("pincode", pincode)
 .append("deliveryOption", data['deliveryOption'])
 .append("productQuantity", data['productQuantity']);
 return this.http.post(this.baseUrl + 'assets/api/cartDeliveryPrice.php', httpParams);
@@ -1932,6 +1939,7 @@ getcartCheckout(id) {
 let httpParams = new HttpParams()
 .append("id", id);
 return this.http.post(this.baseUrl + 'assets/api/cartCheckout.php', httpParams);
+}
 
 getCustomerOrderCheckout(orderid) {
 let httpParams = new HttpParams()
@@ -1945,6 +1953,16 @@ cartImgProdUpload(data) {
     let httpParams = new HttpParams()
         .append("prodId", data);
     return this.http.post(this.baseUrl + 'assets/api/cartImgProdUƒpload.php', httpParams);
+}
+  dynamicOfferCart(prodId: any) {
+let httpParams = new HttpParams()
+.append("prodid", prodId)
+return this.http.post(this.baseUrl + 'assets/api/dynamicOfferCart.php', httpParams);
+}
+  variantInfoCartChosen(prodId: any) {
+let httpParams = new HttpParams()
+.append("prodId", prodId);
+return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', httpParams);
 }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )

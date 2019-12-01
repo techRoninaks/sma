@@ -14,6 +14,12 @@ $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
 
+// custom sub font sizes
+$textSmall : 12px;
+$textMedium : 14px;
+$textLarge : 16px;
+
+
 /* Smaller devices */
 @mixin sm-lesser {
 	@media (max-width: 600px) {
@@ -51,6 +57,7 @@ $SubText: 18px;
 
 input{
 	width:inherit;
+	outline: 0;
 }
 
 
@@ -253,6 +260,11 @@ input{
 		width: 300px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media screen and (min-width: 0px) and (max-width:600px) {
+			width: 160px;
+			transform: translate(0rem, 1.4rem);
+		}
+
 	}
 	h3 {
 		text-align: center;
@@ -260,6 +272,10 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media screen and (min-width: 0px) and (max-width:600px) {
+			font-size: $textMedium;
+			transform: translate(0rem, 0rem);
+		}
 	}
 	p {
 		text-align: justify;
@@ -272,28 +288,45 @@ input{
 }
 .grid-AddProductBtn {
 	display: grid;
-	grid-template-columns: auto auto auto;
+	margin-bottom: 30px;
+	grid-template-columns: auto auto auto auto;
 	grid-template-rows: auto;
-	grid-template-areas: "btnDuplicate btnToggleActive btnToggleActive1";
+	grid-template-areas: "btnDuplicate btnToggleActive btnToggleActive0 btnToggleActive1";
+	@media screen and (min-width: 0px) and (max-width:600px) {
+		grid-template-columns: auto auto;
+		row-gap: 10px;
+		grid-template-areas: "btnDuplicate ." ". btnToggleActive" "btnToggleActive0 btnToggleActive1";
+
+		.button{font-size: $textSmall;
+		padding: 0px;}
+	}
+	
 	.btnDuplicate {
 		grid-area: btnDuplicate;
-		.btnDupli {
-			margin-left: 180%;
-			background: #efbe24;
-			color: white;
-			font-family: BitterBold;
-			border-radius: 5px;
-			height: 40px;
-			margin-top: 20px;
-			margin-bottom: 20px;
-			width: 140px;
-			cursor: pointer;
+		
+	}
+	p{
+		margin: 0px;
+	}
+	.btnDupli {
+		background: #efbe24;
+		color: white;
+		font-family: BitterBold;
+		border-radius: 5px;
+		height: 40px;
+		width: 140px;
+		border:none;
+		cursor: pointer;
+		@media screen and (min-width: 0px) and (max-width:600px) {
+			font-size: $textSmall;
+			padding: 5px;
+			height: 25px;
+			width: 90px;
 		}
 	}
 	.btnToggleActive {
 		grid-area: btnToggleActive;
 		.toggleTextActive {
-			margin-left: 130%;
 			margin-top: 26px;
 			font-family: "BitterBold";
 		}
@@ -306,9 +339,6 @@ input{
 			display: inline-block;
 			width: 60px;
 			height: 40px;
-			margin-left: 50%;
-			margin-bottom: 10px;
-			margin-top: 20px;
 		}
 
 		.switch input {
@@ -538,6 +568,10 @@ input{
 		width: 250px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media screen and (min-width: 0px) and (max-width:600px) {
+			width: 180px;
+			transform: translate(0rem, 1.6rem);
+		}
 	}
 	h3 {
 		text-align: center;
@@ -546,6 +580,10 @@ input{
 		font-size: $Text;
 		transform: translate(0px, -0.2em);
 		z-index: 1;
+		@media screen and (min-width: 0px) and (max-width:600px) {
+			font-size:$textMedium;
+			transform: translate(0rem, 0rem);
+		}
 	}
 	p {
 		text-align: justify;
@@ -555,6 +593,13 @@ input{
 .dvImagesPrimaryDetails {
 	grid-area: grid-PrimaryDetails;
 	margin-top: 5% ;
+	@media screen and (min-width: 0px) and (max-width:600px) {
+		h5{font-size: $textMedium;
+			margin-top: 30px;
+			margin-bottom: 0px;
+			margin-left: 0px;
+		}
+	}
 }
 .grid-ImagesPrimaryDetails {
 	padding: 40px 0px;
@@ -599,6 +644,11 @@ input{
 }
 .dvPrimaryDetails1 {
 	grid-area: grid-PrimaryDetails1;
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		p{font-size: $textSmall;
+		margin: 8px 0;
+		}
+	}
 }
 .grid-PrimaryDesc {
 	display: grid;
@@ -827,10 +877,16 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
 		text-align: center;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textSmall;
+		}
 	}
 }
 .dvAddVarients {
@@ -894,6 +950,10 @@ input{
 		::ng-deep .mat-ink-bar{
 			background-color: peru;
 		}
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			p{font-size: $textSmall;
+			margin: 8px 0px;}
+		}
 	}
 
 	::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
@@ -914,7 +974,10 @@ input{
 			font-size: $SubText;
 			font-family: "BitterBold";
 			color: white;
-
+		}
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			p{font-size: $textSmall;
+			margin: 8px 0;}
 		}
 
 		img{
@@ -932,6 +995,13 @@ input{
 		p{
 			font-size: $SubText;
 			font-family: "BitterBold";
+			
+		}
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			p{font-size: $textSmall;
+			margin: 8px 0px;}
+			input{font-size:$textSmall;}
+			button{font-size: $textSmall;}
 		}
 
 		.input-new-varient{
@@ -965,6 +1035,11 @@ input{
 		height: 40px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 100px;
+			height: 30px;
+			transform: translate(0rem, 1.5rem);
+		}
 	}
 	h3 {
 		text-align: center;
@@ -973,6 +1048,9 @@ input{
 		transform: translate(0px, -0.25em);
 		z-index: 1;
 		font-size: $SubHeader;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -981,6 +1059,9 @@ input{
 }
 .dvPrice {
 	grid-area: grid-Price;
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		font-size: $textSmall;
+	}
 }
 .grid-PriceDetails {
 	margin-top: 50px;
@@ -1121,6 +1202,11 @@ input{
 		width: 270px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 200px;
+			height: 30px;
+			transform: translate(0rem, 1.5rem);
+		}
 	}
 	h3 {
 		text-align: center;
@@ -1129,6 +1215,9 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.25em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -1148,6 +1237,9 @@ input{
 		grid-area: grid-AdvanceTextLeft;
 		.labelText {
 			font-family: "BitterBold";
+			@media only screen and (min-width: 0px) and (max-width: 600px){
+				font-size: $textSmall;
+			}
 		}
 	}
 	.grid-AdvanceDropDownRight {
@@ -1168,6 +1260,16 @@ input{
 		grid-template-rows: auto;
 		grid-template-columns: auto;
 		grid-template-areas: "grid-AdvanceSettingsLeft" "grid-AdvanceSettingsRight";
+	}
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		p{font-size: $textSmall;
+		margin: 8px 0;}
+
+		h6{font-size: $textSmall;
+		margin: 8px 0;}
+
+		padding: 10px 10px;
+
 	}
 	.grid-AdvanceSettingsLeft {
 		grid-area: grid-AdvanceSettingsLeft;
@@ -1263,6 +1365,12 @@ input{
 		grid-template-columns: auto;
 		grid-template-rows: auto;
 		grid-template-areas: "grid-Advance3Left" "grid-Advance3Med" "grid-Advance3Right";
+	}
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		p{font-size: $textSmall;
+		margin: 8px 0;}
+		padding: 10px 10px;
+
 	}
 	.grid-Advance3Left {
 		grid-area: grid-Advance3Left;
@@ -1842,6 +1950,9 @@ input{
 		font-size: $Text;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -1850,6 +1961,10 @@ input{
 }
 .dvMsgTitle {
 	grid-area: grid-MsgTitle;
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		p{font-size: $textSmall;
+		margin: 8px 0px;}
+	}
 }
 .grid-MsgTitleContainer {
 	display: grid;
@@ -1933,6 +2048,9 @@ input{
 			.imgClose {
 				cursor: pointer;
 				margin-left: 30px;
+				@media only screen and (min-width: 0px) and (max-width: 600px){
+					margin-left: 0px;
+				}
 				height: 20px;
 			}
 		}
@@ -1948,6 +2066,11 @@ input{
 		width: 300px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 200px;
+			transform: translate(0rem, 1.2rem);
+
+		}
 	}
 	h3 {
 		text-align: center;
@@ -1955,6 +2078,9 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -1963,6 +2089,9 @@ input{
 }
 .dvShippingOptions {
 	grid-area: grid-ShippingOptions;
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		font-size: $textSmall;
+	}
 }
 .grid-RadioBtn {
 	display: grid;
@@ -2034,6 +2163,10 @@ input{
 		width: 300px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 200px;
+			transform: translate(0rem, 1.2rem);
+		}
 	}
 	h3 {
 		text-align: center;
@@ -2041,6 +2174,9 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -2066,10 +2202,17 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textSmall;
+		}
 	}
 	p {
 		text-align: justify;
 		text-align: center;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textSmall;
+		}
+		
 	}
 }
 .grid-DeliverableContainer {
@@ -2082,6 +2225,7 @@ input{
 		"grid-DeliverableFoot";
 	@media only screen and (min-width: 0px) and (max-width: 600px){
 		padding: 0;
+		p{font-size: $textSmall;}
 	}
 
 	.grid-DeliverableHead {
@@ -2128,6 +2272,10 @@ input{
 			grid-template-rows: auto;
 			grid-template-areas: "deliverable-Location deliverable-Price deliverable-Qty-Price shipEdit shipClose";
 
+			@media only screen and (min-width: 0px) and (max-width: 600px){
+				padding: 4px;
+				p{font-size: $textSmall;}
+			}
 			input{
 				border:1px solid #3333333f;
 				text-align: center;
@@ -2219,9 +2367,16 @@ input{
 		margin-left: auto;
 		margin-right: auto;
 		width: 160px;
-		height: 50px;
+		height: 40px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 130px;
+			height: 24px;
+			p{font-size: $textSmall;}
+			transform: translate(0rem, 1rem);
+
+		}
 	}
 	h3 {
 		text-align: center;
@@ -2229,6 +2384,10 @@ input{
 		font-size: $SubHeader;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+			
+		}
 	}
 	p {
 		text-align: justify;
@@ -2256,6 +2415,7 @@ input{
 		justify-items: center;
 		row-gap: 30px;
 		width: fit-content;
+		p{font-size: $textSmall;}
 	
 	}
 	.grid-Pro-Discount-Left {
@@ -2263,6 +2423,7 @@ input{
 		@media only screen and (min-width: 0px) and (max-width: 1400px){
 			grid-area: grid-Pro-Discount-Left;
 			width: inherit;
+			p{font-size: $textSmall;}
 		}
 		.grid-Pro-Discount {
 			display: grid;
@@ -2272,6 +2433,7 @@ input{
 			grid-template-areas:
 				"grid-Pro-Disc-Text"
 				"grid-Pro-Disc-Container";
+				
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
@@ -2300,15 +2462,22 @@ input{
 						"grid-Pro-Disc-Text grid-Price-Label . ."
 						". grid-Disc-Label . ."
 						". . . btnPro-Disc";
-						@media only screen and (min-width: 0px) and (max-width: 600px){
-							grid-template-columns: auto;
-							grid-template-rows: auto;
-							grid-template-areas:
-								"grid-Pro-Date-Text" "grid-Label-1" "grid-minus" "grid-Label-2"
-								"grid-Pro-Disc-Text" "grid-Price-Label"
-								"grid-Disc-Label"
-								"btnPro-Disc";
-						}
+					@media only screen and (min-width: 0px) and (max-width: 600px){
+						grid-template-columns: auto;
+						grid-template-rows: auto;
+						grid-template-areas:
+							"grid-Pro-Date-Text" "grid-Label-1" "grid-minus" "grid-Label-2"
+							"grid-Pro-Disc-Text" "grid-Price-Label"
+							"grid-Disc-Label"
+							"btnPro-Disc";
+						h6{font-size: $textSmall;}
+						p{margin: 8px 0;
+						font-size: $textSmall;}
+						input{font-size:$textSmall;
+						margin: 4px 0;}
+						button{font-size: $textSmall;
+						padding: 1px 2px;}
+					}
 					.grid-Pro-Date-Text {
 						grid-area: grid-Pro-Date-Text;
 						align-self: center;
@@ -2345,6 +2514,7 @@ input{
 						text-align: start;
 						padding-right:10px ;
 						grid-area: grid-Pro-Disc-Text;
+						
 					}
 					.grid-Price-Label {
 						align-self: center;
@@ -2427,6 +2597,9 @@ input{
 			.grid-Pro-Disc-Text {
 				grid-area: grid-Pro-Disc-Text;
 				text-align: center;
+				@media only screen and (min-width: 0px) and (max-width: 1400px){
+					h6{font-size: $textMedium};
+				}
 			}
 			.grid-Pro-Disc-Container {
 				grid-area: grid-Pro-Disc-Container;
@@ -2621,6 +2794,9 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -2648,6 +2824,12 @@ input{
 .policy-wrapper{
 	margin: 50px 0;
 	padding: 0 10%;
+	@media only screen and (min-width: 0px) and (max-width: 600px){
+		p{font-size: $textSmall;
+		margin: 8px 0;}
+		padding: 0 3%;
+		margin: 30px 0;
+	}
 }
 .policyTxtArea {
 	font-family: Bitter;
@@ -2697,9 +2879,14 @@ input{
 		margin-left: auto;
 		margin-right: auto;
 		width: 150px;
-		height: 50px;
+		height: 40px;
 		transform: translate(0rem, 2rem);
 		z-index: 0;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			width: 80px;
+			height: 30px;
+			transform: translate(0rem, 1.2rem);
+		}
 	}
 	h3 {
 		text-align: center;
@@ -2707,6 +2894,9 @@ input{
 		// position: absolute;
 		transform: translate(0px, -0.45em);
 		z-index: 1;
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			font-size: $textMedium;
+		}
 	}
 	p {
 		text-align: justify;
@@ -2734,6 +2924,12 @@ input{
 		border-top-right-radius: 5px;
 		padding: 20px 40px;
 		p{margin: 16px 0px;}
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			padding: 5px 8px 16px 8px;
+			p{
+				font-size: $textSmall;
+				margin: 8px 0;}
+		}
 		.grid-Faq-Head {
 			display: grid;
 			grid-template-columns: 90% 10%;
@@ -2777,7 +2973,11 @@ input{
 		background: #dbdbdb;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
-
+		@media only screen and (min-width: 0px) and (max-width: 600px){
+			label{
+				font-size: $textSmall;
+				margin: 8px 0;}
+		}
 		.grid-Faq-Foot {
 			display: grid;
 			grid-template-columns: 80% 20%;
@@ -2797,12 +2997,21 @@ input{
 					height: 24px;
 					margin-left: 10px;
 					margin-top: 10px;
+					@media only screen and (min-width: 0px) and (max-width: 600px){
+						margin-left: 0;
+						height: 18px;
+					}
 				}
 				.imgClose {
 					cursor: pointer;
 					margin-left: 14px;
 					height: 24px;
 					margin-top: 10px;
+					@media only screen and (min-width: 0px) and (max-width: 600px){
+						margin-left: 0;
+						height: 18px;
+						margin-right: 8px;
+					}
 				}
 			}
 		}
@@ -2832,6 +3041,11 @@ input{
 			border-radius: 5px;
 			cursor: pointer;
 			border: none;
+			@media only screen and (min-width: 0px) and (max-width: 600px){
+				height: 25px;
+				margin: 20px 0;
+				font-size: $textSmall;
+			}
 		}
 	}
 	.grid-BtnLastRight {
@@ -2847,6 +3061,11 @@ input{
 			border-radius: 5px;
 			cursor: pointer;
 			border:none;
+			@media only screen and (min-width: 0px) and (max-width: 600px){
+				height: 25px;
+				margin: 20px 0;
+				font-size: $textSmall;
+			}
 		}
 	}
 }

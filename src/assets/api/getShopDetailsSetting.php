@@ -44,6 +44,7 @@ $data = $data + array('category'=>$row["category"]);
 
 $shopaddress = $data['shop_address_id'];
 $sql_query = "SELECT * FROM `address`  WHERE id='$shopaddress'";
+// echo $sql_query;
 $result = mysqli_query($con2, $sql_query);
 while($row=mysqli_fetch_assoc($result))
 {

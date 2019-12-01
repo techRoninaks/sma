@@ -176,16 +176,17 @@ $quantity_price = $_POST['quantity_price'];
     $sql_query = "UPDATE `product` SET `name`='$name',`short_desc`='$short_desc',`Long_desc`='$Long_desc',`spec`='$spec',`shipping_option`='$shipping_option',`base_price`=$base_price,`offer_id`=$offersArray,`cmsn_dedtd`= $commDec,`shop_id`=$shop_id,`category_id`=$mainCat,`sub_catgry_id`='$subCat',`active_status`='$active_status',`qty_avble`=$qty_avble,`safe_qty`=$safe_qty,`is_returnable`= 0,`label_id`=$labels,`tags`='$tags',`avg_prcessing_time`=$avg_prcessing_time,`avg_shpping_time`=$avg_shpping_time,`auto_cancel_time`=$auto_cancel_time,`has_rfq`=$has_rfq,`has_gift`=$has_gift,`has_order_confmn`=$has_order_confmn,`can_orderbydate`=$can_orderbydate,`has_instant_buy`=$has_instant_buy,`min_order_quant`=$min_order_quant,`max_order_quant`=$max_order_quant,`shipping_policy`='$shipping_policy',`return_policy`='$return_policy',`product_policy`='$product_policy',`can_upload_image`=$can_upload_image,`max_no_of_image`=$max_no_of_image,`add_custom_message_field`=$add_custom_message_field WHERE `prodid` = $editprodid ";
     if($caller == "publish"){
       $result1 = mysqli_query($con1, $sql_query1);
-      echo $sql_query1;
+      // echo $sql_query1;
     }
     else if($caller == "duplicate"){
-      $result1 = mysqli_query($con1, $sql_query1);
-      echo $sql_query1;
+      $result1 = mysqli_query($con1, $sql_query);
+      $editprodid = "all";
+      // echo $sql_query1;
     }
     else{
       $result1 = mysqli_query($con1, $sql_query);
       $editprodid = "all";
-      echo $sql_query;
+      // echo $sql_query;
     }
     // $result1 = mysqli_query($con1, $sql_query1);
     
@@ -241,7 +242,7 @@ $quantity_price = $_POST['quantity_price'];
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL STATE', $value->qtn, $value->price from smausr.location where state like '$loc'";
         $result = mysqli_query($con1, $sql_query);
       }
-      if($value->pincode =="All Over India"){
+      if($value->pincode =="All over India"){
         $sql = "SELECT * FROM `address` WHERE id = $addressid";
         $res = mysqli_query($con2, $sql);
         $row = mysqli_fetch_assoc($res);
@@ -295,7 +296,7 @@ $quantity_price = $_POST['quantity_price'];
     $row = mysqli_fetch_assoc($res);
     $shipping_location_id = $row['id'];
 
-    $sql_query2 = " UPDATE `product` SET `bulk_discount_id`= $bulkDiscountid,`shipping_location_id`= $shipping_location_id  where `prodid` = `$prodid`";
+    $sql_query2 = " UPDATE `product` SET `bulk_discount_id`= $bulkDiscountid,`shipping_location_id`= $shipping_location_id  where `prodid` = $prodid";
     $res = mysqli_query($con1, $sql_query2);
 
     $sql_query2 = "UPDATE `variant_info` SET `prodid`=$prodid WHERE `prodid` = -99";
@@ -337,13 +338,14 @@ $quantity_price = $_POST['quantity_price'];
 
     $mob = 0;
         
+    define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
     if($image1 != 1){
       if (!file_exists('../images/product/'.$prodid.'/')) {
           mkdir('../images/product/'.$prodid.'/', 0777, true);
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+
       $file = UPLOAD_DIR.$prodid.'_0'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image1);
@@ -361,7 +363,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_1'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image2);
@@ -380,7 +382,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_2'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image3);
@@ -399,7 +401,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_3'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image4);
@@ -417,7 +419,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_4'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image5);
@@ -435,7 +437,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_5'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image6);
@@ -453,7 +455,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_6'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image7);
@@ -471,7 +473,7 @@ $quantity_price = $_POST['quantity_price'];
           $dir='../images/product/'.$prodid.'/';
       }
           $dir='../images/product/'.$prodid.'/';
-      define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+      // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
       $file = UPLOAD_DIR.$prodid.'_7'.'.jpg';
       if($mob == 0){
           $img =explode(",", $image8);
@@ -489,7 +491,7 @@ $quantity_price = $_POST['quantity_price'];
         $dir='../images/product/'.$prodid.'/';
     }
         $dir='../images/product/'.$prodid.'/';
-    define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+    // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
     $file = UPLOAD_DIR.$prodid.'_8'.'.jpg';
     if($mob == 0){
         $img =explode(",", $image9);
@@ -507,7 +509,7 @@ if($image10 != 1){
       $dir='../images/product/'.$prodid.'/';
   }
       $dir='../images/product/'.$prodid.'/';
-  define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
+  // define('UPLOAD_DIR', '../images/product/'.$prodid.'/');
   $file = UPLOAD_DIR.$prodid.'_9'.'.jpg';
   if($mob == 0){
       $img =explode(",", $image10);

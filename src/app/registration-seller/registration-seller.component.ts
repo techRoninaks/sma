@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import {Router, RouterLink, NavigationEnd} from '@angular/router';
 import { DataService } from '../data.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -174,6 +174,18 @@ export class RegistrationSellerComponent implements OnInit {
       this.seller_name = this.getCookie("sellerName");
       this.stage_5= true;
       this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 6)
+    {
+      this.seller_id = this.getCookie('sellerId');
+      this.seller_name = this.getCookie("sellerName");
+      this.stage_6= true;
+      this.prelim_stage = false;
+    }
+    else if(this.seller_stage == 7)
+    {
+      this.setCookie("isLoggedIn",1);
+      this.router.navigate["/dashboard"];
     }
     this.data.getPlanDetailsFree(this.data).subscribe(
       data=>{

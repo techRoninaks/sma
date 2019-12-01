@@ -15,6 +15,7 @@
     
     $sql="SELECT `orderid` FROM `purchase_order` WHERE sellerid = $sellerId ORDER BY `orderid` ASC";
     $res = mysqli_query($con2, $sql);
+    // echo $sql;
     while($array = mysqli_fetch_array($res)){
         $orderIdArray[$arraycount2++] = $array['orderid'];
     }
@@ -29,6 +30,7 @@
         $sql_query1="SELECT `created_date`,`customerid`,`order_status`,`delivery_date` FROM `purchase_order` WHERE orderid = $orderId";
         $result1 = mysqli_query($con2, $sql_query1);
         $row1 = mysqli_fetch_array($result1);
+        // echo $sql_query1;
         
         $createDate = $row1["created_date"];
         $orderStatus = $row1["order_status"];
@@ -38,6 +40,7 @@
         $sql_query11 = "SELECT `contact_name`,`pincode`,`city` FROM `address` where mapping_id ='$custId' && `addr_type`='shipping'";
         $result11 = mysqli_query($con2, $sql_query11);
         $row11=mysqli_fetch_array($result11);
+        // echo $sql_query11;
 
         $datem = date_create($createDate);
         $mdate = date_format($datem,"dmy");
@@ -53,9 +56,11 @@
         $row2 = mysqli_fetch_array($result2);
         $prodId= $row2['prodid'];
 
+        // echo $sql_query2;
         $sql_query4 = "SELECT `name`,short_desc,long_desc,spec,shipping_option FROM `product` where prodid =  $prodId ";
         $result4 = mysqli_query($con1, $sql_query4);
         $row4 = mysqli_fetch_array($result4);
+        // echo $sql_query4;
         if($orderStatus == 'pending confirmation')
         {
             $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";

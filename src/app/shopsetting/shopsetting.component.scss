@@ -9,6 +9,13 @@
 	}
 	
 }
+@mixin tablet {
+    @media only screen and (min-width: 768px) and (max-width: 1024px){
+        @content;
+    }  
+}
+
+
 .adj{
     left: auto;
 }
@@ -22,11 +29,16 @@
     left:auto;
 }
 @include phone{
-    .adj{margin-left:-40px;}
+    // .adj{margin-left:-40px;}
     .adj2{margin-left:-35px;}
     .adj3{margin-left: -65px;}
     .adj4{margin-left:-35px;}
     
+}
+@include tablet{
+    .adj2{margin-left: -15px;}
+    .adj3{margin-left: -55px;}
+    .adj4{margin-left: -35px;}
 }
 
 .divMargin {
@@ -130,6 +142,20 @@ table{
     border-radius: 6px;
 }
 }
+@include tablet{
+    
+.editShopDetailsSave{
+    padding: 15px; 
+    background: #EFBE24; 
+    color: white; 
+    width: max-content;
+    width: max-content;
+    position: relative;
+    left: 85%;
+    margin-top: 15px;
+    border-radius: 6px;
+}
+}
 
 
 input{
@@ -164,8 +190,22 @@ input{
     border: 5px solid whitesmoke;
     border-radius: 5px;
     margin-bottom: 20px;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 110px;
+    cursor: pointer;
+    object-fit: cover;
+}
+}
+@include tablet{
+
+    
+.mainShopImage{
+    border: 5px solid whitesmoke;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 95px;             // 60%;
+    height:95px;                 //30%;
     cursor: pointer;
     object-fit: cover;
 }
@@ -252,10 +292,24 @@ input{
     
 .mainLogoImage{
     position: relative;
-    left: -46%;
-    width: 75px;
-    height: 75px;
-    top: -42%;
+    left: -62%;
+    width: 45px;
+    height: 45px;
+    // top: -42%;
+    margin-top: -170px;
+    border-radius: 50%;
+    border: 5px solid whitesmoke;
+}
+}
+@include tablet{
+
+    
+.mainLogoImage{
+    position: relative;
+    left: -30%;
+    width: 60px;
+    // top: -47%;
+    // margin-top: 90px;
     border-radius: 50%;
     border: 5px solid whitesmoke;
 }
@@ -313,6 +367,20 @@ input{
             margin-top: 27px;
             cursor: pointer;
         }
+
+        @include tablet{
+            
+        img{
+            height: 85px;
+            width: 85px;
+            border: 1px solid blanchedalmond;
+            border-radius: 5px;
+            margin: 10px;
+            margin-top: 27px;
+            cursor: pointer;
+        }
+        }
+
     }
 }
 
@@ -515,6 +583,74 @@ $height: $width / 2 + $padding;
     }
 }
 
+@include tablet{
+    .line1{
+        margin-top: 50px;
+        display: grid;
+        grid-template-areas: "gift del rfq";
+        grid-template-columns: auto auto auto;
+        font-size: 20px;
+        font-family: "BitterBold";
+    
+        .gift{
+            grid-area: gift;
+            width: max-content;
+            margin: auto;
+        }
+        .del{
+            grid-area: del;
+            width: max-content;
+            margin: auto;
+        }
+        .rfq{
+            grid-area: rfq;
+            width: max-content;
+            margin: auto;
+        }
+    
+        //toggle code begins!
+        .switch-wrap {
+        cursor: pointer;
+        background: #15273b;
+        padding: $padding;
+        width: 55px;
+        height: 30px;
+        border-radius: $height / 2;
+        &::after {
+            background: #52cf71;
+        }
+        input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        }
+        .switch {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 0fr 1fr 1fr;
+        transition: .2s;
+        //ICYMI, pseudo elements are treated as grid items
+        &::after {
+            content: '';
+            border-radius: 50%;
+            background: rgb(165, 38, 38);
+            grid-column: 2;
+            transition: background .2s;
+        }
+        }
+        input:checked {
+        + .switch {
+            grid-template-columns: 1fr 1fr 0fr; 
+            &::after {
+            background-color: #52cf71;
+            }
+        }
+        }
+    }
+}
+
 .line2{
     margin-top: 50px;
     display: grid;
@@ -636,6 +772,71 @@ $height: $width / 2 + $padding;
         }
         }
     }
+}
+
+@include tablet{
+
+    .line2{
+        margin-top: 50px;
+        display: grid;
+        grid-template-areas: "gift del";
+        grid-template-columns: auto auto;
+        font-size: 20px;
+        font-family: "BitterBold";
+    
+        .gift{
+            grid-area: gift;
+            width: max-content;
+            margin: auto;
+        }
+        .del{
+            grid-area: del;
+            width: max-content;
+            margin: auto;
+        }
+    
+        //toggle code begins!
+        .switch-wrap {
+        cursor: pointer;
+        background: #15273b;
+        padding: $padding;
+        width: 55px;
+        height: 30px;
+        border-radius: $height / 2;
+        &::after {
+            background: #52cf71;
+        }
+        input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        }
+        .switch {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 0fr 1fr 1fr;
+        transition: .2s;
+        //ICYMI, pseudo elements are treated as grid items
+        &::after {
+            content: '';
+            border-radius: 50%;
+            background: rgb(165, 38, 38);
+            grid-column: 2;
+            transition: background .2s;
+        }
+        }
+        input:checked {
+        + .switch {
+            grid-template-columns: 1fr 1fr 0fr; 
+            &::after {
+            background-color: #52cf71;
+            }
+        }
+        }
+    }
+
 }
 
 .shippingHeader{

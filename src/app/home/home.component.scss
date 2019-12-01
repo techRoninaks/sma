@@ -16,7 +16,7 @@ $SubText: 18px;
 
 /* Smaller devices */
 @mixin sm-lesser {
-  @media (max-width: 600px) {
+  @media (max-width: 600px) and (min-width: 310px ){
     @content;
   }
 }
@@ -30,7 +30,7 @@ $SubText: 18px;
 
 /* Medium devices (landscape tablets, 768px and up) */
 @mixin md {
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 700px ) {
     @content;
   }
 }
@@ -247,6 +247,7 @@ $SubText: 18px;
           font-family: BitterBold;
           text-align: center;
           margin-top: 24px;
+          
         }
         .subText {
           font-size:13px;
@@ -414,6 +415,10 @@ $SubText: 18px;
         &:hover {
           color: $smaYellow;
         }
+        @include xlg{
+          padding: 5px;
+          margin-left: 15px;
+        }
       }
     }
     .dvOffer {
@@ -425,6 +430,11 @@ $SubText: 18px;
         color: $smaDarkGray;
         &:hover {
           color: $smaYellow;
+        }
+        @include xlg{
+          padding: 5px;
+          color:#333333;
+          margin-left: 65px;
         }
       }
     }
@@ -489,16 +499,22 @@ $SubText: 18px;
           z-index: 1;
           padding-top: -30%;
           padding: 8%;
-          @include md{
-            padding: 8%;
-            margin: 15% 0% 15% 0%;
-          }
 
           .imgLogo {
             border-radius: 50%;
             object-fit: cover;
+            
+            @include sm-lesser{
+              height: 65px;
+              width: 65px;
+              // padding: 4%;
+              // margin: 10% 0% 10% 0%;
+  
+            }
             @include md{
-              height: 69px;
+              
+              height: 85px;
+              width: 85px;
             }
           }
         }
@@ -508,9 +524,12 @@ $SubText: 18px;
           cursor: pointer;
           margin-bottom: -5%;
           margin-left: 10%;
+          @include sm-lesser{
+            margin-left: -7%;
+          }
           @include md{
-            margin-left: 10%;
-            margin: 10% 0% 0% -10%;
+            // margin-left: 10%;
+            margin: 0% 0% 0% -7%;
 
           }
           @include lg{
@@ -526,20 +545,21 @@ $SubText: 18px;
             // margin-top: 7px;
 
             margin-bottom: 7px;
-            @include md{ 
-            p {
-              font-family: Bitter;
-              font-size: 17px;
-              margin-bottom: 1px;
-              margin-left: -10px;
-            }
-          }
+            
             @include sm-lesser {
               margin-left: 1px;
               p {
-                font-size: 16px;
-                margin-bottom: 3px;
+                font-size: 15px;
+                margin-bottom: 0px;
                 margin-left: 7px;
+              }
+            }
+            @include md{ 
+              p {
+                font-family: Bitter;
+                font-size: 17px;
+                margin-bottom: 1px;
+                margin-left: -10px;
               }
             }
             @include lg {
@@ -554,22 +574,25 @@ $SubText: 18px;
           .dvSellerName {
             padding-left: 10%;
             font-size: 18%;
-            @include md{
-            p {
-              font-family: Bitter;
-              font-size: 17px;
-              color: #808080;
-              margin-top: -8px;
-
-              margin-left: -12px;
-
-            }
-          }
+           
             @include sm-lesser {
               margin-left: 1px;
               p {
-                font-size: 16px;
+                font-size: 15px;
                 margin-left: 6px;
+                margin-top: -9px;
+
+              }
+            }
+            @include md{
+              p {
+                font-family: Bitter;
+                font-size: 17px;
+                color: #808080;
+                margin-top: -8px;
+  
+                margin-left: -12px;
+  
               }
             }
             @include lg {
@@ -636,27 +659,41 @@ $SubText: 18px;
             margin-left: -10%;
 
             p {
-              font-size: $SubHeader;
+              // font-size: $SubHeader;
               font-family: BitterBold;
               margin: auto;
             }
-            @include md{
-              p{
-                font-size: 20px;
-                font-family: BitterBold;
-                margin: auto;
-
-              }
-            }
+            
             @include sm-lesser {
-              p {
-                font-size: $Text;
-              }
+                font-size: 17px;
+                font-family: BitterBold;
+                 margin-left: -5%;
+                // margin: auto;
+              
+            }
+            @include md{
+              
+                
+                font-size: 18px;
+                font-family: BitterBold;
+                margin-left: -8%;
+                
+              
             }
             @include lg {
-              p {
+              
+                
                 font-size: 16px;
-              }
+              
+            }
+            @include xlg{
+              
+               
+                margin-left: -6%;
+                font-family: BitterBold;
+                
+
+              
             }
           }
           .dvRating {
@@ -686,32 +723,46 @@ $SubText: 18px;
 
         .dvDetails {
           padding-top: 10px;
-          p {
-            font-family: Bitter;
-            font-size: $Text;
-            text-align: justify;
-            line-height: 1.3;
-            color: $smaDarkGray;
+          // p {
+          //   font-family: Bitter;
+          //   font-size: $Text;
+          //   text-align: justify;
+          //   line-height: 1.3;
+          //   color: $smaDarkGray;
+          // }
+          
+          @include sm-lesser {
+            margin-left: -4px;
+            p {
+              font-size: 15px;
+              margin-left: 6px;
+            }
           }
           @include md{
             p{
               font-family: Bitter;
-              font-size: 18px;
+              font-size: 17px;
               text-align: justify;
               line-height: 1.3;
               color: $smaDarkGray;
+              margin-left: -1px;
 
-            }
-          }
-          @include sm-lesser {
-            margin-left: -4px;
-            p {
-              font-size: 16px;
             }
           }
           @include lg {
             p {
               font-size: 16px;
+            }
+          }
+          @include xlg{
+            p{
+              font-family: Bitter;
+              font-size: 14px;
+              text-align: justify;
+              line-height: 1.3;
+              color: $smaDarkGray;
+              margin-left: 3px;
+
             }
           }
         }
@@ -747,12 +798,26 @@ $SubText: 18px;
       .pPrice {
         grid-area: p-price;
         @include sm-lesser{
-          margin-left: 9px;
           grid-area: p-price;
+          margin-left: 12px;
           font-size: 12px;
 
         }
+        @include md{
+          font-family: BitterBold;
+          font-size: 17px;
+
+          display: inline;
+
+        }
+        @include xlg{
+          grid-area: p-price;
+          // margin-left: 9px;
+          font-size: 15px;
+
+
       }
+    }
 
       .pActualPrice {
         grid-area: ac-price;
@@ -764,7 +829,7 @@ $SubText: 18px;
         margin-left: -9px;
         .pActualPrice {
           justify-self: center;
-          font-size: 14px;
+          font-size: 12px;
 
         }
       }
@@ -781,7 +846,7 @@ $SubText: 18px;
       @include sm-lesser {
         .pOffer {
           justify-self: end;
-          font-size: 13px;
+          font-size: 12px;
 
         }
       }
@@ -806,7 +871,17 @@ $SubText: 18px;
         margin-left: 10px;
         width: max-content;
       }
+      @include sm-lesser {
+        .btnRfq {
+          font-size: inherit;
+          margin-top: -4px;
+          margin-bottom: auto;
+          margin-left: 7px;
+          width: max-content;
+          height: 30px;
       
+        }
+      }
       @include md{
         .btnRfq{
           cursor: pointer;
@@ -818,25 +893,9 @@ $SubText: 18px;
         background: $smaRed;
         color: white;
         float: right;
-        margin-top: 2px;
-        margin-left: 10px;
         width: max-content;
-        // height: 61%;
+        height: 27px;
 
-        }
-      }
-
-
-
-      @include sm-lesser {
-        .btnRfq {
-          font-size: inherit;
-          margin-top: 1px;
-          margin-bottom: auto;
-          margin-left: 7px;
-          width: max-content;
-          height: 30px;
-      
         }
       }
       @include lg {
@@ -849,7 +908,7 @@ $SubText: 18px;
       @include xlg {
         .btnRfq {
           font-size: inherit;
-          margin-top: auto;
+          margin-top: 0px;
           margin-bottom: auto;
           
           
@@ -915,14 +974,50 @@ $SubText: 18px;
     padding: 10px;
     grid-area: dv-left;
     height: fit-content;
+    @include md{
+      height: 113px;
+    }
 
     img {
       width: inherit;
       object-fit: cover;
+      @include md{
+        height: 338px;
+      }
     }
     .dvText{
       position: absolute;
       width: fit-content;
+      font-family: BitterBold;
+      .textImg{
+        @include sm-lesser{
+             margin-top: 10px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              font-size: 13px;
+
+        }
+        @include md{
+          
+           margin-bottom: 1rem;
+           background:white;
+           padding: 0px 10px 0px 15px;
+           font-size: 13px;
+           margin-top: 12px;
+          //  margin-left: 8px;
+
+     }
+        @include xlg{
+          margin-top: 22px;
+          margin-bottom: 1rem;
+          background:white;
+          padding: 0px 10px 0px 15px;
+          
+          
+        }
+      }
+      
     }
   }
   .dvRight {
@@ -938,14 +1033,49 @@ $SubText: 18px;
       padding: 10px;
       grid-area: dv-RT;
       display: flex;
+      @include md{
+        height: 195px;
+      }
 
       img {
         width: inherit;
         object-fit: cover;
+        @include sm-lesser{
+          height: 160px;
+        }
       }
       .dvText{
         position: absolute;
         width: fit-content;
+        font-family: BitterBold;
+        .textImg{
+          @include sm-lesser{
+              margin-top: 10px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              font-size: 13px;
+
+          }
+          @include md{
+            margin-top: 10px;
+            margin-bottom: 1rem;
+            background:white;
+            padding: 0px 10px 0px 15px;
+            font-size: 13px;
+            
+
+          }
+          @include xlg{
+            margin-top: 22px;
+            margin-bottom: 1rem;
+            background:white;
+            padding: 0px 10px 0px 15px;
+            
+            
+          }
+        }
+        
       }
     }
     .dvRBtm {
@@ -960,6 +1090,14 @@ $SubText: 18px;
         grid-area: dv-RBL;
         display: flex;
         height: fit-content;
+        font-family: BitterBold;
+        @include sm-lesser{
+          padding-top: 72px;
+        }
+        @include md{
+          height: 229px;
+          padding-top: 73px;
+        }
         
         img {
           width: inherit;
@@ -968,6 +1106,33 @@ $SubText: 18px;
         .dvText{
           position: absolute;
           width: fit-content;
+          .textImg{
+            @include sm-lesser{
+              margin-top: 10px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              font-size: 13px;
+            }
+
+              @include md{
+                margin-top: 10px;
+                margin-bottom: 1rem;
+                background:white;
+                padding: 0px 10px 0px 15px;
+                font-size: 13px;
+                
+  
+              }
+            }
+            @include xlg{
+              margin-top: 22px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              
+            }
+          }
         }
       }
       .dvRBR {
@@ -975,19 +1140,59 @@ $SubText: 18px;
         grid-area: dv-RBR;
         display: flex;
         height: fit-content;
+        font-family: BitterBold;
+        @include sm-lesser{
+          padding-top: 76px;
+        }
+        @include md{
+          height: 229px;
+
+          padding-top: 72px;
+        }
 
         img {
           width: inherit;
           object-fit: cover;
+          @include sm-lesser{
+            height: 90px;
+          }
         }
         .dvText{
           position: absolute;
           width: fit-content;
+          .textImg{
+            @include sm-lesser{
+              margin-top: 10px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              font-size: 13px;
+              
+
+            }
+            @include md{
+              margin-top: 10px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              font-size: 13px;
+              
+
+            }
+            @include xlg{
+              margin-top: 22px;
+              margin-bottom: 1rem;
+              background:white;
+              padding: 0px 10px 0px 15px;
+              
+            }
+          }
+
+          
         }
       }
     }
   }
-}
 .dvPartnerHead{
   
   .dvPHeading {
@@ -1007,6 +1212,9 @@ $SubText: 18px;
       width: inherit;
       position: relative;
       top: 48px;
+      @include sm-lesser{
+        margin-left: -30px;
+      }
     }
 
     .head {
