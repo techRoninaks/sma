@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma24/src/";
+  // baseUrl = "http://localhost/Angular/sma25/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -1503,9 +1503,10 @@ getDropdownForShipping(id : any){
  .append("shipping_alias",id);
  return this.http.post(this.baseUrl+'assets/api/getDropdownForShipping.php',httpParams);
 }
-addProductVarients(data : any, prodId = "all"){
+addProductVarients(data : any, prodId = "all", isMultiVariant :any){
  let httpParams= new HttpParams()
  .append("prodid", prodId)
+ .append("isMultiVariant", isMultiVariant)
  .append("variantArray",data);
  return this.http.post(this.baseUrl+'assets/api/addProductVarients.php',httpParams);
 }

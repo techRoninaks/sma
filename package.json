@@ -31,6 +31,7 @@
     "materialize-css": "^1.0.0",
     "ng2-charts": "^2.3.0",
     "ng2-opd-popup": "^1.1.21",
+    "ng2-tooltip-directive": "^2.8.17",
     "ngx-cookie-service": "^2.2.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",

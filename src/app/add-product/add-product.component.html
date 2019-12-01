@@ -39,13 +39,13 @@
             <div class="btnToggleActive" *ngIf="editMode">
                 <button class="btnDupli" (click)="publishBtn('duplicate')">DUPLICATE</button>
             </div>
-            <div class="toggleTextActive0"> 
-                <p>ACTIVE</p>
+            <div class="toggleTextActive0" *ngIf="editMode"> 
+                <button class="btnDupli" [routerLink]="['/listing']"
+                [queryParams]="{shop_id:allProductInfo.shop_id, prod_id:editProdid}">View as Customer</button>
             </div>
             <div class="btnToggleActive1" *ngIf="editMode">
-                
+                <p style="margin-right: 15px;">ACTIVE</p> 
                 <label class="switchActive" name="answer" value="Show giftCard">
-                    
                     <input type="checkbox" id="active" style="margin-left: 20px;">
                     <span class="slider round"></span>
                 </label>
@@ -121,7 +121,7 @@
 
     <hr>
     <!-- PRIMARY DETAILS -->
-    <div style="display: inline-flex;">
+    <div style="display: inline-flex;overflow: auto;">
         <div *ngFor = "let item of subCategoryArray" class="subCategoryDiv">
             <p>{{item.val}}<span><img (click)="deleteCategory(item)" src="assets/icons/close.png"></span></p>
         </div>
@@ -229,12 +229,21 @@
             </div>
             <div class="grid-MedProd1">
                 <input type="text" class="text-Product-Name-Style" value="{{allProductInfo.name}}" id="product-Name">
+                <span tooltip="Product Name" placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
+            <!-- <button mat-raised-button
+                matTooltip="Info about the action"
+                matTooltipPosition="above"
+                aria-label="Button that displays a tooltip when focused or hovered over">
+                ?
+            </button> -->
+            
             <div class="grid-MedProd2">
                 <p class="productBasePriceText">PRODUCT BASE PRICE</p>
             </div>
             <div class="grid-RightProd">
                 <input type="text" class="text-Product-BasePrice-Style" value="{{allProductInfo.base_price}}" (change)="setupPrice()" id="product-BasePrice">
+                <span tooltip="The price seen by buyers" placement="top" class="toolSpan" show-delay="0">?</span>
             </div>
         </div>
         <div class="grid-PrimaryDesc1">
@@ -249,12 +258,15 @@
             </div>
             <div class="grid-ShortDescRight">
                 <input type="text" class="text-Product-ShortDesc-Style" value="{{allProductInfo.short_desc}}" id="product-ShortDesc">
+                <span tooltip="Short Description seen by buyer" placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-LongDescRight">
                 <textarea type="text" class="text-Product-LongDesc-Style" value="{{allProductInfo.Long_desc}}" id="product-Desc"></textarea>
+                <span tooltip="Long Description for the product" placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-SpecRight">
                 <textarea type="list" class="text-Product-Spec-Style" value="{{allProductInfo.spec}}" id="product-Spec"></textarea>
+                <span tooltip="Product specification, each item must be seperated by !~!. Eg: Ram: 1 GB!~!Graphics: 1 GB!~!" placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
         </div>
         <div class="grid-PrimaryDesc2">
@@ -271,12 +283,15 @@
                 <button class="btnMinQtyCount" (click)="decreseCount()">-</button>
                 <input class="counterLabel" value="{{allProductInfo.qty_avble}}"  id="Counter-Label" >
                 <button class="btnMaxQtyCount" (click)="increseCount()">+</button>
+                <span tooltip="Amount of quantity that is available" placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-MaxQtyOrderRight">
                 <input type="text" class="Max-Qty-Style" value="{{allProductInfo.max_order_quant}}"  id="Max-Qty-Order">
+                <span tooltip="Maximum quantity a buyer can buy." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-MiniQtyOrderRight">
                 <input type="text" class="Min-Qty-Style" value="{{allProductInfo.min_order_quant}}"  id="Min-Qty-Order">
+                <span tooltip="Minium quantity a buyer can buy." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
         </div>
         <!-- <button class="save" (click)="ngSave()">SAVE</button> -->
@@ -287,56 +302,8 @@
         <h5>ADD VARIENTS</h5>
     </div>
     <div class="grid-Tab-Form">
-        <!-- <div class="varitentsAdd">
-            <mat-tab-group mat-align-tabs="start" id="varientPlus">
-                <mat-tab label="varient_{{item}}" *ngFor="let item of varients | slice:1; let i = index">
-                    <ng-template matTabContent>
-                        <div style="display: inline-flex;">
-                            <p>VARIENT NAME:</p><input style="background: transparent;border: none;padding: 0px;height: min-content;" id="{{item}}_name"placeholder="Varient Name">
-                        </div>
-                    
-                    <div style="display: inline-flex;">
-                        <div style="margin: 15px; width: max-content;" id="{{item}}_1">
-                            <input placeholder="varient type" id="{{item}}_varient_1">
-                            <input placeholder="price" id="{{item}}_price_1">
-                        </div>
-                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_1" (click)="displayVarientType(item,'2','1')"></div>
-
-                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_2">
-                            <input placeholder="varient type" id="{{item}}_varient_2">
-                            <input placeholder="price" id="{{item}}_price_2">
-                        </div>
-                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_2" style="display: none;" (click)="displayVarientType(item,'3','2')"></div>
-                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_3">
-                            <input placeholder="varient type" id="{{item}}_varient_3">
-                            <input placeholder="price" id="{{item}}_price_3">
-                        </div>
-                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_3" style="display: none;" (click)="displayVarientType(item,'4','3')"></div>
-                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_4">
-                            <input placeholder="varient type" id="{{item}}_varient_4">
-                            <input placeholder="price" id="{{item}}_price_4">
-                        </div>
-                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_4" style="display: none;" (click)="displayVarientType(item,'5','4')"></div>
-                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_5">
-                            <input placeholder="varient type" id="{{item}}_varient_5">
-                            <input placeholder="price" id="{{item}}_price_5">
-                        </div>
-                        <div><img src="assets/icons/plus.png" id="{{item}}_btn_5" style="display: none;" (click)="displayVarientType(item,'6','5')"></div>
-                        <div style="margin: 15px; width: max-content; display: none;" id="{{item}}_6">
-                            <input placeholder="varient type" id="{{item}}_varient_6">
-                            <input placeholder="price" id="{{item}}_price_6">
-                        </div>
-                    
-                    </div>
-                    <button class="saveAddVariant" (click)="saveAddVariant(item)">SAVE</button>
-                    </ng-template>
-                </mat-tab>
-            </mat-tab-group>
-            <div style="width: max-content;cursor: pointer; color: white; background: #EFBE24; margin: auto; border-radius: 5px; ">
-                <p (click)="addVarients()">Add Varients</p>
-            </div>
-        </div> -->
         <div class="varitentsAdd">
+                <span tooltip="Variants associated with the Product" placement="top" class="toolSpan"  show-delay="0">?</span>
             <mat-tab-group mat-align-tabs="start" id="varientPlus">
                 <mat-tab label="{{item.name}}" *ngFor="let item of varients;let i = index">
                     <ng-template mat-tab-label>
@@ -345,20 +312,28 @@
                         </ng-template>
                         <ng-template matTabContent>
                         <div style="display: inline-flex;">
-                            <p>VARIENT NAME:</p><input (keyup)="enterValue(i,'0','name',item)"  style="border: 1px solid grey;padding: 2px 5px;height: min-content; margin-left: 20px; background: #00000004; border-radius: 5px;" value="{{item.name}}" id="{{i}}_name"placeholder="Varient Name">
+                            <p>VARIENT NAME:</p>
+                            <input (keyup)="enterValue(i,'0','name',item)"  style="border: 1px solid grey;padding: 2px 5px;height: min-content; margin-left: 20px; background: #00000004; border-radius: 5px;width: 30%;" value="{{item.name}}" id="{{i}}_name"placeholder="Varient Name">
+                            <div class="multiVariant" style="justify-content: end;display: inline-flex;height: 30px;">
+                                <p  style="width: max-content;margin-right: 5px;">Multi Variant</p>
+                                <input type="checkbox" style="width: max-content;" value="Shipping" id="isMultiVariant_{{i}}">
+                                <span tooltip="This variants can be selected multiple times." placement="top" style="padding-right: 13px;height: 22px;" class="toolSpan"  show-delay="0">?</span>
+                            </div>
                         </div>
                     <div style="display: inline-flex;" >
                         <div *ngFor="let in of item.value; let j = index">
-                            <div style="margin: 5px 15px;display: grid; width: max-content;" id="{{in}}_1">
+                            <div style="margin: 5px 45px 5px 15px;display: grid; width: max-content;" id="{{in}}_1">
                                 <input placeholder="VARIENT TYPE" (keyup)="enterValue(i,j,'type',in)"  id="{{i}}_{{j}}varient_1" value="{{in.type}}" class="input-style-tab">
                                 <input placeholder="PRICE" id="{{i}}_{{j}}price_1" (keyup)="enterValue(i, j,'price', in)"   value="{{in.price}}" class="input-style-tab">
                             </div>
                             <div class="close-varient"><img src="assets/icons/close.png" id="{{in}}_btn_1" (click)="deleteCell(in, item.value)"></div>
                         </div>
+                        <button class="addVariant" (click)="displayVarientType(item.value)">Add sub Variant</button>
                     </div>
 
-                    <button class="saveAddVariant" (click)="saveAddVariant(item)">SAVE</button>
-                    <button class="addVariant" (click)="displayVarientType(item.value)">Add sub Variant</button>
+                    <button class="saveAddVariant" (click)="saveAddVariant(item,i)">SAVE</button>
+                    <span  tooltip="Each variant type must be saved separatly." placement="top" class="toolSpan"  show-delay="0">?</span>
+                    
                     </ng-template>
                 </mat-tab>
             </mat-tab-group>
@@ -402,16 +377,16 @@
                 <p class="dotMed4">:</p>
             </div>
             <div class="grid-RightPrice1">
-                {{ totalPrice }}
+                {{ basePrice }}<span tooltip="Price seen by buyer." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-RightPrice2">
                 {{ tax.tax }}
             </div>
             <div class="grid-RightPrice3" id="commissionDecuction">
-                {{ commDec }}
+                {{ commDec }}<span tooltip="Commission deducted by the Website." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
             <div class="grid-RightPrice4">
-                {{ basePrice }}
+                {{ totalPrice }}<span tooltip="The price that seller will get." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
         </div>
         <hr>
@@ -433,6 +408,7 @@
                         {{ item.label_text }} </option>
                 </select>
             </div>
+            <!-- <span  tooltip="Label assoaciated with the product" placement="top" class="toolSpan"  show-delay="0">?</span> -->
         </div>
         <div class="grid-AdvanceSettings2">
             <div class="grid-AdvanceSettingsLeft">
@@ -448,12 +424,14 @@
                             <p class="AvgProTimeLabel-Style" *ngIf="isOrdered">{{allProductInfo.avg_prcessing_time}}</p>
                             <input class="AvgProTimeLabel-Style" *ngIf="!isOrdered" value="{{allProductInfo.avg_prcessing_time}}" id="Avg-ProTime">
                         </div>
+                        <!-- <span  tooltip="Average time taken to process the order" placement="top" class="toolSpan"  show-delay="0">?</span> -->
                     </div>
                     <div class="grid-LabelRight1">
                         <div class="AvgShipTimeLabel">
                             <p class="AvgShipTimeLabel-Style" *ngIf="isOrdered">{{allProductInfo.avg_shpping_time}}</p>
                             <input class="AvgShipTimeLabel-Style" *ngIf="!isOrdered" value="{{allProductInfo.avg_shpping_time}}"  id="Avg-ShipTime">
                         </div>
+                        <!-- <span  tooltip="Average time taken in shipping the order." placement="top" class="toolSpan"  show-delay="0">?</span> -->
                     </div>
                 </div>
             </div>
@@ -507,19 +485,19 @@
                     </div>
                     <div class="grid-GiftOptionToggleRight1">
                         <label class="switchGiftOption" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="giftOption" style="margin-left: 20px;" value="{{allProductInfo.has_gift}}"  >
+                            <input type="checkbox" id="giftOption" style="margin-left: 12px;" value="{{allProductInfo.has_gift}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="grid-OrderConfrmToggleRight1">
                         <label class="switchOrderConfrm" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="orderConfrm" style="margin-left: 20px;" value="{{allProductInfo.has_order_confmn}}"  >
+                            <input type="checkbox" id="orderConfrm" style="margin-left: 12px;" value="{{allProductInfo.has_order_confmn}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="grid-UploadImgToggleRight1">
                         <label class="switchUploadImg" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="uploadImg" style="margin-left: 20px;" value="{{allProductInfo.can_upload_image}}" >
+                            <input type="checkbox" id="uploadImg" style="margin-left: 12px;" value="{{allProductInfo.can_upload_image}}" >
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -532,7 +510,7 @@
                     </div>
                     <div class="grid-DeliveryDateToggleRight2">
                         <label class="switchDeliveryDate" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="deliveryDate" style="margin-left: 20px;" value="{{allProductInfo.can_orderbydate}}">
+                            <input type="checkbox" id="deliveryDate" style="margin-left: 12px;" value="{{allProductInfo.can_orderbydate}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -551,7 +529,7 @@
                     <div class="grid-AutoCustomToggleRight2">
                         <label class="switchAutoCustom" name="answer" value="Show giftCard" 
                         >
-                            <input type="checkbox" id="autoCustom" style="margin-left: 20px;" value="{{allProductInfo.add_custom_message_field}}">
+                            <input type="checkbox" id="autoCustom" style="margin-left: 12px;" value="{{allProductInfo.add_custom_message_field}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -564,7 +542,7 @@
                     </div>
                     <div class="grid-RfqToggle">
                         <label class="switchRfq" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="rfq" style="margin-left: 20px;" value="{{allProductInfo.has_rfq}}">
+                            <input type="checkbox" id="rfq" style="margin-left: 12px;" value="{{allProductInfo.has_rfq}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -579,7 +557,7 @@
                     </div>
                     <div class="grid-InstantBuyToggle">
                         <label class="switchInstant" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="instantBuy" style="margin-left: 20px;" value="{{allProductInfo.has_instant_buy}}">
+                            <input type="checkbox" id="instantBuy" style="margin-left: 12px;" value="{{allProductInfo.has_instant_buy}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -590,7 +568,10 @@
     <!-- MESSAGE TITLE -->
     <div class="dvMsgTitle">
         <div class="dvMsgTitleText">
-            <h5>MESSAGE TITLE</h5>
+            <div style="margin: auto;width: max-content;height: max-content;display: flex;">
+                <h5 style="width: max-content;">MESSAGE TITLE</h5>
+                <span  style="width: max-content;" tooltip="Message titles that can be added to the order.Eg Happy Birthday ______," placement="top" class="toolSpan"  show-delay="0">?</span>
+            </div>
         </div>
         <div class="grid-MsgTitleContainer">
             <div class="grid-MsgTitleHead">
@@ -641,7 +622,7 @@
                         <p>Shipping</p>
                     </div>
                     <div class="grid-ShippingRadioBtn">
-                        <input type="radio" value="Shipping" id="shippingRadio">
+                        <input type="checkbox" value="Shipping" id="shippingRadio">
                     </div>
                 </div>
             </div>
@@ -651,7 +632,7 @@
                         <p>HomeDelivery</p>
                     </div>
                     <div class="grid-HomeDeliveryRadioBtn">
-                        <input type="radio" value="HomeDelivery" id="homedeliveryRadio">
+                        <input type="checkbox" value="HomeDelivery" id="homedeliveryRadio">
                     </div>
                 </div>
             </div>
@@ -661,7 +642,7 @@
                         <p>Pickup</p>
                     </div>
                     <div class="grid-PickupRadioBtn">
-                        <input type="radio" value="Pickup" id="pickupRadio">
+                        <input type="checkbox" value="Pickup" id="pickupRadio">
                     </div>
                 </div>
             </div>
@@ -879,17 +860,11 @@
         <ng-template #policyEdit>
             <div class="policy-wrapper">
                 <p>Shipping</p>
-                <textarea class="policyTxtArea" id="policyShippingTxtAr" >
-                    {{allProductInfo.shipping_policy}}
-                </textarea>
+                <textarea class="policyTxtArea" id="policyShippingTxtAr" >{{allProductInfo.shipping_policy}}</textarea>
                 <p>Return</p>
-                <textarea class="policyTxtArea" id="policyReturnTxtAr" >
-                    {{allProductInfo.return_policy}}
-                </textarea>
+                <textarea class="policyTxtArea" id="policyReturnTxtAr" >{{allProductInfo.return_policy}}</textarea>
                 <p>Product</p>
-                <textarea class="policyTxtArea" id="policyProductTxtAr" >
-                    {{allProductInfo.product_policy}}
-                </textarea>
+                <textarea class="policyTxtArea" id="policyProductTxtAr" >{{allProductInfo.product_policy}}</textarea>
             </div>
             <div class="btnpolicySubmit">
                 <!-- <button id="policyEdit" class="button" type="button" (click)="sub1();">SUBMIT</button> -->

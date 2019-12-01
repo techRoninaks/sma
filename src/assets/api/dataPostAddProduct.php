@@ -99,8 +99,9 @@ $quantity_price = $_POST['quantity_price'];
 
  if($active_status == 'true')
      $active_status = 'active';
-  else if($active_status == 'false')
-    $active_status = 'inactive';
+else if($active_status == 'false')
+  $active_status = 'inactive';
+
 
   if($caller =="publish"){
     if($editprodid != "all"){
@@ -112,7 +113,20 @@ $quantity_price = $_POST['quantity_price'];
   }
   else if($caller =="duplicate"){
     if($editprodid != "all"){
-      $editprodid = "all";
+      // $editprodid = "all";
+      $sql = "SELECT active_status FROM `product` WHERE prodid = $editprodid";
+      $result = mysqli_query($con1, $sql);
+      $row = mysqli_fetch_assoc($result);
+      $active_statusEdit = $row['active_status'];
+      if($active_statusEdit == "active"){
+        // $active_status = $active_statusEdit;
+      } 
+      else if($active_statusEdit == "inactive"){
+        // $active_status = $active_statusEdit;
+      } 
+      else{
+        $active_status = $active_statusEdit;
+      }
     }
     else{
       $active_status = 'yet_to_publish';
@@ -121,6 +135,19 @@ $quantity_price = $_POST['quantity_price'];
   else if($caller =="save"){
     if($editprodid != "all"){
       // $editprodid = "all";
+      $sql = "SELECT active_status FROM `product` WHERE prodid = $editprodid";
+      $result = mysqli_query($con1, $sql);
+      $row = mysqli_fetch_assoc($result);
+      $active_statusEdit = $row['active_status'];
+      if($active_statusEdit == "active"){
+        // $active_status = $active_statusEdit;
+      } 
+      else if($active_statusEdit == "inactive"){
+        // $active_status = $active_statusEdit;
+      } 
+      else{
+        $active_status = $active_statusEdit;
+      }
     }
     else{
       $active_status = 'yet_to_publish';
@@ -176,17 +203,22 @@ $quantity_price = $_POST['quantity_price'];
     $sql_query = "UPDATE `product` SET `name`='$name',`short_desc`='$short_desc',`Long_desc`='$Long_desc',`spec`='$spec',`shipping_option`='$shipping_option',`base_price`=$base_price,`offer_id`=$offersArray,`cmsn_dedtd`= $commDec,`shop_id`=$shop_id,`category_id`=$mainCat,`sub_catgry_id`='$subCat',`active_status`='$active_status',`qty_avble`=$qty_avble,`safe_qty`=$safe_qty,`is_returnable`= 0,`label_id`=$labels,`tags`='$tags',`avg_prcessing_time`=$avg_prcessing_time,`avg_shpping_time`=$avg_shpping_time,`auto_cancel_time`=$auto_cancel_time,`has_rfq`=$has_rfq,`has_gift`=$has_gift,`has_order_confmn`=$has_order_confmn,`can_orderbydate`=$can_orderbydate,`has_instant_buy`=$has_instant_buy,`min_order_quant`=$min_order_quant,`max_order_quant`=$max_order_quant,`shipping_policy`='$shipping_policy',`return_policy`='$return_policy',`product_policy`='$product_policy',`can_upload_image`=$can_upload_image,`max_no_of_image`=$max_no_of_image,`add_custom_message_field`=$add_custom_message_field WHERE `prodid` = $editprodid ";
     if($caller == "publish"){
       $result1 = mysqli_query($con1, $sql_query1);
-      // echo $sql_query1;
     }
     else if($caller == "duplicate"){
-      $result1 = mysqli_query($con1, $sql_query);
-      $editprodid = "all";
-      // echo $sql_query1;
+      if($editprodid == 'all'){
+        $result1 = mysqli_query($con1, $sql_query1);
+      }
+      else{
+        $result1 = mysqli_query($con1, $sql_query);
+      }
     }
     else{
-      $result1 = mysqli_query($con1, $sql_query);
-      $editprodid = "all";
-      // echo $sql_query;
+      if($editprodid == 'all'){
+        $result1 = mysqli_query($con1, $sql_query1);
+      }
+      else{
+        $result1 = mysqli_query($con1, $sql_query);
+      }
     }
     // $result1 = mysqli_query($con1, $sql_query1);
     
@@ -196,6 +228,35 @@ $quantity_price = $_POST['quantity_price'];
     $result = mysqli_query($con1, $sql_query);
     $rowprodid = mysqli_fetch_assoc($result);
     $prodid=$rowprodid["prodid"];
+
+    if($editprodid != "all"){
+      if($result1){
+        $sql = "SELECT `rating`, `rating_count`,`review_count` FROM `product` WHERE prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $rating = $row['rating'];
+        $rating_count = $row['rating_count'];
+        $review_count = $row['review_count'];
+        if(!$caller == "save" || !$caller == "duplicate"){
+          $sql = "UPDATE `product` SET `rating`='$rating',`rating_count`='$rating_count',`review_count`= '$review_count' WHERE  prodid = $prodid ";
+          $result = mysqli_query($con1, $sql);
+          $sql = "DELETE FROM `product` WHERE  prodid = $editprodid ";
+          $result = mysqli_query($con1, $sql);
+        }
+        $sql = "DELETE FROM `bulk_discount` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `faq` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `offer` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `prod_message` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `prod_shipping_price` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+        $sql = "DELETE FROM `shipping_location_product` WHERE  prodid = $editprodid ";
+        $result = mysqli_query($con1, $sql);
+      }
+    }
     // echo $prodid;
 
     foreach ($discountArraySelect as $value) {
@@ -214,8 +275,10 @@ $quantity_price = $_POST['quantity_price'];
       $faqcount++;
       $ques = "-".$faqcount;
       $sql_query = "INSERT INTO `faq`(`prodid`, `type_id`, `text`) VALUES ($prodid,$ques,'$value->faqQ')";
+      // echo $sql_query; 
       $result = mysqli_query($con1, $sql_query);
       $sql_query = "INSERT INTO `faq`(`prodid`, `type_id`, `text`) VALUES ($prodid,$faqcount,'$value->faqA')";
+      // echo $sql_query;
       $result = mysqli_query($con1, $sql_query);
     }
 
@@ -249,6 +312,7 @@ $quantity_price = $_POST['quantity_price'];
         $loc = $row['state'];
         $loc = preg_replace('/\s/', '', $loc);
         $sql_query = "insert INTO shipping_location_product (prodid,location_alias,pincode) VALUES ($prodid,'ALL INDIA' ,(select GROUP_CONCAT(distinct pincode SEPARATOR ', ') from smausr.location))";
+        // echo $sql_query;
         $result = mysqli_query($con1, $sql_query);
         $sql_query = "INSERT into prod_shipping_price (prodid, shipping_location, type, quantity_price, price) SELECT $prodid, pincode, 'ALL INDIA', $value->qtn, $value->price from smausr.location";
         $result = mysqli_query($con1, $sql_query);
@@ -308,32 +372,7 @@ $quantity_price = $_POST['quantity_price'];
       $res = mysqli_query($con1, $sql_query);
     }
 
-    if($editprodid != "all"){
-      if($result1){
-        $sql = "SELECT `rating`, `rating_count`,`review_count` FROM `product` WHERE prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $rating = $row['rating'];
-        $rating_count = $row['rating_count'];
-        $review_count = $row['review_count'];
-        $sql = "UPDATE `product` SET `rating`='$rating',`rating_count`='$rating_count',`review_count`= '$review_count' WHERE  prodid = $prodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `product` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `bulk_discount` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `faq` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `offer` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `prod_message` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `prod_shipping_price` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-        $sql = "DELETE FROM `shipping_location_product` WHERE  prodid = $editprodid ";
-        $result = mysqli_query($con1, $sql);
-      }
-    }
+
 
 
     $mob = 0;
