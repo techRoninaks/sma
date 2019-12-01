@@ -948,6 +948,7 @@ getdynamicPriceAddProduct(prodid: any) {
     let httpParams = new HttpParams()
     .append("prodId", data['prod_id'])
     .append("submitFaq", data['submitFaq'])
+    .append("userId", data['user_id'])
 
     return this.http.post(this.baseUrl + 'assets/api/faqproductsubmit.php', httpParams);	
   }
@@ -963,6 +964,7 @@ getdynamicPriceAddProduct(prodid: any) {
     let httpParams = new HttpParams()
     .append("shopId", data['shop_id'])
     .append("submitFaq", data['submitFaq'])
+    .append("userId", data['user_id'])
 
     return this.http.post(this.baseUrl + 'assets/api/faqshopsubmit.php', httpParams);	
   }
