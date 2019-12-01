@@ -235,6 +235,7 @@ export class AddProductComponent implements OnInit {
   editShippingFlag: boolean = false;
   editTitleBoolean: boolean = false;
   subCategoryArrayLoad: any;
+  isMessage: boolean;
 
 
 
@@ -292,6 +293,7 @@ export class AddProductComponent implements OnInit {
           this.productStatus = this.allProductInfo['active_status'].replace(/_/g, " ");
           this.basePrice = this.allProductInfo['base_price'];
           this.setupPrice1();
+          this.booleanCheck();
           var shippingLocationMatrix = this.allProductInfo['shipping_option'].split(',');
           for(var i = 0;i<shippingLocationMatrix.length;i++){
             if(shippingLocationMatrix[i]=='pickup'){
@@ -422,6 +424,10 @@ export class AddProductComponent implements OnInit {
 
   }
 
+  isMessageSelect(){
+    this.isMessage = (<HTMLInputElement><any>document.getElementById('autoCustom')).checked;
+  }
+
   getSearchSubCategory(){
     var search = (<HTMLInputElement><any>document.getElementById('subsubcategory')).value;
     (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "block";
@@ -432,6 +438,18 @@ export class AddProductComponent implements OnInit {
         // console.log(this.dynamicSubCategory);
       },
     );
+  }
+
+  booleanCheck(){
+    // (<HTMLInputElement><any>document.getElementById('subsubcategory'));
+    this.allProductInfo['has_gift']=="0"?(<HTMLInputElement><any>document.getElementById('giftOption')).checked = false:(<HTMLInputElement><any>document.getElementById('giftOption')).checked = true;
+    this.allProductInfo['has_order_confmn']=="0"?(<HTMLInputElement><any>document.getElementById('orderConfrm')).checked = false:(<HTMLInputElement><any>document.getElementById('orderConfrm')).checked = true;
+    this.allProductInfo['can_upload_image']=="0"?(<HTMLInputElement><any>document.getElementById('uploadImg')).checked = false:(<HTMLInputElement><any>document.getElementById('uploadImg')).checked = true;
+    this.allProductInfo['can_orderbydate']=="0"?(<HTMLInputElement><any>document.getElementById('deliveryDate')).checked = false:(<HTMLInputElement><any>document.getElementById('deliveryDate')).checked = true;
+    this.allProductInfo['add_custom_message_field']=="0"?(<HTMLInputElement><any>document.getElementById('autoCustom')).checked = false:(<HTMLInputElement><any>document.getElementById('autoCustom')).checked = true;
+    this.allProductInfo['has_rfq']=="0"?(<HTMLInputElement><any>document.getElementById('rfq')).checked = false:(<HTMLInputElement><any>document.getElementById('rfq')).checked = true;
+    this.allProductInfo['has_instant_buy']=="0"?(<HTMLInputElement><any>document.getElementById('instantBuy')).checked = false:(<HTMLInputElement><any>document.getElementById('instantBuy')).checked = true;  
+    this.isMessageSelect()
   }
 
   newSubCategory(){

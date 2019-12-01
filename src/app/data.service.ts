@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma25/src/";
+  // baseUrl = "http://localhost/Angular/sma26/src/";
 
   constructor( private http: HttpClient ) { }
   
