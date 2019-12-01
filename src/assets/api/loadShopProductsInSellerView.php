@@ -2,7 +2,7 @@
 
     require "init.php";
 
-    $pincode = $_POST["pincode"];
+    $shopId = $_POST["shopId"];
 
     $filterSet = json_decode($_POST["filters"]);
     $sortSet = json_decode($_POST["sort"]);
@@ -11,24 +11,11 @@
     $pageNum = $_POST["pageNum"];
     $offset = ($pageNum - 1)*$tagNum;
 
-    $data = array();
-    $count = 0;
-    $request = "failed";
-
     $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-    FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.offer o, roninaks_smapr.prod_shipping_price psp
-    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' ";
-
-    $locationQuery = " AND p.shipping_location_id = sls.id and sls.pincode LIKE '%$pincode%'";
-
-    $status = "deliverable";
-
-    $offerCondition = " AND o.id = p.offer_id AND DAY(NOW()) < o.to_tme_stamp ORDER BY percentage ";
-
-    $groupCondition = " GROUP BY p.prodid ";
-
-    $paginationQuery = " limit $tagNum offset $offset ";
-//Filter madness starts here
+    FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh 
+    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id ";
+    
+    //Filter madness starts here
     $price = "";
     $rating = "";
     $freeShip = "";
@@ -37,18 +24,12 @@
     $instantBuy = "";
     $delivery = "";
     $sortCondition = "";
-    
-    if($filterSet->deliverable){
-        $locationQuery = " AND p.shipping_location_id != sls.id and sls.pincode NOT LIKE '%$pincode%'";
-        
-        $status = "undeliverable";
 
-        $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-        FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.offer o, roninaks_smapr.prod_shipping_price psp
-        WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";
+    if($filterSet->deliverable){
+
     }
     if($filterSet->maxPrice){
-        $price = " and p.base_price >= $filterSet->minPrice and p.base_price <=$filterSet->maxPrice ";
+        $price = " and p.base_price >= $filterSet->minPrice and p.base_price <= $filterSet->maxPrice ";
     }
     if($filterSet->rating != 0){
         $rating = " and p.rating = $filterSet->rating ";
@@ -84,22 +65,25 @@
         $sortCondition = " order by psp.price asc ";
     } else if($sortSet->shipHL){
         $sortCondition = " order by psp.price desc ";
-    } else {
-        $sortCondition = $offerCondition;
     }
 
 //Filter madness ends here
 
-    $sql = $productQuery . $locationQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery .  $groupCondition . $sortCondition . $paginationQuery;
+    // $sql = $productQuery . $locationQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition . $paginationQuery;
+    $sql = $productQuery . " AND p.shop_id = '$shopId'" .$price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition ." limit $tagNum offset $offset";
     $result = mysqli_query($con1,$sql);
 
-    // echo $sql;
+    $data = array();
+    $count = 0; 
+    $request = "failed";
 
+    
     $price = array();
     $prodId = array();
     $catId =  array();
 
-    if(mysqli_num_rows($result) > 0){
+    if(mysqli_num_rows($result)){
+
             while( $row = mysqli_fetch_array($result) ){
 
                 $request = "success";
@@ -120,7 +104,7 @@
                     "basePrice"=>$row["base_price"],
                     "offerPercent"=>$row["percentage"],
                     "hasRfq"=>$row["has_rfq"],
-                    "deliverStatus"=>$status,
+                    "activeStatus"=>$row["active_status"],
                     "rating"=>$row["rating"],
                     "parentId"=>$row["parentid"],
                     "orderConfirm"=>$row["has_order_confmn"],

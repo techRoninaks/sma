@@ -46,6 +46,7 @@ export class CategorylistingComponent implements OnInit {
 	popContent: any = "";
 	popImgSrc: any = "";
 	filterChipset: any = [];
+	comonShopId: any = [];
 
 	constructor(private route: ActivatedRoute, private cookieService: CookieService, private data: DataService, private router: Router) { }
 
@@ -118,34 +119,34 @@ export class CategorylistingComponent implements OnInit {
 		var rating;
 		var minPrice;
 
-		if(filterChip == "Undeliverable items"){
+		if (filterChip == "Undeliverable items") {
 			deliverable = false;
 		}
-		if(filterChip == "Free shipping"){
+		if (filterChip == "Free shipping") {
 			freeShip = false;
 			this.addToFilterArray("filterSet", "freeShipping", freeShip);
 		}
-		if(filterChip == "Instant buy"){
+		if (filterChip == "Instant buy") {
 			instantBuy = false;
 			this.addToFilterArray("filterSet", "instantBuy", instantBuy);
 		}
-		if(filterChip == "Max. Price"){
+		if (filterChip == "Max. Price") {
 			maxPrice = false;
 			this.addToFilterArray("filterSet", "maxPrice", maxPrice);
 		}
-		if(filterChip == "Order confirmation"){
+		if (filterChip == "Order confirmation") {
 			orderConfirm = false;
 			this.addToFilterArray("filterSet", "orderConfirm", orderConfirm);
 		}
-		if(filterChip == "Rating"){
+		if (filterChip == "Rating") {
 			rating = false;
 			this.addToFilterArray("filterSet", "rating", rating);
 		}
-		if(filterChip == "RFQ Enabled"){
+		if (filterChip == "RFQ Enabled") {
 			rfq = false;
 			this.addToFilterArray("filterSet", "rfq", rfq);
 		}
-		if(filterChip == "Min. Price"){
+		if (filterChip == "Min. Price") {
 			minPrice = false;
 			this.addToFilterArray("filterSet", "minPrice", minPrice);
 		}
@@ -155,6 +156,14 @@ export class CategorylistingComponent implements OnInit {
 	selectRating() {
 		var rating = (<HTMLInputElement><any>document.getElementById("tRating")).value;
 		document.getElementById("tRatDisp").innerHTML = rating;
+
+	}
+	//Delete a product in seller view
+	delProduct(id: any) {
+		if (confirm("Do you want to delete the product?")) {
+			document.getElementById("product" + id).style.display = "none";
+			this.data.delProdManage(id).subscribe();
+		}
 
 	}
 	//apply filter functionality
@@ -198,6 +207,7 @@ export class CategorylistingComponent implements OnInit {
 		this.addToFilterArray("filterSet", "shipMethod", shipData);
 
 		document.getElementById('load').style.display = "grid";
+		this.toggleBtns('collapseOne');
 		this.loadData();
 	}
 	applySort() {
@@ -222,6 +232,7 @@ export class CategorylistingComponent implements OnInit {
 		// this.loadFilters(this.pages);
 
 		document.getElementById('load').style.display = "grid";
+		this.toggleBtns('collapseTwo');
 		this.loadData();
 	}
 	//load related filters in filter dropdown based on scenarios
@@ -257,7 +268,7 @@ export class CategorylistingComponent implements OnInit {
 
 			}
 		} else {
-			this.popUpBoxTemplate("Looks like you're lost!","Please enter a valid location!","assets/images/lostImage.jpg");
+			this.locPopUpBoxTemplate("Looks like you're lost!", "Please enter a valid location!", "assets/images/lostImage.jpg");
 		}
 		this.filterChips();
 
@@ -275,10 +286,12 @@ export class CategorylistingComponent implements OnInit {
 			//all shop listing
 			(<any>document.getElementById("productListing")).style.display = "none";
 			(<any>document.getElementById("shopByStore")).style.display = "grid";
+			(<any>document.getElementById("filterBtnMain")).style.display = "none";
+			(<any>document.getElementById("sortBtnMain")).style.display = "none";
 			this.data.loadShopList(pincode, 12, 1).subscribe(shopData => {
 
 				request = shopData["request"];
-				if(request == "success"){
+				if (request == "success") {
 					this.array12 = shopData["data"];
 				}
 				this.requestHandler(request);
@@ -289,32 +302,61 @@ export class CategorylistingComponent implements OnInit {
 			//list favorite shops
 			(<any>document.getElementById("productListing")).style.display = "none";
 			(<any>document.getElementById("shopByStore")).style.display = "grid";
+			(<any>document.getElementById("filterBtnMain")).style.display = "none";
+			(<any>document.getElementById("sortBtnMain")).style.display = "none";
 			var userId = this.getCookie("userId");
 			this.data.loadFavorites(userId, 12, 1).subscribe(favShops => {
 
 				request = favShops["request"];
-				if(request == "success"){
-
+				if (request == "success") {
+					this.array12 = favShops["data"];
 				}
 				this.requestHandler(request);
 			})
 
 		} else if (!isNaN(parseInt(shopId))) {
 
-			//shopwise product listing
-			this.data.loadShopWiseProducts(shopId, 12, 1, filters, sorters).subscribe(shopProducts => {
+			//seller view
+			var sellerId = this.getCookie("sellerId");
+			if (!isNaN(parseInt(sellerId))) {
+				(<any>document.getElementById("productListing")).style.display = "none";
+				(<any>document.getElementById("sellerListing")).style.display = "grid";
+				(<any>document.getElementById("addNewProd")).style.display = "grid";
+				(<any>document.getElementById("filterBtnMain")).style.display = "none";
+				(<any>document.getElementById("sortBtnMain")).style.display = "none";
+				(<any>document.getElementById("filterBtnMainSide")).style.display = "none";
+				this.data.loadShopWiseProductsInSellerView(shopId, 12, 1, filters, sorters).subscribe(shopProducts => {
 
-				request = shopProducts["request"];
-				if(request == "success"){
-					this.array12 = shopProducts["data"];
-					this.subCategory = shopProducts["subCategory"];
-					this.variants = shopProducts["variants"];
-					this.shipMethods = shopProducts["shipMethods"];
-					this.priceRange = this.generatePriceRange(shopProducts["priceRange"]);
-				}
-				this.requestHandler(request);				
+					request = shopProducts["request"];
+					if (request == "success") {
+						this.array12 = shopProducts["data"];
+						this.subCategory = shopProducts["subCategory"];
+						this.variants = shopProducts["variants"];
+						this.shipMethods = shopProducts["shipMethods"];
+						this.priceRange = this.generatePriceRange(shopProducts["priceRange"]);
+						this.comonShopId = this.array12[0].shopId;
+					}
+					this.requestHandler(request);
 
-			})
+				})
+			} else {
+				//shopwise product listing
+				this.data.loadShopWiseProducts(shopId, 12, 1, filters, sorters).subscribe(shopProducts => {
+
+					request = shopProducts["request"];
+					if (request == "success") {
+						this.array12 = shopProducts["data"];
+						this.subCategory = shopProducts["subCategory"];
+						this.variants = shopProducts["variants"];
+						this.shipMethods = shopProducts["shipMethods"];
+						this.priceRange = this.generatePriceRange(shopProducts["priceRange"]);
+						this.comonShopId = this.array12[0].shopId;
+					}
+					this.requestHandler(request);
+
+				})
+			}
+
 
 		}
 	}
@@ -331,7 +373,7 @@ export class CategorylistingComponent implements OnInit {
 			this.data.loadCatIdData(catId, pincode, 12, 1, filters, sorters).subscribe(catIdData => {
 
 				request = catIdData["request"];
-				if(request == "success"){
+				if (request == "success") {
 					this.array12 = catIdData["data"];
 					this.subCategory = catIdData["subCategory"];
 					this.variants = catIdData["variants"];
@@ -347,7 +389,7 @@ export class CategorylistingComponent implements OnInit {
 			this.data.loadTrending(pincode, 12, 1, filters, sorters).subscribe(trendingData => {
 
 				request = trendingData["request"];
-				if(request == "success"){
+				if (request == "success") {
 					this.array12 = trendingData["data"];
 					this.subCategory = trendingData["subCategory"];
 					this.variants = trendingData["variants"];
@@ -363,7 +405,7 @@ export class CategorylistingComponent implements OnInit {
 			this.data.loadOfferProd(pincode, 12, 1, filters, sorters).subscribe(offerData => {
 
 				request = offerData["request"];
-				if(request == "success"){
+				if (request == "success") {
 					this.array12 = offerData["data"];
 					this.subCategory = offerData["subCategory"];
 					this.variants = offerData["variants"];
@@ -379,7 +421,7 @@ export class CategorylistingComponent implements OnInit {
 			this.data.loadNewProd(pincode, 12, 1, filters, sorters).subscribe(newData => {
 
 				request = newData["request"];
-				if(request == "success"){
+				if (request == "success") {
 					this.array12 = newData["data"];
 					this.subCategory = newData["subCategory"];
 					this.variants = newData["variants"];
@@ -404,7 +446,7 @@ export class CategorylistingComponent implements OnInit {
 		this.data.loadSearchResults(srchKey, pincode, 12, 1, filters, sorters).subscribe(searchData => {
 
 			request = searchData["request"];
-			if(request == "success"){
+			if (request == "success") {
 				this.array12 = searchData["data"];
 				this.subCategory = searchData["subCategory"];
 				this.variants = searchData["variants"];
@@ -457,6 +499,12 @@ export class CategorylistingComponent implements OnInit {
 		this.popContent = description;
 		this.popImgSrc = image;
 	}
+	locPopUpBoxTemplate(heading, description, image) {
+		$("#locationModal").modal();
+		this.popHeader = heading;
+		this.popContent = description;
+		this.popImgSrc = image;
+	}
 
 	requestHandler(request) {
 
@@ -466,12 +514,12 @@ export class CategorylistingComponent implements OnInit {
 			}, 500);
 			return;
 
-		} else if(request == "not_found"){
+		} else if (request == "not_found") {
 			setTimeout(function () {
 				document.getElementById('load').style.display = "none";
 			}, 500);
 			var formElement = "form Here";
-			this.popUpBoxTemplate("Sorry, we couldn't find what you're looking for...",formElement,"assets/images/notFoundImage.jpg");
+			this.popUpBoxTemplate("Sorry, we couldn't find what you're looking for...", formElement, "assets/images/notFoundImage.jpg");
 			return;
 		}
 		setTimeout(function () {
@@ -481,15 +529,15 @@ export class CategorylistingComponent implements OnInit {
 
 	}
 
-	goHome(){
+	goHome() {
 		$("#myModal").modal("hide");
 		this.router.navigate(['']);
 	}
-	shopById(shopId){
-		this.router.navigate(['/category'] ,{queryParams:{shop_id:shopId}});
+	shopById(shopId) {
+		this.router.navigate(['/category'], { queryParams: { shop_id: shopId } });
 	}
 
-	deliverable(){
+	deliverable() {
 		var deliFlag = (<HTMLInputElement><any>document.getElementById("inpDeliver")).checked;
 		this.addToFilterArray("filterSet", "deliverable", deliFlag);
 
@@ -497,55 +545,62 @@ export class CategorylistingComponent implements OnInit {
 		this.loadData();
 	}
 
-	filterChips(){
+	filterChips() {
 		this.filterArray = JSON.parse(this.getCookie("filterSet"));
 		var count = 0;
 
 		console.log(this.filterArray);
-		if(this.filterArray["deliverable"] == true){
-			this.filterChipset[count++] = "Undeliverable items"; 
+		if (this.filterArray["deliverable"] == true) {
+			this.filterChipset[count++] = "Undeliverable items";
 			(<HTMLInputElement><any>document.getElementById("inpDeliver")).checked = true;
 		}
-		if(this.filterArray["freeShipping"] == true){
-			this.filterChipset[count++] = "Free shipping"; 
+		if (this.filterArray["freeShipping"] == true) {
+			this.filterChipset[count++] = "Free shipping";
 			(<HTMLInputElement><any>document.getElementById("tFShip")).checked = true;
 		}
-		if(this.filterArray["instantBuy"] == true){
+		if (this.filterArray["instantBuy"] == true) {
 			this.filterChipset[count++] = "Instant buy";
 			(<HTMLInputElement><any>document.getElementById("tFShip")).checked = true;
 		}
-		if(this.filterArray["maxPrice"] !== ""){
-			this.filterChipset[count++] = "Max. Price"; 
+		if (this.filterArray["maxPrice"] !== "") {
+			this.filterChipset[count++] = "Max. Price";
 			(<HTMLInputElement><any>document.getElementById("tmaxPrice")).value = this.filterArray["maxPrice"];
 		}
-		if(this.filterArray["minPrice"] !== ""){
-			this.filterChipset[count++] = "Min. Price"; 
+		if (this.filterArray["minPrice"] !== "") {
+			this.filterChipset[count++] = "Min. Price";
 			(<HTMLInputElement><any>document.getElementById("tminPrice")).value = this.filterArray["minPrice"];
 		}
-		if(this.filterArray["orderConfirm"] == true){
-			this.filterChipset[count++] = "Order confirmation"; 
+		if (this.filterArray["orderConfirm"] == true) {
+			this.filterChipset[count++] = "Order confirmation";
 			(<HTMLInputElement><any>document.getElementById("orderCon")).checked = true;
 		}
-		if(this.filterArray["rating"] !== ""){
-			this.filterChipset[count++] = "Rating"; 
+		if (this.filterArray["rating"] !== "") {
+			this.filterChipset[count++] = "Rating";
 		}
-		if(this.filterArray["rfq"] == true){
-			this.filterChipset[count++] = "RFQ Enabled"; 
+		if (this.filterArray["rfq"] == true) {
+			this.filterChipset[count++] = "RFQ Enabled";
 			(<HTMLInputElement><any>document.getElementById("tRfq")).checked = true;
 		}
-		if(this.filterArray["shipMethod"].length > 0){
+		if (this.filterArray["shipMethod"].length > 0) {
 			var shipMethods = this.filterArray["shipMethod"];
-			for(var i =0;i<shipMethods.length; i++){
+			for (var i = 0; i < shipMethods.length; i++) {
 				this.filterChipset[count++] = shipMethods[i];
 			}
 		}
-		if(this.filterArray["variants"]){
+		if (this.filterArray["variants"]) {
 			var variant = this.filterArray["variants"];
-			for(var i = 0;i<variant.length;i++){
+			for (var i = 0; i < variant.length; i++) {
 				this.filterChipset[count++] = variant[i];
 			}
 		}
 		console.log(this.filterChipset)
-	}	
+	}
+
+	submitLocation() {
+		var locationPin = (<HTMLInputElement><any>document.getElementById('locationPin')).value;
+		console.log(locationPin);
+		this.setCookie("pin", locationPin);
+		window.location.reload();
+	}
 }
 

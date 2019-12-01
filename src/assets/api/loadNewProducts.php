@@ -15,9 +15,9 @@
     $count = 0;
     $request = "failed";
 
-    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
     FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
-    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' ";
+    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' AND p.active_status IN ('active') ";
 
     $locationQuery = " AND p.shipping_location_id = sls.id and sls.pincode LIKE '%$pincode%'";
 
@@ -25,6 +25,8 @@
 
     $newCondition = " AND YEAR(NOW()) = YEAR(p.created_date) AND MONTH(NOW()) = MONTH(p.created_date) ORDER BY MONTH(p.created_date) ";
 
+    $groupCondition = " GROUP BY p.prodid ";
+    
     $paginationQuery = " limit $tagNum offset $offset ";
 //Filter madness starts here
     $price = "";
@@ -41,9 +43,9 @@
 
             $status = "undeliverable";
 
-            $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+            $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
             FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
-            WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";
+            WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' AND p.active_status IN ('active') ";
         }
         if($filterSet->maxPrice){
             $price = " and p.base_price >= $filterSet->minPrice and p.base_price <=$filterSet->maxPrice ";
@@ -88,7 +90,7 @@
 
 //Filter madness ends here
 
-    $sql = $productQuery . $locationQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $sortCondition . $paginationQuery;
+    $sql = $productQuery . $locationQuery . $price . $rating . $freeShip . $hasRfq . $orderConfirm . $instantBuy . $delivery . $groupCondition . $sortCondition . $paginationQuery;
     $result = mysqli_query($con1,$sql);
 
     // echo $sql;
@@ -112,12 +114,13 @@
                 "prodId"=>$row["prodid"],
                 "shopId"=>$row["shop_id"],
                 "sellerName"=>$row["seller_name"],
+                "shopName"=>$row["shopname"],
                 "prodName"=>$row["name"],
                 "desc"=>$row["short_desc"],
                 "basePrice"=>$row["base_price"],
                 "offerPercent"=>$row["percentage"],
                 "hasRfq"=>$row["has_rfq"],
-                "activeStatus"=>$row["active_status"],
+                "deliverStatus"=>$status,
                 "rating"=>$row["rating"],
                 "parentId"=>$row["parentid"],
                 "orderConfirm"=>$row["has_order_confmn"],
