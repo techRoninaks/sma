@@ -12,4 +12,10 @@
 
     $sql_query="INSERT INTO `faq_shop`(`shop_id`,`type_id`, `text`) VALUES ($shopId, $typeId,'$submitFaq')";
     $result = mysqli_query($con2, $sql_query);
+
+    $faqArr = array("faq_shop","shop_id",$shopId,"faq_id",$typeId);
+    $faq = implode("!~!",$faqArr);
+
+    $sql_notif="INSERT INTO `notification`(`userid`, `message`, `prodid`, `type`) VALUES ($userId,'$faq',$prodId,'new question')";
+    $result = mysqli_query($con2, $sql_notif);
 ?>

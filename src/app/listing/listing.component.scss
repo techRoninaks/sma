@@ -724,7 +724,7 @@ $SubText: 18px;
 		.uploadImgContParent{
 			overflow-x: scroll;
 			width: 28rem;
-			display: inline-flex;
+			display: block ruby;
 			scrollbar-width: thin;
 			.uploadImgCont{
 				width: max-content;
@@ -1371,7 +1371,8 @@ $SubText: 18px;
 				grid-template-columns: 3% 45% 51% 3%;
 			}
 			@include xxlg{
-				grid-template-columns: 5% 45% 45% 5%;
+				// grid-template-columns: 5% 45% 45% 5%;
+				grid-template-columns: 10% 41% 44% 5%;
 			}
 
 			.search {
@@ -1394,6 +1395,9 @@ $SubText: 18px;
 					}
 					@include xlg{
 						width: 27rem;
+					}
+					@include xxlg{
+						width: 35rem;
 					}
 				}
 				button {
@@ -1439,6 +1443,9 @@ $SubText: 18px;
 					@include xlg{
 						width: 26rem;
 					}
+					@include xxlg{
+						width: 35rem;
+					}
 				}
 				button {
 					background-color: #efbe24;
@@ -1471,7 +1478,8 @@ $SubText: 18px;
 				margin: 0px 40px 0px 10px;
 			}
 			@include xxlg{
-				margin: 0px 40px 0px 40px;
+				// margin: 0px 40px 0px 40px;
+				margin: 0px 6rem 0px 9rem;
 			}
 
 			.noFaq{
@@ -1809,7 +1817,8 @@ $SubText: 18px;
 		.uploadImgContParent{
 			overflow-x: scroll;
 			width: 25rem;
-			display: inline-flex;
+			// display: inline-flex;
+			display: block ruby;
 			scrollbar-width: thin;
 			.uploadImgCont{
 				width: max-content;

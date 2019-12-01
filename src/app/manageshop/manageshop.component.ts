@@ -319,7 +319,7 @@ export class ManageshopComponent implements OnInit {
 		var faqSearchInput = (<HTMLInputElement><any>document.getElementById("submitFaq")).value;
 		var faqSearchInputLength = (<HTMLInputElement><any>document.getElementById("submitFaq")).value.length;
 		if (faqSearchInputLength >= 5) {
-			this.tokenFaqSubmit = { shop_id: this.token, submitFaq: faqSearchInput };
+			this.tokenFaqSubmit = { shop_id: this.token, submitFaq: faqSearchInput , user_id: this.userId };
 			this.data.getFaqShopSubmit(this.tokenFaqSubmit).subscribe();
 		}
 		(<HTMLInputElement><any>document.getElementById("submitFaq")).value = "";
