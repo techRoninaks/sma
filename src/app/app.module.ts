@@ -44,6 +44,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ShopsettingComponent } from './shopsetting/shopsetting.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     ReactiveFormsModule,
     MatInputModule,
     AutocompleteLibModule,
+    MatTooltipModule,
+    TooltipModule,
     // ActivatedRoute,
     MatFormFieldModule,
     ChartsModule ,

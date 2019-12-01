@@ -274,7 +274,7 @@ export class AddProductComponent implements OnInit {
           this.subCategoryArrayLoad = this.allProductInfo['sub_catgry_id'];
           if(this.subCategoryArrayLoad != "" || this.subCategoryArrayLoad != null){
             this.data.getSubCatForProductEdit(this.subCategoryArrayLoad).subscribe(data=>{
-              this.subCategoryArray = data;
+              // this.subCategoryArray = data;
             })
           }
           if(this.allProductInfo['max_no_of_image'] =="" || this.allProductInfo['max_no_of_image'] == null){
@@ -608,16 +608,16 @@ export class AddProductComponent implements OnInit {
       this.varients.push(cell);
   }
 
-  saveAddVariant(variantArray){
-    console.log(variantArray);
-
+  saveAddVariant(variantArray,pos){
+    var isMultiVariant  = (<HTMLInputElement><any>document.getElementById("isMultiVariant_"+pos)).checked;
+    console.log(isMultiVariant);
     if(this.editMode){
-      this.data.addProductVarients(JSON.stringify(variantArray), this.editProdid).subscribe(data=>{
+      this.data.addProductVarients(JSON.stringify(variantArray), this.editProdid,isMultiVariant).subscribe(data=>{
 
       })
     }
     else{
-      this.data.addProductVarients(JSON.stringify(variantArray)).subscribe(data=>{
+      this.data.addProductVarients(JSON.stringify(variantArray),'all',isMultiVariant).subscribe(data=>{
       })
     }
 
@@ -1033,13 +1033,15 @@ export class AddProductComponent implements OnInit {
         this.data.getdataPostAddProduct(this.addProduct, this.editProdid).subscribe(data => {
           // window.location.href = './dashboard';
           if(caller == "duplicate"){
-            alert('Product have been saved and dupicate have been made.')
+            alert('Product have been saved and dupicate have been made.');
           }
           else if(caller == "publish"){
-            window.location.href = './dashboard';
+            alert('Product have been published.');
+            window.location.href = './managepage';
           }
           else if(caller == "save"){
-            window.location.href = './dashboard';
+            alert('Product have been saved.');
+            window.location.href = './managepage';
           }
           else{
           }
@@ -1049,10 +1051,12 @@ export class AddProductComponent implements OnInit {
         this.data.getdataPostAddProduct(this.addProduct).subscribe(data => {
           // window.location.href = './dashboard'
           if(caller == "publish"){
-            window.location.href = './dashboard';
+            alert('Product have been published.');
+            window.location.href = './managepage';
           }
           else if(caller == "save"){
-            window.location.href = './dashboard';
+            alert('Product have been saved.');
+            window.location.href = './managepage';
           }
         });
       }

@@ -8,9 +8,11 @@
     // $result1 = mysqli_query($con2, $sql_query1);
     $sql_query1="INSERT INTO `transaction_details`( `txnid`, `orderid`, `status`, `payment_mode`, `prod_name`) VALUES ('$txnid',$orderId,'pending_conformation','internet','$prodname')";
     $result1 = mysqli_query($con2, $sql_query1);
-    echo $sql_query1;
-    // $sql_query2="UPDATE `purchase_order` SET `order_status`= '$stageName' WHERE `orderid`= '$orderIdShort' ";
-    // $result2 = mysqli_query($con2, $sql_query2);
+
+    // $notifMsgArr = array("new order placed","customer_order",$coId,"purchase_order",$orderId);
+    // $notifMsg = implode("!~!",$notifMsgArr);
+    // $sql_notif="INSERT INTO `notification`(`userid`, `message`, `prodid`, `type`) VALUES ($userId,'$notifMsg ',$prodId,'new order')";
+    // $result = mysqli_query($con2, $sql_notif); 
 
     if(!$result1)
     {
