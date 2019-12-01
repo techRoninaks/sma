@@ -1984,6 +1984,14 @@ return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', htt
     .append("sellerId", data);  
     return this.http.post(this.baseUrl+'assets/api/ viewOrderDataSeller.php',httpParams);  
   }
+    loadShopWiseProductsInSellerView(shopId : any, tagNum : any, pageNum : any, filters : any, sorters : any){
+    let httpParams = new HttpParams()
+    .append("shopId",shopId)
+    .append("tagNum",tagNum)
+    .append("pageNum",pageNum).append("filters",filters)
+    .append("sort",sorters);
+    return this.http.post(this.baseUrl + 'assets/api/loadShopProductsInSellerView.php', httpParams);
+  }
 
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
