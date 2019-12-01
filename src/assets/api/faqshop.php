@@ -3,7 +3,7 @@
     $shopId =$_POST["shopId"];
     $faqNum =$_POST["numberFaq"];
     $data = array();
-    $sql_queryX = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId";
+    $sql_queryX = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId AND q.shop_id=$shopId";
     $resultX = mysqli_query($con2 , $sql_queryX);
     $countX=0;
     while($rowX=mysqli_fetch_assoc($resultX)){
@@ -18,7 +18,7 @@
             $responseX = 0;
         }
         if($faqNum==0){
-            $sql_query = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId limit 4";
+            $sql_query = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId AND q.shop_id=$shopId limit 4";
             $result = mysqli_query($con2 , $sql_query);
             // echo $sql_query;
             $count=0;
@@ -35,7 +35,7 @@
             // echo json_encode($a);
 
         }else if($faqNum==1){
-            $sql_query = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId";
+            $sql_query = "SELECT f.text,f.type_id from faq_shop f join faq_shop q on abs(f.type_id)=q.type_id WHERE f.shop_id=$shopId AND q.shop_id=$shopId";
             $result = mysqli_query($con2 , $sql_query);
             $count=0;
             while($row=mysqli_fetch_assoc($result)){

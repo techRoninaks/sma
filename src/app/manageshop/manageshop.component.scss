@@ -15,14 +15,21 @@ $SubHeader: 25px;
 $Text: 20px;
 $SubText: 18px;
 
+/* Smaller devices */
+@mixin sm-lesser {
+	@media (max-width: 600px) {
+		@content;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
 @mixin sm {
-	@media (max-width: 1050px) {
+	@media (min-width: 600px) {
 		@content;
 	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-
 @mixin md {
 	@media (min-width: 768px) {
 		@content;
@@ -30,7 +37,6 @@ $SubText: 18px;
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-
 @mixin lg {
 	@media (min-width: 992px) {
 		@content;
@@ -38,9 +44,13 @@ $SubText: 18px;
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-
 @mixin xlg {
 	@media (min-width: 1200px) {
+		@content;
+	}
+}
+@mixin xxlg {
+	@media (min-width: 1500px) {
 		@content;
 	}
 }
@@ -89,11 +99,17 @@ $SubText: 18px;
 		font-family: Bitter;
 		font-size: $SubText;
 		color: #646464;
+		@include sm-lesser{
+			font-size: 14px;
+		}
 	}
 	.desc {
 		font-family: BitterBold;
 		font-size: $SubText;
 		color: #333333;
+		@include sm-lesser{
+			font-size: 15px;
+		}
 	}
 	.shopBg {
 		grid-area: shopBg;
@@ -133,6 +149,17 @@ $SubText: 18px;
 			&:hover {
 				background-color: whitesmoke;
 			}
+			@include sm-lesser{
+				top: -78%;
+				right: -43%;
+				font-size: 14px;
+			}
+			@include xlg{
+				right: -81%;
+			}
+			@include xxlg{
+				right: -86%;
+			}
 		}
 
 		.btnCoverUpload {
@@ -155,14 +182,24 @@ $SubText: 18px;
 		height: auto;
 		// margin-top: 5%;
 		display: grid;
-		grid-template-columns: 49% 2% 49%;
-		grid-template-rows: auto;
-		grid-template-areas: "shopDesc . shopBio";
-		@include sm {
-			display: grid;
-			grid-template-columns: Auto;
+
+		@include sm-lesser {
+			grid-template-columns: auto;
 			grid-template-rows: repeat(2, auto);
 			grid-template-areas: "shopDesc" "shopBio";
+			width: auto;
+			margin: auto;
+		}
+
+		@include sm {
+			grid-template-columns: auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas: "shopDesc" "shopBio";
+		}
+		@include lg{
+			grid-template-columns: 49% 2% 49%;
+			grid-template-rows: auto;
+			grid-template-areas: "shopDesc . shopBio";
 		}
 		.shopDesc {
 			grid-area: shopDesc;
@@ -174,10 +211,29 @@ $SubText: 18px;
 			grid-template-rows: auto;
 			grid-template-areas: ". shopLogo shopInfo";
 			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			@include sm-lesser{
+				grid-template-columns: 0% 29% 49%;
+				width: 100%;
+			}
+			@include xlg{
+				grid-template-columns: 15% 25% 50%;
+				width: 100%;
+			}
+			@include xxlg{
+				grid-template-columns: 25% 25% 50%;
+			}
 			.shopLogo {
 				margin-block-start: 43%;
 				grid-area: shopLogo;
-
+				@include sm-lesser{
+					margin-block-start: 31%;
+				}
+				@include xlg{
+					margin-block-start: 60%;
+				}
+				@include xxlg{
+					margin-block-start: 63%;
+				}
 				img {
 					// width: 100%;
 					// height: 10rem;
@@ -217,6 +273,30 @@ $SubText: 18px;
 					&:hover {
 						background-color: rgb(151, 151, 151);
 					}
+					@include sm-lesser{
+						font-size: 10px;
+						margin-left: 1rem;
+						width: 5.75rem;
+						transform: translate(0px, -2.7rem);
+						margin-top: 0px;
+					}
+					@include xlg{
+						margin-left: 0px;
+						font-size: 15px;
+						margin-top: 0px;
+						width: 8.1rem;
+						left: 11%;
+						position: relative;
+					}
+					@include xxlg{
+						margin-left: 0px;
+						font-size: 15px;
+						margin-top: 0px;
+						width: 10.1rem;
+						left: 14%;
+						position: relative;
+						top: 2%;
+					}
 				}
 
 				.upload-btn-wrapper input[type="file"] {
@@ -243,6 +323,20 @@ $SubText: 18px;
 						font-family: BitterBold;
 						font-size: $SubText;
 						margin-left: 100px;
+						@include sm-lesser{
+							font-size: 13px;
+							margin-left: -2px;	
+						}
+						@include xlg{
+							font-size: 17px;
+							margin-left: 94px;
+							margin-right: 100px;
+						}
+						@include xlg{
+							font-size: $SubText;
+							margin-left: 94px;
+							margin-right: 100px;
+						}
 						button {
 							border: none;
 							box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -260,6 +354,9 @@ $SubText: 18px;
 						grid-area: btnDescEdit;
 						font-family: BitterBold;
 						font-size: $SubText;
+						@include sm-lesser{
+							font-size: 13px;
+						}
 						button {
 							border: none;
 							box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -480,8 +577,11 @@ $SubText: 18px;
 
 			height: auto;
 			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			font-family: Bitter;
 			.btnVacation {
 				.vac {
+					font-family: Bitter;
+					font-size:16px;
 					background-color: #efbe24;
 					color: white;
 					width: 250px;
@@ -491,6 +591,10 @@ $SubText: 18px;
 					align-self: center;
 					border-radius: 10px;
 					// width:auto;
+					@include sm-lesser{
+						font-family: BitterBold;
+						font-size: 15px;
+					}
 					.switch {
 						position: relative;
 						display: inline-block;
@@ -618,15 +722,25 @@ $SubText: 18px;
 				width: auto;
 				border-radius: 10px;
 				padding-bottom: 25px;
+				@include sm-lesser{
+					width: 22rem;
+					margin: auto;
+				}
 				.bioHeader {
 					margin-block-start: 5%;
 					margin-inline-start: 5%;
 					font-family: BitterBold;
 					font-size: $Header;
+					@include sm-lesser{
+						font-size: 24px;
+					}
 				}
 				.bioTxt {
 					margin-inline-end: 10%;
 					margin-inline-start: 5%;
+					@include sm-lesser{
+						font-size: 15px;	
+					}
 				}
 				button {
 					background-color: #efbe24;
@@ -652,6 +766,9 @@ $SubText: 18px;
 			.btnAdvSetting {
 				font-family: BitterBold;
 				font-size: $SubText;
+				@include sm-lesser{
+					font-size: 15px;
+				}
 				button {
 					background-color: #efbe24;
 					color: white;
@@ -677,7 +794,9 @@ $SubText: 18px;
 		grid-template-columns: auto;
 		width: auto;
 		grid-template-areas: "cat" "prod";
-
+		@include sm-lesser{
+			margin:auto;
+		}
 		#showAll {
 			display: block;
 			margin-left: auto;
@@ -700,6 +819,11 @@ $SubText: 18px;
 			width: auto;
 			margin: 5%;
 			grid-area: cat;
+			@include sm-lesser{
+				grid-template-columns: repeat(1, 23rem);
+				width: 100%;
+				margin: auto;
+			}
 			.dvCard {
 				padding: 6%;
 				border-bottom: 1px solid lightgray;
@@ -711,6 +835,14 @@ $SubText: 18px;
 					border-radius: 5px;
 					.imgBanner {
 						width: inherit;
+						height: 20rem;
+						object-fit: cover;
+						@include sm-lesser{
+							height: 15rem;
+						}
+						@include xxlg{
+							height: 25rem;
+						}
 					}
 					.dvUndeliver {
 						position: relative;
@@ -762,16 +894,16 @@ $SubText: 18px;
 								font-family: BitterBold;
 								margin: auto;
 							}
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-							// @include lg {
-							// 	p {
-							// 		font-size: 16px;
-							// 	}
-							// }
+							@include sm-lesser {
+								p {
+									font-size: 20px;
+								}
+							}
+							@include lg {
+								p {
+									font-size: 16px;
+								}
+							}
 						}
 						.dvPrice {
 							grid-area: dv-rate;
@@ -783,16 +915,26 @@ $SubText: 18px;
 								font-size: 24px;
 								font-family: BitterBold;
 							}
-							// @include sm-lesser {
-							// 	p {
-							// 		font-size: 20px;
-							// 	}
-							// }
-							// @include lg {
-							// 	.fa {
-							// 		font-size: 16px;
-							// 	}
-							// }
+							@include sm-lesser {
+								p {
+									font-size: 13px;
+								}
+							}
+							@include lg {
+								.fa {
+									font-size: 16px;
+								}
+							}
+							@include xlg {
+								p {
+									font-size: 18px;
+								}
+							}
+							@include xxlg {
+								p {
+									font-size: 24px;
+								}
+							}
 						}
 					}
 					.dvDetails {
@@ -805,23 +947,25 @@ $SubText: 18px;
 							line-height: 1.3;
 							// color: darkgray;
 						}
-						// @include sm-lesser {
-						// 	p {
-						// 		font-size: $SubText;
-						// 	}
-						// }
-						// @include lg {
-						// 	p {
-						// 		font-size: 16px;
-						// 	}
-						// }
+						@include sm-lesser {
+							p {
+								font-size: 13px;
+							}
+						}
+						@include lg {
+							p {
+								font-size: 16px;
+							}
+						}
 					}
 					.dvBtn {
 						grid-area: btns;
 						grid-template-columns: auto auto;
 						grid-template-areas: "btnEditProduct btnDelete";
 						display: grid;
-
+						@include xxlg{
+							padding-left: 8rem;
+						}
 						.btnEditProduct {
 							grid-area: btnEditProduct;
 							width: 60px;
@@ -860,6 +1004,10 @@ $SubText: 18px;
 			border: 5px solid whitesmoke;
 			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 			border-radius: 5px;
+			@include sm-lesser{
+				height: 15rem;
+				width: 15rem;
+			}
 
 			.plusDiv {
 				grid-area: plusP;
@@ -869,6 +1017,10 @@ $SubText: 18px;
 					font-size: 85px;
 					font-family: Bitter;
 					color: #646464;
+					@include sm-lesser{
+						margin-top: 30px;
+						font-size: 77px;
+					}
 				}
 			}
 			.textDiv {
@@ -906,6 +1058,11 @@ $SubText: 18px;
 				background-color: #ddb01d;
 			}
 		}
+		@include sm-lesser{
+			.headClass{
+				font-size: 19px
+			}
+		}
 		.prodPolicy {
 			// margin: 0rem 1rem 5rem 1rem;
 			img {
@@ -915,6 +1072,9 @@ $SubText: 18px;
 				width: 300px;
 				z-index: 0;
 				transform: translate(0rem, 2rem);
+				@include sm-lesser{
+					width: 200px;			
+					transform: translate(0rem, 1.5rem);				}
 			}
 			p {
 				text-align: center;
@@ -945,6 +1105,10 @@ $SubText: 18px;
 				transform: translate(0rem, 2rem);
 				z-index: 0;
 				// position: absolute;
+				@include sm-lesser{
+					width: 200px;			
+					transform: translate(0rem, 1.5rem);
+				}
 			}
 			p {
 				text-align: center;
@@ -975,6 +1139,10 @@ $SubText: 18px;
 				transform: translate(0rem, 2rem);
 				z-index: 0;
 				// position: absolute;
+				@include sm-lesser{
+					width: 200px;			
+					transform: translate(0rem, 1.5rem);	
+				}
 			}
 			p {
 				text-align: center;
@@ -1004,6 +1172,10 @@ $SubText: 18px;
 				width: 300px;
 				transform: translate(0rem, 2rem);
 				z-index: 0;
+				@include sm-lesser{
+					width: 200px;			
+					transform: translate(0rem, 1.5rem);
+					}
 				// position: absolute;
 			}
 			p {
@@ -1028,11 +1200,14 @@ $SubText: 18px;
 	}
 	.divQuestion {
 		margin: 5% 5% auto 5%;
-		width: Auto;
+		width: auto;
 		grid-area: shopQuestion;
-		height: 300px;
+		height: auto;
 		margin-block-end: 5%;
 		box-sizing: border-box;
+		@include sm-lesser{
+			margin: auto;
+		}
 		img {
 			display: block;
 			margin-left: auto;
@@ -1041,11 +1216,22 @@ $SubText: 18px;
 			height: 50px;
 			z-index: 0;
 			transform: translate(0rem, 2rem);
+			@include sm-lesser{
+				width: 22.5rem;
+				margin-left: 0px;
+				margin-right: 0px;		
+			}
 		}
 		p {
 			text-align: center;
 			transform: translate(0px, -0.45em);
 			z-index: 1;
+		}
+		.headClass{
+			@include sm-lesser{
+				font-size: 19px;
+				text-align: center;
+			}
 		}
 		.divCustomerQA {
 			display: grid;
@@ -1062,6 +1248,20 @@ $SubText: 18px;
 				grid-template-columns: 5% 45% 45% 5%;
 				grid-template-rows: auto;
 				grid-template-areas: ". search askQ .";
+				@include sm-lesser{
+					grid-template-areas: "search askQ";
+					grid-template-columns: auto;
+				}
+				@include lg{
+					grid-template-columns: 3% 48% 53% 0%;
+				}
+				@include xlg{
+					grid-template-columns: 3% 45% 51% 3%;
+				}
+				@include xxlg{
+					// grid-template-columns: 5% 45% 45% 5%;
+					grid-template-columns: 10% 41% 44% 5%;
+				}
 				.search {
 					grid-area: search;
 					.searchBox {
@@ -1072,19 +1272,30 @@ $SubText: 18px;
 						border: none;
 						height: 40px;
 						padding-left: 20px;
+						@include sm-lesser{
+							width: 6rem;
+							height: 25px;
+							font-size: 10px;
+						}
+						@include lg{
+							width: 23rem;
+						}
+						@include xlg{
+							width: 27rem;
+						}
+						@include xxlg{
+							width: 35rem;
+						}
 					}
 					button {
 						background-color: #dbdbdb;
 						border: none;
 						height: 40px;
 						border: none;
-						// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-						// border-radius: 5px;
-						// // padding:6px 25px 6px 25px;
-						// &:hover{
-						// 	cursor: pointer;
-						// 	background-color: #ddb01d;
-						// }
+						@include sm-lesser{
+							transform: translate(0rem,0px);
+							height: 25px;
+						}
 						&:hover {
 							cursor: pointer;
 							background-color: #cfcfcf;
@@ -1093,6 +1304,9 @@ $SubText: 18px;
 							height: 25px;
 							width: 20px;
 							transform: translate(0rem, 0rem);
+							@include sm-lesser{
+								height: 20px;
+							}
 						}
 					}
 				}
@@ -1105,24 +1319,35 @@ $SubText: 18px;
 						border: none;
 						height: 40px;
 						padding-left: 20px;
+						@include sm-lesser{
+							width: 7rem;
+							height: 25px;
+							font-size: 10px;
+						}
+						@include lg{
+							width: 23rem;
+						}
+						@include xlg{
+							width: 26rem;
+						}
+						@include xxlg{
+							width: 35rem;
+						}
 					}
 					button {
 						background-color: #efbe24;
 						color: white;
 						border: none;
-						// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-						// border-radius: 5px;
-						// // padding:6px 25px 6px 25px;
+						@include sm-lesser{
+							height: 25px;
+							transform: translate(0rem,0px);
+							font-size: 10px;
+						}
 						&:hover {
 							cursor: pointer;
 							background-color: #ddb01d;
 						}
-						// border: none;
 						height: 40px;
-						// &:hover {
-						// 	cursor: pointer;
-						// 	background-color: #dba716;
-						// }
 					}
 				}
 			}
@@ -1131,6 +1356,20 @@ $SubText: 18px;
 				grid-template-columns: repeat(2, 1fr);
 				margin: 0px 40px 0px 40px;
 				width: auto;
+				@include sm-lesser{
+					font-size: 10px;
+					margin: 0px 0px 0px 0px;
+				}
+				@include lg{
+					margin: 0px -30px 0px 5px;
+				}
+				@include xlg{
+					margin: 0px 40px 0px 10px;
+				}
+				@include xxlg{
+					// margin: 0px 40px 0px 40px;
+					margin: 0px 6rem 0px 9rem;
+				}
 				.noFaq{
 					display:none;
 					font-family:Bitter;
@@ -1161,9 +1400,20 @@ $SubText: 18px;
 			}
 		}
 		.dvMore {
+			@include sm-lesser{
+				transform: translate(10rem,-2rem);
+				width: max-content;
+			}
 			img {
 				height: 50px;
 				width: 50px;
+				@include sm-lesser{
+					height: 25px;
+					width: 25px;
+				}
+				@include sm{
+					transform: translate(0px,0px);
+				}
 			}
 			&:hover {
 				cursor: pointer;
