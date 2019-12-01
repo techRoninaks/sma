@@ -65,9 +65,9 @@
                         <p><i class="fa fa-rupee" style="font-size:16px">{{dynamicData[item].basePrice}}</i>&nbsp;&nbsp;
                             <del><i class="fa fa-rupee"
                                     style="font-size:16px "></i>{{dynamicDataPrice[item].totalPrice}}</del>&nbsp;&nbsp;
-                            <del><i class="offer"></i></del>
-                            <i class="discountText" style="font-size:16px; font-family: Bitter; color:  #009145;">
-                                (-{{dynamicDataPrice[item].discount}} % off )</i>
+                            <!-- <del><i class="offer"></i></del> -->
+                            <i class="discountText" style="font-size:16px;">
+                                (-{{dynamicOfferCart.percentage}} % off )</i>
                         </p>
                     </div>
                 </div>

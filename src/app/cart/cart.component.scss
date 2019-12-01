@@ -105,7 +105,33 @@ $SubText: 18px;
 		grid-template-columns: auto auto auto;
 		grid-template-rows: auto;
 		grid-template-areas: "dvTitle	dvDeliverTitle	dvDropdown";
-		
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: auto auto ;
+			grid-template-rows: auto auto;
+			grid-template-areas: "dvTitle"
+								"dvDeliverTitle	dvDropdown";
+			width: 338px;
+			margin-left: 5%;
+			height: 112px;
+		}
+		@include md {
+			display: grid;
+			margin-left: 4%;
+			margin-right: 20%;
+			width: 700px;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "dvTitle	dvDeliverTitle	dvDropdown";
+		}
+		@include lg {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			grid-template-rows: auto;
+			grid-template-areas: "dvTitle	dvDeliverTitle	dvDropdown";
+			width: 840px;
+			margin-left: 192px;
+		}
 		.dvTitle {
 			grid-area: dvTitle;
 			font-family: BitterBold;
@@ -127,7 +153,9 @@ $SubText: 18px;
 				height: 30px;
 				width: 30px;
 				margin-left: 80px;
-				
+				@include sm-lesser {
+					margin-top: -68px;
+				}
 				
 			}
 		}
@@ -138,6 +166,16 @@ $SubText: 18px;
 			padding-inline: 20px;
 			padding: 20px;
 			margin-left: 55%;
+			@include sm-lesser {
+				margin-left: -138%;
+				margin-top: 30px;
+			}
+			@include md {
+				margin-left: 46%;
+			}
+			@include lg {
+				margin-left: 54%;
+			}
 			
 		}
 		.dvDropdown {
@@ -149,6 +187,12 @@ $SubText: 18px;
 			margin-right: 177px;
 			border: none;
 			height: 80px;
+			@include sm-lesser {
+				margin-top: 34px;
+			}
+			@include lg {
+				margin-right: 158px;
+			}
 			
 			.AddrDropdown{
 				margin-top: 8px; 
@@ -156,7 +200,16 @@ $SubText: 18px;
 				background: white;
 				border-radius: 5px;
 				border: none;
-				
+				@include sm-lesser {
+					margin-left: -182px;
+					width: 224px;
+				}
+				@include xlg {
+					width: 270px;
+				}
+				@include md {
+					width: 246px;
+				}
 			}	
 		}
 		
@@ -172,6 +225,29 @@ $SubText: 18px;
 		height: 300px;
 		grid-template-columns: 20% auto 20%;
 		grid-template-areas: "gridLeft  gridMid gridRight";
+		@include sm-lesser {
+			display: grid;
+			grid-template-columns: 20% auto 20%;
+			grid-template-areas: "gridLeft  gridMid gridRight";
+			width: 338px;
+			margin-left: 5%;
+			height: 318px;
+		}
+		@include md {
+			display: grid;
+			grid-template-columns: 20% auto 20%;
+			grid-template-areas: "gridLeft  gridMid gridRight";
+			margin-left: 4%;
+			margin-right: 20%;
+			width: 700px;
+		}
+		@include lg {
+			display: grid;
+			grid-template-columns: 20% auto 20%;
+			grid-template-areas: "gridLeft  gridMid gridRight";
+			width: 840px;
+			margin-left: 192px;
+		}
 		
 		.gridLeft {
 			grid-area: gridLeft;
@@ -180,7 +256,13 @@ $SubText: 18px;
 			grid-template-areas:
 				"gridImg"
 				"gridCounter";
-				
+				@include sm-lesser {
+					display: grid;
+					grid-template-columns: 20%;
+					grid-template-areas:
+						"gridImg"
+						"gridCounter";
+				}
 			.gridImg {
 				grid-area: gridImg;
 				width: fit-content;
@@ -195,7 +277,12 @@ $SubText: 18px;
 					cursor: pointer;
 					width: 140px; 
 					height: 140px;
-					
+					@include sm-lesser {
+						border-radius: 5px;
+						cursor: pointer;
+						width: 100px;
+						height: 100px;
+					}
 				}
 			}
 			.gridCounter {
@@ -206,7 +293,11 @@ $SubText: 18px;
 				padding: 10px;
 				grid-template-columns: auto;
 				grid-template-areas: "qtyCounter";
-				
+				@include sm-lesser {
+					display: grid;
+					grid-template-columns: auto;
+					grid-template-areas: "qtyCounter";
+				}
 				.qtyCounter {
 					grid-area: qtyCounter;
 					display: grid;
@@ -215,7 +306,14 @@ $SubText: 18px;
 					margin-left: 30%;
 					grid-template-columns: auto;
 					grid-template-areas: "minus counter plus";
-					
+					@include sm-lesser {
+						cursor: pointer;
+						display: grid;
+						margin-left: 8px;
+						margin-top: -94px;
+						grid-template-columns: auto;
+						grid-template-areas: "minus counter plus";
+					}
 					.minus {
 						grid-area: minus;
 						cursor: pointer;
@@ -225,7 +323,9 @@ $SubText: 18px;
 						border-radius: 5px;
 						width: 30px;
 						height: 30px;
-						
+						@include sm-lesser {
+							cursor: pointer;
+						}
 					}
 					.counter {
 						grid-area: counter;
@@ -237,7 +337,9 @@ $SubText: 18px;
 						width: 50px;
 						height: 30px;
 						text-align: center;
-						
+						@include sm-lesser {
+							cursor: pointer;	
+						}
 					}
 					.plus {
 						grid-area: plus;
@@ -249,7 +351,9 @@ $SubText: 18px;
 						margin-right: -40px;
 						width: 30px;
 						height: 30px;
-						
+						@include sm-lesser {
+							cursor: pointer;
+						}
 					}
 				}
 			}
@@ -260,7 +364,19 @@ $SubText: 18px;
 			grid-template-columns: auto;
 			grid-template-areas: "gridDetails"
 								"gridBodyButton";
-				
+			@include sm-lesser {
+				display: grid;
+				grid-template-columns: auto;
+				grid-template-areas: "gridDetails"
+									"gridBodyButton";
+			}
+			@include md {
+				display: grid;
+				grid-template-columns: auto;
+				grid-template-areas: "gridDetails"
+									"gridBodyButton";
+				margin-left: 30px;
+			}
 			.gridDetails {
 				grid-area: gridDetails;
 				display: grid;
@@ -272,14 +388,26 @@ $SubText: 18px;
 					"detailItemVariInfo"
 					"detailItemPrice"
 					"detalItemPriceDel";
-				
+				@include sm-lesser {
+					display: grid;
+					margin-top: 102px;
+					grid-auto-columns: auto;
+					grid-template-areas:
+						"detailItemName"
+						"detailItemSeller"
+						"detailItemVariInfo"
+						"detailItemPrice"
+						"detalItemPriceDel";
+					}
 				.detailItemName {
 					grid-area: detailItemName;
 					display: grid;
 					font-family: BitterBold;
 					padding-inline: 20px;
 					float: left;
-					
+					@include sm-lesser {
+						margin-left: 44px;
+					}	
 				}
 				.detailItemSeller {
 					grid-area: detailItemSeller;
@@ -287,23 +415,44 @@ $SubText: 18px;
 					font-family: Bitter;
 					padding-inline: 20px;
 					float: left;
-					
+					@include sm-lesser {
+						margin-top: -5%;
+						margin-left: 44px;
+					}
 				}
 				.detailItemVariInfo {
 					grid-area: detailItemVariInfo;
 					margin-top: -53px;
 					margin-left: 16%;
+					@include sm-lesser {
+						margin-top: -50px;
+						margin-left: 46%;
+					}
+					@include md {
+						margin-left: 20%;
+					}
 				}
 				.detailItemPrice {
 					grid-area: detailItemPrice;
-					
+					@include sm-lesser {
+						grid-area: detailItemPrice;
+						margin-left: 44px;
+						margin-top: -7%;
+					}
 					.basePriceStyle{
 						display: grid;
 						// font-family: BitterBold;
 						padding-inline: 20px;
 						float: left;
-						
+					.basePrice {
+
+					}	
 					}
+					.discountText {
+						font-family: Bitter; 
+						color:  #009145;
+					}
+					
 				}
 				
 			}
@@ -312,6 +461,13 @@ $SubText: 18px;
 				display: grid;
 				grid-template-columns: auto;
 				grid-template-areas: "btnBodyRemove";
+				@include sm-lesser {
+					display: grid;
+					margin-left: -17%;
+					margin-bottom: -8%;
+					grid-template-columns: auto;
+					grid-template-areas: "btnBodyRemove";
+				}
 				
 				.btnBodyRemove {
 					grid-area: btnBodyRemove;
@@ -329,7 +485,13 @@ $SubText: 18px;
 					padding: 1px;
 					float: right;
 					border-radius: 5px;
-					
+					@include sm-lesser {
+						width: 84px;
+						margin-left: 20px;
+						height: 30px;
+						margin-top: 46px;
+						cursor: pointer;
+					}
 				}
 			}
 		}
@@ -340,20 +502,32 @@ $SubText: 18px;
 			grid-template-areas:
 				"gridDeliveryDate"
 				"gridRightButton";
-				
+				@include sm-lesser {
+					display: grid;
+					grid-auto-columns: 20%;
+					grid-template-areas:
+						"gridDeliveryDate"
+						"gridRightButton";
+				}
 			.gridDeliveryDate {
 				grid-area: gridDeliveryDate;
 				display: grid;
 				font-family: BitterBold;
 				margin-top: 30px;
-				
+				@include sm-lesser {
+					margin-left: -160px;
+				}
 			}
 			.gridRightButton {
 				grid-area: gridRightButton;
 				display: grid;
 				grid-template-columns: 20%;
 				grid-template-areas: "btnRightDelivery";
-				
+				@include sm-lesser {
+					display: grid;
+					grid-template-columns: 20%;
+					grid-template-areas: "btnRightDelivery";
+				}
 				.btnRightDelivery {
 					grid-area: btnRightDelivery;
 					background-color: #009145;
@@ -370,7 +544,15 @@ $SubText: 18px;
 					padding: 0px;
 					float: left;
 					border-radius: 5px;
-					
+					@include sm-lesser {
+						height: 26px;
+						width: 44px;
+						margin-left: -102px;
+						margin-top: 120px;
+					}
+					@include md {
+						margin-left: 62px;
+					}
 				}
 				.btnPlaceOrder {
 					grid-area: btnFoot;
@@ -388,6 +570,17 @@ $SubText: 18px;
 					float: right;
 					border-radius: 5px;
 					cursor: pointer;
+					@include sm-lesser {
+						width: 131px;
+						border: none;
+						margin-top: 10%;
+						margin-left: -145%;
+						cursor: pointer;
+					}
+					@include md {
+						margin-left: -24%;
+						cursor: pointer;
+					}
 				}
 			}
 		}
@@ -403,22 +596,19 @@ $SubText: 18px;
 		height: 80px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
-		// .btnFoot {
-		// 	grid-area: btnFoot;
-		// 	background-color: #009145;
-		// 	color: white;
-		// 	font-family: BitterBold;
-		// 	width: 150px;
-		// 	border: none;
-		// 	margin-top: 20px;
-		// 	margin-bottom: 20px;
-		// 	margin-left: 60%;
-		// 	display: grid;
-		// 	padding-inline: 20px;
-		// 	padding: 5px;
-		// 	float: right;
-		// 	border-radius: 5px;
-		// }
+		@include sm-lesser {
+			width: 338px;
+			margin-left: 5%;
+		}
+		@include md {
+			margin-left: 4%;
+			margin-right: 20%;
+			width: 700px;
+		}
+		@include lg {
+			width: 840px;
+			margin-left: 192px;
+		}
 	}
 }
 
@@ -435,15 +625,34 @@ $SubText: 18px;
 		"dvHead2"
 		"dvBody2"
 		"dvFoot2";
+	
 	.dvHead2 {
 		display: grid;
 		grid-area: dvHead2;
 		background-color: #dbdbdb;
 		height: 80px;
+		margin-left: -96px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		grid-auto-columns: auto;
 		grid-template-areas: "dvHeadTitle2";
+		@include sm-lesser {
+			width: 338px;
+			margin-left: -16%;
+		}
+		@include md {
+			margin-left: -41%;
+			width: 300px;
+		}
+		@include lg {
+			margin-left: -27%;
+		}
+		@include xxlg {
+			margin-left: -40%;
+		}
+		// @include xlg {
+		// 	margin-left: -40%;
+		// }
 		.dvHeadTitle2 {
 			grid-area: dvHeadTitle2;
 			font-family: BitterBold;
@@ -458,11 +667,60 @@ $SubText: 18px;
 		grid-area: dvBody2;
 		background-color: #f1f1f1;
 		height: 200px;
+		margin-left: -27%;
 		grid-auto-columns: auto auto;
 		grid-template-areas:
 			"dvPriceText   dvPrice"
 			"dvDeliveryText dvFree"
 			"dvTotalPayable dvTotalPrice";
+			@include sm-lesser {
+				display: grid;
+				grid-auto-columns: auto auto;
+				grid-template-areas:
+					"dvPriceText   dvPrice"
+					"dvDeliveryText dvFree"
+					"dvTotalPayable dvTotalPrice";
+					width: 338px;
+					margin-left: -16%;
+		
+			}
+			@include md {
+				display: grid;
+				grid-auto-columns: auto auto;
+				grid-template-areas:
+					"dvPriceText   dvPrice"
+					"dvDeliveryText dvFree"
+					"dvTotalPayable dvTotalPrice";
+				margin-left: -41%;
+				width: 300px;
+			}
+			@include lg {
+				display: grid;
+				grid-auto-columns: auto auto;
+				grid-template-areas:
+					"dvPriceText   dvPrice"
+					"dvDeliveryText dvFree"
+					"dvTotalPayable dvTotalPrice";
+				margin-left: -27%;
+			}
+			@include xxlg {
+				display: grid;
+				grid-auto-columns: auto auto;
+				grid-template-areas:
+					"dvPriceText   dvPrice"
+					"dvDeliveryText dvFree"
+					"dvTotalPayable dvTotalPrice";
+				margin-left: -40%;
+			}
+			// @include xlg {
+			// 	display: grid;
+			// 	grid-auto-columns: auto auto;
+			// 	grid-template-areas:
+			// 		"dvPriceText   dvPrice"
+			// 		"dvDeliveryText dvFree"
+			// 		"dvTotalPayable dvTotalPrice";
+			// 		margin-left: -40%;
+			// }
 		.dvPriceText {
 			grid-area: dvPriceText;
 			display: grid;
@@ -487,6 +745,16 @@ $SubText: 18px;
 			font-family: "BitterBold";
 			margin-left: -40px;
 			margin-top: -20px;
+			@include sm-lesser {
+				margin-left: -34px;
+			}
+			@include lg {
+				margin-left: -28px;
+			}
+			@include md {
+				margin-left: -24px;
+			}
+
 		}
 		.dvFree {
 			grid-area: dvFree;
@@ -522,9 +790,27 @@ $SubText: 18px;
 		color: #009145;
 		height: 10px;
 		padding: 20px;
+		margin-left: -27%;
 		padding-bottom: 50px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
+		@include sm-lesser{
+			width: 338px;
+			margin-left: -16%;
+		}
+		@include md {
+			margin-left: -41%;
+			width: 300px;
+		}
+		@include lg {
+			margin-left: -27%;
+		}
+		@include xxlg {
+			margin-left: -40%;
+		}
+		// @include xlg {
+		// 	margin-left: -40%;
+		// }
 	}
 }
 
