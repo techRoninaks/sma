@@ -211,18 +211,20 @@ $SubText: 18px;
 				justify-self: center;
 				box-shadow: 1px 1px 10px 0 $smaLightGray;
 				z-index: 1;
+				padding: 10px;
 
 				.imgLogo {
 					border-radius: 50%;
 					object-fit: cover;
 					cursor: pointer;
+					width: 100%;
 				}
 			}
 			.dvSeller {
 				grid-area: dv-seller;
 				width: auto;
 				cursor: pointer;
-
+				padding: 0 10px;
 				.dvShopName {
 					border-bottom: 1px solid $smaGray;
 					p {
@@ -500,9 +502,10 @@ $SubText: 18px;
 				border-radius: 50%;
 				background: $smaLightGray;
 				justify-self: center;
-				box-shadow: 1px 1px 10px 0 $smaLightGray;
+				// box-shadow: 1px 1px 10px 0 $smaLightGray;
 				z-index: 1;
 				padding: 10px;
+				margin: auto;
 
 				.imgLogo {
 					border-radius: 50%;
@@ -516,7 +519,7 @@ $SubText: 18px;
 				width: auto;
 				cursor: pointer;
 				margin: auto 0;
-
+				padding: 0 10px;
 				.dvShopName {
 					padding: 10px;
 					border-bottom: 1px solid $smaGray;
@@ -670,9 +673,9 @@ $SubText: 18px;
 		}
 	}
 	.dvCardPrice {
-		grid-template-columns: auto auto auto auto;
+		grid-template-columns: repeat(3,1fr);
 		// auto
-		grid-template-areas: "p-price ac-price p-offer btn-rfq";
+		grid-template-areas: "p-price ac-price p-offer";
 		// btn-rfq
 		display: grid;
 		p {
@@ -693,12 +696,24 @@ $SubText: 18px;
 
 		.pPrice {
 			grid-area: p-price;
+			img{
+				width: 100%;
+			}
 		}
 
 		.pActualPrice {
 			grid-area: ac-price;
 			text-decoration: line-through;
 			color: $smaGray;
+			img{
+				width: 100%;
+			}
+		}
+		.pOffer{
+			grid-area: p-offer;
+			img{
+				width: 100%;
+			}
 		}
 		@include sm-lesser {
 			.pActualPrice {
@@ -724,54 +739,236 @@ $SubText: 18px;
 				justify-self: end;
 			}
 		}
-
-		.btnRfq{
-			grid-area: btn-rfq;
-			font-family: BitterBold;
-			font-size: inherit;
-			border: none;
-			border-radius: 5px;
-			background: $smaRed;
-			padding: 5px;
-			color: white;
-			float: right;
-		}
-		@include sm-lesser{
-		    .btnRfq{
-		        font-size: inherit;
-		        margin-top: auto;
-		        margin-bottom: auto;
-		    }
-		}
-		@include lg{
-		    .btnRfq{
-				font-size: 16px;
-				margin-top: auto;
-          		margin-bottom: auto;
-		    }
-		}
-		@include xlg {
-			.btnRfq {
-			  font-size: inherit;
-			  margin-top: auto;
-			  margin-bottom: auto;
-			}
-		  }
 	}
 	@include sm-lesser {
 		.dvCardPrice {
 			display: grid;
 			grid-template-columns: auto auto auto;
-			grid-template-rows: auto auto;
-			grid-template-areas: "p-price ac-price p-offer" "btn-rfq btn-rfq btn-rfq";
+			grid-template-rows: auto;
+			grid-template-areas: "p-price ac-price p-offer";
+			
+			.pPrice{
+				grid-area: p-price;
+				width: 100%;
+			}
+			.pActualPrice{
+				grid-area: ac-price;
+				width: 100%;
+			}
+			.pOffer{
+				grid-area: p-offer;
+				width: 100%;
+			}
 		}
 	}
 	@include lg {
 		.dvCardPrice {
 			display: grid;
-			grid-template-columns: auto auto auto auto;
+			grid-template-columns: repeat(3,1fr);
 			grid-template-rows: auto;
-			grid-template-areas: "p-price ac-price p-offer btn-rfq";
+			grid-template-areas: "p-price ac-price p-offer";
+		}
+	}
+}
+
+.dvSellerMain {
+	grid-template-columns: repeat(3, 1fr);
+	display: grid;
+	width: auto;
+	margin: 5%;
+	
+	.dvCard {
+		padding: 6%;
+		border-bottom: 1px solid lightgray;
+		.dvCardBanner {
+			cursor: pointer;
+			padding: 10px;
+			background: lightgray;
+			box-shadow: 1px 1px 10px 0px gray;
+			border-radius: 5px;
+			.imgBanner {
+				width: inherit;
+			}
+			.dvUndeliver {
+				position: relative;
+				.overlay {
+					position: absolute;
+					bottom: 0;
+					background: rgb(0, 0, 0);
+					background: rgba(0, 0, 0, 0.5);
+					/* Black see-through */
+					color: #f1f1f1;
+					width: 100%;
+					transition: 0.5s ease;
+					opacity: 0.5;
+					color: white;
+					font-size: 16px;
+					font-family: Bitter;
+					padding: 20px;
+					text-align: center;
+				}
+			}
+			.dvUndeliver:hover .overlay {
+				opacity: 0.8;
+			}
+			// @include lg {
+			// 	.overlay {
+			// 		font-size: 14px !important;
+			// 		padding: 10px !important;
+			// 	}
+			// }
+		}
+		.dvCardName {
+			cursor: default;
+			display: grid;
+			grid-template-columns: auto auto;
+			grid-template-rows: repeat(2, auto);
+			grid-template-areas:
+				"prod prod"
+				"details btns";
+			.dvProduct {
+				grid-area: prod;
+				grid-template-columns: auto auto;
+				grid-template-areas: "dv-prod dv-rate";
+				display: grid;
+				padding-top: 20px;
+				.dvProdName {
+					grid-area: dv-prod;
+					p {
+						font-size: 24px;
+						font-family: BitterBold;
+						margin: auto;
+					}
+					@include sm-lesser {
+						p {
+							font-size: 16px;
+						}
+					}
+					@include lg {
+						p {
+							font-size: 16px;
+						}
+					}
+				}
+				.dvPrice {
+					grid-area: dv-rate;
+					// color: yellow;
+					// font-size: 25px;
+					justify-self: end;
+					width: fit-content;
+					p {
+						font-size: 16px;
+						font-family: BitterBold;
+					}
+					@include sm-lesser {
+						p {
+							font-size: 16px;
+						}
+					}
+					@include lg {
+						.fa {
+							font-size: 16px;
+						}
+					}
+				}
+			}
+			.dvDetails {
+				grid-area: details;
+				padding-top: 10px;
+				p {
+					font-family: Bitter;
+					font-size: 20px;
+					text-align: justify;
+					line-height: 1.3;
+					// color: darkgray;
+				}
+				@include sm-lesser {
+					p {
+						font-size: 16px;
+					}
+				}
+				@include lg {
+					p {
+						font-size: 16px;
+					}
+				}
+			}
+			.dvBtn {
+				grid-area: btns;
+				grid-template-columns: auto auto;
+				grid-template-areas: "btnEditProduct btnDelete";
+				display: grid;
+
+				.btnEditProduct {
+					grid-area: btnEditProduct;
+					width: 60px;
+					height: 30px;
+					color: white;
+					background-color: #009145;
+					font-family: BitterBold;
+					font-size: $SubText;
+					margin: auto;
+					border: none;
+					border-radius: 5px;
+					box-shadow: 1px 1px 10px 1px gray;
+				}
+				.btnDelete {
+					grid-area: btnDelete;
+					width: 50px;
+					height: 30px;
+					background-color: #ff1d25;
+					font-family: BitterBold;
+					font-size: $SubText;
+					margin: auto;
+					border: none;
+					border-radius: 5px;
+					box-shadow: 1px 1px 10px 1px gray;
+				}
+			}
+		}
+	}
+}
+
+.newProd {
+	
+	display: grid;
+	width: auto;
+	margin: 0% 5% 5% 5%;
+	height: 300px;
+	width: 300px;
+	cursor: pointer;
+	background-color: whitesmoke;
+	grid-template-columns: auto;
+	grid-template-rows: auto 40px;
+	grid-template-areas: "plusP" "textP";
+	border: 5px solid whitesmoke;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+
+	.plusDiv {
+		grid-area: plusP;
+		text-align: center;
+		p {
+			margin-top: 60px;
+			font-size: 85px;
+			font-family: Bitter;
+			color: #646464;
+		}
+	}
+	.textDiv {
+		grid-area: textP;
+		justify-self: center;
+		color: white;
+		font-size: 16px;
+		background-color: #009145;
+		text-align: center;
+		font-family: BitterBold;
+		padding: 7px;
+		@include sm-lesser{
+			p{
+				font-size: 16px;
+				padding: 7px;
+			}
 		}
 	}
 }
@@ -1106,6 +1303,9 @@ $SubText: 18px;
 	.dvShopMain{
 		grid-template-columns: 100%;
 	}
+	.dvSellerMain{
+		grid-template-columns: 100%;
+	}
 	.card {
 		display: none;
 	}
@@ -1117,12 +1317,18 @@ $SubText: 18px;
 	.dvShopMain {
 		grid-template-columns: repeat(2, 1fr);
 	}
+	.dvSellerMain{
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 @include md {
 	.dvCatMain {
 		grid-template-columns: repeat(3, 1fr);
 	}
 	.dvShopMain {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.dvSellerMain{
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
@@ -1133,12 +1339,18 @@ $SubText: 18px;
 	.dvShopMain {
 		grid-template-columns: repeat(4, 1fr);
 	}
+	.dvSellerMain{
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 @include xlg {
 	.dvCatMain {
 		grid-template-columns: repeat(4, 1fr);
 	}
 	.dvShopMain {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.dvSellerMain{
 		grid-template-columns: repeat(4, 1fr);
 	}
 }
@@ -1152,7 +1364,7 @@ $SubText: 18px;
 	height: 120px;
 	-webkit-animation: spin 5s linear infinite; /* Safari */
 	animation: spin 2s linear infinite;
-	z-index: 99;
+	z-index: 1;
 	justify-self: center;
 }
   

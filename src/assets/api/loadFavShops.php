@@ -10,8 +10,10 @@
 
         $paginationQuery = " limit $tagNum offset $offset ";
 
-        $sql = "SELECT sd.* FROM follow f, shop_details sd where f.userid = '$userId' and sd.id = f.shopid" . $paginationQuery;
+        $sql = "SELECT sd.*,sl.seller_name FROM follow f, shop_details sd, seller sl where f.userid = '$userId' and sd.id = f.shopid and sl.id = sd.seller_id " . $paginationQuery;
         $result = mysqli_query($con2,$sql);
+
+        // echo $sql;
 
         $data = array();
         $count = 0;
@@ -25,6 +27,7 @@
                 $data[$count++] = array(
                 "shopId"=>$row["id"],
                 "sellerId"=>$row["seller_id"],
+                "sellerName"=>$row["seller_name"],
                 "shopName"=>$row["shopname"],
                 "bannerImg"=>$row["primary_image"],
                 "shopImg1"=>$row["prod_image_1"],
