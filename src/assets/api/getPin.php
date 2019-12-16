@@ -12,5 +12,7 @@ while($row1=mysqli_fetch_array($result1))
         $data[$count] = array('pin'=>$row1['pincode']);
         $count++;
 }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

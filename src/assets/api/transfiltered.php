@@ -43,5 +43,7 @@
         }
         $data[$count++] = array('transactionId'=>$row["txnid"],'paymentMode'=>$row["payment_mode"],'orderId'=>$row["orderid"],'status'=>$row["status"],'productName'=>$productName);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

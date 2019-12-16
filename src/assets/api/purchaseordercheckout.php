@@ -9,7 +9,8 @@
             $data["purchase_order"]=array('purchaseOrder'=>$row["orderid"],'sellerId'=>$row["sellerid"],'createdDate'=>$row["created_date"],'customerId'=>$row["customerid"],'shippingOption'=>$row["shipping_option"],'orderStatus'=>$row["order_status"],'cancellationMessage'=>$row["cancellation_message"],'deliveryDate'=>$row["delivery_date"],'remarks'=>$row["remarks"],'addrType'=>$row["addr_type"],'isRfq'=>$row["is_rfq"],'totalAmount'=>$row["total_amnt"],'paymentMode'=>$row["payment_mode"],'isRated'=>$row["is_rated"],'transactionId'=>$row["transaction_id"]);
 
     }
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 
     echo json_encode($data);
         //echo "hello";

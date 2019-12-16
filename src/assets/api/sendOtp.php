@@ -26,4 +26,6 @@ else
 {
     echo $response;
 }
+mysqli_close($con1);
+mysqli_close($con2);
 ?>

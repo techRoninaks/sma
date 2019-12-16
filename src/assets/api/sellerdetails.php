@@ -18,5 +18,7 @@
     $row2=mysqli_fetch_array($result2);
     $data=array('shopName'=>$row2["shopname"],'sellerName'=>$row2["seller_name"],'privateAccount'=>$row2["private_acc"],'giftOption'=>$row2["gift_option"],'shopId'=>$shopId,'sellerId'=>$row2["id"]);
     // var_dump($data);
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

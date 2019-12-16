@@ -563,6 +563,18 @@ export class AddProductComponent implements OnInit {
     }
     this.shippingLocs.splice( this.shippingLocs.indexOf(pos), 1 );
   }
+
+  toggleInput(){
+    if((<HTMLInputElement><any>document.getElementById("orderConfrm")).checked){
+      (<HTMLInputElement><any>document.getElementById("rfq")).checked = false;
+    }
+  }
+  toggleInput1(){
+    if((<HTMLInputElement><any>document.getElementById("rfq")).checked){
+      (<HTMLInputElement><any>document.getElementById("orderConfrm")).checked = false;
+    }
+  }
+
   editShiipingLocation(item,pos){
     if(!this.editShippingFlag){
       (<HTMLInputElement><any>document.getElementById("item_pincode")).value = item['pincode'];
@@ -612,6 +624,17 @@ export class AddProductComponent implements OnInit {
       alert("Only 5 tags are allowed");
     }
     
+  }
+  selectEvent1(item){
+    console.log(item.srcElement.attributes['1'].nodeValue)
+    console.log(item);
+    if(this.tagsArray.length<5){
+      var cell = {id:this.tagsArray.length+1,name:item.srcElement.attributes['1'].nodeValue}
+      this.tagsArray.push(cell);
+    }
+    else{
+      alert("Only 5 tags are allowed");
+    }
   }
   displayVarientType(item) {
     var cell = {type:"",price:""}
@@ -715,6 +738,10 @@ export class AddProductComponent implements OnInit {
 
 
   subCategoryLoaded(id) {
+    var ids = (<HTMLInputElement><any>document.getElementById("mainCategoryId")).value;
+    if(id == 'all'){
+        id = ids;      
+    }
     this.mainCatId = id;
     if(!this.editMode){
       this.data.getCategoryVariantList(1).subscribe(data=>{

@@ -7,7 +7,8 @@
     $result = mysqli_query($con1, $sql_query);
     $row=mysqli_fetch_assoc($result);
     $offerCount = $row['COUNT(*)'];
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 
     echo json_encode($offerCount);
     

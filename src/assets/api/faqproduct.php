@@ -54,6 +54,7 @@
         $a[0]=array('response'=>$responseX);
     }
 
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($a);
 ?>

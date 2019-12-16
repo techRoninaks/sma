@@ -18,4 +18,5 @@ if($image != 1){
     }
     $success = file_put_contents($file, $data);
 }
+
 ?>

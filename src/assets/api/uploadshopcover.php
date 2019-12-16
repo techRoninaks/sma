@@ -16,7 +16,7 @@
         //     $dir='../assets/images/shop/'.$shopId.'/';
         // }
         define('UPLOAD_DIR', '../images/shop/'.$shopId.'/');
-         echo $image;
+        //  echo $image;
         $file = UPLOAD_DIR.$shopId.'_cover.jpg';
         if($mob == 0){
             $img =explode(",", $image);
@@ -40,5 +40,6 @@
         // echo $dir.$file;
     }
     // echo json_encode(array('imgSrcCover'=>$imgVal));
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

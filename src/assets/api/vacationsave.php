@@ -15,6 +15,7 @@
         $sql_query = "UPDATE `shop_details` SET `vacation_start_date`='$start',`on_vacation`=1,`vacation_end_date`='$end' WHERE `id`=$shopId";
         $result = mysqli_query($con2, $sql_query);
     }
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo $result;
 ?>

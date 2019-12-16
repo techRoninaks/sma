@@ -28,7 +28,7 @@ if($order_confirmation == 'true'){
 }
 
 // echo $order_confirmationBool.$rfqBool.$deliver_by_dateBool.$giftBool;
-$sql_query = "UPDATE `shop_details` SET `gift_option`= $giftBool,`order_confirmation`= $order_confirmationBool,`rfq`= $rfqBool,`deliver_by_date`= $deliver_by_dateBool,`auto_cancellation_time`= '$cancellInput',`avg_processing_time`= '$processInput',`avg_response_time`= '$responseInput' WHERE `id` = '$seller_id'";
+$sql_query = "UPDATE `shop_details` SET `gift_option`= $giftBool,`order_confirmation`= $order_confirmationBool,`rfq`= $rfqBool,`deliver_by_date`= $deliver_by_dateBool,`auto_cancellation_time`= '$cancellInput',`avg_processing_time`= '$processInput',`avg_response_time`= '$responseInput' WHERE `seller_id` = '$seller_id'";
 // echo $sql_query;
 $result = mysqli_query($con2, $sql_query);
 
@@ -38,4 +38,6 @@ if($result){
 else{
     echo '0';
 }
+mysqli_close($con1);
+mysqli_close($con2);
 ?>

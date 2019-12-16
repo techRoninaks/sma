@@ -166,7 +166,7 @@
                     <h6>SELLER</h6>
                 </div>
                 <div class="sellerbox_com">
-                    <div class="getSeller_com" id="divSeller_com" *ngFor = "let item of Seller_name">
+                    <div class="getSeller_com" id="divSeller_com" *ngFor = "let item of seller_name">
                     <p (click)="chatheadSeller_com(item.id);" id="chatheadSeller_com{{item.id}}">{{item.Name}} </p>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
         <div class="dvMsgInput_com">
             <div class="dvtextbox_com">
                 <input type="text" placeholder="Type here..."id="msgsent">
-                <button class="msgsent_com" id="msgsentbtn_com" (click)="msg_com()">Sent</button>
+                <button class="msgsent_com" id="msgsentbtn_com" >Sent</button>
             </div>
         </div>
 </div>
@@ -302,7 +302,7 @@
                         <h6>SELLER</h6>
                     </div>
                     <div class="sellerbox_not">
-                        <div class="getSeller_not" id="divSeller_not" *ngFor = "let item of Seller_name">
+                        <div class="getSeller_not" id="divSeller_not" *ngFor = "let item of seller_name">
                         <p (click)="chatheadSeller_not(item.id);" id="chatheadSeller_not{{item.id}}">{{item.Name}} </p>
                         </div>
                     </div>
@@ -322,7 +322,7 @@
             <div class="dvMsgInput_not">
                 <div class="dvtextbox_not">
                     <input type="text" placeholder="Type here..."id="msgsent">
-                    <button class="msgsent_not" id="msgsentbtn_not" (click)="msg_not()">Sent</button>
+                    <button class="msgsent_not" id="msgsentbtn_not" >Sent</button>
                 </div>
             </div>
 </div>

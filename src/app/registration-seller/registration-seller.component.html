@@ -268,7 +268,7 @@
           </div>
           <div class="shop-name ">
               <input type="text" class ="shopnew" formControlName="shop_name">
-              <div *ngIf="submitted && registrationFormStage1.controls.shop_name.errors" class="error validator-style">
+              <div *ngIf="submitted1 && registrationFormStage1.controls.shop_name.errors" class="error validator-style">
                   <div *ngIf="registrationFormStage1.controls.shop_name.errors.required">
                     Shop Name is required !
                   </div>
@@ -285,7 +285,7 @@
           </div>
           <div class="shop-addr">
             <input type="text" class = "addressnew" placeholder="Address:" formControlName="shop_address">
-            <div *ngIf="submitted && registrationFormStage1.controls.shop_address.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.shop_address.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.shop_address.errors.required">
                   Shop Address is required !
                 </div>
@@ -302,7 +302,7 @@
               <option default>Select Your City</option>
               <option *ngFor="let item of Object.keys(dynamicDataCity)" (click)="selectedCity(dynamicDataCity[item].city);">{{dynamicDataCity[item].city}}</option>
             </select>
-            <div *ngIf="submitted && registrationFormStage1.controls.city.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.city.errors" class="error validator-style">
               <div *ngIf="registrationFormStage1.controls.city.errors.required">
                 City is required !
               </div>
@@ -331,7 +331,7 @@
               <option default>Select Your Pincode</option>
               <option *ngFor="let item of Object.keys(dynamicDataPin)" (click)="selectedPin(dynamicDataPin[item].pin);">{{dynamicDataPin[item].pin}}</option>
             </select>
-            <div *ngIf="submitted && registrationFormStage1.controls.pin.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.pin.errors" class="error validator-style">
               <div *ngIf="registrationFormStage1.controls.pin.errors.required">
                 Pin is required !
               </div>
@@ -344,7 +344,7 @@
             <select formControlName="main_category" class="main1" >
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
-            <div *ngIf="submitted && registrationFormStage1.controls.main_category.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.main_category.errors" class="error validator-style">
                 <div *ngIf="registrationFormStage1.controls.main_category.errors.required">
                   Category is required !
                 </div>
@@ -354,7 +354,7 @@
             <select class="main2" formControlName="main_category1">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
-            <div *ngIf="submitted && registrationFormStage1.controls.main_category1.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.main_category1.errors" class="error validator-style">
               <div *ngIf="registrationFormStage1.controls.main_category1.errors.required">
                 Category is required !
               </div>
@@ -364,7 +364,7 @@
             <select class="main3" formControlName="main_category2">
               <option *ngFor="let item of Object.keys(dynamicDataCat)">{{dynamicDataCat[item].category_name}}</option>
             </select>
-            <div *ngIf="submitted && registrationFormStage1.controls.main_category2.errors" class="error validator-style">
+            <div *ngIf="submitted1 && registrationFormStage1.controls.main_category2.errors" class="error validator-style">
               <div *ngIf="registrationFormStage1.controls.main_category2.errors.required">
                 Category is required !
               </div>

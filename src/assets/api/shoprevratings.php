@@ -57,4 +57,6 @@
     $total=$countRev;
     $rating=array('rat1'=>$rat1,'rat2'=>$rat2,'rat3'=>$rat3,'rat4'=>$rat4,'rat5'=>$rat5,'totRat'=>$total);
     echo json_encode($rating);
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

@@ -5,7 +5,7 @@ import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { DataService } from '../data.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { stringify } from '@angular/compiler/src/util';
 
 var gapi;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   cookie_seller_id: String;
   dynamicDataLocation :any ="";
 
-    constructor( private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
+    constructor( private route: ActivatedRoute, private data: DataService,private formBuilderLogin: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderPassword: FormBuilder, private router: Router,private cookieService: CookieService){ 
       this.loginForm = this.formBuilderLogin.group({
         login_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
         login_password: ['',Validators.required],
@@ -145,8 +145,19 @@ export class LoginComponent implements OnInit {
                     document.getElementById("loginButton").innerText ="Log Out";
                     document.getElementById("locationlabel").innerText = this.city as string;
                     document.getElementById("pinlabel").innerText = this.pin as string;
-                    this.router.navigate(['/']);
-                    window.location.reload();
+                    this.route.queryParams.subscribe(params => {
+                      var shop_id = params['shop_id'];
+                      var prod_id = params['prod_id'];
+                      if(shop_id && prod_id){
+                        console.log(shop_id,prod_id)
+                        this.router.navigate(['/listing'], { queryParams: { shop_id: shop_id,prod_id:prod_id} });
+                      }
+                      else{
+                        this.router.navigate(['/']);
+                      }
+                    });
+
+                    // window.location.reload();
                   }
                   else if(data['status'] =="Success2")
                   {
@@ -218,8 +229,12 @@ export class LoginComponent implements OnInit {
                       document.getElementById("loginButton").innerText ="Log Out";
                       document.getElementById("locationlabel").innerText = this.city as string;
                       document.getElementById("pinlabel").innerText = this.pin as string;
-                      this.router.navigate(['/dashboard']);
-                      window.location.reload();
+                      this.route.queryParams.subscribe(params => {
+                        var shop_id = params['shop_id'];
+                        var prod_id = params['prod_id'];
+                        this.router.navigate(['/dashboard']);
+                        
+                      });
                     }
                   }
                   else
@@ -309,24 +324,30 @@ export class LoginComponent implements OnInit {
   changePassword(){
     this.fp_mobile = this.fpFormMobile.controls['fp_mobile_no'].value;
     this.fp_new_password = this.fpFormPassword.controls['new_password'].value;
-    this.data.setPassword(this.fp_mobile,this.fp_new_password).subscribe(
-      data => 
-        {
-          if(data =="ChangedPassword")
+    if(this.fp_new_password != this.fpFormPassword.controls['confirm_password'].value){
+      alert("Password mismatch");
+    }
+    else{
+      alert(this.fpFormPassword.controls['confirm_password'].value);
+      this.data.setPassword(this.fp_mobile,this.fp_new_password).subscribe(
+        data => 
           {
-            alert('Password Changed Successfully');
-            $("#myModal").modal('hide');
-            this.router.navigate(['/login']);
-          }
-          else
-          {
-            alert('Error Try Again');
-            $("#myModal").modal('hide');
-            this.router.navigate(['/login']);
-          }
-        },
-      error => console.error(error)
-    );
+            if(data =="ChangedPassword")
+            {
+              alert('Password Changed Successfully');
+              $("#myModal").modal('hide');
+              this.router.navigate(['/login']);
+            }
+            else
+            {
+              alert('Error Try Again');
+              $("#myModal").modal('hide');
+              this.router.navigate(['/login']);
+            }
+          },
+        error => console.error(error)
+      );
+    }
   }
 
 }

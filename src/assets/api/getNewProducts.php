@@ -32,5 +32,7 @@
         "hasRfq"=>$row["has_rfq"],
         "rating"=>$row["rating"]);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode(array("data"=>$data,"pages"=>$pageCount));
 ?>

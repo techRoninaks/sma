@@ -19,4 +19,6 @@
 
     $sql_notif="INSERT INTO `notification`(`userid`, `message`, `prodid`, `type`) VALUES ($userId,'$faq',$prodId,'new question')";
     $result = mysqli_query($con2, $sql_notif);
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

@@ -72,6 +72,7 @@
     'cust_pin'=>$row5['pincode'],'cust_city'=>$row5['city'],'remaining_days'=>$diff->format("%a"),
     'delivery_date'=>$delivery_date,'variantArray'=>$variantArray,
     'prod_name'=>$row3["name"],'short_desc'=>$row3["short_desc"]);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

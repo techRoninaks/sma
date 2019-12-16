@@ -2,7 +2,7 @@
     require "init.php";
     $shopId = $_POST["shopId"];
     $data = array();
-    $sql_query = "SELECT * FROM `shop_details` where id =  $shopId  ";
+    $sql_query = "SELECT * FROM `shop_details` where seller_id =  $shopId  ";
     // echo $sql_query;
     $result = mysqli_query($con2, $sql_query);
     // var_dump($con1);
@@ -35,5 +35,7 @@
         $response=0;
         $data = array('response'=>$response);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

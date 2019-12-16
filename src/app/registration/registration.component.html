@@ -97,6 +97,15 @@
               <div *ngIf="registrationForm.controls.reg_pin.errors.required">
                 Pincode is required !
               </div>
+              <div *ngIf="registrationForm.controls.reg_pin.hasError('pattern')">
+                Enter valid Pin !
+              </div>
+              <div *ngIf="registrationForm.controls.reg_pin.hasError('minlength')">
+                Enter valid Pin Number !
+              </div>
+              <div *ngIf="registrationForm.controls.reg_pin.hasError('maxlength')">
+                Enter valid Pin Number !
+              </div>
             </div>
           </div> <br>
 
@@ -142,9 +151,12 @@
               <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" (click)="mobileFetch()">
                   Verify
               </button> -->
-              <button type="button" class="btn btn-warning verifyBtn" (click)="newVerify();" *ngIf="Otp" style="margin-left:25%;margin-top: 5%;" >
+              <button type="button" id="otpSender" class="btn btn-warning verifyBtn" (click)="newVerify();" *ngIf="Otp" style="margin-left:25%;margin-top: 5%;" >
                 Verify
               </button>
+              <!-- <button type="button" class="btn btn-warning verifyBtn" (click)="newVerify();" *ngIf="Otp" style="margin-left:25%;margin-top: 5%;" >
+                Resend Otp
+              </button> -->
               <img src="assets/icons/userProfile/ic_ver_gif.png" *ngIf="otpVerified" >
             <div *ngIf="submitted && registrationForm.controls.reg_mobile_no.errors" class="error validator-style">
               <div *ngIf="registrationForm.controls.reg_mobile_no.errors.required">
@@ -238,11 +250,18 @@
                 </div>
                 <br>
                 <div class="login-layout-3">
-                  <div><input type="checkbox" formControlName="reg_checkbox"> I read the agreement & not going back from success</div>
+                  <div>
+                    <input type="checkbox" id="agreementChecker" formControlName="reg_checkbox"> I read the agreement & not going back from success
+                    <div *ngIf="submitted && registrationForm.controls.reg_checkbox.errors" class="error validator-style" >
+                    <div *ngIf="registrationForm.controls.reg_checkbox.errors.required">
+                        Agree to continue !
+                    </div>
+                    </div>
+                  </div>
                   <br>
                 </div>
                 <div>
-                  <button class="button-login" type="submit" [disabled]="!registrationForm.controls.reg_checkbox.valid">
+                  <button class="button-login" type="submit">
                     Sign Up
                   </button>
                 </div>

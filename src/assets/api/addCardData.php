@@ -3,11 +3,9 @@
     $userName = $_POST['userName'];
     $cvv = $_POST['cvv'];
     $cardNo = $_POST['cardNo'];
-    $validity = $_POST['validity'];
+    $exp_month = $_POST['month'];
+    $exp_year = $_POST['year'];
     $userId = $_POST['userId'];
-    $datem = date_create($validity);
-    $exp_year = date_format($datem,"Y");
-    $exp_month = date_format($datem,"m");
     $current_year = date("Y");
     $current_month = date("m");
     $active_status = 0;
@@ -30,4 +28,6 @@
         $status="Success";
         echo json_encode($status);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

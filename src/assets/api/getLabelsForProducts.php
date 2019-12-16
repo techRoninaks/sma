@@ -8,5 +8,7 @@ while($row=mysqli_fetch_assoc($result))
 {
     $data[$count++] = array('id'=>$row["id"],'label_text'=>$row["label_text"],'priority'=>$row["priority"]);
 }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

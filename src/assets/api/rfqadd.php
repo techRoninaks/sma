@@ -269,7 +269,8 @@
     
     $sqlMessage="INSERT INTO `message`(`threadid`, `message`, `senderid`, `sender_type`,`message_type`) VALUES ($idThread,'rfq_id!~!$idRfq',$userId,'buyer','rfq')";
     $resMessage=mysqli_query($con2,$sqlMessage);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     // echo $sqlThread;
     // echo $sqlT;
     // echo $sqlThread2;

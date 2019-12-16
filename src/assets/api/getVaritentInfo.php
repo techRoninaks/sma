@@ -21,7 +21,8 @@
         $data[] = array("name"=>$val,"value"=>$varitant);
     }
 
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
     
 ?>  

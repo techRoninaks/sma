@@ -3,6 +3,8 @@
     $prodId = $_POST["prodId"];
     $sql_query="DELETE from `product` where `prodid` =$prodId";
     $result = mysqli_query($con1, $sql_query);
+    mysqli_close($con1);
+    mysqli_close($con2);
     // echo $sql_query;
     // require "init.php";
     // $prodId = $_POST["prodId"];

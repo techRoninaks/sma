@@ -246,7 +246,7 @@
                                 </div>
                                 <div class="ic-shipped">
                                     <span class="dot">
-                                        <img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
+                                        <img src="assets/images/order/{{dynamicOrderData.orderId}}stage4.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_shipped.jpg'" width="65px" height="60px"
                                                 style="border-radius: 50%;" *ngIf="noImageShipped">
                                         <input style="display: none;" type="file" id="frontUpload" (click)="frontUpload()" accept="image/*" #fileInput1>
                                         <button (click)="fileInput1.click()" type="button" style="border: none;
@@ -256,7 +256,7 @@
                                 </div>
                                 <div class="ic-deliver">
                                     <span class="dot">
-                                        <img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
+                                        <img src="assets/images/order/{{dynamicOrderData.orderId}}stage5.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_delivered.jpg'" width="65px" height="60px"
                                                 style="border-radius: 50%;" *ngIf="noImageDelivered">
                                         <input style="display: none;" type="file" id="frontUpload2" (click)="frontUpload2()" accept="image/*" #fileInput2>
                                         <button (click)="fileInput2.click()" type="button" style="border: none;
@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="ic-closed">
                                         <span class="dot">
-                                            <img src="assets/images/userProfile/ic_closed.png" width="50px" height="53px"
+                                            <img src="assets/images/order/{{dynamicOrderData.orderId}}stage6.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_closed.png'" width="50px" height="53px"
                                                     style="padding-top: 7%; margin-top: 7%;" *ngIf="noImageClosed">
                                             <input style="display: none;" type="file" id="frontUpload3" (click)="frontUpload3()" accept="image/*" #fileInput3>
                                             <button (click)="fileInput3.click()" type="button" style="border: none;
@@ -275,7 +275,7 @@
                                         </span>
                                 </div>
                                 <div class="stat-bar-1">
-                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending confirmation' "> 
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending_confirmation' "> 
                                         <div class="stats-1">
                                         </div>
                                         <div class="full-circle i-circle-1" style=" margin-top: -11px;">
@@ -291,7 +291,7 @@
                                         <div class="dot-circle i-circle-6" style=" margin-top: -20px;">
                                         </div>
                                     </div>
-                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending payment' "> 
+                                    <div *ngIf="dynamicDataOrderData.orderStatus == 'pending_payment' "> 
                                         <div class="stats-1">
                                         </div>
                                         <div class="full-circle i-circle-1" style=" margin-top: -11px;">
@@ -384,7 +384,7 @@
                                     <label *ngIf="stage_2_full">Payment Confirmed on</label>
                                     <br>
                                     <label *ngIf="stage_2_full">{{dynamicDataOrderData.stage_2_date}}</label>
-                                    <label *ngIf="dynamicDataOrderData.status == 'pending payment'"><input type="date" id="stage_2_date"></label>
+                                    <label *ngIf="dynamicDataOrderData.status == 'pending_payment'"><input type="date" id="stage_2_date"></label>
                                 </div>
                                 <div class="label-3">
                                     <label *ngIf="stage_3_full">Processed on</label>
@@ -553,23 +553,22 @@
                                                 height="60px" style="border-radius: 50%;">
                                 </div>
                                 <div class="ic-shipped">
-                                        <img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
+                                        <img src="assets/images/order/{{item.orderId}}/{{item.orderId}}stage4.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_shipped.jpg'" width="65px" height="60px"
                                                 style="border-radius: 50%;">
                                 </div>
                                 <div class="ic-deliver">
-                                        <img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
+                                        <img src="assets/images/order/{{item.orderId}}/{{item.orderId}}stage5.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_delivered.jpg'" width="65px" height="60px"
                                                 style="border-radius: 50%;">
                                 </div>
                                 <div class="ic-closed">
                                         <span class="dot">
-                                                <img src="assets/images/userProfile/ic_closed.png"
-                                                        style="padding-top: 7%; margin-top: 7%;" width="50px"
-                                                        height="53px">
+                                                <img src="assets/images/order/{{item.orderId}}/{{item.orderId}}stage6.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_closed.jpg'"  width="65px" height="60px"
+                                                style="border-radius: 50%;">
                                         </span>
                                 </div>
                                 
                                 <div class="stat-bar-1">
-                                    <div *ngIf="item.orderStatus == 'pending confirmation' "> 
+                                    <div *ngIf="item.orderStatus == 'pending_confirmation' "> 
                                         <div class="stats-1">
                                         </div>
                                         <div class="full-circle circle-1" style="margin-top: -11px;">
@@ -585,7 +584,7 @@
                                         <div class="dot-circle circle-6" style="margin-top: -20px;">
                                         </div>
                                     </div>
-                                    <div *ngIf="item.orderStatus == 'pending payment' "> 
+                                    <div *ngIf="item.orderStatus == 'pending_payment' "> 
                                         <div class="stats-1">
                                         </div>
                                         <div class="full-circle circle-1" style="margin-top: -11px;">

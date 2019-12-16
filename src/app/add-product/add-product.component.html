@@ -56,8 +56,8 @@
                 <!-- MAIN CATEGORY -->
                 <div class="dropcat1">
                     <p style="text-align: center;">Main Category</p>
-                    <select class="MainCategory" id="mainCategoryId" style="margin-top: -1px; width: 300px;" >
-                        <option *ngFor="let item of dynamicMainCategory" value="{{item.id}}" (click)="subCategoryLoaded(item.id)">
+                    <select class="MainCategory" id="mainCategoryId" (change)="subCategoryLoaded('all')"  style="margin-top: -1px; width: 300px;" >
+                        <option *ngFor="let item of dynamicMainCategory" value="{{item.id}}" (click)="subCategoryLoaded('all')">
                             {{ item.category }} </option>
                     </select>
                 </div>
@@ -455,6 +455,7 @@
                                   (inputChanged)='onChangeSearch($event)'
                                   (inputFocused)='onFocused($event)'
                                   [itemTemplate]="itemTemplate"
+                                  (change)="selectEvent1($event)"
                                   [notFoundTemplate]="notFoundTemplate">                                
                                 </ng-autocomplete>
                                  
@@ -491,7 +492,7 @@
                     </div>
                     <div class="grid-OrderConfrmToggleRight1">
                         <label class="switchOrderConfrm" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="orderConfrm" style="margin-left: 12px;" value="{{allProductInfo.has_order_confmn}}"  >
+                            <input type="checkbox" id="orderConfrm" (change)="toggleInput()" style="margin-left: 12px;" value="{{allProductInfo.has_order_confmn}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -542,7 +543,7 @@
                     </div>
                     <div class="grid-RfqToggle">
                         <label class="switchRfq" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="rfq" style="margin-left: 12px;" value="{{allProductInfo.has_rfq}}">
+                            <input type="checkbox" id="rfq" (change)="toggleInput1()" style="margin-left: 12px;" value="{{allProductInfo.has_rfq}}">
                             <span class="slider round"></span>
                         </label>
                     </div>

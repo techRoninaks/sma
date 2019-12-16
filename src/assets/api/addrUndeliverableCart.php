@@ -18,4 +18,6 @@
     $result1 = mysqli_query($con1, $sql_query1);
     $row=mysqli_fetch_assoc($result);
     echo $sql_query1;
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

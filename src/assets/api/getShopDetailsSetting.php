@@ -51,5 +51,7 @@ while($row=mysqli_fetch_assoc($result))
     $data = $data + array('shop_address'=>$row["addr1"].', '.$row["addr2"].', '.$row["city"].', '.$row["district"].', '.$row["state"].', '.$row["country"].', '.$row["pincode"]);
 }
 $result = mysqli_query($con2, $sql_query);
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

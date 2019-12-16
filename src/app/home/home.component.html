@@ -95,7 +95,7 @@
             <p class="tag" (click)="toggleTags('tag-3')" id="tag-3">NEW ARRIVALS</p>
         </div>
     </div>
-    <div class="dvCatMain">
+    <div class="dvCatMain" *ngIf="!isLoading">
         <div class="dvCard" *ngFor="let item of Object.keys(array12)">
             <div class="dvCardLogo">
                 <div class="dvLogo">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="dvCardBanner" [routerLink]="['/listing']" [queryParams]="{shop_id:array12[item].shopId, prod_id:array12[item].prodId}">
-                <img class="imgBanner" src=" assets/images/banner/Screenshot_20190711-012413[1].png">
+                <img class="imgBanner" src=" assets/images/product/{{array12[item].prodId}}/{{array12[item].prodId}}_0.jpg" >
                 <div class="dvUndeliver">
                     <div class="overlay" *ngIf="array12[item].status == 'undeliverable'">UNDELIVERABLE</div>
                 </div>
@@ -172,6 +172,10 @@
                 <button type="button" class="btnRfq" *ngIf="array12[item].hasRfq == 1" disabled style="">RFQ</button>
             </div>
         </div>
+    </div>
+
+    <div style="width: max-content;margin: auto;" *ngIf="isLoading">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
     <div class="dvMore">
         <button class="btnMore" id="btnSeeMore" (click)="seeMore()">See More</button>
@@ -236,27 +240,27 @@
     </div>
 </div>
 <div class="dvGallery">
-    <div class="dvLeft">
+    <div class="dvLeft" style="cursor: pointer;" [routerLink]="['/category']" [queryParams]="{cat_id:pageData.tile_desc_1_link}">
         <div class="dvText">
             <p class="textImg">{{pageData['tile_desc_1']}}</p>
         </div>
         <img src="{{pageData['tile_img_1']}}">
     </div>
     <div class="dvRight">
-        <div class="dvRTop">
-            <div class="dvText">
+        <div class="dvRTop" style="cursor: pointer;" [routerLink]="['/category']" [queryParams]="{cat_id:pageData['tile_desc_2_link']}">
+            <div class="dvText" >
                 <p class="textImg">{{pageData['tile_desc_2']}}</p>
             </div>
             <img src="{{pageData['tile_img_2']}}">
         </div>
         <div class="dvRBtm">
-            <div class="dvRBR">
+            <div class="dvRBR" style="cursor: pointer;" [routerLink]="['/category']" [queryParams]="{cat_id:pageData['tile_desc_3_link']}">
                 <div class="dvText">
                     <p class="textImg">{{pageData['tile_desc_3']}}</p>
                 </div>
                 <img src="{{pageData['tile_img_3']}}">
             </div>
-            <div class="dvRBL">
+            <div class="dvRBL" style="cursor: pointer;" [routerLink]="['/category']" [queryParams]="{cat_id:pageData['tile_desc_4_link']}">
                 <div class="dvText">
                     <p class="textImg">{{pageData['tile_desc_4']}}</p>
                 </div>
@@ -276,7 +280,7 @@
         <div class="dvText">
             <p class="subText">{{pageData['partner_with_desc']}}</p>
         </div>
-        <button class="btnSell">SELL WITH US</button>
+        <button class="btnSell" routerLink="/sellerlanding">SELL WITH US</button>
     </div>
     <div class="dvPartRight">
         <img src="assets/images/icons/resources (HP)-20.png" style="margin-top: -23%; height: 184%;">

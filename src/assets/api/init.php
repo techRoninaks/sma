@@ -4,11 +4,16 @@ header("Access-Control-Allow-Origin: *");
 header('Content-Type: text/html; charset=utf-8');
 
 // DB configuration
-const DB_SMA_PR = "roninaks_smapr";
-const DB_SMA_USER = "roninaks_smausr";
+const DB_SMA_PR = "roninaks_temp_smapr";
+const DB_SMA_USER = "roninaks_temp_smausr";
 const DB_USER_NAME = "roninaks";
 const DB_USER_PASS = "complexP@ssw0rd";
 const DB_HOST = "localhost";
+// const DB_SMA_PR = "roninaks_temp_smapr";
+// const DB_SMA_USER = "roninaks_temp_smausr";
+// const DB_USER_NAME = "root";
+// const DB_USER_PASS = "";
+// const DB_HOST = "localhost";
 
 $con1 = mysqli_connect(DB_HOST, DB_USER_NAME, DB_USER_PASS, DB_SMA_PR);
 $con2 = mysqli_connect(DB_HOST, DB_USER_NAME, DB_USER_PASS, DB_SMA_USER);

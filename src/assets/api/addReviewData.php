@@ -26,4 +26,6 @@
         $status="Success";
         echo json_encode($status);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

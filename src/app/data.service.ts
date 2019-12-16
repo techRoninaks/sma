@@ -105,6 +105,16 @@ sendOrderDetails(data: any) {
       .append("userId", data)
     return this.http.post(this.baseUrl + 'assets/api/rfqaddress.php', httpParams);
   }
+
+  getReverseCoding(lat,long){
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+  }
+  getAddressFromPincode(pincode){
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+pincode+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+  }
+  getGoogleDistance(origin,destination){
+    return this.http.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+  }
  getPriceDate(data: any) {
     let httpParams = new HttpParams()
       .append("prodId", data['prod_id'])
@@ -878,7 +888,7 @@ getdynamicPriceAddProduct(prodid: any) {
     .append("main_category", data['main_category'])  
     .append("main_category1", data['main_category1'])  
     .append("main_category2", data['main_category2']);  
-    return this.http.post(this.baseUrl+'assets/api/ sellerRegistration2.php',httpParams); 
+    return this.http.post(this.baseUrl+'assets/api/sellerRegistration2.php',httpParams); 
   }
   
  addSellerDataStage3(data: Object){
@@ -1347,7 +1357,8 @@ addCardData(data1: Object,data2:Object,userId:any,userName:any){
   .append("userName", userName)
   .append("userId", userId)
   .append("cardNo", data1['cardno'])
-  .append("validity", data2['date'])
+  .append("month", data2['month'])
+  .append("year", data2['year'])
   .append("cvv", data2['cvv']);
   return this.http.post(this.baseUrl+'assets/api/addCardData.php',httpParams);
  }
@@ -1976,7 +1987,7 @@ return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', htt
     let httpParams= new HttpParams()  
     .append("orderIdShort", orderIdShort)  
     .append("id", data);  
-    return this.http.post(this.baseUrl+'assets/api/ viewSellerOrderData.php',httpParams);  
+    return this.http.post(this.baseUrl+'assets/api/viewSellerOrderData.php',httpParams);  
   } 
   
   getViewOrderDataSeller(data: any,orderIdShort: any)
@@ -1984,7 +1995,7 @@ return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', htt
     let httpParams= new HttpParams()  
     .append("orderIdShort", orderIdShort)  
     .append("sellerId", data);  
-    return this.http.post(this.baseUrl+'assets/api/ viewOrderDataSeller.php',httpParams);  
+    return this.http.post(this.baseUrl+'assets/api/viewOrderDataSeller.php',httpParams);  
   }
     loadShopWiseProductsInSellerView(shopId : any, tagNum : any, pageNum : any, filters : any, sorters : any){
     let httpParams = new HttpParams()
@@ -1993,6 +2004,12 @@ return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', htt
     .append("pageNum",pageNum).append("filters",filters)
     .append("sort",sorters);
     return this.http.post(this.baseUrl + 'assets/api/loadShopProductsInSellerView.php', httpParams);
+  }
+
+  getBulkDiscountProduct(bulkId){
+    let httpParams = new HttpParams()
+    .append("bulkId",bulkId);
+    return this.http.post(this.baseUrl + 'assets/api/getBulkDiscountProduct.php', httpParams);
   }
 
   // deleteCart(id: number) {

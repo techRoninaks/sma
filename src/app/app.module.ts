@@ -46,6 +46,8 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import {} from 'googlemaps';
+
 
 @NgModule({
   declarations: [

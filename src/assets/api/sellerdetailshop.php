@@ -12,5 +12,7 @@
     $result2 = mysqli_query($con2 , $sql_query2);
     $row2=mysqli_fetch_array($result2);
     $data=array('sellerName'=>$row2["seller_name"],'shopId'=>$row2["id"]);
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

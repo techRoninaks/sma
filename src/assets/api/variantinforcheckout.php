@@ -32,6 +32,8 @@
             $data=array('variantid'=>$row["variantid"],'prodId'=>$row["prodid"],'name'=>$row["name"],'value'=>$row["value"],'price'=>$row["price"]);   
     }
 
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
     
 ?>

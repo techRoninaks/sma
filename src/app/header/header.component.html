@@ -10,16 +10,16 @@
         <!-- <div onmouseover="true" style="background-color: #959e97"> -->
           <a class="nav-link">
             <div class="dropdown">
-                <button class="dropbtn" (click)="openLocation()"><img src="assets/images/icons/ic_location.png" Height="10%" Width="10%">Deliver to &nbsp;<label id="locationlabel">{{location}}</label>&nbsp;<label id="pinlabel">{{pin}}</label></button>
+                <button class="dropbtn" (click)="openLocation();"><img src="assets/images/icons/ic_location.png" (click)="findMe();" Height="10%" Width="10%">Deliver to &nbsp;<label id="locationlabel">{{location}}</label>&nbsp;<label id="pinlabel">{{pin}}</label></button>
                   <div class="dropdown-content" id="location_drop_down" style="display: none;">
                   <li>
                     <div>
-                      <input type="text" size= "16" class="input_style" placeholder="Enter pincode">
+                      <input type="text" size= "16" id="headerPin" class="input_style" placeholder="Enter pincode">
                     </div>
                   </li>
                   <li>
                       <div>
-                          <button type="submit" class="btn_style">Apply</button>
+                          <button type="submit" (click)="getGooglePin();" class="btn_style">Apply</button>
                       </div>
                   </li>
                   <li>
@@ -34,7 +34,7 @@
       </li>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control-custom" type="search"(enter)="searchKeyLog()" id="searchField" placeholder="Search" aria-label="Search">
-        <button class="btn btn-custom btn-outline-success my-2 my-sm-0"(click)="searchKeyLog()" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button>
+        <button class="btn btn-custom btn-outline-success my-2 my-sm-0"(click)="searchKeyLog()" type="submit"><img class="headerSearchImage" src="assets/images/icons/search-512.png"></button> 
       </form>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-auto">
@@ -61,7 +61,8 @@
                 </div>
           </div>
         </li>
-        <li class="nav-item ml-auto">
+        <li class="nav-item ml-auto cartCont">
+          <p id="cartCounter" class="cartCount">1</p>
           <a class="nav-link" routerLink="/cart"><img src="assets/images/icons/ic_cart.png" Height="40%" Width="40%"></a>
         </li>
       </ul>
@@ -82,7 +83,7 @@
     </div>
       <div class="scrollmenu">
           <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()" id="breadcrumb">&nbsp;&nbsp;&#9776;</span>
-        <div class="dropdown" id="mainHeader">
+        <div class="dropdown" style="    overflow-x: auto;scrollbar-width: thin;" id="mainHeader">
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
           <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
@@ -105,11 +106,11 @@
   </div>
 </div>
   <!-- login popup -->
-      <div class="container" id="modalContainer">
+      <div class="container" id="modalContainer" style="position: absolute;left: 50%;transform: translate(-50%,0%);">
           <div class="modal" id="myModal-1" role="dialog" >
             <div class="modal-dialog">
               <div class="modal-content ">
-                <div class="modal-header ">
+                <div class="modal-header " style="height: 60px;">
                   <label style="color: white; margin-left:138px;"><h4><a style="color: white;" routerLink="/login">LOGIN</a>/<a style="color: white;" routerLink="/signup">SIGNUP</a></h4></label>
                   <button type="button" class="close" data-dismiss="modal" (click)="dispNone();">&times;</button>
                 </div>
@@ -120,7 +121,9 @@
                       <br>
                       <label style="margin-left: 135px;"><a style="color: black;" routerLink="/login">forgot password</a></label>
                       <br>
-                      <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;<label>I agree to the terms</label> &nbsp;&nbsp; <button style="background: #EFBE24; border: none;" (click)=closePop()><label style="color: white">SIGNIN</label></button>
+                      <!-- <input type="checkbox" style="margin-left: 95px;"> &nbsp;&nbsp;
+                      <label>I agree to the terms</label> &nbsp;&nbsp;  -->
+                      <button style="background: #EFBE24; border: none;" (click)=closePop()><label style="color: white">SIGNIN</label></button>
                   </div>
               </div>
             </div>

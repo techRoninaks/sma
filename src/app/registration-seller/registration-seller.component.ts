@@ -22,6 +22,7 @@ export class RegistrationSellerComponent implements OnInit {
   fpFormOtp: FormGroup;
   termsForm: FormGroup;
   submitted: boolean;
+  submitted1: boolean;
   submittedBank: boolean;
   fpmobile : string=""; 
   fpOTP : string="";
@@ -55,8 +56,8 @@ export class RegistrationSellerComponent implements OnInit {
       state:['',Validators.required],
       pin:['',Validators.required],
       main_category:['',Validators.required],
-      maincategory1:['',Validators.required],
-      maincategory2:['',Validators.required],
+      main_category1:['',Validators.required],
+      main_category2:['',Validators.required],
     })
     this.fpFormMobile = this.formBuilderMobile.group({
       fp_mobile_no:['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
@@ -142,6 +143,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.categorylist();
       this.stage_1 = true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 2)
     {
@@ -151,6 +153,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.idCardlist();
       this.stage_2 = true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 3)
     {
@@ -160,6 +163,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.getLocationList();
       this.stage_3 = true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 4)
     {
@@ -167,6 +171,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.seller_name = this.getCookie("sellerName");
       this.stage_4 = true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 5)
     {
@@ -174,6 +179,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.seller_name = this.getCookie("sellerName");
       this.stage_5= true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 6)
     {
@@ -181,6 +187,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.seller_name = this.getCookie("sellerName");
       this.stage_6= true;
       this.prelim_stage = false;
+      alert(this.seller_stage);
     }
     else if(this.seller_stage == 7)
     {
@@ -270,6 +277,7 @@ export class RegistrationSellerComponent implements OnInit {
   sellerSignIn(){
     this.data.updateStage6(this.g_seller_id).subscribe();
     this.setCookie("sellerId",this.seller_id);
+    this.setCookie("isLoggedIn",1);
     this.seller_name = this.getCookie('sellerName');
     document.getElementById("headerLogin").innerText= this.seller_name;
     this.router.navigate(['/dashboard']);
@@ -335,7 +343,7 @@ export class RegistrationSellerComponent implements OnInit {
     );
   }
   onSubmitStage2(){
-    this.submitted =true;
+    this.submitted1 =true;
     if (this.registrationFormStage1.invalid) {
       alert('Enter Required Fields');
       return;
@@ -367,6 +375,13 @@ export class RegistrationSellerComponent implements OnInit {
     this.seller_dob = (<HTMLInputElement>document.getElementById("seller-dob")).value;
     this.id_type = (<HTMLSelectElement>document.getElementById("id-type")).value;
     
+    this.imageDataFront = { seller_id:this.seller_id ,image:imageFront}
+    this.data.uploadFront(this.imageDataFront).subscribe(
+    );
+    this.imageDataBack = { seller_id:this.seller_id ,image:imageBack}
+    this.data.uploadBack(this.imageDataBack).subscribe(
+    );
+
     this.sellerData3 = { id_no: this.id_no, seller_dob: this.seller_dob, id_type: this.id_type,seller_id:this.seller_id};
     this.data.addSellerDataStage3(this.sellerData3).subscribe(
       data=>{
@@ -385,12 +400,6 @@ export class RegistrationSellerComponent implements OnInit {
         error=> console.error(error)
       );
      
-    this.imageDataFront = { seller_id:this.g_seller_id ,image:imageFront}
-    this.data.uploadFront(this.imageDataFront).subscribe(
-    );
-    this.imageDataBack = { seller_id:this.g_seller_id ,image:imageBack}
-    this.data.uploadBack(this.imageDataBack).subscribe(
-    );
   }
   frontUpload(){
     imageFront=document.getElementById('frontUpload').addEventListener('change', onFrontClick.bind(this));

@@ -729,6 +729,8 @@ $SubText: 18px;
 			.uploadImgCont{
 				width: max-content;
 				padding-right: 5px;
+
+			
 				.imgUpl{
 					@include sm-lesser{
 						height: 60px;
@@ -744,12 +746,20 @@ $SubText: 18px;
 		}
 
 	}
+
+	.errorPincode{
+		margin: auto;
+		width: max-content;
+		margin-bottom: 15px;
+		display: none;
+	}
 	.pdatePicker {
 		grid-area: pdatePicker;
 		margin: 5px;
 		font-family: Bitter;
 		font-size: $SubText;
 		margin: 1rem 0px 1rem 0px;
+		display: none;
 		@include sm-lesser{
 			font-size: 15px;
 		}
@@ -894,6 +904,17 @@ $SubText: 18px;
 	}
 	.pDate {
 		grid-area: pDate;
+		.datePickerBtn{
+			width: max-content;
+			background: #efbe24;
+			padding: 5px;
+			padding-left: 15px;
+			padding-right: 15px;
+			color:	white;
+			cursor: pointer;
+			font-family: Bitter;
+			border-radius: 5px;
+		}
 	}
 }
 .divPolicy {
@@ -1748,6 +1769,17 @@ $SubText: 18px;
 			padding: 6px;
 		}
 	}
+
+	.middle {
+		transition: .5s ease;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		text-align: center;
+	}
 	.rfqTag {
 		grid-area: rfqTag;
 		display: grid;
@@ -2087,6 +2119,8 @@ $SubText: 18px;
 	}
 	.btnAddr {
 		grid-area: btnAddr;
+		margin: auto;
+		width: auto;
 		.btnChange {
 			margin-top: 18px;
 			border-radius: 5px;
@@ -2622,8 +2656,9 @@ $SubText: 18px;
 	}
 	.dvprodImages{
 		display: flex;
-		margin-left: 8px;
-		
+		margin: auto;
+		overflow: auto;
+		width: 86%;
 	}
 	.dvprodImages1 {
 		width: 60px;

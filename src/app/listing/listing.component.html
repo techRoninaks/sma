@@ -18,7 +18,7 @@
                         <div class="undelStyle">
                             <img class="undeliverableIcon" src="assets/icons/img_549368.png">
                             <p id="undel " class="undelP" style="color:#949494; font-family:BitterBold; font-size:20px;">{{undel}}</p>
-                            <p class="undelP" style="color:#ff1d25; font-family:BitterBold; font-size:20px;">{{pincodeValue}}</p>
+                            <p class="undelP" id="modelPincode" style="color:#ff1d25; font-family:BitterBold; font-size:20px;">{{pincodeValue}}</p>
                             <input type="text" class="pincodeInput" placeholder="Enter Pincode" id="undPincode" value="{{pincodeValue}}"
                                 (change)="pincodeChange();" (click)="priceChangeGetter();">
                             <div class="undelRadio">
@@ -121,23 +121,24 @@
         <div class="pDiscount">
             <p style="color: #009145;">{{discountLabel.discountText}}</p>
             <p><i class="fa fa-rupee" style="font-size:16px"></i>{{priceDate.tPrice}}&nbsp;&nbsp;
-                <del><i class="fa fa-rupee" style="font-size:16px"></i>{{baseTotalPrice}}</del>
+                <del *ngIf="emptyDisc"><i class="fa fa-rupee" style="font-size:16px"></i>{{baseTotalPrice}}</del>
             </p>
         </div>
         <div class="pSize">
             <div *ngFor="let group of variantCount; let i = index;">
                 <p class="pCss">{{group.name}}:</p>
                 <select id="{{i}}_variantValue" class="dropdown drop" (change)="priceChangeGetter();">
-                    <option *ngFor="let light of group.value" (click)="variantAdd(light.type);">
+                    <option *ngFor="let light of group.value" >
                         {{light.type}},{{light.price}}
                     </option>
                 </select>
             </div>
+            <!-- (click)="variantAdd(light.type);" -->
         </div>
         <div class="pQuantity" style="margin-top:10px;">
             <p class="pCss">Quantity</p>
             <button type="button" id='1' (click)="count_dec()" class="minus">-</button>
-            <input type="text" id="count" id="productQuantity" value="{{counter}}">
+            <input type="text" id="productQuantity" value="{{counter}}">
             <button type="button" id='2' (click)="count_inc()" class="plus">+</button>
             <!-- (click)="priceChangeGetter();" -->
         </div>
@@ -152,41 +153,42 @@
             </div>
         </div>
         <div class="pImages" id="imageShowOrNot">
-            <p class="pCss">Add Images</p>
+            <p class="pCss">Add {{uploadImageCount}} Images</p>
             <input style="display: none" type="file" name="pic" id="productImage" accept="image/*" #fileInput>
             <button type="button" class="btnStyle" (click)="fileInput.click()"
                 style="background-color: #efbe24;color: white;margin-bottom: 15px;">Upload
                 Image</button>
             <!-- <input type="submit"> -->
             <div class="uploadImgContParent" *ngIf="imageU0 == 1">
-                <div class="uploadImgCont" *ngIf="imageU0 == 1">
+                <div class="uploadImgCont" *ngIf="imageU0 == 1" (click)="deleteImage('0')">
                     <img [src]="imageVAL0" class="imgUpl" style="max-height: 100px;margin-top:5px;">
+                    <!-- <img src="assets/icons/close.png"> -->
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU1 == 1">
+                <div class="uploadImgCont" *ngIf="imageU1 == 1" (click)="deleteImage('1')">
                     <img [src]="imageVAL1" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU2 == 1">
+                <div class="uploadImgCont" *ngIf="imageU2 == 1" (click)="deleteImage('2')">
                     <img [src]="imageVAL2" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU3 == 1">
+                <div class="uploadImgCont" *ngIf="imageU3 == 1" (click)="deleteImage('3')">
                     <img [src]="imageVAL3" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU4 == 1">
+                <div class="uploadImgCont" *ngIf="imageU4 == 1" (click)="deleteImage('4')">
                     <img [src]="imageVAL4" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU5 == 1">
+                <div class="uploadImgCont" *ngIf="imageU5 == 1" (click)="deleteImage('5')">
                     <img [src]="imageVAL5" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU6 == 1">
+                <div class="uploadImgCont" *ngIf="imageU6 == 1" (click)="deleteImage('6')">
                     <img [src]="imageVAL6" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU7 == 1">
+                <div class="uploadImgCont" *ngIf="imageU7 == 1" (click)="deleteImage('7')">
                     <img [src]="imageVAL7" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU8 == 1">
+                <div class="uploadImgCont" *ngIf="imageU8 == 1" (click)="deleteImage('8')">
                     <img [src]="imageVAL8" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
-                <div class="uploadImgCont" *ngIf="imageU9 == 1">
+                <div class="uploadImgCont" *ngIf="imageU9 == 1" (click)="deleteImage('9')">
                     <img [src]="imageVAL9" class="imgUpl" style="max-height: 100px;margin-top:5px;">
                 </div>
             </div>
@@ -259,17 +261,18 @@
                                             <input class="stateShop addrS" id="stateShopId"
                                                 style="height: 30px;width: inherit;" placeholder="state">
                                             <input class="countryShop addrS" id="countryShopId"
-                                                style="height: 30px;width: inherit;" placeholder="country">
+                                                style="height: 30px;width: inherit;"  placeholder="country">
                                             <input class="pincodeShop addrS" id="pincodeShopId"
-                                                style="height: 30px;width: inherit;" placeholder="pincode">
+                                                style="height: 30px;width: inherit;" type="number" pattern="[0-9]" placeholder="pincode">
                                         </div>
 
 
                                         <div class="modal-footer dvModalFooter" style="justify-content: center;">
                                             <input type="submit" class="btn btn-default btnText"
                                                 style="background-color: #efbe24;color:white;" (click)="gift();"
-                                                value="Apply" data-dismiss="modal">
+                                                value="Apply">
                                         </div>
+                                        <p id="errorPincode" class="errorPincode">Sorry this Product is undeliverabl to this location.</p>
                                     </div>
                                 </div>
                             </div>
@@ -277,6 +280,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <p id="bulkDisc" style="display: none;">This product has bulkdiscount in {{bulkQuant}} quantity.</p>
         </div>
         <div class="pConfirmation" id="idConf" style="background-color: whitesmoke">
             <p class="orderConf descD">ORDER CONFIRMATION PERIOD: </p>
@@ -288,17 +294,17 @@
             <p class="headClass" style="margin: .3rem 0.75rem;display:inline;">DELIVERY OPTIONS</p>
         </div>
         <div class="pCourier">
-            <div class="dvShip">
+            <div class="dvShip" *ngIf="shippingCheck">
                 <input type="radio" id="sh" name="shippingOption" value="shipping" (change)="priceChangeGetter();">
                 &nbsp;<label for="normalCourier">Shipping</label>
             </div>
 
 
-            <div class="dvCod">
+            <div class="dvCod" *ngIf="homeCheck">
                 <input type="radio" id="hD" name="shippingOption" value="homeDelivery" (change)="priceChangeGetter();">
                 &nbsp;<label for="homeDelivery">Home Delivery</label>
             </div>
-            <div class="dvPickup">
+            <div class="dvPickup" *ngIf="pickupCheck">
                 <input type="radio" (change)="pickupDetails();" id="pU" name="shippingOption" value="pickUp"
                     (change)="priceChangeGetter();">
                 &nbsp;<label for="pickUp">PickUp</label>
@@ -317,6 +323,7 @@
         </div>
         <div class="pDate">
             <p style="font-family:Bitter;color:#949494;margin-top: 15px;">THE PRODUCT WILL BE DELIVERED BEFORE :<span style="font-family:Bitter;color: #009145;">{{priceDate.dDate}}</span></p>
+            <div class="datePickerBtn" (click)="showDatePicker()">Change delivery date!</div>
         </div>
     </div>
     <!-- POLICY -->
@@ -679,11 +686,11 @@
                     <br>
                     <button (click)="redirect('login');" [routerLink]="['/login']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
-                        style="background-color: #efbe24; color:white; transform: translate(3.5rem,-1rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;">Login</button>
+                        style="background-color: #efbe24; color:white; transform: translate(3.5rem,-1rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;cursor: pointer;z-index: 11;">Login</button>
                     <p style="text-align: center;justify-self:center;font-size: 16px;font-family: Bitter;transform: translate(0.5rem,-2.45rem);">OR</p>
                     <button (click)="redirect('signup');" [routerLink]="['/signup']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
-                        style="background-color: #efbe24; color:white;transform: translate(11.5rem,-5rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;">SignUp</button>
+                        style="background-color: #efbe24; color:white;transform: translate(11.5rem,-5rem);border: none; border-radius: 5px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);font-family: Bitter;font-size: 16px;cursor: pointer;z-index: 11;">SignUp</button>
                     <br>
                     <br>
                     <div id="instantBuyId">
@@ -780,10 +787,11 @@
                             {{dynamicDataAddress.state}},
                             {{dynamicDataAddress.country}},
                             {{dynamicDataAddress.pincode}}
-                            <div class="btnAddr">
-                                <button type="change" class="btnChange btn-warning" id="btnChange"
-                                    (click)=showSavedAddr()>Change</button>
-                            </div>
+
+                        </div>
+                        <div class="btnAddr">
+                            <button type="change" class="btnChange btn-warning" id="btnChange"
+                                (click)=showSavedAddr()>Change</button>
                         </div>
                     </div>
                 </div>
@@ -869,7 +877,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="dvEmail">
+                                <!-- <div class="dvEmail">
                                     <label>Email</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address"
@@ -885,7 +893,7 @@
                                             Enter valid Email !
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="grid-Right-Form">
                                 <div class="dvAddr1">
@@ -915,7 +923,7 @@
                                     </div>
                                 </div>
                                 <div class="dvPincode">
-                                    <label>PinCode</label>
+                                    <label>Pincode</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address" id="pincode-Form"
                                         formControlName="reg_pin">
@@ -951,7 +959,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="dvPhone">
+                                <!-- <div class="dvPhone">
                                     <label>Phone</label>
                                     <br>
                                     <input type="text" size="24" class="card-input-style-address"
@@ -975,7 +983,7 @@
                                             Enter Only digits !
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="btnSaveForm">
                                 <button type="save" class="btnSave1 btn-warning" id="btnSave"
