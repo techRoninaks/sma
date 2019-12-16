@@ -5,7 +5,8 @@
 
     $sql_query = "UPDATE `product` SET `returning_customers_count`=`returning_customers_count`+1,`product_view_count`=`product_view_count`+1 WHERE prodid=$prodId";
     $result = mysqli_query($con1, $sql_query);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo $result;
 
 ?>

@@ -4,7 +4,7 @@
 
     $sellerId = $_POST["sellerId"];
 
-    $sql_pr_view = "SELECT SUM(p.product_view_count) as prod_view FROM roninaks_smapr.product p, roninaks_smausr.shop_details sl WHERE p.shop_id = sl.id and sl.seller_id = '$sellerId'";
+    $sql_pr_view = "SELECT SUM(p.product_view_count) as prod_view FROM roninaks_temp_smapr.product p, roninaks_temp_smausr.shop_details sl WHERE p.shop_id = sl.id and sl.seller_id = '$sellerId'";
     $result_pr_view = mysqli_query($con1,$sql_pr_view);
     $pr_views = mysqli_fetch_array($result_pr_view); 
     // echo $sql_pr_view;
@@ -23,7 +23,7 @@
     $result_tot_sales = mysqli_query($con2,$sql_tot_sales);
     $tot_sales = mysqli_fetch_array($result_tot_sales);
 
-    $sql_activ = "SELECT COUNT(*) AS active_prod FROM roninaks_smapr.product p, roninaks_smausr.shop_details sl WHERE p.shop_id = sl.id and sl.seller_id = '$sellerId' and p.active_status = 'active'";
+    $sql_activ = "SELECT COUNT(*) AS active_prod FROM roninaks_temp_smapr.product p, roninaks_temp_smausr.shop_details sl WHERE p.shop_id = sl.id and sl.seller_id = '$sellerId' and p.active_status = 'active'";
     $result_activ = mysqli_query($con1,$sql_activ);
     $active_prod = mysqli_fetch_array($result_activ);
     // echo $sql_activ;
@@ -33,6 +33,7 @@
     "actProd"=>$active_prod["active_prod"],
     "pendingCount"=>$pur_view["pending_count"],
     "processCount"=>$pro_view["process_count"]);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

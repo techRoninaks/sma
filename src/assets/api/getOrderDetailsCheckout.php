@@ -12,6 +12,8 @@ while($row=mysqli_fetch_assoc($result)){
     $data=array('orderid'=>$row["orderid"]);
 }
 $result = array("success"=>$success,"result"=>$data);
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 
 ?>

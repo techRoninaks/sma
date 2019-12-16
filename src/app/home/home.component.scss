@@ -225,13 +225,16 @@ $SubText: 18px;
     grid-template-columns: repeat(3, auto);
     grid-template-areas: "dv-left dv-mid dv-right";
     display: grid;
-    padding: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 
     .dvLeft {
       grid-area: dv-left;
       grid-template-columns: auto;
       grid-template-areas: "dv-icon" "dv-text" "dv-btn";
       display: grid;
+      border-right: 1px solid #dedede;
+      padding: 45px;
 
       .dvIcon {
         grid-area: dv-icon;
@@ -279,6 +282,8 @@ $SubText: 18px;
       grid-template-columns: auto;
       grid-template-areas: "dv-icon" "dv-text" "dv-btn";
       display: grid;
+      border-right: 1px solid #dedede;
+      padding: 45px;
 
       .dvIcon {
         grid-area: dv-icon;
@@ -326,6 +331,7 @@ $SubText: 18px;
       grid-template-columns: auto;
       grid-template-areas: "dv-icon" "dv-text" "dv-btn";
       display: grid;
+      padding: 45px;
 
       .dvIcon {
         @include sm-lesser{
@@ -408,6 +414,7 @@ $SubText: 18px;
       grid-area: dv-trend;
       width: fit-content;
       justify-self: center;
+      cursor: pointer;
 
       .tag {
         padding: 5px;
@@ -425,6 +432,7 @@ $SubText: 18px;
       grid-area: dv-offer;
       width: fit-content;
       justify-self: center;
+      cursor: pointer;
       .tag {
         padding: 5px;
         color: $smaDarkGray;
@@ -442,6 +450,7 @@ $SubText: 18px;
       grid-area: dv-arrival;
       width: fit-content;
       justify-self: center;
+      cursor: pointer;
       .tag {
         padding: 5px;
         color: $smaDarkGray;
@@ -452,16 +461,101 @@ $SubText: 18px;
     }
   }
 
+  .lds-roller {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+  }
+  .lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #efbe24;
+    margin: -4px 0 0 -4px;
+  }
+  .lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+  }
+  .lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+  }
+  .lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+  }
+  .lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+  }
+  .lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+  }
+  .lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+  }
+  .lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+  }
+  .lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+  }
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .dvCatMain {
     grid-template-columns: repeat(3, 1fr);
     display: grid;
     width: auto;
-    margin: 5%;
+    // margin: 5%;
     @include md{
       grid-template-columns: repeat(1, 1fr);
     display: grid;
     width: 65%;
-    margin: 5%;
+    // margin: 5%;
     margin-left: 17%;
    
 
@@ -473,7 +567,8 @@ $SubText: 18px;
       margin-left: 10%;
     }
 
-    .dvCard {margin-top: 20%;
+    .dvCard {
+      // margin-top: 20%;
       padding: 6%;
       border-bottom: 1px solid $smaLightGray;
       position: relative;
@@ -616,6 +711,8 @@ $SubText: 18px;
 
         .imgBanner {
           width: inherit;
+          height: 300px;
+          object-fit: cover;
         }
         .dvUndeliver {
           position: relative;

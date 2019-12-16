@@ -15,8 +15,8 @@
     $count = 0;
     $request = "failed";
 
-    $productQuery = "SELECT p.category_id,p.active_status, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-    FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
+    $productQuery = "SELECT p.category_id,p.active_status, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_temp_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+    FROM roninaks_temp_smapr.product p, roninaks_temp_smapr.category c, roninaks_temp_smausr.seller sl, roninaks_temp_smausr.shop_details sh, roninaks_temp_smausr.shipping_location_shop sls, roninaks_temp_smapr.prod_shipping_price psp
     WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' AND p.active_status IN ('active') ";
 
     $locationQuery = " AND  sls.pincode LIKE '%$pincode%'";
@@ -44,8 +44,8 @@
             
             $status = "undeliverable";
 
-            $productQuery = "SELECT p.category_id,p.active_status, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-            FROM roninaks_smapr.product p, roninaks_smapr.category c, roninaks_smausr.seller sl, roninaks_smausr.shop_details sh, roninaks_smausr.shipping_location_shop sls, roninaks_smapr.prod_shipping_price psp
+            $productQuery = "SELECT p.category_id,p.active_status, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_temp_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+            FROM roninaks_temp_smapr.product p, roninaks_temp_smapr.category c, roninaks_temp_smausr.seller sl, roninaks_temp_smausr.shop_details sh, roninaks_temp_smausr.shipping_location_shop sls, roninaks_temp_smapr.prod_shipping_price psp
             WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' AND p.active_status IN ('active') ";
         }
         if($filterSet->maxPrice){
@@ -193,4 +193,6 @@
             )
         );
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

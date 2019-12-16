@@ -49,6 +49,7 @@
         'promoId'=>$row["promo_id"],
         'soldCount'=>$row["sold_count"]);
     }
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

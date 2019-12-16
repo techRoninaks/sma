@@ -8,5 +8,7 @@ $sqlDisc = "SELECT * FROM `offer` where prodid =  $prodId  ";
         // echo $sqlDisc;
         $rowDisc=mysqli_fetch_array($resDisc);
         $discountInfo=array('percentage' => $rowDisc["percentage"]);
+        mysqli_close($con1);
+        mysqli_close($con2);
 echo json_encode($discountInfo);
 ?>

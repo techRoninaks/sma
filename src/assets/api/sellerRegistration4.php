@@ -45,4 +45,6 @@
         $data=array('seller_id'=>$row2["id"],'seller_name'=>$row2["seller_name"],'status'=>$status);
         echo json_encode($data);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

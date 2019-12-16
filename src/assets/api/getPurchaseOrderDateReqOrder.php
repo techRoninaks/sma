@@ -15,6 +15,8 @@
         'delivery_date'=>$row["delivery_date"],
         'total_amnt'=>$row["total_amnt"]);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
         //echo "hello";
     

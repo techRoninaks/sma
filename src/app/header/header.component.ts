@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { CookieService } from 'ngx-cookie-service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
-import {Router, RouterLink} from '@angular/router';
+import {Router, ActivatedRoute , RouterLink} from '@angular/router';
 import { DataService } from '../data.service';
+import { } from 'googlemaps';
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +22,7 @@ export class HeaderComponent implements OnInit {
   flag6: string;
   flag7: string;
 
-  constructor(private cookieService: CookieService, private router: Router,private data: DataService) { 
+  constructor(private cookieService: CookieService,private activatedRoute: ActivatedRoute, private router: Router,private data: DataService) { 
   }
   flag: String="";
   flag2: String="";
@@ -35,6 +38,7 @@ export class HeaderComponent implements OnInit {
   dynamicDataLocation :any ="";
   user_signed: boolean = false;
   sellerSignedIn: boolean =false;
+  
   ngOnInit() {
     this.flag=this.getCookie("userName");
     this.flag1=this.getCookie("sellerName");
@@ -88,11 +92,89 @@ export class HeaderComponent implements OnInit {
     }
     else{
       this.setCookie("isLoggedIn",null);
-      setTimeout(function(){ 
-        document.getElementById('myModal-1').style.display="contents";
+      setTimeout(()=>{ 
+        if(this.router.url == "/login"){
+          // console.log("login");
+        }
+        else if(this.router.url == "/signup"){
+          // console.log("signup");
+        }
+        else if(this.router.url == "/signupseller"){
+          // console.log("signupseller");
+        }
+        else{
+          document.getElementById('myModal-1').style.display="contents";
+        }
+        // console.log(this.activatedRoute.snapshot.url);
+        // console.log(this.router.url);
       }, 120000);
+      // }, 1000);
     }
   }
+  findMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showPosition(position);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  showPosition(position) {
+    var currentLat = position.coords.latitude;
+    var currentLong = position.coords.longitude;
+    console.log(currentLat);
+    console.log(currentLong);
+    console.log(position);
+    this.getAddressFromLatLng(currentLat,currentLong);
+  }
+
+  getAddressFromLatLng(currentLat,currentLong) {
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(currentLat, currentLong);
+    let request : any = {
+      latLng: latlng
+    };
+    this.data.getReverseCoding(currentLat, currentLong).subscribe(data=>{
+      var loc1 =data['results'][0]['address_components'][1].long_name;
+      var loc3 = data['results'][0]['address_components'][2].long_name;
+      var loc4 = data['results'][0]['address_components'][3].long_name;
+      var googlePin = loc3.replace(/ /g, "+")+","+loc4.replace(/ /g, "+");
+      var len = data['results'][0]['address_components'].length;
+      var loc2 = data['results'][0]['address_components'][--len].long_name;
+      this.setCookie("googlePin",googlePin);
+      this.setCookie("userPin",loc2);
+      this.location = loc1; 
+      this.pin = loc2;
+      (<HTMLInputElement><any>document.getElementById('locationlabel')).innerText = loc1;
+      (<HTMLInputElement><any>document.getElementById('pinlabel')).innerText = loc2;
+      this.closeLocation();
+    })
+}
+
+getGooglePin(){
+  var checkPin = (<HTMLInputElement><any>document.getElementById('headerPin')).value;
+  var isnum = /^\d+$/.test(checkPin);
+  if(checkPin.length != 6 && !isnum){
+    alert("Please enter proper pincode");
+  }
+  else{
+    this.data.getAddressFromPincode(checkPin).subscribe(data=>{
+      var loc1 =data['results'][0]['address_components'][0].long_name;
+      var loc3 = data['results'][0]['address_components'][1].long_name;
+      var googlePin = loc3.replace(/ /g, "+")+","+loc1.replace(/ /g, "+");
+      this.setCookie("googlePin",googlePin);
+      this.setCookie("userPin",loc1);
+      this.location = loc3; 
+      this.pin = loc1;
+      (<HTMLInputElement><any>document.getElementById('locationlabel')).innerText = loc3;
+      (<HTMLInputElement><any>document.getElementById('pinlabel')).innerText = loc1;
+      this.closeLocation();
+    })
+  }
+}
+
   dispNone(){
     document.getElementById("myModal-1").style.display="none";
   }

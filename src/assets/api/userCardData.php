@@ -10,5 +10,7 @@ while($row=mysqli_fetch_assoc($result))
 {
     $data = array('username'=>$row["username"],'name'=>$row["Name"],'phoneNo'=>$row["phone1"],'email'=>$row["email"],'address'=>$row["addr1"],'address2'=>$row["addr2"],'city'=>$row["city"],'district'=>$row["district"],'state'=>$row["state"],'country'=>$row["country"],'pincode'=>$row["pincode"]);
 }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

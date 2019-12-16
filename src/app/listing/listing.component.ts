@@ -169,6 +169,12 @@ export class ListingComponent implements OnInit {
 	hasDatePickerBit: number;
 	datePickerDefaultCheckOut: any;
 	activeStatusCheckOut: any;
+	shippingCheck: boolean = false;
+	homeCheck: boolean = false;
+	pickupCheck: boolean = false;
+	counterImage: any = 0;
+	emptyDisc: boolean = true;
+	bulkQuant: Object;
 
 	constructor(private rout: Router, private data: DataService, private formBuilder: FormBuilder, private elementRef: ElementRef, private route: ActivatedRoute, private cookieService: CookieService) {
 		this.checkoutForm = this.formBuilder.group({
@@ -180,8 +186,6 @@ export class ListingComponent implements OnInit {
 			reg_state: ['', Validators.required],
 			reg_country: ['', Validators.required],
 			reg_pin: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-			reg_email: ['', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
-			reg_mobile_no: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
 		})
 	}
 	dynamicData: any = "";
@@ -223,7 +227,7 @@ export class ListingComponent implements OnInit {
 	// orderId: any = "";
 	prodImageCount: any = [];
 	imagesCount: any = [];
-	pincodeValue: number;
+	pincodeValue: any;
 	tok: object;
 	undelData: any = [];
 	pinToken: object;
@@ -243,11 +247,27 @@ export class ListingComponent implements OnInit {
 		// console.log(this.userId);
 		// this.setCookie("userPin",682501);
 		this.pincodeValue = parseInt(this.getCookie("userPin"));
+		console.log(this.pincodeValue)
+		if(isNaN(this.pincodeValue)){
+			this.pincodeValue = "";
+		}
+		// alert('adbikbadk');
+		var googlePin = this.getCookie("googlePin");
+		var pin = this.getCookie("userCity");
+		pin = pin.replace(/ /g, "+");
+		console.log(googlePin);
+		console.log(pin);
+		if(googlePin!="" && pin !=""){
+			this.data.getGoogleDistance(googlePin,pin).subscribe(data=>{
+				var place = data;
+				console.log(place['rows'][0]['elements'][0]['distance']['text']);
+			})
+		}
 
 		(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "block";
 		(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "none";
 		this.datePickerDefault = 1;
-		(<HTMLInputElement><any>document.getElementById("sh")).checked = true;
+		// (<HTMLInputElement><any>document.getElementById("sh")).checked = true;
 		(<HTMLInputElement><any>document.getElementById("showAvailable")).style.display = "none";
 		var today = new Date();
 		var dd = String(today.getDate()).padStart(2, '0');
@@ -285,7 +305,27 @@ export class ListingComponent implements OnInit {
 					alert("No such product exists, Redirecting to Homepage");
 					this.rout.navigate(['/']);
 				}
+				if(this.dynamicData.activeStatus !="active"){
+					alert("No such product exists, Redirecting to Homepage");
+					this.rout.navigate(['/']);
+				}
 				this.onVac = this.dynamicData.vac;
+				if(this.dynamicData.offerId == '0'){
+					this.emptyDisc = false;
+				}
+				if(this.dynamicData.bulkDiscId){
+					// alert(this.dynamicData.bulkDiscId)
+					this.data.getBulkDiscountProduct(this.dynamicData.bulkDiscId).subscribe(data=>{
+						this.bulkQuant = data;
+						if(this.bulkQuant){
+							(<HTMLInputElement><any>document.getElementById("bulkDisc")).style.display = "block";
+						}
+						else{
+							(<HTMLInputElement><any>document.getElementById("bulkDisc")).style.display = "none";
+						}
+						
+					})
+				}
 
 				this.activeStatusProd = this.dynamicData.activeStatus;
 				if (this.activeStatusProd == "inactive") {
@@ -320,6 +360,19 @@ export class ListingComponent implements OnInit {
 
 
 				}
+				
+		var shipOption = this.dynamicData.shippingOption.split(',');
+		for(var i=0;i<shipOption.length;i++){
+			if(shipOption[i]=='shipping'){
+				this.shippingCheck = true;
+			}
+			if(shipOption[i]=='home_delivery'){
+				this.homeCheck = true;
+			}
+			if(shipOption[i]=='pickup'){
+				this.pickupCheck = true;
+			}
+		}
 				
 
 
@@ -363,6 +416,7 @@ export class ListingComponent implements OnInit {
 					(<HTMLInputElement><any>document.getElementById("buyNowId")).style.display = "none";
 					(<HTMLInputElement><any>document.getElementById("reqNowId")).style.display = "block";
 					(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "none";
+					(<HTMLInputElement><any>document.getElementById("showAvailable")).style.display = "none";
 				}
 				else if (this.orderConfValue == 0) {
 					(<HTMLInputElement><any>document.getElementById("idConf")).style.display = "none";
@@ -389,13 +443,16 @@ export class ListingComponent implements OnInit {
 						this.undelData = data;
 						if (this.undelData.count == 1) {
 							// alert("count="+this.undelData.count);
-							$("#undeliverableModal").modal('hide');
+							
 							this.undel = "DELIVERABLE TO ";
 							this.undelValue = 1;
+							(<HTMLInputElement><any>document.getElementById("modelPincode")).style.color = "#009145";
+							$("#undeliverableModal").modal('toggle');
 						}
 						else if (this.undelData.count == 0) {
 							// alert("count="+this.undelData.count);
 							$("#undeliverableModal").modal('show');
+							(<HTMLInputElement><any>document.getElementById("modelPincode")).style.color = "#ff1d25";
 						}
 					}
 				);
@@ -436,6 +493,7 @@ export class ListingComponent implements OnInit {
 			},
 			error => console.error(error)
 		);
+
 
 		//UPLOAD IMAGE
 		// for(var imageCU:any=0;imageCU<this.uploadImageCount;imageCU++){
@@ -720,6 +778,10 @@ export class ListingComponent implements OnInit {
 
 	}
 
+	showDatePicker(){
+		(<HTMLInputElement><any>document.getElementById("datePickClass")).style.display = "block";
+	}
+
 	//checkout formGroup
 	displayFn(user?: User): string | undefined {
 		return user ? user.name : undefined;
@@ -738,6 +800,8 @@ export class ListingComponent implements OnInit {
 		if (this.checkoutForm.invalid) {
 			// alert("Enter Details");
 		}
+
+		// pincode-Form
 		else {
 			var contact_name = (<HTMLInputElement><any>document.getElementById("contactName-Form")).value;
 			var addr1 = (<HTMLInputElement><any>document.getElementById("addr1-Form")).value;
@@ -745,23 +809,38 @@ export class ListingComponent implements OnInit {
 			var country = (<HTMLInputElement><any>document.getElementById("country-Form")).value;
 			var city = (<HTMLInputElement><any>document.getElementById("city-Form")).value;
 			var district = (<HTMLInputElement><any>document.getElementById("District-Form")).value;
-			var contact_email = (<HTMLInputElement><any>document.getElementById("contact-Email-Form")).value;
+			// var contact_email = (<HTMLInputElement><any>document.getElementById("contact-Email-Form")).value;
 			var state = (<HTMLInputElement><any>document.getElementById("state-Form")).value;
 			var pincode = (<HTMLInputElement><any>document.getElementById("pincode-Form")).value;
-			var contact_number = (<HTMLInputElement><any>document.getElementById("contact-Number-Form")).value;
+			// var contact_number = (<HTMLInputElement><any>document.getElementById("contact-Number-Form")).value;
 
-			this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: contact_email, state: state, pincode: pincode, contact_number: contact_number };
-
-			this.data.getsaveNewAddress(this.formAddress, this.orderid).subscribe();
-			// this.id = "2";
-			this.data.getNewAddr(this.orderid).subscribe(
+			this.formAddress = { contact_name: contact_name, addr1: addr1, addr2: addr2, country: country, city: city, district: district, contact_email: "", state: state, pincode: pincode, contact_number: "0" };
+			this.pinToken = { pin: pincode, prod_id: this.token, ship_id: this.shipLocId };
+			this.data.checkUndeliverable(this.pinToken).subscribe(
 				data => {
-					this.dynamicNewAddr = data;
-					// console.log(this.dynamicNewAddr);
-				},
-				error => console.error(error)
-			);
-			document.getElementById('formGroup').style.display = "none";
+					var ckeckDeliverable = data;
+					if (ckeckDeliverable['count'] == '1') {
+						this.data.getsaveNewAddress(this.formAddress, this.orderid).subscribe();
+						// this.id = "2";
+						this.data.getNewAddr(this.orderid).subscribe(
+							data => {
+								this.dynamicNewAddr = data;
+								setTimeout(() => {
+									this.btnDeliverAddress2();	
+								}, 3000);
+								
+								// console.log(this.dynamicNewAddr);
+							},
+							error => console.error(error)
+						);
+						document.getElementById('formGroup').style.display = "none";
+						
+					}
+					else if(ckeckDeliverable['count']  == '0'){
+						alert('This product cannot be delivered to this location.')
+					}
+
+				});
 		}
 	}
 
@@ -885,6 +964,7 @@ export class ListingComponent implements OnInit {
 			"image": "favicon.ico", "handler": response => {
 				alert("Booking successful. Thank you!");
 				console.log(response);
+				$("#buyNowPopup").modal('toggle');
 				var dataTrans = {txnid:response.razorpay_payment_id,orderId: this.orderid, prodname:this.dynamicData['name']};
 				this.data.updateTransaction(dataTrans).subscribe(data=>{
 
@@ -939,21 +1019,23 @@ export class ListingComponent implements OnInit {
 
 
 	count_inc() {
-		this.priceChangeGetter();
+		
 		if (this.counter < this.maxOQuant) {
 			this.counter++;
-			var xy: HTMLElement = document.getElementById("count") as HTMLElement;
+			var xy: HTMLElement = document.getElementById("productQuantity") as HTMLElement;
 			// this.fgOrderDetails.controls['quantity'].setValue(this.counter);
 		}
+		this.priceChangeGetter();
 	}
 	count_dec() {
-		this.priceChangeGetter();
+		
 		if (this.counter > this.minOQuant) {
 			this.counter--;
-			var xy = document.getElementById("count") as HTMLElement;
+			var xy = document.getElementById("productQuantity") as HTMLElement;
 			// this.fgOrderDetails.controls['quantity'].setValue(this.counter);
 		}
-
+		
+		this.priceChangeGetter();
 	}
 	myFunction(imgs) {
 		var ele = document.getElementById(imgs) as HTMLImageElement;
@@ -1222,56 +1304,65 @@ export class ListingComponent implements OnInit {
 		this.titleGift = title;
 		this.addressGift = address;
 		this.noteGift = note;
+		var errorFlag = 0;
+		if(title==""||note==""||shopNameId==""||addr2ShopId==""||cityShopId==""||districtShopId==""||stateShopId==""||countryShopId==""||pincodeShopId==""){
+			alert("Enter All Feilds.")
+			errorFlag = 1;
+		}
+		else if(pincodeShopId.length != 6){
+			alert("Enter valid pincode");
+			errorFlag = 1;
+		}
 
-
-		// console.log(title);
-		// console.log(note);
-		// console.log(address);
-		this.setCookie("giftTitle", title);
-		this.setCookie("giftNote", note);
-		this.setCookie("giftAddress", address);
-		// console.log(this.cookieService.get("giftTitle")+"cookie");
-		// console.log(this.cookieService.get("giftNote")+"cookie");
-		// console.log(this.cookieService.get("giftAddress")+"cookie");
-
-		var giftTitle = this.getCookie("giftTitle");
-		var giftNote = this.getCookie("giftNote");
-		var giftAdd = this.getCookie("giftAddress");
-
-		var addr1 = giftTitle.split("!~!");
-		var addr2 = giftNote.split("!~!");
-		var addr3 = giftAdd.split("!~!");
-		var addr4 = giftAdd.split("!~!");
-		var addr5 = giftAdd.split("!~!");
-		var addr6 = giftAdd.split("!~!");
-		var addr7 = giftAdd.split("!~!");
-		var addr8 = giftAdd.split("!~!");
-		var addr9 = giftAdd.split("!~!");
-
-		(<HTMLInputElement><any>document.getElementById('giftTitleId')).value = addr1[0];
-		(<HTMLInputElement><any>document.getElementById('giftNoteId')).value = addr2[0];
-		(<HTMLInputElement><any>document.getElementById('giftHouseNameId')).value = addr3[0];
-		(<HTMLInputElement><any>document.getElementById('giftStreetAddrId')).value = addr4[1];
-		(<HTMLInputElement><any>document.getElementById('giftCityId')).value = addr5[2];
-		(<HTMLInputElement><any>document.getElementById('giftDistrictId')).value = addr6[3];
-		(<HTMLInputElement><any>document.getElementById('giftStateId')).value = addr7[4];
-		(<HTMLInputElement><any>document.getElementById('giftCountryId')).value = addr8[5];
-		(<HTMLInputElement><any>document.getElementById('giftPincodeId')).value = addr9[6];
-
-
-		// document.getElementById("giftTitleId").innerText = (addr1[0]);
-		// document.getElementById("giftNoteId").innerText = (addr2[1]);
-		// document.getElementById("giftHouseNameId").innerText = (addr3[2]);
-		// document.getElementById("giftStreetAddrId").innerText = (addr4[3]);
-		// document.getElementById("giftCityId").innerText = (addr5[4]);
-		// document.getElementById("giftStateId").innerText = (addr6[5]);
-		// document.getElementById("giftCountryId").innerText = (addr7[6]);
-		// document.getElementById("giftPincodeId").innerText = (addr8[7]);
-
-		// document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
-		(<HTMLInputElement><any>document.getElementById("giftOption")).checked = true;
-		document.getElementById('showGiftCard').style.display = "block";
-
+		this.pinToken = { pin: pincodeShopId, prod_id: this.token, ship_id: this.shipLocId };
+		this.data.checkUndeliverable(this.pinToken).subscribe(
+			data => {
+				var undelData = data;
+				console.log(undelData);
+				if (undelData['count'] == 1) {
+					(<HTMLInputElement><any>document.getElementById("errorPincode")).style.display = "none";
+					if(errorFlag == 0){
+						console.log(errorFlag);
+						this.setCookie("giftTitle", title);
+						this.setCookie("giftNote", note);
+						this.setCookie("giftAddress", address);
+			
+						var giftTitle = this.getCookie("giftTitle");
+						var giftNote = this.getCookie("giftNote");
+						var giftAdd = this.getCookie("giftAddress");
+			
+						var addr1 = giftTitle.split("!~!");
+						var addr2 = giftNote.split("!~!");
+						var addr3 = giftAdd.split("!~!");
+						var addr4 = giftAdd.split("!~!");
+						var addr5 = giftAdd.split("!~!");
+						var addr6 = giftAdd.split("!~!");
+						var addr7 = giftAdd.split("!~!");
+						var addr8 = giftAdd.split("!~!");
+						var addr9 = giftAdd.split("!~!");
+			
+						(<HTMLInputElement><any>document.getElementById('giftTitleId')).value = addr1[0];
+						(<HTMLInputElement><any>document.getElementById('giftNoteId')).value = addr2[0];
+						(<HTMLInputElement><any>document.getElementById('giftHouseNameId')).value = addr3[0];
+						(<HTMLInputElement><any>document.getElementById('giftStreetAddrId')).value = addr4[1];
+						(<HTMLInputElement><any>document.getElementById('giftCityId')).value = addr5[2];
+						(<HTMLInputElement><any>document.getElementById('giftDistrictId')).value = addr6[3];
+						(<HTMLInputElement><any>document.getElementById('giftStateId')).value = addr7[4];
+						(<HTMLInputElement><any>document.getElementById('giftCountryId')).value = addr8[5];
+						(<HTMLInputElement><any>document.getElementById('giftPincodeId')).value = addr9[6];
+			
+						// document.getElementById("Gift-Note-Sect1").innerText = (giftTitle + "  " + giftNote  + "  "+ addr1[0] + " " + addr2[1] +" "+ addr3[2] + " " + addr4[3] +" "+ addr5[4] +" "+  addr6[5]+ " " + addr7[6]);
+						(<HTMLInputElement><any>document.getElementById("giftOption")).checked = true;
+						document.getElementById('showGiftCard').style.display = "block";
+						$("#giftModal").modal('toggle');
+					}
+				}
+				else if (undelData['count'] == 0) {
+					(<HTMLInputElement><any>document.getElementById("errorPincode")).style.display = "block";
+					errorFlag = 1;
+				}
+			}
+		);
 	}
 
 
@@ -1399,8 +1490,50 @@ export class ListingComponent implements OnInit {
 
 	}
 
+	deleteImage(imageCount){
+
+		switch(imageCount){
+			case '0':	this.imageU0 = 0;
+					this.imageVAL0 = "";
+					break;
+			case '1':	this.imageU1 = 0;
+					this.imageVAL1 = "";
+					break;
+			case '2':	this.imageU2 = 0;
+					this.imageVAL2 = "";
+					break;
+			case '3':	this.imageU3 = 0;
+					this.imageVAL3 = "";
+					break;
+			case '4':	this.imageU4 = 0;
+					this.imageVAL4 = "";
+					break;
+			case '5':	this.imageU5 = 0;
+					this.imageVAL5 = "";
+					break;
+			case '6':	this.imageU6 = 0;
+					this.imageVAL6 = "";
+					break;
+			case '7':	this.imageU7 = 0;
+					this.imageVAL7 = "";
+					break;
+			case '8':	this.imageU8 = 0;
+					this.imageVAL8 = "";
+					break;
+			case '9':	this.imageU9 = 0;
+					this.imageVAL9 = "";
+					break;
+			default: break;
+		}
+	}
+
 
 	onClick(event) {
+		this.counterImage++;
+		if(this.counterImage>this.uploadImageCount){
+			alert('You can only upload maxium '+this.uploadImageCount+' images');
+			return;
+		}
 		if (this.imageUploaded8 == 1) {
 			this.imageUploaded9 = 1;
 			this.imageUploaded8 = 0;
@@ -1574,6 +1707,323 @@ export class ListingComponent implements OnInit {
 	};
 	submitPrice(x: any) {
 		this.pincodeValue = parseInt(this.getCookie("userPin"));
+		if((<HTMLInputElement><any>document.getElementById('sh')).checked||(<HTMLInputElement><any>document.getElementById('hD')).checked||(<HTMLInputElement><any>document.getElementById('pU')).checked){
+			var userIdValue = parseInt(this.userId);
+			if (userIdValue >= 1 && this.undelValue == 1) {
+				if (x == 'buyNow') {
+					var msgCount: any = this.Object.keys(this.messageTitle).length;
+					// console.log(msgCount);
+					var msg: any = [];
+					for (var i: any = 0; i < msgCount; i++) {
+						msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
+						// console.log(msg[i]);
+					}
+					var z: any = [];
+					z = msg;
+					// console.log(z);
+					// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+					var message = z;
+	
+					var productVariantValue: any =[];
+					console.log(this.varTypes);
+					var varVal=0;
+					var varCount =0;
+					var res :any = [];
+					var val :any = [] ;
+					while(varVal<this.varTypes){
+						res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+						val =  res.split(",");
+						productVariantValue[varVal] =val[0];
+						varCount = varVal;
+						varVal++;
+						// console.log(productVariantValue+"....................");
+					}
+					this.varName = productVariantValue;
+	
+					console.log(productVariantValue)
+	
+					var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
+					// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
+					var desiredDate = "none";
+					var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
+					var cod = (<HTMLInputElement><any>document.getElementById('hD')).checked;
+					var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
+					var pin = parseInt(this.getCookie("userPin"));
+					// console.log("pin"+pin);
+					// console.log("pinV"+this.pincodeValue);
+					// var res = productVariant.split(" ");
+					var image0 = imageValue0;
+					var image1 = imageValue1;
+					var image2 = imageValue2;
+					var image3 = imageValue3;
+					var image4 = imageValue4;
+					var image5 = imageValue5;
+					var image6 = imageValue6;
+					var image7 = imageValue7;
+					var image8 = imageValue8;
+					var image9 = imageValue9;
+	
+					// console.log(image);
+					// alert("working");
+	
+	
+					if (ship == true) {
+						var deliveryOption = "shipping";
+						(<HTMLInputElement><any>document.getElementById("shipping")).checked = true;
+					}
+					else if (cod == true) {
+						var deliveryOption = "homedelivery";
+						(<HTMLInputElement><any>document.getElementById("homedelivery")).checked = true;
+					}
+					else if (pickup == true) {
+						var deliveryOption = "pickup";
+						(<HTMLInputElement><any>document.getElementById("pickup")).checked = true;
+					}
+					// shop_id: this.shopIdentity
+					this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+					// image:image ,
+					this.data.sendOrderDetails(this.tokenPrice).subscribe();
+	
+					//sonu
+	
+					this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
+						this.orderid = data["orderid"];
+						// console.log(this.orderid);
+						this.data.getaddress(this.userId).subscribe(
+							data => {
+								this.dynamicDataAddress = data;
+							},
+							error => console.error(error)
+						);
+						this.data.getprodCheckout(this.token).subscribe(
+							data => {
+								this.dynamicDataProName = data;
+							},
+							error => console.error(error)
+						);
+						this.data.getuserCheckout(this.userId).subscribe(
+							data => {
+								this.dynamicDataUser = data;
+								this.Name = this.dynamicDataUser.Name;
+								this.email = this.dynamicDataUser.email;
+								this.phone1 = this.dynamicDataUser.phone1;
+							},
+							error => console.error(error)
+						);
+						this.data.getCustomerOrderCheckout(this.orderid).subscribe(
+							data => {
+								this.dynamicDataCustomerOrder = data;
+								this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
+							},
+							error => console.error(error)
+						);
+						// console.log(this.variantValue);
+						this.variantValue = { prodid: this.token, userid: this.userId }
+						this.data.getvariantInfor(this.variantValue).subscribe(
+							data => {
+								this.dynamicDataVariant = data;
+								// this.dynamicDataVariants = data;
+							},
+							error => console.error(error)
+						);
+	
+						this.data.getAddressChange(this.userId).subscribe(
+							data => {
+								this.dynamicDataSecondAddress = data;
+								// console.log(this.dynamicDataSecondAddress);
+							},
+							error => console.error(error)
+						);
+	
+						this.data.getMsgTitleProCheckout(this.orderid).subscribe(
+							data => {
+								this.dynamicMsgTitle = data;
+								// console.log(this.dynamicMsgTitle);
+							},
+							error => console.error(error)
+						);
+	
+						this.data.readFileProdImage(this.token).subscribe(
+							data => {
+								this.prodImageCount = data;
+								var iCount = this.prodImageCount.countPI;
+								for (var x: any = 0; x < iCount; x++) {
+									this.imagesCount[x] = x;
+								}
+								// console.log(this.imagesCount);
+							},
+							error => console.error(error)
+						);
+					});
+	
+	
+				}
+				else if (x == 'requestOrder') {
+	
+					document.getElementById('checkOutId').style.display = "none";
+					document.getElementById('reqId').style.display = "block";
+	
+	
+					var msgCount: any = this.Object.keys(this.messageTitle).length;
+					// console.log(msgCount);
+					var msg: any = [];
+					for (var i: any = 0; i < msgCount; i++) {
+						msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
+						// console.log(msg[i]);
+					}
+					var z: any = [];
+					// z=JSON.stringify(msg);
+					z = msg;
+					// console.log(z);
+					// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
+					var message = z;
+					var productVariantValue: any =[];
+					console.log(this.varTypes);
+					var varVal=0;
+					var varCount =0;
+					var res :any = [];
+					var val :any = [] ;
+					while(varVal<this.varTypes){
+						res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
+						val =  res.split(",");
+						productVariantValue[varVal] =val[0];
+						varCount = varVal;
+						varVal++;
+						// console.log(productVariantValue+"....................");
+					}
+					this.varName = productVariantValue;
+	
+					console.log(productVariantValue)
+					var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
+					// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
+					var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
+					var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
+					var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
+					var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
+					var image0 = imageValue0;
+					var image1 = imageValue1;
+					var image2 = imageValue2;
+					var image3 = imageValue3;
+					var image4 = imageValue4;
+					var image5 = imageValue5;
+					var image6 = imageValue6;
+					var image7 = imageValue7;
+					var image8 = imageValue8;
+					var image9 = imageValue9;
+					var pin = parseInt(this.getCookie("userPin"));
+					//orderconf flag check
+					if (this.orderConfValue == 1) {
+						desiredDate = "orderConf";
+					}
+					// console.log("pin"+pin);
+					// console.log("pinV"+this.pincodeValue);
+					// var res = productVariant.split(" ");
+					// this.varName = res[0];
+	
+					if (ship == true) {
+						var deliveryOption = "shipping";
+						(<HTMLInputElement><any>document.getElementById("shipping")).checked = true;
+					}
+					else if (cod == true) {
+						var deliveryOption = "homedelivery";
+						(<HTMLInputElement><any>document.getElementById("homedelivery")).checked = true;
+					}
+					else if (pickup == true) {
+						var deliveryOption = "pickup";
+						(<HTMLInputElement><any>document.getElementById("pickup")).checked = true;
+					}
+					this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
+	
+					this.data.sendOrderDetails(this.tokenPrice).subscribe();
+	
+					//sonu
+					this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
+						this.orderid = data["orderid"];
+						// console.log(this.orderid);
+						this.data.getaddress(this.userId).subscribe(
+							data => {
+								this.dynamicDataAddress = data;
+							},
+							error => console.error(error)
+						);
+						this.data.getprodCheckout(this.token).subscribe(
+							data => {
+								this.dynamicDataProName = data;
+							},
+							error => console.error(error)
+						);
+						this.data.getuserCheckout(this.userId).subscribe(
+							data => {
+								this.dynamicDataUser = data;
+								this.Name = this.dynamicDataUser.Name;
+								this.email = this.dynamicDataUser.email;
+								this.phone1 = this.dynamicDataUser.phone1;
+							},
+							error => console.error(error)
+						);
+						this.data.getCustomerOrderCheckout(this.orderid).subscribe(
+							data => {
+								this.dynamicDataCustomerOrder = data;
+								this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
+							},
+							error => console.error(error)
+						);
+						// console.log(this.variantValue);
+						this.variantValue = { prodid: this.token, userid: this.userId }
+						this.data.getvariantInfor(this.variantValue).subscribe(
+							data => {
+								this.dynamicDataVariant = data;
+								// this.dynamicDataVariants = data;
+							},
+							error => console.error(error)
+						);
+	
+						this.data.getAddressChange(this.userId).subscribe(
+							data => {
+								this.dynamicDataSecondAddress = data;
+								// console.log(this.dynamicDataSecondAddress);
+							},
+							error => console.error(error)
+						);
+	
+						this.data.getMsgTitleProCheckout(this.orderid).subscribe(
+							data => {
+								this.dynamicMsgTitle = data;
+								// console.log(this.dynamicMsgTitle);
+							},
+							error => console.error(error)
+						);
+	
+						this.data.readFileProdImage(this.token).subscribe(
+							data => {
+								this.prodImageCount = data;
+								var iCount = this.prodImageCount.countPI;
+								for (var x: any = 0; x < iCount; x++) {
+									this.imagesCount[x] = x;
+								}
+								// console.log(this.imagesCount);
+							},
+							error => console.error(error)
+						);
+	
+					});
+	
+					//sonu 
+	
+				}
+				$("#buyNowPopup").modal('show');
+			}
+			else if (this.undelValue == 0) {
+				$("#undeliverableModal").modal('show');
+			}
+			else {
+				$("#loginModal").modal('show');
+			}
+		}
+		else{
+			alert(" Please select one delivery option.")
+		}
+
 		// var pickupCheck = (<HTMLInputElement><any>document.getElementById('pU')).checked;
 		// this.flag=1;
 		// if (pickupCheck == true) {
@@ -1586,312 +2036,7 @@ export class ListingComponent implements OnInit {
 		// 	}, 3000);
 		// }
 
-		var userIdValue = parseInt(this.userId);
-		if (userIdValue >= 1 && this.undelValue == 1) {
-			if (x == 'buyNow') {
-				var msgCount: any = this.Object.keys(this.messageTitle).length;
-				// console.log(msgCount);
-				var msg: any = [];
-				for (var i: any = 0; i < msgCount; i++) {
-					msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
-					// console.log(msg[i]);
-				}
-				var z: any = [];
-				z = msg;
-				// console.log(z);
-				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
-				var message = z;
 
-				var productVariantValue: any =[];
-				console.log(this.varTypes);
-				var varVal=0;
-				var varCount =0;
-				var res :any = [];
-				var val :any = [] ;
-				while(varVal<this.varTypes){
-					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
-					val =  res.split(",");
-					productVariantValue[varVal] =val[0];
-					varCount = varVal;
-					varVal++;
-					// console.log(productVariantValue+"....................");
-				}
-				this.varName = productVariantValue;
-
-				console.log(productVariantValue)
-
-				var productQuantity = (<HTMLInputElement><any>document.getElementById('productQuantity')).value;
-				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById('productImage')).value;
-				var desiredDate = "none";
-				var ship = (<HTMLInputElement><any>document.getElementById('sh')).checked;
-				var cod = (<HTMLInputElement><any>document.getElementById('hD')).checked;
-				var pickup = (<HTMLInputElement><any>document.getElementById('pU')).checked;
-				var pin = parseInt(this.getCookie("userPin"));
-				// console.log("pin"+pin);
-				// console.log("pinV"+this.pincodeValue);
-				// var res = productVariant.split(" ");
-				var image0 = imageValue0;
-				var image1 = imageValue1;
-				var image2 = imageValue2;
-				var image3 = imageValue3;
-				var image4 = imageValue4;
-				var image5 = imageValue5;
-				var image6 = imageValue6;
-				var image7 = imageValue7;
-				var image8 = imageValue8;
-				var image9 = imageValue9;
-
-				// console.log(image);
-				// alert("working");
-
-
-
-				if (ship == true) {
-					var deliveryOption = "shipping";
-				}
-				else if (cod == true) {
-					var deliveryOption = "hd";
-				}
-				else if (pickup == true) {
-					var deliveryOption = "pickup";
-				}
-				// shop_id: this.shopIdentity
-				this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.dynamicData.shopId, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
-				// image:image ,
-				this.data.sendOrderDetails(this.tokenPrice).subscribe();
-
-				//sonu
-
-				this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
-					this.orderid = data["orderid"];
-					// console.log(this.orderid);
-					this.data.getaddress(this.userId).subscribe(
-						data => {
-							this.dynamicDataAddress = data;
-						},
-						error => console.error(error)
-					);
-					this.data.getprodCheckout(this.token).subscribe(
-						data => {
-							this.dynamicDataProName = data;
-						},
-						error => console.error(error)
-					);
-					this.data.getuserCheckout(this.userId).subscribe(
-						data => {
-							this.dynamicDataUser = data;
-							this.Name = this.dynamicDataUser.Name;
-							this.email = this.dynamicDataUser.email;
-							this.phone1 = this.dynamicDataUser.phone1;
-						},
-						error => console.error(error)
-					);
-					this.data.getCustomerOrderCheckout(this.orderid).subscribe(
-						data => {
-							this.dynamicDataCustomerOrder = data;
-							this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
-						},
-						error => console.error(error)
-					);
-					// console.log(this.variantValue);
-					this.variantValue = { prodid: this.token, userid: this.userId }
-					this.data.getvariantInfor(this.variantValue).subscribe(
-						data => {
-							this.dynamicDataVariant = data;
-							// this.dynamicDataVariants = data;
-						},
-						error => console.error(error)
-					);
-
-					this.data.getAddressChange(this.userId).subscribe(
-						data => {
-							this.dynamicDataSecondAddress = data;
-							// console.log(this.dynamicDataSecondAddress);
-						},
-						error => console.error(error)
-					);
-
-					this.data.getMsgTitleProCheckout(this.orderid).subscribe(
-						data => {
-							this.dynamicMsgTitle = data;
-							// console.log(this.dynamicMsgTitle);
-						},
-						error => console.error(error)
-					);
-
-					this.data.readFileProdImage(this.token).subscribe(
-						data => {
-							this.prodImageCount = data;
-							var iCount = this.prodImageCount.countPI;
-							for (var x: any = 0; x < iCount; x++) {
-								this.imagesCount[x] = x;
-							}
-							// console.log(this.imagesCount);
-						},
-						error => console.error(error)
-					);
-				});
-
-
-			}
-			else if (x == 'requestOrder') {
-
-				document.getElementById('checkOutId').style.display = "none";
-				document.getElementById('reqId').style.display = "block";
-
-
-				var msgCount: any = this.Object.keys(this.messageTitle).length;
-				// console.log(msgCount);
-				var msg: any = [];
-				for (var i: any = 0; i < msgCount; i++) {
-					msg[i] = (<HTMLInputElement><any>document.getElementById("productMessage_" + i)).value;
-					// console.log(msg[i]);
-				}
-				var z: any = [];
-				// z=JSON.stringify(msg);
-				z = msg;
-				// console.log(z);
-				// var message = (<HTMLInputElement><any>document.getElementById("productMessage")).value;
-				var message = z;
-				var productVariantValue: any =[];
-				console.log(this.varTypes);
-				var varVal=0;
-				var varCount =0;
-				var res :any = [];
-				var val :any = [] ;
-				while(varVal<this.varTypes){
-					res = (<HTMLInputElement><any>document.getElementById(varVal+"_variantValue")).value;
-					val =  res.split(",");
-					productVariantValue[varVal] =val[0];
-					varCount = varVal;
-					varVal++;
-					// console.log(productVariantValue+"....................");
-				}
-				this.varName = productVariantValue;
-
-				console.log(productVariantValue)
-				var productQuantity = (<HTMLInputElement><any>document.getElementById("productQuantity")).value;
-				// 			var imageUploaded = (<HTMLInputElement><any>document.getElementById("productImage")).value;
-				var desiredDate = (<HTMLInputElement><any>document.getElementById("datePickerId")).value;
-				var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
-				var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
-				var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
-				var image0 = imageValue0;
-				var image1 = imageValue1;
-				var image2 = imageValue2;
-				var image3 = imageValue3;
-				var image4 = imageValue4;
-				var image5 = imageValue5;
-				var image6 = imageValue6;
-				var image7 = imageValue7;
-				var image8 = imageValue8;
-				var image9 = imageValue9;
-				var pin = parseInt(this.getCookie("userPin"));
-				//orderconf flag check
-				if (this.orderConfValue == 1) {
-					desiredDate = "orderConf";
-				}
-				// console.log("pin"+pin);
-				// console.log("pinV"+this.pincodeValue);
-				// var res = productVariant.split(" ");
-				// this.varName = res[0];
-
-				if (ship == true) {
-					var deliveryOption = "shipping";
-				}
-				else if (cod == true) {
-					var deliveryOption = "hd";
-				}
-				else if (pickup == true) {
-					var deliveryOption = "pickup";
-				}
-				this.tokenPrice = { pin: pin, image0: image0, image1: image1, image2: image2, image3: image3, image4: image4, image5: image5, image6: image6, image7: image7, image8: image8, image9: image9, imageU0: this.imageU0, imageU1: this.imageU1, imageU2: this.imageU2, imageU3: this.imageU3, imageU4: this.imageU4, imageU5: this.imageU5, imageU6: this.imageU6, imageU7: this.imageU7, imageU8: this.imageU8, imageU9: this.imageU9, imageUCount: imageUCount, seller_identity: this.sellerIdentity, shop_id: this.shopIdentity, rfq_enabled: this.rfqEnabled, gift_enabled: this.giftEnable, prod_id: this.token, user_id: this.userId, message: message, productVariant: this.varName, productQuantity: productQuantity, imageUploaded: this.imageUploaded, desiredDate: desiredDate, deliveryOption: deliveryOption, msgCount: msgCount };
-
-				this.data.sendOrderDetails(this.tokenPrice).subscribe();
-
-				//sonu
-				this.data.getOrderDetailsCheckout(this.userId).subscribe(data => {
-					this.orderid = data["orderid"];
-					// console.log(this.orderid);
-					this.data.getaddress(this.userId).subscribe(
-						data => {
-							this.dynamicDataAddress = data;
-						},
-						error => console.error(error)
-					);
-					this.data.getprodCheckout(this.token).subscribe(
-						data => {
-							this.dynamicDataProName = data;
-						},
-						error => console.error(error)
-					);
-					this.data.getuserCheckout(this.userId).subscribe(
-						data => {
-							this.dynamicDataUser = data;
-							this.Name = this.dynamicDataUser.Name;
-							this.email = this.dynamicDataUser.email;
-							this.phone1 = this.dynamicDataUser.phone1;
-						},
-						error => console.error(error)
-					);
-					this.data.getCustomerOrderCheckout(this.orderid).subscribe(
-						data => {
-							this.dynamicDataCustomerOrder = data;
-							this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
-						},
-						error => console.error(error)
-					);
-					// console.log(this.variantValue);
-					this.variantValue = { prodid: this.token, userid: this.userId }
-					this.data.getvariantInfor(this.variantValue).subscribe(
-						data => {
-							this.dynamicDataVariant = data;
-							// this.dynamicDataVariants = data;
-						},
-						error => console.error(error)
-					);
-
-					this.data.getAddressChange(this.userId).subscribe(
-						data => {
-							this.dynamicDataSecondAddress = data;
-							// console.log(this.dynamicDataSecondAddress);
-						},
-						error => console.error(error)
-					);
-
-					this.data.getMsgTitleProCheckout(this.orderid).subscribe(
-						data => {
-							this.dynamicMsgTitle = data;
-							// console.log(this.dynamicMsgTitle);
-						},
-						error => console.error(error)
-					);
-
-					this.data.readFileProdImage(this.token).subscribe(
-						data => {
-							this.prodImageCount = data;
-							var iCount = this.prodImageCount.countPI;
-							for (var x: any = 0; x < iCount; x++) {
-								this.imagesCount[x] = x;
-							}
-							// console.log(this.imagesCount);
-						},
-						error => console.error(error)
-					);
-
-				});
-
-				//sonu 
-
-			}
-			$("#buyNowPopup").modal('show');
-		}
-		else if (this.undelValue == 0) {
-			$("#undeliverableModal").modal('show');
-		}
-		else {
-			$("#loginModal").modal('show');
-		}
 	}
 
 	submitInstantBuy(x: any) {
@@ -2072,12 +2217,12 @@ export class ListingComponent implements OnInit {
 	}
 
 	reqDateNow() {
-
 		alert("your request has been sent");
+		$("#buyNowPopup").modal('toggle');
 	}
 	submitCart() {
 		var userIdValue = parseInt(this.userId);
-
+		(<HTMLInputElement><any>document.getElementById("cartCounter")).style.display = "block";
 		if (userIdValue >= 1) {
 			this.addToCartValue = "ADDED TO CART";
 			(<HTMLInputElement><any>document.getElementById("addToCart")).disabled = true;
@@ -2242,12 +2387,14 @@ export class ListingComponent implements OnInit {
 					this.undel = "DELIVERABLE TO ";
 					this.undelValue = 1;
 					$("#undeliverableModal").modal('show');
+					(<HTMLInputElement><any>document.getElementById("modelPincode")).style.color = "#009145";
 				}
 				else if (this.undelData.count == 0) {
 					// alert("count="+this.undelData.count);
 					this.undel = "UNDELIVERABLE TO ";
 					this.undelValue = 0;
 					$("#undeliverableModal").modal('show');
+					(<HTMLInputElement><any>document.getElementById("modelPincode")).style.color = "#ff1d25";
 				}
 			}
 		);
@@ -2256,7 +2403,8 @@ export class ListingComponent implements OnInit {
 	}
 	priceChangeGetter() {
 
-		var productQuantity = parseInt((<HTMLInputElement><any>document.getElementById("productQuantity")).value);
+		// var productQuantity = parseInt((<HTMLInputElement><any>document.getElementById("productQuantity")).value);
+		var productQuantity = this.counter;
 		var ship = (<HTMLInputElement><any>document.getElementById("sh")).checked;
 		var cod = (<HTMLInputElement><any>document.getElementById("hD")).checked;
 		var pickup = (<HTMLInputElement><any>document.getElementById("pU")).checked;
@@ -2282,7 +2430,7 @@ export class ListingComponent implements OnInit {
 		}
 		this.varName = productVariantValue;
 
-		// console.log(productVariantValue)
+		// console.log(productVariantPrice);
 
 		var pin = parseInt(this.getCookie("userPin"));
 		if (ship == true) {

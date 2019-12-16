@@ -8,5 +8,7 @@
     $sql_query = "UPDATE `customer_order` SET `delivey_date`= $date WHERE WHERE id =  $orderid";
     $result = mysqli_query($con2, $sql_query);
     //echo "hello";
+    mysqli_close($con1);
+    mysqli_close($con2);
     
 ?>

@@ -15,5 +15,7 @@ while($row1=mysqli_fetch_array($result1))
         $data[$count] = array('owner_name'=>$row["seller_name"],'email'=>$row["email"],'contact'=>$row["phone1"],'state'=>$row1['state']);
         $count++;
 }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

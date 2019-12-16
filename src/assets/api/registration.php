@@ -53,5 +53,7 @@
             $flag = false;
         }
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     
 ?>

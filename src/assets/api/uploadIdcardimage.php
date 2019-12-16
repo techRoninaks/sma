@@ -9,7 +9,7 @@ if($imageFront != 1){
         $dir='../images/seller/'.$sellerid.'/';
     }
     define('UPLOAD_DIR', '../images/seller/'.$sellerid.'/');
-    $file = UPLOAD_DIR.$sellerid.'idfront'.'.jpg';
+    $file = UPLOAD_DIR.$sellerid.'front'.'.jpg';
     $img =explode(",", $imageFront);
     $img[1] = str_replace(' ', '+', $img[1]);
     $data = base64_decode($img[1]);
@@ -21,7 +21,7 @@ if($imageBack != 1){
         $dir='../images/seller/'.$sellerid.'/';
     }
     define('UPLOAD_DIR', '../images/seller/'.$sellerid.'/');
-    $file = UPLOAD_DIR.$sellerid.'idback'.'.jpg';
+    $file = UPLOAD_DIR.$sellerid.'back'.'.jpg';
     $img =explode(",", $imageBack);
     $img[1] = str_replace(' ', '+', $img[1]);
     $data = base64_decode($img[1]);

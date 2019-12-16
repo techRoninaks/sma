@@ -25,5 +25,7 @@
     "disc"=>$disc_count["disc_count"],
     "newMsg"=>$new_msg["msg_count"]);
 
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>  

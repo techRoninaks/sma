@@ -446,10 +446,33 @@
 										<label>VALID TILL</label>
 									</div>
 									<div class="val">
-										<input type="date" size="8" class="card-input-style" formControlName="date">
-										<div *ngIf="submitted && cardFormCvv.controls.date.errors" class="error validator-style">
-											<div *ngIf="cardFormCvv.controls.date.errors.required">
-												Enter date!
+										<input type="text" size="8" class="card-input-style" formControlName="month" placeholder="02">/<input type="text" size="8" class="card-input-style" formControlName="year" placeholder="12">
+										<div *ngIf="submitted && cardFormCvv.controls.month.errors" class="error validator-style">
+											<div *ngIf="cardFormCvv.controls.month.errors.required">
+												Enter month!
+											</div>
+											<div *ngIf="cardFormCvv.controls.month.hasError('pattern')">
+												Enter Only digits !
+											</div>
+											<div *ngIf="cardFormCvv.controls.month.hasError('minlength')">
+												Enter valid month !
+											</div>
+											<div *ngIf="cardFormCvv.controls.month.hasError('maxlength')">
+												Enter valid month !
+											</div>
+										</div>
+										<div *ngIf="submitted && cardFormCvv.controls.year.errors" class="error validator-style">
+											<div *ngIf="cardFormCvv.controls.year.errors.required">
+												Enter year!
+											</div>
+											<div *ngIf="cardFormCvv.controls.year.hasError('pattern')">
+												Enter Only digits !
+											</div>
+											<div *ngIf="cardFormCvv.controls.year.hasError('minlength')">
+												Enter valid year !
+											</div>
+											<div *ngIf="cardFormCvv.controls.year.hasError('maxlength')">
+												Enter valid year !
 											</div>
 										</div>
 									</div>

@@ -11,4 +11,6 @@
 
     $sql_query="INSERT INTO `faq_site`(`type_id`, `text`) VALUES ($typeId,'$submitFaq')";
     $result = mysqli_query($con2, $sql_query);
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

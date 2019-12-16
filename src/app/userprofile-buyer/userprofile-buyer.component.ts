@@ -70,7 +70,8 @@ export class UserprofileBuyerComponent implements OnInit {
     })
     this.cardFormCvv = this.formBuilderCvv.group({
       cvv: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(3),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      date: ['', Validators.required],
+      month: ['',[Validators.required,Validators.maxLength(2),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      year: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(2),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
     })
     this.registrationForm = this.formBuilderUser.group({
       fullname: ['', Validators.required],
@@ -357,12 +358,19 @@ export class UserprofileBuyerComponent implements OnInit {
     this.user_email = this.dynamicDataUsercard.email;
     // this.seller_id = this.getCookie("sellerId");
     var options = {
-      "key": "rzp_test_dveDexCQKoGszl",
-      "amount": Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
-      "currency": "INR",
-      "name": "ScoopMyArt",
-      "description": "Rs.1 for card verification",
-      "image": "favicon.ico", "handler": response => {
+      key: "rzp_test_dveDexCQKoGszl",
+      amount: Math.round(this.TotalPrice * 100), // 2000 paise = INR 20
+      currency: "INR",
+      method: 'card',
+      'card[name]': this.user_name,
+      'card[number]': this.cardForm.controls['cardno'].value,
+      'card[cvv]': this.cardFormCvv.controls['cvv'].value,
+      'card[expiry_month]': this.cardFormCvv.controls['month'].value,
+      'card[expiry_year]': this.cardFormCvv.controls['year'].value,
+      name: "ScoopMyArt",
+      description: "Rs.1 for card verification",
+      image: "favicon.ico", 
+      handler: response => {
         alert("Transaction successful. Amount will be refunded soon!");
         this.data.addCardData(this.cardForm.value,this.cardFormCvv.value,this.id,this.userName).subscribe(
           data=>{
@@ -378,17 +386,17 @@ export class UserprofileBuyerComponent implements OnInit {
               error=> console.error(error)
           );
       },
-      "prefill": {
-        "name": this.user_name,
-        "email": this.user_email,
-        "contact": this.user_phone,
+      prefill: {
+        name: this.user_name,
+        email: this.user_email,
+        contact: this.user_phone,
       },
-      "notes": {},
-      "theme": {
-        "color": "#133E4B"
+      notes: {},
+      theme: {
+        color: "#EFBE24"
       },
-      "modal": {
-        "ondismiss": function () { }
+      modal: {
+        ondismiss: function () { }
       }
     };
     var rzp1 = new Razorpay(options); rzp1.open();

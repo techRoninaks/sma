@@ -16,5 +16,7 @@
         $dateDiff[$count++]=$x;
     }
     // echo $diff;
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($dateDiff);
 ?>

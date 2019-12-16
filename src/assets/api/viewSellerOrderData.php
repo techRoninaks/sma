@@ -5,7 +5,7 @@
     $data = array();
     $variantArray = array();
 
-    $sql_query1 = "SELECT `orderid`,`delivery_date`,`customerid`,`order_status`,`created_date` FROM `purchase_order` where sellerid =  '$sellerId' && orderid= $orderIdShort";
+    $sql_query1 = "SELECT `orderid`,`delivery_date`,`customerid`,`order_status`,`created_date` FROM `purchase_order` where sellerid =  $sellerId && orderid= $orderIdShort";
     $result1 = mysqli_query($con2, $sql_query1);
     $row1=mysqli_fetch_array($result1);
     $orderId=$row1["orderid"];
@@ -42,7 +42,7 @@
     $prodId = $row2["prodid"];
     $tracking_no = $row2["shipping_tracking_number"];
 
-    $sql_query5 = "SELECT `contact_name`,`addr1`,`contact_number`,`pincode`,`city` FROM `address` where mapping_id ='$custId' && `addr_type`='shipping'";
+    $sql_query5 = "SELECT `contact_name`,`addr1`,`contact_number`,`pincode`,`city` FROM `address` where mapping_id =$custId && `addr_type`='shipping'";
     $result5 = mysqli_query($con2, $sql_query5);
     $row5=mysqli_fetch_array($result5);
 
@@ -72,6 +72,7 @@
     'cust_pin'=>$row5['pincode'],'cust_city'=>$row5['city'],'remaining_days'=>$diff->format("%a"),
     'delivery_date'=>$delivery_date,'variantArray'=>$variantArray,
     'prod_name'=>$row3["name"],'short_desc'=>$row3["short_desc"]);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

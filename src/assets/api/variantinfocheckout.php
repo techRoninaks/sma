@@ -8,7 +8,8 @@
             $data=array('variantInfo'=>$row["variantid"],'prodId'=>$row["prodid"],'name'=>$row["name"],'price'=>$row["price"]);
         
     }
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 //     echo json_encode($data);
     echo json_encode("hello");
         //echo "hello";

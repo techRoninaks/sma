@@ -9,6 +9,8 @@
             $data[] = array('pincode'=>$row["shipping_location"],'price'=>$row["price"],'qtn'=>$row["quantity_price"]);
         // $data = array('address'=>$row["addr1"]);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
     
 ?>

@@ -12,5 +12,7 @@
         $data=$row["addr1"].", ".$row["addr2"].", ".$row["city"].", ".$row["district"].", ".$row["state"].", ".$row["country"].", ".$row["pincode"];
     }
     $result = array("success"=>$success,"result"=>$data);
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?> 

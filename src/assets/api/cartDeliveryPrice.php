@@ -42,7 +42,8 @@ $row=mysqli_fetch_assoc($result);
     }
     // $data = array('price'=>$row["price"],'quantity_price'=>$row["quantity_price"],'total'=>$qtPrice);
     // $price = $qtPrice + $shipBasePrice;
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 echo json_encode($data);
 
 ?>

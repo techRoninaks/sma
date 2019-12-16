@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       reg_dist:['', Validators.required],
       reg_state:['', Validators.required],
       reg_country:['', Validators.required],
-      reg_pin:['', Validators.required],
+      reg_pin:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       reg_email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
       reg_mobile_no: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       reg_age: ['',[Validators.required,Validators.pattern(/^\+?[1-9]\d*$/),Validators.min(18)]],
@@ -129,13 +129,14 @@ export class RegistrationComponent implements OnInit {
       alert("Enter Mobile No:");
     }
     else{
+      (<HTMLInputElement><any>document.getElementById("otpSender")).innerText = "Resend Otp";
       this.data.checkMobile(this.fpmobile).subscribe(
         data => { 
             alert('OTP Sent Successfully');
             this.gotp = this.generateOTP();
             this.requestOtp(this.gotp, this.fpmobile);
             this.sentOTP = true;
-            this.Otp = false;
+            // this.Otp = false;
         },
         error => console.error(error)
       );

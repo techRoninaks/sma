@@ -66,7 +66,7 @@ $categorySidePadding:1.5rem;
 }
 
 .navbar {
-    padding: 1rem 1rem;
+    padding: 1rem 1rem 0rem 1rem;
 }
 li{
     list-style: none;
@@ -82,6 +82,18 @@ li{
   background: white;
   z-index: 20;
 }
+
+.cartCont{
+  position: relative;
+  
+  .cartCount{
+    position: absolute;
+    color: #EFBE24;
+    left: 45px;
+    bottom: 5px;
+    display: none;
+  }
+}
 .header-category-bar{
     height: 4rem;
     width: 100%;
@@ -95,7 +107,7 @@ li{
         white-space: nowrap;
         scrollbar-width: none;
         background: white;
-        margin-top: 30px;
+        // margin-top: 30px;
       }
       
       div.scrollmenu a {
@@ -219,8 +231,8 @@ li{
   .dropdown {
     position: relative;
     display: inline-block;
-    width: 100%;
-    background: white !important;
+    width: 95%;
+    background: white !important;      
     // border-radius: 10px;
   }
   .dropdown-profile{

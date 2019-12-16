@@ -26,4 +26,6 @@
         $response = array('seller_id'=>$row2['id'],'status'=>$status,'email'=>$row2['email']);
         echo json_encode($response);
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

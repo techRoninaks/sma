@@ -13,19 +13,20 @@
     $rowTax=mysqli_fetch_assoc($resTax);
     // $tax=$rowTax["value"];
         
-    $spiltVariant = explode(",", $productVariant);  
-    $variantCount = sizeof($spiltVariant);
-    $varPrice = 0;
-    $varId="";
-    for($variantC=0;$variantC<$variantCount;$variantC++){
-        $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]'";
-        $resultVar = mysqli_query($con1, $sql_queryVar);
-        $rowVariant=mysqli_fetch_array($resultVar);
-        $varIdValue=$rowVariant["variantid"];
-        $varPriceValue=$rowVariant["price"];
-        $varId = $varIdValue.",".$varId;
-        $varPrice = $varPrice + $varPriceValue;
-    }
+    // $spiltVariant = explode(",", $productVariant);  
+    // $variantCount = sizeof($spiltVariant);
+    // $varPrice = 0;
+    // $varId="";
+    // for($variantC=0;$variantC<$variantCount;$variantC++){
+    //     $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]' AND prodid = $prodId";
+    //     $resultVar = mysqli_query($con1, $sql_queryVar);
+    //     $rowVariant=mysqli_fetch_array($resultVar);
+    //     $varIdValue=$rowVariant["variantid"];
+    //     $varPriceValue=$rowVariant["price"];
+    //     $varId = $varIdValue.",".$varId;
+    //     $varPrice = $varPrice + $varPriceValue;
+    // }
+    // echo $sql_queryVar." ".$varPriceValue." ".$spiltVariant[$variantC-1];
 
     //get current date
     $sql="SELECT CURRENT_DATE";
@@ -78,7 +79,7 @@
      $varPrice = 0;
      $varId="";
      for($variantC=0;$variantC<$variantCount;$variantC++){
-         $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]'";
+         $sql_queryVar="SELECT * FROM `variant_info` where `value` =  '$spiltVariant[$variantC]' AND prodid = $prodId";
          $resultVar = mysqli_query($con1, $sql_queryVar);
          $rowVariant=mysqli_fetch_array($resultVar);
          $varIdValue=$rowVariant["variantid"];
@@ -252,6 +253,7 @@
  
     //  echo $totalAmount;
 
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data = array('tPrice' => $totalAmount, 'dDate' => $deliveryDate));
 ?>

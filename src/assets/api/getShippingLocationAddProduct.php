@@ -28,5 +28,7 @@ while($row=mysqli_fetch_assoc($result))
     }
     $data = array('id'=>$row["id"],'location_alias'=>$row["location_alias"],'quantity_price'=> 0,'price'=> 0);
 }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

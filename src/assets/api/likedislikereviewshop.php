@@ -54,6 +54,7 @@
     // $row=mysqli_fetch_assoc($res);
     // $tDateValue=array('tDate'=>$row["CURRENT_DATE"]);
 
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($lDValue);
 ?>

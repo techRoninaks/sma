@@ -12,5 +12,7 @@
         $response[$count]= array('cardno'=>$cardno_trim,'cardnofull'=>$cardno,'expmon'=>$row1['expmon'],'exp_year'=>$row1['exp_year']);
         $count++;
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($response);
 ?>

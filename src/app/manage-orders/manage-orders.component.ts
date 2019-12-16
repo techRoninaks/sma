@@ -7,6 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 var imageFront: any ="";
 var imageFront2: any ="";
 var imageFront3: any ="";
+var urlFront1: any ="";
+var urlFront2: any ="";
+var urlFront3: any ="";
 var slideIndex = 1;
 var orderIdShort: any="";
 var orderIdArray: any =[];
@@ -114,13 +117,13 @@ export class ManageOrdersComponent implements OnInit {
             this.cancelledStatus = true;
             this.cancelStatus = true;
           }
-          else if(this.status == "pending confirmation")
+          else if(this.status == "pending_confirmation")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
             this.stage_0 =true;
           }
-          else if(this.status == "pending payment")
+          else if(this.status == "pending_payment")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
@@ -195,13 +198,13 @@ export class ManageOrdersComponent implements OnInit {
             {
               this.cancelled = false;
             }
-            else if(this.status == "pending confirmation")
+            else if(this.status == "pending_confirmation")
             {
               this.stage1_dot = false;
               this.stage1_full = true;
               this.stage_0 =true;
             } 
-            else if(this.status == "pending payment")
+            else if(this.status == "pending_payment")
             {
               this.stage1_dot = false;
               this.stage1_full = true;
@@ -272,7 +275,7 @@ export class ManageOrdersComponent implements OnInit {
               this.dynamicOrderData=data;
               this.orderId = data['orderId'];
               var order_stat = data['order_status'];
-              if(order_stat == "pending payment" || order_stat == "pending confirmation" || order_stat == "processing")
+              if(order_stat == "pending_payment" || order_stat == "pending_confirmation" || order_stat == "processing")
               {
                 this.userAddress = false;
               }
@@ -288,12 +291,12 @@ export class ManageOrdersComponent implements OnInit {
           this.dynamicDataOrderData=data;
           orderIdShort = data['orderIdShort'];
           this.status = data['orderStatus'];
-          if(this.status == "pending confirmation")
+          if(this.status == "pending_confirmation")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
           }
-          else if(this.status == "pending payment")
+          else if(this.status == "pending_payment")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
@@ -369,7 +372,7 @@ export class ManageOrdersComponent implements OnInit {
               this.dynamicOrderData=data;
               this.orderId = data['orderId'];
               var order_stat = data['order_status'];
-              if(order_stat == "pending payment" || order_stat == "pending confirmation" || order_stat == "processing")
+              if(order_stat == "pending_payment" || order_stat == "pending_confirmation" || order_stat == "processing")
               {
                 this.userAddress = false;
               }
@@ -385,12 +388,12 @@ export class ManageOrdersComponent implements OnInit {
           this.dynamicDataOrderData=data;
           orderIdShort = data['orderIdShort'];
           this.status = data['orderStatus'];
-          if(this.status == "pending confirmation")
+          if(this.status == "pending_confirmation")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
           }
-          else if(this.status == "pending payment")
+          else if(this.status == "pending_payment")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
@@ -466,10 +469,10 @@ export class ManageOrdersComponent implements OnInit {
     imageFront3=document.getElementById('frontUpload3').addEventListener('change', onFrontClick3.bind(this));
   }
   updateStatus(){
-    if(this.status == "pending confirmation" )
+    if(this.status == "pending_confirmation" )
     {
       this.stage_2_date = (<HTMLInputElement><any>document.getElementById("stage_2_date")).value;
-      this.stageName = "pending payment";
+      this.stageName = "pending_payment";
       this.stageDate = this.stage_2_date;
       this.data.updateStatus(this.stageDate,this.stageName,orderIdShort).subscribe(
         data=>{
@@ -484,7 +487,7 @@ export class ManageOrdersComponent implements OnInit {
         error=> console.error(error)
       );
     }
-    else if(this.status == "pending payment")
+    else if(this.status == "pending_payment")
     {
       this.stage_3_date = (<HTMLInputElement><any>document.getElementById("stage_3_date")).value;
       this.stageDate = this.stage_3_date;
@@ -600,7 +603,7 @@ export class ManageOrdersComponent implements OnInit {
   }
   confirm(){
     this.stage_1_date = (<HTMLInputElement><any>document.getElementById("stage_1_date")).value;
-      this.stageName = "pending payment";
+      this.stageName = "pending_payment";
       this.stageDate = this.stage_1_date;
       this.data.updateStatus(this.stageDate,this.stageName,orderIdShort).subscribe(
         data=>{
@@ -642,12 +645,12 @@ export class ManageOrdersComponent implements OnInit {
             this.cancelledStatus = true;
             this.cancelStatus = true;
           }
-          else if(this.status == "pending confirmation")
+          else if(this.status == "pending_confirmation")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;
           }
-          else if(this.status == "pending payment")
+          else if(this.status == "pending_payment")
           {
             this.stage_1_dot = false;
             this.stage_1_full = true;

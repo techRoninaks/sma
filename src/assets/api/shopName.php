@@ -33,5 +33,7 @@
         $response[$arraycount]=array('count'=>$count,'prodCount'=>$prodCount,'shopname'=>$row2['shopname'],'seller_name'=>$row4['seller_name'],'rating'=>$row2['rating'],'shopid'=>$shopId);
         $arraycount++;
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($response);
 ?>

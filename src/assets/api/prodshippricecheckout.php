@@ -6,6 +6,7 @@
     while($row=mysqli_fetch_assoc($result)){
         $data["prod_shipping_price"]=array('prodShippingPrice'=>$row["id"],'prodId'=>$row["proid"],'shippingLocation'=>$row["shipping_loaction"],'type'=>$row["type"],'quantityPrice'=>$row["quantity_price"],'price'=>$row["price"]);     
     }
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

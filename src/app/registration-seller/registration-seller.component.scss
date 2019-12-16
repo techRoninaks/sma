@@ -1281,7 +1281,9 @@
 }
 .btn-launch{
   grid-area: btn-launch;
-  margin-top: -279px;
+  width: max-content;
+  margin: auto;
+  margin-top: -20%;
   @include sm-lesser{
     margin-top: -117px;
     margin-left: -314px;

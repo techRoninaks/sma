@@ -256,6 +256,8 @@ else{
     $result4 = mysqli_query($con2,$sql_query4);
     echo $sql_query4;
 }
+mysqli_close($con1);
+mysqli_close($con2);
 
 
 

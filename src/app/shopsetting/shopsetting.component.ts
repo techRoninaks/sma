@@ -60,8 +60,8 @@ export class ShopsettingComponent implements OnInit {
     else{
       this.data.getShopDetailsSettings(this.sellerId).subscribe(data=>{
         this.shopDetails = data;
-        this.idCardImgSrcFront ="assets/images/seller/"+this.sellerId+"/"+this.sellerId+"idfront.jpg"; 
-        this.idCardImgSrcBack ="assets/images/seller/"+this.sellerId+"/"+this.sellerId+"idback.jpg"; 
+        this.idCardImgSrcFront ="assets/images/seller/id/"+this.sellerId+"/"+this.sellerId+"front.jpg"; 
+        this.idCardImgSrcBack ="assets/images/seller/id/"+this.sellerId+"/"+this.sellerId+"back.jpg"; 
         
         if(this.shopDetails['gift_option'] == '1'){
           (<HTMLInputElement><any>document.getElementById('giftInput')).checked = true;

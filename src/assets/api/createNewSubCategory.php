@@ -9,7 +9,8 @@
     $sql_query = "SELECT * FROM `category` ORDER BY category_id DESC LIMIT 1 ";
     $result = mysqli_query($con1, $sql_query);
     $row=mysqli_fetch_assoc($result);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
 
     echo json_encode($row['category_id']);
         //echo "hello";

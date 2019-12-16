@@ -14,6 +14,7 @@
     "retCustomers"=>$row["returning_customers_count"],
     "planExp"=>$row["plan_exp"],
     "shopName"=>$row["shopname"]);
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

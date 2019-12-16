@@ -21,5 +21,7 @@
     $to = $email;
     $subject = "Scoop My Art";
     $txt = "Thanks for the feedback $name!";
+    mysqli_close($con1);
+    mysqli_close($con2);
     mail($to,$subject,$txt);
 ?>

@@ -12,5 +12,7 @@
     while($row = mysqli_fetch_array($result)){
         $data[$row["name"]] = $row["value"];
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 ?>

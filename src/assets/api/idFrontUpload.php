@@ -18,4 +18,6 @@ if($image != 1){
     }
     $success = file_put_contents($file, $data);
 }
+mysqli_close($con1);
+mysqli_close($con2);
 ?>

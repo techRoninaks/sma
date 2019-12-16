@@ -5,7 +5,7 @@
     $count =0;
     $response=array();
 
-    $sql_query1="SELECT id,addr1,addr2,city,district,state,country,pincode FROM `address` WHERE mapping_id = $userId && addr_type='shipping'";
+    $sql_query1="SELECT id,addr1,addr2,city,district,state,country,pincode FROM `address` WHERE mapping_id = $userId ";
     $result1 = mysqli_query($con2, $sql_query1);
     $arraycount =0;
     while($row1 = mysqli_fetch_assoc($result1)){
@@ -13,5 +13,7 @@
         $response[$arraycount]=array('id'=>$addressId,'addressId'=>$row1["addr1"].', '.$row1["addr2"].', '.$row1["city"].', '.$row1["district"].', '.$row1["state"].', '.$row1["country"].', '.$row1["pincode"]);
         $arraycount++;
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($response);
 ?>

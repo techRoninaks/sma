@@ -22,5 +22,7 @@ foreach($sub as $val){
 // {
 
 // }
+mysqli_close($con1);
+mysqli_close($con2);
 echo json_encode($data);
 ?>

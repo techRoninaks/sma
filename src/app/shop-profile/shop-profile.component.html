@@ -400,17 +400,17 @@
                     <br>
                     <p style="text-align: center;justify-self:center">Please Login to continue...</p>
                     <br>
-                    <button (click)="redirect('login');" [routerLink]="['/login']"
+                    <button  [routerLink]="['/login']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
                         style="background-color: #efbe24; color:white; transform: translate(10.5rem,0%)">Login</button>
                     <p style="text-align: center;justify-self:center">OR</p>
-                    <button (click)="redirect('signup');" [routerLink]="['/signup']"
+                    <button  [routerLink]="['/signup']"
                         [queryParams]="{shop_id:dynamicData.shopId , prod_id:dynamicData.prodId}"
                         style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">SignUp</button>
                     <br>
                     <br>
                     <div id="instantBuyId">
-                        <button (click)="submitInstantBuy('instantBuy');"
+                        <button
                             style="background-color: #efbe24; color:white; transform: translate(10.25rem,0%)">Instant
                             Buy</button>
                     </div>

@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   trendingProducts: Object;
   newProducts: Object;
   offerProducts: Object;
+  isLoading : boolean = true;
 
   constructor( private cookieService: CookieService, private router: Router, private data : DataService ) { }
 
@@ -44,6 +45,12 @@ export class HomeComponent implements OnInit {
 
         this.trendingProducts = trendingData["data"];
         this.array12 = trendingData["data"];
+        if(this.array12.length>0){
+          this.isLoading = false;
+        }
+        if(this.array12.request == "failed"){
+          alert('There are no products in this pincode. Please change them and try again.')
+        }
 
       });
       this.data.loadOfferProd(pincode, this.pageData["no_of_tagged_products"], 1, this.getCookie("filterSet"),this.getCookie("SortSet")).subscribe(offerData=>{

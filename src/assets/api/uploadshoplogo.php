@@ -38,6 +38,7 @@
         // echo "<br>";
         // echo $dir.$file;
     }
-    echo json_encode(array('imgSrcLogo'=>$imgVal));
-
+    // echo json_encode(array('imgSrcLogo'=>$imgVal));
+    mysqli_close($con1);
+    mysqli_close($con2);
 ?>

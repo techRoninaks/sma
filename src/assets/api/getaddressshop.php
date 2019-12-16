@@ -7,7 +7,8 @@
     $result1 = mysqli_query($con2, $sql_query1);
     $roq1 = mysqli_fetch_array($result1);
     $data=array('id'=>$roq1['id'],'mapping_id'=>$roq1['mapping_id'],'addr1'=>$roq1['addr1'],'addr2'=>$roq1['addr2'],'city'=>$roq1['city'],'district'=>$roq1['district'],'state'=>$roq1['state'],'country'=>$roq1['country'],'addressType'=>$roq1['addr_type'],'pincode'=>$roq1['pincode'],'contactEmail'=>$roq1['contact_email'],'contactNumber'=>$roq1['contact_number'],'contactName'=>$roq1['contact_name']); 
-
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($data);
 
 ?>

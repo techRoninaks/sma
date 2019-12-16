@@ -6,12 +6,12 @@
     $j=0;
     
     $arraycount =0;
-    $sql_query7 = "SELECT count(*) as Ordercount FROM `purchase_order` where customerid = $userId && order_status = 'pending payment'";
+    $sql_query7 = "SELECT count(*) as Ordercount FROM `purchase_order` where customerid = $userId && order_status = 'pending_payment'";
     $result7 = mysqli_query($con2, $sql_query7);
     $row7 = mysqli_fetch_array($result7);
     $orderCount=$row7["Ordercount"];
     while($j < $orderCount){
-        $sql_query1="SELECT `orderid`,`created_date`,`order_status`,`delivery_date` FROM `purchase_order` WHERE customerid = $userId && order_status = 'pending payment'";
+        $sql_query1="SELECT `orderid`,`created_date`,`order_status`,`delivery_date` FROM `purchase_order` WHERE customerid = $userId && order_status = 'pending_payment'";
         $result1 = mysqli_query($con2, $sql_query1);
         
         while($row1 = mysqli_fetch_array($result1))
@@ -37,29 +37,29 @@
             $sql_query4 = "SELECT `name`,short_desc,long_desc,spec,shipping_option FROM `product` where prodid =  $prodId ";
             $result4 = mysqli_query($con1, $sql_query4);
             $row4 = mysqli_fetch_array($result4);
-            if($orderStatus == 'pending confirmation')
+            if($orderStatus == 'pending_confirmation')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
                 $response[$arraycount]=array('stage_1_date'=>$row10['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
-            else if($orderStatus == 'pending payment')
+            else if($orderStatus == 'pending_payment')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
+                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
                 $response[$arraycount]=array('stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'processing')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
+                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
                 $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
@@ -69,10 +69,10 @@
             }
             else if($orderStatus == 'shipped')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
+                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
                 $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
@@ -88,10 +88,10 @@
             }
             else if($orderStatus == 'delivered')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
+                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
                 $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
@@ -107,10 +107,10 @@
             }
             else if($orderStatus == 'closed')
             {
-                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending confirmation' ";
+                $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending payment' ";
+                $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
                 $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
@@ -131,5 +131,7 @@
             $j++;
         }
     }
+    mysqli_close($con1);
+    mysqli_close($con2);
     echo json_encode($response);
 ?>
