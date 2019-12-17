@@ -107,13 +107,13 @@ sendOrderDetails(data: any) {
   }
 
   getReverseCoding(lat,long){
-    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=apikey");
   }
   getAddressFromPincode(pincode){
-    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+pincode+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+pincode+"&key=apikey");
   }
   getGoogleDistance(origin,destination){
-    return this.http.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination+"&key=AIzaSyCo2l4blaEI1V3NAW95sHAqlHFPf9N_17I");
+    return this.http.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination+"&key=apikey");
   }
  getPriceDate(data: any) {
     let httpParams = new HttpParams()
