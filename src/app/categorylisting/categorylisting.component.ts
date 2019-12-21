@@ -47,6 +47,7 @@ export class CategorylistingComponent implements OnInit {
 	popImgSrc: any = "";
 	filterChipset: any = [];
 	comonShopId: any = [];
+	catList: any = [];
 
 	constructor(private route: ActivatedRoute, private cookieService: CookieService, private data: DataService, private router: Router) { }
 
@@ -518,8 +519,13 @@ export class CategorylistingComponent implements OnInit {
 			setTimeout(function () {
 				document.getElementById('load').style.display = "none";
 			}, 500);
-			var formElement = "form Here";
-			this.popUpBoxTemplate("Sorry, we couldn't find what you're looking for...", formElement, "assets/images/notFoundImage.jpg");
+			$("#suggestPop").modal();
+			this.data.getCategorylist().subscribe( listData => {
+				this.catList = listData;
+				console.log(typeof(this.catList));
+			})
+			// var formElement = "form Here";
+			// this.popUpBoxTemplate("Sorry, we couldn't find what you're looking for...", formElement, "assets/images/notFoundImage.jpg");
 			return;
 		}
 		setTimeout(function () {
@@ -601,6 +607,10 @@ export class CategorylistingComponent implements OnInit {
 		console.log(locationPin);
 		this.setCookie("pin", locationPin);
 		window.location.reload();
+	}
+	submitSuggestion(){
+		alert("I couldn't find the related database to enter the data... Please add a data service here");
+
 	}
 }
 

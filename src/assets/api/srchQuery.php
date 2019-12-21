@@ -2,6 +2,9 @@
 
     require "init.php";
 
+    $DB_SMA_PR = DB_SMA_PR;
+    $DB_SMA_USER = DB_SMA_USER;
+
     $searchQ = $_POST["key"];
     $pincode = $_POST["pincode"];
     
@@ -16,8 +19,8 @@
     $count = 0;
     $request = "failed";
 
-    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_temp_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-    FROM roninaks_temp_smapr.product p, roninaks_temp_smapr.category c, roninaks_temp_smausr.seller sl, roninaks_temp_smausr.shop_details sh, roninaks_temp_smausr.shipping_location_shop sls, roninaks_temp_smapr.prod_shipping_price psp
+    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from $DB_SMA_PR.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy, sh.shopname 
+    FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.prod_shipping_price psp
     WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id  AND psp.shipping_location LIKE '%$pincode%' ";
 
 // and psp.prodid = p.prodid
@@ -47,8 +50,8 @@
 
             $status = "undeliverable";
 
-            $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_temp_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-            FROM roninaks_temp_smapr.product p, roninaks_temp_smapr.category c, roninaks_temp_smausr.seller sl, roninaks_temp_smausr.shop_details sh, roninaks_temp_smausr.shipping_location_shop sls, roninaks_temp_smapr.prod_shipping_price psp
+            $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, p.name, p.short_desc, p.base_price, (SELECT o.percentage from $DB_SMA_PR.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy, sh.shopname 
+            FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.prod_shipping_price psp
             WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";            
             
         }
@@ -100,7 +103,7 @@
 
     if(mysqli_num_rows($result) == 0){
 
-        $categoryQuery = " AND p.category_id IN (select c.category_id from roninaks_temp_smapr.category c where c.category LIKE '%$searchQ%') ";
+        $categoryQuery = " AND p.category_id IN (select c.category_id from $DB_SMA_PR.category c where c.category LIKE '%$searchQ%') ";
 
         $orderQuery = " ORDER by POSITION('$searchQ' IN c.category) ";
 
@@ -110,7 +113,7 @@
 
         if(mysqli_num_rows($result) == 0){
 
-            $ShopQuery = " AND p.shop_id IN (select sd.id from roninaks_temp_smausr.shop_details sd where sd.shopname LIKE '%$searchQ%') ";
+            $ShopQuery = " AND p.shop_id IN (select sd.id from $DB_SMA_USER.shop_details sd where sd.shopname LIKE '%$searchQ%') ";
             
             $orderQuery = " ORDER by POSITION('$searchQ' IN sh.shopname) ";
             
@@ -120,7 +123,7 @@
             
             if(mysqli_num_rows($result) == 0){
 
-                $sellerQuery = " AND p.shop_id IN (SELECT sd.id FROM roninaks_temp_smausr.shop_details sd, roninaks_temp_smausr.seller sl where sd.seller_id = sl.id and sl.seller_name LIKE '%$searchQ%') ";
+                $sellerQuery = " AND p.shop_id IN (SELECT sd.id FROM $DB_SMA_USER.shop_details sd, $DB_SMA_USER.seller sl where sd.seller_id = sl.id and sl.seller_name LIKE '%$searchQ%') ";
                 
                 $orderQuery = " ORDER BY POSITION('$searchQ' IN sl.seller_name) ";
 
@@ -155,6 +158,7 @@
                 $data[$count++] = array(
                     "prodId"=>$row["prodid"],
                     "shopId"=>$row["shop_id"],
+                    "shopName"=>$row["shopname"],
                     "sellerName"=>$row["seller_name"],
                     "prodName"=>$row["name"],
                     "desc"=>$row["short_desc"],

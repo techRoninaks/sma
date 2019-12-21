@@ -2,6 +2,9 @@
 
     require "init.php";
 
+    $DB_SMA_PR = DB_SMA_PR;
+    $DB_SMA_USER = DB_SMA_USER;
+
     $shopId = $_POST["shopId"];
 
     $filterSet = json_decode($_POST["filters"]);
@@ -11,8 +14,8 @@
     $pageNum = $_POST["pageNum"];
     $offset = ($pageNum - 1)*$tagNum;
 
-    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from roninaks_temp_smapr.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-    FROM roninaks_temp_smapr.product p, roninaks_temp_smapr.category c, roninaks_temp_smausr.seller sl, roninaks_temp_smausr.shop_details sh 
+    $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from $DB_SMA_PR.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
+    FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh 
     WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id AND p.active_status IN ('active') ";
     
     //Filter madness starts here
