@@ -1249,6 +1249,37 @@ $SubText: 18px;
 	width: -webkit-fill-available;
 	z-index: 10;
 }
+#modalContentSuggest{
+
+	grid-template-columns: 68% 30%;
+	grid-template-areas: "sug-img sug-form";
+	display: grid;
+	width: auto;
+	margin: 5%;
+
+	#dvSuggestImage{
+		grid-area: sug-img;
+	}
+	#dvForm{
+		grid-area: sug-form;
+
+		grid-template-rows: repeat(2,auto);
+		grid-template-areas: "dv-sug-head" "dv-sug-form";
+		display: grid;
+
+		#dvSugHeader{
+			grid-area: dv-sug-head;
+		}
+		#dvSugForm{
+			grid-area: dv-sug-form;
+			margin: 0 20%;
+			input{
+				// text-align: center;
+				padding: 5px;
+			}
+		}
+	}
+}
 
 // Media queries
 @include sm-lesser {
@@ -1309,6 +1340,16 @@ $SubText: 18px;
 	.card {
 		display: none;
 	}
+	#modalContentSuggest{
+
+		grid-template-columns: 1fr;
+		grid-template-areas: "sug-form";
+		display: grid;
+
+		#dvSuggestImage{
+			display: none;
+		}
+	}
 }
 @include sm {
 	.dvCatMain {
@@ -1320,6 +1361,7 @@ $SubText: 18px;
 	.dvSellerMain{
 		grid-template-columns: repeat(2, 1fr);
 	}
+	
 }
 @include md {
 	.dvCatMain {

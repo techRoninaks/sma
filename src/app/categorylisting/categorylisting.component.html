@@ -436,4 +436,53 @@
         </div>
 
     </div>
+
+    <!-- Suggestions here -->
+    <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="suggestPop" role="dialog">
+            <div class="modal-dialog" style="max-width: fit-content !important;">
+
+                <!-- Modal content-->
+                <div class="modal-content" id="modalContentSuggest">
+                    <div class="dvImgPop" id="dvSuggestImage">
+                        <img src="assets/images/notFoundImage.jpg" class="imgPop">
+                    </div>
+                    <div id="dvForm">
+                        <div class="modal-header" style="display: block !important;" id="dvSugHeader">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title popHeadText">Sorry, we couldn't find what you're looking for...</h4>
+                        </div>
+                        <div class="modal-body popText" id="dvSugForm">
+                            <form>
+                                <label>Product name</label><br>
+                                <input type="text" id="inpProdName" >
+                                <br><br>
+                                <label>Product Category</label><br>
+                                <select id="selCategory" #sel>
+                                    <option>--- Select a category ---</option>
+                                    <option *ngFor="let catItem of Object.keys(catList)">{{catList[catItem].category_name}}</option>
+                                    <option>Others</option>
+                                </select >
+                                <br *ngIf="sel.value === 'Others'"><br  *ngIf="sel.value === 'Others'">
+                                <input type="text" placeholder="Specify Category" *ngIf="sel.value === 'Others'">
+                                <br><br>
+                                <label>Seller name</label><br>
+                                <input type="text">
+                                <br><br>
+                                <label>Seller Contact</label><br>
+                                <input type="number">
+                                <br><br>
+                            </form>
+                            <button class="btn" (click)='submitSuggestion()'>SUBMIT</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
