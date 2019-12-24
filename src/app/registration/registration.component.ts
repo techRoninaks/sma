@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, Ng
 import { DataService } from '../data.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {Router, RouterLink} from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-registration',
@@ -26,7 +27,7 @@ export class RegistrationComponent implements OnInit {
   fp_mobile: any ="" ;
   user_mobile: any="";
 
-  constructor( private data: DataService,private formBuilder: FormBuilder,private router: Router,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder) {
+  constructor(private cookieService: CookieService, private data: DataService,private formBuilder: FormBuilder,private router: Router,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder) {
     this.registrationForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       reg_address1:['', Validators.required],
@@ -56,7 +57,20 @@ export class RegistrationComponent implements OnInit {
   cpwd: any ="";
 
   ngOnInit() {
-    
+    var user = this.getCookie('userId');
+    if(user){
+      this.router.navigate(['/']);
+    }
+  }
+  // Cookie Section
+  getCookie(cname) {
+    return this.cookieService.get(cname);
+  }
+  deleteCookie(cname) {
+    this.cookieService.delete(cname);
+  }
+  setCookie(cname, value) {
+    this.cookieService.set(cname, value);
   }
   onSubmit(){
     this.submitted =true;
@@ -79,11 +93,18 @@ export class RegistrationComponent implements OnInit {
       // alert(this.selectedLevel.name);
       this.data.addData(this.registrationForm.value,this.selectedLevel.name).subscribe(
         data=>{
-                if(data == "Success")
+                if(data['status'] == "Success")
                 {
                   alert('Registration Successful');
-                  this.router.navigate(['/login']);
-                }
+                  this.setCookie("isLoggedIn",1);
+                  this.setCookie("userCity",this.registrationForm.controls['reg_city'].value);
+                  this.setCookie("userPin",this.registrationForm.controls['reg_pin'].value);
+                  this.setCookie("pin",this.registrationForm.controls['reg_pin'].value);
+                  this.setCookie("userName",this.registrationForm.controls['fullname'].value);
+                  this.setCookie("userId",data['id']);
+                  this.router.navigate(['/']);
+                  window.location.reload();
+              }
                 else
                 {
                   alert('Error, try again');

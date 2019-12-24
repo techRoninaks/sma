@@ -135,7 +135,7 @@
         <div class="grid-ImagesPrimaryDetails" style="display: flex;">
             <input style="display: none;" type="file" id="frontUpload"  (click)="frontUpload()" accept="image/*"
                 #fileInput1>
-            <button (click)="fileInput1.click()" class="btn_add_image" type="button" id="btn-add-image-1">+</button>
+            <img (click)="fileInput1.click()" class="btn_add_image" type="button"  src="{{urlFront1}}" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" id="frontUploadImg">
             <!-- <div
                 style="height: 15%;   width: 12%; background: #009145; margin-top: 25px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
                 <label style="color: white; text-align: center; font-family:BitterRegular; margin-left: 50px; ">Add
@@ -144,59 +144,67 @@
 
             <input style="display: none;" type="file" id="frontUpload2" (click)="frontUpload2()" accept="image/*"
                 #fileInput2>
-            <button (click)="fileInput2.click()" type="button"
-            class="btn_add_image" id="btn-add-image-2">+</button>
+            <img (click)="fileInput2.click()" type="button" style="display: none;"
+            class="btn_add_image" src="{{urlFront2}}"  id="frontUpload2Img"onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload3" (click)="frontUpload3()" accept="image/*"
                 #fileInput3>
-            <button (click)="fileInput3.click()" type="button"
-            class="btn_add_image" id="btn-add-image-3">+</button>
+            <img (click)="fileInput3.click()" type="button" style="display: none;" id="frontUpload3Img"
+            class="btn_add_image"  src="{{urlFront3}}" 
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload4" (click)="frontUpload4()" accept="image/*"
                 #fileInput4>
-            <button (click)="fileInput4.click()" type="button"
-            class="btn_add_image" id="btn-add-image-4">+</button>
+            <img (click)="fileInput4.click()" type="button" style="display: none;" id="frontUpload4Img"
+            class="btn_add_image" src="{{urlFront4}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload5" (click)="frontUpload5()" accept="image/*"
                 #fileInput5>
-            <button (click)="fileInput5.click()" type="button"
-            class="btn_add_image" id="btn-add-image-5">+</button>
+            <img (click)="fileInput5.click()" type="button" style="display: none;" id="frontUpload5Img"
+            class="btn_add_image" src="{{urlFront5}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload6" (click)="frontUpload6()" accept="image/*"
                 #fileInput6>
-            <button (click)="fileInput6.click()" type="button"
-            class="btn_add_image" id="btn-add-image-6">+</button>
+            <img (click)="fileInput6.click()" type="button" style="display: none;" id="frontUpload6Img"
+            class="btn_add_image" src="{{urlFront6}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload7" (click)="frontUpload7()" accept="image/*"
                 #fileInput7>
-            <button (click)="fileInput7.click()" type="button"
-            class="btn_add_image" id="btn-add-image-7">+</button>
+            <img (click)="fileInput7.click()" type="button" style="display: none;" id="frontUpload7Img"
+            class="btn_add_image" src="{{urlFront7}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload8" (click)="frontUpload8()" accept="image/*"
                 #fileInput8>
-            <button (click)="fileInput8.click()" type="button"
-            class="btn_add_image" id="btn-add-image-8">+</button>
+            <img (click)="fileInput8.click()" type="button" style="display: none;" id="frontUpload8Img"
+            class="btn_add_image" src="{{urlFront8}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload9" (click)="frontUpload9()" accept="image/*"
                 #fileInput9>
-            <button (click)="fileInput9.click()" type="button"
-            class="btn_add_image" id="btn-add-image-9">+</button>
+            <img (click)="fileInput9.click()" type="button" style="display: none;" id="frontUpload9Img"
+            class="btn_add_image" src="{{urlFront9}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
 
             <input style="display: none;" type="file" id="frontUpload10" (click)="frontUpload10()" accept="image/*"
                 #fileInput10>
-            <button (click)="fileInput10.click()" type="button"
-            class="btn_add_image" id="btn-add-image-10">+</button>
+            <img (click)="fileInput10.click()" type="button" style="display: none;" id="frontUpload10Img"
+            class="btn_add_image" src="{{urlFront10}}"
+            onerror="this.onerror=null;this.src='assets/icons/plus_full.png'">
 
         </div>
-        <div class="grid-Image-View1" style="display: flex;">
+        <!-- <div class="grid-Image-View1" style="display: flex;">
             <img id="frontPreviewId" style="display: none; height: 105px; margin: 0 15px;" src="{{urlFront1}}" height="200">
 
             <img id="frontPreviewId2" style="display: none; height: 105px; margin: 0 15px;" src="{{urlFront2}}" height="200">
@@ -217,7 +225,7 @@
 
             <img id="frontPreviewId10" style="display: none; height: 105px; margin: 0 15px;" src="{{urlFront10}}" height="200">
 
-        </div>
+        </div> -->
     </div>
 
 
@@ -355,9 +363,9 @@
             <div class="grid-LeftPrice1">
                 <p class="dicountText">ACTUAL PRICE</p>
             </div>
-            <div class="grid-LeftPrice2">
+            <!-- <div class="grid-LeftPrice2">
                 <p class="actualPriceText">TAX</p>
-            </div>
+            </div> -->
             <div class="grid-LeftPrice3">
                 <p class="commissionDecuctionText">COMMISSION DEDUCTION</p>
             </div>
@@ -367,9 +375,9 @@
             <div class="grid-Med1">
                 <p class="dotMed1">:</p>
             </div>
-            <div class="grid-Med2">
+            <!-- <div class="grid-Med2">
                 <p class="dotMed2">:</p>
-            </div>
+            </div> -->
             <div class="grid-Med3">
                 <p class="dotMed3">:</p>
             </div>
@@ -379,9 +387,9 @@
             <div class="grid-RightPrice1">
                 {{ basePrice }}<span tooltip="Price seen by buyer." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
-            <div class="grid-RightPrice2">
+            <!-- <div class="grid-RightPrice2">
                 {{ tax.tax }}
-            </div>
+            </div> -->
             <div class="grid-RightPrice3" id="commissionDecuction">
                 {{ commDec }}<span tooltip="Commission deducted by the Website." placement="top" class="toolSpan"  show-delay="0">?</span>
             </div>
@@ -492,7 +500,7 @@
                     </div>
                     <div class="grid-OrderConfrmToggleRight1">
                         <label class="switchOrderConfrm" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="orderConfrm" (change)="toggleInput()" style="margin-left: 12px;" value="{{allProductInfo.has_order_confmn}}"  >
+                            <input type="checkbox" id="orderConfrm" style="margin-left: 12px;" value="{{allProductInfo.has_order_confmn}}"  >
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -543,7 +551,7 @@
                     </div>
                     <div class="grid-RfqToggle">
                         <label class="switchRfq" name="answer" value="Show giftCard">
-                            <input type="checkbox" id="rfq" (change)="toggleInput1()" style="margin-left: 12px;" value="{{allProductInfo.has_rfq}}">
+                            <input type="checkbox" id="rfq" style="margin-left: 12px;" value="{{allProductInfo.has_rfq}}">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -824,7 +832,7 @@
                                         <label type=text class="Bundle-Qty-Label-Style" id="Price-Label">{{item.discount}} </label>
                                     </div>
                                     <div class="grid-Actual-Price-1">
-                                        <label type=text class="Bundle-Actual-Label-Style" id="Actual-Label">{{item.actualPrice}} </label>
+                                        <label type=text class="Bundle-Actual-Label-Style" id="Actual-Label">Discounted: {{item.bulk}}, Actual:  {{item.actualPrice}} </label>
                                     </div>
                                     <div class="grid-Edit-Close-Bundle-1">
                                         <!-- <img class="imgEdit" src="assets/icons/edit.png" > -->
@@ -918,7 +926,7 @@
     <div class="grid-BtnLast">
         <div class="grid-dvBtnLast">
             <div class="grid-BtnLastLeft">
-                <button class="btnSaveAsDraft" (click)="publishBtn('save')">SAVE AS DRAFT</button>
+                <button class="btnSaveAsDraft" *ngIf='!editMode' (click)="publishBtn('save')">SAVE AS DRAFT</button>
             </div>
             <div class="grid-BtnLastRight">
                 <button class="btnPublish" (click)="publishBtn('publish')">PUBLISH</button>

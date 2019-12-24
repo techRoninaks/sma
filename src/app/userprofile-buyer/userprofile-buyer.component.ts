@@ -86,6 +86,8 @@ export class UserprofileBuyerComponent implements OnInit {
     })
     this.addAddress=formBuilderAddress.group({
       country:['',Validators.required],
+      address1:['',Validators.required],
+      district:['',Validators.required],
       state:['',Validators.required],
       city:['',Validators.required],
       pin:['',[Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -144,6 +146,19 @@ export class UserprofileBuyerComponent implements OnInit {
       data=>{
               this.dynamicDataUsercard=data;
               this.userMobile= data['phoneNo'];
+              // console.log(this.registrationForm.value)
+              this.registrationForm.setValue({
+                fullname: this.dynamicDataUsercard['name'],
+                reg_address1:this.dynamicDataUsercard['address'],
+                reg_city:this.dynamicDataUsercard['city'],
+                reg_dist:this.dynamicDataUsercard['district'],
+                reg_state:this.dynamicDataUsercard['state'],
+                reg_country:this.dynamicDataUsercard['country'],
+                reg_pin:this.dynamicDataUsercard['pincode'],
+                reg_email: this.dynamicDataUsercard['email'],
+                reg_mobile_no:this.dynamicDataUsercard['phoneNo']
+              })
+              // console.log(this.registrationForm.value)
             },
         error=> console.error(error)
       );
@@ -260,18 +275,23 @@ export class UserprofileBuyerComponent implements OnInit {
   }
   addAddressData(){
     this.submitted = true;
-    this.data.addUserAddressData(this.id,this.userName,this.addAddress.value).subscribe(
-      data=>{
-              if(data == "Success")
-              {
-                alert("Address added Successfully");
-                window.location.reload();
-              }
-              else
-               alert("Error");
-            },
-      error=> console.error(error)
-    );
+    // console.log(this.addAddress.invalid);
+    console.log(this.addAddress.value)
+    if(!this.addAddress.invalid){
+      this.data.addUserAddressData(this.id,this.userName,this.addAddress.value).subscribe(
+        data=>{
+                if(data == "Success")
+                {
+                  alert("Address added Successfully");
+                  window.location.reload();
+                }
+                else
+                 alert("Error");
+              },
+        error=> console.error(error)
+      );
+    }
+    
   }
   deleteAddress(addressId){
     this.data.deleteUserAddress(addressId).subscribe(
@@ -423,8 +443,37 @@ export class UserprofileBuyerComponent implements OnInit {
     this.viewMode = false;
     this.editMode = true;
   }
+  paynow(orderIdsmall : any){
+    console.log(orderIdsmall);
+    var options = {
+      key: "rzp_test_dveDexCQKoGszl",
+      amount: Math.round(orderIdsmall['total_amnt'] * 100), // 2000 paise = INR 20
+      currency: "INR",
+      method: 'card',
+      name: orderIdsmall['sellerName'],
+      description: orderIdsmall['prodName']+" - "+orderIdsmall['shortDesc'],
+      image: "favicon.ico", 
+      handler: response => {
+        alert("Transaction successful.");
+      },
+      prefill: {
+        name: this.user_name,
+        email: this.user_email,
+        contact: this.user_phone,
+      },
+      notes: {},
+      theme: {
+        color: "#FFC921"
+      },
+      modal: {
+        ondismiss: function () { }
+      }
+    };
+    var rzp1 = new Razorpay(options); rzp1.open();
+  }
   save(){
     this.submitted =true;
+    // console.log(this.registrationForm.value)
     if(this.registrationForm.invalid){
       alert("Enter Details");
     }

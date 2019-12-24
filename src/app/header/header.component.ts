@@ -93,13 +93,13 @@ export class HeaderComponent implements OnInit {
     else{
       this.setCookie("isLoggedIn",null);
       setTimeout(()=>{ 
-        if(this.router.url == "/login"){
+        if(this.router.url.includes("login")){
           // console.log("login");
         }
-        else if(this.router.url == "/signup"){
+        else if(this.router.url.includes("signup")){
           // console.log("signup");
         }
-        else if(this.router.url == "/signupseller"){
+        else if(this.router.url.includes("signupseller")){
           // console.log("signupseller");
         }
         else{

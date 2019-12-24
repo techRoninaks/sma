@@ -7,6 +7,7 @@ $phone = $_POST['phone'];
 $gst = $_POST['gst'];
 $address = $_POST['address'];
 $imageMain = $_POST['imageMain'];
+$shopAddress = $_POST['shopAddress'];
 $imageProductOne = $_POST['imageProductOne'];
 $imageProductTwo = $_POST['imageProductTwo'];
 $imageProductThree = $_POST['imageProductThree'];
@@ -37,7 +38,7 @@ $add5 = $add[4];
 $add6 = $add[5];
 $add7 = $add[6];
 
-$sql_query = "UPDATE `address` SET `addr1`= '$add1',`addr2`='$add2',`city`='$add3',`district`='$add4',`state`='$add5',`country`='$add6',`pincode`='$add7',`contact_email`='$email',`contact_number`='$phone' WHERE `id` = '$addressId'";
+$sql_query = "UPDATE `address` SET `addr1`= '$add1',`addr2`='$add2',`city`='$add3',`district`='$add4',`state`='$add5',`country`='$add6',`pincode`='$add7',`contact_email`='$email',`contact_number`='$phone' WHERE `id` = '$shopAddress'";
 // echo $sql_query;
 $result = mysqli_query($con2, $sql_query);
 

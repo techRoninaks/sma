@@ -85,37 +85,6 @@ export class AddProductComponent implements OnInit {
   urlFront8 = "";
   urlFront9 = "";
   urlFront10 = "";
-  // imageU0: any;
-  // imageU1: any;
-  // imageU2: any;
-  // imageU3: any;
-  // imageU4: any;
-  // imageU5: any;
-  // imageU6: any;
-  // imageU7: any;
-  // imageU9: any;
-  // imageU8: any;
-  // imageUploaded: any;
-  // imageUploaded0: any;
-  // imageUploaded1: any;
-  // imageUploaded2: any;
-  // imageUploaded3: any;
-  // imageUploaded4: any;
-  // imageUploaded5: any;
-  // imageUploaded6: any;
-  // imageUploaded7: any;
-  // imageUploaded8: any;
-  // imageUploaded9: any;
-  // imageVAL9: any;
-  // imageVAL8: any;
-  // imageVAL7: any;
-  // imageVAL6: any;
-  // imageVAL5: any;
-  // imageVAL4: any;
-  // imageVAL3: any;
-  // imageVAL2: any;
-  // imageVAL1: any;
-  // imageVAL0: any;
   basePrice: any;
   commDec: any;
   totalPrice: any;
@@ -236,6 +205,7 @@ export class AddProductComponent implements OnInit {
   editTitleBoolean: boolean = false;
   subCategoryArrayLoad: any;
   isMessage: boolean;
+  
 
 
 
@@ -260,7 +230,6 @@ export class AddProductComponent implements OnInit {
     this.data.getTaxFromSetting().subscribe(data=>{
       this.tax = data;
     })
-
 
     this.route.queryParams.subscribe(params => {
       this.editProdid = params['prod_id'];
@@ -347,10 +316,29 @@ export class AddProductComponent implements OnInit {
         });
 
         this.urlGetter(this.editProdid);
+
+
       }
-
-
-
+      else{
+        this.data.getShopDetailsSettings(this.sellerId).subscribe(data=>{
+          var temp = data;
+          this.allProductInfo.shipping_policy = temp['shipping_policy'];
+          this.allProductInfo.return_policy = temp['return_policy'];
+          this.allProductInfo.product_policy = temp['product_policy'];
+          this.allProductInfo.avg_shpping_time = temp['avg_shipping_time'];
+          this.allProductInfo.avg_prcessing_time = temp['avg_processing_time'];
+          this.allProductInfo.auto_cancel_time = temp['auto_cancellation_time'];
+          this.allProductInfo['has_gift'] = temp['gift_option'];
+          this.allProductInfo['has_order_confmn'] = temp['order_confirmation'];
+          this.allProductInfo['can_upload_image'] = '0';
+          this.allProductInfo['can_orderbydate'] = temp['deliver_by_date'];
+          this.allProductInfo['add_custom_message_field'] = '0';
+          this.allProductInfo['has_rfq'] = temp['rfq'];
+          this.allProductInfo['has_instant_buy'] = '0';
+          console.log(this.allProductInfo)
+          this.booleanCheck();
+        })
+      }
 		});
 
   
@@ -381,15 +369,15 @@ export class AddProductComponent implements OnInit {
       this.flagAdd = true;
     }
 
-    this.data.getPolicyAddProduct(this.prodid).subscribe(
-      data => {
-        this.dynamicDataProPolicy = data;
-        this.dynamicDataShipPolicy = data;
-        this.dynamicDataReturnPolicy = data;
-      },error => {
-        return;
-      }
-    );
+    // this.data.getPolicyAddProduct(this.prodid).subscribe(
+    //   data => {
+    //     this.dynamicDataProPolicy = data;
+    //     this.dynamicDataShipPolicy = data;
+    //     this.dynamicDataReturnPolicy = data;
+    //   },error => {
+    //     return;
+    //   }
+    // );
 
     this.data.getMainCategoryAddProduct(this.parentid).subscribe(
       data => {
@@ -454,10 +442,10 @@ export class AddProductComponent implements OnInit {
 
   newSubCategory(){
     var search = (<HTMLInputElement><any>document.getElementById('subsubcategory')).value;
-    (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "none";
+    // (<HTMLInputElement><any>document.getElementById("myUL1")).style.display = "none";
     this.data.createNewSubCategory(this.catId, search).subscribe(
       data => {
-        console.log(data);
+        this.getSearchSubCategory();
         // console.log(this.dynamicSubCategory);
       },
     );
@@ -498,10 +486,10 @@ export class AddProductComponent implements OnInit {
 
   newCategory(){
     var search = (<HTMLInputElement><any>document.getElementById('subcategory')).value;
-    (<HTMLInputElement><any>document.getElementById("myUL2")).style.display = "none";
+    // (<HTMLInputElement><any>document.getElementById("myUL2")).style.display = "none";
     this.data.createNewSubCategory(this.mainCatId, search).subscribe(
       data => {
-        console.log(data);
+        this.getSearchCategory();
         // console.log(this.dynamicSubCategory);
       },
     );
@@ -564,16 +552,6 @@ export class AddProductComponent implements OnInit {
     this.shippingLocs.splice( this.shippingLocs.indexOf(pos), 1 );
   }
 
-  toggleInput(){
-    if((<HTMLInputElement><any>document.getElementById("orderConfrm")).checked){
-      (<HTMLInputElement><any>document.getElementById("rfq")).checked = false;
-    }
-  }
-  toggleInput1(){
-    if((<HTMLInputElement><any>document.getElementById("rfq")).checked){
-      (<HTMLInputElement><any>document.getElementById("orderConfrm")).checked = false;
-    }
-  }
 
   editShiipingLocation(item,pos){
     if(!this.editShippingFlag){
@@ -818,30 +796,39 @@ export class AddProductComponent implements OnInit {
   // UPLOAD IMAGES
   frontUpload() {
     imageFront1 = document.getElementById('frontUpload').addEventListener('change', onFrontClick.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload2Img")).style.display = "block";
   }
   frontUpload2() {
     imageFront2 = document.getElementById('frontUpload2').addEventListener('change', onFrontClick2.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload3Img")).style.display = "block";
   }
   frontUpload3() {
     imageFront3 = document.getElementById('frontUpload3').addEventListener('change', onFrontClick3.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload4Img")).style.display = "block";
   }
   frontUpload4() {
     imageFront4 = document.getElementById('frontUpload4').addEventListener('change', onFrontClick4.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload5Img")).style.display = "block";
   }
   frontUpload5() {
     imageFront5 = document.getElementById('frontUpload5').addEventListener('change', onFrontClick5.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload6Img")).style.display = "block";
   }
   frontUpload6() {
     imageFront6 = document.getElementById('frontUpload6').addEventListener('change', onFrontClick6.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload7Img")).style.display = "block";
   }
   frontUpload7() {
     imageFront7 = document.getElementById('frontUpload7').addEventListener('change', onFrontClick7.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload8Img")).style.display = "block";
   }
   frontUpload8() {
     imageFront8 = document.getElementById('frontUpload8').addEventListener('change', onFrontClick8.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload9Img")).style.display = "block";
   }
   frontUpload9() {
     imageFront9 = document.getElementById('frontUpload9').addEventListener('change', onFrontClick9.bind(this));
+    // (<HTMLInputElement><any>document.getElementById("frontUpload10Img")).style.display = "block";
   }
   frontUpload10() {
     imageFront10 = document.getElementById('frontUpload10').addEventListener('change', onFrontClick10.bind(this));
@@ -1258,11 +1245,12 @@ export class AddProductComponent implements OnInit {
   addBulkDiscTwo() {
     var bulkDiscount = (<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value;
     var discount = (<HTMLInputElement><any>document.getElementById("Disc-Pres")).value;
-    var bulk  = parseInt((<HTMLInputElement><any>document.getElementById("Disc-Pres")).value);
+    var bulk  = parseInt((<HTMLInputElement><any>document.getElementById("Disc-Price")).value);
     var actualPrice = (<HTMLInputElement><any>document.getElementById("Actual-Price")).value;
 
     var addProductDisc = { bulkDiscount: bulkDiscount,bulk:bulk, discount: discount, actualPrice: actualPrice };
     this.discountArray.push(addProductDisc);
+    // console.log(this.discountArray);
     (<HTMLInputElement><any>document.getElementById("Bundle-Qty")).value = "";
     (<HTMLInputElement><any>document.getElementById("Disc-Pres")).value = "";
     (<HTMLInputElement><any>document.getElementById("Disc-Price")).value = "";
@@ -1289,16 +1277,16 @@ export class AddProductComponent implements OnInit {
     this.urlFront9 = "assets/images/product/"+prodid+"/"+prodid+"_8.jpg";
     this.urlFront10 = "assets/images/product/"+prodid+"/"+prodid+"_9.jpg";
     setTimeout(()=>{
-      (<HTMLInputElement>document.getElementById("frontPreviewId")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId2")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId3")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId4")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId5")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId6")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId7")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId8")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId9")).style.display = "block";
-      (<HTMLInputElement>document.getElementById("frontPreviewId10")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUploadImg")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload2Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload3Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload4Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload5Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload6Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload7Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload8Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload9Img")).style.display = "block";
+      (<HTMLInputElement>document.getElementById("frontUpload10Img")).style.display = "block";
     }, 5000);
   }
 
@@ -1523,10 +1511,8 @@ function onFrontClick(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront1 = text;
-    // console.log(imageFront);
-    (<HTMLInputElement>document.getElementById("frontPreviewId")).style.display = "block";
     this.urlFront1 = imageFront1;
-    document.getElementById('btn-add-image-1').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload2Img")).style.display = "block";
   };
 }
 function onFrontClick2(event) {
@@ -1535,10 +1521,8 @@ function onFrontClick2(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront2 = text;
-    // console.log(imageFront2);
-    (<HTMLInputElement>document.getElementById("frontPreviewId2")).style.display = "block";
     this.urlFront2 = imageFront2;
-    document.getElementById('btn-add-image-2').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload3Img")).style.display = "block";
   };
 }
 function onFrontClick3(event) {
@@ -1547,10 +1531,8 @@ function onFrontClick3(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront3 = text;
-    // console.log(imageFront3);
-    (<HTMLInputElement>document.getElementById("frontPreviewId3")).style.display = "block";
     this.urlFront3 = imageFront3;
-    document.getElementById('btn-add-image-3').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload4Img")).style.display = "block";
   };
 }
 function onFrontClick4(event) {
@@ -1559,10 +1541,8 @@ function onFrontClick4(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront4 = text;
-    // console.log(imageFront4);
-    (<HTMLInputElement>document.getElementById("frontPreviewId4")).style.display = "block";
     this.urlFront4 = imageFront4;
-    document.getElementById('btn-add-image-4').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload5Img")).style.display = "block";
   };
 }
 function onFrontClick5(event) {
@@ -1571,10 +1551,8 @@ function onFrontClick5(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront5 = text;
-    // console.log(imageFront5);
-    (<HTMLInputElement>document.getElementById("frontPreviewId5")).style.display = "block";
     this.urlFront5 = imageFront5;
-    document.getElementById('btn-add-image-5').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload6Img")).style.display = "block";
   };
 }
 function onFrontClick6(event) {
@@ -1583,10 +1561,8 @@ function onFrontClick6(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront6 = text;
-    // console.log(imageFront6);
-    (<HTMLInputElement>document.getElementById("frontPreviewId6")).style.display = "block";
     this.urlFront6 = imageFront6;
-    document.getElementById('btn-add-image-6').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload7Img")).style.display = "block";
   };
 }
 function onFrontClick7(event) {
@@ -1595,10 +1571,8 @@ function onFrontClick7(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront7 = text;
-    // console.log(imageFront7);
-    (<HTMLInputElement>document.getElementById("frontPreviewId7")).style.display = "block";
     this.urlFront7 = imageFront7;
-    document.getElementById('btn-add-image-7').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload8Img")).style.display = "block";
   };
 }
 function onFrontClick8(event) {
@@ -1607,10 +1581,8 @@ function onFrontClick8(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront8 = text;
-    // console.log(imageFront8);
-    (<HTMLInputElement>document.getElementById("frontPreviewId8")).style.display = "block";
     this.urlFront8 = imageFront8;
-    document.getElementById('btn-add-image-8').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload9Img")).style.display = "block";
   };
 }
 function onFrontClick9(event) {
@@ -1619,10 +1591,8 @@ function onFrontClick9(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront9 = text;
-    // console.log(imageFront8);
-    (<HTMLInputElement>document.getElementById("frontPreviewId9")).style.display = "block";
     this.urlFront9 = imageFront9;
-    document.getElementById('btn-add-image-9').innerHTML = "Change image";
+    (<HTMLInputElement><any>document.getElementById("frontUpload10Img")).style.display = "block";
   };
 }
 function onFrontClick10(event) {
@@ -1631,10 +1601,7 @@ function onFrontClick10(event) {
   reader.onload = (event) => {
     var text: any = reader.result;
     imageFront10 = text;
-    // console.log(imageFront8);
-    (<HTMLInputElement>document.getElementById("frontPreviewId10")).style.display = "block";
     this.urlFront10 = imageFront10;
-    document.getElementById('btn-add-image-10').innerHTML = "Change image";
   };
 
 

@@ -824,7 +824,7 @@
                 </div>
                 <!-- FORM GROUP -->
                 <div class="dvFormGroup" id="formGroup" style="display :none">
-                    <form [formGroup]="checkoutForm" (ngSubmit)="formSave()">
+                    <form [formGroup]="checkoutForm" >
                         <div class="grid-Addr-Form">
                             <div class="grid-left-Form">
                                 <div class="dvContactName">
@@ -1084,8 +1084,8 @@
                         </div>
                     </div>
                     <!-- MESSAGE TITLE -->
-                    <div class="dvMessageTitle">
-                        <p class="MsgTitleText">Message Title : {{ dynamicMsgTitle.title }}</p>
+                    <div class="dvMessageTitle" >
+                        <p class="MsgTitleText" *ngFor="let item of dynamicMsgTitle">Message : {{ item.message }}</p>
                     </div>
 
 

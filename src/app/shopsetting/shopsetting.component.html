@@ -1,3 +1,4 @@
+<ngx-ui-loader></ngx-ui-loader>
 <div class="divMargin">
     <ul class="breadcrumb">
         <li><a [routerLink]="[ '' ]" routerLinkActive="active">Home</a></li>
@@ -20,18 +21,18 @@
         <div class="image-section">
 
             <div class="mainImage">
-                <img (click)="fileInputCover.click()" id="mainImageSrc" src="{{shopDetails.mainImage}}" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'"  class="mainShopImage">
-                <img src="assets/images/52385041_2139637902824429_5023495445637234688_n.jpg" class="mainLogoImage">
+                <img (click)="fileInputCover.click();editShopDetailsToggler();" id="mainImageSrc" src="{{shopDetails.mainImage}}" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'"  class="mainShopImage">
+                <img src="assets/images/shop/{{shopDetails.shopid}}/{{shopDetails.shopid}}_logo.jpg" class="mainLogoImage">
                 <input style="display: none" type="file" name="pic" id="mainImageHolder" accept="image/*" #fileInputCover>
                 <p class="mainShopName">{{shopDetails.shopname}}</p>
             </div>
 
             <div class="productImage">
-                <img src="{{shopDetails.prod_one}}" id="productOneSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductOne.click()">
+                <img src="{{shopDetails.prod_one}}" id="productOneSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductOne.click();editShopDetailsToggler();">
                 <input style="display: none" type="file" name="pic" id="productOneImageHolder" accept="image/*" #fileproductOne>
-                <img src="{{shopDetails.prod_two}}" id="productTwoSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductTwo.click()">
+                <img src="{{shopDetails.prod_two}}" id="productTwoSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductTwo.click();editShopDetailsToggler();">
                 <input style="display: none" type="file" name="pic" id="productTwoImageHolder" accept="image/*" #fileproductTwo>
-                <img src="{{shopDetails.prod_three}}" id="productThreeSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductThree.click()">
+                <img src="{{shopDetails.prod_three}}" id="productThreeSrc" onerror="this.onerror=null;this.src='assets/icons/plus_full.png'" (click)="fileproductThree.click();editShopDetailsToggler();">
                 <input style="display: none" type="file" name="pic" id="productThreeImageHolder" accept="image/*" #fileproductThree>
             </div>
         </div>
@@ -46,8 +47,17 @@
             </tr>
             <tr>
                 <td class="padding15 font15">Shop Address</td>
-                <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.shop_address}}</td>
-                <td class="padding15" *ngIf = "editShopDetails"><input id="address" value="{{shopDetails.shop_address}}"></td>
+                <td class="padding15" *ngIf = "!editShopDetails">{{shopAddress}}</td>
+                <td class="padding15" *ngIf = "editShopDetails">
+                    <input id="address1" value="{{addr1}}" placeholder="Address Line 1">
+                    <input id="address2" value="{{addr2}}" placeholder="Address Line 2">
+                    <input id="address3" value="{{city}}" placeholder="City">
+                    <input id="address4" value="{{district}}" placeholder="District">
+                    <input id="address5" value="{{state}}" placeholder="State">
+                    <input id="address6" value="{{country}}" placeholder="Country">
+                    <input id="address7" value="{{pincode}}" placeholder="Pincode">
+                    <!-- <input id="address" value="{{shopDetails.shop_address}}" placeholder="Address Line 1"> -->
+                </td>
             </tr>
             <tr>
                 <td class="padding15 font15">Main Category</td>
@@ -66,21 +76,34 @@
             <tr> 
                 <td class="padding15 font15">Contact No</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.contact}}</td>
-                <td class="padding15" *ngIf = "editShopDetails"><input id="phone" value="{{shopDetails.contact}}"></td>
+                <td class="padding15" *ngIf = "editShopDetails" (click)="alertError('Phone number cannot be changed');" ><input style="cursor: pointer;" id="phone"   readonly="readonly" value="{{shopDetails.contact}}"></td>
             </tr>
             <tr>
                 <td class="padding15 font15">Email ID</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.email}}</td>
-                <td class="padding15" *ngIf = "editShopDetails"><input id="email" value="{{shopDetails.email}}"></td>
+                <td class="padding15" *ngIf = "editShopDetails" ><input style="cursor: pointer;" (click)="alertError('Email cannot be changed');"   id="email" value="{{shopDetails.email}}"  readonly="readonly"></td>
             </tr>
             <tr>
                 <td class="padding15 font15">GST No</td>
                 <td class="padding15" *ngIf = "!editShopDetails">{{shopDetails.gst}}</td>
                 <td class="padding15" *ngIf = "editShopDetails"><input id="gst" value="{{shopDetails.gst}}"></td>
             </tr>
+            <tr *ngIf = "changePassword">
+                <td class="padding15 font15">Change Password</td>
+                <td class="padding15" >
+                    <input id="passwordOld" *ngIf = "!passwordChecker" type="password" placeholder="Enter the old passsword">
+                    <p class="verifyPassword" *ngIf = "!passwordChecker" (click)="verifyPassword();">verify passsword</p>
+                    <input id="passwordNew" *ngIf = "passwordChecker" type="password" placeholder="Enter the New passsword">
+                    <input id="passwordConfirm" *ngIf = "passwordChecker" type="password" placeholder="Confirm passsword">
+                    <p class="verifyPassword" *ngIf = "passwordChecker" (click)="changePasswordFunc();">change passsword</p>
+                </td>
+            </tr>
         </table>
-
-        <div class="editShopDetailsSave" *ngIf = "editShopDetails" style="cursor: pointer;" (click) = "saveShopDetails()">Save</div>
+        <div style="display: inline-flex;">
+            <div class="editShopDetailsSave" style="cursor: pointer;left: 0;" (click) ="editShopDetails = true;changePassword = true">Change Password</div>
+            <div class="editShopDetailsSave" *ngIf = "editShopDetails" style="cursor: pointer;" (click) = "saveShopDetails()">Save</div>
+        </div>
+        
 
       </mat-expansion-panel>
 
@@ -103,7 +126,7 @@
         <tr>
             <td class="padding15 font15">Email ID</td>
             <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.email}}</td>
-            <td class="padding15" *ngIf = "editOwnerDetails"><input id="owneremail" value="{{shopDetails.email}}"></td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input style="cursor: pointer;" (click)="alertError('Email cannot be changed');" id="owneremail" value="{{shopDetails.email}}" readonly="readonly"></td>
         </tr>
         <tr>
             <td class="padding15 font15">Date of Birth</td>
@@ -123,7 +146,7 @@
         <tr>
             <td class="padding15 font15">Contact No</td>
             <td class="padding15" *ngIf = "!editOwnerDetails">{{shopDetails.contact}}</td>
-            <td class="padding15" *ngIf = "editOwnerDetails"><input id="ownerphone" value="{{shopDetails.contact}}"></td>
+            <td class="padding15" *ngIf = "editOwnerDetails"><input style="cursor: pointer;" (click)="alertError('Phone number cannot be changed');" id="ownerphone" value="{{shopDetails.contact}}" readonly="readonly"></td>
         </tr>
         <tr>
             <td class="padding15 font15">GST No</td>

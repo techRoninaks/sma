@@ -37,6 +37,7 @@
             $result1 = mysqli_query($con2, $sql_query1);
             $sql_query3 = "UPDATE `user`SET addr_id='$id' WHERE id = '$id'";
             $result3 = mysqli_query($con2, $sql_query3);
+
             if(!$result && !$result1 && !$result3)
             {
                 $status="Error";
@@ -45,7 +46,8 @@
             else
             {
                 $status="Success";
-                echo json_encode($status);
+                $data = array('id'=>$id,'status'=>$status);
+                echo json_encode($data);
             }
         }
         else

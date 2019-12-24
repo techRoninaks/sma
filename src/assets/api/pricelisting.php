@@ -270,8 +270,8 @@
     $priceAfterTax = $price * (1+($tax/100));
     $totalAmount = round($priceAfterTax);
 
-    echo $shipBasePrice;
-    echo $totalAmount;
+    // echo $shipBasePrice;
+    // echo $totalAmount;
 
 
 
@@ -281,7 +281,7 @@
     `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'$orderStatus',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
     0,0,$reqDD,'$varId',0)";
     $result2 = mysqli_query($con2, $sql_query2);
-    echo $sql_query2;
+    // echo $sql_query2;
 
     //orderid selection
 
@@ -684,7 +684,7 @@
     `delivery_date`, `shipping_tracking_number`, `shipping_tracking_hyperlink`) VALUES ($prodId,$productQuantity,'$varId',$isGift,null,null,null,$isRfq,$basePrice,$qtPrice,
     $totalAmount,$disc,$shipBasePrice,$tax,$varPrice,$imageUploaded,$orderId,null,0,'$deliveryDate',null,null)";
     $result3 = mysqli_query($con2, $sql_query3);
-    echo $sql_query3;
+    // echo $sql_query3;
     //customer order id
     $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);
@@ -694,7 +694,7 @@
     $orderCustInfo=array('coid'=>$rowCustOrder["coid"]);
     
     $coId=$orderCustInfo["coid"];
-
+    echo $orderId;
 
     $spiltMsg = explode(",", $message);  
     for($msgC=0;$msgC<$msgCount;$msgC++){

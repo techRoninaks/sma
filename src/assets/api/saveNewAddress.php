@@ -15,8 +15,8 @@
           $status = "";
           $sql_query = "INSERT INTO `address`( `mapping_id`, `addr1`, `addr2`, `city`, `district`, `state`, `country`, `pincode`,`contact_email`, `contact_number`, `contact_name`, `addr_type`) VALUES ($mapping_id,'$addr1','$addr2','$city','$district','$state','$country',$pincode,'$contact_email',$contact_number,'$contact_name','shipping')";
           $result = mysqli_query($con2, $sql_query);
-          echo $sql_query;
-          echo $result;
+          // echo $sql_query;
+          // echo $result;
           if($result){
             echo "success";
           }

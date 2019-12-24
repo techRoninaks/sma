@@ -11,15 +11,21 @@
     $row7 = mysqli_fetch_array($result7);
     $orderCount=$row7["Ordercount"];
     while($j < $orderCount){
-        $sql_query1="SELECT `orderid`,`created_date`,`order_status`,`delivery_date` FROM `purchase_order` WHERE customerid = $userId && order_status = 'pending_payment'";
+        $sql_query1="SELECT * FROM `purchase_order` WHERE customerid = $userId && order_status = 'pending_payment'";
         $result1 = mysqli_query($con2, $sql_query1);
         
         while($row1 = mysqli_fetch_array($result1))
         {
             $orderId = $row1["orderid"];
+            $orderIdsmall = $row1["orderid"];
             $createDate = $row1["created_date"];
             $orderStatus = $row1["order_status"];
             $delivery = $row1["delivery_date"];
+            $seller = $row1["sellerid"];
+            $sql_query95="SELECT seller_name FROM `seller` WHERE id = $seller";
+            $result95 = mysqli_query($con2, $sql_query95);
+            $row95 = mysqli_fetch_array($result95);
+            $sellerName = $row95['seller_name'];
             $datem = date_create($createDate);
             $mdate = date_format($datem,"dmy");
             $len = strlen($orderId);
@@ -52,7 +58,7 @@
                 $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
-                $response[$arraycount]=array('stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option'],'orderIdsmall'=>$orderIdsmall,'sellerName'=>$sellerName,'total_amnt'=>$row1['total_amnt']);
             }
             else if($orderStatus == 'processing')
             {

@@ -1,7 +1,7 @@
 <div class="breadcrumb-layout">
     <ul class="breadcrumb">
       <li><a routerLink="/signupseller">Home</a></li>
-      <li>Registration</li>
+      <li>Registration</li>                                                                                                                            
     </ul>
     <hr class="hrdiv">
   </div>
@@ -592,14 +592,24 @@
             </div>
             <div class="grid-location">
               <div class="location-input">
-                <input type="text" id="city" class="city2">
+                <input type="text" id="city" class="city2" (keyup)="shippingLocationGetter('item')" value="{{shippingLocation.location_alias}}">
               </div>
               <div class="addbtn">
                 <button class="addButton1">+</button>
               </div>
-              <div class="location-list">
-                <!-- <label style="margin-left: -432px; margin-top: 127px;">Tamilnadu,600046</label> -->
+              <div  id="myUL" style="display: none;">
+                <ul>
+                <li>
+                  <a (click)="replaceTextMyul(inp.pincode,inp.office_name);" *ngFor="let inp of shippinglocationArray">
+                      {{inp.office_name}},{{inp.pincode}}
+                  </a>
+                </li>
+              </ul>
               </div>
+
+            </div>
+            <div>
+              <p *ngFor="let inp of shippingArray">{{inp.location}}</p>
             </div>
           </div>
           <div class="payment">

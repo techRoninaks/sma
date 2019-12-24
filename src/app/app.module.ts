@@ -47,7 +47,38 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import {} from 'googlemaps';
+import { NgxUiLoaderModule, NgxUiLoaderConfig } from  'ngx-ui-loader';
 
+
+var ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  "bgsColor": "#EFBE24",
+  "bgsOpacity": 0.8,
+  "bgsPosition": "center-center",
+  "bgsSize": 60,
+  "bgsType": "ball-spin-clockwise",
+  "blur": 7,
+  "delay": 0,
+  "fgsColor": "#EFBE24",
+  "fgsPosition": "center-center",
+  "fgsSize": 70,
+  "fgsType": "three-strings",
+  "gap": 24,
+  "logoPosition": "center-center",
+  "logoSize": 120,
+  "logoUrl": "",
+  "masterLoaderId": "master",
+  "overlayBorderRadius": "0",
+  "overlayColor": "rgb(4, 15, 21)",
+  "pbColor": "#EFBE24",
+  "pbDirection": "ltr",
+  "pbThickness": 1,
+  "hasProgressBar": true,
+  "text": "",
+  "textColor": "#FFFFFF",
+  "textPosition": "center-center",
+  "maxTime": -1,
+  "minTime": 500
+};
 
 @NgModule({
   declarations: [
@@ -80,6 +111,7 @@ import {} from 'googlemaps';
   ],
   imports: [
     BrowserModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
