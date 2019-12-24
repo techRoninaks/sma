@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma26/src/";
+  // baseUrl = "http://localhost/Angular/sma27/src/";
 
   constructor( private http: HttpClient ) { }
   
@@ -1393,6 +1393,8 @@ addUserAddressData(userId: any,userName:any,data: Object){
   let httpParams= new HttpParams()
   .append("userName", userName)
   .append("city", data['city'])
+  .append("address", data['address1'])
+  .append("district", data['district'])
   .append("country", data['country'])
   .append("pin", data['pin'])
   .append("email", data['email'])
@@ -1434,7 +1436,7 @@ uploadImage1(data: Object){
   return this.http.post(this.baseUrl+'assets/api/getShopDetailsSetting.php',httpParams);
  }
 
- updateShopDetailsSettings(data : Object){
+ updateShopDetailsSettings(data : Object, shopAddress){
   let httpParams= new HttpParams()
   .append("seller_id",data['seller_id'])
   .append("name",data['shopname'])
@@ -1445,10 +1447,26 @@ uploadImage1(data: Object){
   .append("imageMain",data['imageMain'])
   .append("imageProductOne",data['imageProductOne'])
   .append("imageProductTwo",data['imageProductTwo'])
+  .append("shopAddress",shopAddress)
   .append("imageProductThree",data['imageProductThree'])
   .append("category",data['category']);
   return this.http.post(this.baseUrl+'assets/api/uploadShopDetailsSetting.php',httpParams);
  }
+
+ verfiyPassword(data : Object){
+  let httpParams= new HttpParams()
+  .append("shopId",data['shopId'])
+  .append("oldpassword",data['oldpassword']);
+  return this.http.post(this.baseUrl+'assets/api/verifyPassword.php',httpParams);
+ }
+
+ postChangePassword(data : Object){
+  let httpParams= new HttpParams()
+  .append("sellerid",data['sellerid'])
+  .append("newpassword",data['newpassword']);
+  return this.http.post(this.baseUrl+'assets/api/postChangePassword.php',httpParams);
+ }
+
  updateOwnerDetailsSettings(data : Object){
   let httpParams= new HttpParams()
   .append("seller_id",data['seller_id'])

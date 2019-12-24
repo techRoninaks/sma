@@ -549,6 +549,28 @@
 							</div>
 							<div >
 							   <form [formGroup]="addAddress" class="grid-add-address">
+								<div class="Address">
+									<label class="saved-card-style">Address</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address" formControlName="address1">
+									<div *ngIf="submitted && addAddress.controls.address1.errors" class="error validator-style">
+										<div *ngIf="addAddress.controls.address1.errors.required">
+											Enter Address!
+										</div>
+									</div>
+									
+								</div>
+								<div class="district">
+									<label class="saved-card-style">District</label>
+									<br>
+									<input type="text" size="24" class="card-input-style-address" formControlName="district">
+									<div *ngIf="submitted && addAddress.controls.district.errors" class="error validator-style">
+										<div *ngIf="addAddress.controls.district.errors.required">
+											Enter district!
+										</div>
+									</div>
+									
+								</div>
 								<div class="country">
 									<label class="saved-card-style">Country</label>
 									<br>
@@ -865,96 +887,15 @@
 				<p class="del-date">{{dynamicDataOrderData[item].delivery}}</p>
 			</div>
 			<div class="btn-req-update">
-				<button class="btn-req-update-style" *ngIf="dynamicDataOrderData[item].orderStatus != 'closed'" (click)="reqUpdate(dynamicDataOrderData[item].prodId);">REQUEST UPDATE</button>
+				<button class="btn-req-update-style" *ngIf="dynamicDataOrderData[item].orderStatus != 'closed'&&dynamicDataOrderData[item].orderStatus !='pending_payment'" (click)="reqUpdate(dynamicDataOrderData[item].prodId);">REQUEST UPDATE</button>
+				<button class="btn-req-update-style" *ngIf="dynamicDataOrderData[item].orderStatus == 'pending_payment'" (click)="paynow(dynamicDataOrderData[item]);">PAY NOW</button>
 				<div *ngIf="dynamicDataOrderData[item].orderStatus == 'closed'">
 					<div class="container" style="height: auto;">
 						<!-- Trigger the modal with a button -->
 						<button type="button" class="btn-review" data-toggle="modal"
 								data-target="#myModalReview">REVIEW</button>
 						<!-- Modal -->
-						<div class="modal fade" id="myModalReview" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content" class="modal-review">
-									<div class="modal-header" style="border-top-right-radius: 18px; border-top-left-radius: 18px;">
-											<h4 class="modal-title" style="text-align: center; margin-left: auto;">
-												REVIEW
-											</h4>
-											<button type="button" class="close"
-													data-dismiss="modal">&times;</button>
-									</div>
-									<div class="modal-body">
-										<form [formGroup]="addReview">
-											<div class="grid-complaint">
-												<div class="username">
-														<label>Title</label>
-														<br>
-														<input type="text" class="user-style title-style" formControlName="title">
-														<div *ngIf="submittedReview && addReview.controls.title.errors" class="error validator-style">
-																<div *ngIf="addReview.controls.title.errors.required">
-																		Required
-																</div>
-														</div>
-												</div>
-												<div class="write-complaint">
-														<textarea placeholder="Review" class="text-area-style title-style-2" formControlName="review_desc"></textarea>
-														<div *ngIf="submittedReview && addReview.controls.review_desc.errors" class="error validator-style">
-																<div *ngIf="addReview.controls.review_desc.errors.required">
-																		Required
-																</div>
-														</div>
-														<div>
-															<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-1');" id="star-1"></span>
-															<span class="fa fa-star active" (click)="addStar('star-1');" id="star-1-active" style="display: none; color: #EFBE24;"></span>
-															<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-2');" id="star-2"></span>
-															<span class="fa fa-star active" (click)="addStar('star-2');" id="star-2-active" style="display: none; color: #EFBE24;"></span>
-															<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-3');" id="star-3"></span>
-															<span class="fa fa-star active" (click)="addStar('star-3');" id="star-3-active" style="display: none; color: #EFBE24;"></span>
-															<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-4');" id="star-4"></span>
-															<span class="fa fa-star active" (click)="addStar('star-4');" id="star-4-active" style="display: none; color: #EFBE24;"></span>
-															<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-5');" id="star-5"></span>
-															<span class="fa fa-star active" (click)="addStar('star-5');" id="star-5-active" style="display: none; color: #EFBE24;"></span>
-														</div>
-														<div>
-															<button class="submit btn-review-submit" (click)="onSubmitReview(dynamicDataOrderData[item].prodId);" type="submit">Submit</button>
-														</div>
-														
-												</div>
-												<div class="add-image">
-													<label>Add image</label>
-													<br>
-													<div class="flex-container">
-														<div>
-															<input style="display: none;" type="file" id="frontUpload4" (click)="frontUpload4()" accept="image/*" #fileInput4>
-															<button (click)="fileInput4.click()" type="button" style="border: none; margin-left: -13px;
-															margin-top: 2px; background: inherit;">+</button>
-															<img id="frontPreviewId4" style="display: none; margin-left: -9px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront4" height="200">
-														</div>
-														<div>
-															<input style="display: none;" type="file" id="frontUpload5" (click)="frontUpload5()" accept="image/*" #fileInput5>
-															<button (click)="fileInput5.click()" type="button" style="border: none; margin-left: 23px;
-															margin-top: 2px; background: inherit;">+</button>
-															<img id="frontPreviewId5" style="display: none; margin-left: 10px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront5" height="200">
-														</div>
-														<div>
-															<input style="display: none;" type="file" id="frontUpload6" (click)="frontUpload6()" accept="image/*" #fileInput6>
-															<button (click)="fileInput6.click()" type="button" style="border: none; margin-left: 23px;
-															margin-top: 2px; background: inherit;">+</button>
-															<img id="frontPreviewId6" style="display: none; margin-left: 20px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront6" height="200">
-														</div>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-									<div class="modal-footer" style="border-bottom-left-radius: 18px;
-									border-bottom-right-radius: 18px;">
-											<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -1045,3 +986,88 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="myModalReview" role="dialog" >
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content" class="modal-review">
+			<div class="modal-header" style="border-top-right-radius: 18px; border-top-left-radius: 18px;">
+					<h4 class="modal-title" style="text-align: center; margin-left: auto;">
+						REVIEW
+					</h4>
+					<button type="button" class="close"
+							data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="addReview">
+					<div class="grid-complaint">
+						<div class="username">
+								<label>Title</label>
+								<br>
+								<input type="text" class="user-style title-style" formControlName="title">
+								<div *ngIf="submittedReview && addReview.controls.title.errors" class="error validator-style">
+										<div *ngIf="addReview.controls.title.errors.required">
+												Required
+										</div>
+								</div>
+						</div>
+						<div class="write-complaint">
+								<textarea placeholder="Review" class="text-area-style title-style-2" formControlName="review_desc"></textarea>
+								<div *ngIf="submittedReview && addReview.controls.review_desc.errors" class="error validator-style">
+										<div *ngIf="addReview.controls.review_desc.errors.required">
+												Required
+										</div>
+								</div>
+								<div>
+									<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-1');" id="star-1"></span>
+									<span class="fa fa-star active" (click)="addStar('star-1');" id="star-1-active" style="display: none; color: #EFBE24;"></span>
+									<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-2');" id="star-2"></span>
+									<span class="fa fa-star active" (click)="addStar('star-2');" id="star-2-active" style="display: none; color: #EFBE24;"></span>
+									<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-3');" id="star-3"></span>
+									<span class="fa fa-star active" (click)="addStar('star-3');" id="star-3-active" style="display: none; color: #EFBE24;"></span>
+									<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-4');" id="star-4"></span>
+									<span class="fa fa-star active" (click)="addStar('star-4');" id="star-4-active" style="display: none; color: #EFBE24;"></span>
+									<span class="fa fa-star-o" style="color: #EFBE24;" (click)="addStar('star-5');" id="star-5"></span>
+									<span class="fa fa-star active" (click)="addStar('star-5');" id="star-5-active" style="display: none; color: #EFBE24;"></span>
+								</div>
+								<div>
+									<button class="submit btn-review-submit" (click)="onSubmitReview(dynamicDataOrderData[item].prodId);" type="submit">Submit</button>
+								</div>
+								
+						</div>
+						<div class="add-image">
+							<label>Add image</label>
+							<br>
+							<div class="flex-container">
+								<div>
+									<input style="display: none;" type="file" id="frontUpload4" (click)="frontUpload4()" accept="image/*" #fileInput4>
+									<button (click)="fileInput4.click()" type="button" style="border: none; margin-left: -13px;
+									margin-top: 2px; background: inherit;">+</button>
+									<img id="frontPreviewId4" style="display: none; margin-left: -9px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront4" height="200">
+								</div>
+								<div>
+									<input style="display: none;" type="file" id="frontUpload5" (click)="frontUpload5()" accept="image/*" #fileInput5>
+									<button (click)="fileInput5.click()" type="button" style="border: none; margin-left: 23px;
+									margin-top: 2px; background: inherit;">+</button>
+									<img id="frontPreviewId5" style="display: none; margin-left: 10px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront5" height="200">
+								</div>
+								<div>
+									<input style="display: none;" type="file" id="frontUpload6" (click)="frontUpload6()" accept="image/*" #fileInput6>
+									<button (click)="fileInput6.click()" type="button" style="border: none; margin-left: 23px;
+									margin-top: 2px; background: inherit;">+</button>
+									<img id="frontPreviewId6" style="display: none; margin-left: 20px; width: 100px; height: 100px; margin-top: -79px;" [src]="urlFront6" height="200">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="modal-footer" style="border-bottom-left-radius: 18px;
+			border-bottom-right-radius: 18px;">
+					<button type="button" class="btn btn-default"
+							data-dismiss="modal">Close</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+

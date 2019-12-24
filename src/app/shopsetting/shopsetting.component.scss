@@ -85,6 +85,19 @@
 }
 .padding15{
     padding: 15px;
+
+    input{
+        margin-bottom: 8px;
+    }
+
+    .verifyPassword{
+        width: max-content;
+        padding: 5px;
+        background: #EFBE24;
+        border-radius: 5px;
+        color:white;
+        cursor: pointer;
+    }
 }
 
 
@@ -123,7 +136,7 @@ table{
     width: max-content;
     width: max-content;
     position: relative;
-    left: 94.7%;
+    left: 82.5%;
     margin-top: 15px;
     border-radius: 6px;
 }
@@ -284,6 +297,7 @@ input{
     position: relative;
     left: -31%;
     width: 65px;
+    height: 65px;
     top: -47%;
     border-radius: 50%;
     border: 5px solid whitesmoke;

@@ -89,6 +89,37 @@
     background: none;
     margin-left: 1%;
   }
+
+  #myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #EFBE24;
+    z-index: 111;
+    position: absolute;
+    margin-top: 5%;
+    width: 25%;
+
+	li{
+
+	}
+}
+
+#myUL li a {
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #EFBE24;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    color: #EFBE24;
+    cursor: pointer;
+}
   
   .breadcrumb-layout{
     margin-left: 0%;

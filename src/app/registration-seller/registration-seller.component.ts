@@ -14,6 +14,7 @@ declare var Razorpay: any;
 })
 export class RegistrationSellerComponent implements OnInit {
   Object = Object;
+  shippingLocation : any ="";
   registrationForm: FormGroup;
   sellerRegForm: FormGroup;
   bankDetailsForm: FormGroup;
@@ -32,8 +33,9 @@ export class RegistrationSellerComponent implements OnInit {
   fp_mobile: any ="" ;
   sentOTP: boolean = false;
   Otp: boolean = true;
-
+  shippinglocationArray: any = [];
   otpVerified: boolean = false;
+  shippingArray: any = [] ;
 
   constructor(private data: DataService,private formBuilderBank: FormBuilder,private formBuilder: FormBuilder,private formBuilderMobile: FormBuilder,private formBuilderOtp: FormBuilder,private formBuilderTerms: FormBuilder,private router: Router,private cookieService: CookieService) { 
     this.registrationForm = this.formBuilder.group({
@@ -219,6 +221,7 @@ export class RegistrationSellerComponent implements OnInit {
         error=> console.error(error)
       );
   }
+
   setCookie(cname, value) {
     this.cookieService.set(cname, value);
   }
@@ -456,6 +459,30 @@ export class RegistrationSellerComponent implements OnInit {
             },
         error=> console.error(error)
       );
+    }
+  }
+  shippingLocationGetter(pos){
+    var search = (<HTMLInputElement><any>document.getElementById("city")).value;
+    (<HTMLInputElement><any>document.getElementById("myUL")).style.display = "block";
+    this.data.getAutoShippingLocation(search).subscribe(data=>{
+      this.shippinglocationArray = data;
+    })
+  }
+
+  replaceTextMyul(pincode, location){
+    var cell = { location : location, pin : pincode };
+    this.shippingArray.push(cell);
+    (<HTMLInputElement><any>document.getElementById("myUL")).style.display = 'none';
+    console.log(this.shippingArray);
+  }
+  replaceText(pin, loc){
+    if(loc == "Main"){
+      (<HTMLInputElement><any>document.getElementById("item_pincode")).value = pin;
+      (<HTMLInputElement><any>document.getElementById("myUL")).style.display = "none";
+    }
+    else{
+      (<HTMLInputElement><any>document.getElementById("item_pincode")).value = loc+", "+pin;
+      (<HTMLInputElement><any>document.getElementById("myUL")).style.display = "none";
     }
   }
   idCardlist(){

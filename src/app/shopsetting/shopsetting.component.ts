@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../data.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
 
 var imageCoverValue : any = 1 ;
 var productTwoValue : any = 1 ;
@@ -20,9 +21,11 @@ export class ShopsettingComponent implements OnInit {
   editOwnerDetails: boolean = false;
   editPaymentDetails: boolean = false;
   newShipping: boolean = false;
+  changePassword: boolean = false;
   userId: any = "";
   sellerId: any = "";
   shopDetails: any = "";
+  shopAddress: any = "";
   locationDetails: any = "";
   shopDetailUpload: any = "";
   shopOwnerUpload: any = "";
@@ -41,8 +44,16 @@ export class ShopsettingComponent implements OnInit {
   arrayPos: any;
   selectArrayCell: any;
   allFlag : boolean = true;
+  addr1: any;
+  addr2: any;
+  city: any;
+  district: any;
+  state: any;
+  country: any;
+  pincode: any;
+  passwordChecker: boolean = false;
 
-  constructor( private cookieService: CookieService, private route : Router, private data : DataService ) { }
+  constructor( private ngxService: NgxUiLoaderService, private cookieService: CookieService, private route : Router, private data : DataService ) { }
 
   ngOnInit() {
     (<HTMLInputElement><any>document.getElementById('sellerHeader')).style.display ="block";
@@ -60,6 +71,15 @@ export class ShopsettingComponent implements OnInit {
     else{
       this.data.getShopDetailsSettings(this.sellerId).subscribe(data=>{
         this.shopDetails = data;
+        this.shopAddress = this.shopDetails['shop_address'];
+        var shopAdd = this.shopAddress.split(',');
+        this.addr1 = shopAdd[0]; 
+        this.addr2 = shopAdd[1]; 
+        this.city = shopAdd[2]; 
+        this.district = shopAdd[3]; 
+        this.state = shopAdd[4]; 
+        this.country = shopAdd[5]; 
+        this.pincode = shopAdd[6]; 
         this.idCardImgSrcFront ="assets/images/seller/id/"+this.sellerId+"/"+this.sellerId+"front.jpg"; 
         this.idCardImgSrcBack ="assets/images/seller/id/"+this.sellerId+"/"+this.sellerId+"back.jpg"; 
         
@@ -127,6 +147,16 @@ export class ShopsettingComponent implements OnInit {
 		(<HTMLInputElement><any>document.getElementById('breadcrumb')).style.display ="block";
   }
 
+  alertError(text){
+    alert(text)
+  }
+
+  editShopDetailsToggler(){
+    this.editShopDetails = true;
+    // this.ngxService.startBackground('do-background-things');
+    // this.ngxService.stopBackground('do-background-things');
+  }
+
   openDropdown(){
     (<HTMLInputElement><any>document.getElementById('myUL')).style.display ="block";
   }
@@ -169,18 +199,29 @@ export class ShopsettingComponent implements OnInit {
     var email = (<HTMLInputElement><any>document.getElementById('email')).value;
     var phone = (<HTMLInputElement><any>document.getElementById('phone')).value;
     var gst = (<HTMLInputElement><any>document.getElementById('gst')).value;
-    var address = (<HTMLInputElement><any>document.getElementById('address')).value;
+    var address1 = (<HTMLInputElement><any>document.getElementById('address1')).value;
+    var address2 = (<HTMLInputElement><any>document.getElementById('address2')).value;
+    var address3 = (<HTMLInputElement><any>document.getElementById('address3')).value;
+    var address4 = (<HTMLInputElement><any>document.getElementById('address4')).value;
+    var address5 = (<HTMLInputElement><any>document.getElementById('address5')).value;
+    var address6 = (<HTMLInputElement><any>document.getElementById('address6')).value;
+    var address7 = (<HTMLInputElement><any>document.getElementById('address7')).value;
     var caetegory = (<HTMLInputElement><any>document.getElementById('caetegory')).value;
     this.shopDetails.shopname = name;
     this.shopDetails.email = email;
     this.shopDetails.contact = phone;
     this.shopDetails.gst = gst;
-    this.shopDetails.shop_address = address;
+    var addressEdited = address1+","+address2+","+address3+","+address4+","+address5+","+address6+","+address7;
+    this.shopAddress = addressEdited;
+    console.log(addressEdited);
     this.shopDetails.category = caetegory;
     this.editShopDetails = false;
-    this.shopDetailUpload = { seller_id: this.sellerId, shopname: name, email: email, phone: phone, gst: gst, address: address, category: caetegory,imageMain: imageCoverValue,imageProductOne: productOneValue,imageProductTwo: productTwoValue,imageProductThree: productThreeValue};
-    this.data.updateShopDetailsSettings(this.shopDetailUpload).subscribe(data=>{
+    this.shopDetailUpload = { seller_id: this.sellerId, shopname: name, email: email, phone: phone, gst: gst, address: addressEdited, category: caetegory,imageMain: imageCoverValue,imageProductOne: productOneValue,imageProductTwo: productTwoValue,imageProductThree: productThreeValue};
+    this.ngxService.startBackground('do-background-things');
+    var shopAddress = this.shopDetails['shop_address_id'];
+    this.data.updateShopDetailsSettings(this.shopDetailUpload, shopAddress).subscribe(data=>{
       // console.log(data);
+      this.ngxService.stopBackground('do-background-things');
     });
   }
 
@@ -203,8 +244,9 @@ export class ShopsettingComponent implements OnInit {
     this.editOwnerDetails = false;
 
     this.shopOwnerUpload = { seller_id: this.sellerId, name: ownername, email: owneremail, phone: ownerphone, gst: ownergst, owneridtype: owneridtype, owneridno: owneridno, ownerdob: ownerdob};
+    this.ngxService.startBackground('do-background-things');
     this.data.updateOwnerDetailsSettings(this.shopOwnerUpload).subscribe(data=>{
-      // console.log(data);
+      this.ngxService.stopBackground('do-background-things');
     });
   }
 
@@ -248,8 +290,9 @@ export class ShopsettingComponent implements OnInit {
     }
 
     this.shopPaymentUpload = { seller_id: this.sellerId, shippingform: shippingform, shippingmode: shippingModeBlock, accountholder: accountholder, accounttype: accounttype, accountno: accountno, ifsc: ifsc, bankname: bankname, shippingLoc: this.shippingArray};
+    this.ngxService.startBackground('do-background-things');
     this.data.updatePaymentDetailsSettings(this.shopPaymentUpload).subscribe(data=>{
-      // console.log(data);
+      this.ngxService.stopBackground('do-background-things');
     });
   }
 
@@ -263,8 +306,9 @@ export class ShopsettingComponent implements OnInit {
     var order_confirmation = (<HTMLInputElement><any>document.getElementById('orderInput')).checked;
 
     this.shopAdvancedUpload = { seller_id: this.sellerId, responseInput: responseInput, processInput: processInput, cancellInput: cancellInput, giftInput: giftInput, deliver_by_date: deliver_by_date, rfq: rfq, order_confirmation: order_confirmation};
+    this.ngxService.startBackground('do-background-things');
     this.data.updateAdvancedDetailsSettings(this.shopAdvancedUpload).subscribe(data=>{
-      // console.log(data);
+      this.ngxService.stopBackground('do-background-things');
     });
     
   }
@@ -286,6 +330,48 @@ export class ShopsettingComponent implements OnInit {
     this.shippingArray.push(primaryArea);
     (<HTMLInputElement><any>document.getElementById('shippingLocationPrimary')).value = "";
   }
+
+  verifyPassword(){
+    var verifyPassword = (<HTMLInputElement><any>document.getElementById('passwordOld')).value;
+    if(verifyPassword == "" || verifyPassword == null){
+      alert("Password feild is empty.")
+    }
+    else{
+      var token = { shopId : this.shopDetails['shopid'], oldpassword: verifyPassword }
+      this.data.verfiyPassword(token).subscribe(data=>{
+        var passwordCheck = data;
+        this.passwordChecker = passwordCheck == "true"? true : false;
+        if(this.passwordChecker){
+          alert('Password have been confirmed.')
+        }
+      })
+    }
+
+  }
+
+  changePasswordFunc(){
+    var newPassword = (<HTMLInputElement><any>document.getElementById('passwordNew')).value;
+    var confirmPassword = (<HTMLInputElement><any>document.getElementById('passwordConfirm')).value;
+    var token = { sellerid : this.sellerId, newpassword:newPassword }
+    if(newPassword == confirmPassword){
+      this.data.postChangePassword(token).subscribe(data=>{
+        if(data ==1){
+          this.changePassword = false;
+          this.passwordChecker = false;
+          alert('Password sucessfully changed.')
+        }
+        else{
+          this.changePassword = true;
+          this.passwordChecker = true;
+          alert('There was an error.')
+        }
+      })
+    }
+    else{
+      alert('Password mismatch.')
+    }
+  }
+
   deleteShipping(cell){
     if(cell == "All over India"){
       this.allFlag = true;
@@ -355,8 +441,9 @@ export class ShopsettingComponent implements OnInit {
   deleteShippingLocation(id : any){
     var result = confirm("Want to delete?");
     if (result) {
+        this.ngxService.stopBackground('do-background-things');
         this.data.deleteLocation(id).subscribe(data=>{
-          
+          this.ngxService.stopBackground('do-background-things');
         });
     }
   }
