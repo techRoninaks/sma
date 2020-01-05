@@ -2,6 +2,9 @@
 
     require "init.php";
 
+    $DB_SMA_PR = DB_SMA_PR;
+    $DB_SMA_USER = DB_SMA_USER;
+
     $pincode = $_POST["pincode"];
 
     $tagNum = $_POST["tagNum"];
@@ -10,7 +13,7 @@
 
     $paginationQuery = " limit $tagNum offset $offset ";
 
-    $sql = "select sd.*, sl.seller_name from shop_details sd, shipping_location_shop sls, seller sl where sd.on_vacation = 0 and sls.pincode like '%$pincode%' and sd.id = sls.shop_id and sl.id = sd.seller_id and sl.stage_number = 8 order by sd.rating" . $paginationQuery;
+    $sql = "select sd.*, sl.seller_name from $DB_SMA_USER.shop_details sd, $DB_SMA_USER.seller sl where sd.on_vacation = 0 and sl.id = sd.seller_id and sl.stage_number = 8 and sd.id IN (SELECT p.shop_id from $DB_SMA_PR.product p,$DB_SMA_PR.shipping_location_product slp WHERE slp.pincode LIKE '%$pincode%' group by p.shop_id) order by sd.rating" . $paginationQuery;
     $result = mysqli_query($con2,$sql);
     // echo $sql;
     $data = array();
