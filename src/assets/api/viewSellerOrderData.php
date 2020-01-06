@@ -54,6 +54,7 @@
     $varSplit = (explode(",",$variantList));
     $arrayCount =sizeof($varSplit);
     $count1 =0;
+    $count2 =0;
     for ($i=0; $i<$arrayCount; $i++)
     {
         $sql_query4 = "SELECT * FROM `variant_info` where `prodid` =  '$prodId' && `variantid`= '$varSplit[$i]'";
@@ -61,6 +62,10 @@
         while($row4=mysqli_fetch_array($result4))
         {
             $variantArray[$count1++]= array('var_name'=>$row4["name"],'var_value'=>$row4["value"],'var_price'=>$row4["price"]);
+        }
+        if(!$row4)
+        {
+            $variantArray[$count2++]= array('var_name'=>"",'var_value'=>"",'var_price'=>"");
         }
     }
 

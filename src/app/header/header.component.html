@@ -84,15 +84,25 @@
       <div class="scrollmenu">
           <span style="font-size:28px;cursor:pointer;background: white" onclick="openNav()" id="breadcrumb">&nbsp;&nbsp;&#9776;</span>
         <div class="dropdown" style="    overflow-x: auto;scrollbar-width: thin;" id="mainHeader">
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:5}">Mom & Kids</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:1}">Mens</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:4}">Womens</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:13}">Painting & Arts</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:14}">Hand Craft</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:10}">Accessories</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:12}">Apparels</a></button>
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{cat_id:11}">Cakes</a></button> 
-          <button class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{shop_id:'all'}">Shop By Store</a></button>
+          <div class="dropbtn-cat ">
+            <a [routerLink]="['/category']" class='cat_{{i}}' [queryParams]="{cat_id:item.main_id}" *ngFor='let item of categoryData; let i = index;'>
+              {{item.main}}
+              <div class="subnav-content" >
+                <a  [routerLink]="['/category']" *ngFor='let links of item.list' [queryParams]="{cat_id:links.cate_id}">{{links.cate}}
+                <div class="sub-subnav-content" >
+                  <a  [routerLink]="['/category']" *ngFor='let link of links.sublist' [queryParams]="{cat_id:link.cate_id}">{{link.cate}}</a>
+                </div>
+              </a>
+              </div>
+            </a>
+            
+          </div>
+          <div class="subnav-content">
+            <a href="#company">Company</a>
+            <a href="#team">Team</a>
+            <a href="#careers">Careers</a>
+          </div>
+          <div class="dropbtn-cat"><a [routerLink]="['/category']" [queryParams]="{shop_id:'all'}">Shop By Store</a></div>
         </div>
         <div class="dropdown" style="display: none;" id="sellerHeader">
           <button class="dropbtn-cat"><a routerLink="/dashboard">DASHBOARD</a></button>

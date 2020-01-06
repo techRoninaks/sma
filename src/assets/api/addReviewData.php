@@ -15,6 +15,7 @@
     $Date = $current_date->format('Y/m/d');
 
     $sql_query = " INSERT INTO `review_rating` (`userid`,`review_title`,`review`,`mappingid`,`rating`,`has_image`,`date`) VALUES ('$userId','$title','$notes','$prodId','$rating',0,'$Date')";
+    
     $result = mysqli_query($con2, $sql_query);
     if(! $result)
     {

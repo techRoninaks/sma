@@ -1,10 +1,13 @@
 <?php
 require "init.php";
+$DB_SMA_PR = DB_SMA_PR;
+$DB_SMA_USER = DB_SMA_USER;
 $prodId = $_POST['prodId'];
 $data = array();
-$sql_query = "SELECT `name`,`value`,`price` FROM smapr1.variant_info, smausr1.cart WHERE FIND_IN_SET( smapr1.variant_info.variantid, smausr1.cart.variants_chosen )";
+$sql_query = "SELECT `name`,`value`,`price` FROM $DB_SMA_PR.variant_info, $DB_SMA_USER.cart WHERE FIND_IN_SET( $DB_SMA_PR.variant_info.variantid,  $DB_SMA_USER.cart.variants_chosen )";
 $result = mysqli_query($con1, $sql_query);
 $count= 0;
+// echo $sql_query;
 while($row=mysqli_fetch_assoc($result))
 {
     $data[$count++] = array('name'=>$row["name"],'value'=>$row["value"],'price'=>$row["price"]);

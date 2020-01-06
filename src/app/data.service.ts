@@ -7,7 +7,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   baseUrl = "";
-  // baseUrl = "http://localhost/Angular/sma27/src/";
+  // baseUrl = "http://localhost/Angular/sma28/src/";
+  googleApiKey = '';
 
   constructor( private http: HttpClient ) { }
   
@@ -70,6 +71,9 @@ sendOrderDetails(data: any) {
       .append("productCount", data['prod_number'])
 		return this.http.post(this.baseUrl+'assets/api/productslist.php', httpParams);
 	}
+  getCategoryForHeader() {
+		return this.http.get(this.baseUrl+'assets/api/getCategoryForHeader.php');
+	}
   
 
  sendCartDetails(data: any) {
@@ -107,13 +111,13 @@ sendOrderDetails(data: any) {
   }
 
   getReverseCoding(lat,long){
-    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=apikey");
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key="+this.googleApiKey);
   }
   getAddressFromPincode(pincode){
-    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+pincode+"&key=apikey");
+    return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+pincode+"&key="+this.googleApiKey);
   }
   getGoogleDistance(origin,destination){
-    return this.http.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination+"&key=apikey");
+    return this.http.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination+"&key="+this.googleApiKey);
   }
  getPriceDate(data: any) {
     let httpParams = new HttpParams()
@@ -911,6 +915,7 @@ getdynamicPriceAddProduct(prodid: any) {
   .append("branch",data['branch'])
   .append("accnt_no",data['accnt_no'])
   .append("seller_id",data['seller_id'])
+  .append("shippinglocationArray",data['shippinglocationArray'])
   .append("ifsc",data['ifsc']);
   return this.http.post(this.baseUrl+'assets/api/sellerRegistration4.php',httpParams);
  }

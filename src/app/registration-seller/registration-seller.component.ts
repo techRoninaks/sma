@@ -266,6 +266,9 @@ export class RegistrationSellerComponent implements OnInit {
     this.stage_5 = true; 
   }
   welcome(){
+    if((<HTMLInputElement><any>document.getElementById("paynow")).checked == true){
+      this.checkoutFree();
+    }
     if(this.choosedPlan == true)
     {
       this.g_seller_id = this.getCookie("sellerId");
@@ -425,6 +428,7 @@ export class RegistrationSellerComponent implements OnInit {
     }
     else
     {
+
       this.ship_city = (<HTMLInputElement>document.getElementById("ship-city")).value;
       var checkedValue = (<HTMLInputElement>document.querySelector('.shipping-mode:checked')).value;
       var checkedValue2 = (<HTMLInputElement>document.querySelector('.shipping-place:checked')).value;
@@ -439,7 +443,7 @@ export class RegistrationSellerComponent implements OnInit {
       this.accnt_no = (<HTMLSelectElement>document.getElementById("accnt-no")).value;
       this.ifsc = (<HTMLSelectElement>document.getElementById("ifsc")).value;
       this.conf_accnt_no = (<HTMLSelectElement>document.getElementById("conf-accnt-no")).value;
-      this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id};
+      this.sellerData4 = { ship_city: this.ship_city, checkedValue: checkedValue ,checkedValue2:checkedValue2,city:this.city,accnt_holder_name:this.accnt_holder_name,bank_name:this.bank_name,accnt_type:this.accnt_type,branch:this.branch,accnt_no:this.accnt_no,ifsc:this.ifsc,seller_id: this.seller_id,shippinglocationArray: JSON.stringify(this.shippinglocationArray)};
       this.data.addSellerDataStage4(this.sellerData4).subscribe(
       data=>{
               if(data['status'] == "Success")

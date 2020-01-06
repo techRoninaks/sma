@@ -11,16 +11,18 @@
     $row7 = mysqli_fetch_array($result7);
     $orderCount=$row7["Ordercount"];
     while($j < $orderCount){
-        $sql_query1="SELECT `orderid`,`sellerid`,`created_date`,`order_status`,`delivery_date` FROM `purchase_order` WHERE customerid = $userId";
+        $sql_query1="SELECT * FROM `purchase_order` WHERE customerid = $userId";
         $result1 = mysqli_query($con2, $sql_query1);
         
         while($row1 = mysqli_fetch_array($result1))
         {
             $orderId = $row1["orderid"];
+            $orderIdShort = $row1["orderid"];
             $createDate = $row1["created_date"];
             $orderStatus = $row1["order_status"];
             $delivery = $row1["delivery_date"];
             $sellerId = $row1["sellerid"];
+            $total_amnt = $row1["total_amnt"];
             $datem = date_create($createDate);
             $mdate = date_format($datem,"dmy");
             $len = strlen($orderId);
@@ -45,7 +47,7 @@
                 $sql_query10 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending _confirmation' ";
                 $result10 = mysqli_query($con2, $sql_query10);
                 $row10 = mysqli_fetch_array($result10);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'pending_payment')
             {
@@ -55,7 +57,7 @@
                 $sql_query5 = "SELECT `date` FROM `order_stage_date` where `stage` = 'pending_payment' ";
                 $result5 = mysqli_query($con2, $sql_query5);
                 $row5 = mysqli_fetch_array($result5);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stageDate'=>$createDate,'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'total_amnt'=>$total_amnt,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'processing')
             {
@@ -68,7 +70,7 @@
                 $sql_query6 = "SELECT `date` FROM `order_stage_date` where `stage` = 'processing' ";
                 $result6 = mysqli_query($con2, $sql_query6);
                 $row6 = mysqli_fetch_array($result6);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'shipped')
             {
@@ -87,7 +89,7 @@
                 $sql_query8 = "SELECT `shipping_tracking_number`, `shipping_tracking_hyperlink` FROM `customer_order` where `orderid` = $orderId ";
                 $result8 = mysqli_query($con2, $sql_query8);
                 $row8 = mysqli_fetch_array($result8);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'tracking_number'=>$row8['shipping_tracking_number'],'tracking_hyperlink'=>$row8['shipping_tracking_hyperlink'],'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'tracking_number'=>$row8['shipping_tracking_number'],'tracking_hyperlink'=>$row8['shipping_tracking_hyperlink'],'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'delivered')
             {
@@ -106,7 +108,7 @@
                 $sql_query8 = "SELECT `date` FROM `order_stage_date` where `stage` = 'delivered' ";
                 $result8 = mysqli_query($con2, $sql_query8);
                 $row8 = mysqli_fetch_array($result8);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             else if($orderStatus == 'closed')
             {
@@ -128,7 +130,7 @@
                 $sql_query9 = "SELECT `date` FROM `order_stage_date` where `stage` = 'closed' ";
                 $result9 = mysqli_query($con2, $sql_query9);
                 $row9 = mysqli_fetch_array($result9);
-                $response[$arraycount]=array('sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'stage_6_date'=>$row9['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
+                $response[$arraycount]=array('orderIdShort'=>$orderIdShort,'sellerId'=>$sellerId,'prodId'=>$prodId,'stage_1_date'=>$row10['date'],'stage_2_date'=>$row5['date'],'stage_3_date'=>$row6['date'],'stage_4_date'=>$row7['date'],'stage_5_date'=>$row8['date'],'stage_6_date'=>$row9['date'],'delivery'=>$delivery,'orderCount'=>$orderCount,'orderStatus'=>$orderStatus,'createDate'=>$mdate,'orderId'=>$orderId,'prodName'=>$row4['name'],'shortDesc'=>$row4['short_desc'],'longDesc'=>$row4['long_desc'],'spec'=>$row4['spec'],'shippingOption'=>$row4['shipping_option']);
             }
             $arraycount++;
             $j++;

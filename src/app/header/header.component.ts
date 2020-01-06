@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
   dynamicDataLocation :any ="";
   user_signed: boolean = false;
   sellerSignedIn: boolean =false;
+  categoryData : any = "";
   
   ngOnInit() {
     this.flag=this.getCookie("userName");
@@ -110,6 +111,7 @@ export class HeaderComponent implements OnInit {
       }, 120000);
       // }, 1000);
     }
+    this.getCategoryForHeader();
   }
   findMe() {
     if (navigator.geolocation) {
@@ -349,5 +351,11 @@ getGooglePin(){
   }
   deleteCookie(cname) {
     this.cookieService.delete(cname);
+  }
+
+  getCategoryForHeader(){
+    this.data.getCategoryForHeader().subscribe(data=>{
+      this.categoryData = data;
+    })
   }
 }

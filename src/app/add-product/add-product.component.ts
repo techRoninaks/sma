@@ -205,6 +205,7 @@ export class AddProductComponent implements OnInit {
   editTitleBoolean: boolean = false;
   subCategoryArrayLoad: any;
   isMessage: boolean;
+  tagsExtra: any = [];
   
 
 
@@ -592,17 +593,7 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  selectEvent(item) {
-    // do something with selected item
-    if(this.tagsArray.length<5){
-      var cell = {id:this.tagsArray.length+1,name:item.name}
-      this.tagsArray.push(cell);
-    }
-    else{
-      alert("Only 5 tags are allowed");
-    }
-    
-  }
+
   selectEvent1(item){
     console.log(item.srcElement.attributes['1'].nodeValue)
     console.log(item);
@@ -728,6 +719,7 @@ export class AddProductComponent implements OnInit {
     }
     this.data.getTagsForProduct(this.mainCatId).subscribe(data=>{
       this.datas = data;
+      this.tagsExtra = this.datas;
     });
     this.data.getCategoryAddProduct(id).subscribe(
       data => {
@@ -735,6 +727,44 @@ export class AddProductComponent implements OnInit {
         // console.log(this.dynamicCategory);
       },
     );
+  }
+  selectEvent(item) {
+    // do something with selected item
+    (<HTMLInputElement><any>document.getElementById("myUL3")).style.display = "none";
+    if(this.tagsArray.length<5){
+      var cell = {id:this.tagsArray.length+1,name:item};
+      this.tagsArray.push(cell);
+    }
+    else{
+      alert("Only 5 tags are allowed");
+    }
+    
+  }
+
+  onTagsInput(event){
+    (<HTMLInputElement><any>document.getElementById("myUL3")).style.display = "block";
+    if(event.key == "Enter"){
+      (<HTMLInputElement><any>document.getElementById("myUL3")).style.display = "none";
+      if(this.tagsArray.length<5){
+        var search = (<HTMLInputElement><any>document.getElementById("tagsInput")).value;
+        var cell = {id:this.tagsArray.length+1,name:search};
+        this.tagsArray.push(cell);
+      }
+      else{
+        alert("Only 5 tags are allowed");
+      }
+    }
+    else{
+      var search = (<HTMLInputElement><any>document.getElementById("tagsInput")).value;
+      var array = [];
+      var i = 0;
+      for(i = 0; i<this.tagsExtra.length;i++){
+        if(this.tagsExtra[i].name.includes(search)){
+          array.push(this.tagsExtra[i]);
+        }
+      }
+      this.datas = array;
+    }
   }
 
   replaceCategory(id, val){
