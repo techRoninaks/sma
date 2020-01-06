@@ -19,10 +19,10 @@
     $request = "failed";
 
     $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from $DB_SMA_PR.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-    FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.offer o, $DB_SMA_PR.prod_shipping_price psp
-    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid = p.prodid AND psp.shipping_location LIKE '%$pincode%' ";
+    FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.offer o,$DB_SMA_PR.shipping_location_product slp
+    WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id ";
 
-    $locationQuery = " and sls.pincode LIKE '%$pincode%'";
+    $locationQuery = " and slp.pincode LIKE '%$pincode%' ";
     // AND p.shipping_location_id = sls.id
     $status = "deliverable";
 
@@ -42,13 +42,13 @@
     $sortCondition = "";
     
     if($filterSet->deliverable){
-        $locationQuery = " AND p.shipping_location_id != sls.id and sls.pincode NOT LIKE '%$pincode%'";
+        $locationQuery = " slp.pincode NOT LIKE '%$pincode%'";
         
         $status = "undeliverable";
 
         $productQuery = "SELECT p.category_id, c.parentid, p.prodid, p.created_date, p.sold_count, p.avg_prcessing_time, p.avg_confrmn_time,p.shop_id,sl.seller_name, sh.shopname, p.name, p.short_desc, p.base_price, (SELECT o.percentage from $DB_SMA_PR.offer o WHERE o.id = p.offer_id) as percentage, p.active_status, p.has_rfq, p.rating, p.has_order_confmn, p.has_instant_buy
-        FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.offer o, $DB_SMA_PR.prod_shipping_price psp
-        WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id and psp.prodid != p.prodid AND psp.shipping_location NOT LIKE '%$pincode%' ";
+        FROM $DB_SMA_PR.product p, $DB_SMA_PR.category c, $DB_SMA_USER.seller sl, $DB_SMA_USER.shop_details sh, $DB_SMA_USER.shipping_location_shop sls, $DB_SMA_PR.offer o,$DB_SMA_PR.shipping_location_product slp
+        WHERE p.category_id = c.category_id AND p.shop_id = sh.id and sh.seller_id = sl.id ";
     }
     if($filterSet->maxPrice){
         $price = " and p.base_price >= $filterSet->minPrice and p.base_price <=$filterSet->maxPrice ";
