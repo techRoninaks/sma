@@ -1,6 +1,6 @@
 $primaryYellowColor: #efbe22;
 $primaryFontColor:black;
-$categorySidePadding:1.5rem;
+$categorySidePadding:0.5rem;
 
 @mixin phone {
   @media only screen and (max-width:600px) {
@@ -20,6 +20,115 @@ $categorySidePadding:1.5rem;
     @content;
   }
 }
+
+.subnav-content {
+  display: none;
+  position: relative;
+  left: 0;
+  // background-color: red;
+  // width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+.sub-subnav-content {
+  display: none;
+  position: relative;
+  left: 45px;
+  // background-color: red;
+  // width: 100%;
+  z-index: 1;
+}
+
+.sub-subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.sub-subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+.subnav-content:hover  .sub-subnav-content{
+  display: block;
+  a{
+    // width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+
+// .dropbtn-cat:hover + .subnav-content {
+//   display: block;
+// }
+
+.cat_0:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_1:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_2:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_3:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_4:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_5:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+.cat_7:hover  .subnav-content {
+  display: block;
+  a{
+    width: 100%;
+    text-align: initial;
+    padding: 0;
+  }
+}
+
 
 
 .collapse{

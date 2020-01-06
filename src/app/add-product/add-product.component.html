@@ -456,25 +456,15 @@
                     <div class="grid-TagCard">
                         <div class="AdvanceTagCard">
                             <div class="ng-autocomplete" style="width: auto;">
-                                <ng-autocomplete 
-                                  [data]="datas"
-                                  [searchKeyword]="keyword"
-                                  (selected)='selectEvent($event)'
-                                  (inputChanged)='onChangeSearch($event)'
-                                  (inputFocused)='onFocused($event)'
-                                  [itemTemplate]="itemTemplate"
-                                  (change)="selectEvent1($event)"
-                                  [notFoundTemplate]="notFoundTemplate">                                
-                                </ng-autocomplete>
-                                 
-                                <ng-template #itemTemplate let-item>
-                                <a [innerHTML]="item.name"></a>
-                                </ng-template>
-                                 
-                                <ng-template #notFoundTemplate let-notFound>
-                                <div [innerHTML]="notFound"></div>
-                                </ng-template>
-                                </div>
+                                <input type="text" id="tagsInput" style="margin-left: 12px;" (keyup)="onTagsInput($event)" >
+                                <ul id="myUL3" class="rfqUL2" style="display: none;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                                    <li>
+                                        <a (click)="selectEvent(inp.name);" *ngFor="let inp of datas">
+                                            {{inp.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

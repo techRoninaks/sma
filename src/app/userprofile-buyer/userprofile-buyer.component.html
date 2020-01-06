@@ -672,12 +672,12 @@
 			</div>
 			<div class="all">
 				<button id="all-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="allFilter();">All</button>
-			</div>
-			<div class="pending-pay">
-				<button id="pending-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingPayFilter();" >Pending Payment</button>
-			</div>
-			<div class="ready-shipping">
-				<button id="shipping-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="readyForShippingFilter();" >Ready for Shipping</button>
+				<button id="pending-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingConformatiomFilter();" >Pending Confirmation</button>
+				<button id="payment-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="pendingPayFilter();" >Pending Payment</button>
+				<button id="processing-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="processingFilter();" >Processing</button>
+				<button id="shipping-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="shippingFilter();" >Shipped</button>
+				<button id="delivered-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="deliveredFilter();" >Delivered</button>
+				<button id="closed-btn" style="margin-top: 55px;" class="btn-filter-style" (click)="closedFilter();" >Closed</button>
 			</div>
 		</div>
 		<div class="grid-order-history-head" style="width: 90%; margin-left: 5%;" *ngIf="! noOrders">
@@ -742,16 +742,16 @@
 						height="60px" style="border-radius: 50%;">
 				</div>
 				<div class="ic-shipped">
-					<img src="assets/images/userProfile/ic_shipped.jpg" width="65px" height="60px"
+					<img src="assets/images/order/{{dynamicDataOrderData[item].orderId}}/{{dynamicDataOrderData[item].orderId}}stage4.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_shipped.jpg'" width="65px" height="60px"
 						style="border-radius: 50%;">
 				</div>
 				<div class="ic-deliver">
-					<img src="assets/images/userProfile/ic_delivered.jpg" width="65px" height="60px"
+					<img src="assets/images/order/{{dynamicDataOrderData[item].orderId}}/{{dynamicDataOrderData[item].orderId}}stage5.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_delivered.jpg'" width="65px" height="60px"
 						style="border-radius: 50%;">
 				</div>
 				<div class="ic-closed">
 					<span class="dot">
-						<img src="assets/images/userProfile/ic_closed.png"
+						<img src="assets/images/order/{{dynamicDataOrderData[item].orderId}}/{{dynamicDataOrderData[item].orderId}}stage6.jpg" onerror="this.onerror=null;this.src='assets/images/userProfile/ic_closed.png'"
 							style="padding-top: 7%; margin-top: 7%;" width="50px"
 							height="53px">
 					</span>
@@ -879,7 +879,7 @@
 				 </div>
 			</div>
 			<div class="feedback-stat">
-				<label>{{dynamicDataOrderData[item].orderStatus}}</label>
+				<label style="text-transform: capitalize;">{{dynamicDataOrderData[item].orderStatus}}</label>
 			</div>
 			<div class="feedback-desc" *ngIf="dynamicDataOrderData[item].orderStatus != 'closed' ">
 				<p style="font-family: Bitter;" class="del-before">delivery before</p>
@@ -923,7 +923,7 @@
 											<div class="username">
 												<label>Username</label>
 												<br>
-												<input type="text" class="user-style" value="{{dynamicDataUsercard.username}}" formControlName="username">
+												<input type="text" class="user-style"  formControlName="username">
 												<div *ngIf="submitted && addComplaint.controls.username.errors" class="error validator-style">
 													<div *ngIf="addComplaint.controls.username.errors.required">
 														Enter Username
@@ -988,7 +988,7 @@
 </div>
 
 <div class="modal fade" id="myModalReview" role="dialog" >
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="pointer-events: all;">
 		<!-- Modal content-->
 		<div class="modal-content" class="modal-review">
 			<div class="modal-header" style="border-top-right-radius: 18px; border-top-left-radius: 18px;">
@@ -1031,7 +1031,7 @@
 									<span class="fa fa-star active" (click)="addStar('star-5');" id="star-5-active" style="display: none; color: #EFBE24;"></span>
 								</div>
 								<div>
-									<button class="submit btn-review-submit" (click)="onSubmitReview(dynamicDataOrderData[item].prodId);" type="submit">Submit</button>
+									<button class="submit btn-review-submit" (click)="onSubmitReview('12');" type="submit">Submit</button>
 								</div>
 								
 						</div>

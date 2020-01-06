@@ -201,19 +201,30 @@ else if($active_status == 'false')
     $sql_query1 = "INSERT INTO `product` (`name`,`short_desc`,`Long_desc`,`spec`,`shipping_option`,`base_price`,`qty_avble`,`tags`,`avg_prcessing_time`,`avg_shpping_time`,`auto_cancel_time`,`has_rfq`,`has_gift`,`has_order_confmn`,`can_orderbydate`,`has_instant_buy`,`min_order_quant`,`max_order_quant`,`shipping_policy`,`return_policy`,`product_policy`,`shipping_location_id`,`can_upload_image`,`max_no_of_image`,`add_custom_message_field`,`shop_id`,`category_id`,`sub_catgry_id`,`active_status`,`is_returnable`,`remarks`,`bulk_discount_id`,`offer_id`,`cmsn_dedtd`,`label_id`,`safe_qty`) VALUES ('$name','$short_desc','$Long_desc','$spec','$shipping_option',$base_price,$qty_avble,'$tags',$avg_prcessing_time,$avg_shpping_time,$auto_cancel_time,$has_rfq,$has_gift,$has_order_confmn,$can_orderbydate,$has_instant_buy,$min_order_quant,$max_order_quant,'$shipping_policy','$return_policy','$product_policy',5,$can_upload_image,$max_no_of_image,$add_custom_message_field,$shop_id,$mainCat,'$subCat','$active_status',0,'New Product',NULL,$offersArray,8,$labels,$safe_qty)";
 
     $sql_query = "UPDATE `product` SET `name`='$name',`short_desc`='$short_desc',`Long_desc`='$Long_desc',`spec`='$spec',`shipping_option`='$shipping_option',`base_price`=$base_price,`offer_id`=$offersArray,`cmsn_dedtd`= $commDec,`shop_id`=$shop_id,`category_id`=$mainCat,`sub_catgry_id`='$subCat',`active_status`='$active_status',`qty_avble`=$qty_avble,`safe_qty`=$safe_qty,`is_returnable`= 0,`label_id`=$labels,`tags`='$tags',`avg_prcessing_time`=$avg_prcessing_time,`avg_shpping_time`=$avg_shpping_time,`auto_cancel_time`=$auto_cancel_time,`has_rfq`=$has_rfq,`has_gift`=$has_gift,`has_order_confmn`=$has_order_confmn,`can_orderbydate`=$can_orderbydate,`has_instant_buy`=$has_instant_buy,`min_order_quant`=$min_order_quant,`max_order_quant`=$max_order_quant,`shipping_policy`='$shipping_policy',`return_policy`='$return_policy',`product_policy`='$product_policy',`can_upload_image`=$can_upload_image,`max_no_of_image`=$max_no_of_image,`add_custom_message_field`=$add_custom_message_field WHERE `prodid` = $editprodid ";
-    if($caller == "publish"){
-      $result1 = mysqli_query($con1, $sql_query1);
-    }
-    else if($caller == "duplicate"){
-      if($editprodid == 'all'){
-        $result1 = mysqli_query($con1, $sql_query1);
-      }
-      else{
-        $result1 = mysqli_query($con1, $sql_query);
-      }
+    // if($caller == "publish"){
+    //   $result1 = mysqli_query($con1, $sql_query1);
+    // }
+    // else if($caller == "duplicate"){
+    //   if($editprodid == 'all'){
+    //     $result1 = mysqli_query($con1, $sql_query1);
+    //   }
+    //   else{
+    //     $result1 = mysqli_query($con1, $sql_query);
+    //   }
+    // }
+    // else{
+    //   if($editprodid == 'all'){
+    //     $result1 = mysqli_query($con1, $sql_query1);
+    //   }
+    //   else{
+    //     $result1 = mysqli_query($con1, $sql_query);
+    //   }
+    // }
+    if($editprodid != 'all'){
+      $result1 = mysqli_query($con1, $sql_query);
     }
     else{
-      if($editprodid == 'all'){
+      if($caller == "publish"){
         $result1 = mysqli_query($con1, $sql_query1);
       }
       else{

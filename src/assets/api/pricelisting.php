@@ -208,7 +208,7 @@
     $rowPrice=mysqli_fetch_assoc($resPrice);
     $shipQtyPrice=$rowPrice["quantity_price"];
     $shipBasePrice=$rowPrice["price"];
-
+    // echo $sqlPrice;
 
     //get discount info
     $sqlDisc = "SELECT * FROM `offer` where `id` =  $offerIdProduct";   
@@ -278,7 +278,7 @@
    //purchase order insertion
 
     $sql_query2 = "INSERT INTO `purchase_order` (`sellerid`, `customerid`, `shipping_option`, `order_status`,`cancellation_message`,`delivery_date`, `remarks`,`is_rfq`, `total_amnt`, `payment_mode`,
-    `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'$orderStatus',null,'$deliveryDate',null,$isRfq,$totalAmount,'pending',
+    `is_rated`, `transaction_id`, `require_delivery_date`, `variants_chosen`, `addr_id`) VALUES  ($sellerId,$userId,$shipOption,'$orderStatus','temp','$deliveryDate',null,$isRfq,$totalAmount,'pending',
     0,0,$reqDD,'$varId',0)";
     $result2 = mysqli_query($con2, $sql_query2);
     // echo $sql_query2;
@@ -686,7 +686,7 @@
     $result3 = mysqli_query($con2, $sql_query3);
     // echo $sql_query3;
     //customer order id
-    $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`=$orderId ORDER BY orderid DESC LIMIT 1";
+    $sqlCustOrder="SELECT `coid` FROM `customer_order`  where `orderid`= $orderId ORDER BY orderid DESC LIMIT 1";
     $resCustOrder=mysqli_query($con2,$sqlCustOrder);
     $rowCustOrder=mysqli_fetch_assoc($resCustOrder);
     // echo $sqlCustOrder;

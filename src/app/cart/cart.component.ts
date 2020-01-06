@@ -67,7 +67,7 @@ export class CartComponent implements OnInit {
   // prodImage: any = "";
   // imagesCount: any = [];
   prod: any = [];
-  cartImg: any;
+  cartImg: any ;
   dynamicCartProdDisc: any;
   dynamicVariantInfo: any = [];
   dynamicShippingPrice: any = [];
@@ -114,6 +114,7 @@ export class CartComponent implements OnInit {
       this.dynamicDataPrice = data;
       this.dynamicDataCart = data;
       this.prodId = this.dynamicDataDate[0].prodId;
+      this.cartImg = 'assets/images/product/'+this.prodId+'/'+this.prodId+'_0.jpg';
       // this.counter = this.dynamicData.minOrderQuant;
       // this.counter 
       for (this.i = 0; this.i < this.dynamicDataDate.length; this.i++) {
@@ -185,107 +186,117 @@ export class CartComponent implements OnInit {
 
   
   placeOrder(pos) {
-    
-    
-    var addrSplit = (<HTMLInputElement><any>document.getElementById("dropDownAddrId")).value;
-    var addressSplit = addrSplit.split(",")
-    var pincode = addressSplit[6];
-
-    var productQuantity = (<HTMLInputElement><any>document.getElementById(this.dynamicData[pos].productId)).value;
-    var ship = (<HTMLInputElement><any>document.getElementById("shipping")).checked;
-    var cod = (<HTMLInputElement><any>document.getElementById("homedelivery")).checked;
-    var pickup = (<HTMLInputElement><any>document.getElementById("pickup")).checked;
-    
-    var deliveryOption = "";
-
-    if (ship == true) {
-      deliveryOption = "shipping";
+    if(!this.curVal){
+      alert('Please increase the quantity.')
+      $("#buyNowPopup").modal('hide');
     }
-    else if (cod == true) {
-      deliveryOption = "homedelivery";
+    else if(this.curVal < 1){
+      alert('Please increase the quantity.')
+      $("#buyNowPopup").modal('hide');
     }
-    else if (pickup == true) {
-      deliveryOption = "pickup";
-    } 
-    // alert(productQuantity);
-    this.tokenDeliveryPrice = { productQuantity : productQuantity, deliveryOption : deliveryOption }
-    this.data.cartDeliveryPrice(this.prodId,pincode,this.tokenDeliveryPrice).subscribe(data => {
-      this.dynamicShippingPrice = data;
-      console.log(this.dynamicShippingPrice);
-    },
-    );
-
-    this.data.deleteCartProductfn("all", this.cookieCart, this.prodId, this.curVal,pincode ).subscribe(data => {
-      this.dynamicOffPrice = data;
-      console.log(this.dynamicOffPrice)
-      this.dynamicCartProdDisc = data;
-      this.orderid = data;
-
-      dropDownAddrId = (<HTMLSelectElement>document.getElementById("dropDownAddrId")).value;
-      (<HTMLSelectElement>document.getElementById("AddrIdChange")).innerHTML = dropDownAddrId;
-      console.log(dropDownAddrId);
-
-      this.data.getaddress(this.cookieCart).subscribe(
-        data => {
-          this.dynamicDataAddress = data;
-        },
-        error => console.error(error)
+    else{
+      $("#buyNowPopup").modal('show');
+      alert(this.curVal);
+      var addrSplit = (<HTMLInputElement><any>document.getElementById("dropDownAddrId")).value;
+      var addressSplit = addrSplit.split(",")
+      var pincode = addressSplit[6];
+  
+      var productQuantity = (<HTMLInputElement><any>document.getElementById(this.dynamicData[pos].productId)).value;
+      var ship = (<HTMLInputElement><any>document.getElementById("shipping")).checked;
+      var cod = (<HTMLInputElement><any>document.getElementById("homedelivery")).checked;
+      var pickup = (<HTMLInputElement><any>document.getElementById("pickup")).checked;
+      
+      var deliveryOption = "";
+  
+      if (ship == true) {
+        deliveryOption = "shipping";
+      }
+      else if (cod == true) {
+        deliveryOption = "hd";
+      }
+      else if (pickup == true) {
+        deliveryOption = "pickup";
+      } 
+      // alert(productQuantity);
+      this.tokenDeliveryPrice = { productQuantity : productQuantity, deliveryOption : deliveryOption }
+      this.data.cartDeliveryPrice(this.prodId,pincode,this.tokenDeliveryPrice).subscribe(data => {
+        this.dynamicShippingPrice = data;
+        console.log(this.dynamicShippingPrice);
+      },
       );
-      this.data.getprodCheckout(this.prodId).subscribe(
-        data => {
-          this.dynamicDataProName = data;
-        },
-        error => console.error(error)
-      );
-      this.data.getuserCheckout(this.cookieCart).subscribe(
-        data => {
-          this.dynamicDataUser = data;
-          this.Name = this.dynamicDataUser.Name;
-          this.email = this.dynamicDataUser.email;
-          this.phone1 = this.dynamicDataUser.phone1;
-        },
-        error => console.error(error)
-      );
-      this.data.getCustomerOrderCheckout(this.orderid).subscribe(
-        data => {
-          this.dynamicDataCustomerOrder = data;
-          this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
-        },
-        error => console.error(error)
-      );
-      // console.log(this.variantValue);
-      this.variantValue = { prodid: this.prodId, userid: this.cookieCart }
-      console.log(this.variantValue);
-      this.data.getvariantInfor(this.variantValue).subscribe(
-        data => {
-          this.dynamicDataVariant = data;
-        },
-        error => console.error(error)
-      );
-      // this.data.variantInfoCartChosen(this.prodId).subscribe(data => {
-      //   this.dynamicVariantInfo = data;
-      //   console.log(this.dynamicVariantInfo);
-      // },
-      // ); 
-
-      this.data.getAddressChange(this.cookieCart).subscribe(
-        data => {
-          this.dynamicDataSecondAddress = data;
-          console.log(this.dynamicDataSecondAddress);
-        },
-        error => console.error(error)
-      );
-
-      // this.data.getMsgTitleProCheckout(this.orderid).subscribe(
-      //   data => {
-      //     this.dynamicMsgTitle = data;
-      //     console.log(this.dynamicMsgTitle);
-      //   },
-      //   error => console.error(error)
-      // );
-
-     
-    });
+  
+      this.data.deleteCartProductfn("all", this.cookieCart, this.prodId, this.curVal,pincode ).subscribe(data => {
+        this.dynamicOffPrice = data;
+        console.log(this.dynamicOffPrice)
+        this.dynamicCartProdDisc = data;
+        this.orderid = data;
+  
+        dropDownAddrId = (<HTMLSelectElement>document.getElementById("dropDownAddrId")).value;
+        (<HTMLSelectElement>document.getElementById("AddrIdChange")).innerHTML = dropDownAddrId;
+        console.log(dropDownAddrId);
+  
+        this.data.getaddress(this.cookieCart).subscribe(
+          data => {
+            this.dynamicDataAddress = data;
+          },
+          error => console.error(error)
+        );
+        this.data.getprodCheckout(this.prodId).subscribe(
+          data => {
+            this.dynamicDataProName = data;
+          },
+          error => console.error(error)
+        );
+        this.data.getuserCheckout(this.cookieCart).subscribe(
+          data => {
+            this.dynamicDataUser = data;
+            this.Name = this.dynamicDataUser.Name;
+            this.email = this.dynamicDataUser.email;
+            this.phone1 = this.dynamicDataUser.phone1;
+          },
+          error => console.error(error)
+        );
+        this.data.getCustomerOrderCheckout(this.orderid).subscribe(
+          data => {
+            this.dynamicDataCustomerOrder = data;
+            this.TotalPrice = this.dynamicDataCustomerOrder.totalPrice;
+          },
+          error => console.error(error)
+        );
+        // console.log(this.variantValue);
+        this.variantValue = { prodid: this.prodId, userid: this.cookieCart }
+        console.log(this.variantValue);
+        this.data.getvariantInfor(this.variantValue).subscribe(
+          data => {
+            this.dynamicDataVariant = data;
+          },
+          error => console.error(error)
+        );
+        // this.data.variantInfoCartChosen(this.prodId).subscribe(data => {
+        //   this.dynamicVariantInfo = data;
+        //   console.log(this.dynamicVariantInfo);
+        // },
+        // ); 
+  
+        this.data.getAddressChange(this.cookieCart).subscribe(
+          data => {
+            this.dynamicDataSecondAddress = data;
+            console.log(this.dynamicDataSecondAddress);
+          },
+          error => console.error(error)
+        );
+  
+        // this.data.getMsgTitleProCheckout(this.orderid).subscribe(
+        //   data => {
+        //     this.dynamicMsgTitle = data;
+        //     console.log(this.dynamicMsgTitle);
+        //   },
+        //   error => console.error(error)
+        // );
+  
+       
+      });
+    }
 
   }
 
@@ -424,8 +435,10 @@ export class CartComponent implements OnInit {
     this.curVal = (<HTMLInputElement><unknown>document.getElementById(id)).value;
     this.curVal = Number(this.curVal);
     if (this.curVal) {
-      this.curVal -= 1;
-      (<HTMLInputElement><unknown>document.getElementById(id)).value = this.curVal.toString();
+      if(this.curVal >=2){
+        this.curVal -= 1;
+        (<HTMLInputElement><unknown>document.getElementById(id)).value = this.curVal.toString();
+      }
     }
     this.calculatedPrice = this.dynamicData[0].basePrice * this.curVal
   }

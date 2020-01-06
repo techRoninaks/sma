@@ -1,10 +1,11 @@
 <?php
     require "init.php";
     // header("Access-Control-Allow-Origin: *");
+
     $userId = $_POST['userId'] ;
     $data = array();
     $count = 0;
-    $sql_query = "SELECT * FROM cart where user_id = $userId ";
+    $sql_query = "SELECT * FROM cart where user_id = $userId ORDER BY id DESC LIMIT 1 ";
     $result = mysqli_query($con2, $sql_query);
     while($row=mysqli_fetch_assoc($result)){
         $data[$count++]=array(

@@ -156,9 +156,13 @@ if($id == "all"){
         // var_dump($resDisc);
         // echo $sqlDisc;
         $rowDisc=mysqli_fetch_array($resDisc);
-        $discountInfo=array('percentage' => $rowDisc["percentage"]);
+        if($rowDisc["percentage"] == "" || $rowDisc["percentage"] == null){
+            $disc = 0;
+        }else{
+            $disc=$discountInfo["percentage"];
+        }
 
-        $disc=$discountInfo["percentage"];
+        
 
         $sql_query = "SELECT price, quantity_price FROM `prod_shipping_price` where prodid = $prodid and shipping_location like $pincode";
         $result = mysqli_query($con1, $sql_query);
@@ -201,7 +205,7 @@ if($id == "all"){
 
 
         
-
+        // echo 'amount'.$basePrice."   asdasda".$disc;
         $amountDisc=$basePrice*($disc/100);
         $price=$basePrice-$amountDisc;
         $price=round($price);

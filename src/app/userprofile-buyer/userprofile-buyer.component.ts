@@ -44,6 +44,9 @@ export class UserprofileBuyerComponent implements OnInit {
   otpVerified2: boolean = false;
   otpSent: boolean = false;
   count: number=0;
+  urlFront4 = "";
+  urlFront5 = "";
+  urlFront6 = "";
   i: number = 0;
   j: number = 0;
   k: number = 0;
@@ -64,6 +67,7 @@ export class UserprofileBuyerComponent implements OnInit {
   cardForm: FormGroup;
   cardFormCvv: FormGroup;
   registrationForm: FormGroup;
+  allOrderData: any;
   constructor(private formBuilderPassword: FormBuilder,private formBuilderMobile: FormBuilder ,private formBuilderOtp2: FormBuilder, private formBuilderOtp: FormBuilder,private formBuilderReview:FormBuilder,private formBuilderComplaint:FormBuilder,private formBuilderAddress: FormBuilder,private formBuilderUser: FormBuilder,private formBuilderCvv: FormBuilder,private data: DataService,private router: Router,private route: ActivatedRoute,private formBuilderCard: FormBuilder,private cookieService: CookieService) { 
     this.cardForm = this.formBuilderCard.group({
       cardno: ['', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -145,6 +149,7 @@ export class UserprofileBuyerComponent implements OnInit {
     this.data.getUsercardData(this.id).subscribe(
       data=>{
               this.dynamicDataUsercard=data;
+              this.addComplaint.controls['username'].setValue(this.dynamicDataUsercard.username);
               this.userMobile= data['phoneNo'];
               // console.log(this.registrationForm.value)
               this.registrationForm.setValue({
@@ -185,6 +190,7 @@ export class UserprofileBuyerComponent implements OnInit {
         data=>{
           this.i =0;
           this.dynamicDataOrderData=data;
+          this.allOrderData = this.dynamicDataOrderData;
           this.orderCount= data[this.i]['orderCount'];
           this.status = this.dynamicDataOrderData['orderStatus'];
           for(this.i; this.i < this.orderCount; this.i++)
@@ -450,6 +456,11 @@ export class UserprofileBuyerComponent implements OnInit {
       amount: Math.round(orderIdsmall['total_amnt'] * 100), // 2000 paise = INR 20
       currency: "INR",
       method: 'card',
+      'card[name]': 'Gaurav Kumar',
+      'card[number]': '4111111111111111',
+      'card[cvv]': '566',
+      'card[expiry_month]': '10',
+      'card[expiry_year]': '20',
       name: orderIdsmall['sellerName'],
       description: orderIdsmall['prodName']+" - "+orderIdsmall['shortDesc'],
       image: "favicon.ico", 
@@ -583,6 +594,7 @@ export class UserprofileBuyerComponent implements OnInit {
     }
   onSubmitComplaint(sellerId){
     this.submitted = true;
+    // this.addComplaint.controls['username'].updateValueAndValidity(this.dynamicDataUsercard.username);
     if(this.addComplaint.invalid)
     {
       alert("Enter required fiels");
@@ -626,7 +638,7 @@ export class UserprofileBuyerComponent implements OnInit {
     );
   }
   openInvoice(orderId){
-    window.open("http://localhost:8080/sma13/src/assets/invoice/"+orderId+'.pdf', '_blank');
+    window.open("http://localhost:4200/assets/invoice/"+orderId+'.pdf', '_blank');
   }
   addStar(star){
     if(star == 'star-1'){
@@ -761,53 +773,158 @@ export class UserprofileBuyerComponent implements OnInit {
       );
     }
   }
-  pendingPayFilter(){
+  pendingConformatiomFilter(){
     this.noOrders = false;
-    this.data.getPendingPayData(this.id).subscribe(
-      data=>{
-        this.dynamicDataOrderData=data;
-        if(this.dynamicDataOrderData==""){
-          this.noOrders = true;
-        }
-      },
-      error=> console.error(error)
-    );
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "pending_confirmation"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
     (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="11px #EFBE24 solid" ;
     (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderRadius ="8px" ;
     (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
     (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
   }
-  readyForShippingFilter(){
+  pendingPayFilter(){
     this.noOrders = false;
-    this.data.getReadyShippingData(this.id).subscribe(
-      data=>{
-        this.dynamicDataOrderData=data;
-        if(this.dynamicDataOrderData==""){
-          this.noOrders = true;
-        }
-      },
-      error=> console.error(error)
-    );
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "pending_payment"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  processingFilter(){
+    this.noOrders = false;
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "processing"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  deliveredFilter(){
+    this.noOrders = false;
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "delivered"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+  }
+  closedFilter(){
+    this.noOrders = false;
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "closed"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="11px #EFBE24 solid" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderRadius ="8px" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("delivered-btn")).style.borderBottom ="none" ;
+  }
+  shippingFilter(){
+    this.noOrders = false;
+    var array = [];
+    
+    for(var i=0; i < this.allOrderData.length; i++){
+      if(this.allOrderData[i].orderStatus == "shipped"){
+        array.push(this.allOrderData[i]);
+      }
+    }
+    if(array.length == 0){
+      this.noOrders = true;
+    }
+    this.dynamicDataOrderData = array;
     (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="11px #EFBE24 solid" ;
     (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderRadius ="8px" ;
-    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
     (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
   }
   allFilter(){
     this.noOrders = false;
-    this.data.getOrderData(this.id).subscribe(
-      data=>{
-        this.dynamicDataOrderData=data;
-        if(this.dynamicDataOrderData==""){
-          this.noOrders = true;
-        }
-      },
-      error=> console.error(error)
-    );
+    this.dynamicDataOrderData = this.allOrderData;
     (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderBottom ="11px #EFBE24 solid" ;
     (<HTMLButtonElement><any>document.getElementById("all-btn")).style.borderRadius ="8px" ;
     (<HTMLButtonElement><any>document.getElementById("shipping-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
     (<HTMLButtonElement><any>document.getElementById("pending-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("payment-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("processing-btn")).style.borderBottom ="none" ;
+    (<HTMLButtonElement><any>document.getElementById("closed-btn")).style.borderBottom ="none" ;
   }
 }
 function onFrontClick(event) {

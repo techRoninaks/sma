@@ -28,7 +28,7 @@ $row=mysqli_fetch_assoc($result);
         } 
         $shipOption=1;
     }
-    else if($deliveryOption=="homedelivery")
+    else if($deliveryOption=="hd")
     {
         $qtPrice=0;
         $shipBasePrice=0;
