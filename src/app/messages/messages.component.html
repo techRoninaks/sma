@@ -1,23 +1,23 @@
 <div class="dvMsgCat">
     <div class="dvMsgBtn">
         <button class="btnAll" (click)="filtertabs('All');" id="btnAll">ALL&emsp;<span
-                class="badge badge-danger">{{allMsgCount}}</span></button>
+                class="badge badge-danger">{{allCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
         <button class="btnRFQ" (click)="filtertabs('RFQ');" id="btnRFQ">RFQ&emsp;<span
-                class="badge badge-danger">{{allMsgCount}}</span></button>
+                class="badge badge-danger">{{rfqCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
         <button class="btnComplaints" (click)="filtertabs('Complaints');" id="btnComplaints">COMPLAINTS&emsp;<span
-                class="badge badge-danger">{{allMsgCount}}</span></button>
+                class="badge badge-danger">{{cmplntCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
         <button class="btnMessages" (click)="filtertabs('Messages');" id="btnMessages">MESSAGES&emsp;<span
-                class="badge badge-danger">{{allMsgCount}}</span></button>
+                class="badge badge-danger">{{msgCount}}</span></button>
     </div>
     <div class="dvMsgBtn">
         <button class="btnNotification" (click)="filtertabs('Notification');"
-            id="btnNotification">NOTIFICATION&emsp;<span class="badge badge-danger">{{allMsgCount}}</span></button>
+            id="btnNotification">NOTIFICATION&emsp;<span class="badge badge-danger">{{notifCount}}</span></button>
     </div>
 </div>
 
@@ -37,14 +37,14 @@
             <select>
                 <option>Select</option>
                 <option></option>
-                <option>Date</option>
-                <option>Name</option>
+                <option (click)="sortByDate();">Date</option>
+                <option (click)="sortByName();">Name</option>
                 <option>Type</option>
             </select>
             <!-- <button><i class="fa fa-arrow-up"></i></button>
             <button><i class="fa fa-arrow-down"></i></button> -->
         </div>
-        <div class="dvMsgSeller">
+        <div class="dvMsgSeller" id ="s_id">
             <div class="nmSeller">
                 <h6>SELLER</h6>
             </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="dvMsgBuyer">
+        <div class="dvMsgBuyer" id ="u_id">
             <div class="nmBuyer">
                 <h6>BUYER</h6>
             </div>
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="dvMsgContent" id="msgbox"*ngIf = "msgview">
+    <div class="dvMsgContent" id="msgbox" *ngIf = "msgview">
         <div class="scrollmsg">
             <div class="dvMsgUi" id="dvMsgUiDiv">
                 <div class="dvmsgheader">
@@ -73,7 +73,7 @@
                         <h6 id="name"></h6>
                     </div>
                 </div>
-                <div class="dvrecivemsgview" id="recivemsgview"*ngIf = "rfqbox">
+                <div class="dvrecivemsgview" id="recivemsgview" *ngIf = "rfqbox">
                     <div class="dvshopdetails">
                         <h6 id="shopname" class="name"></h6>
                         <h6 id="shoplocation" class="location"></h6>
@@ -113,7 +113,7 @@
                 <div class="dvMsgInput">
                 <div class="dvtextbox">
                     <input type="text" placeholder="Type here..."id="msgsent">
-                    <button class="msgsent" id="msgsentbtn" (click)="msg()"*ngIf = "msg">Sent</button>
+                    <button class="msgsent" id="msgsentbtn" (click)="msg()"*ngIf = "msg">Send</button>
                 </div>
             </div>
         </div>
@@ -134,14 +134,14 @@
                 <select>
                     <option>Select</option>
                     <option></option>
-                    <option>Date</option>
-                    <option>Name</option>
+                    <option (click)="sortByDate();">Date</option>
+                    <option (click)="sortByName();">Name</option>
                     <option>Type</option>
                 </select>
                 <!-- <button><i class="fa fa-arrow-up"></i></button>
                 <button><i class="fa fa-arrow-down"></i></button> -->
             </div>
-            <div class="dvMsgAdmin_com">
+            <div class="dvMsgAdmin_com" id ="a_id_cmplnt">
                 <div class="nmAdmin_com">
                     <h6>ADMIN</h6>
                 </div>
@@ -151,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="dvMsgBuyer_com">
+            <div class="dvMsgBuyer_com" id ="u_id_cmplnt">
                 <div class="nmBuyer_com">
                     <h6>BUYER</h6>
                 </div>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
             </div>
-            <div class="dvMsgSeller_com">
+            <div class="dvMsgSeller_com" id ="s_id_cmplnt">
                 <div class="nmSeller_com">
                     <h6>SELLER</h6>
                 </div>
@@ -186,7 +186,7 @@
         <div class="dvMsgInput_com">
             <div class="dvtextbox_com">
                 <input type="text" placeholder="Type here..."id="msgsent">
-                <button class="msgsent_com" id="msgsentbtn_com" >Sent</button>
+                <button class="msgsent_com" id="msgsentbtn_com" >Send</button>
             </div>
         </div>
 </div>
@@ -203,8 +203,8 @@
                 <select>
                     <option>Select</option>
                     <option></option>
-                    <option>Date</option>
-                    <option>Name</option>
+                    <option (click)="sortByDate();">Date</option>
+                    <option (click)="sortByName();">Name</option>
                     <option>Type</option>
                 </select>
                 <!-- <button><i class="fa fa-arrow-up"></i></button>
@@ -255,7 +255,7 @@
         <div class="dvMsgInput_msg">
             <div class="dvtextbox_msg">
                 <input type="text" placeholder="Type here..."id="msgsent_msg">
-                <button class="msgsent_msg" id="msgsentbtn_msg" (click)="msg_msg()">Sent</button>
+                <button class="msgsent_msg" id="msgsentbtn_msg" (click)="msg_msg()">Send</button>
             </div>
         </div>
 </div>
@@ -270,8 +270,8 @@
                     <select>
                         <option>Select</option>
                         <option></option>
-                        <option>Date</option>
-                        <option>Name</option>
+                        <option (click)="sortByDate();">Date</option>
+                        <option (click)="sortByName();">Name</option>
                         <option>Type</option>
                     </select>
                     <!-- <button><i class="fa fa-arrow-up"></i></button>
@@ -322,7 +322,7 @@
             <div class="dvMsgInput_not">
                 <div class="dvtextbox_not">
                     <input type="text" placeholder="Type here..."id="msgsent">
-                    <button class="msgsent_not" id="msgsentbtn_not" >Sent</button>
+                    <button class="msgsent_not" id="msgsentbtn_not" >Send</button>
                 </div>
             </div>
 </div>

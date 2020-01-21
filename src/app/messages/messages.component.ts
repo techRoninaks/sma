@@ -7,7 +7,9 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { MatDivider } from '@angular/material';
 import { not } from '@angular/compiler/src/output/output_ast';
 import { loadavg } from 'os';
-
+var t_id: any="";
+var s_id: any="";
+var u_id: any="";
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -15,7 +17,12 @@ import { loadavg } from 'os';
 })
 export class MessagesComponent implements OnInit {
 
-  allMsgCount: number;
+  allCount: number;
+  rfqCount: number;
+  cmplntCount: number;
+  msgCount: number;
+  notifCount: number;
+  c_count: number =0;
   Adminname: any;
   Adminid: any;
   Buyername: any;
@@ -34,7 +41,7 @@ export class MessagesComponent implements OnInit {
   show: any;
   store: any;
   post: boolean = false;
-  rfqbox:boolean = true;
+  rfqbox:boolean = false;
   msgview: boolean = false;
   enablegifting: boolean = false;
   message1: boolean = false;
@@ -50,8 +57,13 @@ export class MessagesComponent implements OnInit {
   constructor(private data: DataService, private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.allMsgCount = 5;
-
+    this.allCount = 5;
+    this.rfqCount = 2;
+    this.cmplntCount = 3;
+    this.msgCount = 1;
+    this.notifCount = 8;
+    s_id = this.getCookie("sellerId");
+    u_id = this.getCookie("userId");
     this.data.getAdmin().subscribe(
       data => {
         this.Adminname = data;
@@ -92,6 +104,11 @@ export class MessagesComponent implements OnInit {
         $('#Complaintsbox').hide();
         $('#Messagesbox').hide();
         $('#Notificationbox').hide();
+        document.getElementById("btnAll").style.background = "#efbe24";
+        document.getElementById("btnRFQ").style.background = "#f1f1f1";
+        document.getElementById("btnComplaints").style.background = "#f1f1f1";
+        document.getElementById("btnMessages").style.background = "#f1f1f1";
+        document.getElementById("btnNotification").style.background = "#f1f1f1";
         break;
       case "RFQ":
         $('#Allbox').hide();
@@ -99,6 +116,17 @@ export class MessagesComponent implements OnInit {
         $('#Complaintsbox').hide();
         $('#Messagesbox').hide();
         $('#Notificationbox').hide();
+        if(s_id){
+          document.getElementById("s_id").style.display = "none";
+        }
+        else if(u_id){
+          document.getElementById("u_id").style.display = "none";
+        }
+        document.getElementById("btnAll").style.background = "#f1f1f1";
+        document.getElementById("btnRFQ").style.background = "#efbe24";
+        document.getElementById("btnComplaints").style.background = "#f1f1f1";
+        document.getElementById("btnMessages").style.background = "#f1f1f1";
+        document.getElementById("btnNotification").style.background = "#f1f1f1";
         break;
       case "Complaints":
         $('#Allbox').hide();
@@ -106,6 +134,17 @@ export class MessagesComponent implements OnInit {
         $('#Complaintsbox').show();
         $('#Messagesbox').hide();
         $('#Notificationbox').hide();
+        if(s_id){
+          document.getElementById("s_id_cmplnt").style.display = "none";
+        }
+        else if(u_id){
+          document.getElementById("u_id_cmplnt").style.display = "none";
+        }
+        document.getElementById("btnAll").style.background = "#f1f1f1";
+        document.getElementById("btnRFQ").style.background = "#f1f1f1";
+        document.getElementById("btnComplaints").style.background = "#efbe24";
+        document.getElementById("btnMessages").style.background = "#f1f1f1";
+        document.getElementById("btnNotification").style.background = "#f1f1f1";
         break;
       case "Messages":
         $('#Allbox').hide();
@@ -113,6 +152,11 @@ export class MessagesComponent implements OnInit {
         $('#Complaintsbox').hide();
         $('#Messagesbox').show();
         $('#Notificationbox').hide();
+        document.getElementById("btnAll").style.background = "#f1f1f1";
+        document.getElementById("btnRFQ").style.background = "#f1f1f1";
+        document.getElementById("btnComplaints").style.background = "#f1f1f1";
+        document.getElementById("btnMessages").style.background = "#efbe24";
+        document.getElementById("btnNotification").style.background = "#f1f1f1";
         break;
       case "Notification":
         $('#Allbox').hide();
@@ -120,6 +164,11 @@ export class MessagesComponent implements OnInit {
         $('#Complaintsbox').hide();
         $('#Messagesbox').hide();
         $('#Notificationbox').show();
+        document.getElementById("btnAll").style.background = "#f1f1f1";
+        document.getElementById("btnRFQ").style.background = "#f1f1f1";
+        document.getElementById("btnComplaints").style.background = "#f1f1f1";
+        document.getElementById("btnMessages").style.background = "#f1f1f1";
+        document.getElementById("btnNotification").style.background = "#efbe24";
         break;
     }
   }
@@ -129,7 +178,70 @@ export class MessagesComponent implements OnInit {
   getCookie(cname) {
     return this.cookieService.get(cname);
   }
-
+  sortByName(){
+    this.data.getSortedAdmin().subscribe(
+      data => {
+        this.Adminname = data;
+        this.Adminid = data;
+        this.Adminname = this.Adminname.data.result;
+        this.Adminid = this.Adminid.data.result;
+        console.log(this.Adminname);
+      },
+      error => console.error(error)
+    );
+    this.data.getSortedBuyer().subscribe(
+      data => {
+        this.Buyername = data;
+        this.Buyerid = data;
+        this.Buyername = this.Buyername.data.result;
+        this.Buyerid = this.Buyerid.data.result;
+        console.log(this.Buyername);
+      },
+      error => console.error(error)
+    );
+    this.data.getSortedSeller().subscribe(
+      data => {
+        this.seller_name = data;
+        this.Seller_id = data;
+        this.seller_name = this.seller_name.data.result;
+        this.Seller_id = this.Seller_id.data.result;
+        console.log(this.Seller_id);
+      },
+      error => console.error(error)
+    );
+  }
+  sortByDate(){
+    this.data.getDateSortedAdmin().subscribe(
+      data => {
+        this.Adminname = data;
+        this.Adminid = data;
+        this.Adminname = this.Adminname.data.result;
+        this.Adminid = this.Adminid.data.result;
+        console.log(this.Adminname);
+      },
+      error => console.error(error)
+    );
+    this.data.getDateSortedBuyer().subscribe(
+      data => {
+        this.Buyername = data;
+        this.Buyerid = data;
+        this.Buyername = this.Buyername.data.result;
+        this.Buyerid = this.Buyerid.data.result;
+        console.log(this.Buyername);
+      },
+      error => console.error(error)
+    );
+    this.data.getDateSortedSeller().subscribe(
+      data => {
+        this.seller_name = data;
+        this.Seller_id = data;
+        this.seller_name = this.seller_name.data.result;
+        this.Seller_id = this.Seller_id.data.result;
+        console.log(this.Seller_id);
+      },
+      error => console.error(error)
+    );
+  }
   chatheadSeller(id) {
     this.msgview = true;
     let Sellername = (<HTMLInputElement><any>document.getElementById("chatheadSeller" + id)).innerHTML;
@@ -152,13 +264,14 @@ export class MessagesComponent implements OnInit {
       // console.log(id,myid);
       
     }
-    else {
-      // this.threadpush(id,Userid);
-    }
+    // else {
+    //   // this.threadpush(id,Userid);
+    // }
   }
   chatheadBuyer(id) {
+    // window.location.reload();
     this.msgview = true;
-  
+    // ++this.c_count;
     let Buyername = (<HTMLInputElement><any>document.getElementById("chatheadBuyer" + id)).innerHTML;
     document.getElementById("name").innerHTML = Buyername;
     this.Buyerid = id;
@@ -174,11 +287,44 @@ export class MessagesComponent implements OnInit {
     }
     if (mytype = 'seller') {
       // console.log("chatheadbuyer reached");
-      this.threadpush(id, Sellerid);
+      // if(this.Buyerid == 2)
+      {
+        this.threadpush(id, Sellerid);
+      }
+      
+    }
+    // else {
+    //   // this.threadpush1(id,Userid);
+    // }
+  }
+  chatheadBuyer_com(id) {
+    // window.location.reload();
+    this.msgview = true;
+    // ++this.c_count;
+    let Buyername = (<HTMLInputElement><any>document.getElementById("chatheadBuyer" + id)).innerHTML;
+    document.getElementById("name").innerHTML = Buyername;
+    this.Buyerid = id;
+
+    var Userid = this.getCookie("userId");
+    var Sellerid = this.getCookie("sellerId");
+
+    if (Sellerid != '0') {
+      var mytype = 'buyer';
     }
     else {
-      // this.threadpush1(id,Userid);
+      var mytype = 'seller';
     }
+    if (mytype = 'seller') {
+      // console.log("chatheadbuyer reached");
+      // if(this.Buyerid == 2)
+      {
+        this.threadpush2(id, Sellerid);
+      }
+      
+    }
+    // else {
+    //   // this.threadpush1(id,Userid);
+    // }
   }
   accept() {
     this.post = true;
@@ -192,6 +338,137 @@ export class MessagesComponent implements OnInit {
     this.enablegifting = true;
 
   }
+  //////////////
+  threadpush2(Buyerid, Sellerid) {
+    // console.log("threadpush started");
+
+    this.usertype1 = 'buyer';
+    this.usertype2 = 'seller';
+    this.data.makethread(Buyerid, Sellerid, 'buyer', 'seller').subscribe(
+      data => {
+        this.threadid = data['threadid'];
+        t_id = data['threadid'];
+        var msg = data['message'];
+        var rid = msg.split("!~!");
+        var rfqid = rid[1];
+        if(rfqid)
+        {
+          document.getElementById("msgbox").style.display = "block";
+          this.msgview = true;
+        }
+
+        this.disp_rfq(t_id,rfqid);
+        // this.fetchrfqmsg();
+        // 
+        var i;
+        let sender_type;
+        let msg1;
+        this.data.fetchrfqmsgCmplnt(this.threadid).subscribe(
+          data => {
+            for (let item in data) {
+              msg1 = data[item]['message'];
+              sender_type = data[item]['sender_type'];
+              // console.log(sender_type);
+              if (sender_type == "seller") {
+                var msglist = document.createElement('div');
+                msglist.style.background = "#dbdbdb";
+                msglist.style.width = "300px";
+                msglist.style.height = "auto";
+                msglist.style.marginTop = "20px";
+                msglist.style.borderRadius = "10px";
+                msglist.innerHTML = msg1;
+                msglist.style.padding = "10px";
+                document.getElementById('dvMsgUiDiv_com').appendChild(msglist);
+                // console.log(msg);
+              }
+              else {
+                var msglist = document.createElement('div');
+                msglist.style.background = "#dbdbdb";
+                msglist.style.width = "300px";
+                msglist.style.height = "auto";
+                msglist.style.marginTop = "20px";
+                msglist.style.borderRadius = "10px";
+                msglist.innerHTML = msg1;
+                msglist.style.padding = "10px";
+                msglist.style.marginLeft = "460px";
+                msglist.style.marginBottom = "35px";
+                document.getElementById('dvMsgUiDiv_com').appendChild(msglist);
+                // console.log(msglist);
+              }
+            }
+          },
+          error => console.error(error)
+        );
+        // 
+      });
+    // console.log("threadpush end");
+
+  }
+  threadpush3(myid, Sellerid) {
+    // console.log("threadpush 1 reached");
+    // console.log(Sellerid,myid);
+    this.usertype1 = 'seller';
+    this.usertype2 = 'buyer';
+    this.myid = myid;
+    this.data.makethread1(myid, Sellerid, this.usertype1, this.usertype2).subscribe(
+      data => {
+        this.threadid = data['threadid'];
+        t_id = data['threadid'];
+        var msg = data['message'];
+        var rid = msg.split("!~!");
+        var rfqid = rid[1];
+        if(rfqid)
+        {
+          document.getElementById("msgbox").style.display = "block";
+          this.msgview = true;
+        }
+
+        this.disp_rfq(t_id,rfqid);
+        // this.fetchrfqmsg();
+        // 
+        var i;
+    let sender_type;
+    let msg1;
+    this.data.fetchrfqmsg(this.threadid).subscribe(
+      data => {
+        for (let item in data) {
+          msg1 = data[item]['message'];
+          sender_type = data[item]['sender_type'];
+          // console.log(sender_type);
+          if (sender_type == "seller") {
+            var msglist = document.createElement('div');
+            msglist.style.background = "#dbdbdb";
+            msglist.style.width = "300px";
+            msglist.style.height = "auto";
+            msglist.style.marginTop = "20px";
+            msglist.style.borderRadius = "10px";
+            msglist.innerHTML = msg1;
+            msglist.style.padding = "10px";
+            document.getElementById('dvMsgUiDiv').appendChild(msglist);
+            // console.log(msg);
+          }
+          else {
+            var msglist = document.createElement('div');
+            msglist.style.background = "#dbdbdb";
+            msglist.style.width = "300px";
+            msglist.style.height = "auto";
+            msglist.style.marginTop = "20px";
+            msglist.style.borderRadius = "10px";
+            msglist.innerHTML = msg1;
+            msglist.style.padding = "10px";
+            msglist.style.marginLeft = "460px";
+            msglist.style.marginBottom = "35px";
+            document.getElementById('dvMsgUiDiv').appendChild(msglist);
+            // console.log(msglist);
+          }
+        }
+      },
+      error => console.error(error)
+    );
+        // 
+      });
+  }
+  //////////////
   threadpush(Buyerid, Sellerid) {
     // console.log("threadpush started");
 
@@ -200,8 +477,59 @@ export class MessagesComponent implements OnInit {
     this.data.makethread(Buyerid, Sellerid, 'buyer', 'seller').subscribe(
       data => {
         this.threadid = data['threadid'];
-        this.disp_rfq(this.threadid);
-        this.fetchrfqmsg();
+        t_id = data['threadid'];
+        var msg = data['message'];
+        var rid = msg.split("!~!");
+        var rfqid = rid[1];
+        if(rfqid)
+        {
+          document.getElementById("msgbox").style.display = "block";
+          this.msgview = true;
+        }
+
+        this.disp_rfq(t_id,rfqid);
+        // this.fetchrfqmsg();
+        // 
+        var i;
+        let sender_type;
+        let msg1;
+        this.data.fetchrfqmsg(this.threadid).subscribe(
+          data => {
+            for (let item in data) {
+              msg1 = data[item]['message'];
+              sender_type = data[item]['sender_type'];
+              // console.log(sender_type);
+              if (sender_type == "seller") {
+                var msglist = document.createElement('div');
+                msglist.style.background = "#dbdbdb";
+                msglist.style.width = "300px";
+                msglist.style.height = "auto";
+                msglist.style.marginTop = "20px";
+                msglist.style.borderRadius = "10px";
+                msglist.innerHTML = msg1;
+                msglist.style.padding = "10px";
+                document.getElementById('dvMsgUiDiv').appendChild(msglist);
+                // console.log(msg);
+              }
+              else {
+                var msglist = document.createElement('div');
+                msglist.style.background = "#dbdbdb";
+                msglist.style.width = "300px";
+                msglist.style.height = "auto";
+                msglist.style.marginTop = "20px";
+                msglist.style.borderRadius = "10px";
+                msglist.innerHTML = msg1;
+                msglist.style.padding = "10px";
+                msglist.style.marginLeft = "460px";
+                msglist.style.marginBottom = "35px";
+                document.getElementById('dvMsgUiDiv').appendChild(msglist);
+                // console.log(msglist);
+              }
+            }
+          },
+          error => console.error(error)
+        );
+        // 
       });
     // console.log("threadpush end");
 
@@ -215,15 +543,67 @@ export class MessagesComponent implements OnInit {
     this.data.makethread1(myid, Sellerid, this.usertype1, this.usertype2).subscribe(
       data => {
         this.threadid = data['threadid'];
-        this.disp_rfq(this.threadid);
-        this.fetchrfqmsg();
+        t_id = data['threadid'];
+        var msg = data['message'];
+        var rid = msg.split("!~!");
+        var rfqid = rid[1];
+        if(rfqid)
+        {
+          document.getElementById("msgbox").style.display = "block";
+          this.msgview = true;
+        }
+
+        this.disp_rfq(t_id,rfqid);
+        // this.fetchrfqmsg();
+        // 
+        var i;
+    let sender_type;
+    let msg1;
+    this.data.fetchrfqmsg(this.threadid).subscribe(
+      data => {
+        for (let item in data) {
+          msg1 = data[item]['message'];
+          sender_type = data[item]['sender_type'];
+          // console.log(sender_type);
+          if (sender_type == "seller") {
+            var msglist = document.createElement('div');
+            msglist.style.background = "#dbdbdb";
+            msglist.style.width = "300px";
+            msglist.style.height = "auto";
+            msglist.style.marginTop = "20px";
+            msglist.style.borderRadius = "10px";
+            msglist.innerHTML = msg1;
+            msglist.style.padding = "10px";
+            document.getElementById('dvMsgUiDiv').appendChild(msglist);
+            // console.log(msg);
+          }
+          else {
+            var msglist = document.createElement('div');
+            msglist.style.background = "#dbdbdb";
+            msglist.style.width = "300px";
+            msglist.style.height = "auto";
+            msglist.style.marginTop = "20px";
+            msglist.style.borderRadius = "10px";
+            msglist.innerHTML = msg1;
+            msglist.style.padding = "10px";
+            msglist.style.marginLeft = "460px";
+            msglist.style.marginBottom = "35px";
+            document.getElementById('dvMsgUiDiv').appendChild(msglist);
+            // console.log(msglist);
+          }
+        }
+      },
+      error => console.error(error)
+    );
+        // 
       });
   }
-  disp_rfq(threadid) {
+  disp_rfq(t_id,rfqid) {
     // console.log("disprfq reached");
 
     let i = 0;
-    this.threadid = threadid;
+    this.threadid = t_id;
+    let rfq_id = rfqid;
     let msg_id;
     let msg_message;
     let msg_type;
@@ -249,7 +629,7 @@ export class MessagesComponent implements OnInit {
 
     // console.log(this.threadid);
 
-    this.data.disp_rfq(threadid).subscribe(
+    this.data.disp_rfq(t_id,rfqid).subscribe(
       data => {
         // console.log(data);
         for (let item in data) {
@@ -281,7 +661,7 @@ export class MessagesComponent implements OnInit {
 
 
           // // displaying details in msg view
-          if (!threadid) {
+          if (!t_id) {
             // hide div
             document.getElementById("shopname").innerHTML = '';
             document.getElementById("shoplocation").innerHTML = '';
@@ -309,7 +689,7 @@ export class MessagesComponent implements OnInit {
       console.log(this.threadid);
       console.log(this.Buyerid);
 
-      this.data.msgsent1(msg, this.threadid, this.Buyerid, sender_type).subscribe(
+      this.data.msgsent1(msg, t_id, this.Buyerid, sender_type).subscribe(
         data => {
           let msg = data[0]['message'];
           console.log(msg);
@@ -321,10 +701,8 @@ export class MessagesComponent implements OnInit {
       // console.log("msg reached seller");
       let msg = (<HTMLInputElement><any>document.getElementById('msgsent')).value;
       let sender_type = 'seller';
-      this.threadid = this.threadid;
-      this.Sellerid = this.Sellerid;
       this.txtmsg = { msg: msg, threadid: this.threadid, Sellerid: this.Sellerid, sender_type: sender_type };
-      this.data.msgsent(msg, this.threadid, this.Buyerid, sender_type).subscribe(
+      this.data.msgsent(msg, t_id, this.Buyerid, sender_type).subscribe(
         data => {
           let msg = data[0]['message'];
           // console.log(msg);
@@ -332,7 +710,7 @@ export class MessagesComponent implements OnInit {
         error => console.error(error)
       );
     }
-
+    // window.location.reload();
   }
   fetchrfqmsg() {
     var i;
@@ -346,7 +724,7 @@ export class MessagesComponent implements OnInit {
           // console.log(sender_type);
           if (sender_type == "seller") {
             var msglist = document.createElement('div');
-            msglist.style.background = "gray";
+            msglist.style.background = "#dbdbdb";
             msglist.style.width = "300px";
             msglist.style.height = "auto";
             msglist.style.marginTop = "20px";
@@ -358,14 +736,15 @@ export class MessagesComponent implements OnInit {
           }
           else {
             var msglist = document.createElement('div');
-            msglist.style.background = "gray";
+            msglist.style.background = "#dbdbdb";
             msglist.style.width = "300px";
             msglist.style.height = "auto";
             msglist.style.marginTop = "20px";
             msglist.style.borderRadius = "10px";
             msglist.innerHTML = msg;
             msglist.style.padding = "10px";
-            msglist.style.marginLeft = "500px";
+            msglist.style.marginLeft = "460px";
+            msglist.style.marginBottom = "35px";
             document.getElementById('dvMsgUiDiv').appendChild(msglist);
             // console.log(msglist);
           }
@@ -408,14 +787,15 @@ export class MessagesComponent implements OnInit {
     var msg = submitionmsg1 + buyer_name + submitionmsg4 + order_no + submitionmsg2 + product_price + submitionmsg3 + delivery_by;
     
     var msglist = document.createElement('div');
-    msglist.style.background = "gray";
+    msglist.style.background = "#dbdbdb";
     msglist.style.width = "300px";
     msglist.style.height = "auto";
     msglist.style.marginTop = "20px";
     msglist.style.borderRadius = "10px";
     msglist.textContent = msg;
     msglist.style.padding = "10px";
-    msglist.style.marginLeft = "500px";
+    msglist.style.marginLeft = "460px";
+    msglist.style.marginBottom = "35px";
     document.getElementById('dvMsgUiDiv').appendChild(msglist);
     this.postsubmitionorder(msg);
   }
@@ -424,7 +804,7 @@ export class MessagesComponent implements OnInit {
     this.threadid = this.threadid;
     this.Buyerid = this.Buyerid;
     this.txtmsg = { msg: msg, threadid: this.threadid, Buyerid: this.Buyerid, sender_type: sender_type };
-    this.data.msgsent(msg, this.threadid, this.Buyerid, sender_type).subscribe(
+    this.data.msgsent(msg, t_id, this.Buyerid, sender_type).subscribe(
       data => {
         let msg = data[0]['message'];
         // console.log(msg);
@@ -536,7 +916,7 @@ export class MessagesComponent implements OnInit {
     
     this.data.makethread_msg(myid,receiverid,mytype,receivertype).subscribe(
       data => {
-        this.threadid = data['threadid'];
+        this.threadid = data;
         this.fetchmsg();
       }
     );
@@ -553,7 +933,7 @@ export class MessagesComponent implements OnInit {
           // console.log(sender_type);
           if (sender_type == "seller") {
             var msglist = document.createElement('div');
-            msglist.style.background = "gray";
+            msglist.style.background = "#dbdbdb";
             msglist.style.width = "300px";
             msglist.style.height = "auto";
             msglist.style.marginTop = "20px";
@@ -565,14 +945,15 @@ export class MessagesComponent implements OnInit {
           }
           else {
             var msglist = document.createElement('div');
-            msglist.style.background = "gray";
+            msglist.style.background = "#dbdbdb";
             msglist.style.width = "300px";
             msglist.style.height = "auto";
             msglist.style.marginTop = "20px";
             msglist.style.borderRadius = "10px";
             msglist.innerHTML = msg;
             msglist.style.padding = "10px";
-            msglist.style.marginLeft = "500px";
+            msglist.style.marginLeft = "460px";
+            msglist.style.marginBottom = "35px";
             document.getElementById('dvMsgUiDiv_msg').appendChild(msglist);
             // console.log(msglist);
           }
