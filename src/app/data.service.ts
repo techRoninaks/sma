@@ -1734,9 +1734,10 @@ getNotifications(data: any){
     .append("seller",receivertype)
     return this.http.post(this.baseUrl+'assets/api/makethread.php', httpParams);
   }
-  disp_rfq(threadid: any){
+  disp_rfq(threadid: any,rfqid: any){
   let httpParams= new HttpParams()
   .append("threadid", threadid)
+  .append("rfqid", rfqid);
   return this.http.post(this.baseUrl+'assets/api/rfqmsg.php',httpParams);
  }
  msgsent(msg: any,threadid: any,Buyerid: any,sender_type: any){
@@ -2034,7 +2035,29 @@ return this.http.post(this.baseUrl + 'assets/api/variantInfoCartChosen.php', htt
     .append("bulkId",bulkId);
     return this.http.post(this.baseUrl + 'assets/api/getBulkDiscountProduct.php', httpParams);
   }
-
+fetchrfqmsgCmplnt(threadid: any){
+  let httpParams= new HttpParams()
+  .append("threadid", threadid)
+  return this.http.post(this.baseUrl+'assets/api/fetchrfqmsgcmplnt.php',httpParams);
+ }
+    getSortedAdmin() {
+    return this.http.get(this.baseUrl + 'assets/api/sortedAdmin.php');
+  }
+  getDateSortedAdmin() {
+    return this.http.get(this.baseUrl + 'assets/api/dateSortedAdmin.php');
+  }
+  getDateSortedSeller() {
+    return this.http.get(this.baseUrl + 'assets/api/dateSortedSeller.php');
+  }
+  getDateSortedBuyer() {
+    return this.http.get(this.baseUrl + 'assets/api/dateSortedBuyer.php');
+  }
+  getSortedBuyer() {
+    return this.http.get(this.baseUrl + 'assets/api/sortedBuyer.php');
+  }
+  getSortedSeller() {
+    return this.http.get(this.baseUrl + 'assets/api/sortedSeller.php');
+  }
   // deleteCart(id: number) {
   //     const i = this.DataService.findIndex(d => )
   // }
