@@ -9,6 +9,7 @@ export const environment = {
 //Define General URL'S  here.
 export const URLS = {
   baseURL: "http://localhost/sma/src/",
+  version: "1.0.0",
 };
 
 /*
